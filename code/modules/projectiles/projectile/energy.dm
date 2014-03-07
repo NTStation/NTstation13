@@ -10,9 +10,9 @@
 	name = "electrode"
 	icon_state = "spark"
 	nodamage = 1
-	stun = 5
-	weaken = 5
-	stutter = 5
+	stun = 10
+	weaken = 10
+	stutter = 10
 	hitsound = "sparks"
 
 	on_hit(var/atom/target, var/blocked = 0)
@@ -44,8 +44,8 @@
 	damage = 10
 	damage_type = TOX
 	nodamage = 0
-	weaken = 5
-	stutter = 5
+	weaken = 10
+	stutter = 10
 
 
 /obj/item/projectile/energy/bolt/large
