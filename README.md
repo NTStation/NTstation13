@@ -1,17 +1,17 @@
-/tg/station 13 v1.0 - 6 October 2010 [![Build Status](https://travis-ci.org/tgstation/-tg-station.png)](https://travis-ci.org/tgstation/-tg-station)
+NTStation 13 - March 2014
 
 Website: http://ss13.eu
 
-Code: https://github.com/tgstation/-tg-station
+Code: https://github.com/NTStation/Ntstation13
 
-IRC: irc://irc.rizon.net/coderbus
+Fourms:  http://www.ss13.eu/phpbb
 
 # DOWNLOADING
 
 There are a number of ways to download the source code. Some are described here, an alternative all-inclusive guide is also located at http://wiki.ss13.eu/index.php/Downloading_the_source_code
 
 Option 1: Download the source code as a zip by clicking the ZIP button in the
-code tab of https://github.com/tgstation/-tg-station
+code tab of https://github.com/NTStation/Ntstation13
 (note: this will use a lot of bandwidth if you wish to update and is a lot of
 hassle if you want to make any changes at all, so it's not recommended.)
 
@@ -45,7 +45,7 @@ tgstation.dmb - 0 errors, 0 warnings
 
 If you see any errors or warnings, something has gone wrong - possibly a corrupt
 download or the files extracted wrong. If problems persist, ask for assistance
-in irc://irc.rizon.net/coderbus
+on the fourms.
 
 Once that's done, open up the config folder.  You'll want to edit config.txt to
 set the probabilities for different gamemodes in Secret and to set your server
@@ -102,15 +102,7 @@ Everyone is free to contribute to this project as long as they follow these simp
 
 **Introduction**
 
-As a goal to increase code maintainability we are going to be requiring all pull requests to hold up to the standards mentioned below. This is in order for all of us to benefit, instead of having to fix the same bug more than once because of duplicated code.
-
-But first we want to make it clear over what powers the maintainers have over your pull request, so you do not get any surprises when submitting pull requests and it is closed for a reason you did not suspect.
-
-Maintainers are quality control. If a proposed pull request does not meet the mentioned quality specifications then it can be closed if you fail to satisfy them. Maintainers are required to give a reason for closing the pull request.
-
-Maintainers can revert your changes if they feel they are not worth maintaining or if they did not live up to the quality specifications.
-
-Headcoders, which are elected by the maintainers and members of the project, have complete control over what goes through and what is reverted. They are encouraged to take control in what features are added to the game. It is encouraged that if you do not want to waste time working on a feature, that might be denied, that you ask a head coder first.
+NTStation13 is a fork from the /tg/station branch on March 6th, 2014.  It is devoted to having more freedom with commits, and trying to enjoy both coding and playing.
 
 **Specification**
 
@@ -152,13 +144,9 @@ You are expected to help maintain the code that you add, meaning if there is a p
 
 **Other Requirements/Information**
 
-Pull requests will sometimes take a while before they are looked at by a maintainer, the bigger the change the more time it will take before they are accepted into the code.
+Please be kind when commiting!  If you've commited to ss13 before, please message Polymorph on the fourms and request merge permissions to the master branch.  Treat them well and be respectful, please!
 
-You are expected to document all your changes in the pull request, failing to do so will risk delaying it. On the other hand you can speed up the process by making the pull request readable and easy to understand, with diagrams or before/after data.
-
-If you are proposing multiple changes, which change many different aspects of the code, you are to section them off into different pull requests in order to easily review them and to deny/accept the changes that are deemed acceptable.
-
-If your pull request is accepted, the code you add is no longer yours but everyones, everyone is free to work on it but you are also free to object to any changes being made, which will be noted by a headcoder.
+If you haven't commited before, please make a pull request and announce it on the fourms.  After a few of those, we can give you merge permissions yourself.
 
 **Getting Started**
 
