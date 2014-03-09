@@ -528,7 +528,7 @@
 
 /obj/item/weapon/reagent_containers/food/drinks/drinkingglass/bottle/kahlua
 	name = "Honkish Honking Kahlua"
-	desc = "The coffee liqeur of the Clowns. Extremely good, if extremely bitter. And possibly angry."
+	desc = "The coffee liqueur of the Clowns. Extremely good, if extremely bitter. And possibly angry."
 	New()
 		..()
 		reagents.add_reagent("kahlua", 100)
@@ -666,3 +666,4 @@
 		..()
 		reagents.add_reagent("manlydorf", 70)
 		on_reagent_change()
+Glass of chocolate
