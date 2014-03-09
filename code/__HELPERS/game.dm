@@ -185,7 +185,7 @@ proc/recursive_mob_check(var/atom/O, var/client_check=1, var/sight_check=1, var/
 /proc/get_mobs_in_view(var/R, var/atom/source)
 	// Returns a list of mobs in range of R from source. Used in radio and say code.
 
-	var/turf/T = get_turf(source.loc)
+	var/turf/T = get_turf(source)
 	var/list/hear = list()
 
 	if(!T)
