@@ -33,7 +33,7 @@
 	if(!stat)
 		Aggro()
 	if(P.damage < 30)
-		P.damage = (P.damage / 3)
+		P.damage = (P.damage / 2)
 		visible_message("<span class='danger'>[P] has a reduced effect on [src]!</span>")
 	..()
 
@@ -61,20 +61,20 @@
 	projectilesound = 'sound/weapons/pierce.ogg'
 	ranged = 1
 	ranged_message = "stares"
-	ranged_cooldown_cap = 20
+	ranged_cooldown_cap = 40
 	throw_message = "does nothing against the hard shell of"
 	vision_range = 2
-	speed = 3
-	maxHealth = 200
-	health = 200
+	speed = 5
+	maxHealth = 100
+	health = 100
 	harm_intent_damage = 5
-	melee_damage_lower = 12
-	melee_damage_upper = 12
+	melee_damage_lower = 2
+	melee_damage_upper = 10
 	attacktext = "bites into"
 	a_intent = "harm"
 	attack_sound = 'sound/weapons/bladeslice.ogg'
 	ranged_cooldown_cap = 4
-	aggro_vision_range = 9
+	aggro_vision_range = 5
 	idle_vision_range = 2
 
 /obj/item/projectile/temp/basilisk
@@ -228,8 +228,8 @@
 	aggro_vision_range = 9
 	idle_vision_range = 5
 	speed = 3
-	maxHealth = 75
-	health = 75
+	maxHealth = 45
+	health = 45
 	harm_intent_damage = 5
 	melee_damage_lower = 0
 	melee_damage_upper = 0
@@ -336,15 +336,15 @@
 	ranged_cooldown_cap = 8
 	friendly = "wails at"
 	vision_range = 4
-	speed = 3
-	maxHealth = 300
-	health = 300
+	speed = 5
+	maxHealth = 150
+	health = 150
 	harm_intent_damage = 0
-	melee_damage_lower = 25
-	melee_damage_upper = 25
+	melee_damage_lower = 10
+	melee_damage_upper = 20
 	attacktext = "pulverizes"
 	throw_message = "does nothing to the rocky hide of the"
-	aggro_vision_range = 9
+	aggro_vision_range = 6
 	idle_vision_range = 5
 
 /mob/living/simple_animal/hostile/asteroid/goliath/OpenFire()
@@ -368,7 +368,7 @@
 	if(istype(turftype, /turf/simulated/mineral))
 		var/turf/simulated/mineral/M = turftype
 		M.gets_drilled()
-	spawn(20)
+	spawn(30)
 		Trip()
 
 /obj/effect/goliath_tentacle/original
@@ -389,12 +389,6 @@
 		visible_message("<span class='warning'>The [src.name] knocks [M.name] down!</span>")
 	del(src)
 
-/obj/effect/goliath_tentacle/Crossed(AM as mob|obj)
-	if(isliving(AM))
-		Trip()
-		return
-	..()
-
 /mob/living/simple_animal/hostile/asteroid/goliath/Die()
 	var/obj/item/asteroid/goliath_hide/G = new /obj/item/asteroid/goliath_hide(src.loc)
 	G.layer = 4.1
@@ -414,7 +408,7 @@
 			var/obj/item/clothing/C = target
 			var/current_armor = C.armor
 			if(current_armor.["melee"] < 90)
-				current_armor.["melee"] = min(current_armor.["melee"] + 10, 90)
+				current_armor.["melee"] = min(current_armor.["melee"] + 5, 90)
 				user << "<span class='info'>You strengthen [target], improving its resistance against melee attacks.</span>"
 				del(src)
 			else

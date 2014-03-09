@@ -493,19 +493,27 @@
 
 /obj/machinery/vending/boozeomat
 	name = "\improper Booze-O-Mat"
-	desc = "A technological marvel, supposedly able to mix just the mixture you'd like to drink the moment you ask for one."
+	desc = "A technological marvel, it dispenses glasses and some premixed drinks. It's neat."
 	icon_state = "boozeomat"        //////////////18 drink entities below, plus the glasses, in case someone wants to edit the number of bottles
 	icon_deny = "boozeomat-deny"
-	products = list(/obj/item/weapon/reagent_containers/food/drinks/bottle/gin = 5,/obj/item/weapon/reagent_containers/food/drinks/bottle/whiskey = 5,
-					/obj/item/weapon/reagent_containers/food/drinks/bottle/tequilla = 5,/obj/item/weapon/reagent_containers/food/drinks/bottle/vodka = 5,
-					/obj/item/weapon/reagent_containers/food/drinks/bottle/vermouth = 5,/obj/item/weapon/reagent_containers/food/drinks/bottle/rum = 5,
-					/obj/item/weapon/reagent_containers/food/drinks/bottle/wine = 5,/obj/item/weapon/reagent_containers/food/drinks/bottle/cognac = 5,
-					/obj/item/weapon/reagent_containers/food/drinks/bottle/kahlua = 5,/obj/item/weapon/reagent_containers/food/drinks/beer = 6,
-					/obj/item/weapon/reagent_containers/food/drinks/ale = 6,/obj/item/weapon/reagent_containers/food/drinks/bottle/orangejuice = 4,
-					/obj/item/weapon/reagent_containers/food/drinks/bottle/tomatojuice = 4,/obj/item/weapon/reagent_containers/food/drinks/bottle/limejuice = 4,
-					/obj/item/weapon/reagent_containers/food/drinks/bottle/cream = 4,/obj/item/weapon/reagent_containers/food/drinks/soda_cans/tonic = 8,
-					/obj/item/weapon/reagent_containers/food/drinks/soda_cans/cola = 8, /obj/item/weapon/reagent_containers/food/drinks/soda_cans/sodawater = 15,
-					/obj/item/weapon/reagent_containers/food/drinks/drinkingglass = 30,/obj/item/weapon/reagent_containers/food/drinks/ice = 9)
+	products = list(/obj/item/weapon/reagent_containers/food/drinks/bottle/orangejuice = 4,/obj/item/weapon/reagent_containers/food/drinks/bottle/tomatojuice = 4,
+					/obj/item/weapon/reagent_containers/food/drinks/bottle/limejuice = 4,/obj/item/weapon/reagent_containers/food/drinks/bottle/cream = 4,
+					/obj/item/weapon/reagent_containers/food/drinks/soda_cans/tonic = 15,/obj/item/weapon/reagent_containers/food/drinks/soda_cans/cola = 15,
+					/obj/item/weapon/reagent_containers/food/drinks/soda_cans/sodawater = 15,/obj/item/weapon/reagent_containers/food/drinks/drinkingglass = 30,
+					/obj/item/weapon/reagent_containers/food/drinks/drinkingglass/shot = 30,/obj/item/weapon/reagent_containers/food/drinks/drinkingglass/wine = 30,
+					/obj/item/weapon/reagent_containers/food/drinks/drinkingglass/mug = 30,/obj/item/weapon/reagent_containers/food/drinks/drinkingglass/bottle = 30,
+					/obj/item/weapon/reagent_containers/food/drinks/drinkingglass/atomicbomb = 8, /obj/item/weapon/reagent_containers/food/drinks/drinkingglass/b52 = 8,
+					/obj/item/weapon/reagent_containers/food/drinks/drinkingglass/screwdriver = 8, /obj/item/weapon/reagent_containers/food/drinks/drinkingglass/mug/manlydorf = 8,
+					/obj/item/weapon/reagent_containers/food/drinks/drinkingglass/mug/mead = 8, /obj/item/weapon/reagent_containers/food/drinks/drinkingglass/bottle/ale = 8,
+					/obj/item/weapon/reagent_containers/food/drinks/drinkingglass/bottle/beer = 8, /obj/item/weapon/reagent_containers/food/drinks/drinkingglass/bottle/cognac = 8,
+					/obj/item/weapon/reagent_containers/food/drinks/drinkingglass/bottle/gin = 8, /obj/item/weapon/reagent_containers/food/drinks/drinkingglass/bottle/kahlua = 8,
+					/obj/item/weapon/reagent_containers/food/drinks/drinkingglass/bottle/patron = 8, /obj/item/weapon/reagent_containers/food/drinks/drinkingglass/bottle/rum = 8,
+					/obj/item/weapon/reagent_containers/food/drinks/drinkingglass/bottle/tequilla = 8, /obj/item/weapon/reagent_containers/food/drinks/drinkingglass/bottle/vermouth = 8,
+					/obj/item/weapon/reagent_containers/food/drinks/drinkingglass/bottle/vodka = 8, /obj/item/weapon/reagent_containers/food/drinks/drinkingglass/bottle/whiskey = 8,
+					/obj/item/weapon/reagent_containers/food/drinks/drinkingglass/bottle/wine = 8,/obj/item/weapon/reagent_containers/food/drinks/drinkingglass/shot/blackrussian = 8,
+					/obj/item/weapon/reagent_containers/food/drinks/drinkingglass/shot/whiterussian = 8,/obj/item/weapon/reagent_containers/food/drinks/drinkingglass/shot/whiskeycola = 8,
+					/obj/item/weapon/reagent_containers/food/drinks/drinkingglass/wine/gintonic = 8, /obj/item/weapon/reagent_containers/food/drinks/drinkingglass/wine/margarita = 8,
+					/obj/item/weapon/reagent_containers/food/drinks/ice = 15)
 	contraband = list(/obj/item/weapon/reagent_containers/food/drinks/tea = 10)
 	vend_delay = 15
 	product_slogans = "I hope nobody asks me for a bloody cup o' tea...;Alcohol is humanity's friend. Would you abandon a friend?;Quite delighted to serve you!;Is nobody thirsty on this station?"
@@ -788,7 +796,7 @@
 	desc = "A kitchen and restaurant equipment vendor"
 	product_ads = "Mm, food stuffs!;Food and food accessories.;Get your plates!;You like forks?;I like forks.;Woo, utensils.;You don't really need these..."
 	icon_state = "dinnerware"
-	products = list(/obj/item/weapon/tray = 8,/obj/item/weapon/kitchen/utensil/fork = 6,/obj/item/weapon/kitchenknife = 3,/obj/item/weapon/reagent_containers/food/drinks/drinkingglass = 8,/obj/item/clothing/suit/chef/classic = 2,/obj/item/weapon/reagent_containers/food/condiment/pack/ketchup = 5,/obj/item/weapon/reagent_containers/food/condiment/pack/hotsauce = 5)
+	products = list(/obj/item/weapon/tray = 8,/obj/item/weapon/kitchen/utensil/fork = 6,/obj/item/weapon/kitchenknife = 3,/obj/item/weapon/reagent_containers/food/drinks/drinkingglass = 16,/obj/item/clothing/suit/chef/classic = 2,/obj/item/weapon/reagent_containers/food/condiment/pack/ketchup = 5,/obj/item/weapon/reagent_containers/food/condiment/pack/hotsauce = 5,/obj/item/trash/bowl = 20)
 	contraband = list(/obj/item/weapon/kitchen/rollingpin = 2, /obj/item/weapon/butch = 2)
 
 /obj/machinery/vending/sovietsoda

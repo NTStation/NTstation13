@@ -153,6 +153,7 @@ obj/item/projectile/kinetic/New()
 	if(pressure < 50)
 		name = "full strength kinetic force"
 		damage = 30
+		range = 4
 	..()
 
 /obj/item/projectile/kinetic/Range()
