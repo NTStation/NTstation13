@@ -333,8 +333,8 @@
 	hitsound = 'sound/weapons/bladeslice.ogg'
 
 	suicide_act(mob/user)
-		viewers(user) << pick("<span class='suicide'>[user] is slitting \his wrists with the shard of glass! It looks like \he's trying to commit suicide.</span>", \
-							"<span class='suicide'>[user] is slitting \his throat with the shard of glass! It looks like \he's trying to commit suicide.</span>")
+		viewers(user) << pick("<span class='suicide'>[user] is slitting \his feet with the plasma crystal! It looks like \he's trying to commit suicide.</span>", \
+							"<span class='suicide'>[user] is chewing on the plasma crystal! It looks like \he's trying to commit suicide.</span>")
 		return (BRUTELOSS)
 
 /obj/item/weapon/shard/plasma/New()
@@ -361,7 +361,7 @@
 			var/mob/living/carbon/human/H = AM
 			H << "<span class='userdanger'>You step in the broken plasma shards!</span>"
 			H.apply_damage(9,BRUTE,(pick("l_leg", "r_leg")))
-			H.Weaken(8)
+			H.Weaken(6)
 
 /*
  * Plasma Glass sheets
