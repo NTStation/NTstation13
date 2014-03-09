@@ -395,3 +395,4 @@
 	bearable_temp = INFINITY	//INFINITY Kelvin. Insanely strong. It'd take a satanhellburn to burn through this.
 	health = 90
 	reinf = 1
+	shard_type = /obj/item/weapon/shard/plasma
