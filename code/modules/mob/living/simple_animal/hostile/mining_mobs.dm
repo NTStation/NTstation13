@@ -65,10 +65,10 @@
 	throw_message = "does nothing against the hard shell of"
 	vision_range = 2
 	speed = 5
-	maxHealth = 100
-	health = 100
+	maxHealth = 150
+	health = 150
 	harm_intent_damage = 5
-	melee_damage_lower = 2
+	melee_damage_lower = 7
 	melee_damage_upper = 10
 	attacktext = "bites into"
 	a_intent = "harm"
@@ -124,7 +124,7 @@
 	icon_dead = "Goldgrub_dead"
 	icon_gib = "syndicate_gib"
 	vision_range = 2
-	aggro_vision_range = 9
+	aggro_vision_range = 5
 	idle_vision_range = 2
 	move_to_delay = 5
 	friendly = "harmlessly rolls into"
@@ -305,7 +305,7 @@
 	maxHealth = 1
 	health = 1
 	harm_intent_damage = 5
-	melee_damage_lower = 2
+	melee_damage_lower = 1
 	melee_damage_upper = 2
 	attacktext = "slashes"
 	throw_message = "falls right through the strange body of the"
@@ -337,11 +337,11 @@
 	friendly = "wails at"
 	vision_range = 4
 	speed = 5
-	maxHealth = 150
-	health = 150
+	maxHealth = 225
+	health = 225
 	harm_intent_damage = 0
-	melee_damage_lower = 10
-	melee_damage_upper = 20
+	melee_damage_lower = 14
+	melee_damage_upper = 24
 	attacktext = "pulverizes"
 	throw_message = "does nothing to the rocky hide of the"
 	aggro_vision_range = 6
