@@ -89,16 +89,16 @@
 			sandwich_limit += 4
 
 	if(src.contents.len > sandwich_limit)
-		user << "\red If you put anything else on \the [src] it's going to collapse. Add a breadslice to reinforce it's stability."
+		user << "<span class='warning'> If you put anything else on \the [src] it's going to collapse. Add a bread slice to reinforce it's stability.</span>"
 		return
 	else if(istype(W,/obj/item/weapon/shard))
-		user << "\blue You hide [W] in \the [src]."
+		user << "<span class='notice'> You hide [W] in \the [src].</span>"
 		user.drop_item()
 		W.loc = src
 		update()
 		return
 	else if(istype(W,/obj/item/weapon/reagent_containers/food/snacks))
-		user << "\blue You layer [W] over \the [src]."
+		user << "<span class='notice'> You add [W] to \the [src].</span>"
 		var/obj/item/weapon/reagent_containers/food/snacks/F = W
 		F.reagents.trans_to(src, F.reagents.total_volume)
 		src.bitesize += F.bitesize
@@ -139,7 +139,7 @@
 		overlays += T
 
 	name = lowertext("[fullname] [basename]")
-	if(length(name) > 80) name = "[pick(list("absurd","colossal","enormous","ridiculous","massive","oversized","cardiac-arresting","pipe-clogging"))] [basename]"
+	if(length(name) > 80) name = "[pick(list("absurd","colossal","enormous","ridiculous","massive","oversized","cardiac-arresting","pipe-clogging","edible but sickening","sickening","gargantuan","mega","belly-burster","chest-burster"))] [basename]"
 	w_class = n_ceil(Clamp((ingredients.len/2),1,3))
 
 /obj/item/weapon/reagent_containers/food/snacks/customizable/Del()
@@ -150,7 +150,7 @@
 /obj/item/weapon/reagent_containers/food/snacks/customizable/examine()
 	..()
 	var/whatsinside = pick(ingredients)
-	usr << "\blue You think you can see [whatsinside] in there."
+	usr << "<span class='notice'> You think you can see [whatsinside] in there.</span>"
 
 /obj/item/weapon/reagent_containers/food/snacks/customizable/attack(mob/M as mob, mob/user as mob, def_zone)
 
@@ -165,6 +165,6 @@
 		H = M
 
 	if(H && shard && M == user) //This needs a check for feeding the food to other people, but that could be abusable.
-		H << "\red You lacerate your mouth on a [shard.name] in the sandwich!"
+		H << "<span class='warning'> You lacerate your mouth on a [shard.name] in the [src.basename]!</span>"
 		H.adjustBruteLoss(5) //TODO: Target head if human.
 	..()
