@@ -144,28 +144,28 @@
 
 	if(href_list["ejectBeaker"])
 		if(beaker)
-			var/obj/item/weapon/reagent_containers/B = beaker
+			var/obj/item/weapon/reagent_containers/glass/B = beaker
 			B.loc = loc
 			beaker = null
 
 	add_fingerprint(usr)
 	return 1 // update UIs attached to this object
 
-/obj/machinery/chem_dispenser/attackby(var/obj/item/weapon/reagent_containers/B as obj, var/mob/user as mob)
+/obj/machinery/chem_dispenser/attackby(var/obj/item/weapon/reagent_containers/glass/B as obj, var/mob/user as mob)
 	if(isrobot(user))
 		return
 
-	if(istype(B, /obj/item/weapon/reagent_containers/pill))
+	if(!istype(B, /obj/item/weapon/reagent_containers/glass))
 		return
 
 	if(src.beaker)
-		user << "There's already a reagent container loaded into the machine."
+		user << "A beaker is already loaded into the machine."
 		return
 
 	src.beaker =  B
 	user.drop_item()
 	B.loc = src
-	user << "You add [B] to the machine!"
+	user << "You add the beaker to the machine!"
 	nanomanager.update_uis(src) // update all UIs attached to src
 
 /obj/machinery/chem_dispenser/attack_ai(mob/user as mob)
@@ -186,7 +186,6 @@
 	name = "portable chem dispenser"
 	icon = 'icons/obj/chemical.dmi'
 	icon_state = "minidispenser"
-	var/start_state = "minidispenser"
 	energy = 5
 	max_energy = 5
 	amount = 5
@@ -227,7 +226,7 @@
 
 /obj/machinery/chem_dispenser/constructable/attackby(var/obj/item/I, var/mob/user)
 	..()
-	if(default_deconstruction_screwdriver(user, "[start_state]-o", "[start_state]", I))
+	if(default_deconstruction_screwdriver(user, "minidispenser-o", "minidispenser", I))
 		return
 
 	if(exchange_parts(user, I))
@@ -236,65 +235,12 @@
 	if(panel_open)
 		if(istype(I, /obj/item/weapon/crowbar))
 			if(beaker)
-				var/obj/item/weapon/reagent_containers/B = beaker
+				var/obj/item/weapon/reagent_containers/glass/B = beaker
 				B.loc = loc
 				beaker = null
 			default_deconstruction_crowbar(I)
 			return 1
 
-/obj/machinery/chem_dispenser/constructable/booze
-	name = "Booze-O-Matic 5000"
-	desc = "This machine is magical in that it fabricates booze! Rejoice!"
-	icon = 'icons/obj/chemical.dmi'
-	icon_state = "booze_dispenser"
-	start_state = "booze_dispenser"
-	energy = 10
-	max_energy = 10
-	amount = 5
-	recharge_delay = 30
-	dispensable_reagents = list()
-	special_reagents = list(list("beer", "wine", "whiskey", "vodka", "kahlua", "gin", "rum", "tequilla", "vermouth","ale","water","space_cola","sodawater","ice","tonic","enzyme"),
-							list("thirteenloko","milk","cream","coffee","tea","hotcoco","nothing","mead"),
-							list("ethanol", "orangejuice", "tomatojuice", "limejuice", "carrotjuice", "berryjuice", "watermelonjuice", "lemonjuice", "banana", "potato_juice", "soymilk", "iron"))
-
-/obj/machinery/chem_dispenser/constructable/booze/New()
-	..()
-	component_parts = list()
-	component_parts += new /obj/item/weapon/circuitboard/booze_dispenser(null)
-	component_parts += new /obj/item/weapon/stock_parts/matter_bin(null)
-	component_parts += new /obj/item/weapon/stock_parts/matter_bin(null)
-	component_parts += new /obj/item/weapon/stock_parts/manipulator(null)
-	component_parts += new /obj/item/weapon/stock_parts/capacitor(null)
-	component_parts += new /obj/item/weapon/stock_parts/console_screen(null)
-	component_parts += new /obj/item/weapon/stock_parts/cell/high(null)
-	RefreshParts()
-
-/obj/machinery/chem_dispenser/constructable/soda
-	name = "SodaStream Fizzy Drinks Maker"
-	desc = "The syrup alone costs nearly twice as much as spacemarket own-brand cola."
-	icon = 'icons/obj/chemical.dmi'
-	icon_state = "soda_dispenser"
-	start_state = "soda_dispenser"
-	energy = 10
-	max_energy = 10
-	amount = 5
-	recharge_delay = 30
-	dispensable_reagents = list()
-	special_reagents = list(list("water","space_cola","sodawater","space_up","dr_gibb","spacemountainwind","lemon_lime","tonic","ice","enzyme"),
-							list("soy_latte","soymilk","milk","cream","coffee","tea","hotcoco","cafe_latte","thirteenloko"),
-							list("orangejuice", "tomatojuice", "limejuice", "carrotjuice", "berryjuice", "watermelonjuice", "lemonjuice", "banana", "potato_juice", "nuka_cola"))
-
-/obj/machinery/chem_dispenser/constructable/soda/New()
-	..()
-	component_parts = list()
-	component_parts += new /obj/item/weapon/circuitboard/soda_dispenser(null)
-	component_parts += new /obj/item/weapon/stock_parts/matter_bin(null)
-	component_parts += new /obj/item/weapon/stock_parts/matter_bin(null)
-	component_parts += new /obj/item/weapon/stock_parts/manipulator(null)
-	component_parts += new /obj/item/weapon/stock_parts/capacitor(null)
-	component_parts += new /obj/item/weapon/stock_parts/console_screen(null)
-	component_parts += new /obj/item/weapon/stock_parts/cell/high(null)
-	RefreshParts()
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 

@@ -341,29 +341,6 @@ to destroy them and players will be able to make replacements.
 							"/obj/item/weapon/stock_parts/console_screen" = 1,
 							"/obj/item/weapon/stock_parts/cell" = 1)
 
-/obj/item/weapon/circuitboard/booze_dispenser
-	name = "circuit board (Booze-O-Matic 5000)"
-	build_path = /obj/machinery/chem_dispenser/constructable/booze
-	board_type = "machine"
-	origin_tech = "materials=2;engineering=3;programming=3;biotech=2"
-	req_components = list(
-							"/obj/item/weapon/stock_parts/matter_bin" = 2,
-							"/obj/item/weapon/stock_parts/capacitor" = 1,
-							"/obj/item/weapon/stock_parts/manipulator" = 1,
-							"/obj/item/weapon/stock_parts/console_screen" = 1,
-							"/obj/item/weapon/stock_parts/cell" = 1)
-
-/obj/item/weapon/circuitboard/soda_dispenser
-	name = "circuit board (Soda-Fizzer)"
-	build_path = /obj/machinery/chem_dispenser/constructable/soda
-	board_type = "machine"
-	origin_tech = "materials=2;engineering=3;programming=3;biotech=2"
-	req_components = list(
-							"/obj/item/weapon/stock_parts/matter_bin" = 2,
-							"/obj/item/weapon/stock_parts/capacitor" = 1,
-							"/obj/item/weapon/stock_parts/manipulator" = 1,
-							"/obj/item/weapon/stock_parts/console_screen" = 1,
-							"/obj/item/weapon/stock_parts/cell" = 1)
 
 /obj/item/weapon/circuitboard/destructive_analyzer
 	name = "circuit board (Destructive Analyzer)"
