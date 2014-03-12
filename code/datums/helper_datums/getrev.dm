@@ -10,7 +10,7 @@ var/global/datum/getrev/revdata = new()
 		if(fexists("config/git_host.txt"))
 			project_href = file2text("config/git_host.txt")
 		else
-			project_href = "https://www.github.com/tgstation/-tg-station"
+			project_href = "https://github.com/NTStation/NTstation13"
 		var/list/head_log = file2list(".git/logs/HEAD", "\n")
 		for(var/line=head_log.len, line>=1, line--)
 			if(head_log[line])
@@ -31,7 +31,7 @@ var/global/datum/getrev/revdata = new()
 			showinfo += "*unknown*"
 		showinfo += "<p>-<a href='[project_href]/issues/new'>Report Bugs Here-</a><br><i>Please provide as much info as possible<br>Copy/paste the revision date and hash into your issue report if possible, thanks</i> :)</p>"
 
-		world.log << "Running /tg/ revision:"
+		world.log << "Running NTStation revision:"
 		world.log << date
 		world.log << revision
 		return

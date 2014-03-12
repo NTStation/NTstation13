@@ -3,7 +3,7 @@ var/datum/configuration/config = null
 var/host = null
 var/join_motd = null
 var/station_name = null
-var/game_version = "/tg/ Station 13"
+var/game_version = "NTStation 13"
 var/changelog_hash = ""
 
 var/ooc_allowed = 1	// used with admin verbs to disable ooc - not a config option apparently
