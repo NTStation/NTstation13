@@ -161,7 +161,7 @@
 			V.show_message("[usr] starts climbing into \the [src].", 3)
 		if(target != user && !user.restrained() && !user.stat && !user.weakened && !user.stunned && !user.paralysis)
 			if(target.anchored) return
-			if(!ishuman(user) && !ismonkey(user)) return
+			if(ispAI(user)) return
 			V.show_message("[usr] starts stuffing [target.name] into \the [src].", 3)
 	if(!do_after(usr, 20))
 		return
