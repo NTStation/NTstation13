@@ -36,7 +36,7 @@
 
 			filling.icon += mix_color_from_reagents(reagents.reagent_list)
 			overlays += filling
-			
+
 		if (reagents.total_volume && decor)
 			//mrid = R.get_master_reagent_id()
 			switch(reagents.get_master_reagent_id())
@@ -465,7 +465,7 @@
 			name = "Drinking glass"
 			desc = "Your standard drinking glass. Stores 50 of any reagent."
 			return
-		
+
 
 /obj/item/weapon/reagent_containers/food/drinks/drinkingglass/shot
 	name = "shot glass"
@@ -666,4 +666,3 @@
 		..()
 		reagents.add_reagent("manlydorf", 70)
 		on_reagent_change()
-Glass of chocolate
