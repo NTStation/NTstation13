@@ -218,6 +218,23 @@
 				else
 					on = 0
 				continue
+			if (selected_glass == 1 && selected_gold == 0 && selected_silver == 0 && selected_diamond == 0 && selected_plasma == 1 && selected_uranium == 0 && selected_iron == 0 && selected_clown == 0)
+				if (ore_glass > 0 && ore_plasma > 0)
+					ore_glass--;
+					ore_plasma--;
+					generate_mineral(/obj/item/stack/sheet/glass/plasmaglass)
+				else
+					on = 0
+				continue
+			if (selected_glass == 1 && selected_gold == 0 && selected_silver == 0 && selected_diamond == 0 && selected_plasma == 1 && selected_uranium == 0 && selected_iron == 1 && selected_clown == 0)
+				if (ore_glass > 0 && ore_plasma > 0 && ore_iron > 0)
+					ore_glass--;
+					ore_plasma--;
+					ore_iron--;
+					generate_mineral(/obj/item/stack/sheet/glass/plasmarglass)
+				else
+					on = 0
+				continue
 			if (selected_glass == 0 && selected_gold == 1 && selected_silver == 0 && selected_diamond == 0 && selected_plasma == 0 && selected_uranium == 0 && selected_iron == 0 && selected_clown == 0)
 				if (ore_gold > 0)
 					ore_gold--;
