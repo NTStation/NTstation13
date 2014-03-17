@@ -5,7 +5,7 @@
 /obj/item/clothing/suit/space/powered
 	name = "Powered armor"
 	desc = "Not for rookies."
-	icon_state = "swat"
+	icon_state = "power_armour"
 	item_state = "swat"
 	w_class = 4//bulky item
 
@@ -201,7 +201,7 @@
 
 /obj/item/clothing/head/space/powered
 	name = "Powered armor"
-	icon_state = "swat"
+	icon_state = "power_armour_helmet"
 	desc = "Not for rookies."
 	flags = FPRINT | HEADCOVERSEYES | HEADCOVERSMOUTH | STOPSPRESSUREDMAGE | THICKMATERIAL | BLOCKHAIR
 	item_state = "swat"
@@ -237,7 +237,7 @@
 
 /obj/item/clothing/gloves/powered
 	name = "Powered armor"
-	icon_state = "swat"
+	icon_state = "power_armour_gloves"
 	desc = "Not for rookies."
 	flags = FPRINT
 	item_state = "swat"
@@ -245,7 +245,7 @@
 
 /obj/item/clothing/shoes/powered
 	name = "Powered armor"
-	icon_state = "swat"
+	icon_state = "power_armour_boots"
 	desc = "Not for rookies."
 	flags = FPRINT
 	item_state = "swat"

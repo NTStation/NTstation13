@@ -3,6 +3,8 @@
  */
 
 /obj/item/powerarmor
+	icon = 'icons/obj/PowerArmour.dmi'
+	icon_state = "Plates"
 	name = "Generic power armor component"
 	desc = "This is the base object, you should never see one."
 	var/obj/item/clothing/suit/space/powered/parent //so the component knows which armor it belongs to.
@@ -16,6 +18,7 @@
 /obj/item/powerarmor/power
 	name = "Adminbus power armor power source"
 	desc = "Runs on the rare Badminium molecule."
+	icon_state = "Plasma"
 
 /obj/item/powerarmor/process()
 	return
@@ -43,6 +46,7 @@
 	return fuel
 
 /obj/item/powerarmor/power/powercell
+	icon_state = "Powercell"
 	name = "Powercell interface"
 	desc = "Boring, but reliable."
 	var/obj/item/weapon/stock_parts/cell/cell
@@ -62,6 +66,7 @@
 	return max(cell.charge, 0)
 
 /obj/item/powerarmor/power/nuclear
+	icon_state = "Nuclear"
 	name = "Miniaturized nuclear generator"
 	desc = "For all your radioactive needs."
 	slowdown = 1.5
@@ -91,6 +96,7 @@
 	return !crit_fail
 
 /obj/item/powerarmor/reactive
+	icon_state = "Plates"
 	name = "Adminbus power armor reactive plating"
 	desc = "Made with the rare Badminium molecule."
 	var/list/togglearmor = list(melee = 250, bullet = 100, laser = 100,energy = 100, bomb = 100, bio = 100, rad = 100)
@@ -124,6 +130,7 @@
 
 
 /obj/item/powerarmor/servos
+	icon_state = "Servo"
 	name = "Adminbus power armor movement servos"
 	desc = "Made with the rare Badminium molecule."
 	var/toggleslowdown = 9
@@ -139,6 +146,7 @@
 			parent.slowdown -= toggleslowdown
 
 /obj/item/powerarmor/atmoseal
+	icon_state = "Tubes"
 	name = "Power armor atmospheric seals"
 	desc = "Keeps the bad stuff out."
 	slowdown = 1
