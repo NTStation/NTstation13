@@ -17,4 +17,4 @@ install:
   - cd ..
 
 script:
-  - DreamMaker tgstation.dme
+  - DreamMaker NTstation13.dme
