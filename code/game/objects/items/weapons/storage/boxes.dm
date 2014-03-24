@@ -70,7 +70,11 @@
 
 /obj/item/weapon/storage/box/gloves
 	name = "box of latex gloves"
-	desc = "Contains white gloves."
+	desc = "Contains sterile latex gloves. There's a sticker on the side: \
+	\"NANOTRASEN SECURITY WOULD LIKE TO REMIND ALL STAFF THAT LATEX GLOVES \
+	WILL NOT PREVENT TRANSFER OF FINGERPRINTS. PLEASE LEAVE GLOVES FOR \
+	MEDICAL STAFF.\""
+
 	icon_state = "latex"
 	New()
 		..()

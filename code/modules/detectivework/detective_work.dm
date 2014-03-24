@@ -87,6 +87,9 @@ atom/proc/add_fibers(mob/living/carbon/human/M)
 		var/mob/living/carbon/human/H = M
 		check_dna_integrity(H)	//sets up dna and its variables if it was missing somehow
 
+		if(H.gloves && istype(H.gloves, /obj/item/clothing/gloves/latex))
+			ignoregloves = 1
+
 		//Now, deal with gloves.
 		if(!ignoregloves)
 			if(H.gloves && H.gloves != src)
@@ -97,10 +100,7 @@ atom/proc/add_fibers(mob/living/carbon/human/M)
 
 			//Deal with gloves the pass finger/palm prints.
 			if(H.gloves != src)
-				if(prob(75) && istype(H.gloves, /obj/item/clothing/gloves/latex))
-					return 0
-				else if(H.gloves && !istype(H.gloves, /obj/item/clothing/gloves/latex))
-					return 0
+				return 0
 
 		//More adminstuffz
 		if(fingerprintslast != H.key)
@@ -146,3 +146,10 @@ atom/proc/add_fibers(mob/living/carbon/human/M)
 	if(fingerprintshidden)
 		A.fingerprintshidden |= fingerprintshidden.Copy()    //admin
 	A.fingerprintslast = fingerprintslast
+
+/atom/proc/add_custom_fiber(fiber, chance)
+	if(!suit_fibers)
+		suit_fibers = list()
+
+	if(prob(chance))
+		suit_fibers += fiber
