@@ -260,8 +260,8 @@
 /obj/item/asteroid/hivelord_core
 	name = "hivelord remains"
 	desc = "All that remains of a hivelord, it seems to be what allows it to break pieces of itself off without being hurt... its healing properties will soon become inert if not used quickly. Try not to think about what you're eating."
-	icon = 'icons/obj/food.dmi'
-	icon_state = "boiledrorocore"
+	icon = 'icons/obj/surgery.dmi'
+	icon_state = "roro core"
 	var/inert = 0
 
 /obj/item/asteroid/hivelord_core/New()
