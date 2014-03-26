@@ -303,11 +303,17 @@
 				if(G.amount>=G.max_amount)
 					continue
 				G.attackby(NG, user)
+<<<<<<< HEAD
 				usr << "You add the newly-formed glass to the stack. It now contains [NG.amount] sheets."
 			//SN src = null
 			del(src)
 			return
 	return ..()
+=======
+				user << "<span class='notice'>You add the newly-formed glass to the stack. It now contains [NG.amount] sheet\s.</span>"
+			qdel(src)
+	..()
+>>>>>>> c7471d0795e1cf865ea5ed76c34ad30c680b0231
 
 /obj/item/weapon/shard/Crossed(var/mob/AM)
 	if(istype(AM))
