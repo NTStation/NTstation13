@@ -118,31 +118,21 @@
 /obj/effect/landmark/costume/nyangirl/New()
 	new /obj/item/clothing/under/schoolgirl(src.loc)
 	new /obj/item/clothing/head/kitty(src.loc)
-<<<<<<< HEAD
 	if (prob(50))
 		new /obj/item/clothing/glasses/sunglasses/blindfold(src.loc)
 	else
 		new /obj/item/clothing/mask/muzzle/gag(src.loc)
-	del(src)
-=======
-	new /obj/item/clothing/glasses/sunglasses/blindfold(src.loc)
 	qdel(src)
->>>>>>> c7471d0795e1cf865ea5ed76c34ad30c680b0231
 
 /obj/effect/landmark/costume/maid/New()
 	new /obj/item/clothing/under/blackskirt(src.loc)
 	var/CHOICE = pick( /obj/item/clothing/head/beret , /obj/item/clothing/head/rabbitears )
 	new CHOICE(src.loc)
-<<<<<<< HEAD
 	if (prob(50))
 		new /obj/item/clothing/glasses/sunglasses/blindfold(src.loc)
 	else
 		new /obj/item/clothing/mask/muzzle/gag(src.loc)
-	del(src)
-=======
-	new /obj/item/clothing/glasses/sunglasses/blindfold(src.loc)
 	qdel(src)
->>>>>>> c7471d0795e1cf865ea5ed76c34ad30c680b0231
 
 /obj/effect/landmark/costume/butler/New()
 	new /obj/item/clothing/tie/waistcoat(src.loc)

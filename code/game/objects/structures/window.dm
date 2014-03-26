@@ -18,25 +18,13 @@
 
 
 /obj/structure/window/bullet_act(var/obj/item/projectile/Proj)
-<<<<<<< HEAD
 	health -= Proj.damage
 	if(reinf) health += 0.5*Proj.damage
 	..()
 	if(health <= 0)
 		new shard_type(loc)
 		if(reinf) new /obj/item/stack/rods(loc)
-		del(src)
-=======
-	if((Proj.damage_type == BRUTE || Proj.damage_type == BURN))
-		health -= Proj.damage
-	..()
-	if(health <= 0)
-		new /obj/item/weapon/shard(loc)
-		new /obj/item/stack/rods(loc)
 		qdel(src)
->>>>>>> c7471d0795e1cf865ea5ed76c34ad30c680b0231
-	return
-
 
 /obj/structure/window/ex_act(severity)
 	switch(severity)

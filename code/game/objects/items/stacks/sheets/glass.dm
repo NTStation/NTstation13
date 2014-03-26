@@ -292,30 +292,22 @@
 		L.adjustBruteLoss(force / 2)
 
 
-/obj/item/weapon/shard/attackby(obj/item/weapon/W as obj, mob/user as mob)
-	if ( istype(W, /obj/item/weapon/weldingtool))
-		var/obj/item/weapon/weldingtool/WT = W
+/obj/item/weapon/shard/attackby(obj/item/I, mob/user)
+	if(istype(I, /obj/item/weapon/weldingtool))
+		var/obj/item/weapon/weldingtool/WT = I
 		if(WT.remove_fuel(0, user))
 			var/obj/item/stack/sheet/glass/NG = new (user.loc)
-			for (var/obj/item/stack/sheet/glass/G in user.loc)
-				if(G==NG)
+			for(var/obj/item/stack/sheet/glass/G in user.loc)
+				if(G == NG)
 					continue
-				if(G.amount>=G.max_amount)
+				if(G.amount >= G.max_amount)
 					continue
 				G.attackby(NG, user)
-<<<<<<< HEAD
-				usr << "You add the newly-formed glass to the stack. It now contains [NG.amount] sheets."
-			//SN src = null
-			del(src)
-			return
-	return ..()
-=======
 				user << "<span class='notice'>You add the newly-formed glass to the stack. It now contains [NG.amount] sheet\s.</span>"
 			qdel(src)
 	..()
->>>>>>> c7471d0795e1cf865ea5ed76c34ad30c680b0231
 
-/obj/item/weapon/shard/Crossed(var/mob/AM)
+/obj/item/weapon/shard/Crossed(mob/AM)
 	if(istype(AM))
 		playsound(loc, 'sound/effects/glass_step.ogg', 50, 1)
 		if(ishuman(AM))
