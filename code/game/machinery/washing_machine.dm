@@ -27,11 +27,11 @@
 	set category = "Object"
 	set src in oview(1)
 
-	if( state != 4 )
-		usr << "The washing machine cannot run in this state."
+	if(state != 4)
+		usr << "<span class='notice'>[src] cannot run in this state.</span>"
 		return
 
-	if( locate(/mob,contents) )
+	if(locate(/mob, contents))
 		state = 8
 	else
 		state = 5
@@ -49,10 +49,10 @@
 
 	if(crayon)
 		var/wash_color
-		if(istype(crayon,/obj/item/toy/crayon))
+		if(istype(crayon, /obj/item/toy/crayon))
 			var/obj/item/toy/crayon/CR = crayon
 			wash_color = CR.colourName
-		else if(istype(crayon,/obj/item/weapon/stamp))
+		else if(istype(crayon, /obj/item/weapon/stamp))
 			var/obj/item/weapon/stamp/ST = crayon
 			wash_color = ST.item_color
 
@@ -72,59 +72,50 @@
 			var/new_desc = "The colors are a bit dodgy."
 			for(var/T in typesof(/obj/item/clothing/under))
 				var/obj/item/clothing/under/J = new T
-				//world << "DEBUG: [wash_color] == [J.item_color]"
 				if(wash_color == J.item_color)
 					new_jumpsuit_icon_state = J.icon_state
 					new_jumpsuit_item_state = J.item_state
 					new_jumpsuit_name = J.name
 					del(J)
-					//world << "DEBUG: YUP! [new_icon_state] and [new_item_state]"
 					break
 				del(J)
 			for(var/T in typesof(/obj/item/clothing/gloves))
 				var/obj/item/clothing/gloves/G = new T
-				//world << "DEBUG: [wash_color] == [J.item_color]"
 				if(wash_color == G.item_color)
 					new_glove_icon_state = G.icon_state
 					new_glove_item_state = G.item_state
 					new_glove_name = G.name
 					del(G)
-					//world << "DEBUG: YUP! [new_icon_state] and [new_item_state]"
 					break
 				del(G)
 			for(var/T in typesof(/obj/item/clothing/shoes))
 				var/obj/item/clothing/shoes/S = new T
-				//world << "DEBUG: [wash_color] == [J.item_color]"
 				if(wash_color == S.item_color)
 					new_shoe_icon_state = S.icon_state
 					new_shoe_name = S.name
 					del(S)
-					//world << "DEBUG: YUP! [new_icon_state] and [new_item_state]"
 					break
 				del(S)
 			for(var/T in typesof(/obj/item/weapon/bedsheet))
 				var/obj/item/weapon/bedsheet/B = new T
-				//world << "DEBUG: [wash_color] == [J.item_color]"
 				if(wash_color == B.item_color)
 					new_sheet_icon_state = B.icon_state
 					new_sheet_name = B.name
 					del(B)
-					//world << "DEBUG: YUP! [new_icon_state] and [new_item_state]"
 					break
 				del(B)
 			for(var/T in typesof(/obj/item/clothing/head/soft))
 				var/obj/item/clothing/head/soft/H = new T
-				//world << "DEBUG: [wash_color] == [J.item_color]"
 				if(wash_color == H.item_color)
 					new_softcap_icon_state = H.icon_state
 					new_softcap_name = H.name
 					del(H)
-					//world << "DEBUG: YUP! [new_icon_state] and [new_item_state]"
 					break
 				del(H)
 			if(new_jumpsuit_icon_state && new_jumpsuit_item_state && new_jumpsuit_name)
 				for(var/obj/item/clothing/under/J in contents)
-					//world << "DEBUG: YUP! FOUND IT!"
+					if(!J.item_color)
+						continue
 					J.item_state = new_jumpsuit_item_state
 					J.icon_state = new_jumpsuit_icon_state
 					J.item_color = wash_color
@@ -132,7 +123,8 @@
 					J.desc = new_desc
 			if(new_glove_icon_state && new_glove_item_state && new_glove_name)
 				for(var/obj/item/clothing/gloves/G in contents)
-					//world << "DEBUG: YUP! FOUND IT!"
+					if(!G.item_color)
+						continue
 					G.item_state = new_glove_item_state
 					G.icon_state = new_glove_icon_state
 					G.item_color = wash_color
@@ -140,25 +132,28 @@
 					G.desc = new_desc
 			if(new_shoe_icon_state && new_shoe_name)
 				for(var/obj/item/clothing/shoes/S in contents)
-					//world << "DEBUG: YUP! FOUND IT!"
-					if (S.chained == 1)
+					if(!S.item_color)
+						continue
+					if(S.chained == 1)
 						S.chained = 0
 						S.slowdown = SHOES_SLOWDOWN
-						new /obj/item/weapon/handcuffs( src )
+						new /obj/item/weapon/handcuffs(src)
 					S.icon_state = new_shoe_icon_state
 					S.item_color = wash_color
 					S.name = new_shoe_name
 					S.desc = new_desc
 			if(new_sheet_icon_state && new_sheet_name)
 				for(var/obj/item/weapon/bedsheet/B in contents)
-					//world << "DEBUG: YUP! FOUND IT!"
+					if(!B.item_color)
+						continue
 					B.icon_state = new_sheet_icon_state
 					B.item_color = wash_color
 					B.name = new_sheet_name
 					B.desc = new_desc
 			if(new_softcap_icon_state && new_softcap_name)
 				for(var/obj/item/clothing/head/soft/H in contents)
-					//world << "DEBUG: YUP! FOUND IT!"
+					if(!H.item_color)
+						continue
 					H.icon_state = new_softcap_icon_state
 					H.item_color = wash_color
 					H.name = new_softcap_name
@@ -167,12 +162,13 @@
 		crayon = null
 
 
-	if( locate(/mob,contents) )
+	if(locate(/mob, contents))
 		state = 7
 		gibs_ready = 1
 	else
 		state = 4
 	update_icon()
+
 
 /obj/machinery/washing_machine/verb/climb_out()
 	set name = "Climb out"
@@ -180,126 +176,115 @@
 	set src in usr.loc
 
 	sleep(20)
-	if(state in list(1,3,6) )
-		usr.loc = src.loc
+	if(state in list(1, 3, 6))
+		usr.loc = loc
 
 
 /obj/machinery/washing_machine/update_icon()
 	icon_state = "wm_[state][panel]"
 
-/obj/machinery/washing_machine/attackby(obj/item/weapon/W as obj, mob/user as mob)
-	/*if(istype(W,/obj/item/weapon/screwdriver))
-		panel = !panel
-		user << "\blue you [panel ? "open" : "close"] the [src]'s maintenance panel"*/
-	if(istype(W,/obj/item/toy/crayon) ||istype(W,/obj/item/weapon/stamp))
-		if( state in list(	1, 3, 6 ) )
+
+/obj/machinery/washing_machine/attackby(obj/item/I, mob/user)
+	if(istype(I, /obj/item/toy/crayon) ||istype(I, /obj/item/weapon/stamp))
+		if(state in list(1, 3, 6))
 			if(!crayon)
 				user.drop_item()
-				crayon = W
+				crayon = I
 				crayon.loc = src
 			else
 				..()
 		else
 			..()
-	else if(istype(W,/obj/item/weapon/grab))
-		if( (state == 1) && hacked)
-			var/obj/item/weapon/grab/G = W
+	else if(istype(I, /obj/item/weapon/grab))
+		if(state == 1 && hacked)
+			var/obj/item/weapon/grab/G = I
 			if(ishuman(G.assailant) && iscorgi(G.affecting))
 				G.affecting.loc = src
 				del(G)
 				state = 3
 		else
 			..()
-	else if(istype(W,/obj/item/stack/sheet/hairlesshide) || \
-		istype(W,/obj/item/clothing/under) || \
-		istype(W,/obj/item/clothing/mask) || \
-		istype(W,/obj/item/clothing/head) || \
-		istype(W,/obj/item/clothing/gloves) || \
-		istype(W,/obj/item/clothing/shoes) || \
-		istype(W,/obj/item/clothing/suit) || \
-		istype(W,/obj/item/weapon/bedsheet))
+	else if(istype(I, /obj/item/stack/sheet/hairlesshide)	|| \
+		istype(I, /obj/item/clothing/under)		|| \
+		istype(I, /obj/item/clothing/mask)		|| \
+		istype(I, /obj/item/clothing/head)		|| \
+		istype(I, /obj/item/clothing/gloves)	|| \
+		istype(I, /obj/item/clothing/shoes)		|| \
+		istype(I, /obj/item/clothing/suit)		|| \
+		istype(I, /obj/item/weapon/bedsheet))
 
 		//YES, it's hardcoded... saves a var/can_be_washed for every single clothing item.
-		if ( istype(W,/obj/item/clothing/suit/space ) )
-			user << "This item does not fit."
+		if(istype(I, /obj/item/clothing/suit/space))
+			user << "<span class='notice'>[I] does not fit.</span>"
 			return
-		if ( istype(W,/obj/item/clothing/suit/syndicatefake ) )
-			user << "This item does not fit."
+		if(istype(I, /obj/item/clothing/suit/syndicatefake))
+			user << "<span class='notice'>[I] does not fit.</span>"
 			return
-//		if ( istype(W,/obj/item/clothing/suit/powered ) )
-//			user << "This item does not fit."
-//			return
-		if ( istype(W,/obj/item/clothing/suit/cyborg_suit ) )
-			user << "This item does not fit."
+		if(istype(I, /obj/item/clothing/suit/cyborg_suit))
+			user << "<span class='notice'>[I] does not fit.</span>"
 			return
-		if ( istype(W,/obj/item/clothing/suit/bomb_suit ) )
-			user << "This item does not fit."
+		if(istype(I, /obj/item/clothing/suit/bomb_suit))
+			user << "<span class='notice'>[I] does not fit.</span>"
 			return
-		if ( istype(W,/obj/item/clothing/suit/armor ) )
-			user << "This item does not fit."
+		if(istype(I, /obj/item/clothing/suit/armor))
+			user << "<span class='notice'>[I] does not fit.</span>"
 			return
-		if ( istype(W,/obj/item/clothing/suit/armor ) )
-			user << "This item does not fit."
+		if(istype(I, /obj/item/clothing/mask/gas))
+			user << "<span class='notice'>[I] does not fit.</span>"
 			return
-		if ( istype(W,/obj/item/clothing/mask/gas ) )
-			user << "This item does not fit."
+		if(istype(I, /obj/item/clothing/mask/cigarette))
+			user << "<span class='notice'>[I] does not fit.</span>"
 			return
-		if ( istype(W,/obj/item/clothing/mask/cigarette ) )
-			user << "This item does not fit."
+		if(istype(I, /obj/item/clothing/head/syndicatefake))
+			user << "<span class='notice'>[I] does not fit.</span>"
 			return
-		if ( istype(W,/obj/item/clothing/head/syndicatefake ) )
-			user << "This item does not fit."
-			return
-//		if ( istype(W,/obj/item/clothing/head/powered ) )
-//			user << "This item does not fit."
-//			return
-		if ( istype(W,/obj/item/clothing/head/helmet ) )
-			user << "This item does not fit."
+		if(istype(I, /obj/item/clothing/head/helmet))
+			user << "<span class='notice'>[I] does not fit.</span>"
 			return
 
 		if(contents.len < 5)
-			if ( state in list(1, 3) )
+			if(state in list(1, 3))
 				user.drop_item()
-				W.loc = src
+				I.loc = src
 				state = 3
 			else
-				user << "\blue You can't put the item in right now."
+				user << "<span class='notice'>You can't put the item in right now.</span>"
 		else
-			user << "\blue The washing machine is full."
+			user << "<span class='notice'>[src] is full.</span>"
 	else
 		..()
 	update_icon()
 
-/obj/machinery/washing_machine/attack_hand(mob/user as mob)
+
+/obj/machinery/washing_machine/attack_hand(mob/user)
 	switch(state)
 		if(1)
 			state = 2
 		if(2)
 			state = 1
 			for(var/atom/movable/O in contents)
-				O.loc = src.loc
+				O.loc = loc
 		if(3)
 			state = 4
 		if(4)
 			state = 3
 			for(var/atom/movable/O in contents)
-				O.loc = src.loc
+				O.loc = loc
 			crayon = null
 			state = 1
 		if(5)
-			user << "\red The [src] is busy."
+			user << "<span class='notice'>[src] is busy.</span>"
 		if(6)
 			state = 7
 		if(7)
 			if(gibs_ready)
 				gibs_ready = 0
-				if(locate(/mob,contents))
-					var/mob/M = locate(/mob,contents)
+				if(locate(/mob, contents))
+					var/mob/M = locate(/mob, contents)
 					M.gib()
 			for(var/atom/movable/O in contents)
-				O.loc = src.loc
+				O.loc = loc
 			crayon = null
 			state = 1
-
 
 	update_icon()

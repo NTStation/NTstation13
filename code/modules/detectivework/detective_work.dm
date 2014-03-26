@@ -87,8 +87,11 @@ atom/proc/add_fibers(mob/living/carbon/human/M)
 		var/mob/living/carbon/human/H = M
 		check_dna_integrity(H)	//sets up dna and its variables if it was missing somehow
 
-		if(H.gloves && istype(H.gloves, /obj/item/clothing/gloves/latex))
-			ignoregloves = 1
+		//Check if the gloves (if any) hide fingerprints
+		if(H.gloves)
+			var/obj/item/clothing/gloves/G = H.gloves
+			if(G.transfer_prints)
+				ignoregloves = 1
 
 		//Now, deal with gloves.
 		if(!ignoregloves)
@@ -97,9 +100,6 @@ atom/proc/add_fibers(mob/living/carbon/human/M)
 					fingerprintshidden += text("\[[]\](Wearing gloves). Real name: [], Key: []",time_stamp(), H.real_name, H.key)
 					fingerprintslast = H.key
 				H.gloves.add_fingerprint(M)
-
-			//Deal with gloves the pass finger/palm prints.
-			if(H.gloves != src)
 				return 0
 
 		//More adminstuffz
