@@ -414,7 +414,7 @@
 	orient2hud()
 
 
-/obj/item/weapon/storage/Del()
+/obj/item/weapon/storage/Destroy()
 	close_all()
 	..()
 
