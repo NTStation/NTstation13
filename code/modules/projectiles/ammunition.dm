@@ -12,6 +12,7 @@
 	var/obj/item/projectile/BB = null 			//The loaded bullet
 	var/pellets = 0								//Pellets for spreadshot
 	var/variance = 0							//Variance for inaccuracy fundamental to the casing
+	var/trace_residue = "Gunpowder residue."	//What residue should be left on the shooter? null for none.
 
 
 /obj/item/ammo_casing/New()

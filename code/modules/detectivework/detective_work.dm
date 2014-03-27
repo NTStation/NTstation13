@@ -14,35 +14,34 @@ atom/proc/add_fibers(mob/living/carbon/human/M)
 
 	if(!suit_fibers) suit_fibers = list()
 	var/fibertext
-	var/item_multiplier = istype(src, /obj/item)? 1.2 : 1
 
 	if(M.wear_suit)
 		fibertext = "Material from \a [M.wear_suit]."
-		if(prob(10 * item_multiplier) && !(fibertext in suit_fibers))
+		if(prob(60) && !(fibertext in suit_fibers))
 			suit_fibers += fibertext
 
 		if(!(M.wear_suit.body_parts_covered & CHEST))
 			if(M.w_uniform)
 				fibertext = "Fibers from \a [M.w_uniform]."
-				if(prob(12 * item_multiplier) && !(fibertext in suit_fibers))	//Wearing a suit means less of the uniform exposed.
+				if(prob(50) && !(fibertext in suit_fibers))	//Wearing a suit means less of the uniform exposed.
 					suit_fibers += fibertext
 
 		if(!(M.wear_suit.body_parts_covered & HANDS))
 			if(M.gloves)
 				fibertext = "Material from a pair of [M.gloves.name]."
-				if(prob(20 * item_multiplier) && !(fibertext in suit_fibers))
+				if(prob(40) && !(fibertext in suit_fibers))
 					suit_fibers += fibertext
 
 	else
 		if(M.w_uniform)
 			fibertext = "Fibers from \a [M.w_uniform]."
-			if(prob(15 * item_multiplier) && !(fibertext in suit_fibers))
+			if(prob(50) && !(fibertext in suit_fibers))
 				suit_fibers += fibertext
 
 		if(M.gloves)
 			fibertext = "Material from a pair of [M.gloves.name]."
-			if(prob(20 * item_multiplier) && !(fibertext in suit_fibers))
-				suit_fibers += "Material from a pair of [M.gloves.name]."
+			if(prob(40) && !(fibertext in suit_fibers))
+				suit_fibers += fibertext
 
 
 /atom/proc/add_hiddenprint(mob/living/M)
@@ -67,6 +66,7 @@ atom/proc/add_fibers(mob/living/carbon/human/M)
 			fingerprintshidden += text("\[[time_stamp()]\] Real name: [], Key: []",M.real_name, M.key)
 			fingerprintslast = M.key
 	return
+
 
 //Set ignoregloves to add prints irrespective of the mob having gloves on.
 /atom/proc/add_fingerprint(mob/living/M as mob, ignoregloves = 0)
@@ -145,9 +145,45 @@ atom/proc/add_fibers(mob/living/carbon/human/M)
 		A.fingerprintshidden |= fingerprintshidden.Copy()    //admin
 	A.fingerprintslast = fingerprintslast
 
+
+//call without chance will definitely place fiber
 /atom/proc/add_custom_fiber(fiber, chance)
+	if(isnull(fiber))	return
 	if(!suit_fibers)
 		suit_fibers = list()
 
-	if(prob(chance))
+	if((isnull(chance) || prob(chance)) && !(fiber in suit_fibers))
 		suit_fibers += fiber
+
+
+/mob/living/proc/add_suit_fibers(fiber)
+	if(isnull(fiber))	return
+	if(!suit_fibers) suit_fibers = list()
+
+	if(!(fiber in suit_fibers))
+		suit_fibers += fiber
+
+//similar to add_fibers, but in reverse. This adds trace evidence to a human over their clothing, and over them if they're naked.
+/mob/living/carbon/human/add_suit_fibers(fiber)
+	if(isnull(fiber))	return
+	if(!suit_fibers) suit_fibers = list()
+
+	if(wear_suit)
+		wear_suit.add_custom_fiber(fiber, 70)
+
+		if(!(wear_suit.body_parts_covered & CHEST))
+			if(w_uniform)
+				w_uniform.add_custom_fiber(fiber, 60)
+
+		if(!(wear_suit.body_parts_covered & HANDS))
+			if(gloves)
+				gloves.add_custom_fiber(fiber, 40)
+
+	else
+		if(w_uniform)
+			w_uniform.add_custom_fiber(fiber, 60)
+		else
+			add_custom_fiber(fiber)
+
+		if(gloves)
+			gloves.add_custom_fiber(fiber, 40)

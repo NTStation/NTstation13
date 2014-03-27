@@ -87,6 +87,7 @@
 				shoot_with_empty_chamber(user)
 			else
 				shoot_live_shot(user)
+				add_custom_fiber(chambered.trace_residue)
 		else
 			shoot_with_empty_chamber(user)
 		process_chamber()
