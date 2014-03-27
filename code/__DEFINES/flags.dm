@@ -13,7 +13,7 @@
 #define NOSHIELD	32		// weapon not affected by shield
 #define CONDUCT		64		// conducts electricity (metal etc.)
 #define ABSTRACT    128		// for all things that are technically items but used for various different stuff, made it 128 because it could conflict with other flags other way
-#define FPRINT		256		// takes a fingerprint
+#define UNUSED		256		// unused!
 #define ON_BORDER	512		// item has priority to check when entering or leaving
 
 
