@@ -153,7 +153,6 @@ obj/item/projectile/kinetic/New()
 	if(pressure < 50)
 		name = "full strength kinetic force"
 		damage = 30
-		range = 3
 	..()
 
 /obj/item/projectile/kinetic/Range()
@@ -178,4 +177,4 @@ obj/item/projectile/kinetic/New()
 
 /obj/item/effect/kinetic_blast/New()
 	spawn(4)
-		del(src)
+		qdel(src)
