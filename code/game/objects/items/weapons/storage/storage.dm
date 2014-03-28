@@ -416,6 +416,8 @@
 
 /obj/item/weapon/storage/Destroy()
 	close_all()
+	qdel(boxes)
+	qdel(closer)
 	..()
 
 
@@ -431,3 +433,4 @@
 	if(user.get_active_hand() == src)
 		if(verbs.Find(/obj/item/weapon/storage/verb/quick_empty))
 			quick_empty()
+
