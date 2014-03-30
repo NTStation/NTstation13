@@ -36,8 +36,6 @@
 		S.icon_state = object.icon_state
 		S.name = "deep fried [object.name]"
 		S.desc = object.desc
-		if(emagged)
-			S.reagents.add_reagent("notfood", 2)
 		playsound(src.loc, 'sound/machines/ding.ogg', 50, 1)
 		del(O)
 		del(object)
