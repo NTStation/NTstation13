@@ -272,9 +272,6 @@
 		place_poster(W,user)
 		return
 
-	else
-		return attack_hand(user)
-	return
 
 /turf/simulated/wall/proc/thermitemelt(mob/user as mob)
 	if(mineral == "diamond")

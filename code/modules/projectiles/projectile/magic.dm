@@ -5,6 +5,7 @@
 	damage_type = OXY
 	nodamage = 1
 	flag = "magic"
+	trace_residue = null
 
 /obj/item/projectile/magic/death
 	name = "bolt of death"

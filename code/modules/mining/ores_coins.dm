@@ -172,7 +172,7 @@
 /obj/item/weapon/coin
 	icon = 'icons/obj/economy.dmi'
 	name = "coin"
-	icon_state = "coin"
+	icon_state = "coin__heads"
 	flags = CONDUCT
 	force = 1
 	throwforce = 0

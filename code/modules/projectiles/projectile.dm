@@ -48,6 +48,7 @@
 	var/eyeblur = 0
 	var/drowsy = 0
 	var/forcedodge = 0
+	var/trace_residue = "Projectile markings."
 
 
 	proc/delete()
@@ -55,10 +56,16 @@
 		loc = null
 
 	proc/on_hit(var/atom/target, var/blocked = 0, var/hit_zone)
-		if(!isliving(target))	return 0
-		if(isanimal(target))	return 0
-		var/mob/living/L = target
-		return L.apply_effects(stun, weaken, paralyze, irradiate, stutter, eyeblur, drowsy, blocked)
+		if(isliving(target))
+			var/mob/living/L = target
+			L.add_suit_fibers(trace_residue)
+
+			if(isanimal(target))
+				return 0
+
+			return L.apply_effects(stun, weaken, paralyze, irradiate, stutter, eyeblur, drowsy, blocked)
+		else
+			target.add_custom_fiber(trace_residue)
 
 	proc/vol_by_damage()
 		if(src.damage)
