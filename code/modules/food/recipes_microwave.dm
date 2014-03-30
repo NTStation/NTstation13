@@ -8,6 +8,12 @@
 	)
 	result = /obj/item/weapon/reagent_containers/food/snacks/friedegg
 
+/datum/recipe/customizable_bun
+	items = list(
+		/obj/item/weapon/reagent_containers/food/snacks/dough
+	)
+	result = /obj/item/weapon/reagent_containers/food/snacks/bun
+
 /datum/recipe/boiledegg
 	reagents = list("water" = 5)
 	items = list(
