@@ -2807,3 +2807,52 @@
 	New()
 		..()
 		reagents.add_reagent("nutriment", 3)
+
+/obj/item/weapon/reagent_containers/food/snacks/dough
+	name = "dough"
+	desc = "A piece of dough."
+	icon = 'icons/obj/food_ingredients.dmi'
+	icon_state = "dough"
+	bitesize = 2
+	New()
+		..()
+		reagents.add_reagent("nutriment", 3)
+
+// Dough + rolling pin = flat dough
+/obj/item/weapon/reagent_containers/food/snacks/dough/attackby(obj/item/weapon/W as obj, mob/user as mob)
+	if(istype(W,/obj/item/weapon/kitchen/rollingpin))
+		new /obj/item/weapon/reagent_containers/food/snacks/sliceable/flatdough(src)
+		user << "You flatten the dough."
+		del(src)
+
+// slicable into 3xdoughslices
+/obj/item/weapon/reagent_containers/food/snacks/sliceable/flatdough
+	name = "flat dough"
+	desc = "A flattened dough."
+	icon = 'icons/obj/food_ingredients.dmi'
+	icon_state = "flat dough"
+	slice_path = /obj/item/weapon/reagent_containers/food/snacks/doughslice
+	slices_num = 3
+	New()
+		..()
+		reagents.add_reagent("nutriment", 3)
+
+/obj/item/weapon/reagent_containers/food/snacks/doughslice
+	name = "dough slice"
+	desc = "A building block of an impressive dish."
+	icon = 'icons/obj/food_ingredients.dmi'
+	icon_state = "doughslice"
+	bitesize = 2
+	New()
+		..()
+		reagents.add_reagent("nutriment", 1)
+
+/obj/item/weapon/reagent_containers/food/snacks/bun
+	name = "bun"
+	desc = "A base for any self-respecting burger."
+	icon = 'icons/obj/food_ingredients.dmi'
+	icon_state = "bun"
+	bitesize = 2
+	New()
+		..()
+		reagents.add_reagent("nutriment", 4)
