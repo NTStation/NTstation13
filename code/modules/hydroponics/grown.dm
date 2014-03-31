@@ -28,7 +28,7 @@
 	pixel_y = rand(-5, 5)
 
 	transform *= TransformUsingVariable(potency, 100, 0.5) //Makes the resulting produce's sprite larger or smaller based on potency!
-
+	filling_color = pick("#FF0000","#0000FF","#008000","#FFFF00")
 
 /obj/item/weapon/reagent_containers/food/snacks/grown/attackby(var/obj/item/O as obj, var/mob/user as mob)
 	..()

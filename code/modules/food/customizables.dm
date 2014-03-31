@@ -2,27 +2,27 @@
 	if(istype(W,/obj/item/weapon/reagent_containers/food/snacks))
 		var/obj/item/weapon/reagent_containers/food/snacks/customizable/S = new(get_turf(user))
 		S.attackby(W,user)
-		del(src)
+		qdel(src)
 
 /obj/item/weapon/reagent_containers/food/snacks/bun/attackby(obj/item/W as obj, mob/user as mob)
 	if(istype(W,/obj/item/weapon/reagent_containers/food/snacks))
 		var/obj/item/weapon/reagent_containers/food/snacks/customizable/burger/S = new(get_turf(user))
 		S.attackby(W,user)
-		del(src)
+		qdel(src)
 	..()
 
 /obj/item/weapon/reagent_containers/food/snacks/sliceable/flatdough/attackby(obj/item/W as obj, mob/user as mob)
 	if(istype(W,/obj/item/weapon/reagent_containers/food/snacks))
 		var/obj/item/weapon/reagent_containers/food/snacks/customizable/pizza/S = new(get_turf(user))
 		S.attackby(W,user)
-		del(src)
+		qdel(src)
 	..()
 
 /obj/item/weapon/reagent_containers/food/snacks/boiledspagetti/attackby(obj/item/W as obj, mob/user as mob)
 	if(istype(W,/obj/item/weapon/reagent_containers/food/snacks))
 		var/obj/item/weapon/reagent_containers/food/snacks/customizable/pasta/S = new(get_turf(user))
 		S.attackby(W,user)
-		del(src)
+		qdel(src)
 	..()
 
 /obj/item/trash/bowl
@@ -35,7 +35,7 @@
 	if(istype(W,/obj/item/weapon/shard) || istype(W,/obj/item/weapon/reagent_containers/food/snacks))
 		var/obj/item/weapon/reagent_containers/food/snacks/customizable/soup/S = new(get_turf(user))
 		S.attackby(W,user)
-		del(src)
+		qdel(src)
 	..()
 
 /obj/item/weapon/reagent_containers/food/snacks/customizable
@@ -89,22 +89,15 @@
 	trash = null
 
 /obj/item/weapon/reagent_containers/food/snacks/customizable/attackby(obj/item/W as obj, mob/user as mob)
-	if(istype(W,/obj/item/weapon/shard))
-		user << "<span class='notice'> You hide [W] in [src].</span>"
-		user.drop_item()
-		W.loc = src
-		update()
-		return
-	else if(istype(W,/obj/item/weapon/reagent_containers/food/snacks))
-		user << "<span class='notice'> You add [W] to [src].</span>"
+	user << "<span class='notice'> You add [W] to [src].</span>"
+	if(istype(W, /obj/item/weapon/reagent_containers/))
 		var/obj/item/weapon/reagent_containers/F = W
 		F.reagents.trans_to(src, F.reagents.total_volume)
-		user.drop_item()
-		W.loc = src
-		ingredients += W
-		update()
-		return
-	..()
+	user.drop_item()
+	W.loc = src
+	ingredients += W
+	update()
+	return
 
 /obj/item/weapon/reagent_containers/food/snacks/customizable/proc/update()
 	var/fullname = "" //We need to build this from the contents of the var.
@@ -112,7 +105,7 @@
 
 	overlays.Cut()
 
-	for(var/obj/item/weapon/reagent_containers/food/snacks/O in ingredients)
+	for(var/obj/item/O in ingredients)
 
 		i++
 		if(i == 1)
@@ -123,7 +116,11 @@
 			fullname += ", [O.name]"
 
 		var/image/I = new(src.icon, "[baseicon]_filling")
-		I.color = O.filling_color
+		if(istype(O, /obj/item/weapon/reagent_containers/food/snacks))
+			var/obj/item/weapon/reagent_containers/food/snacks/food = O
+			I.color = food.filling_color
+		else
+			I.color = pick("#FF0000","#0000FF","#008000","#FFFF00")
 		if(add_overlays)
 			I.pixel_x = pick(list(-1,0,1))
 			I.pixel_y = (i*2)+1
@@ -136,12 +133,12 @@
 		overlays += T
 
 	name = lowertext("[fullname] [basename]")
-	if(length(name) > 80) name = "[pick(list("absurd","colossal","enormous","ridiculous","massive","oversized","cardiac-arresting","pipe-clogging","edible but sickening","sickening","gargantuan","mega","belly-burster","chest-burster"))] [basename]"
+	if(length(name) > 150) name = "[pick(list("absurd","colossal","enormous","ridiculous","massive","oversized","cardiac-arresting","pipe-clogging","edible but sickening","sickening","gargantuan","mega","belly-burster","chest-burster"))] [basename]"
 	w_class = n_ceil(Clamp((ingredients.len/2),1,3))
 
 /obj/item/weapon/reagent_containers/food/snacks/customizable/Del()
 	for(var/obj/item/O in ingredients)
-		del(O)
+		qdel(O)
 	..()
 
 /obj/item/weapon/reagent_containers/food/snacks/customizable/examine()

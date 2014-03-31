@@ -2766,7 +2766,7 @@
 
 /obj/item/weapon/reagent_containers/food/snacks/icecream/icecreamcone
         name = "ice cream cone"
-        desc = "delicious ice cream"
+        desc = "Delicious ice cream."
         icon_state = "icecream_cone"
         volume = 24 // takes into account current reagents, so the player can insert all their reagents. plus one for rounding.
         New()
@@ -2777,8 +2777,8 @@
                 bitesize = 3
 
 /obj/item/weapon/reagent_containers/food/snacks/icecream/icecreamcup
-        name = "ice cream cup"
-        desc = "delicious ice cream"
+        name = "chocolate ice cream cone"
+        desc = "Delicious ice cream."
         icon_state = "icecream_cup"
         volume = 44 // likewise
         New()

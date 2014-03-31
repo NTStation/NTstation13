@@ -88,7 +88,7 @@
 /datum/table_recipe/dough
 	name = "Dough"
 	result_path = /obj/item/weapon/reagent_containers/food/snacks/dough
-	reqs = list(/obj/item/weapon/reagent_containers/food/snacks/egg = 1,
+	reqs = list(/obj/item/weapon/reagent_containers/food/snacks/egg = 1,\
 				/datum/reagent/flour = 5)
 	time = 80
 

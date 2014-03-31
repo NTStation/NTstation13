@@ -194,7 +194,7 @@
 			dat += "<A href='?src=\ref[src];synthcond=1;type=4'>Cream</A><BR>"
 			dat += "<A href='?src=\ref[src];synthcond=1;type=5'>Water</A><BR>"
 			dat += "<strong>Dispense in:</strong><BR>"
-			dat += "<A href='?src=\ref[src];createcup=1'>Cup</A><BR>"
+			dat += "<A href='?src=\ref[src];createcup=1'>Chocolate Cone</A><BR>"
 		if(reagents.total_volume <= 15)
 			dat += "<A href='?src=\ref[src];createcone=1'>Cone</A><BR>"
 		else

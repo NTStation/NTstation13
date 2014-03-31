@@ -19,6 +19,7 @@
 		/obj/structure/table,
 		/obj/structure/closet,
 		/obj/structure/sink,
+		/obj/machinery/icemachine,
 		/obj/item/weapon/storage,
 		/obj/machinery/atmospherics/unary/cryo_cell,
 		/obj/item/weapon/grenade/chem_grenade,
