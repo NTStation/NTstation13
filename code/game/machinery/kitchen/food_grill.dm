@@ -1,5 +1,5 @@
 /obj/machinery/foodgrill
-	name = "Grill"
+	name = "grill"
 	icon = 'icons/obj/cooking_machines.dmi'
 	desc = "Backyard grilling, IN SPACE."
 	icon_state = "grill_off"
@@ -14,6 +14,8 @@
 	if(on)
 		user << "<span class='warning'>The machine is already processing, please wait."
 		return
+	if(istype(O, /obj/item/weapon/grab)||istype(O, /obj/item/tk_grab))
+		user << "<span class='warning'>That isn't going to fit.</span>"
 	if(istype(O, /obj/item/weapon/reagent_containers/food/snacks/deepfryholder))
 		user << "<span class='warning'>Universe wide cooking regulations say to not even think about grilling deep fried foods."
 		return

@@ -1,5 +1,5 @@
 /obj/machinery/deepfryer
-	name = "Deep Fryer"
+	name = "deep fryer"
 	icon = 'icons/obj/cooking_machines.dmi'
 	desc = "Deep fried <i>everything</i>."
 	icon_state = "fryer_off"
@@ -13,6 +13,11 @@
 /obj/machinery/deepfryer/attackby(var/obj/item/O as obj, var/mob/user as mob)
 	if(on)
 		user << "The machine is already active, please wait."
+		return
+	if(istype(O, /obj/item/weapon/grab)||istype(O, /obj/item/tk_grab))
+		user << "<span class='warning'>That isn't going to fit.</span>"
+	if(istype(O, /obj/item/weapon/reagent_containers/glass/))
+		user << "That would probably break the deep fryer."
 		return
 	if(istype(O, /obj/item/weapon/reagent_containers/food/snacks/deepfryholder))
 		user << "<span class='warning'>You can't deepfry what is already deep fried!</span>"
