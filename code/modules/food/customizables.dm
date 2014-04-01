@@ -84,7 +84,7 @@
 	name = "burger bun"
 	desc = "A bun for a burger. Delicious."
 	icon_state = "bun"
-	icon = 'icons/obj/food_ingredients.dmi
+	icon = 'icons/obj/food_ingredients.dmi'
 	baseicon = "bun"
 	basename = "bun"
 	trash = null
