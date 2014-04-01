@@ -16,6 +16,7 @@
 		return
 	if(istype(O, /obj/item/weapon/grab)||istype(O, /obj/item/tk_grab))
 		user << "<span class='warning'>That isn't going to fit.</span>"
+		return
 	if(istype(O, /obj/item/weapon/reagent_containers/glass/))
 		user << "That would probably break the deep fryer."
 		return

@@ -16,8 +16,6 @@
 		return
 	if(istype(O, /obj/item/weapon/grab)||istype(O, /obj/item/tk_grab))
 		user << "<span class='warning'>That isn't going to fit.</span>"
-	if(istype(O, /obj/item/weapon/reagent_containers/food/snacks/deepfryholder))
-		user << "<span class='warning'>Universe wide cooking regulations say to not even think about grilling deep fried foods."
 		return
 	if(!user.unEquip(O))
 		user << "<span class='warning'>You cannot grill [O]."
