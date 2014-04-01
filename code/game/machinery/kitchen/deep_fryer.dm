@@ -16,11 +16,9 @@
 		return
 	if(istype(O, /obj/item/weapon/grab)||istype(O, /obj/item/tk_grab))
 		user << "<span class='warning'>That isn't going to fit.</span>"
+		return
 	if(istype(O, /obj/item/weapon/reagent_containers/glass/))
 		user << "That would probably break the deep fryer."
-		return
-	if(istype(O, /obj/item/weapon/reagent_containers/food/snacks/deepfryholder))
-		user << "<span class='warning'>You can't deepfry what is already deep fried!</span>"
 		return
 	if(!user.unEquip(O))
 		user << "<span class='warning'>You cannot deepfry [O].</span>"
