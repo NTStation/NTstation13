@@ -14,7 +14,7 @@
 /obj/item/weapon/janitor/holosign_creator/attack_self(mob/user as mob)
 	..()
 	user << "You create a holographic sign with the device."
-	new /obj/item/weapon/janitor/caution/holograph(src.loc)
+	new /obj/item/weapon/janitor/caution/holograph(get_turf(user))
 	return
 /obj/item/weapon/janitor/caution // Old lame signs
 	desc = "Caution! Wet Floor!"
