@@ -13,3 +13,13 @@
 		if(slot_r_hand)
 			return r_hand
 	return null
+
+/mob/living/carbon/get_equipped_items()
+	var/list/items = new/list()
+
+	if(back)
+		items += back
+	if(wear_mask)
+		items += wear_mask
+
+	return items

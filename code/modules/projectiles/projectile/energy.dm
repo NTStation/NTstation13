@@ -4,6 +4,7 @@
 	damage = 0
 	damage_type = BURN
 	flag = "energy"
+	trace_residue = "Minor electrical discolouration."
 
 
 /obj/item/projectile/energy/electrode
@@ -28,6 +29,7 @@
 	nodamage = 1
 	damage_type = CLONE
 	irradiate = 40
+	trace_residue = "Active protein agents."
 
 
 /obj/item/projectile/energy/dart
@@ -36,6 +38,7 @@
 	damage = 5
 	damage_type = TOX
 	weaken = 5
+	trace_residue = null
 
 
 /obj/item/projectile/energy/bolt
@@ -46,6 +49,7 @@
 	nodamage = 0
 	weaken = 10
 	stutter = 10
+	trace_residue = null
 
 
 /obj/item/projectile/energy/bolt/large

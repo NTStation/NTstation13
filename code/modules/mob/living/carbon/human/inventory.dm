@@ -232,3 +232,30 @@
 			src << "\red You are trying to equip this item to an unsupported inventory slot. Report this to a coder!"
 			return
 
+/mob/living/carbon/human/get_equipped_items()
+	var/list/items = new/list()
+
+	if(back)
+		items += back
+	if(belt)
+		items += belt
+	if(ears)
+		items += ears
+	if(glasses)
+		items += glasses
+	if(gloves)
+		items += gloves
+	if(head)
+		items += head
+	if(shoes)
+		items += shoes
+	if(wear_id)
+		items += wear_id
+	if(wear_mask)
+		items += wear_mask
+	if(wear_suit)
+		items += wear_suit
+	if(w_uniform)
+		items += w_uniform
+
+	return items

@@ -560,9 +560,3 @@
 			var/icon/blood_splatter_icon = blood_splatter_icons[index]
 			if(blood_splatter_icon)
 				overlays -= blood_splatter_icon
-
-/obj/item/clothing/gloves/clean_blood()
-	. = ..()
-	if(.)
-		transfer_blood = 0
-		bloody_hands_mob = null

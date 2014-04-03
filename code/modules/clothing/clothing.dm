@@ -61,8 +61,15 @@ BLIND     // can't see anything
 	var/transfer_prints = FALSE
 
 // Called just before an attack_hand(), in mob/UnarmedAttack()
-/obj/item/clothing/gloves/proc/Touch(var/atom/A, var/proximity)
+/obj/item/clothing/gloves/proc/Touch(atom/A, proximity)
 	return 0 // return 1 to cancel attack_hand()
+
+/obj/item/clothing/gloves/clean_blood()
+	. = ..()
+	if(.)
+		transfer_blood = 0
+		bloody_hands_mob = null
+
 
 //Head
 /obj/item/clothing/head
