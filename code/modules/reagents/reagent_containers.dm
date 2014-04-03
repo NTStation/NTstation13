@@ -46,8 +46,9 @@
 		return data
 	else return "No reagents"
 
+//beep boop revertbot was here - proc remains to maximise compatibility
 /obj/item/weapon/reagent_containers/proc/canconsume(mob/eater, mob/user)
-	//Check for covering mask
+/*	//Check for covering mask
 	var/obj/item/clothing/cover = eater.get_item_by_slot(slot_wear_mask)
 
 	if(isnull(cover)) // No mask, do we have any helmet?
@@ -67,4 +68,5 @@
 				user << "<span class='notice'>You have to remove [who] helmet first!</span>"
 
 			return 0
+*/
 	return 1
