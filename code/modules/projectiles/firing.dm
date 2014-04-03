@@ -12,7 +12,7 @@
 			newshot()
 	user.add_suit_fibers(trace_residue)
 	add_custom_fiber(trace_residue)
-	user.next_move = world.time + 4
+	user.changeNext_move(4)
 	update_icon()
 	return 1
 

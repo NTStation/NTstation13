@@ -10,6 +10,7 @@
 		visible_message("<span class='danger'>[src] has been hit by [user] with [I].</span>")
 
 /mob/living/attackby(obj/item/I, mob/user)
+	user.changeNext_move(8)
 	I.attack(src, user)
 
 /mob/living/proc/attacked_by(obj/item/I, mob/living/user, def_zone)
