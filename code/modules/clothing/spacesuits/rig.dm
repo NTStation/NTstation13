@@ -191,7 +191,7 @@
 	icon_state = "rig0-ancient"
 	item_state = "ancient_helm"
 	item_color = "ancient"
-	armor = list(melee = 30, bullet = 15, laser = 30,energy = 10, bomb = 10, bio = 100, rad = 50)
+	armor = list(melee = 40, bullet = 25, laser = 40,energy = 20, bomb = 20, bio = 100, rad = 60)
 
 /obj/item/clothing/suit/space/rig/ancient
 	name = "ancient hardsuit"
