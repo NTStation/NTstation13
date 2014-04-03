@@ -74,7 +74,7 @@
 			l.janicart_insert(user,src)
 		else
 			user << fail_msg
-	else if(istype(I, /obj/item/weapon/janitor/caution))
+	else if(istype(I, /obj/item/weapon/caution))
 		if(signs < max_signs)
 			put_in_cart(I, user)
 			signs++
@@ -130,7 +130,7 @@
 			myreplacer = null
 	if(href_list["sign"])
 		if(signs)
-			var/obj/item/weapon/janitor/caution/Sign = locate() in src
+			var/obj/item/weapon/caution/Sign = locate() in src
 			if(Sign)
 				user.put_in_hands(Sign)
 				user << "<span class='notice'>You take \a [Sign] from [src].</span>"
