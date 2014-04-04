@@ -1,46 +1,45 @@
 /obj/machinery/cerealmaker
 	name = "cereal maker"
-	icon = 'icons/obj/cooking_machines.dmi'
 	desc = "Now with Dann O's available!"
+	icon = 'icons/obj/cooking_machines.dmi'
 	icon_state = "cereal_off"
 	layer = 2.9
 	density = 1
 	anchored = 1
 	use_power = 1
 	idle_power_usage = 5
-	var/on = 0 // Is it making cereal already?
+	var/on = FALSE	//Is it making cereal already?
 
-/obj/machinery/cerealmaker/attackby(var/obj/item/O as obj, var/mob/user as mob)
+/obj/machinery/cerealmaker/attackby(obj/item/I, mob/user)
 	if(on)
-		user << "<span class='warning'>The machine is already processing, please wait."
+		user << "<span class='notice'>[src] is already processing, please wait.</span>"
 		return
-	if(istype(O, /obj/item/weapon/grab)||istype(O, /obj/item/tk_grab))
+	if(istype(I, /obj/item/weapon/grab)||istype(I, /obj/item/tk_grab))
 		user << "<span class='warning'>That isn't going to fit.</span>"
 		return
-	if(istype(O, /obj/item/weapon/reagent_containers/glass/))
-		user << "That would probably break the cereal maker."
+	if(istype(I, /obj/item/weapon/reagent_containers/glass/))
+		user << "<span class='warning'>That would probably break [src].</span>"
 		return
-	if(!user.unEquip(O))
-		user << "<span class='warning'>You cannot make cereal out of [O]."
+	if(!user.unEquip(I))
+		user << "<span class='warning'>You cannot make cereal out of [I].</span>"
 		return
 	else
-		user << "<span class='warning'>You put [O] into [src]."
-		on = 1
+		user << "<span class='notice'>You put [I] into [src].</span>"
+		on = TRUE
 		user.drop_item()
-		O.loc = src
+		I.loc = src
 		icon_state = "cereal_on"
 		sleep(200)
 		icon_state = "cereal_off"
 		var/obj/item/weapon/reagent_containers/food/snacks/cereal/S = new(get_turf(src))
-		var/image/I = new(O.icon, O.icon_state)
-		I.transform *= 0.7
-		if(istype(O, /obj/item/weapon/reagent_containers/))
-			var/obj/item/weapon/reagent_containers/food = O
+		var/image/img = new(I.icon, I.icon_state)
+		img.transform *= 0.7
+		if(istype(I, /obj/item/weapon/reagent_containers/))
+			var/obj/item/weapon/reagent_containers/food = I
 			food.reagents.trans_to(S, food.reagents.total_volume)
-		S.overlays += I
-		S.name = "box of [O] cereal"
-		playsound(src.loc, 'sound/machines/ding.ogg', 50, 1)
-		on = 0
-		qdel(O)
-		return
+		S.overlays += img
+		S.name = "box of [I] cereal"
+		playsound(loc, 'sound/machines/ding.ogg', 50, 1)
+		on = FALSE
+		qdel(I)
 

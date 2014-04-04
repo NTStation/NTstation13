@@ -554,7 +554,7 @@
 				Put 3 flour into the microwave and then wait.
 
 				<h2>Waffles:<h2>
-				Add 2 flour and 2 egg to the microwave and then wait.
+				Add 2 flour and 2 eggs to the microwave and then wait.
 
 				<h2>Popcorn:<h2>
 				Add 1 corn to the microwave and wait.

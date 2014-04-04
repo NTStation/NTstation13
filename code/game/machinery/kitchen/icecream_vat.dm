@@ -1,10 +1,8 @@
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //ICE CREAM MACHINE
 //Code made by Sawu at Sawu-Station.
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 /obj/machinery/icemachine
-	name = "Cream-Master Deluxe"
+	name = "\improper Cream-Master Deluxe"
 	density = 1
 	anchored = 1
 	icon = 'icons/obj/cooking_machines.dmi'
@@ -12,59 +10,62 @@
 	use_power = 1
 	idle_power_usage = 20
 	var/obj/item/weapon/reagent_containers/glass/beaker = null
-	var/useramount = 15 // Last used amount
+	var/useramount = 15	//Last used amount
 
-/obj/machinery/icemachine/proc/generate_name(var/reagent_name)
+
+/obj/machinery/icemachine/proc/generate_name(reagent_name)
 	var/name_prefix = pick("Mr.","Mrs.","Super","Happy","Whippy")
 	var/name_suffix = pick(" Whippy "," Slappy "," Creamy "," Dippy "," Swirly "," Swirl ")
-	var/cone_name = null //Heart failure prevention.
+	var/cone_name = null	//Heart failure prevention.
 	cone_name += name_prefix
 	cone_name += name_suffix
 	cone_name += "[reagent_name]"
 	return cone_name
+
 
 /obj/machinery/icemachine/New()
 	var/datum/reagents/R = new/datum/reagents(500)
 	reagents = R
 	R.my_atom = src
 
-/obj/machinery/icemachine/attackby(var/obj/item/weapon/B as obj, var/mob/user as mob)
 
-	if(istype(B, /obj/item/weapon/reagent_containers/glass))
-		if(src.beaker)
-			user << "A container is already inside the Cream-Master"
+/obj/machinery/icemachine/attackby(obj/item/I, mob/user)
+	if(istype(I, /obj/item/weapon/reagent_containers/glass))
+		if(beaker)
+			user << "<span class='notice'>A container is already inside [src].</span>"
 			return
-		src.beaker = B
+		beaker = I
 		user.drop_item()
-		B.loc = src
-		user << "You add the container to the Cream-Master!"
-		src.updateUsrDialog()
+		I.loc = src
+		user << "<span class='notice'>You add [I] to [src]</span>"
+		updateUsrDialog()
 		return
-	if(istype(B, /obj/item/weapon/reagent_containers/food/snacks/icecream))
-		if(!B.reagents.has_reagent("sprinkles"))
-			if(B.reagents.total_volume > 29) B.reagents.remove_any(1)
-			B.reagents.add_reagent("sprinkles",1)
+	if(istype(I, /obj/item/weapon/reagent_containers/food/snacks/icecream))
+		if(!I.reagents.has_reagent("sprinkles"))
+			if(I.reagents.total_volume > 29) I.reagents.remove_any(1)
+			I.reagents.add_reagent("sprinkles",1)
 			var/image/sprinkles = image('icons/obj/kitchen.dmi', src, "sprinkles")
-			B.overlays += sprinkles
-			B.name += " with sprinkles"
-			B.desc += ". This also has sprinkles."
+			I.overlays += sprinkles
+			I.name += " with sprinkles"
+			I.desc += ". This also has sprinkles."
 		else
-			user << "This [B] already has sprinkles"
-			return
+			user << "<span class='notice'>This [I] already has sprinkles.</span>"
 
-/obj/machinery/icemachine/proc/validexchange(var/reag)
+
+/obj/machinery/icemachine/proc/validexchange(reag)
 	if(reag == "sprinkles" | reag == "cola" | reag == "kahlua" | reag == "dr_gibb" | reag == "vodka" | reag == "space_up" | reag == "rum" | reag == "spacemountainwind" | reag == "gin" | reag == "cream" | reag == "water")
 		return 1
 	else
 		if(reagents.total_volume < 500)
-			usr << "The [src] vibrates for a moment, apparently accepting the unknown liquid."
-			playsound(src.loc, 'sound/machines/twobeep.ogg', 10, 1)
+			usr << "<span class='notice'>[src] vibrates for a moment, apparently accepting the unknown liquid.</span>"
+			playsound(loc, 'sound/machines/twobeep.ogg', 10, 1)
 		return 1
+
 
 /obj/machinery/icemachine/Topic(href, href_list)
 	if(..()) return
 
-	src.add_fingerprint(usr)
+	add_fingerprint(usr)
 	usr.set_machine(src)
 
 	if(href_list["close"])
@@ -79,14 +80,14 @@
 		A = beaker
 		R = A.reagents
 
-	if (href_list["add"])
+	if(href_list["add"])
 		if(href_list["amount"])
 			var/id = href_list["add"]
 			var/amount = text2num(href_list["amount"])
 			if(validexchange(id))
 				R.trans_id_to(src, id, amount)
 
-	else if (href_list["remove"])
+	else if(href_list["remove"])
 		if(href_list["amount"])
 			var/id = href_list["remove"]
 			var/amount = text2num(href_list["amount"])
@@ -98,17 +99,17 @@
 				else
 					reagents.remove_reagent(id,amount)
 
-	else if (href_list["main"])
+	else if(href_list["main"])
 		attack_hand(usr)
 		return
 
-	else if (href_list["eject"])
+	else if(href_list["eject"])
 		if(beaker)
-			A.loc = src.loc
+			A.loc = loc
 			beaker = null
 			reagents.trans_to(A,reagents.total_volume)
 
-	else if (href_list["synthcond"])
+	else if(href_list["synthcond"])
 		if(href_list["type"])
 			var/ID = text2num(href_list["type"])
 			/*
@@ -140,19 +141,19 @@
 			else if(ID == 4)
 				if(reagents.total_volume <= 500 & reagents.total_volume >= 15)
 					reagents.add_reagent("cream",(30 - reagents.total_volume))
-				else if (reagents.total_volume <= 15)
+				else if(reagents.total_volume <= 15)
 					reagents.add_reagent("cream",(15 - reagents.total_volume))
 			else if(ID == 5)
 				if(reagents.total_volume <= 500 & reagents.total_volume >= 15)
 					reagents.add_reagent("water",(30 - reagents.total_volume))
-				else if (reagents.total_volume <= 15)
+				else if(reagents.total_volume <= 15)
 					reagents.add_reagent("water",(15 - reagents.total_volume))
 
-	else if (href_list["createcup"])
+	else if(href_list["createcup"])
 		var/name = generate_name(reagents.get_master_reagent_name())
 		name += " Chocolate Cone"
 		var/obj/item/weapon/reagent_containers/food/snacks/icecream/icecreamcup/C
-		C = new/obj/item/weapon/reagent_containers/food/snacks/icecream/icecreamcup(src.loc)
+		C = new/obj/item/weapon/reagent_containers/food/snacks/icecream/icecreamcup(loc)
 		C.name = "[name]"
 		C.pixel_x = rand(-8, 8)
 		C.pixel_y = -16
@@ -161,11 +162,11 @@
 			reagents.clear_reagents()
 		C.update_icon()
 
-	else if (href_list["createcone"])
+	else if(href_list["createcone"])
 		var/name = generate_name(reagents.get_master_reagent_name())
 		name += " Cone"
 		var/obj/item/weapon/reagent_containers/food/snacks/icecream/icecreamcone/C
-		C = new/obj/item/weapon/reagent_containers/food/snacks/icecream/icecreamcone(src.loc)
+		C = new/obj/item/weapon/reagent_containers/food/snacks/icecream/icecreamcone(loc)
 		C.name = "[name]"
 		C.pixel_x = rand(-8, 8)
 		C.pixel_y = -16
@@ -173,14 +174,15 @@
 		if(reagents)
 			reagents.clear_reagents()
 		C.update_icon()
-	src.updateUsrDialog()
-	return
+	updateUsrDialog()
 
-/obj/machinery/icemachine/attack_ai(mob/user as mob)
-	return src.attack_hand(user)
 
-/obj/machinery/icemachine/attack_paw(mob/user as mob)
-	return src.attack_hand(user)
+/obj/machinery/icemachine/attack_ai(mob/user)
+	return attack_hand(user)
+
+/obj/machinery/icemachine/attack_paw(mob/user)
+	return attack_hand(user)
+
 
 /obj/machinery/icemachine/proc/show_toppings()
 	var/dat = ""
@@ -198,7 +200,8 @@
 	dat += "</center>"
 	return dat
 
-/obj/machinery/icemachine/proc/show_reagents(var/container)
+
+/obj/machinery/icemachine/proc/show_reagents(container)
 	//1 = beaker / 2 = internal
 	var/dat = ""
 	if(container == 1)
@@ -226,7 +229,8 @@
 		dat += "<BR>SOMEONE ENTERED AN INVALID REAGENT CONTAINER; QUICK, BUG REPORT!<BR>"
 	return dat
 
-/obj/machinery/icemachine/attack_hand(mob/user as mob)
+
+/obj/machinery/icemachine/attack_hand(mob/user)
 	if(..()) return
 	user.set_machine(src)
 	var/dat = ""
@@ -248,4 +252,3 @@
 	var/datum/browser/popup = new(user, "cream_master","Cream-Master Deluxe", 700, 400, src)
 	popup.set_content(dat)
 	popup.open()
-	return
