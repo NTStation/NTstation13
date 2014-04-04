@@ -5,6 +5,7 @@
 	damage_type = OXY
 	nodamage = 1
 	flag = "magic"
+	trace_residue = null
 
 /obj/item/projectile/magic/death
 	name = "bolt of death"
@@ -117,6 +118,7 @@ proc/wabbajack(mob/living/M)
 			if(istype(M, /mob/living/silicon/robot))
 				var/mob/living/silicon/robot/Robot = M
 				if(Robot.mmi)	qdel(Robot.mmi)
+				Robot.notify_ai(1)
 			else
 				for(var/obj/item/W in M)
 					if(istype(W, /obj/item/weapon/implant))	//TODO: Carn. give implants a dropped() or something

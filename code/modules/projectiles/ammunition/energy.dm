@@ -3,6 +3,7 @@
 	desc = "The part of the gun that makes the laser go pew"
 	caliber = "energy"
 	projectile_type = /obj/item/projectile/energy
+	trace_residue = null	//energy weapons leave no trace! :o
 	var/e_cost = 100 //The amount of energy a cell needs to expend to create this shot.
 	var/select_name = "energy"
 	var/mod_name = null
@@ -10,6 +11,11 @@
 
 /obj/item/ammo_casing/energy/laser
 	projectile_type = /obj/item/projectile/beam
+	select_name = "kill"
+
+/obj/item/ammo_casing/energy/lasergun
+	projectile_type = /obj/item/projectile/beam
+	e_cost = 83
 	select_name = "kill"
 
 /obj/item/ammo_casing/energy/laser/practice

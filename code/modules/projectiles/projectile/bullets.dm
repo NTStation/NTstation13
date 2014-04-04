@@ -84,6 +84,7 @@
 
 /obj/item/projectile/bullet/mime
 	damage = 20
+	trace_residue = null
 
 /obj/item/projectile/bullet/mime/on_hit(var/atom/target, var/blocked = 0)
 		if(istype(target, /mob/living/carbon))
@@ -95,6 +96,7 @@
 	name = "dart"
 	icon_state = "cbbolt"
 	damage = 6
+	trace_residue = "Deep pinpricking."
 
 	New()
 		..()
@@ -133,6 +135,7 @@
 	damage = 5
 	damage_type = TOX
 	weaken = 5
+	trace_residue = "Sludge residue."
 
 /obj/item/projectile/bullet/neurotoxin/on_hit(var/atom/target, var/blocked = 0)
 	if(isalien(target))

@@ -49,6 +49,9 @@
 		qdel(src)
 		return 0
 	if(istype(M, /mob/living/carbon))
+		if(!canconsume(M, user))
+			return 0
+
 		if(M == user)								//If you're eating it yourself.
 			var/fullness = M.nutrition + (M.reagents.get_reagent_amount("nutriment") * 25)
 			if(wrapped)
@@ -2743,6 +2746,7 @@
 	New()
 		..()
 		reagents.add_reagent("purplecrayonpowder", 10)
+<<<<<<< HEAD
 		bitesize = 3
 
 ////////////////////////////////ICE CREAM///////////////////////////////////
@@ -2856,3 +2860,6 @@
 	New()
 		..()
 		reagents.add_reagent("nutriment", 4)
+=======
+		bitesize = 3
+>>>>>>> 154745786a12d54bb8430064c9fc1a8f3add839b
