@@ -2831,7 +2831,7 @@
 // slicable into 3xdoughslices
 /obj/item/weapon/reagent_containers/food/snacks/sliceable/flatdough
 	name = "flat dough"
-	desc = "A flattened dough."
+	desc = "Some flattened dough."
 	icon = 'icons/obj/food_ingredients.dmi'
 	icon_state = "flat dough"
 	slice_path = /obj/item/weapon/reagent_containers/food/snacks/doughslice
