@@ -18,7 +18,7 @@
 		user << "<span class='warning'>That isn't going to fit.</span>"
 		return
 	if(istype(O, /obj/item/weapon/reagent_containers/glass/))
-		user << "That would probably break the deep fryer."
+		user << "That would probably break the cereal maker."
 		return
 	if(!user.unEquip(O))
 		user << "<span class='warning'>You cannot make cereal out of [O]."

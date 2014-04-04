@@ -2748,7 +2748,7 @@
 ////////////////////////////////ICE CREAM///////////////////////////////////
 /obj/item/weapon/reagent_containers/food/snacks/icecream
         name = "ice cream"
-        desc = "delicious ice cream"
+        desc = "Delicious ice cream."
         icon = 'icons/obj/kitchen.dmi'
         icon_state = "icecream_cone"
         New()
@@ -2768,7 +2768,7 @@
         name = "ice cream cone"
         desc = "Delicious ice cream."
         icon_state = "icecream_cone"
-        volume = 24 // takes into account current reagents, so the player can insert all their reagents. plus one for rounding.
+        volume = 500
         New()
                 ..()
                 reagents.add_reagent("nutriment", 2)
@@ -2780,7 +2780,7 @@
         name = "chocolate ice cream cone"
         desc = "Delicious ice cream."
         icon_state = "icecream_cup"
-        volume = 44 // likewise
+        volume = 500
         New()
                 ..()
                 reagents.add_reagent("nutriment", 4)
@@ -2796,7 +2796,7 @@
 	bitesize = 2
 	New()
 		..()
-		reagents.add_reagent("nutriment", 3)
+		reagents.add_reagent("nutriment", 30)
 /obj/item/weapon/reagent_containers/food/snacks/deepfryholder
 	name = "Deep Fried Foods Holder Obj"
 	desc = "If you can see this description the code for the deep fryer fucked up."
@@ -2806,7 +2806,7 @@
 	deepfried = 1
 	New()
 		..()
-		reagents.add_reagent("nutriment", 3)
+		reagents.add_reagent("nutriment", 30)
 
 /obj/item/weapon/reagent_containers/food/snacks/dough
 	name = "dough"
@@ -2839,7 +2839,7 @@
 
 /obj/item/weapon/reagent_containers/food/snacks/doughslice
 	name = "dough slice"
-	desc = "A building block of an impressive dish."
+	desc = "The building block of an impressive dish."
 	icon = 'icons/obj/food_ingredients.dmi'
 	icon_state = "doughslice"
 	bitesize = 2
@@ -2849,7 +2849,7 @@
 
 /obj/item/weapon/reagent_containers/food/snacks/bun
 	name = "bun"
-	desc = "A base for any self-respecting burger."
+	desc = "The base for any self-respecting burger."
 	icon = 'icons/obj/food_ingredients.dmi'
 	icon_state = "bun"
 	bitesize = 2

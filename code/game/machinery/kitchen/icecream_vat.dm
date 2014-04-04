@@ -17,14 +17,14 @@
 /obj/machinery/icemachine/proc/generate_name(var/reagent_name)
 	var/name_prefix = pick("Mr.","Mrs.","Super","Happy","Whippy")
 	var/name_suffix = pick(" Whippy "," Slappy "," Creamy "," Dippy "," Swirly "," Swirl ")
-	var/cone_name = null //Heart failiure prevention.
+	var/cone_name = null //Heart failure prevention.
 	cone_name += name_prefix
 	cone_name += name_suffix
 	cone_name += "[reagent_name]"
 	return cone_name
 
 /obj/machinery/icemachine/New()
-	var/datum/reagents/R = new/datum/reagents(30)
+	var/datum/reagents/R = new/datum/reagents(500)
 	reagents = R
 	R.my_atom = src
 
@@ -56,7 +56,7 @@
 	if(reag == "sprinkles" | reag == "cola" | reag == "kahlua" | reag == "dr_gibb" | reag == "vodka" | reag == "space_up" | reag == "rum" | reag == "spacemountainwind" | reag == "gin" | reag == "cream" | reag == "water")
 		return 1
 	else
-		if(reagents.total_volume < 30)
+		if(reagents.total_volume < 500)
 			usr << "The [src] vibrates for a moment, apparently accepting the unknown liquid."
 			playsound(src.loc, 'sound/machines/twobeep.ogg', 10, 1)
 		return 1
@@ -138,19 +138,19 @@
 					else
 						reagents.add_reagent("gin",5)
 			else if(ID == 4)
-				if(reagents.total_volume <= 30 & reagents.total_volume >= 15)
+				if(reagents.total_volume <= 500 & reagents.total_volume >= 15)
 					reagents.add_reagent("cream",(30 - reagents.total_volume))
 				else if (reagents.total_volume <= 15)
 					reagents.add_reagent("cream",(15 - reagents.total_volume))
 			else if(ID == 5)
-				if(reagents.total_volume <= 30 & reagents.total_volume >= 15)
+				if(reagents.total_volume <= 500 & reagents.total_volume >= 15)
 					reagents.add_reagent("water",(30 - reagents.total_volume))
 				else if (reagents.total_volume <= 15)
 					reagents.add_reagent("water",(15 - reagents.total_volume))
 
 	else if (href_list["createcup"])
 		var/name = generate_name(reagents.get_master_reagent_name())
-		name += " Cup"
+		name += " Chocolate Cone"
 		var/obj/item/weapon/reagent_containers/food/snacks/icecream/icecreamcup/C
 		C = new/obj/item/weapon/reagent_containers/food/snacks/icecream/icecreamcup(src.loc)
 		C.name = "[name]"
@@ -184,9 +184,9 @@
 
 /obj/machinery/icemachine/proc/show_toppings()
 	var/dat = ""
-	if(reagents.total_volume <= 30)
+	if(reagents.total_volume <= 500)
 		dat += "<HR>"
-		if((reagents.total_volume + 5) != 30)
+		if((reagents.total_volume + 5) != 500)
 			dat += "<strong>Add fillings:</strong><BR>"
 			dat += "<A href='?src=\ref[src];synthcond=1;type=2'>Soda</A><BR>"
 			dat += "<A href='?src=\ref[src];synthcond=1;type=3'>Alcohol</A><BR>"
