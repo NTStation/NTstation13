@@ -1,9 +1,6 @@
 // BEGIN_INTERNALS
 /*
 MAP_ICON_TYPE: 0
-WINDOW: code\game\machinery\kitchen\icecream_vat.dm;code\game\machinery\kitchen\food_grill.dm;code\game\machinery\kitchen\deep_fryer.dm;code\game\machinery\kitchen\cereal_maker.dm;code\modules\reagents\reagent_containers\food\snacks.dm;code\modules\reagents\reagent_containers\glass.dm;code\modules\food\customizables.dm;code\game\objects\items\weapons\manuals.dm
-DIR: code code\game code\game\machinery code\game\machinery\kitchen code\game\objects code\game\objects\items code\game\objects\items\weapons code\modules code\modules\reagents\reagent_containers code\modules\reagents\reagent_containers\food 
-FILE: code\game\objects\items\weapons\manuals.dm
 AUTO_FILE_DIR: OFF
 */
 // END_INTERNALS

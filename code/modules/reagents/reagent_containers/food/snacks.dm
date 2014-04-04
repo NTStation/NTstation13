@@ -2746,7 +2746,6 @@
 	New()
 		..()
 		reagents.add_reagent("purplecrayonpowder", 10)
-<<<<<<< HEAD
 		bitesize = 3
 
 ////////////////////////////////ICE CREAM///////////////////////////////////
@@ -2832,7 +2831,7 @@
 // slicable into 3xdoughslices
 /obj/item/weapon/reagent_containers/food/snacks/sliceable/flatdough
 	name = "flat dough"
-	desc = "A flattened dough."
+	desc = "Some flattened dough."
 	icon = 'icons/obj/food_ingredients.dmi'
 	icon_state = "flat dough"
 	slice_path = /obj/item/weapon/reagent_containers/food/snacks/doughslice
@@ -2860,6 +2859,4 @@
 	New()
 		..()
 		reagents.add_reagent("nutriment", 4)
-=======
 		bitesize = 3
->>>>>>> 154745786a12d54bb8430064c9fc1a8f3add839b
