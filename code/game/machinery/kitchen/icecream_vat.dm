@@ -186,19 +186,15 @@
 	var/dat = ""
 	if(reagents.total_volume <= 500)
 		dat += "<HR>"
-		if((reagents.total_volume + 5) != 500)
-			dat += "<strong>Add fillings:</strong><BR>"
-			dat += "<A href='?src=\ref[src];synthcond=1;type=2'>Soda</A><BR>"
-			dat += "<A href='?src=\ref[src];synthcond=1;type=3'>Alcohol</A><BR>"
-			dat += "<strong>Finish With:</strong><BR>"
-			dat += "<A href='?src=\ref[src];synthcond=1;type=4'>Cream</A><BR>"
-			dat += "<A href='?src=\ref[src];synthcond=1;type=5'>Water</A><BR>"
-			dat += "<strong>Dispense in:</strong><BR>"
-			dat += "<A href='?src=\ref[src];createcup=1'>Chocolate Cone</A><BR>"
-		if(reagents.total_volume <= 15)
-			dat += "<A href='?src=\ref[src];createcone=1'>Cone</A><BR>"
-		else
-			dat += "The Machine has too many reagents to create a cone!<BR>"
+		dat += "<strong>Add fillings:</strong><BR>"
+		dat += "<A href='?src=\ref[src];synthcond=1;type=2'>Soda</A><BR>"
+		dat += "<A href='?src=\ref[src];synthcond=1;type=3'>Alcohol</A><BR>"
+		dat += "<strong>Finish With:</strong><BR>"
+		dat += "<A href='?src=\ref[src];synthcond=1;type=4'>Cream</A><BR>"
+		dat += "<A href='?src=\ref[src];synthcond=1;type=5'>Water</A><BR>"
+		dat += "<strong>Dispense in:</strong><BR>"
+		dat += "<A href='?src=\ref[src];createcup=1'>Chocolate Cone</A><BR>"
+		dat += "<A href='?src=\ref[src];createcone=1'>Cone</A><BR>"
 	dat += "</center>"
 	return dat
 
