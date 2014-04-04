@@ -85,6 +85,13 @@
 				/obj/item/robot_parts/r_arm = 1)
 	time = 80
 
+/datum/table_recipe/dough
+	name = "Dough"
+	result_path = /obj/item/weapon/reagent_containers/food/snacks/dough
+	reqs = list(/obj/item/weapon/reagent_containers/food/snacks/egg = 1,\
+				/datum/reagent/flour = 5)
+	time = 80
+
 /datum/table_recipe/medbot
 	name = "Medbot"
 	result_path = /obj/machinery/bot/medbot
