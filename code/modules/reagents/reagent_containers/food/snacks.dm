@@ -2824,9 +2824,14 @@
 // Dough + rolling pin = flat dough
 /obj/item/weapon/reagent_containers/food/snacks/dough/attackby(obj/item/I, mob/user)
 	if(istype(I, /obj/item/weapon/kitchen/rollingpin))
-		new /obj/item/weapon/reagent_containers/food/snacks/sliceable/flatdough(loc)
-		user << "<span class='notice'>You flatten the dough.</span>"
-		qdel(src)
+		if(isturf(loc))
+			new /obj/item/weapon/reagent_containers/food/snacks/sliceable/flatdough(loc)
+			user << "<span class='notice'>You flatten [src].</span>"
+			qdel(src)
+		else
+			user << "<span class='notice'>You need to put [src] on a surface to roll it out!</span>"
+	else
+		..()
 
 // slicable into 3xdoughslices
 /obj/item/weapon/reagent_containers/food/snacks/sliceable/flatdough

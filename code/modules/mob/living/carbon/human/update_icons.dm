@@ -333,6 +333,8 @@ Please contact me on #coderbus IRC. ~Carnie x
 			if(!female_uniform_icon ) 	//Create standing/laying icons if they don't exist
 				generate_uniform(index,t_color)
 			standing	= image("icon"=female_uniform_icons["[t_color]_s"], "layer"=-UNIFORM_LAYER)
+			standing.color = w_uniform.color
+			standing.alpha = w_uniform.alpha
 			overlays_standing[UNIFORM_LAYER]	= standing
 
 		if(w_uniform.blood_DNA)
