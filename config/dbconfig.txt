@@ -7,16 +7,16 @@
 
 ## Server the MySQL database can be found at.
 # Examples: localhost, 200.135.5.43, www.mysqldb.com, etc.
-ADDRESS ss13.eu
+ADDRESS localhost
 
 ## MySQL server port (default is 3306).
 PORT 3306
 
 ## Database for all SQL functions, not just feedback.
-FEEDBACK_DATABASE errorage_nts13_game
+FEEDBACK_DATABASE feedback
 
 ## Username/Login used to access the database.
-FEEDBACK_LOGIN nts13
+FEEDBACK_LOGIN username
 
 ## Password used to access the database.
-FEEDBACK_PASSWORD ianLovesBooger
+FEEDBACK_PASSWORD password
