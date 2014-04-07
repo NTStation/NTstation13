@@ -14,7 +14,7 @@
 /obj/machinery/deepfryer/examine()
 	..()
 	if(frying)
-		user << "You can make out [frying] in the oil."
+		usr << "You can make out [frying] in the oil."
 
 /obj/machinery/deepfryer/attackby(obj/item/I, mob/user)
 	if(on)
