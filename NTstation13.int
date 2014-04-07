@@ -1,6 +1,11 @@
 // BEGIN_INTERNALS
 /*
 MAP_ICON_TYPE: 0
+WINDOW: icons\mob\head.dmi
+LAST_COMPILE_VERSION: 504.1234
+DIR: _maps _maps\map_files code code\game code\game\machinery code\game\machinery\kitchen code\game\objects code\game\objects\items code\game\objects\items\weapons code\modules code\modules\food code\modules\mob code\modules\mob\living icons icons\mob 
+FILE: icons\mob\head.dmi
+LAST_COMPILE_TIME: 1396879906
 AUTO_FILE_DIR: OFF
 */
 // END_INTERNALS
