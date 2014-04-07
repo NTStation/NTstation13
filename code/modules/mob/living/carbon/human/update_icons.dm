@@ -321,6 +321,9 @@ Please contact me on #coderbus IRC. ~Carnie x
 		var/t_color = w_uniform.item_color
 		if(!t_color)		t_color = icon_state
 		var/image/standing	= image("icon"='icons/mob/uniform.dmi', "icon_state"="[t_color]_s", "layer"=-UNIFORM_LAYER)
+		standing.color = w_uniform.color
+		standing.alpha = w_uniform.alpha
+
 		overlays_standing[UNIFORM_LAYER]	= standing
 
 		var/G = (gender == FEMALE) ? "f" : "m"
@@ -330,6 +333,8 @@ Please contact me on #coderbus IRC. ~Carnie x
 			if(!female_uniform_icon ) 	//Create standing/laying icons if they don't exist
 				generate_uniform(index,t_color)
 			standing	= image("icon"=female_uniform_icons["[t_color]_s"], "layer"=-UNIFORM_LAYER)
+			standing.color = w_uniform.color
+			standing.alpha = w_uniform.alpha
 			overlays_standing[UNIFORM_LAYER]	= standing
 
 		if(w_uniform.blood_DNA)
@@ -338,7 +343,11 @@ Please contact me on #coderbus IRC. ~Carnie x
 		if(U.hastie)
 			var/tie_color = U.hastie.item_color
 			if(!tie_color) tie_color = U.hastie.icon_state
-			standing.overlays	+= image("icon"='icons/mob/ties.dmi', "icon_state"="[tie_color]")
+			var/image/tie = image("icon"='icons/mob/ties.dmi', "icon_state"="[tie_color]")
+			tie.color = U.hastie.color
+			tie.alpha = U.hastie.alpha
+
+			standing.overlays	+= tie
 	else
 		// Automatically drop anything in store / id / belt if you're not wearing a uniform.	//CHECK IF NECESARRY
 		for(var/obj/item/thing in list(r_store, l_store, wear_id, belt))						//
@@ -369,6 +378,9 @@ Please contact me on #coderbus IRC. ~Carnie x
 		var/t_state = gloves.item_state
 		if(!t_state)	t_state = gloves.icon_state
 		var/image/standing	= image("icon"='icons/mob/hands.dmi', "icon_state"="[t_state]", "layer"=-GLOVES_LAYER)
+		standing.color = gloves.color
+		standing.alpha = gloves.alpha
+
 		overlays_standing[GLOVES_LAYER]	= standing
 
 		if(gloves.blood_DNA)
@@ -416,6 +428,9 @@ Please contact me on #coderbus IRC. ~Carnie x
 			client.screen += shoes
 
 		var/image/standing	= image("icon"='icons/mob/feet.dmi', "icon_state"="[shoes.icon_state]", "layer"=-SHOES_LAYER)
+		standing.color = shoes.color
+		standing.alpha = shoes.alpha
+
 		overlays_standing[SHOES_LAYER]	= standing
 
 		if(shoes.blood_DNA)
@@ -449,7 +464,7 @@ Please contact me on #coderbus IRC. ~Carnie x
 			client.screen += head
 
 		var/image/standing = image("icon"='icons/mob/head.dmi', "icon_state"="[head.icon_state]", "layer"=-HEAD_LAYER)
-		standing.color = head.color // For now, this is here solely for kitty ears, but everything should do this eventually
+		standing.color = head.color
 		standing.alpha = head.alpha
 
 		overlays_standing[HEAD_LAYER]	= standing
@@ -485,6 +500,9 @@ Please contact me on #coderbus IRC. ~Carnie x
 			client.screen += wear_suit
 
 		var/image/standing	= image("icon"='icons/mob/suit.dmi', "icon_state"="[wear_suit.icon_state]", "layer"=-SUIT_LAYER)
+		standing.color = wear_suit.color
+		standing.alpha = wear_suit.alpha
+
 		overlays_standing[SUIT_LAYER]	= standing
 
 		if(istype(wear_suit, /obj/item/clothing/suit/straight_jacket))
@@ -519,6 +537,9 @@ Please contact me on #coderbus IRC. ~Carnie x
 			client.screen += wear_mask
 
 		var/image/standing	= image("icon"='icons/mob/mask.dmi', "icon_state"="[wear_mask.icon_state]", "layer"=-FACEMASK_LAYER)
+		standing.color = wear_mask.color
+		standing.alpha = wear_mask.alpha
+
 		overlays_standing[FACEMASK_LAYER]	= standing
 
 		if(wear_mask.blood_DNA && !istype(wear_mask, /obj/item/clothing/mask/cigarette))
@@ -537,7 +558,11 @@ Please contact me on #coderbus IRC. ~Carnie x
 			back.screen_loc = ui_back	//TODO
 			client.screen += back
 
-		overlays_standing[BACK_LAYER]	= image("icon"='icons/mob/back.dmi', "icon_state"="[back.icon_state]", "layer"=-BACK_LAYER)
+		var/image/standing	= image("icon"='icons/mob/back.dmi', "icon_state"="[back.icon_state]", "layer"=-BACK_LAYER)
+		standing.color = back.color
+		standing.alpha = back.alpha
+
+		overlays_standing[BACK_LAYER]	= standing
 
 	apply_overlay(BACK_LAYER)
 

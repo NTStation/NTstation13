@@ -1,54 +1,54 @@
 /obj/machinery/foodgrill
 	name = "grill"
-	icon = 'icons/obj/cooking_machines.dmi'
 	desc = "Backyard grilling, IN SPACE."
+	icon = 'icons/obj/cooking_machines.dmi'
 	icon_state = "grill_off"
 	layer = 2.9
 	density = 1
 	anchored = 1
 	use_power = 1
 	idle_power_usage = 5
-	var/on = 0 // Is it grilling food already?
+	var/on = FALSE	//Is it grilling food already?
 
-/obj/machinery/foodgrill/attackby(var/obj/item/O as obj, var/mob/user as mob)
+/obj/machinery/foodgrill/attackby(obj/item/I, mob/user)
 	if(on)
-		user << "<span class='warning'>The machine is already processing, please wait."
+		user << "<span class='notice'>[src] is already processing, please wait.</span>"
 		return
-	if(istype(O, /obj/item/weapon/grab)||istype(O, /obj/item/tk_grab))
+	if(istype(I, /obj/item/weapon/grab)||istype(I, /obj/item/tk_grab))
 		user << "<span class='warning'>That isn't going to fit.</span>"
 		return
-	if(!user.unEquip(O))
-		user << "<span class='warning'>You cannot grill [O]."
+	if(!user.unEquip(I))
+		user << "<span class='warning'>You cannot grill [I].</span>"
 		return
 	else
-		user << "You put [O] onto [src]."
-		on = 1
+		user << "<span class='notice'>You put [I] onto [src].</span>"
+		on = TRUE
 		user.drop_item()
-		O.loc = src
+		I.loc = src
 		icon_state = "grill_on"
-		var/image/I = new(O.icon, O.icon_state)
-		I.pixel_y = 5
-		overlays += I
+
+		var/image/img = new(I.icon, I.icon_state)
+		img.pixel_y = 5
+		overlays += img
 		sleep(200)
 		overlays.Cut()
-		I.color = "#C28566"
-		I.pixel_y = 5
-		overlays += I
+		img.color = "#C28566"
+		overlays += img
 		sleep(200)
 		overlays.Cut()
-		I.color = "#A34719"
-		I.pixel_y = 5
-		overlays += I
+		img.color = "#A34719"
+		overlays += img
 		sleep(50)
 		overlays.Cut()
-		on = 0
+
+		on = FALSE
 		icon_state = "grill_off"
-		if(istype(O, /obj/item/weapon/reagent_containers/))
-			var/obj/item/weapon/reagent_containers/food = O
+
+		if(istype(I, /obj/item/weapon/reagent_containers/))
+			var/obj/item/weapon/reagent_containers/food = I
 			food.reagents.add_reagent("nutriment", 10)
-			food.reagents.trans_to(O, food.reagents.total_volume)
-		O.loc = get_turf(src)
-		O.color = "#A34719"
-		var/tempname = O.name
-		O.name = "grilled [tempname]"
-		return
+			food.reagents.trans_to(I, food.reagents.total_volume)
+		I.loc = get_turf(src)
+		I.color = "#A34719"
+		var/tempname = I.name
+		I.name = "grilled [tempname]"
