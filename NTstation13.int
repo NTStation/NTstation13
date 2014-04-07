@@ -1,6 +1,11 @@
 // BEGIN_INTERNALS
 /*
 MAP_ICON_TYPE: 0
+LAST_COMPILE_VERSION: 503.1224
+WINDOW: code\game\machinery\kitchen\processor.dm;code\game\machinery\kitchen\microwave.dm;code\modules\food\recipes_microwave.dm;code\modules\hydroponics\grown.dm;code\modules\reagents\Chemistry-Reagents.dm;code\modules\reagents\reagent_containers\food\snacks.dm;code\modules\reagents\reagent_containers\food\drinks.dm
+DIR: code code\game code\game\machinery code\game\machinery\kitchen code\modules code\modules\hydroponics code\modules\reagents code\modules\reagents\reagent_containers code\modules\reagents\reagent_containers\food 
+FILE: code\modules\reagents\reagent_containers\food\drinks.dm
+LAST_COMPILE_TIME: 1396831801
 AUTO_FILE_DIR: OFF
 */
 // END_INTERNALS
