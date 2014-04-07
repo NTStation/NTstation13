@@ -141,6 +141,88 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 	griefProtection()
 */
 
+/obj/machinery/computer/rdconsole/proc/build(var/id,var/amount)
+	//TODO
+	var/coeff
+	if(linked_lathe)
+		coeff = linked_lathe.efficiency_coeff
+	else
+		coeff = 1
+	var/g2g = 1
+	if(linked_lathe)
+		var/datum/design/being_built = null
+		for(var/datum/design/D in files.known_designs)
+			if(D.id == id)
+				being_built = D
+				break
+		if(being_built)
+			var/power = 2000
+			for(var/M in being_built.materials)
+				power += round(being_built.materials[M] / 5)
+			power = max(2000, power)
+			screen = 0.3
+			if(linked_lathe.busy)
+				g2g = 0
+			var/key = usr.key	//so we don't lose the info during the spawn delay
+			if (!(being_built.build_type & PROTOLATHE))
+				g2g = 0
+				message_admins("Protolathe exploit attempted by [key_name(usr, usr.client)]!")
+
+			if (g2g) //If input is incorrect, nothing happens
+				linked_lathe.busy = 1
+				flick("protolathe_n",linked_lathe)
+				use_power(power)
+
+				for(var/i=1,i<amount+1;i++)
+					for(var/M in being_built.materials)
+						if(!linked_lathe.check_mat(being_built, M))
+							src.visible_message("<font color='blue'>The [src.name] beeps, \"Not enough materials to complete prototype.\"</font>")
+							g2g = 0
+							break
+						switch(M)
+							if("$metal")
+								linked_lathe.m_amount = max(0, (linked_lathe.m_amount-(being_built.materials[M]/coeff)))
+							if("$glass")
+								linked_lathe.g_amount = max(0, (linked_lathe.g_amount-(being_built.materials[M]/coeff)))
+							if("$gold")
+								linked_lathe.gold_amount = max(0, (linked_lathe.gold_amount-(being_built.materials[M]/coeff)))
+							if("$silver")
+								linked_lathe.silver_amount = max(0, (linked_lathe.silver_amount-(being_built.materials[M]/coeff)))
+							if("$plasma")
+								linked_lathe.plasma_amount = max(0, (linked_lathe.plasma_amount-(being_built.materials[M]/coeff)))
+							if("$uranium")
+								linked_lathe.uranium_amount = max(0, (linked_lathe.uranium_amount-(being_built.materials[M]/coeff)))
+							if("$diamond")
+								linked_lathe.diamond_amount = max(0, (linked_lathe.diamond_amount-(being_built.materials[M]/coeff)))
+							if("$clown")
+								linked_lathe.clown_amount = max(0, (linked_lathe.clown_amount-(being_built.materials[M]/coeff)))
+							else
+								linked_lathe.reagents.remove_reagent(M, being_built.materials[M]/coeff)
+
+					var/P = being_built.build_path //lets save these values before the spawn() just in case. Nobody likes runtimes.
+					var/R = being_built.reliability
+					var/O = being_built.locked
+					spawn(32*i)
+						if(g2g) //And if we only fail the material requirements, we still spend time and power
+							var/obj/new_item = new P(src)
+							if( new_item.type == /obj/item/weapon/storage/backpack/holding )
+								new_item.investigate_log("built by [key]","singulo")
+							new_item.reliability = R
+							new_item.m_amt /= coeff
+							new_item.g_amt /= coeff
+							if(linked_lathe.hacked)
+								R = max((reliability / 2), 0)
+							if(O)
+								var/obj/item/weapon/storage/lockbox/L = new/obj/item/weapon/storage/lockbox(linked_lathe.loc)
+								new_item.loc = L
+								L.name += " ([new_item.name])"
+							else
+								new_item.loc = linked_lathe.loc
+						if(i==amount)
+							linked_lathe.busy = 0
+							screen = 3.1
+							updateUsrDialog()
+
 /obj/machinery/computer/rdconsole/attackby(var/obj/item/weapon/D as obj, var/mob/user as mob)
 
 	//Loading a disk into it.
@@ -330,83 +412,10 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 		sync = !sync
 
 	else if(href_list["build"]) //Causes the Protolathe to build something.
-		var/coeff
-		if(linked_lathe)
-			coeff = linked_lathe.efficiency_coeff
-		else
-			coeff = 1
-		var/g2g = 1
-		if(linked_lathe)
-			var/datum/design/being_built = null
-			for(var/datum/design/D in files.known_designs)
-				if(D.id == href_list["build"])
-					being_built = D
-					break
-			if(being_built)
-				var/power = 2000
-				for(var/M in being_built.materials)
-					power += round(being_built.materials[M] / 5)
-				power = max(2000, power)
-				screen = 0.3
-				if(linked_lathe.busy)
-					g2g = 0
-				var/key = usr.key	//so we don't lose the info during the spawn delay
-				if (!(being_built.build_type & PROTOLATHE))
-					g2g = 0
-					message_admins("Protolathe exploit attempted by [key_name(usr, usr.client)]!")
+		build(href_list["build"],1)
 
-				if (g2g) //If input is incorrect, nothing happens
-					linked_lathe.busy = 1
-					flick("protolathe_n",linked_lathe)
-					use_power(power)
-
-					for(var/M in being_built.materials)
-						if(!linked_lathe.check_mat(being_built, M))
-							src.visible_message("<font color='blue'>The [src.name] beeps, \"Not enough materials to complete prototype.\"</font>")
-							g2g = 0
-							break
-						switch(M)
-							if("$metal")
-								linked_lathe.m_amount = max(0, (linked_lathe.m_amount-(being_built.materials[M]/coeff)))
-							if("$glass")
-								linked_lathe.g_amount = max(0, (linked_lathe.g_amount-(being_built.materials[M]/coeff)))
-							if("$gold")
-								linked_lathe.gold_amount = max(0, (linked_lathe.gold_amount-(being_built.materials[M]/coeff)))
-							if("$silver")
-								linked_lathe.silver_amount = max(0, (linked_lathe.silver_amount-(being_built.materials[M]/coeff)))
-							if("$plasma")
-								linked_lathe.plasma_amount = max(0, (linked_lathe.plasma_amount-(being_built.materials[M]/coeff)))
-							if("$uranium")
-								linked_lathe.uranium_amount = max(0, (linked_lathe.uranium_amount-(being_built.materials[M]/coeff)))
-							if("$diamond")
-								linked_lathe.diamond_amount = max(0, (linked_lathe.diamond_amount-(being_built.materials[M]/coeff)))
-							if("$clown")
-								linked_lathe.clown_amount = max(0, (linked_lathe.clown_amount-(being_built.materials[M]/coeff)))
-							else
-								linked_lathe.reagents.remove_reagent(M, being_built.materials[M]/coeff)
-
-					var/P = being_built.build_path //lets save these values before the spawn() just in case. Nobody likes runtimes.
-					var/R = being_built.reliability
-					var/O = being_built.locked
-					spawn(32)
-						if(g2g) //And if we only fail the material requirements, we still spend time and power
-							var/obj/new_item = new P(src)
-							if( new_item.type == /obj/item/weapon/storage/backpack/holding )
-								new_item.investigate_log("built by [key]","singulo")
-							new_item.reliability = R
-							new_item.m_amt /= coeff
-							new_item.g_amt /= coeff
-							if(linked_lathe.hacked)
-								R = max((reliability / 2), 0)
-							if(O)
-								var/obj/item/weapon/storage/lockbox/L = new/obj/item/weapon/storage/lockbox(linked_lathe.loc)
-								new_item.loc = L
-								L.name += " ([new_item.name])"
-							else
-								new_item.loc = linked_lathe.loc
-						linked_lathe.busy = 0
-						screen = 3.1
-						updateUsrDialog()
+	else if(href_list["buildmulti"]) // copypasta yay
+		build(href_list["buildmulti"],text2num(href_list["amount"]))
 
 	else if(href_list["imprint"]) //Causes the Circuit Imprinter to build something.
 		var/coeff = linked_imprinter.efficiency_coeff
@@ -784,7 +793,11 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 					else
 						temp_material += " [D.materials[M]/coeff] [CallMaterialName(M)]"
 				if (check_materials)
-					dat += "* <A href='?src=\ref[src];build=[D.id]'>[temp_dat]</A>[temp_material]<BR>"
+					dat += "* <A href='?src=\ref[src];build=[D.id]'>[temp_dat]</A>[temp_material]"
+					dat += " "
+					for(var/multiple in list(2,3,5,10))
+						dat += "<A href='?src=\ref[src];buildmulti=[D.id];amount=[multiple]'>x[multiple]</A>"
+					dat += "<BR>"
 				else
 					dat += "* <span class='linkOff'>[temp_dat]</span>[temp_material]<BR>"
 			dat += "</div>"
