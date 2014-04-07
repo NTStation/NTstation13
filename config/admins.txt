@@ -1,60 +1,59 @@
-###############################################################################################
-# Basically, ckey goes first. Rank goes after the "="                                         #
-# Case is not important for ckey.                                                             #
-# Case IS important for the rank.                                                             #
-# All punctuation (spaces etc) EXCEPT '-', '_' and '@' will be stripped from rank names.      #
-# Ranks can be anything defined in admin_ranks.txt                                            #
-# NOTE: if the rank-name cannot be found in admin_ranks.txt, they will not be adminned! ~Carn #
-# NOTE: syntax was changed to allow hyphenation of ranknames, since spaces are stripped.      #
-###############################################################################################
-razharas = Game Master
-rolan7 = Game Master
-quarxink = Game Master
-adrix89 = Game Master
-tle = Game Master
-xsi = Game Master
-scaredofshadows = Game Master
-neofite = Game Master
-trubblebass = Game Master
-mport2004 = Game Master
-deuryn = Game Master
-agouri = Game Master
-errorage = Game Master
-superxpdude = Game Master
-petethegoat = Game Master
-korphaeron = Game Master
-nodrak = Game Master
-carnwennan = Game Master
-ikarrus = Game Master
-cheridan = Game Master
-giacomand = Game Master
-rockdtben = Game Master
-sieve = Game Master
-aranclanos = Game Master
-intigracy = Game Master
-dumpdavidson = Game Master
-kazeespada = Game Master
-malkevin = Game Master
-incoming = Game Master
-demas = Game Master
-fleure = Game Master
-ricotez = Game Master
-misterperson = Game Master
-crimsonvision = Game Master
-iamgoofball = Game Master
-zelacks = Game Master
-androidsfv = Game Master
-miggles = Game Master
-jordie0608 = Game Master
-s0ldi3rkr4s0 = Game Master
-ergovisavi = Game Master
-vistapowa = Game Master
-miauw62 = Game Master
-kazeespada = Game Master
-rumia29 = Game Master
-bobylein = Game Master
-sirbayer = Game Master
-hornygranny = Game Master
-startoad = Game Master
-polymorphblue = Game Master
-yota = Game Master
+
+######################################################################
+# Basically, ckey goes first. Rank goes after the "="                #
+# Case is not important for ckey.                                    #
+# Case IS important for the rank. However punctuation/spaces are not #
+# Ranks can be anything defined in admin_ranks.txt           ~Carn   #
+######################################################################
+ 
+scaredofshadows = Host
+tle = Host
+ 
+hotelbravolima = Headmin
+deuryn = Headmin
+intigracy = Headmin
+ 
+an0n3 = GameMaster
+crossbowman5 = GameMaster
+xsi = GameMaster
+thebiblemelts = GameMaster
+elyina = GameMaster
+
+fateweaver = GameAdmin
+alien219 = GameAdmin
+tanknut = GameAdmin
+gamarr = GameAdmin
+laharlmontgommery = GameAdmin
+herpa = GameAdmin
+stillchr = GameAdmin
+Ikarrus = GameAdmin
+Giacomand = GameAdmin
+Zoomerik = GameAdmin
+brotemis = GameAdmin
+sawrge = GameAdmin
+hbk2006 = GameAdmin
+petethegoat = GameAdmin
+MrGlasses91 = GameAdmin
+hornygranny = GameAdmin
+errorage = GameAdmin
+creationpro = GameAdmin
+SubtleGraces = GameAdmin
+Pandarsenic = GameAdmin
+Neerti = GameAdmin
+leibniz = GameAdmin
+rockdtben = GameAdmin
+spillage = GameAdmin
+antonkr = GameAdmin
+ 
+Jordie0608 = TrialAdmin
+Skorvold = TrialAdmin
+Aurx = TrialAdmin
+Bluespace = TrialAdmin
+Nerolat = TrialAdmin
+ 
+niknakflak = AdminObserver
+Upgradecap = AdminObserver
+wjohnston = AdminObserver
+
+miggles = CodebaseManager
+depress = CodebaseManager
