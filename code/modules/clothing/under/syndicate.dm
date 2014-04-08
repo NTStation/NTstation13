@@ -9,6 +9,7 @@
 
 /obj/item/clothing/under/syndicate/combat
 	name = "combat turtleneck"
+	can_roll = 0
 
 /obj/item/clothing/under/syndicate/tacticool
 	name = "\improper Tacticool turtleneck"
@@ -16,5 +17,6 @@
 	icon_state = "tactifool"
 	item_state = "bl_suit"
 	item_color = "tactifool"
+	can_roll = 0
 
 
