@@ -44,7 +44,7 @@ leibniz = GameAdmin
 rockdtben = GameAdmin
 spillage = GameAdmin
 antonkr = GameAdmin
- 
+dannno = GameAdmin 
 Jordie0608 = TrialAdmin
 Skorvold = TrialAdmin
 Aurx = TrialAdmin
@@ -56,4 +56,4 @@ Upgradecap = AdminObserver
 wjohnston = AdminObserver
 
 miggles = CodebaseManager
-depress = CodebaseManager
+dannno = CodebaseManager
