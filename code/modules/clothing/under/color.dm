@@ -32,6 +32,14 @@
 
 /obj/item/clothing/under/color/orange
 	name = "orange jumpsuit"
+	desc = "It's an orange jumpsuit. Don't wear this around paranoid security officers."
+	icon_state = "orange"
+	item_state = "o_suit"
+	item_color = "orange"
+
+
+/obj/item/clothing/under/color/prison
+	name = "prison jumpsuit"
 	desc = "It's standardised Nanotrasen prisoner-wear. Its suit sensors are stuck in the \"Fully On\" position."
 	icon_state = "orange"
 	item_state = "o_suit"
@@ -71,73 +79,67 @@
 
 /obj/item/clothing/under/lightblue
 	name = "lightblue jumpsuit"
-	desc = "lightblue"
+	desc = "A light blue jumpsuit."
 	icon_state = "lightblue"
 	item_color = "lightblue"
 
 /obj/item/clothing/under/aqua
 	name = "aqua jumpsuit"
-	desc = "aqua"
+	desc = "An aqua jumpsuit."
 	icon_state = "aqua"
 	item_color = "aqua"
 
 /obj/item/clothing/under/purple
 	name = "purple jumpsuit"
-	desc = "purple"
+	desc = "A purple jumpsuit."
 	icon_state = "purple"
 	item_state = "p_suit"
 	item_color = "purple"
 
 /obj/item/clothing/under/lightpurple
 	name = "lightpurple jumpsuit"
-	desc = "lightpurple"
+	desc = "A purple jumpsuit in a lighter shade."
 	icon_state = "lightpurple"
 	item_color = "lightpurple"
 
 /obj/item/clothing/under/lightgreen
 	name = "lightgreen jumpsuit"
-	desc = "lightgreen"
+	desc = "A green jumpsuit in a lighter shade."
 	icon_state = "lightgreen"
 	item_color = "lightgreen"
 
-/obj/item/clothing/under/lightblue
-	name = "lightblue jumpsuit"
-	desc = "lightblue"
-	icon_state = "lightblue"
-	item_color = "lightblue"
-
 /obj/item/clothing/under/lightbrown
 	name = "lightbrown jumpsuit"
-	desc = "lightbrown"
+	desc = "A brown jumpsuit in a lighter shade"
 	icon_state = "lightbrown"
 	item_color = "lightbrown"
 
 /obj/item/clothing/under/brown
 	name = "brown jumpsuit"
-	desc = "brown"
+	desc = "A brown jumpsuit."
 	icon_state = "brown"
 	item_color = "brown"
 
 /obj/item/clothing/under/yellowgreen
 	name = "yellowgreen jumpsuit"
-	desc = "yellowgreen"
+	desc = "A jumpsuit in a yellowish-green flavour."
 	icon_state = "yellowgreen"
 	item_color = "yellowgreen"
 
 /obj/item/clothing/under/darkblue
 	name = "darkblue jumpsuit"
-	desc = "darkblue"
+	desc = "A dark blue jumpsuit."
 	icon_state = "darkblue"
 	item_color = "darkblue"
 
 /obj/item/clothing/under/lightred
 	name = "lightred jumpsuit"
-	desc = "lightred"
+	desc = "A red jumpsuit in a lighter shade."
 	icon_state = "lightred"
 	item_color = "lightred"
 
 /obj/item/clothing/under/darkred
 	name = "darkred jumpsuit"
-	desc = "darkred"
+	desc = "A dark red jumpsuit."
 	icon_state = "darkred"
 	item_color = "darkred"

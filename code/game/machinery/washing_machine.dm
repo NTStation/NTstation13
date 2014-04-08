@@ -121,6 +121,7 @@
 					J.item_color = wash_color
 					J.name = new_jumpsuit_name
 					J.desc = new_desc
+					J.suit_color = wash_color
 			if(new_glove_icon_state && new_glove_item_state && new_glove_name)
 				for(var/obj/item/clothing/gloves/G in contents)
 					if(!G.item_color)

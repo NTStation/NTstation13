@@ -1,27 +1,27 @@
-/obj/item/weapon/reagent_containers/food/snacks/breadslice/attackby(obj/item/W as obj, mob/user as mob)
-	if(istype(W,/obj/item/))
+/obj/item/weapon/reagent_containers/food/snacks/breadslice/attackby(obj/item/I, mob/user)
+	if(istype(I, /obj/item/))
 		var/obj/item/weapon/reagent_containers/food/snacks/customizable/S = new(get_turf(user))
-		S.attackby(W,user)
+		S.attackby(I, user)
 		qdel(src)
 
-/obj/item/weapon/reagent_containers/food/snacks/bun/attackby(obj/item/W as obj, mob/user as mob)
-	if(istype(W,/obj/item/))
+/obj/item/weapon/reagent_containers/food/snacks/bun/attackby(obj/item/I, mob/user)
+	if(istype(I, /obj/item/))
 		var/obj/item/weapon/reagent_containers/food/snacks/customizable/burger/S = new(get_turf(user))
-		S.attackby(W,user)
+		S.attackby(I, user)
 		qdel(src)
 	..()
 
-/obj/item/weapon/reagent_containers/food/snacks/sliceable/flatdough/attackby(obj/item/W as obj, mob/user as mob)
-	if(istype(W,/obj/item/))
+/obj/item/weapon/reagent_containers/food/snacks/sliceable/flatdough/attackby(obj/item/I, mob/user)
+	if(istype(I, /obj/item/))
 		var/obj/item/weapon/reagent_containers/food/snacks/customizable/pizza/S = new(get_turf(user))
-		S.attackby(W,user)
+		S.attackby(I, user)
 		qdel(src)
 	..()
 
-/obj/item/weapon/reagent_containers/food/snacks/boiledspagetti/attackby(obj/item/W as obj, mob/user as mob)
-	if(istype(W,/obj/item/weapon/reagent_containers/food/snacks))
+/obj/item/weapon/reagent_containers/food/snacks/boiledspagetti/attackby(obj/item/I, mob/user)
+	if(istype(I, /obj/item/weapon/reagent_containers/food/snacks))
 		var/obj/item/weapon/reagent_containers/food/snacks/customizable/pasta/S = new(get_turf(user))
-		S.attackby(W,user)
+		S.attackby(I, user)
 		qdel(src)
 	..()
 
@@ -31,10 +31,10 @@
 	icon = 'icons/obj/food.dmi'
 	icon_state = "soup"
 
-/obj/item/trash/bowl/attackby(obj/item/W as obj, mob/user as mob)
-	if(istype(W,/obj/item/weapon/shard) || istype(W,/obj/item/weapon/reagent_containers/food/snacks))
+/obj/item/trash/bowl/attackby(obj/item/I, mob/user)
+	if(istype(I, /obj/item/weapon/shard) || istype(I, /obj/item/weapon/reagent_containers/food/snacks))
 		var/obj/item/weapon/reagent_containers/food/snacks/customizable/soup/S = new(get_turf(user))
-		S.attackby(W,user)
+		S.attackby(I, user)
 		qdel(src)
 	..()
 
@@ -89,16 +89,15 @@
 	basename = "bun"
 	trash = null
 
-/obj/item/weapon/reagent_containers/food/snacks/customizable/attackby(obj/item/W as obj, mob/user as mob)
-	user << "<span class='notice'> You add [W] to [src].</span>"
-	if(istype(W, /obj/item/weapon/reagent_containers/))
-		var/obj/item/weapon/reagent_containers/F = W
+/obj/item/weapon/reagent_containers/food/snacks/customizable/attackby(obj/item/I, mob/user)
+	user << "<span class='notice'> You add [I] to [src].</span>"
+	if(istype(I,  /obj/item/weapon/reagent_containers/))
+		var/obj/item/weapon/reagent_containers/F = I
 		F.reagents.trans_to(src, F.reagents.total_volume)
 	user.drop_item()
-	W.loc = src
-	ingredients += W
+	I.loc = src
+	ingredients += I
 	update()
-	return
 
 /obj/item/weapon/reagent_containers/food/snacks/customizable/proc/update()
 	var/fullname = "" //We need to build this from the contents of the var.
@@ -107,7 +106,6 @@
 	overlays.Cut()
 
 	for(var/obj/item/O in ingredients)
-
 		i++
 		if(i == 1)
 			fullname += "[O.name]"
@@ -145,5 +143,4 @@
 /obj/item/weapon/reagent_containers/food/snacks/customizable/examine()
 	..()
 	var/whatsinside = pick(ingredients)
-
-	usr << "<span class='notice'> You think you can see [whatsinside] in there.</span>"
+	usr << "<span class='notice'>You think you can see [whatsinside] in there.</span>"
