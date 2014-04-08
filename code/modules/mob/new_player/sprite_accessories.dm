@@ -502,3 +502,230 @@
 		name = "Tankini"
 		icon_state = "female_tankini"
 		gender = FEMALE
+
+////////////////////////////
+// Undershirt Definitions //
+////////////////////////////
+
+/datum/sprite_accessory/undershirt
+	icon = 'icons/mob/undershirt.dmi'
+
+	nude
+		name = "Nude"
+		icon_state = null
+		gender = NEUTER
+
+	black_shirt
+		name = "Black Shirt"
+		icon_state = "bl_shirt"
+		gender = NEUTER
+
+	white_shirt
+		name = "White Shirt"
+		icon_state = "wt_shirt"
+		gender = NEUTER
+
+
+	black_tank_top
+		name = "Black Tank Top"
+		icon_state = "bl_ttop"
+		gender = NEUTER
+
+	white_tank_top
+		name = "White Tank Top"
+		icon_state = "wt_ttop"
+		gender = NEUTER
+
+	atmos_tank
+		name = "Atmos Tank Top"
+		icon_state = "atmostank"
+		gender = NEUTER
+
+	botany_tank
+		name = "Botany Tank Top"
+		icon_state = "botanytank"
+		gender = NEUTER
+
+	engi_tank
+		name = "Engineering Tank Top"
+		icon_state = "engitank"
+		gender = NEUTER
+
+	sci_tank
+		name = "Science Tank Top"
+		icon_state = "scitank"
+		gender = NEUTER
+
+	mine_tank
+		name = "Mining Tank Top"
+		icon_state = "minetank"
+		gender = NEUTER
+
+	jani_tank
+		name = "Janitorial Tank Top"
+		icon_state = "janitank"
+		gender = NEUTER
+
+	med_tank
+		name = "Medical Tank Top"
+		icon_state = "medtank"
+		gender = NEUTER
+
+	robo_tank
+		name = "Robotics Tank Top"
+		icon_state = "robotank"
+		gender = NEUTER
+
+	sec_tank
+		name = "Security Tank Top"
+		icon_state = "sectank"
+		gender = NEUTER
+
+//MrSnapwalk is apparently a basketball fan - RR
+
+	blue_tank_0
+		name = "Blue Tank Top (0)"
+		icon_state = "0bluetank"
+		gender = NEUTER
+
+	blue_tank_1
+		name = "Blue Tank Top (1)"
+		icon_state = "1bluetank"
+		gender = NEUTER
+
+	blue_tank_2
+		name = "Blue Tank Top (2)"
+		icon_state = "2bluetank"
+		gender = NEUTER
+
+	blue_tank_3
+		name = "Blue Tank Top (3)"
+		icon_state = "3bluetank"
+		gender = NEUTER
+
+	blue_tank_4
+		name = "Blue Tank Top (4)"
+		icon_state = "4bluetank"
+		gender = NEUTER
+
+	blue_tank_5
+		name = "Blue Tank Top (5)"
+		icon_state = "5bluetank"
+		gender = NEUTER
+
+	blue_tank_6
+		name = "Blue Tank Top (6)"
+		icon_state = "6bluetank"
+		gender = NEUTER
+
+	blue_tank_7
+		name = "Blue Tank Top (7)"
+		icon_state = "7bluetank"
+		gender = NEUTER
+
+	blue_tank_8
+		name = "Blue Tank Top (8)"
+		icon_state = "8bluetank"
+		gender = NEUTER
+
+	blue_tank_9
+		name = "Blue Tank Top (9)"
+		icon_state = "9bluetank"
+		gender = NEUTER
+
+	red_tank_0
+		name = "Red Tank Top (0)"
+		icon_state = "0redtank"
+		gender = NEUTER
+
+	red_tank_1
+		name = "Red Tank Top (1)"
+		icon_state = "1redtank"
+		gender = NEUTER
+
+	red_tank_2
+		name = "Red Tank Top (2)"
+		icon_state = "2redtank"
+		gender = NEUTER
+
+	red_tank_3
+		name = "Red Tank Top (3)"
+		icon_state = "3redtank"
+		gender = NEUTER
+
+	red_tank_4
+		name = "Red Tank Top (4)"
+		icon_state = "4redtank"
+		gender = NEUTER
+
+	red_tank_5
+		name = "Red Tank Top (5)"
+		icon_state = "5redtank"
+		gender = NEUTER
+
+	red_tank_6
+		name = "Red Tank Top (6)"
+		icon_state = "6redtank"
+		gender = NEUTER
+
+	red_tank_7
+		name = "Red Tank Top (7)"
+		icon_state = "7redtank"
+		gender = NEUTER
+
+	red_tank_8
+		name = "Red Tank Top (8)"
+		icon_state = "8redtank"
+		gender = NEUTER
+
+	red_tank_9
+		name = "Red Tank Top (9)"
+		icon_state = "9redtank"
+		gender = NEUTER
+
+//End of B-Ball nonsense - RR
+
+	rainbow_tank
+		name = "Rainbow Tank Top"
+		icon_state = "rainbowtank"
+		gender = NEUTER
+
+	happy_tank
+		name = "Happy Tank Top"
+		icon_state = "happytank"
+		gender = NEUTER
+
+	neutral_tank
+		name = "Neutral Tank Top"
+		icon_state = "neutraltank"
+		gender = NEUTER
+
+	sad_tank
+		name = "Sad Tank Top"
+		icon_state = "sadtank"
+		gender = NEUTER
+
+	assitant_tank
+		name = "Assitant Tank Top"
+		icon_state = "assitanttank"
+		gender = NEUTER
+
+	dorf_tank
+		name = "Dwarf Tank Top"
+		icon_state = "dorftank"
+		gender = NEUTER
+
+	monkey_tank
+		name = "Monkey Tank Top"
+		icon_state = "monkeytank"
+		gender = NEUTER
+
+	praise_the_sun_tank
+		name = "Praise The Sun Tank Top" //Looks a tad shit all capitalised
+		icon_state = "praisethesuntank"
+		gender = NEUTER
+
+	treehugger_tank
+		name = "Treehugger Tank"
+		icon_state = "treehuggertank"
+		gender = NEUTER
