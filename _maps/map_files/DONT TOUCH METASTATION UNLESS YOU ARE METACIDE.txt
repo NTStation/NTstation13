@@ -1,4 +1,0 @@
-Don't touch it because it messes up Metacide when he does PRs.
-
-Thanks,
-Iamgoofball

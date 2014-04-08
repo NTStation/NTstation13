@@ -40,7 +40,7 @@
 	desc = "A special suit that protects against hazardous, low pressure environments. Has radiation shielding."
 	icon_state = "rig-engineering"
 	item_state = "eng_hardsuit"
-	slowdown = 3
+	slowdown = 2
 	armor = list(melee = 10, bullet = 5, laser = 10,energy = 5, bomb = 10, bio = 100, rad = 75)
 	allowed = list(/obj/item/device/flashlight,/obj/item/weapon/tank,/obj/item/device/t_scanner, /obj/item/weapon/rcd)
 
@@ -163,7 +163,7 @@
 	name = "medical hardsuit"
 	desc = "A special suit that protects against hazardous, low pressure environments. Built with lightweight materials for easier movement."
 	item_state = "medical_hardsuit"
-	slowdown = 2
+	slowdown = 1
 	allowed = list(/obj/item/device/flashlight,/obj/item/weapon/tank,/obj/item/weapon/storage/firstaid,/obj/item/device/healthanalyzer,/obj/item/stack/medical)
 	armor = list(melee = 10, bullet = 5, laser = 10,energy = 5, bomb = 10, bio = 100, rad = 50)
 
@@ -183,3 +183,21 @@
 	item_state = "sec_hardsuit"
 	allowed = list(/obj/item/device/flashlight,/obj/item/weapon/tank, /obj/item/weapon/gun/energy,/obj/item/weapon/reagent_containers/spray/pepper,/obj/item/weapon/gun/projectile,/obj/item/ammo_box,/obj/item/ammo_casing,/obj/item/weapon/melee/baton,/obj/item/weapon/handcuffs)
 	armor = list(melee = 30, bullet = 15, laser = 30,energy = 10, bomb = 10, bio = 100, rad = 50)
+
+//Ancient hardsuit - Found on away missions/in space.
+/obj/item/clothing/head/helmet/space/rig/ancient
+	name = "ancient hardsuit helmet"
+	desc = "A bulky, antique helmet that protects from hazardous, low pressure environments. You're not sure how old this is."
+	icon_state = "rig0-ancient"
+	item_state = "ancient_helm"
+	item_color = "ancient"
+	armor = list(melee = 40, bullet = 25, laser = 40,energy = 20, bomb = 20, bio = 100, rad = 60)
+
+/obj/item/clothing/suit/space/rig/ancient
+	name = "ancient hardsuit"
+	desc = "A bulky, antique hardsuit with the date '2301' scratched into the chestplate. How old is this thing?"
+	icon_state = "rig-ancient"
+	item_state = "ancient_hardsuit"
+	slowdown = 3
+	allowed = list(/obj/item/device/flashlight,/obj/item/weapon/tank)
+	armor = list(melee = 40, bullet = 25, laser = 40,energy = 20, bomb = 20, bio = 100, rad = 60)

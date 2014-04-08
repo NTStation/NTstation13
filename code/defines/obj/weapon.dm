@@ -210,23 +210,6 @@
 
 
 
-/obj/item/weapon/caution
-	desc = "Caution! Wet Floor!"
-	name = "wet floor sign"
-	icon = 'icons/obj/janitor.dmi'
-	icon_state = "caution"
-	force = 1.0
-	throwforce = 3.0
-	throw_speed = 2
-	throw_range = 5
-	w_class = 2.0
-	attack_verb = list("warned", "cautioned", "smashed")
-
-/obj/item/weapon/caution/cone
-	desc = "This cone is trying to warn you of something!"
-	name = "warning cone"
-	icon_state = "cone"
-
 /obj/item/weapon/rack_parts
 	name = "rack parts"
 	desc = "Parts of a rack."
@@ -374,8 +357,8 @@
 	if(istype(A, /obj/effect/spacevine))
 		for(var/obj/effect/spacevine/B in orange(A,1))
 			if(prob(80))
-				del B
-		del A
+				qdel(B)
+		qdel(A)
 
 /*
 /obj/item/weapon/cigarpacket
@@ -405,7 +388,7 @@
 	icon_state = "RPED"
 	item_state = "RPED"
 	w_class = 5
-	can_hold = list("/obj/item/weapon/stock_parts")
+	can_hold = list(/obj/item/weapon/stock_parts)
 	storage_slots = 14
 	use_to_pickup = 1
 	allow_quick_gather = 1

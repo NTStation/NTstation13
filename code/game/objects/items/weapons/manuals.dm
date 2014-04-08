@@ -548,13 +548,13 @@
 				Here is a guide on basic food recipes and also how to not poison your customers accidentally.
 
 				<h2>Burger:<h2>
-				Put 1 meat and 5u of flour into the microwave and turn it on. Then wait.
+				Put 1 meat and 1 flour into the microwave and turn it on. Then wait.
 
 				<h2>Bread:<h2>
-				Put 15u of flour into the microwave and then wait.
+				Put 3 flour into the microwave and then wait.
 
 				<h2>Waffles:<h2>
-				Add 10u of flour and 2 eggs to the microwave and then wait.
+				Add 2 flour and 2 eggs to the microwave and then wait.
 
 				<h2>Popcorn:<h2>
 				Add 1 corn to the microwave and wait.
@@ -563,16 +563,13 @@
 				Put 1 meat, 1 unit of salt and 1 unit of pepper into the microwave and wait.
 
 				<h2>Meat Pie:<h2>
-				Put 1 meat and 10u of flour into the microwave and wait.
-
-				<h2>Unboiled Spagetti:<h2>
-				Simply add 5u of flour and wait.
+				Put 1 meat and 2 flour into the microwave and wait.
 
 				<h2>Boiled Spagetti:<h2>
 				Put 1 spagetti and 5 units of water into the microwave and wait.
 
 				<h2>Donuts:<h2>
-				Add 1 egg and 5u of flour to the microwave and wait.
+				Add 1 egg and 1 flour to the microwave and wait.
 
 				<h2>Fries:<h2>
 				Add one potato to the processor and wait.
@@ -584,16 +581,25 @@
 				Add any food item to a bread slice.
 
 				<h2>BURGER:<h2>
-				Use a fork on a bread slice to carve it into a bun.
+				Add any food item to a bun.
 
 				<h2>SPAGETTI:<h2>
 				Add any food item to a boiled spaghetti.
 
 				<h2>PERSONAL PAN PIZZA:<h2>
-				Use a rolling pin on a bread loaf. Note that this is for one person and not sliceable.
+				Add any food item to some flat dough.
 
 				<h2>SOUP:<h2>
 				Add any food item to a bowl, which you can get from a dinnerware vendor.
+
+				<h2>Dough:<h2>
+				Set 1 egg and a bag of Flour onto a table and clickdrag the table onto you. Select dough from the menu.
+
+				<h2>Flat Dough:<h2>
+				Use a rolling pin on some dough.
+
+				<h2>Bun:<h2>
+				Bake a dough in the microwave.
 
 
 				</body>

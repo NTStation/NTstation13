@@ -202,7 +202,7 @@
 	if(can_hold.len)
 		var/ok = 0
 		for(var/A in can_hold)
-			if(istype(W, text2path(A) ))
+			if(istype(W, A))
 				ok = 1
 				break
 		if(!ok)
@@ -211,7 +211,7 @@
 			return 0
 
 	for(var/A in cant_hold) //Check for specific items which this container can't hold.
-		if(istype(W, text2path(A) ))
+		if(istype(W, A))
 			if(!stop_messages)
 				usr << "<span class='notice'>[src] cannot hold [W].</span>"
 			return 0
@@ -358,7 +358,6 @@
 		for(var/mob/M in range(1))
 			if(M.s_active == src)
 				close(M)
-	add_fingerprint(user)
 
 /obj/item/weapon/storage/attack_paw(mob/user)
 	return attack_hand(user)
@@ -415,8 +414,10 @@
 	orient2hud()
 
 
-/obj/item/weapon/storage/Del()
+/obj/item/weapon/storage/Destroy()
 	close_all()
+	qdel(boxes)
+	qdel(closer)
 	..()
 
 
@@ -432,3 +433,4 @@
 	if(user.get_active_hand() == src)
 		if(verbs.Find(/obj/item/weapon/storage/verb/quick_empty))
 			quick_empty()
+

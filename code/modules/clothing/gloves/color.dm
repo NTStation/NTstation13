@@ -25,7 +25,7 @@
 	name = "black gloves"
 	icon_state = "black"
 	item_state = "bgloves"
-	item_color="brown"
+	item_color = "brown"
 
 	cold_protection = HANDS
 	min_cold_protection_temperature = GLOVES_MIN_TEMP_PROTECT
@@ -44,7 +44,7 @@
 	desc = "A pair of gloves, they don't look special in any way."
 	icon_state = "orange"
 	item_state = "orangegloves"
-	item_color="orange"
+	item_color = "orange"
 
 /obj/item/clothing/gloves/red
 	name = "red gloves"
@@ -68,28 +68,28 @@
 	desc = "A pair of gloves, they don't look special in any way."
 	icon_state = "blue"
 	item_state = "bluegloves"
-	item_color="blue"
+	item_color = "blue"
 
 /obj/item/clothing/gloves/purple
 	name = "purple gloves"
 	desc = "A pair of gloves, they don't look special in any way."
 	icon_state = "purple"
 	item_state = "purplegloves"
-	item_color="purple"
+	item_color = "purple"
 
 /obj/item/clothing/gloves/green
 	name = "green gloves"
 	desc = "A pair of gloves, they don't look special in any way."
 	icon_state = "green"
 	item_state = "greengloves"
-	item_color="green"
+	item_color = "green"
 
 /obj/item/clothing/gloves/grey
 	name = "grey gloves"
 	desc = "A pair of gloves, they don't look special in any way."
 	icon_state = "gray"
 	item_state = "graygloves"
-	item_color="grey"
+	item_color = "grey"
 
 	rd
 		item_color = "director"			//Exists for washing machines. Is not different from gray gloves in any way.
@@ -102,14 +102,14 @@
 	desc = "A pair of gloves, they don't look special in any way."
 	icon_state = "lightbrown"
 	item_state = "lightbrowngloves"
-	item_color="light brown"
+	item_color = "light brown"
 
 /obj/item/clothing/gloves/brown
 	name = "brown gloves"
 	desc = "A pair of gloves, they don't look special in any way."
 	icon_state = "brown"
 	item_state = "browngloves"
-	item_color="brown"
+	item_color = "brown"
 
 	cargo
 		item_color = "cargo"				//Exists for washing machines. Is not different from brown gloves in any way.

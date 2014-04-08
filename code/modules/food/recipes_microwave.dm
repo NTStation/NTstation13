@@ -1,16 +1,6 @@
 
 // see code/datums/recipe.dm
 
-
-/* No telebacon. just no...
-/datum/recipe/telebacon
-	items = list(
-		/obj/item/weapon/reagent_containers/food/snacks/meat,
-		/obj/item/device/assembly/signaler
-	)
-	result = /obj/item/weapon/reagent_containers/food/snacks/telebacon
-*/
-
 /datum/recipe/friedegg
 	reagents = list("sodiumchloride" = 1, "blackpepper" = 1)
 	items = list(
@@ -18,22 +8,18 @@
 	)
 	result = /obj/item/weapon/reagent_containers/food/snacks/friedegg
 
+/datum/recipe/customizable_bun
+	items = list(
+		/obj/item/weapon/reagent_containers/food/snacks/dough
+	)
+	result = /obj/item/weapon/reagent_containers/food/snacks/bun
+
 /datum/recipe/boiledegg
 	reagents = list("water" = 5)
 	items = list(
 		/obj/item/weapon/reagent_containers/food/snacks/egg
 	)
 	result = /obj/item/weapon/reagent_containers/food/snacks/boiledegg
-
-/*
-/datum/recipe/bananaphone
-	reagents = list("mushroomhallucinogen" = 5) //Trippin' balls, man.
-	items = list(
-		/obj/item/weapon/reagent_containers/food/snacks/grown/banana,
-		/obj/item/device/radio
-	)
-	result = /obj/item/weapon/reagent_containers/food/snacks/bananaphone
-*/
 
 /datum/recipe/jellydonut
 	reagents = list("berryjuice" = 5, "flour" = 5)
@@ -74,6 +60,7 @@
 		var/obj/item/weapon/reagent_containers/food/snacks/burger/human/HB = ..(container)
 		HB.name = human_name+HB.name
 		HB.job = human_job
+		return HB
 
 	reagents = list("flour" = 5)
 	items = list(
@@ -94,7 +81,6 @@
 		/obj/item/organ/appendix
 	)
 	result = /obj/item/weapon/reagent_containers/food/snacks/burger/appendix
-
 
 /datum/recipe/brainburger
 	reagents = list("flour" = 5)
@@ -135,7 +121,6 @@
 	reagents = list("flour" = 5)
 	items = list(
 		/obj/item/clothing/mask/gas/clown_hat,
-		/* /obj/item/weapon/reagent_containers/food/snacks/grown/banana, */
 	)
 	result = /obj/item/weapon/reagent_containers/food/snacks/burger/clown
 
@@ -261,6 +246,15 @@
 		/obj/item/weapon/ectoplasm
 	)
 	result = /obj/item/weapon/reagent_containers/food/snacks/muffin/booberry
+
+/datum/recipe/cornedbeef
+	reagents = list("sodiumchloride" = 5)
+	items = list(
+		/obj/item/weapon/reagent_containers/food/snacks/meat,
+		/obj/item/weapon/reagent_containers/food/snacks/grown/cabbage,
+		/obj/item/weapon/reagent_containers/food/snacks/grown/cabbage,
+	)
+	result = /obj/item/weapon/reagent_containers/food/snacks/cornedbeef
 
 /datum/recipe/eggplantparm
 	items = list(
@@ -943,7 +937,6 @@
 	)
 	result = /obj/item/weapon/reagent_containers/food/snacks/bloodsoup
 
-
 /datum/recipe/slimesoup
 	reagents = list("water" = 10, "slimejelly" = 5)
 	items = list(
@@ -957,14 +950,7 @@
 		/obj/item/weapon/ore/clown,
 	)
 	result = /obj/item/weapon/reagent_containers/food/snacks/clownstears
-/*
-/datum/recipe/boiledslimeextract
-	reagents = list("water" = 5)
-	items = list(
-		/obj/item/slime_core,
-	)
-	result = /obj/item/weapon/reagent_containers/food/snacks/boiledslimecore
-*/
+
 /datum/recipe/braincake
 	reagents = list("milk" = 5, "flour" = 15)
 	items = list(

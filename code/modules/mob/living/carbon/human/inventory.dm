@@ -30,12 +30,12 @@
 					H << "\red You are unable to equip that."
 
 
-/mob/living/carbon/human/proc/equip_in_one_of_slots(obj/item/I, list/slots, del_on_fail = 1)
+/mob/living/carbon/human/proc/equip_in_one_of_slots(obj/item/I, list/slots, qdel_on_fail = 1)
 	for(var/slot in slots)
-		if(equip_to_slot_if_possible(I, slots[slot], del_on_fail = 0))
+		if(equip_to_slot_if_possible(I, slots[slot], qdel_on_fail = 0))
 			return slot
-	if(del_on_fail)
-		del(I)
+	if(qdel_on_fail)
+		qdel(I)
 	return null
 
 
@@ -232,3 +232,30 @@
 			src << "\red You are trying to equip this item to an unsupported inventory slot. Report this to a coder!"
 			return
 
+/mob/living/carbon/human/get_equipped_items()
+	var/list/items = new/list()
+
+	if(back)
+		items += back
+	if(belt)
+		items += belt
+	if(ears)
+		items += ears
+	if(glasses)
+		items += glasses
+	if(gloves)
+		items += gloves
+	if(head)
+		items += head
+	if(shoes)
+		items += shoes
+	if(wear_id)
+		items += wear_id
+	if(wear_mask)
+		items += wear_mask
+	if(wear_suit)
+		items += wear_suit
+	if(w_uniform)
+		items += w_uniform
+
+	return items

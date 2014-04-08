@@ -1,4 +1,4 @@
-NTStation 13 - March 2014
+NTStation 13 - March 2014 [![Build Status](https://travis-ci.org/NTStation/NTstation13.png)](https://travis-ci.org/NTStation/NTstation13)
 
 Website: http://ss13.eu
 

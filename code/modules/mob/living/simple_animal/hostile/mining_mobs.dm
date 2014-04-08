@@ -33,7 +33,7 @@
 	if(!stat)
 		Aggro()
 	if(P.damage < 30)
-		P.damage = (P.damage / 2)
+		P.damage = (P.damage / 3)
 		visible_message("<span class='danger'>[P] has a reduced effect on [src]!</span>")
 	..()
 
@@ -61,20 +61,20 @@
 	projectilesound = 'sound/weapons/pierce.ogg'
 	ranged = 1
 	ranged_message = "stares"
-	ranged_cooldown_cap = 40
+	ranged_cooldown_cap = 20
 	throw_message = "does nothing against the hard shell of"
 	vision_range = 2
-	speed = 5
-	maxHealth = 150
-	health = 150
+	speed = 3
+	maxHealth = 200
+	health = 200
 	harm_intent_damage = 5
-	melee_damage_lower = 7
-	melee_damage_upper = 10
+	melee_damage_lower = 12
+	melee_damage_upper = 12
 	attacktext = "bites into"
 	a_intent = "harm"
 	attack_sound = 'sound/weapons/bladeslice.ogg'
 	ranged_cooldown_cap = 4
-	aggro_vision_range = 5
+	aggro_vision_range = 9
 	idle_vision_range = 2
 
 /obj/item/projectile/temp/basilisk
@@ -124,7 +124,7 @@
 	icon_dead = "Goldgrub_dead"
 	icon_gib = "syndicate_gib"
 	vision_range = 2
-	aggro_vision_range = 5
+	aggro_vision_range = 9
 	idle_vision_range = 2
 	move_to_delay = 5
 	friendly = "harmlessly rolls into"
@@ -174,7 +174,7 @@
 		ore_eaten++
 		if(!(O.type in ore_types_eaten))
 			ore_types_eaten += O.type
-		del(O)
+		qdel(O)
 	if(ore_eaten > 5)//Limit the scope of the reward you can get, or else things might get silly
 		ore_eaten = 5
 	visible_message("<span class='notice'>The ore was swallowed whole!</span>")
@@ -185,7 +185,7 @@
 		spawn(chase_time)
 		if(alerted)
 			visible_message("<span class='danger'>The [src.name] buries into the ground, vanishing from sight!</span>")
-			del(src)
+			qdel(src)
 
 /mob/living/simple_animal/hostile/asteroid/goldgrub/proc/Reward()
 	if(!ore_eaten || ore_types_eaten.len == 0)
@@ -228,8 +228,8 @@
 	aggro_vision_range = 9
 	idle_vision_range = 5
 	speed = 3
-	maxHealth = 45
-	health = 45
+	maxHealth = 75
+	health = 75
 	harm_intent_damage = 5
 	melee_damage_lower = 0
 	melee_damage_upper = 0
@@ -260,8 +260,8 @@
 /obj/item/asteroid/hivelord_core
 	name = "hivelord remains"
 	desc = "All that remains of a hivelord, it seems to be what allows it to break pieces of itself off without being hurt... its healing properties will soon become inert if not used quickly. Try not to think about what you're eating."
-	icon = 'icons/obj/food.dmi'
-	icon_state = "boiledrorocore"
+	icon = 'icons/obj/surgery.dmi'
+	icon_state = "roro core"
 	var/inert = 0
 
 /obj/item/asteroid/hivelord_core/New()
@@ -285,7 +285,7 @@
 				user << "<span class='notice'>You chomp into [src], barely managing to hold it down, but feel amazingly refreshed in mere moments.</span>"
 			playsound(src.loc,'sound/items/eatfood.ogg', rand(10,50), 1)
 			H.revive()
-			del(src)
+			qdel(src)
 	..()
 
 /mob/living/simple_animal/hostile/asteroid/hivelordbrood
@@ -298,14 +298,14 @@
 	icon_dead = "Hivelordbrood"
 	icon_gib = "syndicate_gib"
 	mouse_opacity = 2
-	move_to_delay = 0
+	move_to_delay = 1
 	friendly = "buzzes near"
 	vision_range = 10
 	speed = 3
 	maxHealth = 1
 	health = 1
 	harm_intent_damage = 5
-	melee_damage_lower = 1
+	melee_damage_lower = 2
 	melee_damage_upper = 2
 	attacktext = "slashes"
 	throw_message = "falls right through the strange body of the"
@@ -315,10 +315,10 @@
 /mob/living/simple_animal/hostile/asteroid/hivelordbrood/New()
 	..()
 	spawn(100)
-		del(src)
+		qdel(src)
 
 /mob/living/simple_animal/hostile/asteroid/hivelordbrood/Die()
-	del(src)
+	qdel(src)
 
 /mob/living/simple_animal/hostile/asteroid/goliath
 	name = "goliath"
@@ -336,15 +336,15 @@
 	ranged_cooldown_cap = 8
 	friendly = "wails at"
 	vision_range = 4
-	speed = 5
-	maxHealth = 225
-	health = 225
+	speed = 3
+	maxHealth = 300
+	health = 300
 	harm_intent_damage = 0
-	melee_damage_lower = 14
-	melee_damage_upper = 24
+	melee_damage_lower = 25
+	melee_damage_upper = 25
 	attacktext = "pulverizes"
 	throw_message = "does nothing to the rocky hide of the"
-	aggro_vision_range = 6
+	aggro_vision_range = 9
 	idle_vision_range = 5
 
 /mob/living/simple_animal/hostile/asteroid/goliath/OpenFire()
@@ -368,7 +368,7 @@
 	if(istype(turftype, /turf/simulated/mineral))
 		var/turf/simulated/mineral/M = turftype
 		M.gets_drilled()
-	spawn(30)
+	spawn(20)
 		Trip()
 
 /obj/effect/goliath_tentacle/original
@@ -387,7 +387,13 @@
 	for(var/mob/living/M in src.loc)
 		M.Weaken(5)
 		visible_message("<span class='warning'>The [src.name] knocks [M.name] down!</span>")
-	del(src)
+	qdel(src)
+
+/obj/effect/goliath_tentacle/Crossed(AM as mob|obj)
+	if(isliving(AM))
+		Trip()
+		return
+	..()
 
 /mob/living/simple_animal/hostile/asteroid/goliath/Die()
 	var/obj/item/asteroid/goliath_hide/G = new /obj/item/asteroid/goliath_hide(src.loc)
@@ -408,9 +414,9 @@
 			var/obj/item/clothing/C = target
 			var/current_armor = C.armor
 			if(current_armor.["melee"] < 90)
-				current_armor.["melee"] = min(current_armor.["melee"] + 5, 90)
+				current_armor.["melee"] = min(current_armor.["melee"] + 10, 90)
 				user << "<span class='info'>You strengthen [target], improving its resistance against melee attacks.</span>"
-				del(src)
+				qdel(src)
 			else
 				user << "<span class='info'>You can't improve [C] any further.</span>"
 	return

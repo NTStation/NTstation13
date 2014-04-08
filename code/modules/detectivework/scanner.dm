@@ -127,10 +127,10 @@
 				for(var/B in blood)
 					add_log("Type: <font color='red'>[blood[B]]</font> DNA: <font color='red'>[B]</font>")
 
-			//Fibers
+			//Fibers aka trace evidence
 			if(fibers && fibers.len)
 				sleep(30)
-				add_log("<span class='info'><B>Fibers:</B></span>")
+				add_log("<span class='info'><B>Trace Residue:</B></span>")
 				for(var/fiber in fibers)
 					add_log("[fiber]")
 				found_something = 1
@@ -151,7 +151,7 @@
 			if(!found_something)
 				add_log("<I># No forensic traces found #</I>", 0) // Don't display this to the holder user
 				if(holder)
-					holder << "<span class='notice'>Unable to locate any fingerprints, materials, fibers, or blood on \the [target_name]!</span>"
+					holder << "<span class='notice'>Unable to locate any fingerprints, materials, fibers, residue, or blood on \the [target_name]!</span>"
 			else
 				if(holder)
 					holder << "<span class='notice'>You finish scanning \the [target_name].</span>"

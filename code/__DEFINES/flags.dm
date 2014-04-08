@@ -5,16 +5,16 @@
 #define STOPSPRESSUREDMAGE 1	//This flag is used on the flags variable for SUIT and HEAD items which stop pressure damage. Note that the flag 1 was previous used as ONBACK, so it is possible for some code to use (flags & 1) when checking if something can be put on your back. Replace this code with (inv_flags & SLOT_BACK) if you see it anywhere
 //To successfully stop you taking all pressure damage you must have both a suit and head item with this flag.
 
-#define NODROP 2			// This flag makes it so that an item literally cannot be removed at all, or at least that's how it should be. Only deleted.
-#define NOBLUDGEON	4		// when an item has this it produces no "X has been hit by Y with Z" message in the default attackby()
-#define MASKINTERNALS	8	// mask allows internals
-//#define SUITSPACE		8	// suit protects against space
-#define USEDELAY 	16		// For adding extra delay to heavy items, not currently used
-#define NOSHIELD	32		// weapon not affected by shield
-#define CONDUCT		64		// conducts electricity (metal etc.)
-#define ABSTRACT    128		// for all things that are technically items but used for various different stuff, made it 128 because it could conflict with other flags other way
-#define FPRINT		256		// takes a fingerprint
-#define ON_BORDER	512		// item has priority to check when entering or leaving
+#define NODROP			2	//This flag makes it so that an item literally cannot be removed at all, or at least that's how it should be. Only deleted.
+#define NOBLUDGEON		4	//when an item has this it produces no "X has been hit by Y with Z" message in the default attackby()
+#define MASKINTERNALS	8	//mask allows internals
+//#define UNUSED		8	//unused!
+//#define UNUSED 		16	//unused!
+#define NOSHIELD		32	//weapon not affected by shield
+#define CONDUCT			64	//conducts electricity (metal etc.)
+#define ABSTRACT		128	//for all things that are technically items but used for various different stuff, made it 128 because it could conflict with other flags other way
+//#define UNUSED		256	//unused!
+#define ON_BORDER		512	//item has priority to check when entering or leaving
 
 
 #define GLASSESCOVERSEYES	1024

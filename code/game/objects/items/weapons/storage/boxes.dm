@@ -47,7 +47,7 @@
 	user.put_in_hands(I)
 	user.update_inv_l_hand()
 	user.update_inv_r_hand()
-	del(src)
+	qdel(src)
 
 
 /obj/item/weapon/storage/box/survival
@@ -70,7 +70,11 @@
 
 /obj/item/weapon/storage/box/gloves
 	name = "box of latex gloves"
-	desc = "Contains white gloves."
+	desc = "Contains sterile latex gloves. There's a sticker on the side: \
+	\"NANOTRASEN SECURITY WOULD LIKE TO REMIND ALL STAFF THAT LATEX GLOVES \
+	WILL NOT PREVENT TRANSFER OF FINGERPRINTS. PLEASE LEAVE GLOVES FOR \
+	MEDICAL STAFF.\""
+
 	icon_state = "latex"
 	New()
 		..()
@@ -329,7 +333,7 @@
 	icon = 'icons/obj/food.dmi'
 	icon_state = "monkeycubebox"
 	storage_slots = 7
-	can_hold = list("/obj/item/weapon/reagent_containers/food/snacks/monkeycube")
+	can_hold = list(/obj/item/weapon/reagent_containers/food/snacks/monkeycube)
 	New()
 		..()
 		for(var/i = 1; i <= 5; i++)
@@ -407,7 +411,7 @@
 
 /obj/item/weapon/storage/box/mousetraps
 	name = "box of Pest-B-Gon mousetraps"
-	desc = "<B><FONT=red>WARNING:</FONT></B> <I>Keep out of reach of children</I>."
+	desc = "<span class='alert'>Keep out of reach of children.</span>"
 	icon_state = "mousetraps"
 
 	New()
@@ -483,7 +487,7 @@
 	item_state = "syringe_kit"
 	foldable = /obj/item/stack/sheet/cardboard //BubbleWrap
 	storage_slots=21
-	can_hold = list("/obj/item/weapon/light/tube", "/obj/item/weapon/light/bulb")
+	can_hold = list(/obj/item/weapon/light/tube, /obj/item/weapon/light/bulb)
 	max_combined_w_class = 21
 	use_to_pickup = 1 // for picking up broken bulbs, not that most people will try
 

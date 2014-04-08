@@ -5,6 +5,7 @@
 	damage_type = BURN
 	nodamage = 1
 	flag = "energy"
+	trace_residue = "Minor electrical discolouration."
 
 
 	on_hit(var/atom/target, var/blocked = 0)
@@ -17,6 +18,7 @@
 	icon_state= "bolter"
 	damage = 50
 	flag = "bullet"
+	trace_residue = "Airburst explosive patterning."
 
 
 	on_hit(var/atom/target, var/blocked = 0)
@@ -30,6 +32,7 @@
 	damage_type = BURN
 	nodamage = 1
 	flag = "energy"
+	trace_residue = null
 	var/temperature = 100
 
 
@@ -42,6 +45,7 @@
 /obj/item/projectile/temp/hot
 	name = "heat beam"
 	temperature = 400
+	trace_residue = "Unfocused charring patterns."
 
 /obj/item/projectile/meteor
 	name = "meteor"
@@ -51,6 +55,7 @@
 	damage_type = BRUTE
 	nodamage = 1
 	flag = "bullet"
+	trace_residue = null
 
 	Bump(atom/A as mob|obj|turf|area)
 		if(A == firer)
@@ -80,6 +85,7 @@
 	damage_type = TOX
 	nodamage = 1
 	flag = "energy"
+	trace_residue = null
 
 	on_hit(var/atom/target, var/blocked = 0)
 		if(iscarbon(target))
@@ -116,6 +122,7 @@
 	damage_type = TOX
 	nodamage = 1
 	flag = "energy"
+	trace_residue = null
 
 	on_hit(mob/living/carbon/target, var/blocked = 0)
 		if(iscarbon(target))
@@ -129,6 +136,7 @@
 
 /obj/item/projectile/beam/mindflayer
 	name = "flayer ray"
+	trace_residue = null
 
 	on_hit(var/atom/target, var/blocked = 0)
 		if(ishuman(target))
@@ -142,6 +150,7 @@
 	damage = 15
 	damage_type = BRUTE
 	flag = "bomb"
+	trace_residue = null
 	var/range = 2
 
 obj/item/projectile/kinetic/New()
@@ -153,7 +162,6 @@ obj/item/projectile/kinetic/New()
 	if(pressure < 50)
 		name = "full strength kinetic force"
 		damage = 30
-		range = 3
 	..()
 
 /obj/item/projectile/kinetic/Range()
@@ -178,4 +186,4 @@ obj/item/projectile/kinetic/New()
 
 /obj/item/effect/kinetic_blast/New()
 	spawn(4)
-		del(src)
+		qdel(src)

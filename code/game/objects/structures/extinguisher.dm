@@ -30,6 +30,7 @@
 		return
 	if(has_extinguisher)
 		user.put_in_hands(has_extinguisher)
+		has_extinguisher.add_fingerprint(user)
 		user << "<span class='notice'>You take [has_extinguisher] from [src].</span>"
 		has_extinguisher = null
 		opened = 1

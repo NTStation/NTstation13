@@ -58,10 +58,18 @@ BLIND     // can't see anything
 	body_parts_covered = HANDS
 	slot_flags = SLOT_GLOVES
 	attack_verb = list("challenged")
+	var/transfer_prints = FALSE
 
 // Called just before an attack_hand(), in mob/UnarmedAttack()
-/obj/item/clothing/gloves/proc/Touch(var/atom/A, var/proximity)
+/obj/item/clothing/gloves/proc/Touch(atom/A, proximity)
 	return 0 // return 1 to cancel attack_hand()
+
+/obj/item/clothing/gloves/clean_blood()
+	. = ..()
+	if(.)
+		transfer_blood = 0
+		bloody_hands_mob = null
+
 
 //Head
 /obj/item/clothing/head
@@ -76,6 +84,7 @@ BLIND     // can't see anything
 	icon = 'icons/obj/clothing/masks.dmi'
 	body_parts_covered = HEAD
 	slot_flags = SLOT_MASK
+	var/alloweat = 0
 
 
 //Override this to modify speech like luchador masks.
@@ -135,7 +144,7 @@ BLIND     // can't see anything
 	flags = STOPSPRESSUREDMAGE | THICKMATERIAL
 	body_parts_covered = CHEST|GROIN|LEGS|FEET|ARMS|HANDS
 	allowed = list(/obj/item/device/flashlight,/obj/item/weapon/tank/emergency_oxygen)
-	slowdown = 3
+	slowdown = 2
 	armor = list(melee = 0, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 100, rad = 50)
 	flags_inv = HIDEGLOVES|HIDESHOES|HIDEJUMPSUIT
 	cold_protection = CHEST | GROIN | LEGS | FEET | ARMS | HANDS
@@ -155,6 +164,10 @@ BLIND     // can't see anything
 	var/fitted = 1// For use in alternate clothing styles for women, if clothes vary from a jumpsuit in shape, set this to 0
 	var/has_sensor = 1//For the crew computer 2 = unable to change mode
 	var/sensor_mode = 0
+	var/can_roll = 1
+	var/rolled_down = 1
+	var/suit_color = null
+
 		/*
 		1 = Report living/dead
 		2 = Report detailed damages
@@ -242,6 +255,28 @@ atom/proc/generate_uniform(index,t_color)
 			usr << "Your suit will now report your vital lifesigns as well as your coordinate position."
 	..()
 
+/obj/item/clothing/under/verb/rolldown()
+	set name = "Roll Down Jumpsuit"
+	set category = "Object"
+	set src in usr
+	if(usr.stat)
+		return
+	if(!can_roll)
+		usr << "You cannot roll down this suit."
+		return
+	if(src.rolled_down == 2)
+		src.item_color = initial(item_color)
+		src.item_color = src.suit_color //colored jumpsuits are shit and break without this
+		usr << "You put your arms through the sleeves and zip up the jumpsuit."
+		src.rolled_down = 1
+	else
+		src.item_color += "_d"
+		usr << "You unzip and roll down the jumpsuit."
+		src.rolled_down = 2
+	usr.update_inv_w_uniform()
+	..()
+
+
 /obj/item/clothing/under/verb/removetie()
 	set name = "Remove Accessory"
 	set category = "Object"
@@ -262,8 +297,10 @@ atom/proc/generate_uniform(index,t_color)
 			var/mob/living/carbon/human/H = loc
 			H.update_inv_w_uniform(0)
 
-/obj/item/clothing/under/rank/New()
+/obj/item/clothing/under/New()
 	sensor_mode = pick(0,1,2,3)
+	rolled_down = 1
+	suit_color = item_color
 	..()
 
 /obj/item/clothing/proc/weldingvisortoggle()			//Malk: proc to toggle welding visors on helmets, masks, goggles, etc.
@@ -273,7 +310,7 @@ atom/proc/generate_uniform(index,t_color)
 			flags |= (visor_flags)
 			flags_inv |= (visor_flags_inv)
 			icon_state = initial(icon_state)
-			usr << "You flip the [src] down to protect your eyes."
+			usr << "You pull the [src] down."
 			flash_protect = initial(flash_protect)
 			tint = initial(tint)
 		else
@@ -281,7 +318,7 @@ atom/proc/generate_uniform(index,t_color)
 			flags &= ~(visor_flags)
 			flags_inv &= ~(visor_flags_inv)
 			icon_state = "[initial(icon_state)]up"
-			usr << "You push the [src] up out of your face."
+			usr << "You push the [src] up."
 			flash_protect = 0
 			tint = 0
 
