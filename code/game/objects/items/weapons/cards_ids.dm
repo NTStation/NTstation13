@@ -215,3 +215,30 @@
 /obj/item/weapon/card/id/prisoner/seven
 	name = "Prisoner #13-007"
 	registered_name = "Prisoner #13-007"
+
+/obj/item/weapon/card/id/assistant
+	name = "Assistant employment card"
+	desc = "Imprinted with Assitant Lifelong Enslavement Contract"
+	var/registered  = 0
+
+/obj/item/weapon/card/id/assistant/attackby(obj/item/weapon/W as obj, mob/user as mob)
+	if(istype(W, /obj/item/weapon/card/id) && !registered)
+		var/obj/item/weapon/card/id/I = W
+		src.desc = "Assistant to [I.registered_name]"
+
+		var/datum/job/job = null
+		for(var/datum/job/J in job_master.occupations)
+			if(J.title == I.assignment)
+				job = J
+				break
+
+		src.access |= job.assistant_access
+		src.registered = 1
+		user << "You register the assistant"
+
+/obj/item/weapon/card/id/assistant/attack_self(mob/user as mob) // copypasta but not worth proc imo
+	for(var/mob/O in viewers(user, null))
+		O.show_message(text("[] shows you: \icon[] []: assignment: []", user, src, src.name, registered? src.desc : src.assignment), 1)
+	src.add_fingerprint(user)
+	return
+

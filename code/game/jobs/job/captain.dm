@@ -11,6 +11,7 @@
 	req_admin_notify = 1
 	access = list() 			//See get_access()
 	minimal_access = list() 	//See get_access()
+	assistant_access = list(access_heads)
 	minimal_player_age = 14
 
 

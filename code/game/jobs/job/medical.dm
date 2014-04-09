@@ -15,6 +15,7 @@
 	minimal_access = list(access_medical, access_morgue, access_genetics, access_heads,
 			access_chemistry, access_virology, access_cmo, access_surgery, access_RC_announce,
 			access_keycard_auth, access_sec_doors)
+	assistant_access = list(access_medical)
 	minimal_player_age = 7
 
 	equip(var/mob/living/carbon/human/H)
@@ -47,7 +48,7 @@
 	selection_color = "#ffeef0"
 	access = list(access_medical, access_morgue, access_surgery, access_chemistry, access_virology, access_genetics)
 	minimal_access = list(access_medical, access_morgue, access_surgery)
-
+	assistant_access = list(access_medical)
 
 	equip(var/mob/living/carbon/human/H)
 		if(!H)	return 0
@@ -80,7 +81,7 @@
 	selection_color = "#ffeef0"
 	access = list(access_medical, access_morgue, access_surgery, access_chemistry, access_virology, access_genetics, access_mineral_storeroom)
 	minimal_access = list(access_medical, access_chemistry, access_mineral_storeroom)
-
+	assistant_access = list(access_medical)
 
 	equip(var/mob/living/carbon/human/H)
 		if(!H)	return 0
@@ -104,7 +105,7 @@
 	selection_color = "#ffeef0"
 	access = list(access_medical, access_morgue, access_surgery, access_chemistry, access_virology, access_genetics, access_research)
 	minimal_access = list(access_medical, access_morgue, access_genetics, access_research)
-
+	assistant_access = list(access_medical)
 
 	equip(var/mob/living/carbon/human/H)
 		if(!H)	return 0
@@ -129,7 +130,7 @@
 	selection_color = "#ffeef0"
 	access = list(access_medical, access_morgue, access_surgery, access_chemistry, access_virology, access_genetics, access_mineral_storeroom)
 	minimal_access = list(access_medical, access_virology, access_mineral_storeroom)
-
+	assistant_access = list(access_medical)
 
 	equip(var/mob/living/carbon/human/H)
 		if(!H)	return 0
