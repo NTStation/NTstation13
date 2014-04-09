@@ -210,20 +210,27 @@
 	var/registered = FALSE
 
 /obj/item/weapon/card/id/assistant/attackby(obj/item/I, mob/user)
-	if(istype(I, /obj/item/weapon/card/id) && !registered)
-		var/obj/item/weapon/card/id/idcard = I
-		desc = "Assistant to [idcard.registered_name]."
+	if(!registered)
+		var/obj/item/weapon/card/id/idcard = I.GetID()
+		if(idcard)
+			desc = "Assistant to [idcard.registered_name]."
 
-		var/datum/job/job = null
-		for(var/datum/job/J in job_master.occupations)
-			if(J.title == idcard.assignment)
-				job = J
-				break
+			var/datum/job/job = null
+			for(var/datum/job/J in job_master.occupations)
+				if(J.title == idcard.assignment)
+					job = J
+					break
 
-		access |= job.assistant_access
-		registered = TRUE
-		user << "<span class='notice'>You register the assistant as a part of your department.</span>"
+			access |= job.assistant_access
+			registered = TRUE
+			user << "<span class='notice'>You register the assistant as a part of your department.</span>"
 
 /obj/item/weapon/card/id/assistant/attack_self(mob/user)	//copypasta but not worth proc imo
 	user.visible_message("[user] shows \his [src]: \icon[src] [name]: assignment: [registered ? desc : assignment]")
+
+/obj/item/weapon/card/id/assistant/proc/ResetRegistration()
+	src.registered = FALSE
+	src.desc = "Imprinted with the Assistant Lifelong Enslavement Contract."
+	var/datum/job/assdatum = job_master.GetJob("Assistant")
+	src.access = assdatum.get_access()
 
