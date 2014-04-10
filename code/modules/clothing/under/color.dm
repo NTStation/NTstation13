@@ -143,3 +143,9 @@
 	desc = "A dark red jumpsuit."
 	icon_state = "darkred"
 	item_color = "darkred"
+
+/obj/item/clothing/under/lightpink
+	name = "lightpink jumpsuit"
+	desc = "A light pink jumpsuit"
+	icon_state = "lightpink"
+	item_color = "lightpink"
