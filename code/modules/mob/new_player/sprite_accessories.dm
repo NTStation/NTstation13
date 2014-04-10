@@ -289,6 +289,25 @@
 		name = "Slightly long"
 		icon_state = "hair_protagonist"
 
+	side_tail2
+		name = "Side Tail2"
+		icon_state = "hair_sidetail2"
+
+	braid2
+		name = "Braid2"
+		icon_state = "hair_braid2"
+
+	lowbraid
+		name = "Low Braid"
+		icon_state = "hair_hbraid"
+
+	gentle
+		name = "Gentle"
+		icon_state = "hair_gentle"
+
+	side_tail3
+		name = "Side Tail3"
+		icon_state = "hair_stail"
 /////////////////////////////
 // Facial Hair Definitions //
 /////////////////////////////
