@@ -18,3 +18,6 @@ install:
 
 script:
   - DreamMaker NTstation13.dme
+
+notifications:
+  webhooks: https://beepsky.herokuapp.com/hubot/travis?room=nanobus
