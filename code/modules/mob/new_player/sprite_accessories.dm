@@ -707,7 +707,7 @@
 
 	assitant_tank
 		name = "Assitant Tank Top"
-		icon_state = "assitanttank"
+		icon_state = "assistanttank"
 		gender = NEUTER
 
 	dorf_tank
