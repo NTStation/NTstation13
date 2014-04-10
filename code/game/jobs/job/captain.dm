@@ -68,7 +68,7 @@
 			            access_crematorium, access_kitchen, access_cargo, access_cargo_bot, access_mailsorting, access_qm, access_hydroponics, access_lawyer,
 			            access_theatre, access_chapel_office, access_library, access_research, access_mining, access_heads_vault, access_mining_station,
 			            access_hop, access_RC_announce, access_keycard_auth, access_gateway)
-
+	assistant_access = list(access_heads)
 
 	equip(var/mob/living/carbon/human/H)
 		if(!H)	return 0

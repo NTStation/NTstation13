@@ -220,8 +220,8 @@
 				if(J.title == idcard.assignment)
 					job = J
 					break
-
-			access |= job.assistant_access
+			if(job &&!istype(idcard,/obj/item/weapon/card/id/syndicate))
+				access |= job.assistant_access
 			registered = TRUE
 			user << "<span class='notice'>You register the assistant as a part of your department.</span>"
 
