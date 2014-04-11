@@ -243,7 +243,6 @@
 	longbangs
 		name = "Long Bangs"
 		icon_state = "hair_lbangs"
-		gender = FEMALE
 
 	balding
 		name = "Balding Hair"
@@ -312,22 +311,18 @@
 	oneshoulder
 		name = "One Shoulder"
 		icon_state = "hair_oneshoulder"
-		gender = FEMALE
 
 	tressshoulder
 		name = "Tress Shoulder"
 		icon_state = "hair_tressshoulder"
-		gender = FEMALE
 
 	messy
 		name = "Messy"
 		icon_state = "hair_messy"
-		gender = FEMALE
 
 	shorthair
 		name = "Short Hair"
 		icon_state = "hair_shorthair"
-		gender = FEMALE
 /////////////////////////////
 // Facial Hair Definitions //
 /////////////////////////////
