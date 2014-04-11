@@ -293,8 +293,8 @@
 		name = "Side Tail2"
 		icon_state = "hair_sidetail2"
 
-	braid2
-		name = "Braid2"
+	not_floorlength_braid
+		name = "Not Floorlength Braid"
 		icon_state = "hair_braid2"
 
 	lowbraid
