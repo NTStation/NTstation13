@@ -9,6 +9,7 @@
 	name = "storage"
 	icon = 'icons/obj/storage.dmi'
 	w_class = 3.0
+	var/interaction_sound = "rustle"
 	var/list/can_hold = new/list() //List of objects which this item can store (if set, it can't store anything else)
 	var/list/cant_hold = new/list() //List of objects which this item can't store (in effect only if can_hold isn't set)
 	var/max_w_class = 2 //Max size of objects that this object can store (in effect only if can_hold isn't set)
@@ -42,7 +43,7 @@
 
 		if(!(loc == usr) || (loc && loc.loc == usr))
 			return
-		playsound(loc, "rustle", 50, 1, -5)
+		playsound(loc, interaction_sound, 50, 1, -5)
 		if(!( M.restrained() ) && !( M.stat ))
 			switch(over_object.name)
 				if("r_hand")
@@ -335,7 +336,7 @@
 	return
 
 /obj/item/weapon/storage/attack_hand(mob/user)
-	playsound(loc, "rustle", 50, 1, -5)
+	playsound(loc, interaction_sound, 50, 1, -5)
 
 	if(ishuman(user))
 		var/mob/living/carbon/human/H = user
