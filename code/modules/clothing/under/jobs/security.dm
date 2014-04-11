@@ -56,6 +56,7 @@
 	icon_state = "jensen"
 	item_state = "jensen"
 	item_color = "jensen"
+	can_roll = 0
 
 /obj/item/clothing/suit/armor/hos/jensen
 	name = "armored trenchoat"
@@ -89,3 +90,4 @@
 	icon_state = "wardenblueclothes"
 	item_state = "wardenblueclothes"
 	item_color = "wardenblueclothes"
+	can_roll = 0

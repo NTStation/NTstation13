@@ -170,6 +170,7 @@
 	icon_state = "black_suit"
 	item_state = "bl_suit"
 	item_color = "black_suit"
+	can_roll = 0
 
 /obj/item/clothing/under/suit_jacket/really_black
 	name = "executive suit"
@@ -177,6 +178,7 @@
 	icon_state = "really_black_suit"
 	item_state = "bl_suit"
 	item_color = "black_suit"
+	can_roll = 0
 
 /obj/item/clothing/under/suit_jacket/female
 	name = "executive suit"
