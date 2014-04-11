@@ -745,6 +745,16 @@
 		gender = NEUTER
 
 	treehugger_tank
-		name = "Treehugger Tank"
+		name = "Treehugger Tank Top"
 		icon_state = "treehuggertank"
+		gender = NEUTER
+
+	rus_shirt
+		name = "Telnyashka Shirt"
+		icon_state = "rus_shirt"
+		gender = NEUTER
+
+	rus_tank
+		name = "Telnyashka Tank Top"
+		icon_state = "rus_ttop"
 		gender = NEUTER
