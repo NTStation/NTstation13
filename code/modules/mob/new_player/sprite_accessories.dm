@@ -292,8 +292,8 @@
 		name = "Side Tail2"
 		icon_state = "hair_sidetail2"
 
-	braid2
-		name = "Braid2"
+	not_floorlength_braid
+		name = "Not Floorlength Braid"
 		icon_state = "hair_braid2"
 
 	lowbraid
@@ -320,9 +320,9 @@
 		name = "Messy"
 		icon_state = "hair_messy"
 
-	shorthair
-		name = "Short Hair"
-		icon_state = "hair_shorthair"
+	shorthair2
+		name = "Short Hair2"
+		icon_state = "hair_shorthair2"
 /////////////////////////////
 // Facial Hair Definitions //
 /////////////////////////////
