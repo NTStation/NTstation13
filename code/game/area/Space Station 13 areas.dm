@@ -367,6 +367,7 @@ proc/process_ghost_teleport_locs()
 	name = "\improper Clown Planet"
 	icon_state = "honk"
 	requires_power = 0
+	has_gravity = 1
 
 /area/telesciareas
 	name = "\improper Cosmic Anomaly"

@@ -1,0 +1,97 @@
+"aa" = (/turf/unsimulated/wall,/area/planet/clown)
+"ab" = (/turf/simulated/mineral/random/clown,/area/planet/clown)
+"ac" = (/turf/simulated/floor/grass,/area/planet/clown)
+"ad" = (/obj/structure/flora/ausbushes/brflowers,/turf/simulated/floor/grass,/area/planet/clown)
+"ae" = (/obj/structure/flora/ausbushes/ppflowers,/mob/living/simple_animal/hostile/retaliate/clown,/turf/simulated/floor/grass,/area/planet/clown)
+"af" = (/obj/structure/flora/ausbushes/ppflowers,/turf/simulated/floor/grass,/area/planet/clown)
+"ag" = (/obj/structure/flora/ausbushes/brflowers,/obj/structure/flora/ausbushes/ppflowers,/turf/simulated/floor/grass,/area/planet/clown)
+"ah" = (/obj/structure/flora/ausbushes/ppflowers,/obj/structure/flora/ausbushes/lavendergrass,/turf/simulated/floor/grass,/area/planet/clown)
+"ai" = (/obj/structure/flora/ausbushes/lavendergrass,/mob/living/simple_animal/hostile/retaliate/clown,/turf/simulated/floor/grass,/area/planet/clown)
+"aj" = (/obj/structure/flora/ausbushes/lavendergrass,/turf/simulated/floor/grass,/area/planet/clown)
+"ak" = (/obj/structure/flora/ausbushes/brflowers,/obj/structure/flora/ausbushes/ppflowers,/mob/living/simple_animal/hostile/retaliate/clown,/turf/simulated/floor/grass,/area/planet/clown)
+"al" = (/obj/structure/flora/ausbushes/ppflowers,/obj/structure/flora/ausbushes/brflowers,/turf/simulated/floor/grass,/area/planet/clown)
+"am" = (/obj/structure/flora/ausbushes/ppflowers,/obj/structure/flora/ausbushes/brflowers,/obj/structure/flora/ausbushes/lavendergrass,/turf/simulated/floor/grass,/area/planet/clown)
+"an" = (/obj/structure/flora/ausbushes/brflowers,/obj/structure/flora/ausbushes/lavendergrass,/turf/simulated/floor/grass,/area/planet/clown)
+"ao" = (/obj/structure/flora/ausbushes/lavendergrass,/obj/structure/flora/ausbushes/ppflowers,/turf/simulated/floor/grass,/area/planet/clown)
+"ap" = (/obj/machinery/gateway{dir = 9},/obj/structure/flora/ausbushes/ppflowers,/turf/simulated/floor/grass,/area/planet/clown)
+"aq" = (/obj/machinery/gateway{dir = 1},/turf/simulated/floor/grass,/area/planet/clown)
+"ar" = (/obj/machinery/gateway{dir = 5},/obj/structure/flora/ausbushes/ppflowers,/turf/simulated/floor/grass,/area/planet/clown)
+"as" = (/obj/structure/flora/ausbushes/ppflowers,/obj/structure/flora/ausbushes/brflowers,/mob/living/simple_animal/hostile/retaliate/clown,/turf/simulated/floor/grass,/area/planet/clown)
+"at" = (/obj/structure/flora/ausbushes/brflowers,/mob/living/simple_animal/hostile/retaliate/clown,/turf/simulated/floor/grass,/area/planet/clown)
+"au" = (/obj/machinery/gateway{dir = 8},/turf/simulated/floor/grass,/area/planet/clown)
+"av" = (/obj/machinery/gateway/centeraway,/turf/simulated/floor/grass,/area/planet/clown)
+"aw" = (/obj/machinery/gateway{dir = 4},/turf/simulated/floor/grass,/area/planet/clown)
+"ax" = (/obj/structure/table/woodentable,/obj/item/clothing/mask/gas/clown_hat,/obj/item/clothing/gloves/rainbow/clown,/obj/item/clothing/shoes/clown_shoes{desc = "These shoes appear var-edited!."; name = "uhangi's shoes"; slowdown = -1},/obj/item/clothing/under/rank/clown,/obj/item/device/pda/clown,/obj/item/weapon/storage/backpack/clown,/turf/simulated/floor/grass,/area/planet/clown)
+"ay" = (/obj/structure/table/woodentable,/obj/item/seeds/cashseed,/obj/item/seeds/cashseed,/turf/simulated/floor/grass,/area/planet/clown)
+"az" = (/obj/machinery/gateway{dir = 10},/obj/structure/flora/ausbushes/ppflowers,/turf/simulated/floor/grass,/area/planet/clown)
+"aA" = (/obj/machinery/gateway,/turf/simulated/floor/grass,/area/planet/clown)
+"aB" = (/obj/machinery/gateway{dir = 6},/obj/structure/flora/ausbushes/ppflowers,/turf/simulated/floor/grass,/area/planet/clown)
+"aC" = (/obj/structure/flora/ausbushes/ppflowers,/obj/structure/flora/ausbushes/brflowers,/obj/structure/flora/ausbushes/lavendergrass,/mob/living/simple_animal/hostile/retaliate/clown,/turf/simulated/floor/grass,/area/planet/clown)
+"aD" = (/obj/structure/flora/ausbushes/brflowers,/obj/structure/flora/ausbushes/lavendergrass,/mob/living/simple_animal/hostile/retaliate/clown,/turf/simulated/floor/grass,/area/planet/clown)
+"aE" = (/obj/structure/flora/ausbushes/lavendergrass,/obj/structure/flora/ausbushes/ppflowers,/mob/living/simple_animal/hostile/retaliate/clown,/turf/simulated/floor/grass,/area/planet/clown)
+"aF" = (/obj/structure/flora/ausbushes/ppflowers,/obj/structure/flora/ausbushes/brflowers,/obj/structure/flora/ausbushes/lavendergrass,/obj/structure/signpost{desc = "The sign says: Please don't mine the Bananium!"; name = "Welcome to Clown Planet"},/turf/simulated/floor/grass,/area/planet/clown)
+"aG" = (/obj/structure/flora/ausbushes/brflowers,/obj/structure/flora/ausbushes/ppflowers,/obj/structure/flora/ausbushes/brflowers,/obj/structure/flora/ausbushes/lavendergrass,/turf/simulated/floor/grass,/area/planet/clown)
+"aH" = (/obj/structure/flora/ausbushes/brflowers,/obj/structure/flora/ausbushes/brflowers,/obj/structure/flora/ausbushes/lavendergrass,/turf/simulated/floor/grass,/area/planet/clown)
+"aI" = (/obj/structure/flora/ausbushes/lavendergrass,/obj/structure/flora/ausbushes/ppflowers,/obj/structure/flora/ausbushes/ppflowers,/turf/simulated/floor/grass,/area/planet/clown)
+"aJ" = (/mob/living/simple_animal/hostile/retaliate/clown,/turf/simulated/floor/grass,/area/planet/clown)
+"aK" = (/obj/machinery/hydroponics/soil,/turf/simulated/floor/grass,/area/planet/clown)
+"aL" = (/obj/structure/flora/ausbushes/lavendergrass,/obj/structure/flora/ausbushes/ppflowers,/obj/structure/flora/ausbushes/brflowers,/turf/simulated/floor/grass,/area/planet/clown)
+"aM" = (/obj/structure/flora/ausbushes/lavendergrass,/obj/structure/flora/ausbushes/ppflowers,/obj/structure/flora/ausbushes/brflowers,/mob/living/simple_animal/hostile/retaliate/clown,/turf/simulated/floor/grass,/area/planet/clown)
+"aN" = (/obj/structure/flora/ausbushes/palebush,/turf/simulated/floor/grass,/area/planet/clown)
+"aO" = (/obj/structure/flora/ausbushes/sunnybush,/turf/simulated/floor/grass,/area/planet/clown)
+"aP" = (/obj/structure/flora/ausbushes/brflowers,/obj/structure/flora/ausbushes/sunnybush,/turf/simulated/floor/grass,/area/planet/clown)
+"aQ" = (/turf/simulated/wall/mineral/clown,/area/planet/clown)
+"aR" = (/obj/structure/mineral_door/gold,/turf/simulated/floor{dir = 8; icon_state = "barber"},/area/planet/clown)
+"aS" = (/turf/simulated/floor{dir = 8; icon_state = "barber"},/area/planet/clown)
+"aT" = (/obj/structure/stool/bed/chair/comfy/lime,/mob/living/simple_animal/hostile/retaliate/clown,/turf/simulated/floor{dir = 8; icon_state = "barber"},/area/planet/clown)
+"aU" = (/obj/structure/table/reinforced,/obj/item/clothing/gloves/rainbow/clown,/turf/simulated/floor{dir = 8; icon_state = "barber"},/area/planet/clown)
+"aV" = (/obj/structure/stool/bed/chair/office/light{dir = 8},/mob/living/simple_animal/hostile/retaliate/clown,/turf/simulated/floor{dir = 8; icon_state = "barber"},/area/planet/clown)
+"aW" = (/obj/structure/filingcabinet,/turf/simulated/floor{dir = 8; icon_state = "barber"},/area/planet/clown)
+"aX" = (/obj/machinery/door/window/westleft,/turf/simulated/floor{dir = 8; icon_state = "barber"},/area/planet/clown)
+"aY" = (/turf/simulated/floor{dir = 1; icon_state = "warning"},/area/planet/clown)
+"aZ" = (/obj/machinery/gun_turret,/turf/simulated/floor{dir = 1; icon_state = "warning"},/area/planet/clown)
+"ba" = (/turf/simulated/floor,/area/planet/clown)
+"bb" = (/obj/structure/closet/crate,/obj/item/stack/sheet/mineral/clown,/obj/item/stack/sheet/mineral/clown,/obj/item/stack/sheet/mineral/clown,/obj/item/stack/sheet/mineral/clown,/obj/item/stack/sheet/mineral/clown,/obj/item/stack/sheet/mineral/clown,/turf/simulated/floor,/area/planet/clown)
+
+(1,1,1) = {"
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaababababababababababababababababababababababababababababababababababababababaa
+aaababababababababababababababababababababababababababababababababababababababaa
+aaababababababababababababababababababababababababababababababababababababababaa
+aaababababababababababababababababababababababababababababababababababababababaa
+aaababababababababababababababababababababababababababababababababababababababaa
+aaababababababababababababababababababababababababababababababababababababababaa
+aaababababababababababababababababababababababababababababababababababababababaa
+aaababababababababababababababababababababababababababababababababababababababaa
+aaababababababababababababababababababababababababababababababababababababababaa
+aaababababababababababababababababababababababababababababababababababababababaa
+aaababababababababababababababababababababababababababababababababababababababaa
+aaababababababababababababababababababababababababababababababababababababababaa
+aaababababababababababababababababababababababababababababababababababababababaa
+aaabababababacacabababababacacababababababababababababababababababababababababaa
+aaabababababacacacacadadadacacacabababacacababababababababababababababababababaa
+aaabababababacaeafafagagagafafafafahaiajacacabababababababababababababababababaa
+aaababababacacafafafagagagafafafafahajajacacabababacabababababababababababababaa
+aaababababababafafafagakagafalalalamananacacacacacacacababababababababababababaa
+aaabababababajaoaoaoagagapaqarasasasatatacacacacacabacababababababababababababaa
+aaababababacajaoaoaoaoaoauavawaxayayayayajacacacacababababababababababababababaa
+aaabababababadagagakaoaoazaAaBaCaCaCaCaDajacacacacacabababababababababababababaa
+aaababababacadadadadajajaEafamamamamamanajacacacacacabababababababababababababaa
+aaababababacadadadadajajaoafamaFamaGaGaHanadacacacababababababababababababababaa
+aaabababababadadadagaoaoaIafamamamaGaGaHanadacaJaKababababababababababababababaa
+aaabababababababacafaoaoaLadanananaDanananadacacaKababababababababababababababaa
+aaababababababacacafaoaoaMadadadadadadadadadaNaNaNababababababababababababababaa
+aaababababaKacacacaOaOaOaPadadadaPaPaPaPadadabababababababababababababababababaa
+aaababababaKabacaKaQaQaQaQaQaRaQaQaQaQaQacababababababababababababababababababaa
+aaabababababababaKaQaSaSaTaTaSaSaUaVaWaQabababababababababababababababababababaa
+aaababababababababaQaQaSaSaSaSaSaXaSaWaQabababababababababababababababababababaa
+aaabababababababababaQaQaQaRaQaQaQaQaQaQabababababababababababababababababababaa
+aaabababababababababababaQaYaYaYaZaQabababababababababababababababababababababaa
+aaabababababababababababaQbabababbaQabababababababababababababababababababababaa
+aaabababababababababababaQbabababbaQabababababababababababababababababababababaa
+aaabababababababababababaQbabababaaQabababababababababababababababababababababaa
+aaabababababababababababaQbbbbbbbbaQabababababababababababababababababababababaa
+aaabababababababababababaQaQaQaQaQaQabababababababababababababababababababababaa
+aaababababababababababababababababababababababababababababababababababababababaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+"}

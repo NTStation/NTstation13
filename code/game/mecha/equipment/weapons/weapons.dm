@@ -103,8 +103,8 @@
 /obj/item/mecha_parts/mecha_equipment/weapon/honker
 	name = "\improper HoNkER BlAsT 5000"
 	icon_state = "mecha_honker"
-	energy_drain = 200
-	equip_cooldown = 150
+	energy_drain = 600
+	equip_cooldown = 300
 	range = MELEE|RANGED
 	construction_time = 500
 	construction_cost = list("metal"=20000,"bananium"=10000)
@@ -120,21 +120,21 @@
 	set_ready_state(0)
 	playsound(chassis, 'sound/items/AirHorn.ogg', 100, 1)
 	chassis.occupant_message("<font color='red' size='5'>HONK</font>")
-	for(var/mob/living/carbon/M in ohearers(6, chassis))
+	for(var/mob/living/carbon/M in ohearers(3, chassis))
 		if(istype(M, /mob/living/carbon/human))
 			var/mob/living/carbon/human/H = M
 			if(istype(H.ears, /obj/item/clothing/ears/earmuffs))
 				continue
 		M << "<font color='red' size='7'>HONK</font>"
 		M.sleeping = 0
-		M.stuttering += 20
-		M.ear_deaf += 30
-		M.Weaken(3)
-		if(prob(30))
-			M.Stun(10)
+		M.stuttering += 10
+		M.ear_deaf += 15
+		M.Weaken(2)
+		if(prob(15))
+			M.Stun(5)
 			M.Paralyse(4)
 		else
-			M.Jitter(500)
+			M.Jitter(250)
 		/* //else the mousetraps are useless
 		if(istype(M, /mob/living/carbon/human))
 			var/mob/living/carbon/human/H = M
