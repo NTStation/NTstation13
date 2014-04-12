@@ -635,7 +635,7 @@
 		icon_state = "sadtank"
 		gender = NEUTER
 
-	assitant_tank
+	assistant_tank
 		name = "Assistant Tank Top"
 		icon_state = "assistanttank"
 		gender = NEUTER
