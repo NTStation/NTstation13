@@ -226,9 +226,12 @@
 			M.brainmob.mind.transfer_to(O)
 
 			if(O.mind && O.mind.special_role)
-				O.mind.wipe_memory()
 				O.mind.remove_all_antag()
-				O << "<span class='warning'>You forget everything about your past life!</span>"
+				if(!config.borg_remembers)
+					O.mind.store_memory("All Objectives listed here are considered Failed.")
+				else
+					O << "<span class='warning'>You forget everything about your past life!</span>"
+					O.mind.wipe_memory()
 
 			O.job = "Cyborg"
 
