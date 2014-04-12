@@ -127,7 +127,6 @@
 /turf/simulated/mineral/uranium
 	name = "Uranium deposit"
 	mineralName = "Uranium"
-	mineralAmt = 5
 	spreadChance = 5
 	spread = 1
 	hidden = 1
@@ -137,7 +136,6 @@
 	name = "Iron deposit"
 	icon_state = "rock_Iron"
 	mineralName = "Iron"
-	mineralAmt = 5
 	spreadChance = 20
 	spread = 1
 	hidden = 0
@@ -145,7 +143,6 @@
 /turf/simulated/mineral/diamond
 	name = "Diamond deposit"
 	mineralName = "Diamond"
-	mineralAmt = 5
 	spreadChance = 0
 	spread = 1
 	hidden = 1
@@ -154,7 +151,6 @@
 /turf/simulated/mineral/gold
 	name = "Gold deposit"
 	mineralName = "Gold"
-	mineralAmt = 5
 	spreadChance = 5
 	spread = 1
 	hidden = 1
@@ -163,7 +159,6 @@
 /turf/simulated/mineral/silver
 	name = "Silver deposit"
 	mineralName = "Silver"
-	mineralAmt = 5
 	spreadChance = 5
 	spread = 1
 	hidden = 1
@@ -173,7 +168,6 @@
 	name = "Plasma deposit"
 	icon_state = "rock_Plasma"
 	mineralName = "Plasma"
-	mineralAmt = 5
 	spreadChance = 5
 	spread = 1
 	hidden = 1

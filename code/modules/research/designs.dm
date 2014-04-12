@@ -1562,7 +1562,7 @@ datum/design/nuclear_gun
 	id = "nuclear_gun"
 	req_tech = list("combat" = 3, "materials" = 5, "powerstorage" = 3)
 	build_type = PROTOLATHE
-	materials = list("$metal" = 5000, "$glass" = 1000, "$uranium" = 5000)
+	materials = list("$metal" = 5000, "$glass" = 1000, "$uranium" = 3750)
 	reliability = 76
 	build_path = /obj/item/weapon/gun/energy/gun/nuclear
 	locked = 1
@@ -1627,11 +1627,11 @@ datum/design/largecrossbow
 */
 datum/design/temp_gun
 	name = "Temperature Gun"
-	desc = "A gun that shoots temperature bullet energythings to change temperature."//Change it if you want
+	desc = "A gun that fires a concentrated temperature-altering projectile."//Change it if you want
 	id = "temp_gun"
 	req_tech = list("combat" = 3, "materials" = 4, "powerstorage" = 3, "magnets" = 2)
 	build_type = PROTOLATHE
-	materials = list("$metal" = 10000, "$glass" = 1000, "$silver" = 5000)
+	materials = list("$metal" = 10000, "$glass" = 1000, "$silver" = 3750)
 	build_path = /obj/item/weapon/gun/energy/temperature
 	locked = 1
 
