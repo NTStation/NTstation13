@@ -86,11 +86,16 @@ datum/mind
 	proc/store_memory(new_text)
 		memory += "[new_text]<BR>"
 
-
-	proc/wipe_memory() //Wipes memories - RR
+	proc/wipe_memory()
 		memory = null
 
-	proc/remove_antag(specified_antag) //Removes an antag type's references - RR
+	proc/remove_antag(specified_antag)
+
+		/* - RR
+		Removes antag type's references from a mind.
+		objectives, uplinks, powers etc are all handled.
+		*/
+
 		special_role = null
 
 		if(objectives.len)
@@ -164,7 +169,7 @@ datum/mind
 				var/obj/item/device/radio/R = I
 				R.traitor_frequency = 0.0
 
-	proc/remove_all_antag() //Remove all Antag references - RR
+	proc/remove_all_antag() //For the Lazy amongst us.
 		remove_antag("Changeling")
 		remove_antag("Traitor")
 		remove_antag("NuclearOp")

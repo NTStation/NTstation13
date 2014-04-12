@@ -228,7 +228,7 @@
 			if(O.mind && O.mind.special_role)
 				O.mind.wipe_memory()
 				O.mind.remove_all_antag()
-				O << "<span class='warning'>Your Memories have been wiped!</span>"
+				O << "<span class='warning'>You forget everything about your past life!</span>"
 
 			O.job = "Cyborg"
 
