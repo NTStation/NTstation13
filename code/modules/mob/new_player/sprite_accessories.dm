@@ -615,110 +615,6 @@
 		icon_state = "sectank"
 		gender = NEUTER
 
-//MrSnapwalk is apparently a basketball fan - RR
-
-	blue_tank_0
-		name = "Blue Tank Top (0)"
-		icon_state = "0bluetank"
-		gender = NEUTER
-
-	blue_tank_1
-		name = "Blue Tank Top (1)"
-		icon_state = "1bluetank"
-		gender = NEUTER
-
-	blue_tank_2
-		name = "Blue Tank Top (2)"
-		icon_state = "2bluetank"
-		gender = NEUTER
-
-	blue_tank_3
-		name = "Blue Tank Top (3)"
-		icon_state = "3bluetank"
-		gender = NEUTER
-
-	blue_tank_4
-		name = "Blue Tank Top (4)"
-		icon_state = "4bluetank"
-		gender = NEUTER
-
-	blue_tank_5
-		name = "Blue Tank Top (5)"
-		icon_state = "5bluetank"
-		gender = NEUTER
-
-	blue_tank_6
-		name = "Blue Tank Top (6)"
-		icon_state = "6bluetank"
-		gender = NEUTER
-
-	blue_tank_7
-		name = "Blue Tank Top (7)"
-		icon_state = "7bluetank"
-		gender = NEUTER
-
-	blue_tank_8
-		name = "Blue Tank Top (8)"
-		icon_state = "8bluetank"
-		gender = NEUTER
-
-	blue_tank_9
-		name = "Blue Tank Top (9)"
-		icon_state = "9bluetank"
-		gender = NEUTER
-
-	red_tank_0
-		name = "Red Tank Top (0)"
-		icon_state = "0redtank"
-		gender = NEUTER
-
-	red_tank_1
-		name = "Red Tank Top (1)"
-		icon_state = "1redtank"
-		gender = NEUTER
-
-	red_tank_2
-		name = "Red Tank Top (2)"
-		icon_state = "2redtank"
-		gender = NEUTER
-
-	red_tank_3
-		name = "Red Tank Top (3)"
-		icon_state = "3redtank"
-		gender = NEUTER
-
-	red_tank_4
-		name = "Red Tank Top (4)"
-		icon_state = "4redtank"
-		gender = NEUTER
-
-	red_tank_5
-		name = "Red Tank Top (5)"
-		icon_state = "5redtank"
-		gender = NEUTER
-
-	red_tank_6
-		name = "Red Tank Top (6)"
-		icon_state = "6redtank"
-		gender = NEUTER
-
-	red_tank_7
-		name = "Red Tank Top (7)"
-		icon_state = "7redtank"
-		gender = NEUTER
-
-	red_tank_8
-		name = "Red Tank Top (8)"
-		icon_state = "8redtank"
-		gender = NEUTER
-
-	red_tank_9
-		name = "Red Tank Top (9)"
-		icon_state = "9redtank"
-		gender = NEUTER
-
-//End of B-Ball nonsense - RR
-
 	rainbow_tank
 		name = "Rainbow Tank Top"
 		icon_state = "rainbowtank"
@@ -740,7 +636,7 @@
 		gender = NEUTER
 
 	assitant_tank
-		name = "Assitant Tank Top"
+		name = "Assistant Tank Top"
 		icon_state = "assistanttank"
 		gender = NEUTER
 
