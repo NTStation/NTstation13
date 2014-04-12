@@ -369,7 +369,7 @@ datum/design/comm_traffic
 	id = "comm_traffic"
 	req_tech = list("programming" = 3)
 	build_type = IMPRINTER
-	materials = list("$glass" = 2000, "sacid" = 20)
+	materials = list("$glass" = 1000, "sacid" = 20)
 	build_path = /obj/item/weapon/circuitboard/comm_traffic
 
 datum/design/telesci_console
@@ -378,8 +378,8 @@ datum/design/telesci_console
 	id = "telesci_console"
 	req_tech = list("programming" = 3, "bluespace" = 2)
 	build_type = IMPRINTER
-	materials = list("$glass" = 2000, "sacid" = 20)
- 	build_path = /obj/item/weapon/circuitboard/telesci_console
+	materials = list("$glass" = 1000, "sacid" = 20)
+	build_path = /obj/item/weapon/circuitboard/telesci_console
 
 datum/design/aifixer
 	name = "Circuit Design (AI Integrity Restorer)"
@@ -1425,7 +1425,7 @@ datum/design/mech_recharger
 	id = "mech_recharger"
 	req_tech = list("programming" = 3, "powerstorage" = 4, "engineering" = 4)
 	build_type = IMPRINTER
-	materials = list("$glass" = 2000, "sacid" = 20)
+	materials = list("$glass" = 1000, "sacid" = 20)
 	build_path = /obj/item/weapon/circuitboard/mech_recharger
 
 datum/design/vendor
@@ -1434,7 +1434,7 @@ datum/design/vendor
 	id = "vendor"
 	req_tech = list("programming" = 1)
 	build_type = IMPRINTER
-	materials = list("$glass" = 2000, "sacid" = 20)
+	materials = list("$glass" = 1000, "sacid" = 20)
 	build_path = /obj/item/weapon/circuitboard/vendor
 
 
