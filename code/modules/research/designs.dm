@@ -363,6 +363,24 @@ datum/design/message_monitor
 	materials = list("$glass" = 1000, "sacid" = 20)
 	build_path = /obj/item/weapon/circuitboard/message_monitor
 
+datum/design/comm_traffic
+	name = "Circuit Design (Telecommunications Traffic Control Console)"
+	desc = "Allows for the construction of circuit boards used to build a telecommunications traffic control console."
+	id = "comm_traffic"
+	req_tech = list("programming" = 3)
+	build_type = IMPRINTER
+	materials = list("$glass" = 2000, "sacid" = 20)
+	build_path = /obj/item/weapon/circuitboard/comm_traffic
+
+datum/design/telesci_console
+	name = "Circuit Design (Telepad Control Console Board)"
+	desc = "Allows for the construction of circuit boards used to build a telescience console."
+	id = "telesci_console"
+	req_tech = list("programming" = 3, "bluespace" = 2)
+	build_type = IMPRINTER
+	materials = list("$glass" = 2000, "sacid" = 20)
+ 	build_path = /obj/item/weapon/circuitboard/telesci_console
+
 datum/design/aifixer
 	name = "Circuit Design (AI Integrity Restorer)"
 	desc = "Allows for the construction of circuit boards used to build an AI Integrity Restorer."
@@ -1400,6 +1418,25 @@ datum/design/cyborgrecharger
 	build_type = IMPRINTER
 	materials = list("$glass" = 1000, "sacid" = 20)
 	build_path = /obj/item/weapon/circuitboard/cyborgrecharger
+
+datum/design/mech_recharger
+	name = "Mechbay Recharger Board"
+	desc = "The circuit board for a Mechbay Recharger."
+	id = "mech_recharger"
+	req_tech = list("programming" = 3, "powerstorage" = 4, "engineering" = 4)
+	build_type = IMPRINTER
+	materials = list("$glass" = 2000, "sacid" = 20)
+	build_path = /obj/item/weapon/circuitboard/mech_recharger
+
+datum/design/vendor
+	name = "Vendor Board"
+	desc = "The circuit board for a Vendor."
+	id = "vendor"
+	req_tech = list("programming" = 1)
+	build_type = IMPRINTER
+	materials = list("$glass" = 2000, "sacid" = 20)
+	build_path = /obj/item/weapon/circuitboard/vendor
+
 
 /////////////////////////////////////////
 ////////////Power Stuff//////////////////
