@@ -11,7 +11,7 @@
 	blocks_air = 1
 	temperature = TCMB
 	var/mineralName = ""
-	var/mineralAmt = 0
+	var/mineralAmt = 3
 	var/spread = 0 //will the seam spread?
 	var/spreadChance = 0 //the percentual chance of an ore spreading to the neighbouring tiles
 	var/last_act = 0
@@ -109,7 +109,7 @@
 /turf/simulated/mineral/random/high_chance
 	icon_state = "rock_highchance"
 	mineralChance = 25
-	mineralSpawnChanceList = list("Uranium" = 10, "Iron" = 30, "Diamond" = 2, "Gold" = 10, "Silver" = 10, "Plasma" = 20)
+	mineralSpawnChanceList = list("Uranium" = 35, "Diamond" = 10, "Gold" = 35, "Silver" = 35, "Plasma" = 35, "Iron" = 50)
 
 /turf/simulated/mineral/random/high_chance/New()
 	icon_state = "rock"
@@ -128,7 +128,7 @@
 	name = "Uranium deposit"
 	mineralName = "Uranium"
 	mineralAmt = 5
-	spreadChance = 0
+	spreadChance = 5
 	spread = 1
 	hidden = 1
 	scan_state = "rock_Uranium"
@@ -155,7 +155,7 @@
 	name = "Gold deposit"
 	mineralName = "Gold"
 	mineralAmt = 5
-	spreadChance = 0
+	spreadChance = 5
 	spread = 1
 	hidden = 1
 	scan_state = "rock_Gold"
@@ -164,7 +164,7 @@
 	name = "Silver deposit"
 	mineralName = "Silver"
 	mineralAmt = 5
-	spreadChance = 0
+	spreadChance = 5
 	spread = 1
 	hidden = 1
 	scan_state = "rock_Silver"
@@ -174,7 +174,7 @@
 	icon_state = "rock_Plasma"
 	mineralName = "Plasma"
 	mineralAmt = 5
-	spreadChance = 0
+	spreadChance = 5
 	spread = 1
 	hidden = 1
 	scan_state = "rock_Plasma"
