@@ -1593,7 +1593,7 @@ datum/design/decloner
 	id = "decloner"
 	req_tech = list("combat" = 8, "materials" = 7, "biotech" = 5, "powerstorage" = 6)
 	build_type = PROTOLATHE
-	materials = list("$gold" = 5000,"$uranium" = 10000, "mutagen" = 40)
+	materials = list("$gold" = 5000,"$uranium" = 8000, "mutagen" = 40)
 	build_path = /obj/item/weapon/gun/energy/decloner
 	locked = 1
 /*
@@ -1613,7 +1613,7 @@ datum/design/rapidsyringe
 	id = "rapidsyringe"
 	req_tech = list("combat" = 3, "materials" = 3, "engineering" = 3, "biotech" = 2)
 	build_type = PROTOLATHE
-	materials = list("$metal" = 8000, "$glass" = 2000)
+	materials = list("$metal" = 6000, "$glass" = 2000)
 	build_path = /obj/item/weapon/gun/syringe/rapidsyringe
 /*
 datum/design/largecrossbow
