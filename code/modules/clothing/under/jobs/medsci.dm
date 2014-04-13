@@ -18,6 +18,14 @@
 	item_color = "rdwhimsy"
 	armor = list(melee = 0, bullet = 0, laser = 0, energy = 0, bomb = 0, bio = 10, rad = 0)
 
+/obj/item/clothing/under/rank/research_director/ema
+	desc = "This is amazing! Just FEEL the power of science flowing through you!"
+	name = "female research director jumpsuit"
+	icon_state = "rdema"
+	item_state = "rdema"
+	item_color = "rdema"
+	armor = list(melee = 0, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 10, rad = 0)
+
 /obj/item/clothing/under/rank/scientist
 	desc = "It's made of a special fiber that provides minor protection against biohazards. It has markings that denote the wearer as a scientist."
 	name = "scientist's jumpsuit"
