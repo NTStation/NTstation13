@@ -162,7 +162,7 @@
 		if ((src.loc == user) && (src.locked == 1))
 			usr << "\red [src] is locked and cannot be opened!"
 		else if ((src.loc == user) && (!src.locked))
-			playsound(src.loc, "rustle", 50, 1, -5)
+			playsound(src.loc, interaction_sound, 50, 1, -5)
 			if (user.s_active)
 				user.s_active.close(user) //Close and re-open
 			src.show_to(user)

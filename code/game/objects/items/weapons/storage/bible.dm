@@ -7,6 +7,7 @@
 	w_class = 3.0
 	var/mob/affecting = null
 	var/deity_name = "Christ"
+	interaction_sound = "pageturn"//bibles sound like paper when opening/dropping/picking up
 
 /obj/item/weapon/storage/bible/booze
 	name = "bible"
@@ -117,5 +118,5 @@
 			A.reagents.add_reagent("cleaner",unholy2clean)		//it cleans their soul, get it? I'll get my coat...
 
 /obj/item/weapon/storage/bible/attackby(obj/item/weapon/W as obj, mob/user as mob)
-	playsound(src.loc, "rustle", 50, 1, -5)
+	playsound(src.loc, interaction_sound, 50, 1, -5)
 	..()
