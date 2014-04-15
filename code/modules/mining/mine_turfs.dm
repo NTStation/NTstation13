@@ -99,6 +99,8 @@
 					new/turf/simulated/floor/plating/asteroid/airless/cave(src)
 				if("Gibtonite")
 					M = new/turf/simulated/mineral/gibtonite(src)
+				if("Clown")
+					M = new/turf/simulated/mineral/clown(src)
 				/*if("Adamantine")
 					M = new/turf/simulated/mineral/adamantine(src)*/
 			if(M)
@@ -112,6 +114,15 @@
 	mineralSpawnChanceList = list("Uranium" = 10, "Iron" = 30, "Diamond" = 2, "Gold" = 10, "Silver" = 10, "Plasma" = 20)
 
 /turf/simulated/mineral/random/high_chance/New()
+	icon_state = "rock"
+	..()
+
+/turf/simulated/mineral/random/clown
+	icon_state = "rock_highchance"
+	mineralChance = 25
+	mineralSpawnChanceList = list("Clown" = 50)
+
+/turf/simulated/mineral/random/clown/New()
 	icon_state = "rock"
 	..()
 
