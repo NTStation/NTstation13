@@ -238,6 +238,12 @@
 				carddesc += "<b>registered_name:</b> [target_owner]</span>"
 				jobs += "<b>Assignment:</b> [target_rank] (<a href='?src=\ref[src];choice=demote'>Demote</a>)</span>"
 
+			if(istype(modify,/obj/item/weapon/card/id/assistant))
+				var/obj/item/weapon/card/id/assistant/card  = modify
+				if(card.registered)
+					jobs += "<a href=?src=\ref[src];choice=reset_registration>Reset Registration</a>" //Keeping it consistent with the rest
+
+
 			var/accesses = ""
 			if(istype(src,/obj/machinery/computer/card/centcom))
 				accesses += "<h5>Central Command:</h5>"
@@ -454,6 +460,11 @@
 				P.info = t1
 				P.name = "paper- 'Crew Manifest'"
 				printing = null
+		if ("reset_registration")
+			if (authenticated)
+				var/obj/item/weapon/card/id/assistant/card = modify
+				card.ResetRegistration()
+
 	if (modify)
 		modify.name = text("[modify.registered_name]'s ID Card ([modify.assignment])")
 	updateUsrDialog()

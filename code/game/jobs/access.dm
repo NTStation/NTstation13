@@ -217,7 +217,7 @@
 		if(3) //medbay
 			return list(access_medical, access_genetics, access_morgue, access_chemistry, access_virology, access_surgery, access_cmo)
 		if(4) //research
-			return list(access_research, access_tox, access_tox_storage, access_genetics, access_robotics, access_xenobiology, access_rd)
+			return list(access_research, access_tox, access_tox_storage, access_robotics, access_xenobiology, access_genetics, access_rd)
 		if(5) //engineering and maintenance
 			return list(access_construction, access_maint_tunnels, access_engine, access_engine_equip, access_external_airlocks, access_tech_storage, access_atmospherics, access_tcomsat, access_ce)
 		if(6) //supply
@@ -229,20 +229,21 @@
 	switch(code)
 		if(0)
 			return "All"
-		if(1) //station general
-			return "General"
-		if(2) //security
+		if(1) //security
 			return "Security"
-		if(3) //medbay
+		if(2) //medbay
 			return "Medbay"
-		if(4) //research
+		if(3) //research
 			return "Research"
-		if(5) //engineering and maintenance
+		if(4) //engineering and maintenance
 			return "Engineering"
-		if(6) //supply
-			return "Supply"
-		if(7) //command
+		if(5) //command
 			return "Command"
+		if(6) //station general
+			return "Station General"
+		if(7) //supply
+			return "Supply"
+
 
 /proc/get_access_desc(A)
 	switch(A)

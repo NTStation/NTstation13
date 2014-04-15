@@ -24,6 +24,7 @@
 			            access_forensics_lockers, access_morgue, access_maint_tunnels, access_all_personal_lockers,
 			            access_research, access_engine, access_mining, access_medical, access_construction, access_mailsorting,
 			            access_heads, access_hos, access_RC_announce, access_keycard_auth, access_gateway)
+	assistant_access = list(access_sec_doors)
 	minimal_player_age = 14
 
 	equip(var/mob/living/carbon/human/H)
@@ -65,6 +66,7 @@
 	selection_color = "#ffeeee"
 	access = list(access_security, access_sec_doors, access_brig, access_armory, access_court, access_maint_tunnels, access_morgue)
 	minimal_access = list(access_security, access_sec_doors, access_brig, access_armory, access_court) //But see /datum/job/warden/get_access()
+	assistant_access = list(access_sec_doors)
 	minimal_player_age = 7
 
 	equip(var/mob/living/carbon/human/H)
@@ -109,6 +111,7 @@
 	selection_color = "#ffeeee"
 	access = list(access_sec_doors, access_forensics_lockers, access_morgue, access_maint_tunnels, access_court)
 	minimal_access = list(access_sec_doors, access_forensics_lockers, access_morgue, access_maint_tunnels, access_court)
+	assistant_access = list(access_sec_doors)
 	minimal_player_age = 7
 
 
@@ -156,6 +159,7 @@
 	selection_color = "#ffeeee"
 	access = list(access_security, access_sec_doors, access_brig, access_court, access_maint_tunnels, access_morgue)
 	minimal_access = list(access_security, access_sec_doors, access_brig, access_court) //But see /datum/job/warden/get_access()
+	assistant_access = list(access_sec_doors)
 	minimal_player_age = 7
 	var/list/dep_access = null
 
@@ -190,7 +194,7 @@
 	L |= ..() | check_config_for_sec_maint()
 	dep_access = null;
 	return L
-	
+
 var/list/sec_departments = list("engineering", "supply", "medical", "science")
 
 /datum/job/officer/proc/assign_sec_to_department(var/mob/living/carbon/human/H)
@@ -240,7 +244,7 @@ var/list/sec_departments = list("engineering", "supply", "medical", "science")
 					break
 		H << "<b>You have been assigned to [department]!</b>"
 		return
-	
+
 /obj/item/device/radio/headset/headset_sec/department/New()
 	wires = new(src)
 	secure_radio_connections = new

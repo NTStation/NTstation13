@@ -20,6 +20,7 @@
 			            access_research, access_robotics, access_xenobiology, access_ai_upload,
 			            access_RC_announce, access_keycard_auth, access_gateway, access_mineral_storeroom,
 			            access_tech_storage)
+	assistant_access = list(access_research)
 	minimal_player_age = 7
 
 	equip(var/mob/living/carbon/human/H)
@@ -47,7 +48,7 @@
 	selection_color = "#ffeeff"
 	access = list(access_robotics, access_tox, access_tox_storage, access_research, access_xenobiology, access_mineral_storeroom)
 	minimal_access = list(access_tox, access_tox_storage, access_research, access_xenobiology, access_mineral_storeroom)
-
+	assistant_access = list(access_research)
 
 	equip(var/mob/living/carbon/human/H)
 		if(!H)	return 0
@@ -74,6 +75,7 @@
 	selection_color = "#ffeeff"
 	access = list(access_robotics, access_tox, access_tox_storage, access_tech_storage, access_morgue, access_research, access_mineral_storeroom) //As a job that handles so many corpses, it makes sense for them to have morgue access.
 	minimal_access = list(access_robotics, access_tech_storage, access_morgue, access_research, access_mineral_storeroom) //As a job that handles so many corpses, it makes sense for them to have morgue access.
+	assistant_access = list(access_robotics)
 
 	equip(var/mob/living/carbon/human/H)
 		if(!H)	return 0

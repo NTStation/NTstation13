@@ -20,7 +20,7 @@
 	max_combined_w_class = 21
 
 /obj/item/weapon/storage/backpack/attackby(obj/item/weapon/W as obj, mob/user as mob)
-	playsound(src.loc, "rustle", 50, 1, -5)
+	playsound(get_turf(src), interaction_sound, 50, 1, -5)
 	..()
 
 /*
@@ -85,9 +85,17 @@
 
 /obj/item/weapon/storage/backpack/clown
 	name = "Giggles von Honkerton"
-	desc = "It's a backpack made by Honk! Co."
+	desc = "It's a honking backpack made by Honk! Co."
 	icon_state = "clownpack"
 	item_state = "clownpack"
+	interaction_sound = 'sound/items/bikehorn.ogg'
+
+/obj/item/weapon/storage/backpack/mime
+	name = "Parcel Parceaux"
+	desc = "A silent backpack made for those silent workers. Silence Co."
+	icon_state = "mimepack"
+	item_state = "mimepack"
+	interaction_sound = 'sound/misc/null.ogg'
 
 /obj/item/weapon/storage/backpack/medic
 	name = "medical backpack"
@@ -180,9 +188,3 @@
 	desc = "An exclusive satchel for Nanotrasen officers."
 	icon_state = "satchel-cap"
 	item_state = "captainpack"
-
-/obj/item/weapon/storage/backpack/mime
-	name = "Parcel Parceaux"
-	desc = "A silent backpack made for those silent workers. Silence Co."
-	icon_state = "mimepack"
-	item_state = "mimepack"
