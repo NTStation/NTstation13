@@ -10,6 +10,9 @@
 	//Assistant acess : acess granted to job's assistants
 	var/list/assistant_access = list()
 
+	//Determines who can demote this position
+	var/department_head = list()
+
 	//Bitflags for the job
 	var/flag = 0
 	var/department_flag = 0

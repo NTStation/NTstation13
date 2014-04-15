@@ -1,6 +1,7 @@
 /datum/job/rd
 	title = "Research Director"
 	flag = RD
+	department_head = list("Captain")
 	department_flag = MEDSCI
 	faction = "Station"
 	total_positions = 1
@@ -38,6 +39,7 @@
 /datum/job/scientist
 	title = "Scientist"
 	flag = SCIENTIST
+	department_head = list("Research Director")
 	department_flag = MEDSCI
 	faction = "Station"
 	total_positions = 5
@@ -64,6 +66,7 @@
 /datum/job/roboticist
 	title = "Roboticist"
 	flag = ROBOTICIST
+	department_head = list("Research Director")
 	department_flag = MEDSCI
 	faction = "Station"
 	total_positions = 2

@@ -1,6 +1,9 @@
 // BEGIN_INTERNALS
 /*
 MAP_ICON_TYPE: 0
+WINDOW: code\game\jobs\access.dm
+DIR: code code\game code\game\jobs code\game\machinery code\game\machinery\computer 
+FILE: code\game\jobs\access.dm
 AUTO_FILE_DIR: OFF
 */
 // END_INTERNALS
