@@ -1,6 +1,6 @@
 var/list/ai_list = list()
 
-//Not sure why this is necessary...
+//Not sure why this is necessary..
 /proc/AutoUpdateAI(obj/subject)
 	var/is_in_use = 0
 	if (subject!=null)
@@ -132,7 +132,7 @@ var/list/ai_list = list()
 		return
 
 		//if(icon_state == initial(icon_state))
-	var/icontype = input("Please, select a display!", "AI", null/*, null*/) in list("Clown", "Monochrome", "Blue", "Inverted", "Firewall", "Green", "Red", "Static", "Red October")
+	var/icontype = input("Please, select a display!", "AI", null/*, null*/) in list("Clown", "Monochrome", "Blue", "Inverted", "Firewall", "Green", "Red", "Static", "Red October", "Hades", "Helios", "House", "President", "Gigyas", "Yuki", "SyndicatMeow")
 	if(icontype == "Clown")
 		icon_state = "ai-clown2"
 	else if(icontype == "Monochrome")
@@ -151,6 +151,20 @@ var/list/ai_list = list()
 		icon_state = "ai-static"
 	else if(icontype == "Red October")
 		icon_state = "ai-redoctober"
+	else if(icontype == "Hades")
+		icon_state = "ai-hades"
+	else if(icontype == "Helios")
+		icon_state = "ai-helios"
+	else if(icontype == "House")
+		icon_state = "ai-house"
+	else if(icontype == "President")
+		icon_state = "ai-pres"
+	else if(icontype == "Gigyas")
+		icon_state = "ai-gigyas"
+	else if(icontype == "Yuki")
+		icon_state = "ai-yuki"
+	else if(icontype == "SyndicatMeow")
+		icon_state = "ai-syndicatmeow"
 	//else
 			//usr <<"You can only change your display once!"
 			//return

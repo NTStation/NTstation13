@@ -11,6 +11,7 @@
 	req_admin_notify = 1
 	access = list() 			//See get_access()
 	minimal_access = list() 	//See get_access()
+	assistant_access = list(access_heads)
 	minimal_player_age = 14
 
 
@@ -68,6 +69,7 @@
 			            access_theatre, access_chapel_office, access_library, access_research, access_mining, access_heads_vault, access_mining_station,
 			            access_hop, access_RC_announce, access_keycard_auth, access_gateway, access_mineral_storeroom)
 
+	assistant_access = list(access_heads)
 
 	equip(var/mob/living/carbon/human/H)
 		if(!H)	return 0

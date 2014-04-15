@@ -17,6 +17,7 @@
 			            access_external_airlocks, access_atmospherics, access_emergency_storage, access_eva,
 			            access_heads, access_construction, access_sec_doors,
 			            access_ce, access_RC_announce, access_keycard_auth, access_tcomsat, access_mineral_storeroom)
+	assistant_access = list(access_engine,access_maint_tunnels)
 	minimal_player_age = 7
 
 
@@ -50,8 +51,7 @@
 	selection_color = "#fff5cc"
 	access = list(access_eva, access_engine, access_engine_equip, access_tech_storage, access_maint_tunnels, access_external_airlocks, access_construction, access_atmospherics, access_tcomsat)
 	minimal_access = list(access_engine, access_engine_equip, access_tech_storage, access_maint_tunnels, access_external_airlocks, access_construction, access_tcomsat)
-
-
+	assistant_access = list(access_engine,access_maint_tunnels)
 
 	equip(var/mob/living/carbon/human/H)
 		if(!H)	return 0
@@ -83,7 +83,7 @@
 	selection_color = "#fff5cc"
 	access = list(access_eva, access_engine, access_engine_equip, access_tech_storage, access_maint_tunnels, access_external_airlocks, access_construction, access_atmospherics)
 	minimal_access = list(access_atmospherics, access_maint_tunnels, access_emergency_storage, access_construction)
-
+	assistant_access = list(access_atmospherics,access_maint_tunnels)
 
 	equip(var/mob/living/carbon/human/H)
 		if(!H)	return 0
