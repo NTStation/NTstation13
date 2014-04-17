@@ -14,14 +14,11 @@
 	if(on)
 		user << "<span class='notice'>[src] is already processing, please wait.</span>"
 		return
-	if(istype(I, /obj/item/weapon/grab)||istype(I, /obj/item/tk_grab))
+	if(!istype(I, /obj/item/weapon/reagent_containers/food/snacks/))
+		user << "<span class='warning'>Budget cuts won't let you put that in there..</span>"
+		return
+	if(istype(I, /obj/item/weapon/reagent_containers/food/snacks/cereal/))
 		user << "<span class='warning'>That isn't going to fit.</span>"
-		return
-	if(istype(I, /obj/item/weapon/reagent_containers/glass/))
-		user << "<span class='warning'>That would probably break [src].</span>"
-		return
-	if(!user.unEquip(I))
-		user << "<span class='warning'>You cannot make cereal out of [I].</span>"
 		return
 	else
 		user << "<span class='notice'>You put [I] into [src].</span>"
@@ -38,6 +35,7 @@
 			var/obj/item/weapon/reagent_containers/food = I
 			food.reagents.trans_to(S, food.reagents.total_volume)
 		S.overlays += img
+		S.overlays += I.overlays
 		S.name = "box of [I] cereal"
 		playsound(loc, 'sound/machines/ding.ogg', 50, 1)
 		on = FALSE

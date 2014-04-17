@@ -1,29 +1,29 @@
-/obj/item/weapon/reagent_containers/food/snacks/breadslice/attackby(obj/item/I, mob/user)
-	if(istype(I, /obj/item/))
+/obj/item/weapon/reagent_containers/food/snacks/breadslice/attackby(obj/item/W as obj, mob/user as mob)
+
+	if(istype(W,/obj/item/weapon/reagent_containers/food/snacks))
 		var/obj/item/weapon/reagent_containers/food/snacks/customizable/S = new(get_turf(user))
-		S.attackby(I, user)
+		S.attackby(W,user)
 		qdel(src)
-
-/obj/item/weapon/reagent_containers/food/snacks/bun/attackby(obj/item/I, mob/user)
-	if(istype(I, /obj/item/))
+/obj/item/weapon/reagent_containers/food/snacks/bun/attackby(obj/item/W as obj, mob/user as mob)
+	if(istype(W,/obj/item/weapon/reagent_containers/food/snacks))
 		var/obj/item/weapon/reagent_containers/food/snacks/customizable/burger/S = new(get_turf(user))
-		S.attackby(I, user)
+		S.attackby(W,user)
 		qdel(src)
 	..()
 
-/obj/item/weapon/reagent_containers/food/snacks/sliceable/flatdough/attackby(obj/item/I, mob/user)
-	if(istype(I, /obj/item/))
+/obj/item/weapon/reagent_containers/food/snacks/sliceable/flatdough/attackby(obj/item/W as obj, mob/user as mob)
+	if(istype(W,/obj/item/weapon/reagent_containers/food/snacks))
 		var/obj/item/weapon/reagent_containers/food/snacks/customizable/pizza/S = new(get_turf(user))
-		S.attackby(I, user)
+		S.attackby(W,user)
 		qdel(src)
 	..()
 
-/obj/item/weapon/reagent_containers/food/snacks/boiledspagetti/attackby(obj/item/I, mob/user)
-	if(istype(I, /obj/item/weapon/reagent_containers/food/snacks))
+/obj/item/weapon/reagent_containers/food/snacks/boiledspagetti/attackby(obj/item/W as obj, mob/user as mob)
+
+	if(istype(W,/obj/item/weapon/reagent_containers/food/snacks))
 		var/obj/item/weapon/reagent_containers/food/snacks/customizable/pasta/S = new(get_turf(user))
-		S.attackby(I, user)
+		S.attackby(W,user)
 		qdel(src)
-	..()
 
 /obj/item/trash/bowl
 	name = "bowl"
@@ -31,10 +31,11 @@
 	icon = 'icons/obj/food.dmi'
 	icon_state = "soup"
 
-/obj/item/trash/bowl/attackby(obj/item/I, mob/user)
-	if(istype(I, /obj/item/weapon/shard) || istype(I, /obj/item/weapon/reagent_containers/food/snacks))
+/obj/item/trash/bowl/attackby(obj/item/W as obj, mob/user as mob)
+
+	if(istype(W,/obj/item/weapon/shard) || istype(W,/obj/item/weapon/reagent_containers/food/snacks))
 		var/obj/item/weapon/reagent_containers/food/snacks/customizable/soup/S = new(get_turf(user))
-		S.attackby(I, user)
+		S.attackby(W,user)
 		qdel(src)
 	..()
 
@@ -47,10 +48,15 @@
 	var/top = 1	//Do we have a top?
 	var/add_overlays = 1	//Do we stack?
 //	var/offsetstuff = 1 //Do we offset the overlays?
+	var/sandwich_limit = 10
 	trash = /obj/item/trash/plate
 	bitesize = 2
 
 	var/list/ingredients = list()
+
+	New()
+		..()
+		reagents.add_reagent("nutriment", 8)
 
 /obj/item/weapon/reagent_containers/food/snacks/customizable/pizza
 	name = "personal pizza"
@@ -70,6 +76,60 @@
 	add_overlays = 0
 	top = 0
 
+/obj/item/weapon/reagent_containers/food/snacks/customizable/cook/donut
+	name = "filled donut"
+	desc = "A donut"
+	icon_state = "donutcustom"
+	baseicon = "donutcustom"
+	basename = "filled donut"
+	add_overlays = 0
+	top = 0
+
+/obj/item/weapon/reagent_containers/food/snacks/customizable/cook/bread
+	name = "bread"
+	desc = "Tasty bread."
+	icon_state = "breadcustom"
+	baseicon = "breadcustom"
+	basename = "bread"
+	add_overlays = 0
+	top = 0
+
+/obj/item/weapon/reagent_containers/food/snacks/customizable/cook/pie
+	name = "pie"
+	desc = "Tasty pie."
+	icon_state = "piecustom"
+	baseicon = "piecustom"
+	basename = "pie"
+	add_overlays = 0
+	top = 0
+
+/obj/item/weapon/reagent_containers/food/snacks/customizable/cook/cake
+	name = "cake"
+	desc = "A popular band."
+	icon_state = "cakecustom"
+	baseicon = "cakecustom"
+	basename = "cake"
+	add_overlays = 0
+	top = 0
+
+/obj/item/weapon/reagent_containers/food/snacks/customizable/cook/jelly
+	name = "jelly"
+	desc = "Totally jelly."
+	icon_state = "jellycustom"
+	baseicon = "jellycustom"
+	basename = "jelly"
+	add_overlays = 0
+	top = 0
+
+/obj/item/weapon/reagent_containers/food/snacks/customizable/cook/donkpocket
+	name = "donk pocket"
+	desc = "You wanna put a bangin-Oh fuck it."
+	icon_state = "donkcustom"
+	baseicon = "donkcustom"
+	basename = "donk pocket"
+	add_overlays = 0
+	top = 0
+
 /obj/item/weapon/reagent_containers/food/snacks/customizable/soup
 	name = "soup"
 	desc = "A bowl with liquid and... stuff in it."
@@ -83,21 +143,25 @@
 /obj/item/weapon/reagent_containers/food/snacks/customizable/burger
 	name = "burger bun"
 	desc = "A bun for a burger. Delicious."
-	icon_state = "bun"
-	icon = 'icons/obj/food_ingredients.dmi'
-	baseicon = "bun"
-	basename = "bun"
+	icon_state = "burger"
+	baseicon = "burger"
+	basename = "burger"
 	trash = null
 
-/obj/item/weapon/reagent_containers/food/snacks/customizable/attackby(obj/item/I, mob/user)
-	user << "<span class='notice'> You add [I] to [src].</span>"
-	if(istype(I,  /obj/item/weapon/reagent_containers/))
-		var/obj/item/weapon/reagent_containers/F = I
+/obj/item/weapon/reagent_containers/food/snacks/customizable/attackby(obj/item/W as obj, mob/user as mob)
+	if(src.contents.len > sandwich_limit)
+		user << "<span class='warning'>If you put anything else on [src] it's going to collapse.</span>"
+		return
+	else if(istype(W,/obj/item/weapon/reagent_containers/food/snacks))
+		user << "<span class='notice'> You add [W] to [src].</span>"
+		var/obj/item/weapon/reagent_containers/F = W
 		F.reagents.trans_to(src, F.reagents.total_volume)
-	user.drop_item()
-	I.loc = src
-	ingredients += I
-	update()
+		user.drop_item()
+		W.loc = src
+		ingredients += W
+		update()
+		return
+	..()
 
 /obj/item/weapon/reagent_containers/food/snacks/customizable/proc/update()
 	var/fullname = "" //We need to build this from the contents of the var.
@@ -105,7 +169,8 @@
 
 	overlays.Cut()
 
-	for(var/obj/item/O in ingredients)
+	for(var/obj/item/weapon/reagent_containers/food/snacks/O in ingredients)
+
 		i++
 		if(i == 1)
 			fullname += "[O.name]"
@@ -115,11 +180,7 @@
 			fullname += ", [O.name]"
 
 		var/image/I = new(src.icon, "[baseicon]_filling")
-		if(istype(O, /obj/item/weapon/reagent_containers/food/snacks))
-			var/obj/item/weapon/reagent_containers/food/snacks/food = O
-			I.color = food.filling_color
-		else
-			I.color = pick("#FF0000","#0000FF","#008000","#FFFF00")
+		I.color = O.filling_color
 		if(add_overlays)
 			I.pixel_x = pick(list(-1,0,1))
 			I.pixel_y = (i*2)+1
@@ -132,15 +193,16 @@
 		overlays += T
 
 	name = lowertext("[fullname] [basename]")
-	if(length(name) > 150) name = "[pick(list("absurd","colossal","enormous","ridiculous","massive","oversized","cardiac-arresting","pipe-clogging","edible but sickening","sickening","gargantuan","mega","belly-burster","chest-burster"))] [basename]"
+	if(length(name) > 80) name = "[pick(list("absurd","colossal","enormous","ridiculous","massive","oversized","cardiac-arresting","pipe-clogging","edible but sickening","sickening","gargantuan","mega","belly-burster","chest-burster"))] [basename]"
 	w_class = n_ceil(Clamp((ingredients.len/2),1,3))
 
 /obj/item/weapon/reagent_containers/food/snacks/customizable/Del()
 	for(var/obj/item/O in ingredients)
-		qdel(O)
+		del(O)
 	..()
 
 /obj/item/weapon/reagent_containers/food/snacks/customizable/examine()
 	..()
 	var/whatsinside = pick(ingredients)
-	usr << "<span class='notice'>You think you can see [whatsinside] in there.</span>"
+
+	usr << "<span class='notice'> You think you can see [whatsinside] in there.</span>"
