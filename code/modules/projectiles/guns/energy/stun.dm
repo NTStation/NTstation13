@@ -100,7 +100,9 @@
 
 /obj/item/weapon/gun/energy/crossbow/largecrossbow
 	name = "Energy Crossbow"
-	desc = "A weapon favored by syndicate infiltration teams."
+	desc = "A reverse-engineered tranquilizer crossbow."
+	icon_state = "crossbow_large"
 	w_class = 4.0
+	item_state = "crossbow_large"
 	force = 10
 	m_amt = 200000
