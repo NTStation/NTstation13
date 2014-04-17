@@ -17,7 +17,7 @@
 	speak_chance = 5
 	turns_per_move = 5
 	see_in_dark = 10
-	meat_type = /obj/item/weapon/reagent_containers/food/snacks/spidermeat
+	meat_type = list(/obj/item/weapon/reagent_containers/food/snacks/spidermeat)
 	response_help  = "pets"
 	response_disarm = "gently pushes aside"
 	response_harm   = "hits"
@@ -42,7 +42,7 @@
 	icon_state = "nurse"
 	icon_living = "nurse"
 	icon_dead = "nurse_dead"
-	meat_type = /obj/item/weapon/reagent_containers/food/snacks/spidereggs
+	meat_type = list(/obj/item/weapon/reagent_containers/food/snacks/spidereggs)
 	maxHealth = 40
 	health = 40
 	melee_damage_lower = 5
