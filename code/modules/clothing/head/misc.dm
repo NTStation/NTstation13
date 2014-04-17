@@ -164,7 +164,7 @@
 
 /obj/item/clothing/head/monkeypelt
 	name = "monkey pelt hat"
-	desc = "PunPun lived too long anyway."
+	desc = "Pun Pun lived too long anyway."
 	icon_state = "monkeypelt"
 	flags = BLOCKHAIR
 
@@ -188,7 +188,7 @@
 
 /obj/item/clothing/head/polypelt
 	name = "poly pelt hat"
-	desc = "Who is the chucklefuck now?."
+	desc = "Who is the chucklefuck now?"
 	icon_state = "polypelt"
 
 /obj/item/clothing/head/xenos
