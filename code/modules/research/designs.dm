@@ -1618,7 +1618,7 @@ datum/design/rapidsyringe
 
 datum/design/largecrossbow
 	name = "Energy Crossbow"
-	desc = "A reverse-engineered tranquilizer crossbow."
+	desc = "A reverse-engineered energy crossbow."
 	id = "largecrossbow"
 	req_tech = list("combat" = 4, "materials" = 5, "engineering" = 3, "biotech" = 4, "syndicate" = 3)
 	build_type = PROTOLATHE
