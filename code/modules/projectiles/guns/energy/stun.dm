@@ -1,4 +1,3 @@
-
 /obj/item/weapon/gun/energy/taser
 	name = "taser gun"
 	desc = "A small, low capacity gun used for non-lethal takedowns."
@@ -100,7 +99,7 @@
 
 /obj/item/weapon/gun/energy/crossbow/largecrossbow
 	name = "Energy Crossbow"
-	desc = "A reverse-engineered tranquilizer crossbow."
+	desc = "A reverse-engineered energy crossbow."
 	icon_state = "crossbow_large"
 	w_class = 4.0
 	item_state = "crossbow_large"
