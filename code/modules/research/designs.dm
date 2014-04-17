@@ -1622,7 +1622,7 @@ datum/design/largecrossbow
 	id = "largecrossbow"
 	req_tech = list("combat" = 4, "materials" = 5, "engineering" = 3, "biotech" = 4, "syndicate" = 3)
 	build_type = PROTOLATHE
-	materials = list("$metal" = 6000, "$glass" = 2000, "$uranium" = 3750, "$silver" = 1000)
+	materials = list("$metal" = 10000, "$glass" = 4000, "$uranium" = 3750, "$silver" = 2000)
 	build_path = /obj/item/weapon/gun/energy/crossbow/largecrossbow
 
 datum/design/temp_gun
