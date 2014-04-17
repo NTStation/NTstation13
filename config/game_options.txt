@@ -23,6 +23,11 @@ REVIVAL_BRAIN_LIFE -1
 # Whether cyborgs can rename themselves at roundstart or when built.  Has no effect on roboticists renaming cyborgs the normal way.  Set to 0 to disable self-renaming.
 RENAME_CYBORG 1
 
+### MEMORY ###
+
+# Whether cyborgs remember their past lives, 1 = Remember, 0 = Don't remember
+BORG_REMEMBERS 0
+
 ### MOB MOVEMENT ###
 
 ## We suggest editing these variables ingame to find a good speed for your server.
