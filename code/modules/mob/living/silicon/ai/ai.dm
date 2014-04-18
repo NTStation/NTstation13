@@ -164,7 +164,7 @@ var/list/ai_list = list()
 	else if(icontype == "Yuki")
 		icon_state = "ai-yuki"
 	else if(icontype == "SyndicatMeow")
-		icon_state = "ai-syndicatmeow"
+		icon_state = "ai- syndicatmeow"
 	//else
 			//usr <<"You can only change your display once!"
 			//return
