@@ -25,6 +25,12 @@
 		S.attackby(W,user)
 		qdel(src)
 
+/obj/item/trash/plate/attackby(obj/item/W as obj, mob/user as mob)
+	if(istype(W,/obj/item/weapon/reagent_containers/food/snacks))
+		var/obj/item/weapon/reagent_containers/food/snacks/customizable/fullycustom/S = new(get_turf(user))
+		S.attackby(W,user)
+		qdel(src)
+
 /obj/item/trash/bowl
 	name = "bowl"
 	desc = "An empty bowl. Put some food in it to start making a soup."
@@ -49,6 +55,7 @@
 	var/add_overlays = 1	//Do we stack?
 //	var/offsetstuff = 1 //Do we offset the overlays?
 	var/sandwich_limit = 10
+	var/fullycustom = 0
 	trash = /obj/item/trash/plate
 	bitesize = 2
 
@@ -73,15 +80,6 @@
 	icon_state = "pasta_bot"
 	baseicon = "pasta_bot"
 	basename = "spagetti"
-	add_overlays = 0
-	top = 0
-
-/obj/item/weapon/reagent_containers/food/snacks/customizable/cook/donut
-	name = "filled donut"
-	desc = "A donut"
-	icon_state = "donutcustom"
-	baseicon = "donutcustom"
-	basename = "filled donut"
 	add_overlays = 0
 	top = 0
 
@@ -123,12 +121,104 @@
 
 /obj/item/weapon/reagent_containers/food/snacks/customizable/cook/donkpocket
 	name = "donk pocket"
-	desc = "You wanna put a bangin-Oh fuck it."
+	desc = "You wanna put a bangin-Oh nevermind."
 	icon_state = "donkcustom"
 	baseicon = "donkcustom"
 	basename = "donk pocket"
 	add_overlays = 0
 	top = 0
+
+/obj/item/weapon/reagent_containers/food/snacks/customizable/cook/kebab
+	name = "kebab"
+	desc = "Kebab or Kabab?"
+	icon_state = "kababcustom"
+	baseicon = "kababcustom"
+	basename = "kebab"
+	add_overlays = 0
+	top = 0
+
+/obj/item/weapon/reagent_containers/food/snacks/customizable/cook/salad
+	name = "salad"
+	desc = "Very tasty."
+	icon_state = "saladcustom"
+	baseicon = "saladcustom"
+	basename = "salad"
+	add_overlays = 0
+	top = 0
+
+/obj/item/weapon/reagent_containers/food/snacks/customizable/cook/waffles
+	name = "waffles"
+	desc = "Made with love."
+	icon_state = "wafflecustom"
+	baseicon = "wafflecustom"
+	basename = "waffles"
+	add_overlays = 0
+	top = 0
+
+/obj/item/weapon/reagent_containers/food/snacks/customizable/candy/cookie
+	name = "cookie"
+	desc = "COOKIE!!1!"
+	icon_state = "cookiecustom"
+	baseicon = "cookiecustom"
+	basename = "cookie"
+	add_overlays = 0
+	top = 0
+
+/obj/item/weapon/reagent_containers/food/snacks/customizable/candy/donut
+	name = "filled donut"
+	desc = "A donut"
+	icon_state = "donutcustom"
+	baseicon = "donutcustom"
+	basename = "filled donut"
+	add_overlays = 0
+	top = 0
+
+/obj/item/weapon/reagent_containers/food/snacks/customizable/candy/bar
+	name = "flavored chocolate bar"
+	desc = "Made in a factory downtown."
+	icon_state = "barcustom"
+	baseicon = "barcustom"
+	basename = "flavored chocolate bar"
+	add_overlays = 0
+	top = 0
+
+/obj/item/weapon/reagent_containers/food/snacks/customizable/candy/sucker
+	name = "flavored sucker"
+	desc = "Suck suck suck."
+	icon_state = "suckercustom"
+	baseicon = "suckercustom"
+	basename = "flavored sucker"
+	add_overlays = 0
+	top = 0
+
+/obj/item/weapon/reagent_containers/food/snacks/customizable/candy/cash
+	name = "flavored cash"
+	desc = "I got piles!"
+	icon_state = "cashcustom"
+	baseicon = "cashcustom"
+	basename = "flavored cash"
+	add_overlays = 0
+	top = 0
+
+/obj/item/weapon/reagent_containers/food/snacks/customizable/candy/coin
+	name = "flavored coin"
+	desc = "Clink, clink, clink."
+	icon_state = "coincustom"
+	baseicon = "coincustom"
+	basename = "flavored coin"
+	add_overlays = 0
+	top = 0
+
+/obj/item/weapon/reagent_containers/food/snacks/customizable/fullycustom // In the event you fuckers find something I forgot to add a customizable food for.
+	name = "on a plate"
+	desc = "A unique dish."
+	icon_state = "fullycustom"
+	baseicon = "fullycustom"
+	basename = "on a plate"
+	add_overlays = 0
+	top = 0
+	sandwich_limit = 20
+	fullycustom = 1
 
 /obj/item/weapon/reagent_containers/food/snacks/customizable/soup
 	name = "soup"
@@ -146,11 +236,10 @@
 	icon_state = "burger"
 	baseicon = "burger"
 	basename = "burger"
-	trash = null
 
 /obj/item/weapon/reagent_containers/food/snacks/customizable/attackby(obj/item/W as obj, mob/user as mob)
 	if(src.contents.len > sandwich_limit)
-		user << "<span class='warning'>If you put anything else on [src] it's going to collapse.</span>"
+		user << "<span class='warning'>If you put anything else in or on [src] it's going to make a mess.</span>"
 		return
 	else if(istype(W,/obj/item/weapon/reagent_containers/food/snacks))
 		user << "<span class='notice'> You add [W] to [src].</span>"
@@ -179,12 +268,24 @@
 		else
 			fullname += ", [O.name]"
 
-		var/image/I = new(src.icon, "[baseicon]_filling")
-		I.color = O.filling_color
-		if(add_overlays)
-			I.pixel_x = pick(list(-1,0,1))
-			I.pixel_y = (i*2)+1
-		overlays += I
+		if(!fullycustom)
+			var/image/I = new(src.icon, "[baseicon]_filling")
+			if(istype(O, /obj/item/weapon/reagent_containers/food/snacks))
+				var/obj/item/weapon/reagent_containers/food/snacks/food = O
+				if(!food.filling_color == "#FFFFFF")
+					I.color = food.filling_color
+				else
+					I.color = pick("#FF0000","#0000FF","#008000","#FFFF00")
+			if(add_overlays)
+				I.pixel_x = pick(list(-1,0,1))
+				I.pixel_y = (i*2)+1
+			overlays += I
+		else
+			var/image/F = new(O.icon, O.icon_state)
+			F.pixel_x = pick(list(-1,0,1))
+			F.pixel_y = pick(list(-1,0,1))
+			overlays += F
+			overlays += O.overlays
 
 	if(top)
 		var/image/T = new(src.icon, "[baseicon]_top")

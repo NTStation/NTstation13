@@ -21,10 +21,10 @@
 		user << "<span class='notice'>[src] is still active!</span>"
 		return
 	if(!istype(I, /obj/item/weapon/reagent_containers/food/snacks/))
-		user << "<span class='warning'>Budget cuts won't let you put that in there..</span>"
+		user << "<span class='warning'>Budget cuts won't let you put that in there.</span>"
 		return
 	if(istype(I, /obj/item/weapon/reagent_containers/food/snacks/deepfryholder))
-		user << "<span class='userdanger'>[I] is already deepfried, you vomituous deviant. This attempt has been logged and will be forwarded to the galactic authorities.</span>"
+		user << "<span class='userdanger'>[I] is already deepfried, you vomituous deviant.</span>"
 		return
 	else
 		user << "<span class='notice'>You put [I] into [src].</span>"
