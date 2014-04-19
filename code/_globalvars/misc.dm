@@ -26,5 +26,11 @@ var/global/list/biblestates =		list("bible", "koran", "scrapbook", "burning", "h
 //Bible itemstates
 var/global/list/bibleitemstates =	list("bible", "koran", "scrapbook", "bible", "bible", "bible", "syringe_kit", "syringe_kit", "syringe_kit", "syringe_kit", "syringe_kit", "kingyellow", "ithaqua", "scientology", "melted", "necronomicon")
 
-//Bible deity names (Mainly stolen from 'famous' works of fiction)
-var/global/list/bibledeitynames = 	list("Space Jesus","Space Satan","Cthulu","Armok","Honk Mother","Gia","Beelzebub","Ymir","Zeus","Yog-Sothoth","Talos","Cuban Pete","Chaos","Slaanesh","Death","Drilldoizer","Astaruas","Bringer of Deep fryer","Gwyn","Flying Spaghetti Monster","The Force")
+//Bible deity names, Stolen from Fiction and gathered from the Players
+var/global/list/bibledeitynames = 	list("Space Jesus","Space Satan","Cthulu","Armok","Honk Mother","Gia","Beelzebub","Ymir","Zeus","Yog-Sothoth","Talos","Cuban Pete", \
+"Chaos","Slaanesh","Death","Drilldoizer","Astaruas","Bringer of Deep fryer","Gwyn","Flying Spaghetti Monster","The Force","Great Corgi","Mr Rogers","Old man Henderson", \
+"Galactus, Eater of Worlds","Gozer the Gozerian","Crom","The Q Continuum","Arceus","Eru Ilúvatar","Honk Father","Silencer", "Toolboxia","Bhaal","Comdomiom","God-king Boris")
+
+
+
+
