@@ -152,3 +152,10 @@
 	icon_state = "miner"
 	item_state = "miner"
 	item_color = "miner"
+
+/obj/item/clothing/under/billydonka
+	name = "candyman outfit"
+	desc = "Who can take a rainbow and wrap it in a sigh?"
+	icon_state = "billydonka"
+	item_state = "billydonka"
+	item_color = "billydonka"
