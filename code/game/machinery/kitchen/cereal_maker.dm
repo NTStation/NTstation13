@@ -15,7 +15,7 @@
 		user << "<span class='notice'>[src] is already processing, please wait.</span>"
 		return
 	if(!istype(I, /obj/item/weapon/reagent_containers/food/snacks/))
-		user << "<span class='warning'>Budget cuts won't let you put that in there..</span>"
+		user << "<span class='warning'>Budget cuts won't let you put that in there.</span>"
 		return
 	if(istype(I, /obj/item/weapon/reagent_containers/food/snacks/cereal/))
 		user << "<span class='warning'>That isn't going to fit.</span>"

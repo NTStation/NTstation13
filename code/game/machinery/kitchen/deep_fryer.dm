@@ -24,7 +24,7 @@
 		user << "<span class='warning'>Budget cuts won't let you put that in there.</span>"
 		return
 	if(istype(I, /obj/item/weapon/reagent_containers/food/snacks/deepfryholder))
-		user << "<span class='userdanger'>[I] is already deepfried, you vomituous deviant.</span>"
+		user << "<span class='userdanger'>You cannot doublefry.</span>"
 		return
 	else
 		user << "<span class='notice'>You put [I] into [src].</span>"
