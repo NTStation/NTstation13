@@ -1,5 +1,4 @@
 /obj/item/weapon/reagent_containers/food/snacks/breadslice/attackby(obj/item/W as obj, mob/user as mob)
-
 	if(istype(W,/obj/item/weapon/reagent_containers/food/snacks))
 		var/obj/item/weapon/reagent_containers/food/snacks/customizable/S = new(get_turf(user))
 		S.attackby(W,user)
@@ -164,9 +163,72 @@
 	add_overlays = 0
 	top = 0
 
+/obj/item/weapon/reagent_containers/food/snacks/customizable/candy/cotton
+	name = "flavored cotton candy"
+	desc = "Who can take a sunrise, sprinkle it with dew,"
+	icon_state = "cottoncandycustom"
+	baseicon = "cottoncandycustom"
+	basename = "flavored cotton candy"
+	add_overlays = 0
+	top = 0
+
+/obj/item/weapon/reagent_containers/food/snacks/customizable/candy/gummybear
+	name = "flavored giant gummy bear"
+	desc = "Cover it in chocolate and a miracle or two,"
+	icon_state = "gummybearcustom"
+	baseicon = "gummybearcustom"
+	basename = "flavored giant gummy bear"
+	add_overlays = 0
+	top = 0
+
+/obj/item/weapon/reagent_containers/food/snacks/customizable/candy/gummyworm
+	name = "flavored giant gummy worm"
+	desc = "The Candy Man can 'cause he mixes it with love,"
+	icon_state = "gummywormcustom"
+	baseicon = "gummywormcustom"
+	basename = "flavored giant gummy worm"
+	add_overlays = 0
+	top = 0
+
+/obj/item/weapon/reagent_containers/food/snacks/customizable/candy/jellybean
+	name = "flavored giant jelly bean"
+	desc = "And makes the world taste good."
+	icon_state = "jellybeancustom"
+	baseicon = "jellybeancustom"
+	basename = "flavored giant jelly bean"
+	add_overlays = 0
+	top = 0
+
+/obj/item/weapon/reagent_containers/food/snacks/customizable/candy/jawbreaker
+	name = "flavored jawbreaker"
+	desc = "Who can take a rainbow, Wrap it in a sigh,"
+	icon_state = "jawbreakercustom"
+	baseicon = "jawbreakercustom"
+	basename = "flavored jawbreaker"
+	add_overlays = 0
+	top = 0
+
+/obj/item/weapon/reagent_containers/food/snacks/customizable/candy/candycane
+	name = "flavored candy cane"
+	desc = "Soak it in the sun and make strawberry-lemon pie,"
+	icon_state = "candycanecustom"
+	baseicon = "candycanecustom"
+	basename = "flavored candy cane"
+	add_overlays = 0
+	top = 0
+
+/obj/item/weapon/reagent_containers/food/snacks/customizable/candy/gum
+	name = "flavored gum"
+	desc = "The Candy Man can 'cause he mixes it with love and makes the world taste good. And the world tastes good 'cause the Candy Man thinks it should..."
+	icon_state = "gumcustom"
+	baseicon = "gumcustom"
+	basename = "flavored gum"
+	add_overlays = 0
+	top = 0
+
 /obj/item/weapon/reagent_containers/food/snacks/customizable/candy/donut
 	name = "filled donut"
-	desc = "A donut"
+	desc = "Donut eat this!" // kill me
 	icon_state = "donutcustom"
 	baseicon = "donutcustom"
 	basename = "filled donut"
@@ -192,7 +254,7 @@
 	top = 0
 
 /obj/item/weapon/reagent_containers/food/snacks/customizable/candy/cash
-	name = "flavored cash"
+	name = "flavored chocolate cash"
 	desc = "I got piles!"
 	icon_state = "cashcustom"
 	baseicon = "cashcustom"
@@ -201,7 +263,7 @@
 	top = 0
 
 /obj/item/weapon/reagent_containers/food/snacks/customizable/candy/coin
-	name = "flavored coin"
+	name = "flavored chocolate coin"
 	desc = "Clink, clink, clink."
 	icon_state = "coincustom"
 	baseicon = "coincustom"
