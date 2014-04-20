@@ -660,6 +660,11 @@
 		icon_state = "treehuggertank"
 		gender = NEUTER
 
+	skull_tank
+		name = "Skull Tank Top"
+		icon_state = "skull_ttop"
+		gender = NEUTER
+
 	rus_shirt
 		name = "Telnyashka Shirt"
 		icon_state = "rus_shirt"
