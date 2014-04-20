@@ -99,6 +99,7 @@
 	var/revival_brain_life = -1
 
 	var/rename_cyborg = 1
+	var/borg_remembers = 0
 
 	//Used for modifying movement speed for mobs.
 	//Unversal modifiers
@@ -281,6 +282,8 @@
 					config.revival_brain_life		= text2num(value)
 				if("rename_cyborg")
 					config.rename_cyborg			= text2num(value)
+				if("borg_remembers")
+					config.borg_remembers			= text2num(value)
 				if("run_delay")
 					config.run_speed				= text2num(value)
 				if("walk_delay")

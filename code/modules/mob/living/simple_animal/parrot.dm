@@ -47,7 +47,7 @@ lines 294-301 in living/say.dm (speech buffer)
 
 	speak_chance = 1 //1% (1 in 100) chance every tick; So about once per 150 seconds, assuming an average tick is 1.5s
 	turns_per_move = 5
-	meat_type = /obj/item/weapon/reagent_containers/food/snacks/cracker/
+	meat_type = list(/obj/item/weapon/reagent_containers/food/snacks/cracker/)
 	melee_damage_upper = 10
 	melee_damage_lower = 5
 
@@ -122,6 +122,9 @@ lines 294-301 in living/say.dm (speech buffer)
 		held_item = null
 	walk(src,0)
 	..()
+	if(!ckey)
+		new /obj/item/clothing/head/polypelt(loc)
+		qdel(src)
 
 /mob/living/simple_animal/parrot/Stat()
 	..()

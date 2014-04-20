@@ -11,7 +11,7 @@
 	blocks_air = 1
 	temperature = TCMB
 	var/mineralName = ""
-	var/mineralAmt = 0
+	var/mineralAmt = 3
 	var/spread = 0 //will the seam spread?
 	var/spreadChance = 0 //the percentual chance of an ore spreading to the neighbouring tiles
 	var/last_act = 0
@@ -72,7 +72,7 @@
 /turf/simulated/mineral/random
 	name = "Mineral deposit"
 	icon_state = "rock"
-	var/mineralSpawnChanceList = list("Uranium" = 3, "Diamond" = 1, "Gold" = 4, "Silver" = 5, "Plasma" = 10, "Iron" = 40, "Gibtonite" = 2/*, "Adamantine" =5*/, "Cave" = 1)//Currently, Adamantine won't spawn as it has no uses. -Durandan
+	var/mineralSpawnChanceList = list("Uranium" = 20, "Diamond" = 4, "Gold" = 10, "Silver" = 15, "Plasma" = 25, "Iron" = 40, "Gibtonite" = 2/*, "Adamantine" =5*/, "Cave" = 2)//Currently, Adamantine won't spawn as it has no uses. -Durandan
 	var/mineralChance = 10  //means 10% chance of this plot changing to a mineral deposit
 
 /turf/simulated/mineral/random/New()
@@ -111,7 +111,7 @@
 /turf/simulated/mineral/random/high_chance
 	icon_state = "rock_highchance"
 	mineralChance = 25
-	mineralSpawnChanceList = list("Uranium" = 10, "Iron" = 30, "Diamond" = 2, "Gold" = 10, "Silver" = 10, "Plasma" = 20)
+	mineralSpawnChanceList = list("Uranium" = 35, "Diamond" = 20, "Gold" = 45, "Silver" = 50, "Plasma" = 30)
 
 /turf/simulated/mineral/random/high_chance/New()
 	icon_state = "rock"
@@ -129,7 +129,7 @@
 /turf/simulated/mineral/random/low_chance
 	icon_state = "rock_lowchance"
 	mineralChance = 5
-	mineralSpawnChanceList = list("Uranium" = 2, "Diamond" = 1, "Gold" = 3, "Silver" = 4, "Plasma" = 5, "Iron" = 45, "Gibtonite" = 4)
+	mineralSpawnChanceList = list("Uranium" = 5, "Diamond" = 2, "Gold" = 5, "Silver" = 10, "Plasma" = 15, "Iron" = 35, "Gibtonite" = 1)
 
 /turf/simulated/mineral/random/low_chance/New()
 	icon_state = "rock"
@@ -138,8 +138,7 @@
 /turf/simulated/mineral/uranium
 	name = "Uranium deposit"
 	mineralName = "Uranium"
-	mineralAmt = 5
-	spreadChance = 0
+	spreadChance = 5
 	spread = 1
 	hidden = 1
 	scan_state = "rock_Uranium"
@@ -148,7 +147,6 @@
 	name = "Iron deposit"
 	icon_state = "rock_Iron"
 	mineralName = "Iron"
-	mineralAmt = 5
 	spreadChance = 20
 	spread = 1
 	hidden = 0
@@ -156,7 +154,6 @@
 /turf/simulated/mineral/diamond
 	name = "Diamond deposit"
 	mineralName = "Diamond"
-	mineralAmt = 5
 	spreadChance = 0
 	spread = 1
 	hidden = 1
@@ -165,8 +162,7 @@
 /turf/simulated/mineral/gold
 	name = "Gold deposit"
 	mineralName = "Gold"
-	mineralAmt = 5
-	spreadChance = 0
+	spreadChance = 5
 	spread = 1
 	hidden = 1
 	scan_state = "rock_Gold"
@@ -174,8 +170,7 @@
 /turf/simulated/mineral/silver
 	name = "Silver deposit"
 	mineralName = "Silver"
-	mineralAmt = 5
-	spreadChance = 0
+	spreadChance = 5
 	spread = 1
 	hidden = 1
 	scan_state = "rock_Silver"
@@ -184,8 +179,7 @@
 	name = "Plasma deposit"
 	icon_state = "rock_Plasma"
 	mineralName = "Plasma"
-	mineralAmt = 5
-	spreadChance = 0
+	spreadChance = 5
 	spread = 1
 	hidden = 1
 	scan_state = "rock_Plasma"

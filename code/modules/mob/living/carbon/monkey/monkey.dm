@@ -10,6 +10,12 @@
 	update_icon = 0		///no need to call regenerate_icon
 	ventcrawler = 1
 
+/mob/living/carbon/monkey/punpun
+	name = "Pun Pun"
+	voice_name = "Pun Pun"
+	icon_state = "punpun1"
+	gender = MALE
+
 /mob/living/carbon/monkey/New()
 	create_reagents(1000)
 	verbs += /mob/living/proc/mob_sleep
