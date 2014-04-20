@@ -674,3 +674,28 @@
 		name = "Telnyashka Tank Top"
 		icon_state = "rus_ttop"
 		gender = NEUTER
+
+	ss13_shirt
+		name = "Space Station 13 Shirt"
+		icon_state = "ss13shirt"
+		gender = NEUTER
+
+	bleed_shirt
+		name = "Wound Shirt"
+		icon_state = "bleedshirt"
+		gender = NEUTER
+
+	ian_shirt
+		name = "Corgi Shirt"
+		icon_state = "ianshirt"
+		gender = NEUTER
+
+	wat_shirt
+		name = "Question Shirt"
+		icon_state = "watshirt"
+		gender = NEUTER
+
+	skull_shirt
+		name = "Skull Shirt"
+		icon_state = "skullshirt"
+		gender = NEUTER
