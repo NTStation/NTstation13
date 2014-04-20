@@ -77,3 +77,7 @@
 /obj/structure/closet/critter/pug
 	name = "pug crate"
 	content_mob = /mob/living/simple_animal/pug
+
+/obj/structure/closet/critter/parrot
+	name = "parrot crate"
+	content_mob = /mob/living/simple_animal/parrot
