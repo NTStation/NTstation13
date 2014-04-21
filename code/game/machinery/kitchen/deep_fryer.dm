@@ -20,17 +20,11 @@
 	if(on)
 		user << "<span class='notice'>[src] is still active!</span>"
 		return
+	if(!istype(I, /obj/item/weapon/reagent_containers/food/snacks/))
+		user << "<span class='warning'>Budget cuts won't let you put that in there.</span>"
+		return
 	if(istype(I, /obj/item/weapon/reagent_containers/food/snacks/deepfryholder))
-		user << "<span class='userdanger'>[I] is already deepfried, you vomituous deviant. This attempt has been logged.</span>"
-		return
-	if(istype(I, /obj/item/weapon/grab) || istype(I, /obj/item/tk_grab))
-		user << "<span class='warning'>That isn't going to fit.</span>"
-		return
-	if(istype(I, /obj/item/weapon/reagent_containers/glass))
-		user << "<span class='warning'>That would probably break [src].</span>"
-		return
-	if(!user.unEquip(I))
-		user << "<span class='warning'>You cannot deepfry [I].</span>"
+		user << "<span class='userdanger'>You cannot doublefry.</span>"
 		return
 	else
 		user << "<span class='notice'>You put [I] into [src].</span>"
@@ -48,6 +42,7 @@
 				food.reagents.trans_to(S, food.reagents.total_volume)
 			S.color = "#FFAD33"
 			S.icon = frying.icon
+			S.overlays = I.overlays
 			S.icon_state = frying.icon_state
 			S.name = "deep fried [frying.name]"
 			S.desc = I.desc

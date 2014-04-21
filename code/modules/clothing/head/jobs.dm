@@ -5,7 +5,6 @@
 	desc = "It's a hat used by chefs to keep hair out of your food. Judging by the food in the mess, they don't work."
 	icon_state = "chef"
 	item_state = "chef"
-	desc = "The commander in chef's head wear."
 
 //Captain
 /obj/item/clothing/head/caphat
@@ -79,3 +78,10 @@
 
 /obj/item/clothing/head/beret/sec/navyofficer
 	icon_state = "officerberet"
+
+
+/obj/item/clothing/head/billydonka
+	name = "candyman's hat"
+	desc = "And the world tastes good 'cause the candyman thinks it should.."
+	icon_state = "billydonkahat"
+	item_state = "billydonkahat"
