@@ -233,3 +233,10 @@
 	new /obj/item/clothing/mask/gas/sexymime(src.loc)
 	new /obj/item/clothing/under/sexymime(src.loc)
 	qdel(src)
+
+/obj/effect/landmark/costume/anon/New()
+	new /obj/item/clothing/mask/fawkes(src.loc)
+	new /obj/item/clothing/head/fedora(src.loc)
+	new /obj/item/clothing/under/lawyer/bluesuit(src.loc)
+	new /obj/item/clothing/suit/lawyer/blackjacket(src.loc)
+	qdel(src)
