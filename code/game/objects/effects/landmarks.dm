@@ -235,8 +235,7 @@
 	qdel(src)
 
 /obj/effect/landmark/costume/anon/New()
-	new /obj/item/clothing/mask/fawkes(src.loc)
-	new /obj/item/clothing/head/fedora(src.loc)
-	new /obj/item/clothing/under/lawyer/bluesuit(src.loc)
+	new /obj/item/clothing/under/suit_jacket/charcoal(src.loc)
 	new /obj/item/clothing/suit/lawyer/blackjacket(src.loc)
+	new /obj/item/clothing/mask/fawkes(src.loc)
 	qdel(src)
