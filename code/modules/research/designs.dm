@@ -1877,6 +1877,7 @@ datum/design/detective_scanner
 	build_type = PROTOLATHE
 	materials = list("$metal" = 3000, "$glass" = 3000)
 	build_path = /obj/item/device/detective_scanner
+	locked = 1
 	
 datum/design/welding_mask
 	name = "Welding Gas Mask"
