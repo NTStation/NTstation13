@@ -1620,7 +1620,7 @@ datum/design/largecrossbow
 	name = "Energy Crossbow"
 	desc = "A reverse-engineered energy crossbow."
 	id = "largecrossbow"
-	req_tech = list("combat" = 4, "materials" = 5, "engineering" = 3, "biotech" = 4, "syndicate" = 5)
+	req_tech = list("combat" = 4, "materials" = 5, "engineering" = 3, "biotech" = 4, "syndicate" = 4)
 	build_type = PROTOLATHE
 	materials = list("$metal" = 8000, "$glass" = 4000, "$uranium" = 3750, "$silver" = 2000)
 	build_path = /obj/item/weapon/gun/energy/crossbow/largecrossbow
