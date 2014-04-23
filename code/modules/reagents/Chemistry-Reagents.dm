@@ -2185,7 +2185,7 @@ datum
 					new /obj/effect/decal/cleanable/flour(T)
 
 		cherryjelly
-			name = "Cherry Jelly"
+			name = "Berry Jelly"
 			id = "cherryjelly"
 			description = "Totally the best. Only to be spread on foods with excellent lateral symmetry."
 			reagent_state = LIQUID
