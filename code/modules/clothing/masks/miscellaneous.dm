@@ -62,3 +62,11 @@
 		if(!(copytext(message, 1, 2) == "*" || (usr.mind && usr.mind.changeling && (copytext(message, 1, 3) == ":g" || copytext(message, 1, 3) == ":G" || copytext(message, 1, 3) == ":ï"))))
 			message = pick("NEEIIGGGHHHH!", "NEEEIIIIGHH!", "NEIIIGGHH!", "HAAWWWWW!", "HAAAWWW!")
 	return message
+
+/obj/item/clothing/mask/fawkes
+	name = "Guy Fawkes mask"
+	desc = "A mask designed to help you remember a specific date."
+	icon_state = "fawkes"
+	item_state = "fawkes"
+	flags_inv = HIDEFACE
+	w_class = 2
