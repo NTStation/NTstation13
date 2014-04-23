@@ -1615,16 +1615,16 @@ datum/design/rapidsyringe
 	build_type = PROTOLATHE
 	materials = list("$metal" = 6000, "$glass" = 2000)
 	build_path = /obj/item/weapon/gun/syringe/rapidsyringe
-/*
+
 datum/design/largecrossbow
 	name = "Energy Crossbow"
-	desc = "A weapon favoured by syndicate infiltration teams."
+	desc = "A reverse-engineered energy crossbow."
 	id = "largecrossbow"
-	req_tech = list("combat" = 4, "materials" = 5, "engineering" = 3, "biotech" = 4, "syndicate" = 3)
+	req_tech = list("combat" = 4, "materials" = 5, "engineering" = 3, "biotech" = 4, "syndicate" = 4)
 	build_type = PROTOLATHE
-	materials = list("$metal" = 5000, "$glass" = 1000, "$uranium" = 1000, "$silver" = 1000)
-	build_path = /obj/item/weapon/gun/energy/crossbow/largecrossbow"
-*/
+	materials = list("$metal" = 8000, "$glass" = 4000, "$uranium" = 3750, "$silver" = 2000)
+	build_path = /obj/item/weapon/gun/energy/crossbow/largecrossbow
+
 datum/design/temp_gun
 	name = "Temperature Gun"
 	desc = "A gun that fires a concentrated temperature-altering projectile."//Change it if you want
