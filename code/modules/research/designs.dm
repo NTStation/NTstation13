@@ -1867,6 +1867,16 @@ datum/design/borg_syndicate_module
 //////////////////Misc///////////////////
 /////////////////////////////////////////
 
+datum/design/detective_scanner
+	name = "forensic scanner"
+	desc = "Used to remotely scan objects and biomass for DNA and fingerprints. Can print a report of the findings."
+	id = "forensicscanner"
+	req_tech = list("materials" = 3, "magnets" = 5)
+	build_type = PROTOLATHE
+	materials = list("$metal" = 3000, "$glass" = 3000)
+	build_path = /obj/item/device/detective_scanner
+	locked = 1
+	
 datum/design/welding_mask
 	name = "Welding Gas Mask"
 	desc = "A gas mask with built in welding goggles and face shield. Looks like a skull, clearly designed by a nerd."
