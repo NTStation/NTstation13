@@ -176,9 +176,14 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 				for(var/i=1,i<amount+1;i++)
 					for(var/M in being_built.materials)
 						if(!linked_lathe.check_mat(being_built, M))
-							src.visible_message("<font color='blue'>The [src.name] beeps, \"Not enough materials to complete prototype.\"</font>")
+							src.visible_message("<span class='noitce'>The [src.name] beeps, \"Not enough materials to complete all prototypes.\"</span>")
 							g2g = 0
-							break
+							spawn(32*i)
+								linked_lathe.busy = 0
+								screen = 3.1
+								updateUsrDialog()
+							return
+							//break
 						switch(M)
 							if("$metal")
 								linked_lathe.m_amount = max(0, (linked_lathe.m_amount-(being_built.materials[M]/coeff)))
@@ -203,7 +208,7 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 					var/R = being_built.reliability
 					var/O = being_built.locked
 					spawn(32*i)
-						if(g2g) //And if we only fail the material requirements, we still spend time and power
+						if(g2g)
 							var/obj/new_item = new P(src)
 							if( new_item.type == /obj/item/weapon/storage/backpack/holding )
 								new_item.investigate_log("built by [key]","singulo")
@@ -927,7 +932,7 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 			if(linked_imprinter.diamond_amount >= 2000) dat += "<A href='?src=\ref[src];imprinter_ejectsheet=diamond;imprinter_ejectsheet_amt=50'>All</A>"
 			dat += "</div>"
 
-	var/datum/browser/popup = new(user, "rndconsole", name, 420, 450)
+	var/datum/browser/popup = new(user, "rndconsole", name, 620, 450)
 	popup.set_content(dat)
 	popup.open()
 	return
