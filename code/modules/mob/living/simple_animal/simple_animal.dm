@@ -19,8 +19,7 @@
 	var/turns_per_move = 1
 	var/turns_since_move = 0
 	universal_speak = 1
-	var/meat_amount = 0
-	var/meat_type
+	var/list/meat_type = list()
 	var/stop_automated_movement = 0 //Use this to temporarely stop random movement or to if you write special movement code for animals.
 	var/wander = 1	// Does the mob wander around when idle?
 	var/stop_automated_movement_when_pulled = 1 //When set to 1 this stops the animal from moving when someone is pulling it.
@@ -222,11 +221,9 @@
 /mob/living/simple_animal/gib(var/animation = 0)
 	if(icon_gib)
 		flick(icon_gib, src)
-	if(meat_amount && meat_type)
-		for(var/i = 0; i < meat_amount; i++)
-			new meat_type(src.loc)
+	for(var/i in meat_type)
+		new i(get_turf(src))
 	..()
-
 
 /mob/living/simple_animal/blob_act()
 	adjustBruteLoss(20)
@@ -403,9 +400,8 @@
 		else
 			user << "\blue [src] is dead, medical items won't bring it back to life."
 			return
-	else if(meat_type && (stat == DEAD))	//if the animal has a meat, and if it is dead.
-		if(istype(O, /obj/item/weapon/kitchenknife) || istype(O, /obj/item/weapon/butch))
-			harvest()
+	else if(meat_type.len && (stat == DEAD))	//if the animal has a meat, and if it is dead.
+		harvest(O)
 	else
 		if(O.force)
 			var/damage = O.force
@@ -516,10 +512,8 @@
 		new childtype(loc)
 
 // Harvest an animal's delicious byproducts
-/mob/living/simple_animal/proc/harvest()
-	new meat_type (get_turf(src))
-	if(prob(95))
+/mob/living/simple_animal/proc/harvest(obj/item/I)
+	if(istype(I, /obj/item/weapon/kitchenknife) || istype(I, /obj/item/weapon/butch))
+		for(var/i in meat_type)
+			new i(get_turf(src))
 		qdel(src)
-		return
-	gib()
-	return

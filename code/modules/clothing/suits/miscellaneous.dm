@@ -238,3 +238,9 @@
 	item_state = "xenos_helm"
 	body_parts_covered = CHEST|GROIN|LEGS|ARMS|HANDS
 	flags_inv = HIDEGLOVES|HIDESHOES|HIDEJUMPSUIT
+
+/obj/item/clothing/suit/billydonka
+	name = "candyman vest"
+	desc = "The candy man can 'cause he mixes it with love and makes the world taste good."
+	icon_state = "billydonkaoutfit"
+	item_state = "billydonkaoutfit"
