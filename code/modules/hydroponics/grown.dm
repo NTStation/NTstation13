@@ -1046,3 +1046,31 @@
 		if(reagents)
 			reagents.add_reagent("teapowder", 1+round((potency / 10), 2))
 			reagents.add_reagent("kelotane", 1+round((potency / 20), 1))
+
+/obj/item/weapon/reagent_containers/food/snacks/grown/blazeit
+	seed = "/obj/item/seeds/blazeit"
+	name = "cannabis leaf"
+	desc = "420."
+	icon_state = "blazeit"
+	dried_type = /obj/item/weapon/reagent_containers/food/snacks/grown/blazeit
+	New(var/loc, var/potency = 10)
+		..()
+		if(reagents)
+			reagents.add_reagent("nutriment", 1)
+			reagents.add_reagent("space_drugs", 30+round(potency / 8, 1))
+			bitesize = 1+round(reagents.total_volume / 2, 1)
+
+
+/obj/item/weapon/reagent_containers/food/snacks/grown/rainbowblazeit
+	seed = "/obj/item/seeds/rainbowblazeit"
+	name = "rainbow cannabis leaf"
+	desc = "BLAZE IT"
+	icon_state = "rainbowblazeit"
+	dried_type = /obj/item/weapon/reagent_containers/food/snacks/grown/rainbowblazeit
+	New(var/loc, var/potency = 10)
+		..()
+		if(reagents)
+			reagents.add_reagent("nutriment", 1)
+			reagents.add_reagent("space_drugs", 20+round(potency / 8, 1))
+			reagents.add_reagent("mindbreaker", 20+round(potency / 8, 1))
+			bitesize = 1+round(reagents.total_volume / 2, 1)
