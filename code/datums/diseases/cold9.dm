@@ -24,9 +24,9 @@
 			if(prob(1))
 				affected_mob.emote("cough")
 			if(prob(1))
-				affected_mob << "\red Your throat feels sore."
+				affected_mob << "<span class='rose'> Your throat feels sore.</span class>"
 			if(prob(5))
-				affected_mob << "\red You feel stiff."
+				affected_mob << "<span class='rose'> You feel stiff.</span class>"
 		if(3)
 			affected_mob.bodytemperature -= 20
 			if(prob(1))
@@ -34,6 +34,6 @@
 			if(prob(1))
 				affected_mob.emote("cough")
 			if(prob(1))
-				affected_mob << "\red Your throat feels sore."
+				affected_mob << "<span class='rose'> Your throat feels sore.</span class>"
 			if(prob(10))
-				affected_mob << "\red You feel stiff."
+				affected_mob << "<span class='rose'> You feel stiff.</span class>"
