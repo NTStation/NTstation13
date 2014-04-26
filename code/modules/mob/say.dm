@@ -44,7 +44,7 @@
 	if(name != real_name)
 		alt_name = " (died as [real_name])"
 
-	message = src.say_quote(message)
+	message = src.say_quote(message,1)
 	var/rendered = "<span class='game deadsay'><span class='prefix'>DEAD:</span> <span class='name'>[name]</span>[alt_name] <span class='message'>[message]</span></span>"
 
 	for(var/mob/M in player_list)
@@ -65,7 +65,7 @@
 		return 1
 	return 0
 
-/mob/proc/say_quote(var/text)
+/mob/proc/say_quote(var/text, var/isdeadsay)
 	if(!text)
 		return "says, \"...\"";	//not the best solution, but it will stop a large number of runtimes. The cause is somewhere in the Tcomms code
 	var/ending = copytext(text, length(text))
@@ -79,7 +79,8 @@
 		return "asks, \"[text]\"";
 	if (ending == "!")
 		return "exclaims, \"[text]\"";
-
+	if(isdeadsay)
+		return "[pick("moans","complains","cries","whines")], \"[text]\"";
 	return "says, \"[text]\"";
 
 /mob/proc/emote(var/act)
