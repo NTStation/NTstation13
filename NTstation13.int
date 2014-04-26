@@ -1,6 +1,11 @@
 // BEGIN_INTERNALS
 /*
 MAP_ICON_TYPE: 0
+WINDOW: icons\mob\AI.dmi;code\modules\mob\living\silicon\ai\ai.dm
+LAST_COMPILE_VERSION: 504.1234
+DIR: code code\modules code\modules\mob code\modules\mob\living code\modules\mob\living\silicon code\modules\mob\living\silicon\ai icons icons\mob 
+FILE: code\modules\mob\living\silicon\ai\ai.dm
+LAST_COMPILE_TIME: 1398552882
 AUTO_FILE_DIR: OFF
 */
 // END_INTERNALS
