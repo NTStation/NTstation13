@@ -1876,7 +1876,7 @@ datum/design/detective_scanner
 	materials = list("$metal" = 3000, "$glass" = 3000)
 	build_path = /obj/item/device/detective_scanner
 	locked = 1
-	
+
 datum/design/welding_mask
 	name = "Welding Gas Mask"
 	desc = "A gas mask with built in welding goggles and face shield. Looks like a skull, clearly designed by a nerd."
@@ -1912,3 +1912,12 @@ datum/design/night_vision_goggles
 	build_type = PROTOLATHE
 	materials = list("$metal" = 100, "$glass" = 100, "$uranium" = 5000)
 	build_path = /obj/item/clothing/glasses/night
+
+datum/design/magboots
+	name = "Magnetic Boots"
+	desc = "Magnetic boots, often used during extravehicular activity to ensure the user remains safely attached to the vehicle."
+	id = "magboots"
+	req_tech = list("materials" = 4, "magnets" = 4, "engineering" = 5)
+	build_type = PROTOLATHE
+	materials = list("$metal" = 4500, "$silver" = 1500, "$gold" = 2500)
+	build_path = /obj/item/clothing/shoes/magboots
