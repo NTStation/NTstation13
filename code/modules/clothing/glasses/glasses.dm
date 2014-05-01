@@ -74,6 +74,46 @@
 	flash_protect = 1
 	tint = 1
 
+/obj/item/clothing/glasses/sunglasses/garb
+	desc = "Wicked cool."
+	name = "Black GAR Glasses"
+	icon_state = "garb"
+	item_state = "garb"
+	force = 10
+	throwforce = 10
+	attack_verb = list("sliced")
+	hitsound = 'sound/weapons/bladeslice.ogg'
+
+/obj/item/clothing/glasses/sunglasses/supergarb
+	desc = "Wicked cool to the power of SICK."
+	name = "Black SUPER GAR Glasses"
+	icon_state = "supergarb"
+	item_state = "supergarb"
+	force = 12
+	throwforce = 12
+	attack_verb = list("sliced")
+	hitsound = 'sound/weapons/bladeslice.ogg'
+
+/obj/item/clothing/glasses/sunglasses/gar
+	desc = "Cool."
+	name = "GAR Glasses"
+	icon_state = "gar"
+	item_state = "gar"
+	force = 10
+	throwforce = 10
+	attack_verb = list("sliced")
+	hitsound = 'sound/weapons/bladeslice.ogg'
+
+/obj/item/clothing/glasses/sunglasses/supergar
+	desc = "Cool to the power of SICK."
+	name = "SUPER GAR Glasses"
+	icon_state = "supergar"
+	item_state = "supergar"
+	force = 12
+	throwforce = 12
+	attack_verb = list("sliced")
+	hitsound = 'sound/weapons/bladeslice.ogg'
+
 /obj/item/clothing/glasses/welding
 	name = "welding goggles"
 	desc = "Protects the eyes from welders, approved by the mad scientist association."
