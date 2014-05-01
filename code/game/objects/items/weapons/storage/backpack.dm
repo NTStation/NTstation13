@@ -48,8 +48,7 @@
 			if(confirm == "No")
 				return
 			investigate_log("has become a singularity. Caused by [user.key]","singulo")
-			user << "\red The Bluespace interfaces of the two devices catastrophically malfunction!"
-			qdel(W)
+			user << "<span class='notice'> The Bluespace interfaces of the two devices catastrophically malfunction!</span>"			qdel(W)
 			var/obj/machinery/singularity/singulo = new /obj/machinery/singularity (get_turf(src))
 			singulo.energy = 300 //should make it a bit bigger~
 			message_admins("[key_name_admin(user)] detonated a bag of holding")
@@ -61,9 +60,9 @@
 	proc/failcheck(mob/user as mob)
 		if (prob(src.reliability)) return 1 //No failure
 		if (prob(src.reliability))
-			user << "\red The Bluespace portal resists your attempt to add another item." //light failure
+			user << "<span class='notice'> The Bluespace portal resists your attempt to add another item.</span>" //light failure
 		else
-			user << "\red The Bluespace generator malfunctions!"
+			user << "<span class='notice'> The Bluespace generator malfunctions!</span>"
 			for (var/obj/O in src.contents) //it broke, delete what was in it
 				qdel(O)
 			crit_fail = 1
