@@ -118,7 +118,6 @@ obj/item/clothing/glasses/hud/security/gars
 	darkness_view = 1
 	flash_protect = 1
 	tint = 1
-	cover_hair = 1
 	force = 10
 	throwforce = 10
 	attack_verb = list("sliced")
@@ -132,7 +131,6 @@ obj/item/clothing/glasses/hud/security/supergars
 	darkness_view = 1
 	flash_protect = 1
 	tint = 1
-	cover_hair = 1
 	force = 12
 	throwforce = 12
 	attack_verb = list("sliced")

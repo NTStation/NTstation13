@@ -33,7 +33,6 @@
 	var/emagged = 0
 	var/hud = null
 	var/list/icon/current = list() //the current hud icons
-	var/cover_hair = null
 
 /obj/item/clothing/glasses/proc/process_hud(var/mob/M)
 	return

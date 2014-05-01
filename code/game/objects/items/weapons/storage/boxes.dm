@@ -45,8 +45,7 @@
 	user << "<span class='notice'>You fold [src] flat.</span>"
 	var/obj/item/I = new foldable(get_turf(src))
 	user.put_in_hands(I)
-	user.update_inv_l_hand()
-	user.update_inv_r_hand()
+	user.update_inv_hands()
 	qdel(src)
 
 

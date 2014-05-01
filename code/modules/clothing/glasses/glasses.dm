@@ -79,7 +79,6 @@
 	name = "Black GAR Glasses"
 	icon_state = "garb"
 	item_state = "garb"
-	cover_hair = 1
 	force = 10
 	throwforce = 10
 	attack_verb = list("sliced")
@@ -90,7 +89,6 @@
 	name = "Black SUPER GAR Glasses"
 	icon_state = "supergarb"
 	item_state = "supergarb"
-	cover_hair = 1
 	force = 12
 	throwforce = 12
 	attack_verb = list("sliced")
@@ -101,7 +99,6 @@
 	name = "GAR Glasses"
 	icon_state = "gar"
 	item_state = "gar"
-	cover_hair = 1
 	force = 10
 	throwforce = 10
 	attack_verb = list("sliced")
@@ -112,7 +109,6 @@
 	name = "SUPER GAR Glasses"
 	icon_state = "supergar"
 	item_state = "supergar"
-	cover_hair = 1
 	force = 12
 	throwforce = 12
 	attack_verb = list("sliced")
