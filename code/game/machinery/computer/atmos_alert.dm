@@ -112,14 +112,14 @@
 		var/removing_zone = href_list["priority_clear"]
 		for(var/zone in priority_alarms)
 			if(ckey(zone) == removing_zone)
-				usr << "\green Priority Alert for area [] cleared."
+				usr << "<span class='green'>Priority Alert for area [] cleared.</span>"
 				priority_alarms -= zone
 
 	if(href_list["minor_clear"])
 		var/removing_zone = href_list["minor_clear"]
 		for(var/zone in minor_alarms)
 			if(ckey(zone) == removing_zone)
-				usr << "\green Minor Alert for area [] cleared."
+				usr << "<span class='green'>Minor Alert for area [] cleared.</span>"
 				minor_alarms -= zone
 	update_icon()
 	return
