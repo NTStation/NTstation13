@@ -105,7 +105,7 @@
 //		grant_runeword(cult_mind.current)
 //		grant_secondword(cult_mind.current)
 		update_cult_icons_added(cult_mind)
-		cult_mind.current << "\blue You are a member of the cult!"
+		cult_mind.current << "<span class='notice'>You are a member of the cult!</span>"
 		memorize_cult_objectives(cult_mind)
 		cult_mind.special_role = "Cultist"
 
@@ -208,7 +208,7 @@
 //			wordexp = "[wordfree] is free..."
 		if("hide")
 			wordexp = "[wordhide] is hide..."
-	cult_mob << "\red [pick("You remember something from the dark teachings of your master","You hear a dark voice on the wind","Black blood oozes into your vision and forms into symbols","You catch a brief glimmer of the otherside")]... [wordexp]"
+	cult_mob << "<span class='danger'>[pick("You remember something from the dark teachings of your master</span>","You hear a dark voice on the wind","Black blood oozes into your vision and forms into symbols","You catch a brief glimmer of the otherside")]... [wordexp]"
 	cult_mob.mind.store_memory("<B>You remember that</B> [wordexp]", 0, 0)
 	cult_mob.mind.cult_words += word
 	if(cult_mob.mind.cult_words.len == allwords.len)
