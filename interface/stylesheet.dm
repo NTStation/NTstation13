@@ -56,6 +56,7 @@ h1.alert, h2.alert		{color: #000000;}
 .notice					{color: #000099;}
 .unconscious			{color: #0000FF;	font-weight: bold;}
 .suicide				{color: #ff5050;	font-style: italic;}
+.green					{color: #03ff39;}
 
 .alien					{color: #543354;}
 .newscaster				{color: #800000;}
