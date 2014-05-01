@@ -48,7 +48,8 @@
 			if(confirm == "No")
 				return
 			investigate_log("has become a singularity. Caused by [user.key]","singulo")
-			user << "<span class='notice'> The Bluespace interfaces of the two devices catastrophically malfunction!</span>"			qdel(W)
+			user << "<span class='notice'> The Bluespace interfaces of the two devices catastrophically malfunction!</span>"
+			qdel(W)
 			var/obj/machinery/singularity/singulo = new /obj/machinery/singularity (get_turf(src))
 			singulo.energy = 300 //should make it a bit bigger~
 			message_admins("[key_name_admin(user)] detonated a bag of holding")
