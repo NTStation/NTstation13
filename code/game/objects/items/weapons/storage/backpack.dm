@@ -41,7 +41,7 @@
 
 	attackby(obj/item/weapon/W as obj, mob/user as mob)
 		if(crit_fail)
-			user << "\red The Bluespace generator isn't working."
+			user << "<span class = 'notice'>The Bluespace generator isn't working.</span>"
 			return
 		if(istype(W, /obj/item/weapon/storage/backpack/holding) && !W.crit_fail)
 			var/confirm = input("Are you sure you want to do that?", "Put in Bag of Holding") in list("Yes", "No")
