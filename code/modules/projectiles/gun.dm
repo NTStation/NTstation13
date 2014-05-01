@@ -93,8 +93,5 @@
 		process_chamber()
 		update_icon()
 
-		if(user.hand)
-			user.update_inv_l_hand(0)
-		else
-			user.update_inv_r_hand(0)
+		user.update_inv_hands(0)
 

@@ -1,8 +1,7 @@
 //Xeno Overlays Indexes//////////
-#define X_L_HAND_LAYER			1
-#define X_R_HAND_LAYER			2
-#define X_FIRE_LAYER			3
-#define X_TOTAL_LAYERS			3
+#define X_HANDS_LAYER			1
+#define X_FIRE_LAYER			2
+#define X_TOTAL_LAYERS			2
 /////////////////////////////////
 
 /mob/living/carbon/alien/humanoid
@@ -31,8 +30,7 @@
 	..()
 	if (notransform)	return
 
-	update_inv_r_hand(0)
-	update_inv_l_hand(0)
+	update_inv_hands(0)
 	update_inv_pockets(0)
 	update_hud()
 //	update_icons() //Handled in update_transform(), leaving this here as a reminder
@@ -60,28 +58,29 @@
 	if(update_icons)
 		update_icons()
 
+/mob/living/carbon/alien/humanoid/update_inv_hands(update_icons = 1)
+	var/list/X_hands_overlays = list()
 
-/mob/living/carbon/alien/humanoid/update_inv_r_hand(update_icons = 1)
-	if(r_hand)
-		var/t_state = r_hand.item_state
-		if(!t_state)
-			t_state = r_hand.icon_state
-		r_hand.screen_loc = ui_rhand
-		overlays_standing[X_R_HAND_LAYER]	= image("icon" = 'icons/mob/items_righthand.dmi', "icon_state" = t_state)
-	else
-		overlays_standing[X_R_HAND_LAYER]	= null
-	if(update_icons)
-		update_icons()
-
-/mob/living/carbon/alien/humanoid/update_inv_l_hand(update_icons = 1)
 	if(l_hand)
 		var/t_state = l_hand.item_state
 		if(!t_state)
 			t_state = l_hand.icon_state
 		l_hand.screen_loc = ui_lhand
-		overlays_standing[X_L_HAND_LAYER]	= image("icon" = 'icons/mob/items_lefthand.dmi', "icon_state" = t_state)
-	else
-		overlays_standing[X_L_HAND_LAYER]	= null
+		X_hands_overlays	+= image("icon" = 'icons/mob/items_lefthand.dmi', "icon_state" = t_state)
+
+	if(r_hand)
+		var/t_state = r_hand.item_state
+		if(!t_state)
+			t_state = r_hand.icon_state
+		r_hand.screen_loc = ui_rhand
+		X_hands_overlays	+= image("icon" = 'icons/mob/items_righthand.dmi', "icon_state" = t_state)
+
+	if(X_hands_overlays.len)
+		overlays_standing[X_HANDS_LAYER] = X_hands_overlays
+		var/image/I = overlays_standing[X_HANDS_LAYER]
+		if(I)
+			overlays += I
+
 	if(update_icons)
 		update_icons()
 
@@ -95,7 +94,6 @@
 		overlays_standing[X_FIRE_LAYER] = null
 
 //Xeno Overlays Indexes//////////
-#undef X_L_HAND_LAYER
-#undef X_R_HAND_LAYER
+#undef X_HANDS_LAYER
 #undef X_FIRE_LAYER
 #undef X_TOTAL_LAYERS

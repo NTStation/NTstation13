@@ -22,12 +22,12 @@
 	if(istype(user.l_hand, /obj/item/weapon/melee/arm_blade)) //Not the nicest way to do it, but eh
 		qdel(user.l_hand)
 		user.visible_message("<span class='warning'>With a sickening crunch, [user] reforms his blade into an arm!</span>", "<span class='notice'>We assimilate our blade into our body</span>", "<span class='warning>You hear organic matter ripping and tearing!</span>")
-		user.update_inv_l_hand()
+		user.update_inv_hands()
 		return
 	if(istype(user.r_hand, /obj/item/weapon/melee/arm_blade))
 		qdel(user.r_hand)
 		user.visible_message("<span class='warning'>With a sickening crunch, [user] reforms his blade into an arm!</span>", "<span class='notice'>We assimilate our blade into our body</span>", "<span class='warning>You hear organic matter ripping and tearing!</span>")
-		user.update_inv_r_hand()
+		user.update_inv_hands()
 		return
 	..(user, target)
 

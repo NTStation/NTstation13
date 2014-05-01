@@ -28,11 +28,11 @@
 		if(slot_l_hand)
 			l_hand = I
 			I.equipped(src, slot)
-			update_inv_l_hand(redraw_mob)
+			update_inv_hands(redraw_mob)
 		if(slot_r_hand)
 			r_hand = I
 			I.equipped(src, slot)
-			update_inv_r_hand(redraw_mob)
+			update_inv_hands(redraw_mob)
 		if(slot_in_backpack)
 			if(I == get_active_hand())
 				unEquip(I)
