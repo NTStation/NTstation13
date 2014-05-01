@@ -1,11 +1,6 @@
 // BEGIN_INTERNALS
 /*
 MAP_ICON_TYPE: 0
-WINDOW: icons\mob\AI.dmi;code\modules\mob\living\silicon\ai\ai.dm;icons\mob\suit.dmi;icons\mob\head.dmi;icons\obj\clothing\hats.dmi;icons\obj\clothing\suits.dmi
-LAST_COMPILE_VERSION: 504.1234
-DIR: code code\__DEFINES code\datums\wires code\game code\game\objects code\game\objects\items\weapons code\game\objects\items\weapons\melee code\game\objects\structures\crates_lockers code\modules code\modules\clothing code\modules\clothing\spacesuits code\modules\mob\living\silicon code\modules\mob\living\silicon\ai icons icons\misc icons\mob icons\obj icons\obj\clothing icons\obj\flora 
-FILE: icons\obj\clothing\suits.dmi
-LAST_COMPILE_TIME: 1398919601
 AUTO_FILE_DIR: OFF
 */
 // END_INTERNALS
