@@ -44,6 +44,9 @@
 			user << "\red The Bluespace generator isn't working."
 			return
 		if(istype(W, /obj/item/weapon/storage/backpack/holding) && !W.crit_fail)
+			var/confirm = input("Are you sure you want to do that?", "Put in Bag of Holding") in list("Yes", "No")
+			if(confirm == "No")
+				return
 			investigate_log("has become a singularity. Caused by [user.key]","singulo")
 			user << "\red The Bluespace interfaces of the two devices catastrophically malfunction!"
 			qdel(W)
