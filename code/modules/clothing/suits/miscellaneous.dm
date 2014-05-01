@@ -85,6 +85,14 @@
 	allowed = list(/obj/item/weapon/storage/fancy/cigarettes,/obj/item/weapon/spacecash)
 	flags_inv = HIDEJUMPSUIT
 
+/obj/item/clothing/suit/cabanelasuit
+	name = "Cabanela Suit"
+	desc = "This suit seems old."
+	icon_state = "cabanela"
+	item_state = "cabanela"
+	body_parts_covered = CHEST|GROIN|LEGS|ARMS
+	allowed = list(/obj/item/weapon/storage/fancy/cigarettes,/obj/item/weapon/spacecash)
+	flags_inv = HIDEJUMPSUIT
 
 /obj/item/clothing/suit/apron/overalls
 	name = "coveralls"

@@ -56,29 +56,30 @@ Please contact me on #coderbus IRC. ~Carnie x
 */
 
 //Human Overlays Indexes/////////
-#define BODY_LAYER				22		//underwear, undershirts, eyes, lips(makeup)
-#define MUTATIONS_LAYER			21		//Tk headglows etc.
-#define AUGMENTS_LAYER			20
-#define DAMAGE_LAYER			19		//damage indicators (cuts and burns)
-#define UNIFORM_LAYER			18
-#define ID_LAYER				17
-#define SHOES_LAYER				16
-#define GLOVES_LAYER			15
-#define EARS_LAYER				14
-#define SUIT_LAYER				13
-#define GLASSES_LAYER			12
-#define BELT_LAYER				11		//Possible make this an overlay of somethign required to wear a belt?
-#define SUIT_STORE_LAYER		10
-#define BACK_LAYER				9
-#define HAIR_LAYER				8		//TODO: make part of head layer?
-#define FACEMASK_LAYER			7
+#define BODY_LAYER				23		//underwear, undershirts, eyes, lips(makeup)
+#define MUTATIONS_LAYER			22		//Tk headglows etc.
+#define AUGMENTS_LAYER			21
+#define DAMAGE_LAYER			20		//damage indicators (cuts and burns)
+#define UNIFORM_LAYER			19
+#define ID_LAYER				18
+#define SHOES_LAYER				17
+#define GLOVES_LAYER			16
+#define EARS_LAYER				15
+#define SUIT_LAYER				14
+#define GLASSES_LAYER			13
+#define BELT_LAYER				12		//Possible make this an overlay of somethign required to wear a belt?
+#define SUIT_STORE_LAYER		11
+#define BACK_LAYER				10
+#define HAIR_LAYER				9		//TODO: make part of head layer?
+#define FACEMASK_LAYER			8
+#define GAR_LAYER				7
 #define HEAD_LAYER				6
 #define HANDCUFF_LAYER			5
 #define LEGCUFF_LAYER			4
 #define L_HAND_LAYER			3
 #define R_HAND_LAYER			2		//Having the two hands seperate seems rather silly, merge them together? It'll allow for code to be reused on mobs with arbitarily many hands
 #define FIRE_LAYER				1		//If you're on fire
-#define TOTAL_LAYERS			22		//KEEP THIS UP-TO-DATE OR SHIT WILL BREAK ;_;
+#define TOTAL_LAYERS			23		//KEEP THIS UP-TO-DATE OR SHIT WILL BREAK ;_;
 //////////////////////////////////
 /mob/living/carbon/human
 	var/list/overlays_standing[TOTAL_LAYERS]
@@ -402,14 +403,18 @@ Please contact me on #coderbus IRC. ~Carnie x
 
 /mob/living/carbon/human/update_inv_glasses()
 	remove_overlay(GLASSES_LAYER)
+	remove_overlay(GAR_LAYER)
 
 	if(glasses)
 		if(client && hud_used && hud_used.hud_shown)
 			if(hud_used.inventory_shown)			//if the inventory is open ...
 				glasses.screen_loc = ui_glasses		//...draw the item in the inventory screen
 			client.screen += glasses				//Either way, add the item to the HUD
-
-		overlays_standing[GLASSES_LAYER]	= image("icon"='icons/mob/eyes.dmi', "icon_state"="[glasses.icon_state]", "layer"=-GLASSES_LAYER)
+		if(glasses.cover_hair)
+			overlays_standing[GAR_LAYER]	= image("icon"='icons/mob/eyes.dmi', "icon_state"="[glasses.icon_state]", "layer"=-GAR_LAYER)
+			apply_overlay(GAR_LAYER)
+		else
+			overlays_standing[GLASSES_LAYER]	= image("icon"='icons/mob/eyes.dmi', "icon_state"="[glasses.icon_state]", "layer"=-GLASSES_LAYER)
 
 	apply_overlay(GLASSES_LAYER)
 
@@ -674,6 +679,7 @@ Please contact me on #coderbus IRC. ~Carnie x
 #undef SUIT_STORE_LAYER
 #undef BACK_LAYER
 #undef HAIR_LAYER
+#undef GAR_LAYER
 #undef HEAD_LAYER
 #undef HANDCUFF_LAYER
 #undef LEGCUFF_LAYER

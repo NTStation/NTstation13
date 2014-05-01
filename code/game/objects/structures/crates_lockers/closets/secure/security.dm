@@ -26,6 +26,7 @@
 		new /obj/item/device/radio/headset/heads/captain(src)
 		new /obj/item/clothing/gloves/captain(src)
 		new /obj/item/weapon/gun/energy/gun(src)
+		new /obj/item/clothing/glasses/sunglasses/supergar(src)
 		return
 
 
@@ -86,6 +87,7 @@
 		new /obj/item/weapon/melee/baton/loaded(src)
 		new /obj/item/weapon/gun/energy/gun(src)
 		new /obj/item/weapon/storage/belt/security(src)
+		new /obj/item/clothing/glasses/hud/security/supergars(src)
 		return
 
 
@@ -199,6 +201,7 @@
 	New()
 		..()
 		sleep(2)
+		new /obj/item/clothing/suit/cabanelasuit(src)
 		new /obj/item/clothing/under/det(src)
 		new /obj/item/clothing/suit/det_suit(src)
 		new /obj/item/clothing/gloves/black(src)

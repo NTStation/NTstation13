@@ -95,6 +95,35 @@
 	flash_protect = 1
 	tint = 1
 
+obj/item/clothing/glasses/hud/security/gars
+	name = "HUD GAR glasses"
+	desc = "GAR glasses with a HUD."
+	icon_state = "gars"
+	item_state = "gars"
+	darkness_view = 1
+	flash_protect = 1
+	tint = 1
+	cover_hair = 1
+	force = 10
+	throwforce = 10
+	attack_verb = list("sliced")
+	hitsound = 'sound/weapons/bladeslice.ogg'
+
+obj/item/clothing/glasses/hud/security/supergars
+	name = "SUPER HUD GAR glasses"
+	desc = "SUPER GAR glasses with a HUD."
+	icon_state = "supergars"
+	item_state = "supergars"
+	darkness_view = 1
+	flash_protect = 1
+	tint = 1
+	cover_hair = 1
+	force = 12
+	throwforce = 12
+	attack_verb = list("sliced")
+	hitsound = 'sound/weapons/bladeslice.ogg'
+
+
 /obj/item/clothing/glasses/hud/security/sunglasses/emp_act(severity)
 	if(emagged == 0)
 		emagged = 1
