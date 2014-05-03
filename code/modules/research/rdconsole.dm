@@ -176,7 +176,7 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 				for(var/i=1,i<amount+1;i++)
 					for(var/M in being_built.materials)
 						if(!linked_lathe.check_mat(being_built, M))
-							src.visible_message("<span class='noitce'>The [src.name] beeps, \"Not enough materials to complete all prototypes.\"</span>")
+							src.visible_message("<span class='notice'>The [src.name] beeps, \"Not enough materials to complete all prototypes.\"</span>")
 							g2g = 0
 							spawn(32*i)
 								linked_lathe.busy = 0
