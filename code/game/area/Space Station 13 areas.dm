@@ -300,7 +300,7 @@ proc/process_ghost_teleport_locs()
 // === end remove
 
 /area/spacecontent
-	name = "space
+	name = "space"
 
 /area/spacecontent/a1
 	icon_state = "spacecontent1"
