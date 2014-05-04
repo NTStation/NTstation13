@@ -66,11 +66,11 @@ Please contact me on #coderbus IRC. ~Carnie x
 #define GLOVES_LAYER			14
 #define EARS_LAYER				13
 #define SUIT_LAYER				12
-#define GLASSES_LAYER			11
-#define BELT_LAYER				10		//Possible make this an overlay of somethign required to wear a belt?
-#define SUIT_STORE_LAYER		9
-#define BACK_LAYER				8
-#define HAIR_LAYER				7		//Seperate layer so head items can overlay Hair and Hair underlay head items
+#define BELT_LAYER				11		//Possible make this an overlay of somethign required to wear a belt?
+#define SUIT_STORE_LAYER		10
+#define BACK_LAYER				9
+#define HAIR_LAYER				8		//Seperate layer so head items can overlay Hair and Hair underlay head items
+#define GLASSES_LAYER			7		//Seperate layer to head so Eye wear is below helmets, but above hair
 #define FACEMASK_LAYER			6
 #define HEAD_LAYER				5
 #define HANDCUFF_LAYER			4

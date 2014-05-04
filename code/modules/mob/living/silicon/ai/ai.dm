@@ -132,7 +132,7 @@ var/list/ai_list = list()
 		return
 
 		//if(icon_state == initial(icon_state))
-	var/icontype = input("Please, select a display!", "AI", null/*, null*/) in list("Clown", "Monochrome", "Blue", "Inverted", "Firewall", "Green", "Red", "Static", "Red October", "Hades", "Helios", "House", "President", "Gigyas", "Yuki", "SyndicatMeow", "Heartline")
+	var/icontype = input("Please, select a display!", "AI", null/*, null*/) in list("Clown", "Monochrome", "Blue", "Inverted", "Firewall", "Green", "Red", "Static", "Red October", "Hades", "Helios", "House", "President", "Gigyas", "Yuki", "SyndicatMeow", "Heartline", "Alter Ego", "Triumvirate", "Triumvirate-M", "Urist", "Text", "Smiley", "Matrix", "Dorf", "Bliss", "Completely Normal Not-Malf AI", "Fuzz", "Goon")
 	if(icontype == "Clown")
 		icon_state = "ai-clown2"
 	else if(icontype == "Monochrome")
@@ -167,6 +167,30 @@ var/list/ai_list = list()
 		icon_state = "ai-syndicatmeow"
 	else if(icontype == "Heartline")
 		icon_state = "ai-heartline"
+	else if (icontype == "Alter Ego")
+		icon_state = "ai-alterego"
+	else if (icontype == "Triumvirate")
+		icon_state = "ai-triumvirate"
+	else if (icontype == "Triumvirate-M")
+		icon_state = "ai-triumvirate-malf"
+	else if (icontype == "Urist")
+		icon_state = "ai-toodeep"
+	else if (icontype == "Text")
+		icon_state = "ai-text"
+	else if (icontype == "Smiley")
+		icon_state = "ai-smiley"
+	else if (icontype == "Matrix")
+		icon_state = "ai-matrix"
+	else if (icontype == "Dorf")
+		icon_state = "ai-dorf"
+	else if (icontype == "Bliss")
+		icon_state = "ai-bliss"
+	else if (icontype == "Completely Normal Not-Malf AI")
+		icon_state = "ai-notmalf"
+	else if (icontype == "Fuzz")
+		icon_state = "ai-fuzz"
+	else if (icontype == "Goon")
+		icon_state = "ai-goon"
 	//else
 			//usr <<"You can only change your display once!"
 			//return

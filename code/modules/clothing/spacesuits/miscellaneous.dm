@@ -19,6 +19,21 @@
 	slowdown = 1
 	armor = list(melee = 65, bullet = 50, laser = 50, energy = 25, bomb = 50, bio = 100, rad = 50)
 
+//Old Spacesuit
+/obj/item/clothing/head/helmet/space/oldsuit
+	name = "Old Space Helmet"
+	desc = "An old fashioned space helmet. Good times."
+	icon_state = "spaceold"
+	item_state = "spaceold"
+
+/obj/item/clothing/suit/space/oldsuit
+	name = "Old Space Suit"
+	icon_state = "spaceold"
+	item_state = "spaceold"
+	desc = "An old fashioned baggy grey space suit. Good times."
+	slowdown = 1
+
+
 
 //Deathsquad suit
 /obj/item/clothing/head/helmet/space/deathsquad
