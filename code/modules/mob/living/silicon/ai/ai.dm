@@ -132,7 +132,7 @@ var/list/ai_list = list()
 		return
 
 		//if(icon_state == initial(icon_state))
-	var/icontype = input("Please, select a display!", "AI", null/*, null*/) in list("Clown", "Monochrome", "Blue", "Inverted", "Firewall", "Green", "Red", "Static", "Red October", "Hades", "Helios", "House", "President", "Gigyas", "Yuki", "SyndicatMeow", "Heartline", "Alter Ego", "Triumvirate", "Triumvirate-M", "Urist", "Text", "Smiley", "Matrix", "Dorf", "Bliss", "Completely Normal Not-Malf AI", "Fuzz", "Goon", "Database", "Glitchman", "AmericAI")
+	var/icontype = input("Please, select a display!", "AI", null/*, null*/) in list("Clown", "Monochrome", "Blue", "Inverted", "Firewall", "Green", "Red", "Static", "Red October", "Hades", "Helios", "House", "President", "Gigyas", "Yuki", "SyndicatMeow", "Heartline", "Alter Ego", "Triumvirate", "Triumvirate-M", "Urist", "Text", "Smiley", "Matrix", "Dorf", "Bliss", "Completely Normal Not-Malf AI", "Fuzz", "Goon", "Database", "Glitchman", "AmericAI", "Nanotrasen")
 	if(icontype == "Clown")
 		icon_state = "ai-clown2"
 	else if(icontype == "Monochrome")
@@ -197,6 +197,8 @@ var/list/ai_list = list()
 		icon_state = "ai-glitchman"
 	else if (icontype == "AmericAI")
 		icon_state = "ai-murica"
+	else if (icontype == "Nanotrasen")
+		icon_state = "ai-nanotrasen"
 	//else
 			//usr <<"You can only change your display once!"
 			//return
