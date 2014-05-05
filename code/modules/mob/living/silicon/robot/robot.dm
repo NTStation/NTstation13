@@ -1087,7 +1087,7 @@
 	lawupdate = 0
 	scrambledcodes = 1
 	modtype = "Synd"
-	faction = "syndicate"
+	factions = list("syndicate")
 	designation = "Syndicate"
 
 /mob/living/silicon/robot/syndicate/New(loc)
