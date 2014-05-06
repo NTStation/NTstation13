@@ -87,10 +87,7 @@
 
 	if(W == A)
 		W.attack_self(src)
-		if(hand)
-			update_inv_l_hand(0)
-		else
-			update_inv_r_hand(0)
+		update_inv_hands(0)
 		return
 
 	// operate two levels deep here (item in backpack in src; NOT item in box in backpack in src)

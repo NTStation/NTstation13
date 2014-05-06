@@ -52,6 +52,10 @@
 		name = "Short Hair"	  // try to capatilize the names please~
 		icon_state = "hair_a" // you do not need to define _s or _l sub-states, game automatically does this for you
 
+	shorthair2
+		name = "Short Hair 2"
+		icon_state = "hair_shorthair2"
+
 	cut
 		name = "Cut Hair"
 		icon_state = "hair_c"
@@ -64,9 +68,17 @@
 		name = "Long Hair"
 		icon_state = "hair_vlong"
 
+	long_over_eye
+		name = "Over eye"
+		icon_state = "hair_longovereye"
+
 	longest
 		name = "Very Long Hair"
 		icon_state = "hair_longest"
+
+	longest2
+		name = "Very Long Over Eye"
+		icon_state = "hair_longest2"
 
 	longfringe
 		name = "Long Fringe"
@@ -75,6 +87,10 @@
 	longestalt
 		name = "Longer Fringe"
 		icon_state = "hair_vlongfringe"
+
+	gentle
+		name = "Gentle"
+		icon_state = "hair_gentle"
 
 	halfbang
 		name = "Half-banged Hair"
@@ -95,6 +111,26 @@
 	ponytail3
 		name = "Ponytail 3"
 		icon_state = "hair_ponytail3"
+
+	side_tail
+		name = "Side Pony"
+		icon_state = "hair_sidetail"
+
+	side_tail2
+		name = "Side Pony 2"
+		icon_state = "hair_sidetail2"
+
+	side_tail3
+		name = "Side Pony 3"
+		icon_state = "hair_stail"
+
+	oneshoulder
+		name = "One Shoulder"
+		icon_state = "hair_oneshoulder"
+
+	tressshoulder
+		name = "Tress Shoulder"
+		icon_state = "hair_tressshoulder"
 
 	parted
 		name = "Parted"
@@ -119,6 +155,10 @@
 	bedhead3
 		name = "Bedhead 3"
 		icon_state = "hair_bedheadv3"
+
+	messy
+		name = "Messy"
+		icon_state = "hair_messy"
 
 	beehive
 		name = "Beehive"
@@ -208,6 +248,10 @@
 		name = "Spiky"
 		icon_state = "hair_spikey"
 
+	protagonist
+		name = "Slightly long"
+		icon_state = "hair_protagonist"
+
 	kusangi
 		name = "Kusanagi Hair"
 		icon_state = "hair_kusanagi"
@@ -219,6 +263,26 @@
 	himecut
 		name = "Hime Cut"
 		icon_state = "hair_himecut"
+
+	antenna
+		name = "Ahoge"
+		icon_state = "hair_antenna"
+
+	pigtail
+		name = "Pig tails"
+		icon_state = "hair_pigtails"
+
+	front_braid
+		name = "Braided front"
+		icon_state = "hair_braidfront"
+
+	lowbraid
+		name = "Low Braid"
+		icon_state = "hair_hbraid"
+
+	not_floorlength_braid
+		name = "High Braid"
+		icon_state = "hair_braid2"
 
 	braid
 		name = "Floorlength Braid"
@@ -264,65 +328,6 @@
 		name = "Bun Head"
 		icon_state = "hair_bun"
 
-	side_tail
-		name = "Side Pony"
-		icon_state = "hair_sidetail"
-
-	long_over_eye
-		name = "Over eye"
-		icon_state = "hair_longovereye"
-
-	front_braid
-		name = "Braided front"
-		icon_state = "hair_braidfront"
-
-	antenna
-		name = "Ahoge"
-		icon_state = "hair_antenna"
-
-	pigtail
-		name = "Pig tails"
-		icon_state = "hair_pigtails"
-
-	protagonist
-		name = "Slightly long"
-		icon_state = "hair_protagonist"
-
-	side_tail2
-		name = "Side Tail2"
-		icon_state = "hair_sidetail2"
-
-	not_floorlength_braid
-		name = "Not Floorlength Braid"
-		icon_state = "hair_braid2"
-
-	lowbraid
-		name = "Low Braid"
-		icon_state = "hair_hbraid"
-
-	gentle
-		name = "Gentle"
-		icon_state = "hair_gentle"
-
-	side_tail3
-		name = "Side Tail3"
-		icon_state = "hair_stail"
-
-	oneshoulder
-		name = "One Shoulder"
-		icon_state = "hair_oneshoulder"
-
-	tressshoulder
-		name = "Tress Shoulder"
-		icon_state = "hair_tressshoulder"
-
-	messy
-		name = "Messy"
-		icon_state = "hair_messy"
-
-	shorthair2
-		name = "Short Hair2"
-		icon_state = "hair_shorthair2"
 /////////////////////////////
 // Facial Hair Definitions //
 /////////////////////////////
@@ -660,6 +665,11 @@
 		icon_state = "treehuggertank"
 		gender = NEUTER
 
+	skull_tank
+		name = "Skull Tank Top"
+		icon_state = "skull_ttop"
+		gender = NEUTER
+
 	rus_shirt
 		name = "Telnyashka Shirt"
 		icon_state = "rus_shirt"
@@ -668,4 +678,29 @@
 	rus_tank
 		name = "Telnyashka Tank Top"
 		icon_state = "rus_ttop"
+		gender = NEUTER
+
+	ss13_shirt
+		name = "Space Station 13 Shirt"
+		icon_state = "ss13shirt"
+		gender = NEUTER
+
+	bleed_shirt
+		name = "Wound Shirt"
+		icon_state = "bleedshirt"
+		gender = NEUTER
+
+	ian_shirt
+		name = "Corgi Shirt"
+		icon_state = "ianshirt"
+		gender = NEUTER
+
+	wat_shirt
+		name = "Question Shirt"
+		icon_state = "watshirt"
+		gender = NEUTER
+
+	skull_shirt
+		name = "Skull Shirt"
+		icon_state = "skullshirt"
 		gender = NEUTER

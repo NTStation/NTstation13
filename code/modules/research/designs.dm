@@ -72,7 +72,7 @@ datum/design/seccamera
 	id = "seccamera"
 	req_tech = list("programming" = 2)
 	build_type = IMPRINTER
-	materials = list("$glass" = 2000, "sacid" = 20)
+	materials = list("$glass" = 1000, "sacid" = 20)
 	build_path = /obj/item/weapon/circuitboard/security
 
 datum/design/aicore
@@ -81,7 +81,7 @@ datum/design/aicore
 	id = "aicore"
 	req_tech = list("programming" = 4, "biotech" = 3)
 	build_type = IMPRINTER
-	materials = list("$glass" = 2000, "sacid" = 20)
+	materials = list("$glass" = 1000, "sacid" = 20)
 	build_path = /obj/item/weapon/circuitboard/aicore
 
 datum/design/aiupload
@@ -90,7 +90,7 @@ datum/design/aiupload
 	id = "aiupload"
 	req_tech = list("programming" = 4)
 	build_type = IMPRINTER
-	materials = list("$glass" = 2000, "sacid" = 20)
+	materials = list("$glass" = 1000, "sacid" = 20)
 	build_path = /obj/item/weapon/circuitboard/aiupload
 
 datum/design/borgupload
@@ -99,7 +99,7 @@ datum/design/borgupload
 	id = "borgupload"
 	req_tech = list("programming" = 4)
 	build_type = IMPRINTER
-	materials = list("$glass" = 2000, "sacid" = 20)
+	materials = list("$glass" = 1000, "sacid" = 20)
 	build_path = /obj/item/weapon/circuitboard/borgupload
 
 datum/design/med_data
@@ -108,7 +108,7 @@ datum/design/med_data
 	id = "med_data"
 	req_tech = list("programming" = 2)
 	build_type = IMPRINTER
-	materials = list("$glass" = 2000, "sacid" = 20)
+	materials = list("$glass" = 1000, "sacid" = 20)
 	build_path = /obj/item/weapon/circuitboard/med_data
 
 datum/design/operating
@@ -117,7 +117,7 @@ datum/design/operating
 	id = "operating"
 	req_tech = list("programming" = 2, "biotech" = 2)
 	build_type = IMPRINTER
-	materials = list("$glass" = 2000, "sacid" = 20)
+	materials = list("$glass" = 1000, "sacid" = 20)
 	build_path = /obj/item/weapon/circuitboard/operating
 
 datum/design/pandemic
@@ -126,7 +126,7 @@ datum/design/pandemic
 	id = "pandemic"
 	req_tech = list("programming" = 2, "biotech" = 2)
 	build_type = IMPRINTER
-	materials = list("$glass" = 2000, "sacid" = 20)
+	materials = list("$glass" = 1000, "sacid" = 20)
 	build_path = /obj/item/weapon/circuitboard/pandemic
 
 datum/design/scan_console
@@ -135,7 +135,7 @@ datum/design/scan_console
 	id = "scan_console"
 	req_tech = list("programming" = 2, "biotech" = 3)
 	build_type = IMPRINTER
-	materials = list("$glass" = 2000, "sacid" = 20)
+	materials = list("$glass" = 1000, "sacid" = 20)
 	build_path = /obj/item/weapon/circuitboard/scan_consolenew
 
 datum/design/comconsole
@@ -144,7 +144,7 @@ datum/design/comconsole
 	id = "comconsole"
 	req_tech = list("programming" = 2, "magnets" = 2)
 	build_type = IMPRINTER
-	materials = list("$glass" = 2000, "sacid" = 20)
+	materials = list("$glass" = 1000, "sacid" = 20)
 	build_path = /obj/item/weapon/circuitboard/communications
 
 datum/design/idcardconsole
@@ -153,7 +153,7 @@ datum/design/idcardconsole
 	id = "idcardconsole"
 	req_tech = list("programming" = 2)
 	build_type = IMPRINTER
-	materials = list("$glass" = 2000, "sacid" = 20)
+	materials = list("$glass" = 1000, "sacid" = 20)
 	build_path = /obj/item/weapon/circuitboard/card
 
 datum/design/crewconsole
@@ -162,7 +162,7 @@ datum/design/crewconsole
 	id = "crewconsole"
 	req_tech = list("programming" = 3, "magnets" = 2, "biotech" = 2)
 	build_type = IMPRINTER
-	materials = list("$glass" = 2000, "sacid" = 20)
+	materials = list("$glass" = 1000, "sacid" = 20)
 	build_path = /obj/item/weapon/circuitboard/crew
 
 datum/design/teleconsole
@@ -171,7 +171,7 @@ datum/design/teleconsole
 	id = "teleconsole"
 	req_tech = list("programming" = 3, "bluespace" = 2)
 	build_type = IMPRINTER
-	materials = list("$glass" = 2000, "sacid" = 20)
+	materials = list("$glass" = 1000, "sacid" = 20)
 	build_path = /obj/item/weapon/circuitboard/teleporter
 
 datum/design/secdata
@@ -180,7 +180,7 @@ datum/design/secdata
 	id = "secdata"
 	req_tech = list("programming" = 2)
 	build_type = IMPRINTER
-	materials = list("$glass" = 2000, "sacid" = 20)
+	materials = list("$glass" = 1000, "sacid" = 20)
 	build_path = /obj/item/weapon/circuitboard/secure_data
 
 datum/design/atmosalerts
@@ -189,7 +189,7 @@ datum/design/atmosalerts
 	id = "atmosalerts"
 	req_tech = list("programming" = 2)
 	build_type = IMPRINTER
-	materials = list("$glass" = 2000, "sacid" = 20)
+	materials = list("$glass" = 1000, "sacid" = 20)
 	build_path = /obj/item/weapon/circuitboard/atmos_alert
 
 datum/design/air_management
@@ -198,7 +198,7 @@ datum/design/air_management
 	id = "air_management"
 	req_tech = list("programming" = 2)
 	build_type = IMPRINTER
-	materials = list("$glass" = 2000, "sacid" = 20)
+	materials = list("$glass" = 1000, "sacid" = 20)
 	build_path = /obj/item/weapon/circuitboard/air_management
 
 datum/design/robocontrol
@@ -207,7 +207,7 @@ datum/design/robocontrol
 	id = "robocontrol"
 	req_tech = list("programming" = 4)
 	build_type = IMPRINTER
-	materials = list("$glass" = 2000, "sacid" = 20)
+	materials = list("$glass" = 1000, "sacid" = 20)
 	build_path = /obj/item/weapon/circuitboard/robotics
 
 datum/design/clonecontrol
@@ -216,7 +216,7 @@ datum/design/clonecontrol
 	id = "clonecontrol"
 	req_tech = list("programming" = 3, "biotech" = 3)
 	build_type = IMPRINTER
-	materials = list("$glass" = 2000, "sacid" = 20)
+	materials = list("$glass" = 1000, "sacid" = 20)
 	build_path = /obj/item/weapon/circuitboard/cloning
 
 datum/design/clonepod
@@ -225,7 +225,7 @@ datum/design/clonepod
 	id = "clonepod"
 	req_tech = list("programming" = 3, "biotech" = 3)
 	build_type = IMPRINTER
-	materials = list("$glass" = 2000, "sacid" = 20)
+	materials = list("$glass" = 1000, "sacid" = 20)
 	build_path = /obj/item/weapon/circuitboard/clonepod
 
 datum/design/clonescanner
@@ -234,7 +234,7 @@ datum/design/clonescanner
 	id = "clonescanner"
 	req_tech = list("programming" = 3, "biotech" = 3)
 	build_type = IMPRINTER
-	materials = list("$glass" = 2000, "sacid" = 20)
+	materials = list("$glass" = 1000, "sacid" = 20)
 	build_path = /obj/item/weapon/circuitboard/clonescanner
 
 datum/design/arcadebattle
@@ -243,7 +243,7 @@ datum/design/arcadebattle
 	id = "arcademachine"
 	req_tech = list("programming" = 1)
 	build_type = IMPRINTER
-	materials = list("$glass" = 2000, "sacid" = 20)
+	materials = list("$glass" = 1000, "sacid" = 20)
 	build_path = /obj/item/weapon/circuitboard/arcade/battle
 
 datum/design/orion_trail
@@ -252,25 +252,25 @@ datum/design/orion_trail
 	id = "arcademachine"
 	req_tech = list("programming" = 2)
 	build_type = IMPRINTER
-	materials = list("$glass" = 2000, "sacid" = 20)
+	materials = list("$glass" = 1000, "sacid" = 20)
 	build_path = /obj/item/weapon/circuitboard/arcade/orion_trail
 
 datum/design/powermonitor
 	name = "Circuit Design (Power Monitor)"
-	desc = "Allows for the construction of circuit boards used to build a new power monitor."
+	desc = "Allows for the construction of circuit boards used to build a new power monitor"
 	id = "powermonitor"
 	req_tech = list("programming" = 2)
 	build_type = IMPRINTER
-	materials = list("$glass" = 2000, "sacid" = 20)
+	materials = list("$glass" = 1000, "sacid" = 20)
 	build_path = /obj/item/weapon/circuitboard/powermonitor
 
 datum/design/solarcontrol
 	name = "Circuit Design (Solar Control)"
-	desc = "Allows for the construction of circuit boards used to build a solar control console."
+	desc = "Allows for the construction of circuit boards used to build a solar control console"
 	id = "solarcontrol"
 	req_tech = list("programming" = 2, "powerstorage" = 2)
 	build_type = IMPRINTER
-	materials = list("$glass" = 2000, "sacid" = 20)
+	materials = list("$glass" = 1000, "sacid" = 20)
 	build_path = /obj/item/weapon/circuitboard/solar_control
 
 datum/design/prisonmanage
@@ -279,7 +279,7 @@ datum/design/prisonmanage
 	id = "prisonmanage"
 	req_tech = list("programming" = 2)
 	build_type = IMPRINTER
-	materials = list("$glass" = 2000, "sacid" = 20)
+	materials = list("$glass" = 1000, "sacid" = 20)
 	build_path = /obj/item/weapon/circuitboard/prisoner
 
 datum/design/mechacontrol
@@ -288,7 +288,7 @@ datum/design/mechacontrol
 	id = "mechacontrol"
 	req_tech = list("programming" = 3)
 	build_type = IMPRINTER
-	materials = list("$glass" = 2000, "sacid" = 20)
+	materials = list("$glass" = 1000, "sacid" = 20)
 	build_path = /obj/item/weapon/circuitboard/mecha_control
 
 datum/design/mechapower
@@ -297,7 +297,7 @@ datum/design/mechapower
 	id = "mechapower"
 	req_tech = list("programming" = 2, "powerstorage" = 3)
 	build_type = IMPRINTER
-	materials = list("$glass" = 2000, "sacid" = 20)
+	materials = list("$glass" = 1000, "sacid" = 20)
 	build_path = /obj/item/weapon/circuitboard/mech_bay_power_console
 
 datum/design/rdconsole
@@ -306,7 +306,7 @@ datum/design/rdconsole
 	id = "rdconsole"
 	req_tech = list("programming" = 4)
 	build_type = IMPRINTER
-	materials = list("$glass" = 2000, "sacid" = 20)
+	materials = list("$glass" = 1000, "sacid" = 20)
 	build_path = /obj/item/weapon/circuitboard/rdconsole
 
 datum/design/ordercomp
@@ -315,7 +315,7 @@ datum/design/ordercomp
 	id = "ordercomp"
 	req_tech = list("programming" = 2)
 	build_type = IMPRINTER
-	materials = list("$glass" = 2000, "sacid" = 20)
+	materials = list("$glass" = 1000, "sacid" = 20)
 	build_path = /obj/item/weapon/circuitboard/ordercomp
 
 datum/design/supplycomp
@@ -324,7 +324,7 @@ datum/design/supplycomp
 	id = "supplycomp"
 	req_tech = list("programming" = 3)
 	build_type = IMPRINTER
-	materials = list("$glass" = 2000, "sacid" = 20)
+	materials = list("$glass" = 1000, "sacid" = 20)
 	build_path = /obj/item/weapon/circuitboard/supplycomp
 
 datum/design/mining
@@ -333,7 +333,7 @@ datum/design/mining
 	id = "mining"
 	req_tech = list("programming" = 2)
 	build_type = IMPRINTER
-	materials = list("$glass" = 2000, "sacid" = 20)
+	materials = list("$glass" = 1000, "sacid" = 20)
 	build_path = /obj/item/weapon/circuitboard/mining
 
 datum/design/comm_monitor
@@ -342,7 +342,7 @@ datum/design/comm_monitor
 	id = "comm_monitor"
 	req_tech = list("programming" = 3)
 	build_type = IMPRINTER
-	materials = list("$glass" = 2000, "sacid" = 20)
+	materials = list("$glass" = 1000, "sacid" = 20)
 	build_path = /obj/item/weapon/circuitboard/comm_monitor
 
 datum/design/comm_server
@@ -351,7 +351,7 @@ datum/design/comm_server
 	id = "comm_server"
 	req_tech = list("programming" = 3)
 	build_type = IMPRINTER
-	materials = list("$glass" = 2000, "sacid" = 20)
+	materials = list("$glass" = 1000, "sacid" = 20)
 	build_path = /obj/item/weapon/circuitboard/comm_server
 
 datum/design/message_monitor
@@ -360,7 +360,7 @@ datum/design/message_monitor
 	id = "message_monitor"
 	req_tech = list("programming" = 5)
 	build_type = IMPRINTER
-	materials = list("$glass" = 2000, "sacid" = 20)
+	materials = list("$glass" = 1000, "sacid" = 20)
 	build_path = /obj/item/weapon/circuitboard/message_monitor
 
 datum/design/comm_traffic
@@ -369,7 +369,7 @@ datum/design/comm_traffic
 	id = "comm_traffic"
 	req_tech = list("programming" = 3)
 	build_type = IMPRINTER
-	materials = list("$glass" = 2000, "sacid" = 20)
+	materials = list("$glass" = 1000, "sacid" = 20)
 	build_path = /obj/item/weapon/circuitboard/comm_traffic
 
 datum/design/telesci_console
@@ -378,7 +378,7 @@ datum/design/telesci_console
 	id = "telesci_console"
 	req_tech = list("programming" = 3, "bluespace" = 2)
 	build_type = IMPRINTER
-	materials = list("$glass" = 2000, "sacid" = 20)
+	materials = list("$glass" = 1000, "sacid" = 20)
 	build_path = /obj/item/weapon/circuitboard/telesci_console
 
 datum/design/aifixer
@@ -387,7 +387,7 @@ datum/design/aifixer
 	id = "aifixer"
 	req_tech = list("programming" = 3, "biotech" = 2)
 	build_type = IMPRINTER
-	materials = list("$glass" = 2000, "sacid" = 20)
+	materials = list("$glass" = 1000, "sacid" = 20)
 	build_path = /obj/item/weapon/circuitboard/aifixer
 
 ///////////////////////////////////
@@ -399,7 +399,7 @@ datum/design/safeguard_module
 	id = "safeguard_module"
 	req_tech = list("programming" = 3, "materials" = 4)
 	build_type = IMPRINTER
-	materials = list("$glass" = 2000, "sacid" = 20, "$gold" = 100)
+	materials = list("$glass" = 1000, "sacid" = 20, "$gold" = 100)
 	build_path = /obj/item/weapon/aiModule/supplied/safeguard
 
 datum/design/onehuman_module
@@ -408,7 +408,7 @@ datum/design/onehuman_module
 	id = "onehuman_module"
 	req_tech = list("programming" = 4, "materials" = 6)
 	build_type = IMPRINTER
-	materials = list("$glass" = 2000, "sacid" = 20, "$diamond" = 100)
+	materials = list("$glass" = 1000, "sacid" = 20, "$diamond" = 100)
 	build_path = /obj/item/weapon/aiModule/zeroth/oneHuman
 
 datum/design/protectstation_module
@@ -417,7 +417,7 @@ datum/design/protectstation_module
 	id = "protectstation_module"
 	req_tech = list("programming" = 3, "materials" = 6)
 	build_type = IMPRINTER
-	materials = list("$glass" = 2000, "sacid" = 20, "$gold" = 100)
+	materials = list("$glass" = 1000, "sacid" = 20, "$gold" = 100)
 	build_path = /obj/item/weapon/aiModule/supplied/protectStation
 
 /*datum/design/notele_module
@@ -426,7 +426,7 @@ datum/design/protectstation_module
 	id = "notele_module"
 	req_tech = list("programming" = 3)
 	build_type = IMPRINTER
-	materials = list("$glass" = 2000, "sacid" = 20, "$gold" = 100)
+	materials = list("$glass" = 1000, "sacid" = 20, "$gold" = 100)
 	build_path = /obj/item/weapon/aiModule/teleporterOffline"*/
 
 datum/design/quarantine_module
@@ -435,7 +435,7 @@ datum/design/quarantine_module
 	id = "quarantine_module"
 	req_tech = list("programming" = 3, "biotech" = 2, "materials" = 4)
 	build_type = IMPRINTER
-	materials = list("$glass" = 2000, "sacid" = 20, "$gold" = 100)
+	materials = list("$glass" = 1000, "sacid" = 20, "$gold" = 100)
 	build_path = /obj/item/weapon/aiModule/supplied/quarantine
 
 datum/design/oxygen_module
@@ -444,7 +444,7 @@ datum/design/oxygen_module
 	id = "oxygen_module"
 	req_tech = list("programming" = 3, "biotech" = 2, "materials" = 4)
 	build_type = IMPRINTER
-	materials = list("$glass" = 2000, "sacid" = 20, "$gold" = 100)
+	materials = list("$glass" = 1000, "sacid" = 20, "$gold" = 100)
 	build_path = /obj/item/weapon/aiModule/supplied/oxygen
 
 datum/design/freeform_module
@@ -453,7 +453,7 @@ datum/design/freeform_module
 	id = "freeform_module"
 	req_tech = list("programming" = 4, "materials" = 4)
 	build_type = IMPRINTER
-	materials = list("$glass" = 2000, "sacid" = 20, "$gold" = 100)
+	materials = list("$glass" = 1000, "sacid" = 20, "$gold" = 100)
 	build_path = /obj/item/weapon/aiModule/supplied/freeform
 
 datum/design/reset_module
@@ -462,7 +462,7 @@ datum/design/reset_module
 	id = "reset_module"
 	req_tech = list("programming" = 3, "materials" = 6)
 	build_type = IMPRINTER
-	materials = list("$glass" = 2000, "sacid" = 20, "$gold" = 100)
+	materials = list("$glass" = 1000, "sacid" = 20, "$gold" = 100)
 	build_path = /obj/item/weapon/aiModule/reset
 
 datum/design/purge_module
@@ -471,7 +471,7 @@ datum/design/purge_module
 	id = "purge_module"
 	req_tech = list("programming" = 4, "materials" = 6)
 	build_type = IMPRINTER
-	materials = list("$glass" = 2000, "sacid" = 20, "$diamond" = 100)
+	materials = list("$glass" = 1000, "sacid" = 20, "$diamond" = 100)
 	build_path = /obj/item/weapon/aiModule/reset/purge
 
 datum/design/freeformcore_module
@@ -480,7 +480,7 @@ datum/design/freeformcore_module
 	id = "freeformcore_module"
 	req_tech = list("programming" = 4, "materials" = 6)
 	build_type = IMPRINTER
-	materials = list("$glass" = 2000, "sacid" = 20, "$diamond" = 100)
+	materials = list("$glass" = 1000, "sacid" = 20, "$diamond" = 100)
 	build_path = /obj/item/weapon/aiModule/core/freeformcore
 
 datum/design/asimov
@@ -489,7 +489,7 @@ datum/design/asimov
 	id = "asimov_module"
 	req_tech = list("programming" = 3, "materials" = 6)
 	build_type = IMPRINTER
-	materials = list("$glass" = 2000, "sacid" = 20, "$diamond" = 100)
+	materials = list("$glass" = 1000, "sacid" = 20, "$diamond" = 100)
 	build_path = /obj/item/weapon/aiModule/core/full/asimov
 
 datum/design/paladin_module
@@ -498,7 +498,7 @@ datum/design/paladin_module
 	id = "paladin_module"
 	req_tech = list("programming" = 4, "materials" = 6)
 	build_type = IMPRINTER
-	materials = list("$glass" = 2000, "sacid" = 20, "$diamond" = 100)
+	materials = list("$glass" = 1000, "sacid" = 20, "$diamond" = 100)
 	build_path = /obj/item/weapon/aiModule/core/full/paladin
 
 datum/design/tyrant_module
@@ -507,7 +507,7 @@ datum/design/tyrant_module
 	id = "tyrant_module"
 	req_tech = list("programming" = 4, "syndicate" = 2, "materials" = 6)
 	build_type = IMPRINTER
-	materials = list("$glass" = 2000, "sacid" = 20, "$diamond" = 100)
+	materials = list("$glass" = 1000, "sacid" = 20, "$diamond" = 100)
 	build_path = /obj/item/weapon/aiModule/core/full/tyrant
 
 datum/design/corporate_module
@@ -516,7 +516,7 @@ datum/design/corporate_module
 	id = "corporate_module"
 	req_tech = list("programming" = 4, "materials" = 6)
 	build_type = IMPRINTER
-	materials = list("$glass" = 2000, "sacid" = 20, "$diamond" = 100)
+	materials = list("$glass" = 1000, "sacid" = 20, "$diamond" = 100)
 	build_path = /obj/item/weapon/aiModule/core/full/corp
 
 datum/design/custom_module
@@ -525,7 +525,7 @@ datum/design/custom_module
 	id = "custom_module"
 	req_tech = list("programming" = 4, "materials" = 6)
 	build_type = IMPRINTER
-	materials = list("$glass" = 2000, "sacid" = 20, "$diamond" = 100)
+	materials = list("$glass" = 1000, "sacid" = 20, "$diamond" = 100)
 	build_path = /obj/item/weapon/aiModule/core/full/custom
 
 
@@ -538,7 +538,7 @@ datum/design/subspace_receiver
 	id = "s-receiver"
 	req_tech = list("programming" = 2, "engineering" = 2, "bluespace" = 1)
 	build_type = IMPRINTER
-	materials = list("$glass" = 2000, "sacid" = 20)
+	materials = list("$glass" = 1000, "sacid" = 20)
 	build_path = /obj/item/weapon/circuitboard/telecomms/receiver
 
 datum/design/telecomms_bus
@@ -547,7 +547,7 @@ datum/design/telecomms_bus
 	id = "s-bus"
 	req_tech = list("programming" = 2, "engineering" = 2)
 	build_type = IMPRINTER
-	materials = list("$glass" = 2000, "sacid" = 20)
+	materials = list("$glass" = 1000, "sacid" = 20)
 	build_path = /obj/item/weapon/circuitboard/telecomms/bus
 
 datum/design/telecomms_hub
@@ -556,7 +556,7 @@ datum/design/telecomms_hub
 	id = "s-hub"
 	req_tech = list("programming" = 2, "engineering" = 2)
 	build_type = IMPRINTER
-	materials = list("$glass" = 2000, "sacid" = 20)
+	materials = list("$glass" = 1000, "sacid" = 20)
 	build_path = /obj/item/weapon/circuitboard/telecomms/hub
 
 datum/design/telecomms_relay
@@ -565,7 +565,7 @@ datum/design/telecomms_relay
 	id = "s-relay"
 	req_tech = list("programming" = 2, "engineering" = 2, "bluespace" = 2)
 	build_type = IMPRINTER
-	materials = list("$glass" = 2000, "sacid" = 20)
+	materials = list("$glass" = 1000, "sacid" = 20)
 	build_path = /obj/item/weapon/circuitboard/telecomms/relay
 
 datum/design/telecomms_processor
@@ -574,7 +574,7 @@ datum/design/telecomms_processor
 	id = "s-processor"
 	req_tech = list("programming" = 2, "engineering" = 2)
 	build_type = IMPRINTER
-	materials = list("$glass" = 2000, "sacid" = 20)
+	materials = list("$glass" = 1000, "sacid" = 20)
 	build_path = /obj/item/weapon/circuitboard/telecomms/processor
 
 datum/design/telecomms_server
@@ -583,7 +583,7 @@ datum/design/telecomms_server
 	id = "s-server"
 	req_tech = list("programming" = 2, "engineering" = 2)
 	build_type = IMPRINTER
-	materials = list("$glass" = 2000, "sacid" = 20)
+	materials = list("$glass" = 1000, "sacid" = 20)
 	build_path = /obj/item/weapon/circuitboard/telecomms/server
 
 datum/design/subspace_broadcaster
@@ -592,7 +592,7 @@ datum/design/subspace_broadcaster
 	id = "s-broadcaster"
 	req_tech = list("programming" = 2, "engineering" = 2, "bluespace" = 1)
 	build_type = IMPRINTER
-	materials = list("$glass" = 2000, "sacid" = 20)
+	materials = list("$glass" = 1000, "sacid" = 20)
 	build_path = /obj/item/weapon/circuitboard/telecomms/broadcaster
 
 ///////////////////////////////////
@@ -610,7 +610,7 @@ datum/design/intellicard
 
 datum/design/paicard
 	name = "Personal Artificial Intelligence Card"
-	desc = "Allows for the construction of a pAI Card."
+	desc = "Allows for the construction of a pAI Card"
 	id = "paicard"
 	req_tech = list("programming" = 2)
 	build_type = PROTOLATHE
@@ -627,7 +627,7 @@ datum/design/ripley_main
 	id = "ripley_main"
 	req_tech = list("programming" = 3)
 	build_type = IMPRINTER
-	materials = list("$glass" = 2000, "sacid" = 20)
+	materials = list("$glass" = 1000, "sacid" = 20)
 	build_path = /obj/item/weapon/circuitboard/mecha/ripley/main
 
 datum/design/ripley_peri
@@ -636,7 +636,7 @@ datum/design/ripley_peri
 	id = "ripley_peri"
 	req_tech = list("programming" = 3)
 	build_type = IMPRINTER
-	materials = list("$glass" = 2000, "sacid" = 20)
+	materials = list("$glass" = 1000, "sacid" = 20)
 	build_path = /obj/item/weapon/circuitboard/mecha/ripley/peripherals
 
 datum/design/odysseus_main
@@ -645,7 +645,7 @@ datum/design/odysseus_main
 	id = "odysseus_main"
 	req_tech = list("programming" = 3,"biotech" = 2)
 	build_type = IMPRINTER
-	materials = list("$glass" = 2000, "sacid" = 20)
+	materials = list("$glass" = 1000, "sacid" = 20)
 	build_path = /obj/item/weapon/circuitboard/mecha/odysseus/main
 
 datum/design/odysseus_peri
@@ -654,7 +654,7 @@ datum/design/odysseus_peri
 	id = "odysseus_peri"
 	req_tech = list("programming" = 3,"biotech" = 2)
 	build_type = IMPRINTER
-	materials = list("$glass" = 2000, "sacid" = 20)
+	materials = list("$glass" = 1000, "sacid" = 20)
 	build_path = /obj/item/weapon/circuitboard/mecha/odysseus/peripherals
 
 datum/design/gygax_main
@@ -663,7 +663,7 @@ datum/design/gygax_main
 	id = "gygax_main"
 	req_tech = list("programming" = 4)
 	build_type = IMPRINTER
-	materials = list("$glass" = 2000, "sacid" = 20)
+	materials = list("$glass" = 1000, "sacid" = 20)
 	build_path = /obj/item/weapon/circuitboard/mecha/gygax/main
 
 datum/design/gygax_peri
@@ -672,7 +672,7 @@ datum/design/gygax_peri
 	id = "gygax_peri"
 	req_tech = list("programming" = 4)
 	build_type = IMPRINTER
-	materials = list("$glass" = 2000, "sacid" = 20)
+	materials = list("$glass" = 1000, "sacid" = 20)
 	build_path = /obj/item/weapon/circuitboard/mecha/gygax/peripherals
 
 datum/design/gygax_targ
@@ -681,7 +681,7 @@ datum/design/gygax_targ
 	id = "gygax_targ"
 	req_tech = list("programming" = 4, "combat" = 2)
 	build_type = IMPRINTER
-	materials = list("$glass" = 2000, "sacid" = 20)
+	materials = list("$glass" = 1000, "sacid" = 20)
 	build_path = /obj/item/weapon/circuitboard/mecha/gygax/targeting
 
 datum/design/durand_main
@@ -690,7 +690,7 @@ datum/design/durand_main
 	id = "durand_main"
 	req_tech = list("programming" = 4)
 	build_type = IMPRINTER
-	materials = list("$glass" = 2000, "sacid" = 20)
+	materials = list("$glass" = 1000, "sacid" = 20)
 	build_path = /obj/item/weapon/circuitboard/mecha/durand/main
 
 datum/design/durand_peri
@@ -699,7 +699,7 @@ datum/design/durand_peri
 	id = "durand_peri"
 	req_tech = list("programming" = 4)
 	build_type = IMPRINTER
-	materials = list("$glass" = 2000, "sacid" = 20)
+	materials = list("$glass" = 1000, "sacid" = 20)
 	build_path = /obj/item/weapon/circuitboard/mecha/durand/peripherals
 
 datum/design/durand_targ
@@ -708,7 +708,7 @@ datum/design/durand_targ
 	id = "durand_targ"
 	req_tech = list("programming" = 4, "combat" = 2)
 	build_type = IMPRINTER
-	materials = list("$glass" = 2000, "sacid" = 20)
+	materials = list("$glass" = 1000, "sacid" = 20)
 	build_path = /obj/item/weapon/circuitboard/mecha/durand/targeting
 
 datum/design/honker_main
@@ -717,7 +717,7 @@ datum/design/honker_main
 	id = "honker_main"
 	req_tech = list("programming" = 3)
 	build_type = IMPRINTER
-	materials = list("$glass" = 2000, "sacid" = 20)
+	materials = list("$glass" = 1000, "sacid" = 20)
 	build_path = /obj/item/weapon/circuitboard/mecha/honker/main
 
 datum/design/honker_peri
@@ -726,7 +726,7 @@ datum/design/honker_peri
 	id = "honker_peri"
 	req_tech = list("programming" = 3)
 	build_type = IMPRINTER
-	materials = list("$glass" = 2000, "sacid" = 20)
+	materials = list("$glass" = 1000, "sacid" = 20)
 	build_path = /obj/item/weapon/circuitboard/mecha/honker/peripherals
 
 datum/design/honker_targ
@@ -735,7 +735,7 @@ datum/design/honker_targ
 	id = "honker_targ"
 	req_tech = list("programming" = 3)
 	build_type = IMPRINTER
-	materials = list("$glass" = 2000, "sacid" = 20)
+	materials = list("$glass" = 1000, "sacid" = 20)
 	build_path = /obj/item/weapon/circuitboard/mecha/honker/targeting
 
 ////////////////////////////////////////
@@ -897,7 +897,7 @@ datum/design/mech_syringe_gun
 
 datum/design/mech_diamond_drill
 	name = "Exosuit Module Design (Diamond Mining Drill)"
-	desc = "An upgraded version of the standard drill."
+	desc = "An upgraded version of the standard drill"
 	id = "mech_diamond_drill"
 	build_type = MECHFAB
 	req_tech = list("materials" = 4, "engineering" = 3)
@@ -906,7 +906,7 @@ datum/design/mech_diamond_drill
 
 datum/design/mech_generator_nuclear
 	name = "Exosuit Module Design (ExoNuclear Reactor)"
-	desc = "Compact nuclear reactor module."
+	desc = "Compact nuclear reactor module"
 	id = "mech_generator_nuclear"
 	build_type = MECHFAB
 	req_tech = list("powerstorage"= 3, "engineering" = 3, "materials" = 3)
@@ -1089,8 +1089,6 @@ datum/design/super_matter_bin
 	reliability = 75
 	build_path = /obj/item/weapon/stock_parts/matter_bin/super
 
-
-
 datum/design/telesci_gps
 	name = "GPS Device"
 	desc = "Little thingie that can track its position at all times."
@@ -1169,7 +1167,7 @@ datum/design/subspace_transmitter
 
 datum/design/basic_cell
 	name = "Basic Power Cell"
-	desc = "A basic power cell that holds 1000 units of energy."
+	desc = "A basic power cell that holds 1000 units of energy"
 	id = "basic_cell"
 	req_tech = list("powerstorage" = 1)
 	build_type = PROTOLATHE | AUTOLATHE |MECHFAB
@@ -1179,7 +1177,7 @@ datum/design/basic_cell
 
 datum/design/high_cell
 	name = "High-Capacity Power Cell"
-	desc = "A power cell that holds 10000 units of energy."
+	desc = "A power cell that holds 10000 units of energy"
 	id = "high_cell"
 	req_tech = list("powerstorage" = 2)
 	build_type = PROTOLATHE | AUTOLATHE | MECHFAB
@@ -1189,7 +1187,7 @@ datum/design/high_cell
 
 datum/design/super_cell
 	name = "Super-Capacity Power Cell"
-	desc = "A power cell that holds 20000 units of energy."
+	desc = "A power cell that holds 20000 units of energy"
 	id = "super_cell"
 	req_tech = list("powerstorage" = 3, "materials" = 2)
 	reliability = 75
@@ -1200,7 +1198,7 @@ datum/design/super_cell
 
 datum/design/hyper_cell
 	name = "Hyper-Capacity Power Cell"
-	desc = "A power cell that holds 30000 units of energy."
+	desc = "A power cell that holds 30000 units of energy"
 	id = "hyper_cell"
 	req_tech = list("powerstorage" = 5, "materials" = 4)
 	reliability = 70
@@ -1228,7 +1226,7 @@ datum/design/smes
 	id = "smes"
 	req_tech = list("programming" = 4, "power" = 5, "engineering" = 4)
 	build_type = IMPRINTER
-	materials = list("$glass" = 2000, "sacid" = 20)
+	materials = list("$glass" = 1000, "sacid" = 20)
 	build_path = /obj/item/weapon/circuitboard/smes
 
 datum/design/turbine_computer
@@ -1237,7 +1235,7 @@ datum/design/turbine_computer
 	id = "power_turbine_console"
 	req_tech = list("programming" = 4, "power" = 4, "engineering" = 4)
 	build_type = IMPRINTER
-	materials = list("$glass" = 2000, "sacid" = 20)
+	materials = list("$glass" = 1000, "sacid" = 20)
 	build_path = /obj/item/weapon/circuitboard/turbine_computer
 
 datum/design/power_compressor
@@ -1246,7 +1244,7 @@ datum/design/power_compressor
 	id = "power_compressor"
 	req_tech = list("programming" = 4, "power" = 5, "engineering" = 4)
 	build_type = IMPRINTER
-	materials = list("$glass" = 2000, "sacid" = 20)
+	materials = list("$glass" = 1000, "sacid" = 20)
 	build_path = /obj/item/weapon/circuitboard/power_compressor
 
 datum/design/power_turbine
@@ -1255,7 +1253,7 @@ datum/design/power_turbine
 	id = "power_turbine"
 	req_tech = list("programming" = 4, "power" = 4, "engineering" = 5)
 	build_type = IMPRINTER
-	materials = list("$glass" = 2000, "sacid" = 20)
+	materials = list("$glass" = 1000, "sacid" = 20)
 	build_path = /obj/item/weapon/circuitboard/power_turbine
 
 datum/design/teleport_station
@@ -1264,7 +1262,7 @@ datum/design/teleport_station
 	id = "tele_station"
 	req_tech = list("programming" = 4, "bluespace" = 4, "engineering" = 4)
 	build_type = IMPRINTER
-	materials = list("$glass" = 2000, "sacid" = 20)
+	materials = list("$glass" = 1000, "sacid" = 20)
 	build_path = /obj/item/weapon/circuitboard/teleporter_station
 
 datum/design/teleport_hub
@@ -1273,7 +1271,7 @@ datum/design/teleport_hub
 	id = "tele_hub"
 	req_tech = list("programming" = 3, "bluespace" = 5, "materials" = 4, "engineering" = 5)
 	build_type = IMPRINTER
-	materials = list("$glass" = 2000, "sacid" = 20)
+	materials = list("$glass" = 1000, "sacid" = 20)
 	build_path = /obj/item/weapon/circuitboard/teleporter_hub
 
 datum/design/telepad
@@ -1282,7 +1280,7 @@ datum/design/telepad
 	id = "telepad"
 	req_tech = list("programming" = 4, "bluespace" = 4, "materials" = 3, "engineering" = 3)
 	build_type = IMPRINTER
-	materials = list("$glass" = 2000, "sacid" = 20)
+	materials = list("$glass" = 1000, "sacid" = 20)
 	build_path = /obj/item/weapon/circuitboard/telesci_pad
 
 datum/design/sleeper
@@ -1291,7 +1289,7 @@ datum/design/sleeper
 	id = "sleeper"
 	req_tech = list("programming" = 3, "biotech" = 2, "materials" = 3, "engineering" = 3)
 	build_type = IMPRINTER
-	materials = list("$glass" = 2000, "sacid" = 20)
+	materials = list("$glass" = 1000, "sacid" = 20)
 	build_path = /obj/item/weapon/circuitboard/sleeper
 
 datum/design/cryotube
@@ -1300,7 +1298,7 @@ datum/design/cryotube
 	id = "cryotube"
 	req_tech = list("programming" = 4, "biotech" = 3, "engineering" = 4)
 	build_type = IMPRINTER
-	materials = list("$glass" = 2000, "sacid" = 20)
+	materials = list("$glass" = 1000, "sacid" = 20)
 	build_path = /obj/item/weapon/circuitboard/cryo_tube
 
 datum/design/thermomachine
@@ -1309,7 +1307,7 @@ datum/design/thermomachine
 	id = "thermomachine"
 	req_tech = list("programming" = 3, "plasmatech" = 3)
 	build_type = IMPRINTER
-	materials = list("$glass" = 2000, "sacid" = 20)
+	materials = list("$glass" = 1000, "sacid" = 20)
 	build_path = /obj/item/weapon/circuitboard/thermomachine
 
 datum/design/biogenerator
@@ -1318,7 +1316,7 @@ datum/design/biogenerator
 	id = "biogenerator"
 	req_tech = list("programming" = 3, "biotech" = 2, "materials" = 3)
 	build_type = IMPRINTER
-	materials = list("$glass" = 2000, "sacid" = 20)
+	materials = list("$glass" = 1000, "sacid" = 20)
 	build_path = /obj/item/weapon/circuitboard/biogenerator
 
 datum/design/hydroponics
@@ -1327,7 +1325,7 @@ datum/design/hydroponics
 	id = "hydro_tray"
 	req_tech = list("programming" = 1, "biotech" = 1)
 	build_type = IMPRINTER
-	materials = list("$glass" = 2000, "sacid" = 20)
+	materials = list("$glass" = 1000, "sacid" = 20)
 	build_path = /obj/item/weapon/circuitboard/hydroponics
 
 datum/design/microwave
@@ -1336,7 +1334,7 @@ datum/design/microwave
 	id = "microwave"
 	req_tech = list("programming" = 1)
 	build_type = IMPRINTER
-	materials = list("$glass" = 2000, "sacid" = 20)
+	materials = list("$glass" = 1000, "sacid" = 20)
 	build_path = /obj/item/weapon/circuitboard/microwave
 
 datum/design/chem_dispenser
@@ -1345,7 +1343,7 @@ datum/design/chem_dispenser
 	id = "chem_dispenser"
 	req_tech = list("programming" = 4, "biotech" = 3, "engineering" = 4, "materials" = 4, "plasmatech" = 3)
 	build_type = IMPRINTER
-	materials = list("$glass" = 2000, "sacid" = 20)
+	materials = list("$glass" = 1000, "sacid" = 20)
 	build_path = /obj/item/weapon/circuitboard/chem_dispenser
 
 datum/design/destructive_analyzer
@@ -1354,7 +1352,7 @@ datum/design/destructive_analyzer
 	id = "destructive_analyzer"
 	req_tech = list("programming" = 2, "magnets" = 2, "engineering" = 2)
 	build_type = IMPRINTER
-	materials = list("$glass" = 2000, "sacid" = 20)
+	materials = list("$glass" = 1000, "sacid" = 20)
 	build_path = /obj/item/weapon/circuitboard/destructive_analyzer
 
 datum/design/protolathe
@@ -1363,7 +1361,7 @@ datum/design/protolathe
 	id = "protolathe"
 	req_tech = list("programming" = 2, "engineering" = 2)
 	build_type = IMPRINTER
-	materials = list("$glass" = 2000, "sacid" = 20)
+	materials = list("$glass" = 1000, "sacid" = 20)
 	build_path = /obj/item/weapon/circuitboard/protolathe
 
 datum/design/circuit_imprinter
@@ -1372,7 +1370,7 @@ datum/design/circuit_imprinter
 	id = "circuit_imprinter"
 	req_tech = list("programming" = 2, "engineering" = 2)
 	build_type = IMPRINTER
-	materials = list("$glass" = 2000, "sacid" = 20)
+	materials = list("$glass" = 1000, "sacid" = 20)
 	build_path = /obj/item/weapon/circuitboard/circuit_imprinter
 
 datum/design/autolathe
@@ -1381,44 +1379,44 @@ datum/design/autolathe
 	id = "autolathe"
 	req_tech = list("programming" = 2, "engineering" = 2)
 	build_type = IMPRINTER
-	materials = list("$glass" = 2000, "sacid" = 20)
+	materials = list("$glass" = 1000, "sacid" = 20)
 	build_path = /obj/item/weapon/circuitboard/autolathe
 
 datum/design/rdservercontrol
 	name = "R&D Server Control Console Board"
-	desc = "The circuit board for an R&D Server Control Console."
+	desc = "The circuit board for an R&D Server Control Console"
 	id = "rdservercontrol"
 	req_tech = list("programming" = 3)
 	build_type = IMPRINTER
-	materials = list("$glass" = 2000, "sacid" = 20)
+	materials = list("$glass" = 1000, "sacid" = 20)
 	build_path = /obj/item/weapon/circuitboard/rdservercontrol
 
 datum/design/rdserver
 	name = "R&D Server Board"
-	desc = "The circuit board for an R&D Server."
+	desc = "The circuit board for an R&D Server"
 	id = "rdserver"
 	req_tech = list("programming" = 3)
 	build_type = IMPRINTER
-	materials = list("$glass" = 2000, "sacid" = 20)
+	materials = list("$glass" = 1000, "sacid" = 20)
 	build_path = /obj/item/weapon/circuitboard/rdserver
 
 datum/design/mechfab
 	name = "Exosuit Fabricator Board"
-	desc = "The circuit board for an Exosuit Fabricator."
+	desc = "The circuit board for an Exosuit Fabricator"
 	id = "mechfab"
 	req_tech = list("programming" = 3, "engineering" = 3)
 	build_type = IMPRINTER
-	materials = list("$glass" = 2000, "sacid" = 20)
+	materials = list("$glass" = 1000, "sacid" = 20)
 	build_path = /obj/item/weapon/circuitboard/mechfab
 
 
 datum/design/cyborgrecharger
 	name = "Cyborg Recharger Board"
-	desc = "The circuit board for a Cyborg Recharger."
+	desc = "The circuit board for a Cyborg Recharger"
 	id = "cyborgrecharger"
 	req_tech = list("powerstorage" = 3, "engineering" = 3)
 	build_type = IMPRINTER
-	materials = list("$glass" = 2000, "sacid" = 20)
+	materials = list("$glass" = 1000, "sacid" = 20)
 	build_path = /obj/item/weapon/circuitboard/cyborgrecharger
 
 datum/design/mech_recharger
@@ -1427,7 +1425,7 @@ datum/design/mech_recharger
 	id = "mech_recharger"
 	req_tech = list("programming" = 3, "powerstorage" = 4, "engineering" = 4)
 	build_type = IMPRINTER
-	materials = list("$glass" = 2000, "sacid" = 20)
+	materials = list("$glass" = 1000, "sacid" = 20)
 	build_path = /obj/item/weapon/circuitboard/mech_recharger
 
 datum/design/vendor
@@ -1436,7 +1434,7 @@ datum/design/vendor
 	id = "vendor"
 	req_tech = list("programming" = 1)
 	build_type = IMPRINTER
-	materials = list("$glass" = 2000, "sacid" = 20)
+	materials = list("$glass" = 1000, "sacid" = 20)
 	build_path = /obj/item/weapon/circuitboard/vendor
 
 
@@ -1451,7 +1449,7 @@ datum/design/pacman
 	req_tech = list("programming" = 3, "plasmatech" = 3, "powerstorage" = 3, "engineering" = 3)
 	build_type = IMPRINTER
 	reliability = 79
-	materials = list("$glass" = 2000, "sacid" = 20)
+	materials = list("$glass" = 1000, "sacid" = 20)
 	build_path = /obj/item/weapon/circuitboard/pacman
 
 datum/design/superpacman
@@ -1461,7 +1459,7 @@ datum/design/superpacman
 	req_tech = list("programming" = 3, "powerstorage" = 4, "engineering" = 4)
 	build_type = IMPRINTER
 	reliability = 76
-	materials = list("$glass" = 2000, "sacid" = 20)
+	materials = list("$glass" = 1000, "sacid" = 20)
 	build_path = /obj/item/weapon/circuitboard/pacman/super
 
 datum/design/mrspacman
@@ -1471,7 +1469,7 @@ datum/design/mrspacman
 	req_tech = list("programming" = 3, "powerstorage" = 5, "engineering" = 5)
 	build_type = IMPRINTER
 	reliability = 74
-	materials = list("$glass" = 2000, "sacid" = 20)
+	materials = list("$glass" = 1000, "sacid" = 20)
 	build_path = /obj/item/weapon/circuitboard/pacman/mrs
 
 
@@ -1505,7 +1503,7 @@ datum/design/mmi
 	id = "mmi"
 	req_tech = list("programming" = 2, "biotech" = 3)
 	build_type = PROTOLATHE | MECHFAB
-	materials = list("$metal" = 1000, "$glass" = 500)
+	materials = list("$metal" = 500, "$glass" = 250)
 	reliability = 76
 	build_path = /obj/item/device/mmi
 	category = "Misc"
@@ -1516,7 +1514,7 @@ datum/design/mmi_radio
 	id = "mmi_radio"
 	req_tech = list("programming" = 2, "biotech" = 4)
 	build_type = PROTOLATHE | MECHFAB
-	materials = list("$metal" = 1200, "$glass" = 500)
+	materials = list("$metal" = 600, "$glass" = 250)
 	reliability = 74
 	build_path = /obj/item/device/mmi/radio_enabled
 	category = "Misc"
@@ -1527,7 +1525,7 @@ datum/design/synthetic_flash
 	id = "sflash"
 	req_tech = list("magnets" = 3, "combat" = 2)
 	build_type = MECHFAB
-	materials = list("$metal" = 750, "$glass" = 750)
+	materials = list("$metal" = 400, "$glass" = 400)
 	reliability = 76
 	build_path = /obj/item/device/flash/synthetic
 	category = "Misc"
@@ -1538,7 +1536,7 @@ datum/design/bluespacebeaker
 	id = "bluespacebeaker"
 	req_tech = list("bluespace" = 2, "materials" = 6)
 	build_type = PROTOLATHE
-	materials = list("$metal" = 3000, "$plasma" = 3000, "$diamond" = 500)
+	materials = list("$metal" = 1000, "$glass" = 1000, "$plasma" = 10000, "$diamond" = 500)
 	reliability = 76
 	build_path = /obj/item/weapon/reagent_containers/glass/beaker/bluespace
 	category = "Misc"
@@ -1549,7 +1547,7 @@ datum/design/noreactbeaker
 	id = "splitbeaker"
 	req_tech = list("materials" = 2)
 	build_type = PROTOLATHE
-	materials = list("$metal" = 3000)
+	materials = list("$metal" = 1500)
 	reliability = 76
 	build_path = /obj/item/weapon/reagent_containers/glass/beaker/noreact
 	category = "Misc"
@@ -1564,7 +1562,7 @@ datum/design/nuclear_gun
 	id = "nuclear_gun"
 	req_tech = list("combat" = 3, "materials" = 5, "powerstorage" = 3)
 	build_type = PROTOLATHE
-	materials = list("$metal" = 5000, "$glass" = 1000, "$uranium" = 500)
+	materials = list("$metal" = 5000, "$glass" = 1000, "$uranium" = 3750)
 	reliability = 76
 	build_path = /obj/item/weapon/gun/energy/gun/nuclear
 	locked = 1
@@ -1575,7 +1573,7 @@ datum/design/stunrevolver
 	id = "stunrevolver"
 	req_tech = list("combat" = 3, "materials" = 3, "powerstorage" = 2)
 	build_type = PROTOLATHE
-	materials = list("$metal" = 4000)
+	materials = list("$metal" = 5000, "$glass" = 1000)
 	build_path = /obj/item/weapon/gun/energy/stunrevolver
 	locked = 1
 
@@ -1585,7 +1583,7 @@ datum/design/lasercannon
 	id = "lasercannon"
 	req_tech = list("combat" = 4, "materials" = 3, "powerstorage" = 3)
 	build_type = PROTOLATHE
-	materials = list("$metal" = 10000, "$glass" = 1000, "$diamond" = 2000)
+	materials = list("$metal" = 10000, "$glass" = 10000, "$diamond" = 2000)
 	build_path = /obj/item/weapon/gun/energy/lasercannon
 	locked = 1
 
@@ -1595,7 +1593,7 @@ datum/design/decloner
 	id = "decloner"
 	req_tech = list("combat" = 8, "materials" = 7, "biotech" = 5, "powerstorage" = 6)
 	build_type = PROTOLATHE
-	materials = list("$gold" = 5000,"$uranium" = 10000, "mutagen" = 40)
+	materials = list("$gold" = 5000,"$uranium" = 8000, "mutagen" = 40)
 	build_path = /obj/item/weapon/gun/energy/decloner
 	locked = 1
 /*
@@ -1615,25 +1613,25 @@ datum/design/rapidsyringe
 	id = "rapidsyringe"
 	req_tech = list("combat" = 3, "materials" = 3, "engineering" = 3, "biotech" = 2)
 	build_type = PROTOLATHE
-	materials = list("$metal" = 5000, "$glass" = 1000)
+	materials = list("$metal" = 6000, "$glass" = 2000)
 	build_path = /obj/item/weapon/gun/syringe/rapidsyringe
-/*
+
 datum/design/largecrossbow
 	name = "Energy Crossbow"
-	desc = "A weapon favoured by syndicate infiltration teams."
+	desc = "A reverse-engineered energy crossbow."
 	id = "largecrossbow"
-	req_tech = list("combat" = 4, "materials" = 5, "engineering" = 3, "biotech" = 4, "syndicate" = 3)
+	req_tech = list("combat" = 4, "materials" = 5, "engineering" = 3, "biotech" = 4, "syndicate" = 4)
 	build_type = PROTOLATHE
-	materials = list("$metal" = 5000, "$glass" = 1000, "$uranium" = 1000, "$silver" = 1000)
-	build_path = /obj/item/weapon/gun/energy/crossbow/largecrossbow"
-*/
+	materials = list("$metal" = 8000, "$glass" = 4000, "$uranium" = 3750, "$silver" = 2000)
+	build_path = /obj/item/weapon/gun/energy/crossbow/largecrossbow
+
 datum/design/temp_gun
 	name = "Temperature Gun"
-	desc = "A gun that shoots temperature bullet energythings to change temperature."//Change it if you want
+	desc = "A gun that fires a concentrated temperature-altering projectile."//Change it if you want
 	id = "temp_gun"
 	req_tech = list("combat" = 3, "materials" = 4, "powerstorage" = 3, "magnets" = 2)
 	build_type = PROTOLATHE
-	materials = list("$metal" = 5000, "$glass" = 500, "$silver" = 3000)
+	materials = list("$metal" = 10000, "$glass" = 1000, "$silver" = 3750)
 	build_path = /obj/item/weapon/gun/energy/temperature
 	locked = 1
 
@@ -1643,7 +1641,7 @@ datum/design/flora_gun
 	id = "flora_gun"
 	req_tech = list("materials" = 2, "biotech" = 3, "powerstorage" = 3)
 	build_type = PROTOLATHE
-	materials = list("$metal" = 2000, "$glass" = 500, "radium" = 20)
+	materials = list("$metal" = 1000, "$glass" = 250, "radium" = 20)
 	build_path = /obj/item/weapon/gun/energy/floragun
 
 datum/design/large_grenade
@@ -1652,7 +1650,7 @@ datum/design/large_grenade
 	id = "large_Grenade"
 	req_tech = list("combat" = 3, "materials" = 2)
 	build_type = PROTOLATHE
-	materials = list("$metal" = 3000)
+	materials = list("$metal" = 1800)
 	reliability = 79
 	build_path = /obj/item/weapon/grenade/chem_grenade/large
 
@@ -1662,7 +1660,7 @@ datum/design/smg
 	id = "smg"
 	req_tech = list("combat" = 4, "materials" = 3)
 	build_type = PROTOLATHE
-	materials = list("$metal" = 8000, "$silver" = 2000, "$diamond" = 1000)
+	materials = list("$metal" = 9000, "$silver" = 5000, "$diamond" = 1000)
 	build_path = /obj/item/weapon/gun/projectile/automatic
 	locked = 1
 
@@ -1672,7 +1670,7 @@ datum/design/xray
 	id = "xray"
 	req_tech = list("combat" = 6, "materials" = 5, "biotech" = 5, "powerstorage" = 4)
 	build_type = PROTOLATHE
-	materials = list("$gold" = 5000,"$uranium" = 10000, "$metal" = 4000)
+	materials = list("$gold" = 8000,"$uranium" = 12000, "$metal" = 10000, "$glass" = 5000)
 	build_path = /obj/item/weapon/gun/energy/xray
 	locked = 1
 
@@ -1682,7 +1680,7 @@ datum/design/ionrifle
 	id = "ionrifle"
 	req_tech = list("combat" = 5, "materials" = 4, "magnets" = 4)
 	build_type = PROTOLATHE
-	materials = list("$silver" = 4000, "$metal" = 6000, "$uranium" = 1000)
+	materials = list("$silver" = 20000, "$metal" = 10000, "$uranium" = 5000, "$glass" = 5000)
 	build_path = /obj/item/weapon/gun/energy/ionrifle
 	locked = 1
 
@@ -1692,7 +1690,7 @@ datum/design/ammo_9mm
 	id = "ammo_9mm"
 	req_tech = list("combat" = 4, "materials" = 3)
 	build_type = PROTOLATHE
-	materials = list("$metal" = 3750, "$silver" = 100)
+	materials = list("$metal" = 2000)
 	build_path = /obj/item/ammo_box/c9mm
 
 datum/design/mag_smg
@@ -1701,7 +1699,7 @@ datum/design/mag_smg
 	id = "mag_smg"
 	req_tech = list("combat" = 4, "materials" = 3)
 	build_type = PROTOLATHE
-	materials = list("$metal" = 3750, "$silver" = 100)
+	materials = list("$metal" = 2000)
 	build_path = /obj/item/ammo_box/magazine/msmg9mm
 
 datum/design/stunshell
@@ -1710,7 +1708,7 @@ datum/design/stunshell
 	id = "stunshell"
 	req_tech = list("combat" = 3, "materials" = 3)
 	build_type = PROTOLATHE
-	materials = list("$metal" = 4000)
+	materials = list("$metal" = 1000)
 	build_path = /obj/item/ammo_casing/shotgun/stunshell
 
 /////////////////////////////////////////
@@ -1741,7 +1739,7 @@ datum/design/plasmacutter
 	id = "plasmacutter"
 	req_tech = list("materials" = 4, "plasmatech" = 3, "engineering" = 3)
 	build_type = PROTOLATHE
-	materials = list("$metal" = 1500, "$glass" = 500, "$gold" = 500, "$plasma" = 500)
+	materials = list("$metal" = 1500, "$glass" = 500, "$plasma" = 500)
 	reliability = 79
 	build_path = /obj/item/weapon/pickaxe/plasmacutter
 
@@ -1751,7 +1749,7 @@ datum/design/pick_diamond
 	id = "pick_diamond"
 	req_tech = list("materials" = 6)
 	build_type = PROTOLATHE
-	materials = list("$diamond" = 3000)
+	materials = list("$diamond" = 2500, "$metal" = 2000)
 	build_path = /obj/item/weapon/pickaxe/diamond
 
 datum/design/drill_diamond
@@ -1760,7 +1758,7 @@ datum/design/drill_diamond
 	id = "drill_diamond"
 	req_tech = list("materials" = 6, "powerstorage" = 4, "engineering" = 4)
 	build_type = PROTOLATHE
-	materials = list("$metal" = 3000, "$glass" = 1000, "$diamond" = 3750) //Yes, a whole diamond is needed.
+	materials = list("$metal" = 10000, "$glass" = 8000, "$diamond" = 4500) //Yes, a whole diamond is needed.
 	reliability = 79
 	build_path = /obj/item/weapon/pickaxe/diamonddrill
 
@@ -1783,7 +1781,7 @@ datum/design/bag_holding
 	id = "bag_holding"
 	req_tech = list("bluespace" = 4, "materials" = 6)
 	build_type = PROTOLATHE
-	materials = list("$gold" = 3000, "$diamond" = 1500, "$uranium" = 250)
+	materials = list("$gold" = 15000, "$diamond" = 7500, "$uranium" = 1000)
 	reliability = 80
 	build_path = /obj/item/weapon/storage/backpack/holding
 
@@ -1793,7 +1791,7 @@ datum/design/bluespace_crystal
 	id = "bluespace_crystal"
 	req_tech = list("bluespace" = 4, "materials" = 6)
 	build_type = PROTOLATHE
-	materials = list("$diamond" = 1500, "$plasma" = 1500)
+	materials = list("$diamond" = 5000, "$plasma" = 5000)
 	reliability = 100
 	build_path = /obj/item/bluespace_crystal/artificial
 
@@ -1810,6 +1808,15 @@ datum/design/health_hud
 	materials = list("$metal" = 50, "$glass" = 50)
 	build_path = /obj/item/clothing/glasses/hud/health
 
+datum/design/health_hud_night
+	name = "Night Vision Health Scanner HUD"
+	desc = "An advanced medical head-up display that allows doctors to find patients in complete darkness."
+	id = "health_hud_night"
+	req_tech = list("biotech" = 4, "magnets" = 5)
+	build_type = PROTOLATHE
+	materials = list("$metal" = 200, "$glass" = 200, "$uranium" = 1000, "$silver" = 250)
+	build_path = /obj/item/clothing/glasses/hud/health/night
+
 datum/design/security_hud
 	name = "Security HUD"
 	desc = "A heads-up display that scans the humans in view and provides accurate data about their ID status."
@@ -1818,6 +1825,15 @@ datum/design/security_hud
 	build_type = PROTOLATHE
 	materials = list("$metal" = 50, "$glass" = 50)
 	build_path = /obj/item/clothing/glasses/hud/security
+	locked = 1
+datum/design/security_hud_night
+	name = "Night Vision Security HUD"
+	desc = "A heads-up display which provides id data and vision in complete darkness."
+	id = "security_hud_night"
+	req_tech = list("magnets" = 5, "combat" = 4)
+	build_type = PROTOLATHE
+	materials = list("$metal" = 200, "$glass" = 200, "$uranium" = 1000, "$gold" = 350)
+	build_path = /obj/item/clothing/glasses/hud/security/night
 	locked = 1
 
 /////////////////////////////////////////
@@ -1869,13 +1885,23 @@ datum/design/borg_syndicate_module
 //////////////////Misc///////////////////
 /////////////////////////////////////////
 
+datum/design/detective_scanner
+	name = "forensic scanner"
+	desc = "Used to remotely scan objects and biomass for DNA and fingerprints. Can print a report of the findings."
+	id = "forensicscanner"
+	req_tech = list("materials" = 3, "magnets" = 5)
+	build_type = PROTOLATHE
+	materials = list("$metal" = 3000, "$glass" = 3000)
+	build_path = /obj/item/device/detective_scanner
+	locked = 1
+
 datum/design/welding_mask
 	name = "Welding Gas Mask"
 	desc = "A gas mask with built in welding goggles and face shield. Looks like a skull, clearly designed by a nerd."
 	id = "weldingmask"
 	req_tech = list("materials" = 2, "engineering" = 2)
 	build_type = PROTOLATHE
-	materials = list("$metal" = 4000, "$glass" = 2000)
+	materials = list("$metal" = 4000, "$glass" = 1000)
 	build_path = /obj/item/clothing/mask/gas/welding
 
 datum/design/mesons
@@ -1893,7 +1919,7 @@ datum/design/advanced_mesons
 	id = "advanced_mesons"
 	req_tech = list("magnets" = 4, "engineering" = 4)
 	build_type = PROTOLATHE
-	materials = list("$metal" = 100, "$glass" = 100)
+	materials = list("$metal" = 200, "$glass" = 200, "$plasma" = 100)
 	build_path = /obj/item/clothing/glasses/meson/advanced
 
 datum/design/night_vision_goggles
@@ -1902,5 +1928,14 @@ datum/design/night_vision_goggles
 	id = "night_visision_goggles"
 	req_tech = list("magnets" = 4)
 	build_type = PROTOLATHE
-	materials = list("$metal" = 100, "$glass" = 100, "$uranium" = 1000)
+	materials = list("$metal" = 100, "$glass" = 100, "$uranium" = 5000)
 	build_path = /obj/item/clothing/glasses/night
+
+datum/design/magboots
+	name = "Magnetic Boots"
+	desc = "Magnetic boots, often used during extravehicular activity to ensure the user remains safely attached to the vehicle."
+	id = "magboots"
+	req_tech = list("materials" = 4, "magnets" = 4, "engineering" = 5)
+	build_type = PROTOLATHE
+	materials = list("$metal" = 4500, "$silver" = 1500, "$gold" = 2500)
+	build_path = /obj/item/clothing/shoes/magboots

@@ -123,6 +123,27 @@
 	armor = list(melee = 60, bullet = 50, laser = 30, energy = 15, bomb = 35, bio = 100, rad = 50)
 	allowed = list(/obj/item/weapon/gun,/obj/item/ammo_box,/obj/item/ammo_casing,/obj/item/weapon/melee/baton,/obj/item/weapon/melee/energy/sword,/obj/item/weapon/handcuffs,/obj/item/weapon/tank/emergency_oxygen)
 
+
+//Syndicate Stealth Rig
+/obj/item/clothing/head/helmet/space/rig/syndistealth
+	name = "night-black hardsuit helmet"
+	desc = "An advanced helmet designed for work in covert operations. Property of Gorlex Marauders."
+	icon_state = "rig0-stealth"
+	item_state = "stealth_helm"
+	item_color = "stealth"
+	armor = list(melee = 65, bullet = 45, laser = 30,energy = 20, bomb = 30, bio = 100, rad = 50)
+
+/obj/item/clothing/suit/space/rig/syndistealth
+	icon_state = "stealth"
+	name = "night-black hardsuit"
+	desc = "An advanced suit that protects against injuries during covert operations. Property of Gorlex Marauders."
+	item_state = "syndie_hardsuit"
+	slowdown = 1
+	w_class = 3
+	armor = list(melee = 65, bullet = 45, laser = 30, energy = 20, bomb = 30, bio = 100, rad = 50)
+	allowed = list(/obj/item/weapon/gun,/obj/item/ammo_box,/obj/item/ammo_casing,/obj/item/weapon/melee/baton,/obj/item/weapon/melee/energy/sword,/obj/item/weapon/handcuffs,/obj/item/weapon/tank/emergency_oxygen)
+
+
 //Wizard Rig
 /obj/item/clothing/head/helmet/space/rig/wizard
 	name = "gem-encrusted hardsuit helmet"
@@ -201,3 +222,79 @@
 	slowdown = 3
 	allowed = list(/obj/item/device/flashlight,/obj/item/weapon/tank)
 	armor = list(melee = 40, bullet = 25, laser = 40,energy = 20, bomb = 20, bio = 100, rad = 60)
+
+//weird dark rig i dunno
+/obj/item/clothing/head/helmet/space/rig/dark
+	name = "dark rig helmet"
+	desc = "A strange dark rig suit helmet."
+	icon_state = "rig0-dark"
+	item_state = "dark_helm"
+	item_color = "dark"
+	armor = list(melee = 35, bullet = 15, laser = 35,energy = 10, bomb = 15, bio = 100, rad = 50)
+
+/obj/item/clothing/suit/space/rig/dark
+	name = "dark rig suit"
+	desc = "A strange dark rig suit."
+	icon_state = "dark"
+	item_state = "dark-rig"
+	slowdown = 2
+	armor = list(melee = 35, bullet = 15, laser = 35,energy = 10, bomb = 15, bio = 100, rad = 50)
+
+// COLD RIGZ
+	//Security
+/obj/item/clothing/head/helmet/space/rig/security/cold
+	name = "security cryo hardsuit helmet"
+	desc = "A special helmet designed for work in a hazardous, cold, low pressure environment. Has an additional layer of armor."
+	icon_state = "rig0-seccold"
+	item_state = "sec_cold"
+	item_color = "seccold"
+
+
+/obj/item/clothing/suit/space/rig/security/cold
+	icon_state = "cryo-security"
+	name = "security cryo hardsuit"
+	desc = "A special suit that protects against hazardous, cold, low pressure environments. Has an additional layer of armor."
+	item_state = "sec_coldsuit"
+
+//Engineering
+/obj/item/clothing/head/helmet/space/rig/cold
+	name = "engineering cryo hardsuit helmet"
+	desc = "A special helmet designed for work in a hazardous, cold, low-pressure environment. Has radiation shielding."
+	icon_state = "rig0-engicold"
+	item_state = "eng_cold"
+	item_color = "engicold"
+
+/obj/item/clothing/suit/space/rig/cold
+	name = "engineering cryo hardsuit"
+	desc = "A special suit that protects against hazardous, cold, low pressure environments. Has radiation shielding."
+	icon_state = "cryo-engineering"
+	item_state = "eng_coldsuit"
+
+//Atmospherics
+/obj/item/clothing/head/helmet/space/rig/atmos/cold
+	name = "atmospherics cryo hardsuit helmet"
+	desc = "A special helmet designed for work in a hazardous, cold, low-pressure environment. Has thermal shielding."
+	icon_state = "rig0-atmocold"
+	item_state = "atmo_cold"
+	item_color = "atmocold"
+
+/obj/item/clothing/suit/space/rig/atmos/cold
+	name = "atmospherics cryo hardsuit"
+	desc = "A special suit that protects against hazardous, cold, low pressure environments. Has thermal shielding."
+	icon_state = "cryo-atmos"
+	item_state = "atmo_coldsuit"
+
+//Mining
+/obj/item/clothing/head/helmet/space/rig/mining/cold
+	name = "mining cryo hardsuit helmet"
+	desc = "A special helmet designed for work in a hazardous, cold, low pressure environment. Has reinforced plating."
+	icon_state = "rig0-minecold"
+	item_state = "mining_cold"
+	item_color = "minecold"
+
+
+/obj/item/clothing/suit/space/rig/mining/cold
+	icon_state = "cryo-mining"
+	name = "mining cryo hardsuit"
+	desc = "A special suit that protects against hazardous, cold, low pressure environments. Has reinforced plating."
+	item_state = "mining_coldsuit"

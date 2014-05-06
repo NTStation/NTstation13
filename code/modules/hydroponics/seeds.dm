@@ -786,6 +786,40 @@
 	growthstages = 6
 	mutatelist = list(/obj/item/seeds/ambrosiadeusseed)
 
+/obj/item/seeds/blazeit
+	name = "pack of cannabis seeds"
+	desc = "These seeds grow into variant 420 of the Blazeia Itous plant."
+	icon_state = "seed-blazeit"
+	species = "blazeit"
+	plantname = "Cannabis"
+	product = /obj/item/weapon/reagent_containers/food/snacks/grown/blazeit
+	lifespan = 60
+	endurance = 25
+	maturation = 6
+	production = 6
+	yield = 6
+	potency = 50
+	plant_type = 0
+	growthstages = 6
+	mutatelist = list(/obj/item/seeds/rainbowblazeit)
+
+/obj/item/seeds/rainbowblazeit
+	name = "pack of rainbow cannabis seeds"
+	desc = "420 BLAZE IT"
+	icon_state = "seed-rainbowblazeit"
+	species = "rainbowblazeit"
+	plantname = "Rainbow Cannabis"
+	product = /obj/item/weapon/reagent_containers/food/snacks/grown/rainbowblazeit
+	lifespan = 60
+	endurance = 25
+	maturation = 6
+	production = 6
+	yield = 6
+	potency = 50
+	plant_type = 0
+	growthstages = 6
+	rarity = 40
+
 /obj/item/seeds/ambrosiadeusseed
 	name = "pack of ambrosia deus seeds"
 	desc = "These seeds grow into ambrosia deus. Could it be the food of the gods..?"

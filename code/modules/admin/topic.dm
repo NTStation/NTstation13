@@ -1293,9 +1293,9 @@
 				message_admins("[key_name(H)] has their hands full, so they did not receive their cookie, spawned by [key_name(src.owner)].")
 				return
 			else
-				H.update_inv_r_hand()//To ensure the icon appears in the HUD
+				H.update_inv_hands()//To ensure the icon appears in the HUD
 		else
-			H.update_inv_l_hand()
+			H.update_inv_hands()
 		log_admin("[key_name(H)] got their cookie, spawned by [key_name(src.owner)]")
 		message_admins("[key_name(H)] got their cookie, spawned by [key_name(src.owner)]")
 		feedback_inc("admin_cookies_spawned",1)
@@ -1701,11 +1701,16 @@
 				feedback_add_details("admin_secrets_fun_used","STA")
 				message_admins("[key_name_admin(usr)] has made wormholes")
 				E = new /datum/round_event/wormholes()
-			if("goblob")
+			if("npcblob")
 				feedback_inc("admin_secrets_fun_used",1)
 				feedback_add_details("admin_secrets_fun_used","BL")
-				message_admins("[key_name_admin(usr)] has spawned blob", 1)
+				message_admins("[key_name_admin(usr)] has spawned an NPC blob", 1)
 				E = new /datum/round_event/blob()
+			if("goblob")
+				feedback_inc("admin_secrets_fun_used",1)
+				feedback_add_details("admin_secrets_fun_used","BLO")
+				message_admins("[key_name_admin(usr)] has spawned a blob overmind", 1)
+				E = new /datum/round_event/blob/overmind()
 			if("aliens")
 				feedback_inc("admin_secrets_fun_used",1)
 				feedback_add_details("admin_secrets_fun_used","AL")
@@ -1715,6 +1720,11 @@
 				feedback_inc("admin_secrets_fun_used",1)
 				feedback_add_details("admin_secrets_fun_used","ALS")
 				create_xeno()
+			if("brand")
+				E = new /datum/round_event/brand_intelligence()
+				feedback_inc("admin_secrets_fun_used",1)
+				feedback_add_details("admin_secrets_fun_used","BI")
+				message_admins("[key_name_admin(usr)] started an aggressive marketing campaign", 1)
 			if("spiders")
 				E = new /datum/round_event/spider_infestation()
 				feedback_inc("admin_secrets_fun_used",1)

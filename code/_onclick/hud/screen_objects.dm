@@ -319,7 +319,6 @@
 			usr:swap_hand()
 		else
 			if(usr.attack_ui(slot_id))
-				usr.update_inv_l_hand(0)
-				usr.update_inv_r_hand(0)
+				usr.update_inv_hands(0)
 	return 1
 

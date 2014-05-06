@@ -8,7 +8,7 @@
 	icon_gib = "carp_gib"
 	speak_chance = 0
 	turns_per_move = 5
-	meat_type = /obj/item/weapon/reagent_containers/food/snacks/carpmeat
+	meat_type = list(/obj/item/weapon/reagent_containers/food/snacks/carpmeat)
 	response_help = "pets"
 	response_disarm = "gently pushes aside"
 	response_harm = "hits"
@@ -67,7 +67,6 @@
 	response_disarm = "gently pushes aside the threatening laser barrel"
 	response_help = "carefully pets"
 	ranged = 1
-	rapid = 1
 	retreat_distance = 5
 	minimum_distance = 5
 	projectiletype = /obj/item/projectile/beam

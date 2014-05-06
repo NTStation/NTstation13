@@ -67,6 +67,7 @@
 					usr << "You remove the last piece of meat from the monkey!"
 					src.icon_state = "spike"
 					src.occupied = 0
+					new /obj/item/clothing/head/monkeypelt(loc)
 			else if(src.meattype == 2)
 				if(src.meat > 1)
 					src.meat--

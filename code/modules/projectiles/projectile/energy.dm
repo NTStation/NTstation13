@@ -54,7 +54,7 @@
 
 /obj/item/projectile/energy/bolt/large
 	name = "largebolt"
-	damage = 20
+	damage = 10
 
 /obj/item/projectile/energy/disabler
 	name = "disabler beam"
