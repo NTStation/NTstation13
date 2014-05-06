@@ -9,7 +9,7 @@
 	min_n2 = 0
 	max_n2 = 0
 	unsuitable_atoms_damage = 15
-	faction = "mining"
+	factions = list("mining")
 	environment_smash = 2
 	minbodytemp = 0
 	heat_damage_per_tick = 20
@@ -246,7 +246,7 @@
 	var/mob/living/simple_animal/hostile/asteroid/hivelordbrood/A = new /mob/living/simple_animal/hostile/asteroid/hivelordbrood(src.loc)
 	A.GiveTarget(target)
 	A.friends = friends
-	A.faction = faction
+	A.factions = factions
 	return
 
 /mob/living/simple_animal/hostile/asteroid/hivelord/AttackingTarget()

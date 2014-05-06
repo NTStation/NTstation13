@@ -142,4 +142,4 @@
 	ticker.mode.syndicates += R.mind
 	ticker.mode.update_synd_icons_added(R.mind)
 	R.mind.special_role = "syndicate"
-	R.faction = "syndicate"
+	R.factions += "syndicate"

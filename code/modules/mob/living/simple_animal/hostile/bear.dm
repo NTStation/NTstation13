@@ -37,7 +37,7 @@
 	max_n2 = 0
 	minbodytemp = 0
 
-	faction = "russian"
+	factions = list("russian")
 
 //SPACE BEARS! SQUEEEEEEEE~     OW! FUCK! IT BIT MY HAND OFF!!
 /mob/living/simple_animal/hostile/bear/Hudson
