@@ -1,4 +1,4 @@
-/client/var/inquisitive_ghost = 1
+/client/var/inquisitive_ghost = 0
 /mob/dead/observer/verb/toggle_inquisition() // warning: unexpected inquisition
 	set name = "Toggle Inquisitiveness"
 	set desc = "Sets whether your ghost examines everything on click by default"
