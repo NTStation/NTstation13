@@ -45,7 +45,7 @@
 			return
 		if(istype(W, /obj/item/weapon/storage/backpack/holding) && !W.crit_fail)
 			var/confirm = input("Are you sure you want to do that?", "Put in Bag of Holding") in list("Yes", "No")
-			if(confirm == "No")
+			if(confirm == "No"||!Adjacent(user))
 				return
 			investigate_log("has become a singularity. Caused by [user.key]","singulo")
 			user << "<span class='notice'> The Bluespace interfaces of the two devices catastrophically malfunction!</span>"
