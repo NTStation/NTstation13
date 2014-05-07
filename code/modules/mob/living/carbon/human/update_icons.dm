@@ -148,9 +148,14 @@ Please contact me on #coderbus IRC. ~Carnie x
 	if( (HUSK in mutations) || (dna && dna.mutantrace) || (head && (head.flags & BLOCKHAIR)) || (wear_mask && (wear_mask.flags & BLOCKHAIR)) )
 		return
 
+	if( (wear_suit) && (wear_suit.flags & BLOCKHAIR) && (!wear_suit.has_hood) )
+		return
+
 	//base icons
 	var/datum/sprite_accessory/S
 	var/list/standing	= list()
+
+//beardz
 
 	if(facial_hair_style)
 		S = facial_hair_styles_list[facial_hair_style]
@@ -165,6 +170,13 @@ Please contact me on #coderbus IRC. ~Carnie x
 	//Applies the debrained overlay if there is no brain
 	if(!getorgan(/obj/item/organ/brain))
 		standing	+= image("icon"='icons/mob/human_face.dmi', "icon_state" = "debrained_s", "layer" = -HAIR_LAYER)
+
+	if((wear_suit) && (wear_suit.has_hood) && (wear_suit.is_toggled == 2))
+		if(standing.len)
+			overlays_standing[HAIR_LAYER]    = standing
+		apply_overlay(HAIR_LAYER)
+		return
+//hairz
 	else if(hair_style)
 		S = hair_styles_list[hair_style]
 		if(S)
@@ -524,6 +536,7 @@ Please contact me on #coderbus IRC. ~Carnie x
 			var/obj/item/clothing/suit/S = wear_suit
 			standing.overlays	+= image("icon"='icons/effects/blood.dmi', "icon_state"="[S.blood_overlay_type]blood")
 
+	src.update_hair()
 	apply_overlay(SUIT_LAYER)
 
 

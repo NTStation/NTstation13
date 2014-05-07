@@ -1245,7 +1245,7 @@ proc/process_ghost_teleport_locs()
 						objectToGrayscale.icon = newIcon
 */
 
-/area/security/nuke_storage
+/area/ai_monitored/nuke_storage
 	name = "\improper Vault"
 	icon_state = "nuke_storage"
 
