@@ -240,7 +240,7 @@ datum/preferences
 					clothes_s.Blend(new /icon('icons/mob/eyes.dmi', "sun"), ICON_OVERLAY)
 					clothes_s.Blend(new /icon('icons/mob/suit.dmi', "capcarapace"), ICON_OVERLAY)
 					if(backbag == 2)
-						clothes_s.Blend(new /icon('icons/mob/back.dmi', "backpack"), ICON_OVERLAY)
+						clothes_s.Blend(new /icon('icons/mob/back.dmi', "captainpack"), ICON_OVERLAY)
 					if(backbag == 3)
 						clothes_s.Blend(new /icon('icons/mob/back.dmi', "satchel-cap"), ICON_OVERLAY)
 				if(HOS)
