@@ -93,7 +93,7 @@
 		C.post_status("alert", "lockdown")
 
 	src.verbs += /mob/living/silicon/ai/proc/disablelockdown
-	usr << "<span class = 'warning'>Lockdown Initiated.</span>"
+	src << "<span class = 'warning'>Lockdown Initiated.</span>"
 
 /mob/living/silicon/ai/proc/disablelockdown()
 	set category = "Malfunction"
