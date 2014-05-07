@@ -86,6 +86,8 @@ BLIND     // can't see anything
 	body_parts_covered = HEAD
 	slot_flags = SLOT_MASK
 	var/alloweat = 0
+	var/can_flip = null
+	var/is_flipped = 1
 
 
 //Override this to modify speech like luchador masks.

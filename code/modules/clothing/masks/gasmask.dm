@@ -5,9 +5,37 @@
 	flags = MASKCOVERSMOUTH | MASKCOVERSEYES | BLOCK_GAS_SMOKE_EFFECT | MASKINTERNALS
 	flags_inv = HIDEEARS|HIDEEYES|HIDEFACE
 	w_class = 3.0
+	can_flip = 1
 	item_state = "gas_alt"
 	gas_transfer_coefficient = 0.01
 	permeability_coefficient = 0.01
+
+	verb/togglegasmask()
+		set name = "Toggle Gas Mask"
+		set category = "Object"
+		set src in usr
+		if(!usr.canmove || usr.stat || usr.restrained())
+			return
+		if(!can_flip)
+			usr << "You try flipping up your mask, but is very uncomfortable and you look like a fool. You flip it back down."
+			return
+		if(src.is_flipped == 2)
+			src.icon_state = initial(icon_state)
+			gas_transfer_coefficient = 0.01
+			permeability_coefficient = 0.01
+			flags = initial(flags)
+			flags_inv = initial(flags_inv)
+			usr << "You push down your gas mask."
+			src.is_flipped = 1
+		else
+			src.icon_state += "_up"
+			usr << "You push up your gas mask."
+			gas_transfer_coefficient = null
+			permeability_coefficient = null
+			flags = null
+			flags_inv = null
+			src.is_flipped = 2
+		usr.update_inv_wear_mask()
 
 // **** Welding gas mask ****
 
@@ -18,6 +46,7 @@
 	m_amt = 4000
 	g_amt = 2000
 	flash_protect = 2
+	can_flip = null
 	tint = 2
 	armor = list(melee = 10, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 0, rad = 0)
 	origin_tech = "materials=2;engineering=2"
@@ -45,6 +74,7 @@
 	desc = "A standard issue Security gas mask with integrated 'Compli-o-nator 3000' device, plays over a dozen pre-recorded compliance phrases designed to get scumbags to stand still whilst you taze them. Do not tamper with the device."
 	action_button_name = "HALT!"
 	icon_state = "officermask"
+	can_flip = null
 	var/cooldown = 0
 	var/aggressiveness = 2
 
@@ -172,17 +202,20 @@
 	desc = "A modernised version of the classic design, this mask will not only filter out toxins but it can also be connected to an air supply."
 	icon_state = "plaguedoctor"
 	item_state = "gas_mask"
+	can_flip = null
 	armor = list(melee = 0, bullet = 0, laser = 2,energy = 2, bomb = 0, bio = 75, rad = 0)
 
 /obj/item/clothing/mask/gas/swat
 	name = "\improper SWAT mask"
 	desc = "A close-fitting tactical mask that can be connected to an air supply."
 	icon_state = "swat"
+	can_flip = null
 
 /obj/item/clothing/mask/gas/syndicate
 	name = "syndicate mask"
 	desc = "A close-fitting tactical mask that can be connected to an air supply."
 	icon_state = "swat"
+	can_flip = null
 
 /obj/item/clothing/mask/gas/voice
 	name = "gas mask"
@@ -191,6 +224,7 @@
 	var/voice = "Unknown"
 	var/vchange = 0//This didn't do anything before. It now checks if the mask has special functions/N
 	origin_tech = "syndicate=4"
+	can_flip = null
 
 /obj/item/clothing/mask/gas/voice/space_ninja
 	name = "ninja mask"
@@ -227,6 +261,7 @@
 	alloweat = 1
 	icon_state = "clown"
 	item_state = "clown_hat"
+	can_flip = null
 
 /obj/item/clothing/mask/gas/sexyclown
 	name = "sexy-clown wig and mask"
@@ -234,6 +269,7 @@
 	alloweat = 1
 	icon_state = "sexyclown"
 	item_state = "sexyclown"
+	can_flip = null
 
 /obj/item/clothing/mask/gas/mime
 	name = "mime mask"
@@ -241,6 +277,7 @@
 	alloweat = 1
 	icon_state = "mime"
 	item_state = "mime"
+	can_flip = null
 
 /obj/item/clothing/mask/gas/monkeymask
 	name = "monkey mask"
@@ -248,6 +285,7 @@
 	alloweat = 1
 	icon_state = "monkeymask"
 	item_state = "monkeymask"
+	can_flip = null
 
 /obj/item/clothing/mask/gas/sexymime
 	name = "sexy mime mask"
@@ -255,19 +293,23 @@
 	alloweat = 1
 	icon_state = "sexymime"
 	item_state = "sexymime"
+	can_flip = null
 
 /obj/item/clothing/mask/gas/death_commando
 	name = "Death Commando Mask"
 	icon_state = "death_commando_mask"
 	item_state = "death_commando_mask"
+	can_flip = null
 
 /obj/item/clothing/mask/gas/cyborg
 	name = "cyborg visor"
 	desc = "Beep boop"
 	icon_state = "death"
+	can_flip = null
 
 /obj/item/clothing/mask/gas/owl_mask
 	name = "owl mask"
 	desc = "Twoooo!"
 	alloweat = 1
 	icon_state = "owl"
+	can_flip = null
