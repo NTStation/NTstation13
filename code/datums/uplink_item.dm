@@ -408,7 +408,7 @@ var/list/uplink_items = list()
 
 /datum/uplink_item/device_tools/teleporter
 	name = "Teleporter Circuit Board"
-	desc = "A printed circuit board that completes the teleporter onboard the mothership. Advise you test fire the teleporter before entering it, as malfunctions can occur."
+	desc = "A printed circuit board that completes the teleporter onboard the shuttle. It is advised that you test fire the teleporter before entering it, as malfunctions can occur."
 	item = /obj/item/weapon/circuitboard/teleporter
 	cost = 20
 	gamemodes = list(/datum/game_mode/nuclear)
@@ -420,6 +420,14 @@ var/list/uplink_items = list()
 	cost = 8
 	gamemodes = list(/datum/game_mode/nuclear)
 
+/datum/uplink_item/device_tools/medic
+	name = "Tactical Medikit"
+	desc = "A robust assortment of tools for the aspiring combat medic. \
+	Includes a robust medicine injector loaded with active rejuvenation chemicals, a large syringe full of chloral hydrate for your enemies, and several top of the line combat drugs. \
+	Only for experienced agents."
+	item = /obj/item/weapon/storage/firstaid/tactical
+	cost = 8
+	gamemodes = list(/datum/game_mode/nuclear)
 
 // IMPLANTS
 

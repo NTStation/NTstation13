@@ -19,8 +19,6 @@
 	new /obj/item/clothing/suit/space/rig/syndi(src)
 	new /obj/item/weapon/storage/belt/military(src)
 	new /obj/item/weapon/crowbar/red(src)
-	new /obj/item/weapon/stock_parts/cell/high(src)
-	new /obj/item/device/multitool(src)
 
 
 /obj/structure/closet/syndicate/nuclear

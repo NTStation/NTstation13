@@ -65,6 +65,11 @@
 	HELMET_TYPE = /obj/item/clothing/head/helmet/space/rig/mining
 	MASK_TYPE = /obj/item/clothing/mask/breath
 
+/obj/machinery/suit_storage_unit/syndie
+	SUIT_TYPE = /obj/item/clothing/suit/space/syndicate/black/red
+	HELMET_TYPE = /obj/item/clothing/head/helmet/space/syndicate/black/red
+	MASK_TYPE = /obj/item/clothing/mask/gas/syndicate
+
 /obj/machinery/suit_storage_unit/New()
 	src.update_icon()
 	if(SUIT_TYPE)
