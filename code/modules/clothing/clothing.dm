@@ -118,6 +118,7 @@ BLIND     // can't see anything
 	var/can_toggle = 1
 	var/is_toggled = 1
 	var/has_hood = null
+	var/coat_color = null
 
 //Spacesuit
 //Note: Everything in modules/clothing/spacesuits should have the entire suit grouped together.

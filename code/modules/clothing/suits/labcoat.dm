@@ -59,6 +59,36 @@
 	desc = "A suit that protects against minor chemical spills. Has a purple stripe on the shoulder."
 	icon_state = "labcoat_tox"
 
+/obj/item/clothing/suit/labcoat/red
+	name = "red labcoat"
+	desc = "A pretty red labcoat."
+	icon_state = "red_labcoat"
+
+/obj/item/clothing/suit/labcoat/purple
+	name = "purple labcoat"
+	desc = "A pretty purple labcoat."
+	icon_state = "purple_labcoat"
+
+/obj/item/clothing/suit/labcoat/orange
+	name = "orange labcoat"
+	desc = "A pretty orange labcoat."
+	icon_state = "orange_labcoat"
+
+/obj/item/clothing/suit/labcoat/green
+	name = "green labcoat"
+	desc = "A pretty green labcoat."
+	icon_state = "green_labcoat"
+
+/obj/item/clothing/suit/labcoat/blue
+	name = "blue labcoat"
+	desc = "A pretty blue labcoat."
+	icon_state = "blue_labcoat"
+
+/obj/item/clothing/suit/labcoat/yellow
+	name = "yellow labcoat"
+	desc = "A pretty yellow labcoat."
+	icon_state = "yellow_labcoat"
+
 /obj/item/clothing/suit/labcoat/coat
 	name = "winter coat"
 	desc = "A coat that protects against the bitter cold."
