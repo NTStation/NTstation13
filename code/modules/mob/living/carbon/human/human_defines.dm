@@ -22,7 +22,7 @@
 	var/backbag = 2		//Which backpack type the player has chosen. Nothing, Satchel or Backpack.
 
 	//Equipment slots
-	var/obj/item/wear_suit = null
+	var/obj/item/clothing/suit/wear_suit = null
 	var/obj/item/w_uniform = null
 	var/obj/item/shoes = null
 	var/obj/item/belt = null
