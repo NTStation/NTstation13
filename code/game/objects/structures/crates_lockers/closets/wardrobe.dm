@@ -312,6 +312,9 @@
 	icon_closed = "grey"
 
 /obj/structure/closet/wardrobe/grey/New()
+	new /obj/item/clothing/suit/labcoat/coat(src)
+	new /obj/item/clothing/suit/labcoat/coat(src)
+	new /obj/item/clothing/suit/labcoat/coat(src)
 	new /obj/item/clothing/under/color/grey(src)
 	new /obj/item/clothing/under/color/grey(src)
 	new /obj/item/clothing/under/color/grey(src)
