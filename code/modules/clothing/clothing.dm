@@ -89,7 +89,7 @@ BLIND     // can't see anything
 	var/can_flip = null
 	var/is_flipped = 1
 
-	verb/togglemask()
+	/obj/item/clothing/mask/verb/togglemask()
 		set name = "Toggle Mask"
 		set category = "Object"
 		set src in usr
