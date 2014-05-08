@@ -6,36 +6,12 @@
 	flags_inv = HIDEEARS|HIDEEYES|HIDEFACE
 	w_class = 3.0
 	can_flip = 1
+	action_button_name = "Toggle Mask"
 	item_state = "gas_alt"
 	gas_transfer_coefficient = 0.01
 	permeability_coefficient = 0.01
 
-	verb/togglegasmask()
-		set name = "Toggle Gas Mask"
-		set category = "Object"
-		set src in usr
-		if(!usr.canmove || usr.stat || usr.restrained())
-			return
-		if(!can_flip)
-			usr << "You try flipping up your mask, but is very uncomfortable and you look like a fool. You flip it back down."
-			return
-		if(src.is_flipped == 2)
-			src.icon_state = initial(icon_state)
-			gas_transfer_coefficient = 0.01
-			permeability_coefficient = 0.01
-			flags = initial(flags)
-			flags_inv = initial(flags_inv)
-			usr << "You push down your gas mask."
-			src.is_flipped = 1
-		else
-			src.icon_state += "_up"
-			usr << "You push up your gas mask."
-			gas_transfer_coefficient = null
-			permeability_coefficient = null
-			flags = null
-			flags_inv = null
-			src.is_flipped = 2
-		usr.update_inv_wear_mask()
+
 
 // **** Welding gas mask ****
 
