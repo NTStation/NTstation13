@@ -426,7 +426,7 @@ var/list/uplink_items = list()
 	Includes a robust medicine injector loaded with active rejuvenation chemicals, a large syringe full of chloral hydrate for your enemies, and several top of the line combat drugs. \
 	Only for experienced agents."
 	item = /obj/item/weapon/storage/firstaid/tactical
-	cost = 8
+	cost = 6
 	gamemodes = list(/datum/game_mode/nuclear)
 
 // IMPLANTS
