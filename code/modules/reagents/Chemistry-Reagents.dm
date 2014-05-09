@@ -2987,7 +2987,7 @@ datum
 			id = "threemileisland"
 			description = "Made for a woman, strong enough for a man."
 			color = "#666340" // rgb: 102, 99, 64
-			boozepwr = 40
+			boozepwr = 15
 
 			on_mob_life(var/mob/living/M as mob)
 				M.druggy = max(M.druggy, 50)
