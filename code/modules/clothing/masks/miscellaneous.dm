@@ -95,3 +95,7 @@ obj/item/clothing/mask/bandana/green
 	name = "green bandana"
 	icon_state = "bandgreen"
 
+/obj/item/clothing/mask/bandana/botany
+	name = "botany bandana"
+	desc = "It's a green bandana with some fine nanotech lining."
+	icon_state = "bandbotany"
