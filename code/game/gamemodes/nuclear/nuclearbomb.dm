@@ -212,6 +212,11 @@ var/bomb_set
 
 /obj/item/weapon/disk/nuclear/Destroy()
 	if(blobstart.len > 0)
+		//Lock the bomb if it was carrying the disk
+		if(istype(loc, /obj/machinery/nuclearbomb))
+			var/obj/machinery/nuclearbomb/BOMB = loc
+			BOMB.yes_code = 0
+			BOMB.auth = null
 		loc = pick(blobstart)
 		message_admins("[src] has been destroyed.  Moving it to ([x], [y], [z]).")
 		log_game("[src] has been destroyed.  Moving it to ([x], [y], [z]).")
