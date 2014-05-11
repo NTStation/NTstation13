@@ -73,6 +73,13 @@
 	SUIT_TYPE = /obj/item/clothing/suit/space/syndicate/black/red
 	HELMET_TYPE = /obj/item/clothing/head/helmet/space/syndicate/black/red
 	MASK_TYPE = /obj/item/clothing/mask/gas/syndicate
+	STORAGE_TYPE= /obj/item/weapon/tank/jetpack/oxygen/harness
+
+/obj/machinery/suit_storage_unit/syndierig
+	SUIT_TYPE = /obj/item/clothing/suit/space/syndicate/black/red
+	HELMET_TYPE = /obj/item/clothing/head/helmet/space/syndicate/black/red
+	MASK_TYPE = /obj/item/clothing/mask/gas/syndicate
+	STORAGE_TYPE= /obj/item/weapon/tank/jetpack/oxygen/harness
 
 /obj/machinery/suit_storage_unit/New()
 	src.update_icon()
