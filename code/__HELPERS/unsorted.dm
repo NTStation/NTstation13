@@ -643,6 +643,13 @@ atom/proc/GetTypeInAllContents(typepath)
 
 	return found
 
+atom/proc/CheckForNukeDisk()
+	if(istype(src, /obj/item/weapon/disk/nuclear))
+		return src
+	var/found_disk = GetTypeInAllContents(/obj/item/weapon/disk/nuclear)
+	if(found_disk)
+		return found_disk
+	return 0
 
 //Step-towards method of determining whether one atom can see another. Similar to viewers()
 /proc/can_see(var/atom/source, var/atom/target, var/length=5) // I couldnt be arsed to do actual raycasting :I This is horribly inaccurate.

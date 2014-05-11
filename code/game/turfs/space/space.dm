@@ -62,15 +62,14 @@
 				qdel(A)
 				return
 
-			if(istype(A, /obj/item/weapon/disk/nuclear)) // Don't let nuke disks travel Z levels  ... And moving this shit down here so it only fires when they're actually trying to change z-level.
-				qdel(A) //The disk's Del() proc ensures a new one is created
-				return
-
 			var/mob/living/MM = null
-			var/fukkendisk = A.GetTypeInAllContents(/obj/item/weapon/disk/nuclear)
-			if(fukkendisk)
-				if(isliving(A))
-					MM = A
+			if(isliving(A))
+				MM = A
+
+			//Check for nuke disk
+			var/nukedisk = A.CheckForNukeDisk()
+			if(nukedisk)
+				if(MM)
 					if(MM.client && !MM.stat)
 						MM << "<span class='warning'>Something you are carrying is preventing you from leaving. Don't play stupid; you know exactly what it is.</span>"
 						if(MM.x <= TRANSITIONEDGE)
@@ -82,25 +81,22 @@
 						else if(MM.y >= world.maxy -TRANSITIONEDGE)
 							MM.inertia_dir = 2
 					else
-						qdel(fukkendisk)//Make the disk respawn if it is on a clientless mob or corpse
+						qdel(nukedisk)//Make the disk respawn if it is on a clientless mob or corpse
 				else
-					qdel(fukkendisk)//Make the disk respawn if it is floating on its own
+					qdel(nukedisk)//Make the disk respawn if it is floating on its own
 				return
 
 			//Check if it's a mob pulling an object. Have the object transition with the mob if it's not the nuke disk
-			var/obj/was_pulling = null
-			if(isliving(A))
-				MM = A
-				if(MM.pulling)
-					//Check for that fucking disk
-					if(istype(MM.pulling, /obj/item/weapon/disk/nuclear))
-						qdel(MM.pulling)
+			if(MM && MM.pulling)
+				nukedisk = MM.pulling.CheckForNukeDisk()
+				if(nukedisk)
+					if(nukedisk == MM.pulling)
+						MM.pulling = null
 					else
-						was_pulling = MM.pulling
-						fukkendisk = was_pulling.GetTypeInAllContents(/obj/item/weapon/disk/nuclear)
-						if(fukkendisk)
-							MM << "<span class='warning'>You think you saw something slip out of [was_pulling], but you couldn't tell where it went...</span>"
-							qdel(fukkendisk)
+						MM << "<span class='warning'>You think you saw something slip out of [MM.pulling], but you couldn't tell where it went...</span>"
+					qdel(nukedisk)
+
+			var/obj/was_pulling = MM.pulling //Store the object to transition later
 
 			var/move_to_z = src.z
 			var/safety = 1
@@ -134,7 +130,7 @@
 				A.x = rand(TRANSITIONEDGE + 2, world.maxx - TRANSITIONEDGE - 2)
 
 			spawn (0)
-				if(was_pulling && MM)
+				if(was_pulling && MM) //Carry the object they were pulling with them when they transition
 					was_pulling.loc = MM.loc
 					MM.pulling = was_pulling
 					was_pulling.pulledby = MM
