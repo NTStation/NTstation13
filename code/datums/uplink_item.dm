@@ -445,6 +445,12 @@ var/list/uplink_items = list()
 	item = /obj/item/weapon/storage/box/syndie_kit/imp_adrenal
 	cost = 4
 
+/datum/uplink_item/implants/wire_kit_doors
+	name = "Wire Knowledge: Doors"
+	desc = "An implant granting you the knowledge of Non-secure Airlock and Door wire systems"
+	item = /obj/item/weapon/storage/box/syndie_kit/imp_wire_door
+	cost = 2 //2 because unlike the Emag, this needs tools
+
 // POINTLESS BADASSERY
 
 /datum/uplink_item/badass

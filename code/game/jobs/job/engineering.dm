@@ -37,9 +37,10 @@
 			H.equip_to_slot_or_del(new /obj/item/weapon/storage/box/engineer(H), slot_r_hand)
 		else
 			H.equip_to_slot_or_del(new /obj/item/weapon/storage/box/engineer(H.back), slot_in_backpack)
+
+		H.mind.store_memory(all_solved_wires[/obj/machinery/door/airlock])
+		H.mind.store_memory(all_solved_wires[/obj/machinery/power/apc])
 		return 1
-
-
 
 /datum/job/engineer
 	title = "Station Engineer"
@@ -70,6 +71,8 @@
 			H.equip_to_slot_or_del(new /obj/item/weapon/storage/box/engineer(H), slot_r_hand)
 		else
 			H.equip_to_slot_or_del(new /obj/item/weapon/storage/box/engineer(H.back), slot_in_backpack)
+		H.mind.store_memory(all_solved_wires[/obj/machinery/door/airlock])
+		H.mind.store_memory(all_solved_wires[/obj/machinery/power/apc])
 		return 1
 
 
@@ -102,4 +105,6 @@
 			H.equip_to_slot_or_del(new /obj/item/weapon/storage/box/engineer(H), slot_r_hand)
 		else
 			H.equip_to_slot_or_del(new /obj/item/weapon/storage/box/engineer(H.back), slot_in_backpack)
+		H.mind.store_memory(all_solved_wires[/obj/machinery/door/airlock])
+		H.mind.store_memory(all_solved_wires[/obj/machinery/power/apc])
 		return 1
