@@ -121,7 +121,7 @@ var/list/uplink_items = list()
 
 /datum/uplink_item/dangerous/machinegun
 	name = "L6 Squad Automatic Weapon"
-	desc = "A traditionally constructed machine gun made by AA-2531. This deadly weapon has a massive 50-round magazine of 7.62×51mm ammunition."
+	desc = "A traditionally constructed machine gun made by AA-2531. This deadly weapon has a massive 50-round magazine of 7.62ï¿½51mm ammunition."
 	item = /obj/item/weapon/gun/projectile/automatic/l6_saw
 	cost = 20
 	gamemodes = list(/datum/game_mode/nuclear)
@@ -225,8 +225,8 @@ var/list/uplink_items = list()
 	cost = 1
 
 /datum/uplink_item/ammo/machinegun
-	name = "Ammo-7.62×51mm"
-	desc = "A 50-round magazine of 7.62×51mm ammunition for use in the L6 SAW machinegun. By the time you need to use this, you'll already be on a pile of corpses."
+	name = "Ammo-7.62ï¿½51mm"
+	desc = "A 50-round magazine of 7.62ï¿½51mm ammunition for use in the L6 SAW machinegun. By the time you need to use this, you'll already be on a pile of corpses."
 	item = /obj/item/ammo_box/magazine/m762
 	cost = 6
 	gamemodes = list(/datum/game_mode/nuclear)
@@ -276,7 +276,7 @@ var/list/uplink_items = list()
 
 /datum/uplink_item/stealthy_tools/chameleon_stamp
 	name = "Chameleon Stamp"
-	desc = "A stamp that can be activated to imitate an official Nanotrasen Stamp™. The disguised stamp will work exactly like the real stamp and will allow you to forge false documents to gain access or equipment; \
+	desc = "A stamp that can be activated to imitate an official Nanotrasen Stampï¿½. The disguised stamp will work exactly like the real stamp and will allow you to forge false documents to gain access or equipment; \
 	it can also be used in a washing machine to forge clothing."
 	item = /obj/item/weapon/stamp/chameleon
 	cost = 1
@@ -408,7 +408,7 @@ var/list/uplink_items = list()
 
 /datum/uplink_item/device_tools/teleporter
 	name = "Teleporter Circuit Board"
-	desc = "A printed circuit board that completes the teleporter onboard the mothership. Advise you test fire the teleporter before entering it, as malfunctions can occur."
+	desc = "A printed circuit board that completes the teleporter onboard the shuttle. It is advised that you test fire the teleporter before entering it, as malfunctions can occur."
 	item = /obj/item/weapon/circuitboard/teleporter
 	cost = 20
 	gamemodes = list(/datum/game_mode/nuclear)
@@ -419,7 +419,6 @@ var/list/uplink_items = list()
 	item = /obj/item/weapon/shield/energy
 	cost = 8
 	gamemodes = list(/datum/game_mode/nuclear)
-
 
 // IMPLANTS
 
