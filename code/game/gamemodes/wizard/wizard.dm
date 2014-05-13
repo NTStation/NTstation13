@@ -130,17 +130,6 @@
 		obj_count++
 	return
 
-
-/*/datum/game_mode/proc/learn_basic_spells(mob/living/carbon/human/wizard_mob)
-	if (!istype(wizard_mob))
-		return
-	if(!config.feature_object_spell_system)
-		wizard_mob.verbs += /client/proc/jaunt
-		wizard_mob.mind.special_verbs += /client/proc/jaunt
-	else
-		wizard_mob.spell_list += new /obj/effect/proc_holder/spell/targeted/ethereal_jaunt(usr)
-*/
-
 /datum/game_mode/proc/equip_wizard(mob/living/carbon/human/wizard_mob)
 	if (!istype(wizard_mob))
 		return
@@ -161,7 +150,6 @@
 	if(wizard_mob.backbag == 2) wizard_mob.equip_to_slot_or_del(new /obj/item/weapon/storage/backpack(wizard_mob), slot_back)
 	if(wizard_mob.backbag == 3) wizard_mob.equip_to_slot_or_del(new /obj/item/weapon/storage/backpack/satchel_norm(wizard_mob), slot_back)
 	wizard_mob.equip_to_slot_or_del(new /obj/item/weapon/storage/box/survival(wizard_mob), slot_in_backpack)
-//	wizard_mob.equip_to_slot_or_del(new /obj/item/weapon/scrying_gem(wizard_mob), slot_l_store) For scrying gem.
 	wizard_mob.equip_to_slot_or_del(new /obj/item/weapon/teleportation_scroll(wizard_mob), slot_r_store)
 	wizard_mob.equip_to_slot_or_del(new /obj/item/weapon/spellbook(wizard_mob), slot_r_hand)
 
@@ -272,15 +260,20 @@
 /*Checks if the wizard can cast spells.
 Made a proc so this is not repeated 14 (or more) times.*/
 /mob/proc/casting()
-//Removed the stat check because not all spells require clothing now.
-	if(!istype(usr:wear_suit, /obj/item/clothing/suit/wizrobe))
-		usr << "I don't feel strong enough without my robe."
-		return 0
-	if(!istype(usr:shoes, /obj/item/clothing/shoes/sandal))
-		usr << "I don't feel strong enough without my sandals."
-		return 0
-	if(!istype(usr:head, /obj/item/clothing/head/wizard))
-		usr << "I don't feel strong enough without my hat."
-		return 0
-	else
-		return 1
+//Removed the stat check because not all spells require clothing now
+
+	if(ishuman(src))
+		var/mob/living/carbon/human/H = src
+
+		if(!istype(H.wear_suit, /obj/item/clothing/suit/wizrobe))
+			usr << "I don't feel strong enough without my robe."
+			return 0
+		if(!istype(H.shoes, /obj/item/clothing/shoes/sandal))
+			usr << "I don't feel strong enough without my sandals."
+			return 0
+		if(!istype(H.head, /obj/item/clothing/head/wizard))
+			usr << "I don't feel strong enough without my hat."
+			return 0
+		else
+			return 1
+	return 0

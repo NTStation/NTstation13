@@ -223,8 +223,11 @@
 	set category = "Malfunction"
 	set name = "Hack intercept"
 	src.verbs -= /mob/living/silicon/ai/proc/interhack
-	ticker.mode:hack_intercept()
-	src << "<span class='notice'>Status update intercepted and modified.</span>"
+
+	if(game_is_malf_mode(ticker.mode))
+		var/datum/game_mode/malfunction/Malf = ticker.mode
+		Malf.hack_intercept()
+		src << "<span class='notice'>Status update intercepted and modified.</span>"
 
 /datum/AI_Module/small/reactivate_camera
 	module_name = "Reactivate camera"

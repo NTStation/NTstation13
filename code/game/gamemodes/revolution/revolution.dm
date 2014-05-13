@@ -1,11 +1,12 @@
-// To add a rev to the list of revolutionaries, make sure it's rev (with if(ticker.mode.name == "revolution)),
-// then call ticker.mode:add_revolutionary(_THE_PLAYERS_MIND_)
+// To add a rev to the list of revolutionaries, make sure it's rev (with if(game_is_rev_mode(ticker.mode)),
+// then typecast the game mode to rev: var/datum/game_mode/revolution/Rev = ticker.mode
+// then call Rev.add_revolutionary(_THE_PLAYERS_MIND_)
 // nothing else needs to be done, as that proc will check if they are a valid target.
 // Just make sure the converter is a head before you call it!
-// To remove a rev (from brainwashing or w/e), call ticker.mode:remove_revolutionary(_THE_PLAYERS_MIND_),
+// To remove a rev (from brainwashing or w/e), call Rev.remove_revolutionary(_THE_PLAYERS_MIND_),
 // this will also check they're not a head, so it can just be called freely
 // If the rev icons start going wrong for some reason, ticker.mode:update_all_rev_icons() can be called to correct them.
-// If the game somtimes isn't registering a win properly, then ticker.mode.check_win() isn't being called somewhere.
+// If the game somtimes isn't registering a win properly, then Rev.check_win() isn't being called somewhere.
 
 /datum/game_mode
 	var/list/datum/mind/head_revolutionaries = list()
@@ -354,7 +355,7 @@
 /datum/game_mode/proc/auto_declare_completion_revolution()
 	var/list/targets = list()
 
-	if(head_revolutionaries.len || istype(ticker.mode,/datum/game_mode/revolution))
+	if(head_revolutionaries.len || game_is_rev_mode(ticker.mode))
 		var/text = "<br><font size=3><b>The head revolutionaries were:</b></font>"
 
 		for(var/datum/mind/headrev in head_revolutionaries)
@@ -378,7 +379,7 @@
 
 		world << text
 
-	if(revolutionaries.len || istype(ticker.mode,/datum/game_mode/revolution))
+	if(revolutionaries.len || game_is_rev_mode(ticker.mode))
 		var/text = "<br><font size=3><b>The revolutionaries were:</b></font>"
 
 		for(var/datum/mind/rev in revolutionaries)
@@ -400,7 +401,7 @@
 		world << text
 
 
-	if( head_revolutionaries.len || revolutionaries.len || istype(ticker.mode,/datum/game_mode/revolution) )
+	if( head_revolutionaries.len || revolutionaries.len || game_is_rev_mode(ticker.mode) )
 		var/text = "<br><font size=3><b>The heads of staff were:</b></font>"
 
 		var/list/heads = get_all_heads()

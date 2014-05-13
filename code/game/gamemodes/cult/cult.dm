@@ -15,7 +15,7 @@
 	if(istype(mind.current, /mob/living/carbon/human) && (mind.assigned_role in list("Captain", "Chaplain")))	return 0
 	if(isloyal(mind.current))
 		return 0
-	if (ticker.mode.name == "cult")		//redundent?
+	if(game_is_cult_mode(ticker.mode))
 		if(mind.current == ticker.mode.sacrifice_target)	return 0
 	return 1
 
@@ -102,8 +102,6 @@
 
 	for(var/datum/mind/cult_mind in cult)
 		equip_cultist(cult_mind.current)
-//		grant_runeword(cult_mind.current)
-//		grant_secondword(cult_mind.current)
 		update_cult_icons_added(cult_mind)
 		cult_mind.current << "\blue You are a member of the cult!"
 		memorize_cult_objectives(cult_mind)
@@ -133,8 +131,6 @@
 	cult_mind.memory += "The Geometer of Blood grants you the knowledge to sacrifice non-believers. (Hell Blood Join)<BR>"
 	for(var/startingword in startwords)
 		grant_runeword(cult_mind.current,startingword)
-//	grant_runeword(cult_mind.current,"blood")
-//	grant_runeword(cult_mind.current,"hell")
 
 /datum/game_mode/proc/equip_cultist(mob/living/carbon/human/mob)
 	if(!istype(mob))
@@ -162,21 +158,6 @@
 		mob.update_icons()
 		return 1
 
-
-//datum/game_mode/cult/proc/grant_secondword(mob/living/carbon/human/cult_mob, var/word)
-//	if (!word)
-//		if(secondwords.len > 0)
-//			word=pick(secondwords)
-//			secondwords -= word
-//			grant_runeword(cult_mob,word)
-
-//datum/game_mode/cult/grant_runeword(mob/living/carbon/human/cult_mob, var/word)
-//	if (!word)
-//		if(startwords.len > 0)
-//			word=pick(startwords)
-//			startwords -= word
-//	return ..(cult_mob,word)
-
 /datum/game_mode/proc/grant_runeword(mob/living/carbon/human/cult_mob, var/word)
 	if(!wordtravel)
 		runerandom()
@@ -202,10 +183,6 @@
 			wordexp = "[worddestr] is destroy..."
 		if("other")
 			wordexp = "[wordother] is other..."
-//		if("hear")
-//			wordexp = "[wordhear] is hear..."
-//		if("free")
-//			wordexp = "[wordfree] is free..."
 		if("hide")
 			wordexp = "[wordhide] is hide..."
 	cult_mob << "\red [pick("You remember something from the dark teachings of your master","You hear a dark voice on the wind","Black blood oozes into your vision and forms into symbols","You catch a brief glimmer of the otherside")]... [wordexp]"

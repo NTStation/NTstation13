@@ -8,7 +8,6 @@ var/list/sacrificed = list()
 			var/allrunesloc[]
 			allrunesloc = new/list()
 			var/index = 0
-		//	var/tempnum = 0
 			for(var/obj/effect/rune/R in world)
 				if(R == src)
 					continue
@@ -39,10 +38,6 @@ var/list/sacrificed = list()
 
 
 		itemport(var/key)
-//			var/allrunesloc[]
-//			allrunesloc = new/list()
-//			var/index = 0
-		//	var/tempnum = 0
 			var/culcount = 0
 			var/runecount = 0
 			var/obj/effect/rune/IP = null
@@ -118,26 +113,10 @@ var/list/sacrificed = list()
 						M.mind.special_role = "Cultist"
 						M << "<font color=\"purple\"><b><i>Your blood pulses. Your head throbs. The world goes red. All at once you are aware of a horrible, horrible truth. The veil of reality has been ripped away and in the festering wound left behind something sinister takes root.</b></i></font>"
 						M << "<font color=\"purple\"><b><i>Assist your new compatriots in their dark dealings. Their goal is yours, and yours is theirs. You serve the Dark One above all else. Bring It back.</b></i></font>"
-	/*	//convert no longer gives words
-						//picking which word to use
-						if(usr.mind.cult_words.len != ticker.mode.allwords.len) // No point running if they already know everything
-							var/convert_word
-							for(var/i=1, i<=3, i++)
-								convert_word = pick(ticker.mode.grantwords)
-								if(convert_word in usr.mind.cult_words)
-									if(i==3) convert_word = null				//NOTE: If max loops is changed ensure this condition is changed to match /Mal
-								else
-									break
-							if(!convert_word)
-								usr << "\red This Convert was unworthy of knowledge of the other side!"
-							else
-								usr << "\red The Geometer of Blood is pleased to see his followers grow in numbers."
-								ticker.mode.grant_runeword(usr, convert_word)
-							return 1		*/
 					else
 						M << "<font color=\"purple\"><b><i>Your blood pulses. Your head throbs. The world goes red. All at once you are aware of a horrible, horrible truth. The veil of reality has been ripped away and in the festering wound left behind something sinister takes root.</b></i></font>"
 						M << "<font color=\"red\"><b>And not a single fuck was given, exterminate the cult at all costs.</b></font>"
-						if(ticker.mode.name == "cult")
+						if(game_is_cult_mode(ticker.mode))
 							if(M.mind == ticker.mode.sacrifice_target)
 								for(var/mob/living/carbon/human/cultist in cultsinrange)
 									cultist << "<span class='h2.userdanger'>The Chosen One!! <BR>KILL THE CHOSEN ONE!!! </span>"
@@ -158,9 +137,10 @@ var/list/sacrificed = list()
 					M.say("Tok-lyr rqa'nap g[pick("'","`")]lt-ulotf!")
 					cultist_count += M
 			if(cultist_count.len >= 9)
-				if(ticker.mode.name == "cult")
-					if("eldergod" in ticker.mode.cult_objectives)
-						ticker.mode:eldergod = 0
+				if(game_is_cult_mode(ticker.mode))
+					var/datum/game_mode/cult/Cult = ticker.mode
+					if("eldergod" in Cult.cult_objectives)
+						Cult.eldergod = 0
 					else
 						message_admins("[usr.real_name]([usr.ckey]) tried to summon a god when she didn't want to come out to play.")	// Admin alert because you *KNOW* dickbutts are going to abuse this.
 						for(var/mob/M in cultist_count)
@@ -269,8 +249,10 @@ var/list/sacrificed = list()
 			var/is_sacrifice_target = 0
 			for(var/mob/living/carbon/human/M in src.loc)
 				if(M.stat == DEAD)
-					if(ticker.mode.name == "cult" && M.mind == ticker.mode:sacrifice_target)
-						is_sacrifice_target = 1
+					if(game_is_cult_mode(ticker.mode))
+						var/datum/game_mode/cult/Cult = ticker.mode
+						if(M.mind == Cult.sacrifice_target)
+							is_sacrifice_target = 1
 					else
 						corpse_to_raise = M
 						if(M.key)
@@ -287,8 +269,10 @@ var/list/sacrificed = list()
 				for(var/obj/effect/rune/R in world)
 					if(R.word1==wordblood && R.word2==wordjoin && R.word3==wordhell)
 						for(var/mob/living/carbon/human/N in R.loc)
-							if(ticker.mode.name == "cult" && N.mind && N.mind == ticker.mode:sacrifice_target)
-								is_sacrifice_target = 1
+							if(game_is_cult_mode(ticker.mode))
+								var/datum/game_mode/cult/Cult = ticker.mode
+								if(N.mind && N.mind == Cult.sacrifice_target)
+									is_sacrifice_target = 1
 							else
 								if(N.stat!= DEAD)
 									body_to_sacrifice = N
@@ -320,10 +304,6 @@ var/list/sacrificed = list()
 			corpse_to_raise.SetStunned(0)
 			corpse_to_raise.SetWeakened(0)
 			corpse_to_raise.radiation = 0
-//			corpse_to_raise.buckled = null
-//			if(corpse_to_raise.handcuffed)
-//				qdel(corpse_to_raise.handcuffed)
-//				corpse_to_raise.update_inv_handcuffed(0)
 			corpse_to_raise.stat = CONSCIOUS
 			corpse_to_raise.updatehealth()
 			corpse_to_raise.update_damage_overlays(0)
@@ -338,11 +318,6 @@ var/list/sacrificed = list()
 			"\red You feel as your blood boils, tearing you apart.", \
 			"\red You hear a thousand voices, all crying in pain.")
 			body_to_sacrifice.gib()
-
-//			if(ticker.mode.name == "cult")
-//				ticker.mode:add_cultist(corpse_to_raise.mind)
-//			else
-//				ticker.mode.cult |= corpse_to_raise.mind
 
 			corpse_to_raise << "<font color=\"purple\"><b><i>Your blood pulses. Your head throbs. The world goes red. All at once you are aware of a horrible, horrible truth. The veil of reality has been ripped away and in the festering wound left behind something sinister takes root.</b></i></font>"
 			corpse_to_raise << "<font color=\"purple\"><b><i>Assist your new compatriots in their dark dealings. Their goal is yours, and yours is theirs. You serve the Dark One above all else. Bring It back.</b></i></font>"
@@ -430,8 +405,9 @@ var/list/sacrificed = list()
 
 			D.key = ghost.key
 
-			if(ticker.mode.name == "cult")
-				ticker.mode:add_cultist(D.mind)
+			if(game_is_cult_mode(ticker.mode))
+				var/datum/game_mode/cult/Cult = ticker.mode
+				Cult.add_cultist(D.mind)
 			else
 				ticker.mode.cult+=D.mind
 
@@ -605,8 +581,9 @@ var/list/sacrificed = list()
 					C.say("Barhah hra zar[pick("'","`")]garis!")
 					if(cultsinrange.len >= 3) break		//we only need to check for three alive cultists, loop breaks so their aren't extra cultists getting word rewards
 			for(var/mob/H in victims)
-				if (ticker.mode.name == "cult")
-					if(H.mind == ticker.mode:sacrifice_target)
+				if (game_is_cult_mode(ticker.mode))
+					var/datum/game_mode/cult/Cult = ticker.mode
+					if(H.mind == Cult.sacrifice_target)
 						if(cultsinrange.len >= 3)
 							sacrificed += H.mind
 							stone_or_gib(H)
@@ -671,8 +648,9 @@ var/list/sacrificed = list()
 								usr << "\red However, a mere dead body is not enough to satisfy Him."
 							stone_or_gib(H)
 			for(var/mob/living/carbon/monkey/M in src.loc)
-				if (ticker.mode.name == "cult")
-					if(M.mind == ticker.mode:sacrifice_target)
+				if (game_is_cult_mode(ticker.mode))
+					var/datum/game_mode/cult/Cult = ticker.mode
+					if(M.mind == Cult.sacrifice_target)
 						if(cultsinrange.len >= 3)
 							sacrificed += M.mind
 							for(var/mob/living/carbon/C in cultsinrange)
@@ -698,21 +676,6 @@ var/list/sacrificed = list()
 				stone_or_gib(M)
 			for(var/mob/victim in src.loc)			//TO-DO: Move the shite above into the mob's own sac_act - see /mob/living/simple_animal/corgi/sac_act for an example
 				victim.sac_act(src, victim)			//Sacrifice procs are now seperate per mob, this allows us to allow sacrifice on as many mob types as we want without making an already clunky system worse
-/*			for(var/mob/living/carbon/alien/A)
-				for(var/mob/K in cultsinrange)
-					K.say("Barhah hra zar'garis!")
-				A.dust()      /// A.gib() doesnt work for some reason, and dust() leaves that skull and bones thingy which we dont really need.
-				if (ticker.mode.name == "cult")
-					if(prob(75))
-						usr << "\red The Geometer of Blood accepts your exotic sacrifice."
-						sac_grant_word()
-					else
-						usr << "\red The Geometer of Blood accepts your exotic sacrifice."
-						usr << "\red However, this alien is not enough to gain His favor."
-				else
-					usr << "\red The Geometer of Blood accepts your exotic sacrifice."
-				return
-			return fizzle() */
 
 		sac_grant_word(var/mob/living/C)	//The proc that which chooses a word rewarded for a successful sacrifice, sacrifices always give a currently unknown word if the normal checks pass
 			if(C.mind.cult_words.len != ticker.mode.allwords.len) // No point running if they already know everything
@@ -807,15 +770,32 @@ var/list/sacrificed = list()
 					return fizzle()
 				if (cultist == user) //just to be sure.
 					return
-				if(!(cultist.buckled || \
-					cultist.handcuffed || \
-					istype(cultist.wear_mask, /obj/item/clothing/mask/muzzle) || \
-					(istype(cultist.loc, /obj/structure/closet)&&cultist.loc:welded) || \
-					(istype(cultist.loc, /obj/structure/closet/secure_closet)&&cultist.loc:locked) || \
-					(istype(cultist.loc, /obj/machinery/dna_scannernew)&&cultist.loc:locked) \
-				))
-					user << "\red The [cultist] is already free."
+
+				var/is_free = 0
+
+				if(!cultist.buckled)
+					is_free++
+				if(!cultist.handcuffed)
+					is_free++
+				if(!istype(cultist.wear_mask, /obj/item/clothing/mask/muzzle))
+					is_free++
+				if(istype(cultist.loc, /obj/structure/closet))
+					var/obj/structure/closet/cultist_loc = cultist.loc
+					if(!cultist_loc.welded)
+						is_free++
+				if(istype(cultist.loc, /obj/structure/closet/secure_closet))
+					var/obj/structure/closet/secure_closet/cultist_loc = cultist.loc
+					if(!cultist_loc.locked)
+						is_free++
+				if(istype(cultist.loc, /obj/machinery/dna_scannernew))
+					var/obj/machinery/dna_scannernew/cultist_loc = cultist.loc
+					if(!cultist_loc.locked)
+						is_free++
+
+				if(is_free)
+					user << "<span class='warning'>The [cultist] is already free.</span>"
 					return
+
 				cultist.buckled = null
 				if (cultist.handcuffed)
 					cultist.handcuffed.loc = cultist.loc
@@ -827,12 +807,18 @@ var/list/sacrificed = list()
 					cultist.update_inv_legcuffed(0)
 				if (istype(cultist.wear_mask, /obj/item/clothing/mask/muzzle))
 					cultist.unEquip(cultist.wear_mask)
-				if(istype(cultist.loc, /obj/structure/closet)&&cultist.loc:welded)
-					cultist.loc:welded = 0
-				if(istype(cultist.loc, /obj/structure/closet/secure_closet)&&cultist.loc:locked)
-					cultist.loc:locked = 0
-				if(istype(cultist.loc, /obj/machinery/dna_scannernew)&&cultist.loc:locked)
-					cultist.loc:locked = 0
+				if(istype(cultist.loc, /obj/structure/closet))
+					var/obj/structure/closet/cultist_loc = cultist.loc
+					if(cultist_loc.welded)
+						cultist_loc.welded = 0
+				if(istype(cultist.loc, /obj/structure/closet/secure_closet))
+					var/obj/structure/closet/secure_closet/cultist_loc = cultist.loc
+					if(cultist_loc.locked)
+						cultist_loc.locked = 0
+				if(istype(cultist.loc, /obj/machinery/dna_scannernew))
+					var/obj/machinery/dna_scannernew/cultist_loc = cultist.loc
+					if(cultist_loc.locked)
+						cultist_loc.locked = 0
 				for(var/mob/living/carbon/C in users)
 					user.take_overall_damage(15, 0)
 					C.say("Khari[pick("'","`")]d! Gual'te nikka!")
@@ -1090,7 +1076,6 @@ var/list/sacrificed = list()
 				if(PS.amount >= 4)		// may need increasing?
 					usr.say("Eth ra p'ni[pick("'","`")]dedo ol!")		//I have no idea if these are written in a proper made up language or just Urist smacking his face on the keyboard
 					new /obj/structure/constructshell(src.loc)
-		//?			PS.remove_amount(4)			//TO-DO: Write a proc for removing sheets from a stack and deleting when stack is empty... why doesnt this exist yet??
 					PS.amount -= 4
 					if(PS.amount <= 0)
 						qdel(PS)

@@ -10,8 +10,6 @@ var/wordjoin = null
 var/wordtech = null
 var/worddestr = null
 var/wordother = null
-//var/wordhear = null
-//var/wordfree = null
 var/wordhide = null
 var/runedec = 0
 var/engwords = list("travel", "blood", "join", "hell", "destroy", "technology", "self", "see", "other", "hide")
@@ -90,10 +88,6 @@ var/engwords = list("travel", "blood", "join", "hell", "destroy", "technology", 
 	runewords-=worddestr
 	wordother=pick(runewords)
 	runewords-=wordother
-//	wordhear=pick(runewords)
-//	runewords-=wordhear
-//	wordfree=pick(runewords)
-//	runewords-=wordfree
 	wordhide=pick(runewords)
 	runewords-=wordhide
 
@@ -152,13 +146,6 @@ var/engwords = list("travel", "blood", "join", "hell", "destroy", "technology", 
 		if(!iscultist(usr))
 			usr << "A strange collection of symbols drawn in blood."
 			return
-			/* Explosions... really?
-			if(desc && !usr.stat)
-				usr << "It reads: <i>[desc]</i>."
-				sleep(30)
-				explosion(src.loc, 0, 2, 5, 5)
-				qdel(src)
-			*/
 		if(!desc)
 			usr << "A spell circle drawn in blood. It reads: <i>[word1] [word2] [word3]</i>."
 		else
@@ -488,29 +475,9 @@ var/engwords = list("travel", "blood", "join", "hell", "destroy", "technology", 
 						[words[10]] is <a href='byond://?src=\ref[src];number=10;action=change'>[words[words[10]]]</A> <A href='byond://?src=\ref[src];number=10;action=clear'>Clear</A><BR>
 						"}
 			usr << browse("[notedat]", "window=notes")
-//		call(/obj/item/weapon/tome/proc/edit_notes)()
 		else
 			usr << browse(null, "window=notes")
 			return
-
-
-//	proc/edit_notes()     FUCK IT. Cant get it to work properly. - K0000
-//		world << "its been called! [usr]"
-//		notedat = {"
-//		<br><b>Word translation notes</b> <br>
-//			[words[1]] is <a href='byond://?src=\ref[src];number=1;action=change'>[words[words[1]]]</A> <A href='byond://?src=\ref[src];number=1;action=clear'>Clear</A><BR>
-//			[words[2]] is <A href='byond://?src=\ref[src];number=2;action=change'>[words[words[2]]]</A> <A href='byond://?src=\ref[src];number=2;action=clear'>Clear</A><BR>
-//			[words[3]] is <a href='byond://?src=\ref[src];number=3;action=change'>[words[words[3]]]</A> <A href='byond://?src=\ref[src];number=3;action=clear'>Clear</A><BR>
-//			[words[4]] is <a href='byond://?src=\ref[src];number=4;action=change'>[words[words[4]]]</A> <A href='byond://?src=\ref[src];number=4;action=clear'>Clear</A><BR>
-//			[words[5]] is <a href='byond://?src=\ref[src];number=5;action=change'>[words[words[5]]]</A> <A href='byond://?src=\ref[src];number=5;action=clear'>Clear</A><BR>
-//			[words[6]] is <a href='byond://?src=\ref[src];number=6;action=change'>[words[words[6]]]</A> <A href='byond://?src=\ref[src];number=6;action=clear'>Clear</A><BR>
-//			[words[7]] is <a href='byond://?src=\ref[src];number=7;action=change'>[words[words[7]]]</A> <A href='byond://?src=\ref[src];number=7;action=clear'>Clear</A><BR>
-//			[words[8]] is <a href='byond://?src=\ref[src];number=8;action=change'>[words[words[8]]]</A> <A href='byond://?src=\ref[src];number=8;action=clear'>Clear</A><BR>
-//			[words[9]] is <a href='byond://?src=\ref[src];number=9;action=change'>[words[words[9]]]</A> <A href='byond://?src=\ref[src];number=9;action=clear'>Clear</A><BR>
-//			[words[10]] is <a href='byond://?src=\ref[src];number=10;action=change'>[words[words[10]]]</A> <A href='byond://?src=\ref[src];number=10;action=clear'>Clear</A><BR>
-//					"}
-//		usr << "whatev"
-//		usr << browse(null, "window=tank")
 
 	attack(mob/living/M as mob, mob/living/user as mob)
 		add_logs(user, M, "smacked", object=src)
@@ -554,8 +521,6 @@ var/engwords = list("travel", "blood", "join", "hell", "destroy", "technology", 
 				return
 
 
-
-
 			if (C>=26+runedec+ticker.mode.cult.len) //including the useless rune at the secret room, shouldn't count against the limit of 25 runes - Urist
 				alert("The cloth of reality can't take that much of a strain. Remove some runes first!")
 				return
@@ -592,7 +557,6 @@ var/engwords = list("travel", "blood", "join", "hell", "destroy", "technology", 
 							[words[9]] is <a href='byond://?src=\ref[src];number=9;action=change'>[words[words[9]]]</A> <A href='byond://?src=\ref[src];number=9;action=clear'>Clear</A><BR>
 							[words[10]] is <a href='byond://?src=\ref[src];number=10;action=change'>[words[words[10]]]</A> <A href='byond://?src=\ref[src];number=10;action=clear'>Clear</A><BR>
 							"}	// whoever screwed the tabbing on this originally is an asshole.
-//						call(/obj/item/weapon/tome/proc/edit_notes)()
 						user << browse("[notedat]", "window=notes")
 						return
 					if("Scribe a rune")		//fixed more assbackward tabbing
@@ -686,11 +650,6 @@ var/engwords = list("travel", "blood", "join", "hell", "destroy", "technology", 
 			switch(alert("Copy the runes from your tome?",,"Copy", "Cancel"))
 				if("cancel")
 					return
-	//		var/list/nearby = viewers(1,src) //- Fuck this as well. No clue why this doesnt work. -K0000
-	//			if (T.loc != user)
-	//				return
-	//		for(var/mob/M in nearby)
-	//			if(M == user)
 			for(var/entry in words)
 				words[entry] = T.words[entry]
 			user << "You copy the translation notes from your tome."

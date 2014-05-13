@@ -186,9 +186,6 @@
 		if(!the_disk)
 			icon_state = "pinonnull"
 			return
-//	if(loc.z != the_disk.z)	//If you are on a different z-level from the disk
-//		icon_state = "pinonnull"
-//	else
 	dir = get_dir(src, the_disk)
 	switch(get_dist(src, the_disk))
 		if(0)
