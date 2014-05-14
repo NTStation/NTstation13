@@ -587,6 +587,7 @@
 #include "code\game\objects\items\weapons\implants\implantchair.dm"
 #include "code\game\objects\items\weapons\implants\implanter.dm"
 #include "code\game\objects\items\weapons\implants\implantfreedom.dm"
+#include "code\game\objects\items\weapons\implants\implantknowledge.dm"
 #include "code\game\objects\items\weapons\implants\implantpad.dm"
 #include "code\game\objects\items\weapons\implants\implantuplink.dm"
 #include "code\game\objects\items\weapons\melee\energy.dm"

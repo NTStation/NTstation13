@@ -76,3 +76,19 @@ var/const/APC_WIRE_AI_CONTROL = 8
 				if (A.aidisabled == 1)
 					A.aidisabled = 0
 	A.updateDialog()
+
+
+/datum/wires/apc/SolveWireFunction(var/function)
+	var/sf = ""
+	switch(function)
+		if(APC_WIRE_IDSCAN)
+			sf = "ID wire"
+		if(APC_WIRE_MAIN_POWER1)
+			sf = "1st Main Power wire"
+		if(APC_WIRE_MAIN_POWER2)
+			sf = "2nd Main Power wire"
+		if(APC_WIRE_AI_CONTROL)
+			sf = "AI Control wire"
+
+	return sf
+

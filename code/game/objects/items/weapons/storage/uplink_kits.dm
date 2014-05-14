@@ -98,6 +98,17 @@
 	O.update_icon()
 	return
 
+/obj/item/weapon/storage/box/syndie_kit/imp_wire_door
+	name = "boxed door wire knowledge implant (with injector)"
+
+/obj/item/weapon/storage/box/syndie_kit/imp_wire_door/New()
+	..()
+	var/obj/item/weapon/implanter/O = new(src)
+	O.imp = new /obj/item/weapon/implant/wire_knowledge/door(O)
+	O.update_icon()
+	return
+
+
 /*/obj/item/weapon/storage/box/syndie_kit/imp_compress
 	name = "Compressed Matter Implant (with injector)"
 
@@ -160,3 +171,5 @@
 	new /obj/item/weapon/implanter/emp/(src)
 	new /obj/item/device/flashlight/emp/(src)
 	return
+
+
