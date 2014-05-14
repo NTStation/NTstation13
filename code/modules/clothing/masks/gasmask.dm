@@ -54,6 +54,9 @@
 /obj/item/clothing/mask/gas/sechailer/hos
 	icon_state = "hosmask"
 
+/obj/item/clothing/mask/gas/sechailer/cyborg
+	aggressiveness = 1 //Borgs are nicecurity!
+
 /obj/item/clothing/mask/gas/sechailer/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	if(istype(W, /obj/item/weapon/screwdriver))
 		switch(aggressiveness)
@@ -103,7 +106,7 @@
 
 		switch(phrase)	//sets the properties of the chosen phrase
 			if(1)				// good cop
-				phrase_text = "HALT! HALT! HALT! HALT!"
+				phrase_text = "HALT! HALT! HALT!"
 				phrase_sound = "halt"
 			if(2)
 				phrase_text = "Stop in the name of the Law."
