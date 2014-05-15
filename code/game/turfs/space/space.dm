@@ -86,6 +86,10 @@
 					qdel(nukedisk)//Make the disk respawn if it is floating on its own
 				return
 
+			var/move_to_z = src.z
+			var/safety = 1
+			var/obj/was_pulling = null
+
 			//Check if it's a mob pulling an object. Have the object transition with the mob if it's not the nuke disk
 			if(MM && MM.pulling)
 				nukedisk = MM.pulling.CheckForNukeDisk()
@@ -95,11 +99,8 @@
 					else
 						MM << "<span class='warning'>You think you saw something slip out of [MM.pulling], but you couldn't tell where it went...</span>"
 					qdel(nukedisk)
-
-			var/obj/was_pulling = MM.pulling //Store the object to transition later
-
-			var/move_to_z = src.z
-			var/safety = 1
+				if(MM.pulling)
+					was_pulling = MM.pulling //Store the object to transition later
 
 			while(move_to_z == src.z)
 				var/move_to_z_str = pickweight(accessable_z_levels)
