@@ -15,6 +15,7 @@ var/bomb_set
 	var/safety = 1.0
 	var/obj/item/weapon/disk/nuclear/auth = null
 	use_power = 0
+	var/previous_level = ""
 
 /obj/machinery/nuclearbomb/New()
 	..()
@@ -117,11 +118,15 @@ var/bomb_set
 					src.icon_state = "nuclearbomb2"
 					if(!src.safety)
 						bomb_set = 1//There can still be issues with this reseting when there are multiple bombs. Not a big deal tho for Nuke/N
+						src.previous_level = "[get_security_level()]"
+						set_security_level("delta")
 					else
 						bomb_set = 0
+						set_security_level("[previous_level]")
 				else
 					src.icon_state = "nuclearbomb1"
 					bomb_set = 0
+					set_security_level("[previous_level]")
 			if (href_list["safety"])
 				src.safety = !( src.safety )
 				src.icon_state = "nuclearbomb1"
@@ -175,23 +180,25 @@ var/bomb_set
 		off_station = 2
 
 	if(ticker)
-		if(ticker.mode && ticker.mode.name == "nuclear emergency")
+		if(ticker.mode && game_is_nuclear_mode(ticker.mode))
+			var/datum/game_mode/nuclear/Nuke = ticker.mode
 			var/obj/machinery/computer/syndicate_station/syndie_location = locate(/obj/machinery/computer/syndicate_station)
 			if(syndie_location)
-				ticker.mode:syndies_didnt_escape = (syndie_location.z > 1 ? 0 : 1)	//muskets will make me change this, but it will do for now
-			ticker.mode:nuke_off_station = off_station
+				Nuke.syndies_didnt_escape = (syndie_location.z > 1 ? 0 : 1)	//muskets will make me change this, but it will do for now
+			Nuke.nuke_off_station = off_station
 		ticker.station_explosion_cinematic(off_station,null)
-		if(ticker.mode)
+		if(ticker.mode && game_is_nuclear_mode(ticker.mode))
+			var/datum/game_mode/nuclear/Nuke = ticker.mode
 			ticker.mode.explosion_in_progress = 0
-			if(ticker.mode.name == "nuclear emergency")
-				ticker.mode:nukes_left --
+			if(Nuke.name == "nuclear emergency")
+				Nuke.nukes_left --
 			else
 				world << "<B>The station was destoyed by the nuclear blast!</B>"
 
-			ticker.mode.station_was_nuked = (off_station<2)	//offstation==1 is a draw. the station becomes irradiated and needs to be evacuated.
+			Nuke.station_was_nuked = (off_station<2)	//offstation==1 is a draw. the station becomes irradiated and needs to be evacuated.
 															//kinda shit but I couldn't  get permission to do what I wanted to do.
 
-			if(!ticker.mode.check_finished())//If the mode does not deal with the nuke going off so just reboot because everyone is stuck as is
+			if(!Nuke.check_finished())//If the mode does not deal with the nuke going off so just reboot because everyone is stuck as is
 				world << "<B>Resetting in 30 seconds!</B>"
 
 				feedback_set_details("end_error","nuke - unhandled ending")
@@ -207,6 +214,11 @@ var/bomb_set
 
 /obj/item/weapon/disk/nuclear/Destroy()
 	if(blobstart.len > 0)
+		//Lock the bomb if it was carrying the disk
+		if(istype(loc, /obj/machinery/nuclearbomb))
+			var/obj/machinery/nuclearbomb/BOMB = loc
+			BOMB.yes_code = 0
+			BOMB.auth = null
 		loc = pick(blobstart)
 		message_admins("[src] has been destroyed.  Moving it to ([x], [y], [z]).")
 		log_game("[src] has been destroyed.  Moving it to ([x], [y], [z]).")

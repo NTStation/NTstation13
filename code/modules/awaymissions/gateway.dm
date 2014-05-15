@@ -119,10 +119,7 @@ obj/machinery/gateway/centerstation/process()
 	if(!active)		return
 	if(!awaygate)	return
 
-	if(istype(M, /obj/item/weapon/disk/nuclear))
-		return
-
-	if(M.GetTypeInAllContents(/obj/item/weapon/disk/nuclear))
+	if(M.CheckForNukeDisk())
 		if(ismob(M))
 			var/mob/MOB = M
 			MOB << "<span class='warning'>You are forbidden from taking the nuclear authentication disk off station.</span>"

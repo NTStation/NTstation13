@@ -195,3 +195,34 @@ var/const/AIRLOCK_WIRE_LIGHT = 2048
 		if(AIRLOCK_WIRE_LIGHT)
 			A.lights = !A.lights
 			A.update_icon()
+
+
+/datum/wires/airlock/SolveWireFunction(var/function)
+	var/sf = ""
+	switch(function)
+		if(AIRLOCK_WIRE_IDSCAN)
+			sf = "ID wire"
+		if(AIRLOCK_WIRE_MAIN_POWER1)
+			sf = "1st Main Power wire"
+		if(AIRLOCK_WIRE_MAIN_POWER2)
+			sf = "2nd Main Power wire"
+		if(AIRLOCK_WIRE_DOOR_BOLTS)
+			sf = "Door Bolts wire"
+		if(AIRLOCK_WIRE_BACKUP_POWER1)
+			sf = "1st Backup Power wire"
+		if(AIRLOCK_WIRE_BACKUP_POWER2)
+			sf = "2nd Backup Power wire"
+		if(AIRLOCK_WIRE_OPEN_DOOR)
+			sf = "Open Door wire"
+		if(AIRLOCK_WIRE_AI_CONTROL)
+			sf = "AI Control wire"
+		if(AIRLOCK_WIRE_ELECTRIFY)
+			sf = "Electrify Door wire"
+		if(AIRLOCK_WIRE_SAFETY)
+			sf = "Safety wire"
+		if(AIRLOCK_WIRE_SPEED)
+			sf = "Door Speed wire"
+		if(AIRLOCK_WIRE_LIGHT)
+			sf = "Lights wire"
+
+	return sf

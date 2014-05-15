@@ -7,24 +7,24 @@
 	pressure_resistance = 4*ONE_ATMOSPHERE
 	anchored = 1.0
 	flags = ON_BORDER
-	var/health = 15
+	var/health = 14.0
 	var/ini_dir = null
 	var/state = 0
 	var/reinf = 0
-	var/bearable_temp = 320		//How hot can we get? The default is 320 Kelvin. Windows take damage at this point.
-	var/shard_type = /obj/item/weapon/shard		//Which shard do we drop? Needed for plasma windows.
 //	var/silicate = 0 // number of units of silicate
 //	var/icon/silicateIcon = null // the silicated icon
 
 
 /obj/structure/window/bullet_act(var/obj/item/projectile/Proj)
-	health -= Proj.damage
-	if(reinf) health += 0.5*Proj.damage
+	if((Proj.damage_type == BRUTE || Proj.damage_type == BURN))
+		health -= Proj.damage
 	..()
 	if(health <= 0)
-		new shard_type(loc)
-		if(reinf) new /obj/item/stack/rods(loc)
+		new /obj/item/weapon/shard(loc)
+		new /obj/item/stack/rods(loc)
 		qdel(src)
+	return
+
 
 /obj/structure/window/ex_act(severity)
 	switch(severity)
@@ -32,27 +32,27 @@
 			qdel(src)
 			return
 		if(2.0)
-			new shard_type(loc)
+			new /obj/item/weapon/shard(loc)
 			if(reinf) new /obj/item/stack/rods(loc)
 			qdel(src)
 			return
 		if(3.0)
 			if(prob(50))
-				new shard_type(loc)
+				new /obj/item/weapon/shard(loc)
 				if(reinf) new /obj/item/stack/rods(loc)
 				qdel(src)
 				return
 
 
 /obj/structure/window/blob_act()
-	new shard_type(loc)
+	new /obj/item/weapon/shard(loc)
 	if(reinf) new /obj/item/stack/rods(loc)
 	qdel(src)
 
 
 /obj/structure/window/meteorhit()
 	//world << "glass at [x],[y],[z] Mhit"
-	new shard_type( loc )
+	new /obj/item/weapon/shard( loc )
 	if(reinf) new /obj/item/stack/rods( loc)
 	qdel(src)
 
@@ -84,7 +84,7 @@
 	else if(isobj(AM))
 		var/obj/item/I = AM
 		tforce = I.throwforce
-	if(reinf) tforce *= 0.5
+	if(reinf) tforce *= 0.25
 	playsound(loc, 'sound/effects/Glasshit.ogg', 100, 1)
 	health = max(0, health - tforce)
 	if(health <= 7 && !reinf)
@@ -92,7 +92,7 @@
 		update_nearby_icons()
 		step(src, get_dir(AM, src))
 	if(health <= 0)
-		new shard_type(loc)
+		new /obj/item/weapon/shard(loc)
 		if(reinf) new /obj/item/stack/rods(loc)
 		qdel(src)
 
@@ -107,7 +107,7 @@
 	if(HULK in user.mutations)
 		user.say(pick(";RAAAAAAAARGH!", ";HNNNNNNNNNGGGGGGH!", ";GWAAAAAAAARRRHHH!", "NNNNNNNNGGGGGGGGHH!", ";AAAAAAARRRGH!"))
 		user.visible_message("<span class='danger'>[user] smashes through [src]!</span>")
-		var/obj/item/weapon/shard/S = new shard_type(loc)
+		var/obj/item/weapon/shard/S = new (loc)
 		S.add_fingerprint(user)
 		if(reinf)
 			var/obj/item/stack/rods/R = new (loc)
@@ -131,7 +131,7 @@
 	health -= damage
 	if(health <= 0)
 		user.visible_message("<span class='danger'>[user] smashes through [src]!</span>")
-		new shard_type(loc)
+		new /obj/item/weapon/shard(loc)
 		if(reinf) new /obj/item/stack/rods(loc)
 		qdel(src)
 	else	//for nicer text~
@@ -224,11 +224,11 @@
 			var/index = null
 			index = 0
 			while(index < 2)
-				new shard_type(loc)
+				new /obj/item/weapon/shard(loc)
 				if(reinf) new /obj/item/stack/rods(loc)
 				index++
 		else
-			new shard_type(loc)
+			new /obj/item/weapon/shard(loc)
 			if(reinf) new /obj/item/stack/rods(loc)
 		qdel(src)
 		return
@@ -284,10 +284,23 @@
 */
 
 
-/obj/structure/window/New(Loc)
+/obj/structure/window/New(Loc,re=0)
 	..()
 
+	if(re)	reinf = re
+
 	ini_dir = dir
+	if(reinf)
+		icon_state = "rwindow"
+		desc = "A reinforced window."
+		name = "reinforced window"
+		state = 2*anchored
+		health = 40
+		if(opacity)
+			icon_state = "twindow"
+	else
+		icon_state = "window"
+
 	air_update_turf(1)
 	update_nearby_icons()
 
@@ -297,7 +310,7 @@
 /obj/structure/window/Destroy()
 	density = 0
 	air_update_turf(1)
-	if(anchored)playsound(src, "shatter", 70, 1)
+	playsound(src, "shatter", 70, 1)
 	update_nearby_icons()
 	..()
 
@@ -354,7 +367,7 @@
 		return
 
 /obj/structure/window/temperature_expose(datum/gas_mixture/air, exposed_temperature, exposed_volume)
-	if(exposed_temperature > T0C + bearable_temp)
+	if(exposed_temperature > T0C + 800)
 		hit(round(exposed_volume / 100), 0)
 	..()
 
@@ -366,34 +379,13 @@
 /obj/structure/window/reinforced
 	name = "reinforced window"
 	icon_state = "rwindow"
-	desc = "A reinforced window."
-	bearable_temp = 1040	//1040 Kelvin. Much stronger, but a good burn will shatter it.
-	health = 40
 	reinf = 1
 
 /obj/structure/window/reinforced/tinted
-	name = "tinted reinforced window"
+	name = "tinted window"
 	icon_state = "twindow"
 	opacity = 1
 
 /obj/structure/window/reinforced/tinted/frosted
-	name = "frosted reinforced window"
+	name = "frosted window"
 	icon_state = "fwindow"
-
-/////////Plasma Windows. Fireproof and Stronger.///////////////////
-/obj/structure/window/plasmabasic
-	name = "plasma window"
-	icon_state = "plasmawindow"
-	desc = "A window made out of an alloy crystal of silicon and plasma... Surprisingly it's fireproof to a point."
-	bearable_temp = 32000	//32000 Kelvin. Insanely strong. It'd take a hellburn to burn through this.
-	health = 80
-	shard_type = /obj/item/weapon/shard/plasma	//Plasma shards are in glass.dm, they hurt if you step on them regardless of shoes.
-
-/obj/structure/window/plasmareinforced
-	name = "reinforced plasma window"
-	icon_state = "plasmarwindow"
-	desc = "A window made out of an alloy crystal of silicon and plasma... With rods crammed into it."
-	bearable_temp = INFINITY	//INFINITY Kelvin. Insanely strong. It'd take a satanhellburn to burn through this.
-	health = 90
-	reinf = 1
-	shard_type = /obj/item/weapon/shard/plasma
