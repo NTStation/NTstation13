@@ -85,6 +85,22 @@
 				message = "<B>[src]</B> flaps its wings."
 				m_type = 2
 
+		if ("flipoff")
+			if (!src.buckled)
+				var/M = null
+				if (param)
+					for (var/mob/A in view(1, src))
+						if (param == A.name)
+							M = A
+							break
+				if (!M)
+					param = null
+				if (param)
+					message = "<B>[src]</B> flips the bird at [param]!"
+				else
+					message = "<B>[src]</B> flips the bird."
+			m_type = 1
+
 		if ("frown")
 			message = "<B>[src]</B> frowns."
 			m_type = 1
@@ -177,6 +193,22 @@
 			message = "<B>[src]</B> pouts."
 			m_type = 1
 
+		if ("rude")
+			if (!src.buckled)
+				var/M = null
+				if (param)
+					for (var/mob/A in view(1, src))
+						if (param == A.name)
+							M = A
+							break
+				if (!M)
+					param = null
+				if (param)
+					message = "<B>[src]</B> makes a rude gesture at [param]!"
+				else
+					message = "<B>[src]</B> makes a rude gesture."
+			m_type = 1
+
 		if ("scream")
 			message = "<B>[src]</B> screams!"
 			m_type = 2
@@ -212,6 +244,26 @@
 		if ("snore")
 			message = "<B>[src]</B> snores."
 			m_type = 2
+
+		if ("snore")
+			message = "<B>[src]</B> snorts."
+			m_type = 2
+
+		if ("spit")
+			if (!src.buckled)
+				var/M = null
+				if (param)
+					for (var/mob/A in view(1, src))
+						if (param == A.name)
+							M = A
+							break
+				if (!M)
+					param = null
+				if (param)
+					message = "<B>[src]</B> spits at [param]."
+				else
+					message = "<B>[src]</B> spits on the ground."
+			m_type = 1
 
 		if ("stare")
 			var/M = null
@@ -268,7 +320,7 @@
 			m_type = 2
 
 		if ("help")
-			src << "Help for emotes. You can use these emotes with say \"*emote\":\n\naflap, blush, bow-(none)/mob, burp, choke, chuckle, clap, collapse, cough, dance, deathgasp, drool, flap, frown, gasp, giggle, glare-(none)/mob, grin, jump, laugh, look, me, nod, point-atom, pout, scream, shake, sit, sigh, smile, smirk, sneeze, sniff, snore, stare-(none)/mob, sulk, sway, thumbsup, thumbsdown, tremble, twitch, twitch_s, wave, whimper, yawn"
+			src << "Help for emotes. You can use these emotes with say \"*emote\":\n\naflap, blush, bow-(none)/mob, burp, choke, chuckle, clap, collapse, cough, dance, deathgasp, drool, flap, flipoff, frown, gasp, giggle, glare-(none)/mob, grin, jump, laugh, look, me, nod, point-atom, pout, rude, scream, shake, sit, sigh, smile, smirk, sneeze, sniff, snore, snort, spit, stare-(none)/mob, sulk, sway, thumbsup, thumbsdown, tremble, twitch, twitch_s, wave, whimper, yawn"
 
 		else
 			src << "<span class="notice"> Unusable emote '[act]'. Say *help for a list.</span>"
