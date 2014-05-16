@@ -172,6 +172,10 @@
 					message = "<B>[src]</B> points to [M]."
 				else
 			m_type = 1
+		
+		if ("pout")
+			message = "<B>[src]</B> pouts."
+			m_type = 1
 
 		if ("scream")
 			message = "<B>[src]</B> screams!"
@@ -191,6 +195,10 @@
 
 		if ("smile")
 			message = "<B>[src]</B> smiles."
+			m_type = 1
+		
+		if ("smirk")
+			message = "<B>[src]</B> smirks."
 			m_type = 1
 
 		if ("sneeze")
@@ -227,6 +235,14 @@
 			message = "<B>[src]</B> sways around dizzily."
 			m_type = 1
 
+		if ("thumbsdown")
+			message = "<B>[src]</B> gives a thumbs down."
+			m_type = 1
+		
+		if ("thumbsup")
+			message = "<B>[src]</B> gives a thumbs up!"
+			m_type = 1
+
 		if ("tremble")
 			message = "<B>[src]</B> trembles in fear!"
 			m_type = 1
@@ -252,10 +268,10 @@
 			m_type = 2
 
 		if ("help")
-			src << "Help for emotes. You can use these emotes with say \"*emote\":\n\naflap, blush, bow-(none)/mob, burp, choke, chuckle, clap, collapse, cough, dance, deathgasp, drool, flap, frown, gasp, giggle, glare-(none)/mob, grin, jump, laugh, look, me, nod, point-atom, scream, shake, sit, sigh, smile, sneeze, sniff, snore, stare-(none)/mob, sulk, sway, tremble, twitch, twitch_s, wave, whimper, yawn"
+			src << "Help for emotes. You can use these emotes with say \"*emote\":\n\naflap, blush, bow-(none)/mob, burp, choke, chuckle, clap, collapse, cough, dance, deathgasp, drool, flap, frown, gasp, giggle, glare-(none)/mob, grin, jump, laugh, look, me, nod, point-atom, pout, scream, shake, sit, sigh, smile, sneeze, sniff, snore, stare-(none)/mob, sulk, sway, thumbsup, thumbsdown, tremble, twitch, twitch_s, wave, whimper, yawn"
 
 		else
-			src << "\blue Unusable emote '[act]'. Say *help for a list."
+			src << "<span class="notice"> Unusable emote '[act]'. Say *help for a list.</span>"
 
 
 
