@@ -245,7 +245,7 @@
 			message = "<B>[src]</B> snores."
 			m_type = 2
 
-		if ("snore")
+		if ("snort")
 			message = "<B>[src]</B> snorts."
 			m_type = 2
 
