@@ -70,3 +70,32 @@
 	item_state = "fawkes"
 	flags_inv = HIDEFACE
 	w_class = 2
+
+/obj/item/clothing/mask/bandana
+	name = "bandana"
+	desc = "A colorful bandana."
+	action_button_name = "Toggle Bandana"
+	flags_inv = HIDEFACE
+	w_class = 1
+	can_flip = 1
+
+obj/item/clothing/mask/bandana/red
+	name = "red bandana"
+	icon_state = "bandred"
+
+obj/item/clothing/mask/bandana/blue
+	name = "blue bandana"
+	icon_state = "bandblue"
+
+obj/item/clothing/mask/bandana/gold
+	name = "gold bandana"
+	icon_state = "bandgold"
+
+obj/item/clothing/mask/bandana/green
+	name = "green bandana"
+	icon_state = "bandgreen"
+
+/obj/item/clothing/mask/bandana/botany
+	name = "botany bandana"
+	desc = "It's a green bandana with some fine nanotech lining."
+	icon_state = "bandbotany"
