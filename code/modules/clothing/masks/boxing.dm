@@ -5,6 +5,8 @@
 	item_state = "balaclava"
 	flags = BLOCKHAIR
 	flags_inv = HIDEFACE
+	action_button_name = "Toggle Mask"
+	can_flip = 1
 	w_class = 2
 
 /obj/item/clothing/mask/luchador
