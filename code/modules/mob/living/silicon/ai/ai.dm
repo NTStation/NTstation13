@@ -54,7 +54,7 @@ var/list/ai_list = list()
 	var/sensor_mode = 0 //Determines the AI's current HUD.
 	#define 	SEC_HUD 1 //Security HUD mode
 	#define 	MED_HUD 2 //Medical HUD mode
-	#define 	NIGHT 3   //Night vision mode
+//	#define 	NIGHT 3   //Night vision mode
 
 /mob/living/silicon/ai/New(loc, var/datum/ai_laws/L, var/obj/item/device/mmi/B, var/safety = 0)
 	var/list/possibleNames = ai_names
@@ -525,7 +525,7 @@ var/list/ai_list = list()
 	set name = "Set Sensor Augmentation"
 	set desc = "Augment visual feed with internal sensor overlays."
 
-	var/sensor_type = input("Please select sensor type.", "Sensor Integration", null) in list("Security", "Medical","Light Amplification","Disable")
+	var/sensor_type = input("Please select sensor type.", "Sensor Integration", null) in list("Security", "Medical","Disable")
 	switch(sensor_type)
 		if ("Security")
 			src.sensor_mode = SEC_HUD
@@ -534,9 +534,9 @@ var/list/ai_list = list()
 		if ("Medical")
 			src.sensor_mode = MED_HUD
 			src << "<span class='notice'>Life signs monitor overlay enabled.</span>"
-		if ("Light Amplification")
+/*		if ("Light Amplification")
 			src.sensor_mode = NIGHT
-			src << "<span class='notice'>Light amplification mode enabled.</span>"
+			src << "<span class='notice'>Light amplification mode enabled.</span>" */
 		if ("Disable")
 			src.sensor_mode = 0
 			src << "Sensor augmentations disabled."

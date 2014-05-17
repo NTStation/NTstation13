@@ -169,8 +169,8 @@
 			src.securityHUD(src.eyeobj)
 		if (MED_HUD)
 			src.medicalHUD(src.eyeobj)
-		if (NIGHT)
-			src.see_invisible = SEE_INVISIBLE_MINIMUM
+/*		if (NIGHT)
+			src.see_invisible = SEE_INVISIBLE_MINIMUM */
 
 /mob/living/silicon/ai/updatehealth()
 	if(status_flags & GODMODE)
