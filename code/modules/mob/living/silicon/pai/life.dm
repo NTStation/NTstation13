@@ -11,9 +11,9 @@
 
 	regular_hud_updates()
 	if(src.secHUD == 1)
-		src.securityHUD()
+		src.securityHUD(src)
 	if(src.medHUD == 1)
-		src.medicalHUD()
+		src.medicalHUD(src)
 	if(silence_time)
 		if(world.timeofday >= silence_time)
 			silence_time = null
