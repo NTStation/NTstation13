@@ -16,7 +16,14 @@
 		viewers(user) << "<span class='suicide'>[user] is strangling \himself with the [src.name]! It looks like \he's trying to commit suicide.</span>"
 		return (OXYLOSS)
 
-
+/obj/item/weapon/melee/chainofcommand/longchain
+	name = "long chain"
+	desc = "A long metal chain. A brutal way of dispatching enemies."
+	icon_state = "longchain"
+	item_state = "chain"
+	hitsound = 'sound/weapons/genhit3.ogg'
+	force = 15
+	attack_verb = list("flogged", "whipped", "lashed", "brutalised")
 
 /obj/item/weapon/melee/classic_baton
 	name = "police baton"

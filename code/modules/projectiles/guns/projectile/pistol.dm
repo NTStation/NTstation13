@@ -39,8 +39,6 @@
 	icon_state = "deagleg"
 	item_state = "deagleg"
 
-
-
 /obj/item/weapon/gun/projectile/automatic/deagle/camo
 	desc = "A Deagle brand Deagle for operators operating operationally. Uses .50 AE ammo."
 	icon_state = "deaglecamo"
@@ -97,6 +95,19 @@
 			return
 	..()
 
+/obj/item/weapon/gun/projectile/automatic/deagle/m1911
+	name = "M1911"
+	desc = "An M1911 pistol. Uses .45 ammo."
+	icon_state = "m1911"
+	force = 13.0
+	mag_type = /obj/item/ammo_box/magazine/sm45
+
+/obj/item/weapon/gun/projectile/automatic/deagle/glock
+	name = "glock"
+	desc = "A glock pistol. Uses 9mm ammo."
+	icon_state = "glock"
+	force = 13.0
+	mag_type = /obj/item/ammo_box/magazine/m9mm
 
 /obj/item/weapon/gun/projectile/automatic/pistol/attackby(obj/item/I as obj, mob/user as mob)
 	if(istype(I, /obj/item/weapon/silencer))

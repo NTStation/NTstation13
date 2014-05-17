@@ -431,3 +431,10 @@
 	icon = 'icons/obj/items.dmi'
 	icon_state = "red_crowbar"
 	item_state = "crowbar_red"
+
+/obj/item/weapon/crowbar/tireiron
+	name = "tire iron"
+	desc = "A tire iron."
+	icon = 'icons/obj/weapons.dmi'
+	icon_state = "tireiron"
+	force = 12.0
