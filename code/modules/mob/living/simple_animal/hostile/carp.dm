@@ -84,12 +84,11 @@
 	icon_living = "megacarp"
 	icon_dead = "megacarp_dead"
 	icon_gib = "megacarp_gib"
-	maxHealth = 35
-	health = 35
+	maxHealth = 65
+	health = 65
 
-	harm_intent_damage = 8
-	melee_damage_lower = 18
-	melee_damage_upper = 18
+	melee_damage_lower = 20
+	melee_damage_upper = 20
 
 /mob/living/simple_animal/hostile/carp/mega/Die()
 	qdel(src)
