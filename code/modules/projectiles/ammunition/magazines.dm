@@ -78,7 +78,7 @@
 
 /obj/item/ammo_box/magazine/msmg9mm/update_icon()
 	..()
-	icon_state = "[initial(icon_state)]-[round(ammo_count(),3)]"
+	icon_state = "[initial(icon_state)]-[round(ammo_count(),5)]"
 
 /obj/item/ammo_box/magazine/m10mm
 	name = "magazine (10mm)"
@@ -103,7 +103,7 @@
 
 /obj/item/ammo_box/magazine/sm45
 	name = "magazine (.45)"
-	icon_state = "9x19p"
+	icon_state = "45"
 	ammo_type = /obj/item/ammo_casing/c45
 	caliber = ".45"
 	max_ammo = 8
