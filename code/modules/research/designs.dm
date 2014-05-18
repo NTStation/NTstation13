@@ -1705,9 +1705,9 @@ datum/design/ionrifle
 	locked = 1
 
 datum/design/mag_glock
-	name = "M1911 Magazine (.45)"
+	name = "Glock Magazine (9mm)"
 	desc = "A 12-rnd magazine of 9mm ammunition for the glock handgun."
-	id = "mag_smg"
+	id = "mag_glock"
 	req_tech = list("combat" = 4, "materials" = 3)
 	build_type = PROTOLATHE
 	materials = list("$metal" = 3750)
@@ -1716,7 +1716,7 @@ datum/design/mag_glock
 datum/design/mag_m1911
 	name = "M1911 Magazine (.45)"
 	desc = "An 8-rnd magazine of.45 ammunition for the M1911 handgun."
-	id = "mag_smg"
+	id = "mag_m1911"
 	req_tech = list("combat" = 4, "materials" = 4)
 	build_type = PROTOLATHE
 	materials = list("$metal" = 3750)
