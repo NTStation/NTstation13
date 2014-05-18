@@ -1,11 +1,6 @@
 // BEGIN_INTERNALS
 /*
 MAP_ICON_TYPE: 0
-WINDOW: icons\obj\clothing\hats.dmi;icons\obj\clothing\shoes.dmi;icons\obj\clothing\suits.dmi;icons\mob\head.dmi;icons\mob\feet.dmi;icons\mob\suit.dmi;icons\obj\clothing\uniforms.dmi;icons\mob\uniform.dmi;code\modules\clothing\under\miscellaneous.dm
-LAST_COMPILE_VERSION: 504.1234
-DIR: code code\modules code\modules\clothing code\modules\clothing\under icons icons\mob icons\obj icons\obj\clothing 
-FILE: icons\obj\clothing\uniforms.dmi
-LAST_COMPILE_TIME: 1400436807
 AUTO_FILE_DIR: OFF
 */
 // END_INTERNALS
