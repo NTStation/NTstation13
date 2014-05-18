@@ -437,4 +437,4 @@
 	desc = "A tire iron."
 	icon = 'icons/obj/weapons.dmi'
 	icon_state = "tireiron"
-	force = 12.0
+	force = 14.0
