@@ -262,6 +262,22 @@
 	item_state = "lb_suit"
 	item_color = "overalls"
 
+/obj/item/clothing/under/brownoveralls
+	name = "brown overalls"
+	desc = "A set of old brown overalls for getting the job done."
+	icon_state = "b-overalls"
+	item_state = "lb_suit"
+	item_color = "b-overalls"
+	can_roll = 0
+
+/obj/item/clothing/under/redoveralls
+	name = "red overalls"
+	desc = "A set of tough red overalls for getting the job done."
+	icon_state = "r-overalls"
+	item_state = "lb_suit"
+	item_color = "r-overalls"
+	can_roll = 0
+
 /obj/item/clothing/under/pirate
 	name = "pirate outfit"
 	desc = "Yarr."
