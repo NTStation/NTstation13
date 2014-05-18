@@ -22,7 +22,7 @@
 	icon_state = "longchain"
 	item_state = "chain"
 	hitsound = 'sound/weapons/genhit3.ogg'
-	force = 15
+	force = 16
 	attack_verb = list("flogged", "whipped", "lashed", "brutalised")
 
 /obj/item/weapon/melee/classic_baton
