@@ -1,7 +1,7 @@
 
 
 /mob/proc/rightandwrong(var/summon_type) //0 = Summon Guns, 1 = Summon Magic
-	var/list/gunslist 			= list("taser","egun","laser","revolver","detective","smg","nuclear","deagle","gyrojet","pulse","silenced","cannon","doublebarrel","shotgun","combatshotgun","mateba","smg","uzi","crossbow","saw")
+	var/list/gunslist 			= list("taser","egun","laser","revolver","detective","smg","nuclear","deagle","gyrojet","pulse","silenced","cannon","doublebarrel","shotgun","combatshotgun","mateba","smg","uzi","crossbow","saw","tommy","retro","stunrevolver")
 	var/list/magiclist 			= list("fireball","smoke","blind","mindswap","forcewall","knock","horsemask","charge","wandnothing", "wanddeath", "wandresurrection", "wandpolymorph", "wandteleport", "wanddoor", "wandfireball", "staffchange", "staffhealing", "armor", "scrying", "staffdoor", "special")
 	var/list/magicspeciallist	= list("staffchange","staffanimation", "wandbelt", "contract", "staffchaos")
 
@@ -70,6 +70,12 @@
 					new /obj/item/weapon/gun/energy/crossbow(get_turf(H))
 				if("saw")
 					new /obj/item/weapon/gun/projectile/automatic/l6_saw(get_turf(H))
+				if("tommy")
+					new /obj/item/weapon/gun/projectile/automatic/tommygun(get_turf(H))
+				if("retro")
+					new /obj/item/weapon/gun/energy/laser/retro(get_turf(H))
+				if("stunrevolver")
+					new /obj/item/weapon/gun/energy/stunrevolver(get_turf(H))
 		else
 			switch (randomizemagic)
 				if("fireball")
