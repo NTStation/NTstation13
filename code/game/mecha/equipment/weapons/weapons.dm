@@ -320,9 +320,10 @@
 		projectiles--
 		log_message("Fired from [src.name], targeting [target].")
 		var/turf/T = get_turf(src)
-		message_admins("[key_name(chassis.occupant, chassis.occupant.client)](<A HREF='?_src_=holder;adminmoreinfo=\ref[chassis.occupant]'>?</A>) fired a [src] in ([T.x],[T.y],[T.z] - <A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[T.x];Y=[T.y];Z=[T.z]'>JMP</a>)",0,1)
-		log_game("[chassis.occupant.ckey]([chassis.occupant]) fired a [src] ([T.x],[T.y],[T.z])")
-		do_after_cooldown()
+		if(chassis.occupant && chassis.occupant.client) //incase you exploded your mech by shooting yourself
+			message_admins("[key_name(chassis.occupant, chassis.occupant.client)](<A HREF='?_src_=holder;adminmoreinfo=\ref[chassis.occupant]'>?</A>) fired a [src] in ([T.x],[T.y],[T.z] - <A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[T.x];Y=[T.y];Z=[T.z]'>JMP</a>)",0,1)
+			log_game("[chassis.occupant.ckey]([chassis.occupant]) fired a [src] ([T.x],[T.y],[T.z])")
+			do_after_cooldown()
 		return
 
 
