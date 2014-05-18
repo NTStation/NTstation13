@@ -33,7 +33,7 @@
 
 /obj/item/weapon/baseballbat
 	name = "wooden bat"
-	desc = "An old wooden bat."
+	desc = "HOME RUN!"
 	icon_state = "woodbat"
 	item_state = "classic_baton"
 	w_class = 2.0
@@ -41,7 +41,7 @@
 	throw_speed = 3
 	throw_range = 7
 	throwforce = 7
-	attack_verb = list("smashed", "beaten", "slammed", "smacked")
+	attack_verb = list("smashed", "beaten", "slammed", "smacked", "striked", "home runned", "bonked")
 	hitsound = 'sound/weapons/genhit3.ogg'
 
 /obj/item/weapon/baseballbat/metal
@@ -63,6 +63,38 @@
 	throw_range = 4
 	throwforce = 7
 	attack_verb = list("patted", "tapped")
+
+/obj/item/switchbladeconstruction
+	name = "unfinished switch blade"
+	desc = "An unfinished switch blade."
+	icon = 'icons/obj/buildingobject.dmi'
+	icon_state = "switchbladestep1"
+
+/obj/item/switchbladeconstruction/attackby(obj/item/W as obj, mob/user as mob)
+	if(istype(W,/obj/item/weapon/screwdriver))
+		user << "You finish the switchblade."
+		new /obj/item/weapon/switchblade(user.loc)
+		del(src)
+		return
+/obj/item/switchbladeblade
+	name = "switch blade"
+	desc = "A switch blade's blade."
+	icon = 'icons/obj/buildingobject.dmi'
+	icon_state = "switchblade2"
+/obj/item/switchbladehandle
+	name = "switch blade handle"
+	desc = "A switch blade's handle."
+	icon = 'icons/obj/buildingobject.dmi'
+	icon_state = "switchblade1"
+
+
+/obj/item/switchbladehandle/attackby(obj/item/W as obj, mob/user as mob)
+	if(istype(W,/obj/item/switchbladeblade))
+		user << "You attach the two switchblade parts."
+		new /obj/item/switchbladeconstruction(user.loc)
+		del(W)
+		del(src)
+		return
 
 /obj/item/weapon/switchblade/butterfly
 	name = "butterfly knife"
