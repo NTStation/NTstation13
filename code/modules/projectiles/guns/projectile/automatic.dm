@@ -163,13 +163,13 @@
 	name = "tommy gun grip and foregrip"
 	desc = "A one third finished Chicago Typewriter."
 	icon = 'icons/obj/buildingobject.dmi'
-	icon_state = "tommygun1"
+	icon_state = "tommygun2"
 
 /obj/item/tommystock
 	name = "tommy gun stock"
 	desc = "A one third finished Chicago Typewriter."
 	icon = 'icons/obj/buildingobject.dmi'
-	icon_state = "tommygun1"
+	icon_state = "tommygun3"
 
 /* The thing I found with guns in ss13 is that they don't seem to simulate the rounds in the magazine in the gun.
    Afaik, since projectile.dm features a revolver, this would make sense since the magazine is part of the gun.
