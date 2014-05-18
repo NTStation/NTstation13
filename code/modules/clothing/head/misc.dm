@@ -18,6 +18,11 @@
 	icon_state = "tophat"
 	item_state = "that"
 
+/obj/item/clothing/head/beanie
+	name = "beanie"
+	desc = "A dirty looking beanie."
+	icon_state = "beanie"
+
 /obj/item/clothing/head/redcoat
 	name = "redcoat's hat"
 	icon_state = "redcoat"
