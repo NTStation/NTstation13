@@ -25,7 +25,7 @@
 	icon_state = "brassknuckles"
 	item_state = "brassknuckles"
 	w_class = 1
-	force = 14
+	force = 16
 	throw_speed = 3
 	throw_range = 4
 	throwforce = 7
@@ -37,7 +37,7 @@
 	icon_state = "woodbat"
 	item_state = "classic_baton"
 	w_class = 2.0
-	force = 12
+	force = 15
 	throw_speed = 3
 	throw_range = 7
 	throwforce = 7
@@ -48,7 +48,7 @@
 	name = "metal bat"
 	desc = "A shiny metal bat."
 	icon_state = "metalbat"
-	force = 13
+	force = 16
 
 /obj/item/weapon/switchblade
 	name = "switch blade"
@@ -74,7 +74,7 @@
 	if(active)
 		user << "<span class='notice'>You flip out your [src].</span>"
 		playsound(user, 'sound/weapons/flipblade.ogg', 15, 1)
-		force = 15
+		force = 18
 		hitsound = 'sound/weapons/bladeslice.ogg'
 		icon_state += "_open"
 		w_class = 3
