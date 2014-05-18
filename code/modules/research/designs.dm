@@ -1711,7 +1711,7 @@ datum/design/mag_glock
 	req_tech = list("combat" = 4, "materials" = 3)
 	build_type = PROTOLATHE
 	materials = list("$metal" = 3750)
-	build_path = /obj/item/ammo_box/magazine/c9mm
+	build_path = /obj/item/ammo_box/magazine/m9mm
 
 datum/design/mag_m1911
 	name = "M1911 Magazine (.45)"
