@@ -30,8 +30,6 @@
 		new /obj/item/clothing/glasses/sunglasses/supergar(src)
 		return
 
-
-
 /obj/structure/closet/secure_closet/hop
 	name = "head of personnel's locker"
 	req_access = list(access_hop)

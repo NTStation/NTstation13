@@ -5,7 +5,7 @@
 This system allows you to update individual mob-overlays, without regenerating them all each time.
 When we generate overlays we generate the standing version and then rotate the mob as necessary..
 
-As of the time of writing there are 20 layers within this list. Please try to keep this from increasing. //22 and counting, good job guys
+As of the time of writing there are 20 layers within this list. Please try to keep this from increasing. //21 Total, Keeping things simple
 	var/overlays_standing[20]		//For the standing stance
 
 Most of the time we only wish to update one overlay:
@@ -13,7 +13,7 @@ Most of the time we only wish to update one overlay:
 	e.g.2 - our hair colour has changed, so we need to update our hair icons on our mob
 In these cases, instead of updating every overlay using the old behaviour (regenerate_icons), we instead call
 the appropriate update_X proc.
-	e.g. - update_l_hand()
+	e.g. - update_inv_hands()
 	e.g.2 - update_hair()
 
 Note: Recent changes by aranclanos+carn:
@@ -56,30 +56,28 @@ Please contact me on #coderbus IRC. ~Carnie x
 */
 
 //Human Overlays Indexes/////////
-#define BODY_LAYER				23		//underwear, undershirts, eyes, lips(makeup)
-#define MUTATIONS_LAYER			22		//Tk headglows etc.
-#define AUGMENTS_LAYER			21
-#define DAMAGE_LAYER			20		//damage indicators (cuts and burns)
-#define UNIFORM_LAYER			19
-#define ID_LAYER				18
-#define SHOES_LAYER				17
-#define GLOVES_LAYER			16
-#define EARS_LAYER				15
-#define SUIT_LAYER				14
-#define GLASSES_LAYER			13
-#define BELT_LAYER				12		//Possible make this an overlay of somethign required to wear a belt?
-#define SUIT_STORE_LAYER		11
-#define BACK_LAYER				10
-#define HAIR_LAYER				9		//TODO: make part of head layer?
-#define FACEMASK_LAYER			8
-#define GAR_LAYER				7
-#define HEAD_LAYER				6
-#define HANDCUFF_LAYER			5
-#define LEGCUFF_LAYER			4
-#define L_HAND_LAYER			3
-#define R_HAND_LAYER			2		//Having the two hands seperate seems rather silly, merge them together? It'll allow for code to be reused on mobs with arbitarily many hands
+#define BODY_LAYER				21		//underwear, undershirts, eyes, lips(makeup)
+#define MUTATIONS_LAYER			20		//Tk headglows etc.
+#define AUGMENTS_LAYER			19
+#define DAMAGE_LAYER			18		//damage indicators (cuts and burns)
+#define UNIFORM_LAYER			17
+#define ID_LAYER				16
+#define SHOES_LAYER				15
+#define GLOVES_LAYER			14
+#define EARS_LAYER				13
+#define SUIT_LAYER				12
+#define BELT_LAYER				11		//Possible make this an overlay of somethign required to wear a belt?
+#define SUIT_STORE_LAYER		10
+#define BACK_LAYER				9
+#define HAIR_LAYER				8		//Seperate layer so head items can overlay Hair and Hair underlay head items
+#define GLASSES_LAYER			7		//Seperate layer to head so Eye wear is below helmets, but above hair
+#define FACEMASK_LAYER			6
+#define HEAD_LAYER				5
+#define HANDCUFF_LAYER			4
+#define LEGCUFF_LAYER			3
+#define HANDS_LAYER				2
 #define FIRE_LAYER				1		//If you're on fire
-#define TOTAL_LAYERS			23		//KEEP THIS UP-TO-DATE OR SHIT WILL BREAK ;_;
+#define TOTAL_LAYERS			21		//KEEP THIS UP-TO-DATE OR SHIT WILL BREAK ;_;
 //////////////////////////////////
 /mob/living/carbon/human
 	var/list/overlays_standing[TOTAL_LAYERS]
@@ -314,8 +312,7 @@ Please contact me on #coderbus IRC. ~Carnie x
 	update_inv_belt()
 	update_inv_back()
 	update_inv_wear_suit()
-	update_inv_r_hand()
-	update_inv_l_hand()
+	update_inv_hands()
 	update_inv_handcuffed()
 	update_inv_legcuffed()
 	update_inv_pockets()
@@ -415,18 +412,14 @@ Please contact me on #coderbus IRC. ~Carnie x
 
 /mob/living/carbon/human/update_inv_glasses()
 	remove_overlay(GLASSES_LAYER)
-	remove_overlay(GAR_LAYER)
 
 	if(glasses)
 		if(client && hud_used && hud_used.hud_shown)
 			if(hud_used.inventory_shown)			//if the inventory is open ...
 				glasses.screen_loc = ui_glasses		//...draw the item in the inventory screen
 			client.screen += glasses				//Either way, add the item to the HUD
-		if(glasses.cover_hair)
-			overlays_standing[GAR_LAYER]	= image("icon"='icons/mob/eyes.dmi', "icon_state"="[glasses.icon_state]", "layer"=-GAR_LAYER)
-			apply_overlay(GAR_LAYER)
-		else
-			overlays_standing[GLASSES_LAYER]	= image("icon"='icons/mob/eyes.dmi', "icon_state"="[glasses.icon_state]", "layer"=-GLASSES_LAYER)
+
+		overlays_standing[GLASSES_LAYER]	= image("icon"='icons/mob/eyes.dmi', "icon_state"="[glasses.icon_state]", "layer"=-GLASSES_LAYER)
 
 	apply_overlay(GLASSES_LAYER)
 
@@ -639,42 +632,38 @@ Please contact me on #coderbus IRC. ~Carnie x
 	apply_overlay(LEGCUFF_LAYER)
 
 
+/mob/living/carbon/human/update_inv_hands()
+	var/list/H_hands_overlays = list()
 
-/mob/living/carbon/human/update_inv_r_hand()
-	remove_overlay(R_HAND_LAYER)
-	if (handcuffed)
-		drop_r_hand()
-		return
-	if(r_hand)
-		if(client)
-			r_hand.screen_loc = ui_rhand	//TODO
-			client.screen += r_hand
+	remove_overlay(HANDS_LAYER)
 
-		var/t_state = r_hand.item_state
-		if(!t_state)	t_state = r_hand.icon_state
-
-		overlays_standing[R_HAND_LAYER] = image("icon"='icons/mob/items_righthand.dmi', "icon_state"="[t_state]", "layer"=-R_HAND_LAYER)
-
-	apply_overlay(R_HAND_LAYER)
-
-
-
-/mob/living/carbon/human/update_inv_l_hand()
-	remove_overlay(L_HAND_LAYER)
-	if (handcuffed)
+	if(handcuffed)
 		drop_l_hand()
+		drop_r_hand()
 		return
 	if(l_hand)
 		if(client)
-			l_hand.screen_loc = ui_lhand	//TODO
+			l_hand.screen_loc = ui_lhand
 			client.screen += l_hand
 
 		var/t_state = l_hand.item_state
 		if(!t_state)	t_state = l_hand.icon_state
 
-		overlays_standing[L_HAND_LAYER] = image("icon"='icons/mob/items_lefthand.dmi', "icon_state"="[t_state]", "layer"=-L_HAND_LAYER)
+		H_hands_overlays += image("icon"='icons/mob/items_lefthand.dmi', "icon_state"="[t_state]", "layer"=-HANDS_LAYER)
+	if(r_hand)
+		if(client)
+			r_hand.screen_loc = ui_rhand
+			client.screen += r_hand
 
-	apply_overlay(L_HAND_LAYER)
+		var/t_state = r_hand.item_state
+		if(!t_state)	t_state = r_hand.icon_state
+
+		H_hands_overlays += image("icon"='icons/mob/items_righthand.dmi', "icon_state"="[t_state]", "layer"=-HANDS_LAYER)
+
+	if(H_hands_overlays.len)
+		overlays_standing[HANDS_LAYER] = H_hands_overlays
+
+	apply_overlay(HANDS_LAYER)
 
 //Human Overlays Indexes/////////
 #undef BODY_LAYER
@@ -692,11 +681,9 @@ Please contact me on #coderbus IRC. ~Carnie x
 #undef SUIT_STORE_LAYER
 #undef BACK_LAYER
 #undef HAIR_LAYER
-#undef GAR_LAYER
 #undef HEAD_LAYER
 #undef HANDCUFF_LAYER
 #undef LEGCUFF_LAYER
-#undef L_HAND_LAYER
-#undef R_HAND_LAYER
+#undef HANDS_LAYER
 #undef FIRE_LAYER
 #undef TOTAL_LAYERS

@@ -33,8 +33,6 @@
 		new /obj/item/device/flash(src)
 		return
 
-
-
 /obj/structure/closet/secure_closet/engineering_electrical
 	name = "Electrical Supplies"
 	req_access = list(access_engine_equip)

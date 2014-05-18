@@ -970,9 +970,9 @@
 		bitesize = 2
 
 
-/obj/item/weapon/reagent_containers/food/snacks/human/kabob
-	name = "-kabob"
-	icon_state = "kabob"
+/obj/item/weapon/reagent_containers/food/snacks/human/kebab
+	name = "-kebab"
+	icon_state = "kebab"
 	desc = "A human meat, on a stick."
 	trash = /obj/item/stack/rods
 	filling_color = "#FFBBBB"
@@ -981,9 +981,9 @@
 		reagents.add_reagent("nutriment", 8)
 		bitesize = 2
 
-/obj/item/weapon/reagent_containers/food/snacks/monkeykabob
-	name = "meat-kabob"
-	icon_state = "kabob"
+/obj/item/weapon/reagent_containers/food/snacks/monkeykebab
+	name = "meat-kebab"
+	icon_state = "kebab"
 	desc = "Delicious meat, on a stick."
 	trash = /obj/item/stack/rods
 	filling_color = "#382010"
@@ -992,9 +992,9 @@
 		reagents.add_reagent("nutriment", 8)
 		bitesize = 2
 
-/obj/item/weapon/reagent_containers/food/snacks/tofukabob
-	name = "tofu-kabob"
-	icon_state = "kabob"
+/obj/item/weapon/reagent_containers/food/snacks/tofukebab
+	name = "tofu-kebab"
+	icon_state = "kebab"
 	desc = "Vegan meat, on a stick."
 	trash = /obj/item/stack/rods
 	filling_color = "#F0D8A1"

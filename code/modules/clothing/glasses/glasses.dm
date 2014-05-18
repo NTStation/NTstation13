@@ -75,44 +75,40 @@
 	tint = 1
 
 /obj/item/clothing/glasses/sunglasses/garb
-	desc = "Wicked cool."
-	name = "Black GAR Glasses"
+	desc = "Go beyond impossible and kick reason to the curb!"
+	name = "black gar glasses"
 	icon_state = "garb"
 	item_state = "garb"
-	cover_hair = 1
 	force = 10
 	throwforce = 10
 	attack_verb = list("sliced")
 	hitsound = 'sound/weapons/bladeslice.ogg'
 
 /obj/item/clothing/glasses/sunglasses/supergarb
-	desc = "Wicked cool to the power of SICK."
-	name = "Black SUPER GAR Glasses"
+	desc = "Believe in us humans."
+	name = "black super gar glasses"
 	icon_state = "supergarb"
 	item_state = "supergarb"
-	cover_hair = 1
 	force = 12
 	throwforce = 12
 	attack_verb = list("sliced")
 	hitsound = 'sound/weapons/bladeslice.ogg'
 
 /obj/item/clothing/glasses/sunglasses/gar
-	desc = "Cool."
-	name = "GAR Glasses"
+	desc = "Just who the hell do you think I am?!"
+	name = "gar glasses"
 	icon_state = "gar"
 	item_state = "gar"
-	cover_hair = 1
 	force = 10
 	throwforce = 10
 	attack_verb = list("sliced")
 	hitsound = 'sound/weapons/bladeslice.ogg'
 
 /obj/item/clothing/glasses/sunglasses/supergar
-	desc = "Cool to the power of SICK."
-	name = "SUPER GAR Glasses"
+	desc = "We evolve past the person we were a minute before. Little by little we advance with each turn. That's how a drill works!"
+	name = "super gar glasses"
 	icon_state = "supergar"
 	item_state = "supergar"
-	cover_hair = 1
 	force = 12
 	throwforce = 12
 	attack_verb = list("sliced")

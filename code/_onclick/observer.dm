@@ -1,4 +1,4 @@
-/client/var/inquisitive_ghost = 1
+/client/var/inquisitive_ghost = 0
 /mob/dead/observer/verb/toggle_inquisition() // warning: unexpected inquisition
 	set name = "Toggle Inquisitiveness"
 	set desc = "Sets whether your ghost examines everything on click by default"
@@ -83,6 +83,10 @@
 		user.loc = stationgate.loc
 	else
 		user << "[src] has no destination."
+
+/obj/item/weapon/storage/attack_ghost(mob/user as mob)
+	orient2hud(user)
+	show_to(user)
 
 // -------------------------------------------
 // This was supposed to be used by adminghosts

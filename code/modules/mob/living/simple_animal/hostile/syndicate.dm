@@ -31,7 +31,7 @@
 	min_n2 = 0
 	max_n2 = 0
 	unsuitable_atoms_damage = 15
-	faction = "syndicate"
+	factions = list("syndicate")
 	status_flags = CANPUSH
 
 /mob/living/simple_animal/hostile/syndicate/Die()
@@ -75,8 +75,7 @@
 /mob/living/simple_animal/hostile/syndicate/melee/bullet_act(var/obj/item/projectile/Proj)
 	if(!Proj)	return
 	if(prob(65))
-		if((Proj.damage_type == BRUTE || Proj.damage_type == BURN))
-			src.health -= Proj.damage
+		..(Proj)
 	else
 		visible_message("\red <B>[src] blocks [Proj] with its shield!</B>")
 	return 0
@@ -147,7 +146,7 @@
 	melee_damage_upper = 15
 	attacktext = "cuts"
 	attack_sound = 'sound/weapons/bladeslice.ogg'
-	faction = "syndicate"
+	factions = list("syndicate")
 	min_oxy = 0
 	max_oxy = 0
 	min_tox = 0

@@ -29,6 +29,7 @@
 	var/response_disarm = "shoves"
 	var/response_harm   = "hits"
 	var/harm_intent_damage = 3
+	var/force_threshold = 0 //Minimum force required to deal any damage
 
 	//Temperature effect
 	var/minbodytemp = 250
@@ -260,6 +261,15 @@
 /mob/living/simple_animal/bullet_act(var/obj/item/projectile/Proj)
 	if(!Proj)
 		return
+	if(Proj.silenced)
+		playsound(loc, Proj.hitsound, 5, 1, -1)
+		src << "<span class='userdanger'>You've been shot by \a [Proj]!</span>"
+	else
+		if(Proj.hitsound)
+			var/volume = Proj.vol_by_damage()
+			playsound(loc, Proj.hitsound, volume, 1, -1)
+		visible_message("<span class='danger'>[src] is hit by \a [Proj]!</span>", \
+						"<span class='userdanger'>[src] is hit by \a [Proj]!</span>")
 	if((Proj.damage_type != STAMINA))
 		adjustBruteLoss(Proj.damage)
 		Proj.on_hit(src, 0)
@@ -403,14 +413,22 @@
 	else if(meat_type.len && (stat == DEAD))	//if the animal has a meat, and if it is dead.
 		harvest(O)
 	else
+		user.changeNext_move(8)
 		if(O.force)
-			var/damage = O.force
-			if (O.damtype == STAMINA)
-				damage = 0
-			adjustBruteLoss(damage)
-			for(var/mob/M in viewers(src, null))
-				if ((M.client && !( M.blinded )))
-					M.show_message("<span class='danger'>"+"[src] has been attacked with [O] by [user]!</span>")
+			if(O.force >= force_threshold)
+				var/damage = O.force
+				if (O.damtype == STAMINA)
+					damage = 0
+				adjustBruteLoss(damage)
+				visible_message("<span class='danger'>[src] has been attacked with [O] by [user]!</span>",\
+								"<span class='userdanger'>[src] has been attacked with [O] by [user]!</span>")
+			else
+				visible_message("<span class='danger'>[O] bounces harmlessly off of [src].</span>",\
+								"<span class='userdanger'>[O] bounces harmlessly off of [src].</span>")
+		else
+			user << "\red This weapon is ineffective, it does no damage."
+			user.visible_message("<span class='warning'>[user] gently taps [src] with [O].</span>",\
+							"<span class='warning'>This weapon is ineffective, it does no damage.</span>")
 
 /mob/living/simple_animal/movement_delay()
 	var/tally = 0 //Incase I need to add stuff other than "speed" later

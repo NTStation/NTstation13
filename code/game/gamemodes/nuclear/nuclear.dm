@@ -217,7 +217,7 @@
 	var/obj/item/weapon/implant/explosive/E = new/obj/item/weapon/implant/explosive(synd_mob)
 	E.imp_in = synd_mob
 	E.implanted = 1
-	synd_mob.faction = "syndicate"
+	synd_mob.factions += "syndicate"
 	synd_mob.update_icons()
 	return 1
 
@@ -245,13 +245,6 @@
 			disk_rescued = 0
 			break
 	var/crew_evacuated = (emergency_shuttle.location==2)
-	//var/operatives_are_dead = is_operatives_are_dead()
-
-
-	//nukes_left
-	//station_was_nuked
-	//derp //Used for tracking if the syndies actually haul the nuke to the station	//no
-	//herp //Used for tracking if the syndies got the shuttle off of the z-level	//NO, DON'T FUCKING NAME VARS LIKE THIS
 
 	if      (!disk_rescued &&  station_was_nuked &&          !syndies_didnt_escape)
 		feedback_set_details("round_end_result","win - syndicate nuke")

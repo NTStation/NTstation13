@@ -62,16 +62,16 @@
 				qdel(A)
 				return
 
-			if(istype(A, /obj/item/weapon/disk/nuclear)) // Don't let nuke disks travel Z levels  ... And moving this shit down here so it only fires when they're actually trying to change z-level.
-				qdel(A) //The disk's Del() proc ensures a new one is created
-				return
+			var/mob/living/MM = null
+			if(isliving(A))
+				MM = A
 
-			var/list/disk_search = A.search_contents_for(/obj/item/weapon/disk/nuclear)
-			if(!isemptylist(disk_search))
-				if(istype(A, /mob/living))
-					var/mob/living/MM = A
+			//Check for nuke disk
+			var/nukedisk = A.CheckForNukeDisk()
+			if(nukedisk)
+				if(MM)
 					if(MM.client && !MM.stat)
-						MM << "\red Something you are carrying is preventing you from leaving. Don't play stupid; you know exactly what it is."
+						MM << "<span class='warning'>Something you are carrying is preventing you from leaving. Don't play stupid; you know exactly what it is.</span>"
 						if(MM.x <= TRANSITIONEDGE)
 							MM.inertia_dir = 4
 						else if(MM.x >= world.maxx -TRANSITIONEDGE)
@@ -81,15 +81,26 @@
 						else if(MM.y >= world.maxy -TRANSITIONEDGE)
 							MM.inertia_dir = 2
 					else
-						for(var/obj/item/weapon/disk/nuclear/N in disk_search)
-							qdel(N)//Make the disk respawn it is on a clientless mob or corpse
+						qdel(nukedisk)//Make the disk respawn if it is on a clientless mob or corpse
 				else
-					for(var/obj/item/weapon/disk/nuclear/N in disk_search)
-						qdel(N)//Make the disk respawn if it is floating on its own
+					qdel(nukedisk)//Make the disk respawn if it is floating on its own
 				return
 
 			var/move_to_z = src.z
 			var/safety = 1
+			var/obj/was_pulling = null
+
+			//Check if it's a mob pulling an object. Have the object transition with the mob if it's not the nuke disk
+			if(MM && MM.pulling)
+				nukedisk = MM.pulling.CheckForNukeDisk()
+				if(nukedisk)
+					if(nukedisk == MM.pulling)
+						MM.pulling = null
+					else
+						MM << "<span class='warning'>You think you saw something slip out of [MM.pulling], but you couldn't tell where it went...</span>"
+					qdel(nukedisk)
+				if(MM.pulling)
+					was_pulling = MM.pulling //Store the object to transition later
 
 			while(move_to_z == src.z)
 				var/move_to_z_str = pickweight(accessable_z_levels)
@@ -119,10 +130,11 @@
 				A.y = TRANSITIONEDGE + 1
 				A.x = rand(TRANSITIONEDGE + 2, world.maxx - TRANSITIONEDGE - 2)
 
-
-
-
 			spawn (0)
+				if(was_pulling && MM) //Carry the object they were pulling with them when they transition
+					was_pulling.loc = MM.loc
+					MM.pulling = was_pulling
+					was_pulling.pulledby = MM
 				if ((A && A.loc))
 					A.loc.Entered(A)
 

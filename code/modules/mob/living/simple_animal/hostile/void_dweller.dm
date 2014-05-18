@@ -30,7 +30,7 @@
 	max_n2 = 0
 	minbodytemp = 0
 
-	faction = "void"
+	factions = list("void")
 
 /mob/living/simple_animal/hostile/void_dweller/Process_Spacemove(var/check_drift = 0)
 	return 1	//No drifting in space for void dwellers!	//original comments do not steal

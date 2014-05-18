@@ -10,10 +10,7 @@
 			H << "<span class='notice'>You are not holding anything to equip.</span>"
 			return
 		if(H.equip_to_appropriate_slot(I))
-			if(hand)
-				update_inv_l_hand(0)
-			else
-				update_inv_r_hand(0)
+			update_inv_hands(0)
 		else if(s_active && s_active.can_be_inserted(I,1))	//if storage active insert there
 			s_active.handle_item_insertion(I)
 		else if(istype(S, /obj/item/weapon/storage) && S.can_be_inserted(I,1))	//see if we have box in other hand
@@ -181,10 +178,10 @@
 			update_inv_legcuffed(redraw_mob)
 		if(slot_l_hand)
 			l_hand = I
-			update_inv_l_hand(redraw_mob)
+			update_inv_hands(redraw_mob)
 		if(slot_r_hand)
 			r_hand = I
-			update_inv_r_hand(redraw_mob)
+			update_inv_hands(redraw_mob)
 		if(slot_belt)
 			belt = I
 			update_inv_belt(redraw_mob)

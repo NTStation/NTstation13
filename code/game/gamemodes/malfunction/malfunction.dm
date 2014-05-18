@@ -171,13 +171,16 @@
 	set category = "Malfunction"
 	set name = "System Override"
 	set desc = "Start the victory timer"
-	if (!istype(ticker.mode,/datum/game_mode/malfunction))
+	if (!game_is_malf_mode(ticker.mode))
 		usr << "You cannot begin a takeover in this round type!."
 		return
-	if (ticker.mode:malf_mode_declared)
+
+	var/datum/game_mode/malfunction/Malf = ticker.mode
+
+	if (Malf.malf_mode_declared)
 		usr << "You've already begun your takeover."
 		return
-	if (ticker.mode:apcs < 3)
+	if (Malf.apcs < 3)
 		usr << "You don't have enough hacked APCs to take over the station yet. You need to hack at least 3, however hacking more will make the takeover faster. You have hacked [ticker.mode:apcs] APCs so far."
 		return
 
@@ -188,13 +191,13 @@
 	set_security_level("delta")
 
 	for(var/obj/item/weapon/pinpointer/point in world)
-		for(var/datum/mind/AI_mind in ticker.mode.malf_ai)
+		for(var/datum/mind/AI_mind in Malf.malf_ai)
 			var/mob/living/silicon/ai/A = AI_mind.current // the current mob the mind owns
 			if(A.stat != DEAD)
 				point.the_disk = A //The pinpointer now tracks the AI core.
 
-	ticker.mode:malf_mode_declared = 1
-	for(var/datum/mind/AI_mind in ticker.mode:malf_ai)
+	Malf.malf_mode_declared = 1
+	for(var/datum/mind/AI_mind in Malf.malf_ai)
 		AI_mind.current.verbs -= /datum/game_mode/malfunction/proc/takeover
 	for(var/mob/M in player_list)
 		if(!istype(M,/mob/new_player))
@@ -205,12 +208,18 @@
 	set category = "Malfunction"
 	set name = "Explode"
 	set desc = "Station go boom"
-	if (!ticker.mode:to_nuke_or_not_to_nuke)
+
+	if(!game_is_malf_mode(ticker.mode))
 		return
-	ticker.mode:to_nuke_or_not_to_nuke = 0
-	for(var/datum/mind/AI_mind in ticker.mode:malf_ai)
+
+	var/datum/game_mode/malfunction/Malf = ticker.mode
+
+	if (!Malf.to_nuke_or_not_to_nuke)
+		return
+	Malf.to_nuke_or_not_to_nuke = 0
+	for(var/datum/mind/AI_mind in Malf.malf_ai)
 		AI_mind.current.verbs -= /datum/game_mode/malfunction/proc/ai_win
-	ticker.mode:explosion_in_progress = 1
+	Malf.explosion_in_progress = 1
 	for(var/mob/M in player_list)
 		M << 'sound/machines/Alarm.ogg'
 	world << "Self-destructing in 10"
@@ -221,9 +230,9 @@
 	enter_allowed = 0
 	if(ticker)
 		ticker.station_explosion_cinematic(0,null)
-		if(ticker.mode)
-			ticker.mode:station_was_nuked = 1
-			ticker.mode:explosion_in_progress = 0
+		if(Malf)
+			Malf.station_was_nuked = 1
+			Malf.explosion_in_progress = 0
 	return
 
 
@@ -231,22 +240,22 @@
 	var/malf_dead = is_malf_ai_dead()
 	var/crew_evacuated = (emergency_shuttle.location==2)
 
-	if      ( station_captured &&                station_was_nuked)
+	if(station_captured && station_was_nuked)
 		feedback_set_details("round_end_result","win - AI win - nuke")
 		world << "<FONT size = 3><B>AI Victory</B></FONT>"
 		world << "<B>Everyone was killed by the self-destruct!</B>"
 
-	else if ( station_captured &&  malf_dead && !station_was_nuked)
+	else if(station_captured && malf_dead && !station_was_nuked)
 		feedback_set_details("round_end_result","halfwin - AI killed, staff lost control")
 		world << "<FONT size = 3><B>Neutral Victory</B></FONT>"
 		world << "<B>The AI has been killed!</B> The staff has lose control over the station."
 
-	else if ( station_captured && !malf_dead && !station_was_nuked)
+	else if(station_captured && !malf_dead && !station_was_nuked)
 		feedback_set_details("round_end_result","win - AI win - no explosion")
 		world << "<FONT size = 3><B>AI Victory</B></FONT>"
 		world << "<B>The AI has chosen not to explode you all!</B>"
 
-	else if (!station_captured &&                station_was_nuked)
+	else if(!station_captured && station_was_nuked)
 		feedback_set_details("round_end_result","halfwin - everyone killed by nuke")
 		world << "<FONT size = 3><B>Neutral Victory</B></FONT>"
 		world << "<B>Everyone was killed by the nuclear blast!</B>"
@@ -256,12 +265,12 @@
 		world << "<FONT size = 3><B>Human Victory</B></FONT>"
 		world << "<B>The AI has been destroyed!</B> The staff is victorious."
 
-	else if (!station_captured && !malf_dead && !station_was_nuked && crew_evacuated)
+	else if(!station_captured && !malf_dead && !station_was_nuked && crew_evacuated)
 		feedback_set_details("round_end_result","halfwin - evacuated")
 		world << "<FONT size = 3><B>Neutral Victory</B></FONT>"
 		world << "<B>The Corporation has lost [station_name()]! All survived personnel will be fired!</B>"
 
-	else if (!station_captured && !malf_dead && !station_was_nuked && !crew_evacuated)
+	else if(!station_captured && !malf_dead && !station_was_nuked && !crew_evacuated)
 		feedback_set_details("round_end_result","halfwin - interrupted")
 		world << "<FONT size = 3><B>Neutral Victory</B></FONT>"
 		world << "<B>Round was mysteriously interrupted!</B>"
@@ -270,7 +279,7 @@
 
 
 /datum/game_mode/proc/auto_declare_completion_malfunction()
-	if( malf_ai.len || istype(ticker.mode,/datum/game_mode/malfunction) )
+	if( malf_ai.len || game_is_malf_mode(ticker.mode) )
 		var/text = "<br><FONT size=3><B>The malfunctioning AI were:</B></FONT>"
 
 		for(var/datum/mind/malf in malf_ai)

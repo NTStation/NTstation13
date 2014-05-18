@@ -1,5 +1,5 @@
 /mob/living/simple_animal/hostile
-	faction = "hostile"
+	factions = list("hostile")
 	stop_automated_movement_when_pulled = 0
 	environment_smash = 1 //Set to 1 to break closets,tables,racks, etc; 2 for walls; 3 for rwalls
 	var/stance = HOSTILE_STANCE_IDLE	//Used to determine behavior
@@ -25,7 +25,7 @@
 	var/list/wanted_objects = list() //A list of objects that will be checked against to attack, should we have search_objects enabled
 	var/stat_attack = 0 //Mobs with stat_attack to 1 will attempt to attack things that are unconscious, Mobs with stat_attack set to 2 will attempt to attack the dead.
 	var/stat_exclusive = 0 //Mobs with this set to 1 will exclusively attack things defined by stat_attack, stat_attack 2 means they will only attack corpses
-	var/attack_faction = null //Put a faction string here to have a mob only ever attack a specific faction
+	var/list/attack_faction = list() //Put a faction string here to have a mob only ever attack a specific faction
 
 /mob/living/simple_animal/hostile/Life()
 
@@ -100,14 +100,51 @@
 	var/chosen_target = pick(Targets)//Pick the remaining targets (if any) at random
 	return chosen_target
 
-/mob/living/simple_animal/hostile/CanAttack(var/atom/the_target)//Can we actually attack a possible target?
-	if(see_invisible < the_target.invisibility)//Target's invisible to us, forget it
+/mob/living/simple_animal/hostile/CanAttack(var/atom/L)//Can we actually attack a possible target?
+	//made by wb
+	if(ismob(L))
+		var/mob/M = L
+
+		//Stat checks
+		if(M.stat > stat_attack)
+			return 0
+		if(M.stat != stat_attack && stat_exclusive == 1)
+			return 0
+
+		//Friend check
+		if(M in src.friends) return 0
+
+		//Faction checks
+		if(src.attack_faction in M.factions)  return 1
+		if(length(M.factions & src.factions))
+			if(src.attack_same)  return 1
+			return 0
+		if(src.attack_same != 2) return 1
+		return 0
+
+	else
+
+		var/obj/O = L
+
+		if(istype(O,/obj/mecha))
+			var/obj/mecha/M = O
+			if(!M.occupant)				return 0
+			if(!src.CanAttack(M.occupant))  return 0
+			return 1
+
+		if(O.type in src.wanted_objects)
+			return 1
+
+	return 0
+	//old commented out code
+	/*if(see_invisible < the_target.invisibility)//Target's invisible to us, forget it
 		return 0
 	if(isliving(the_target) && search_objects < 2)
 		var/mob/living/L = the_target
+		var/factsmatch = length(L.factions & src.factions)
 		if(L.stat > stat_attack || L.stat != stat_attack && stat_exclusive == 1)
 			return 0
-		if(L.faction == src.faction && !attack_same || L.faction != src.faction && attack_same == 2 || L.faction != attack_faction && attack_faction)
+		if(factsmatch && !attack_same || !factsmatch && attack_same == 2 || !factsmatch && attack_faction)
 			return 0
 		if(L in friends)
 			return 0
@@ -120,7 +157,7 @@
 			if(M.occupant)//Just so we don't attack empty mechs
 				if(CanAttack(M.occupant))
 					return 1
-	return 0
+	return 0*/
 
 /mob/living/simple_animal/hostile/proc/GiveTarget(var/new_target)//Step 4, give us our selected target
 	target = new_target

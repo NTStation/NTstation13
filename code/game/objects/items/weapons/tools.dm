@@ -274,11 +274,7 @@
 		//mob icon update
 		if(ismob(loc))
 			var/mob/M = loc
-			if(M.r_hand == src)
-				M.update_inv_r_hand(0)
-			else if(M.l_hand == src)
-				M.update_inv_l_hand(0)
-
+			M.update_inv_hands(0)
 		return 0
 	return 1
 

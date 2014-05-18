@@ -75,3 +75,73 @@
 		icon_state = "speedspace_ew_14"
 	shuttlespace_ew15
 		icon_state = "speedspace_ew_15"
+
+/turf/space/transit/south // moving to the south
+
+	pushdirection = NORTH
+
+	shuttlespace_sn1
+		icon_state = "speedspace_s_n_1"
+	shuttlespace_sn2
+		icon_state = "speedspace_s_n_2"
+	shuttlespace_sn3
+		icon_state = "speedspace_s_n_3"
+	shuttlespace_sn4
+		icon_state = "speedspace_s_n_4"
+	shuttlespace_sn5
+		icon_state = "speedspace_s_n_5"
+	shuttlespace_sn6
+		icon_state = "speedspace_s_n_6"
+	shuttlespace_sn7
+		icon_state = "speedspace_s_n_7"
+	shuttlespace_sn8
+		icon_state = "speedspace_s_n_8"
+	shuttlespace_sn9
+		icon_state = "speedspace_s_n_9"
+	shuttlespace_sn10
+		icon_state = "speedspace_s_n_10"
+	shuttlespace_sn11
+		icon_state = "speedspace_s_n_11"
+	shuttlespace_sn12
+		icon_state = "speedspace_s_n_12"
+	shuttlespace_sn13
+		icon_state = "speedspace_s_n_13"
+	shuttlespace_sn14
+		icon_state = "speedspace_s_n_14"
+	shuttlespace_sn15
+		icon_state = "speedspace_s_n_15"
+
+/turf/space/transit/west // moving to the west
+
+	pushdirection = EAST
+
+	shuttlespace_we1
+		icon_state = "speedspace_w_e_1"
+	shuttlespace_we2
+		icon_state = "speedspace_w_e_2"
+	shuttlespace_we3
+		icon_state = "speedspace_w_e_3"
+	shuttlespace_we4
+		icon_state = "speedspace_w_e_4"
+	shuttlespace_we5
+		icon_state = "speedspace_w_e_5"
+	shuttlespace_we6
+		icon_state = "speedspace_w_e_6"
+	shuttlespace_we7
+		icon_state = "speedspace_w_e_7"
+	shuttlespace_we8
+		icon_state = "speedspace_w_e_8"
+	shuttlespace_we9
+		icon_state = "speedspace_w_e_9"
+	shuttlespace_we10
+		icon_state = "speedspace_w_e_10"
+	shuttlespace_we11
+		icon_state = "speedspace_w_e_11"
+	shuttlespace_we12
+		icon_state = "speedspace_w_e_12"
+	shuttlespace_we13
+		icon_state = "speedspace_w_e_13"
+	shuttlespace_we14
+		icon_state = "speedspace_w_e_14"
+	shuttlespace_we15
+		icon_state = "speedspace_w_e_15"
