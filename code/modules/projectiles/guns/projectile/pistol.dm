@@ -72,7 +72,7 @@
 
 /obj/item/weapon/gun/projectile/automatic/pistol
 	name = "\improper Stechtkin pistol"
-	desc = "A small, easily concealable gun. Uses 10mm rounds."
+	desc = "A small, easily concealable handgun. Uses 10mm ammo."
 	icon_state = "pistol"
 	w_class = 2
 	silenced = 0
@@ -100,13 +100,15 @@
 	desc = "An M1911 pistol. Uses .45 ammo."
 	icon_state = "m1911"
 	force = 13.0
+	origin_tech = "combat=4;materials=4"
 	mag_type = /obj/item/ammo_box/magazine/sm45
 
 /obj/item/weapon/gun/projectile/automatic/deagle/glock
 	name = "glock"
 	desc = "A glock pistol. Uses 9mm ammo."
 	icon_state = "glock"
-	force = 13.0
+	force = 10.0
+	origin_tech = "combat=4;materials=3"
 	mag_type = /obj/item/ammo_box/magazine/m9mm
 
 /obj/item/weapon/gun/projectile/automatic/pistol/attackby(obj/item/I as obj, mob/user as mob)

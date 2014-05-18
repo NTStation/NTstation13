@@ -35,7 +35,7 @@
 /obj/item/ammo_casing/c9mm
 	desc = "A 9mm bullet casing."
 	caliber = "9mm"
-	projectile_type = /obj/item/projectile/bullet/midbullet2
+	projectile_type = /obj/item/projectile/bullet/pellet
 
 
 /obj/item/ammo_casing/c45
