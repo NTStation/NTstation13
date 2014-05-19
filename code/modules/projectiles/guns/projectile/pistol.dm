@@ -21,15 +21,6 @@
 	force = 14.0
 	mag_type = /obj/item/ammo_box/magazine/m50
 
-
-/obj/item/weapon/gun/projectile/automatic/deagle/afterattack(atom/target as mob|obj|turf|area, mob/living/user as mob|obj, flag)
-	..()
-	if(!chambered && !get_ammo() && !alarmed)
-		playsound(user, 'sound/weapons/smg_empty_alarm.ogg', 40, 1)
-		update_icon()
-		alarmed = 1
-	return
-
 /obj/item/weapon/gun/projectile/automatic/deagle/update_icon()
 	..()
 	icon_state = "[initial(icon_state)][magazine ? "" : "-e"]"
