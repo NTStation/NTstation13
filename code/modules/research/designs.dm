@@ -1715,7 +1715,7 @@ datum/design/mag_glock
 
 datum/design/mag_m1911
 	name = "M1911 Magazine (.45)"
-	desc = "An 8-rnd magazine of.45 ammunition for the M1911 handgun."
+	desc = "An 8-rnd magazine of .45 ammunition for the M1911 handgun."
 	id = "mag_m1911"
 	req_tech = list("combat" = 4, "materials" = 4)
 	build_type = PROTOLATHE
