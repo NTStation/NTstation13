@@ -107,3 +107,11 @@
 			else
 				holder.icon_state = "hudhealthy"
 			C.images += holder
+
+/obj/mecha/medical/odysseus/loaded/New()
+	..()
+	var/obj/item/mecha_parts/mecha_equipment/ME = new /obj/item/mecha_parts/mecha_equipment/tool/sleeper(src)
+	ME.attach(src)
+	ME = new /obj/item/mecha_parts/mecha_equipment/tool/syringe_gun(src)
+	ME.attach(src)
+	return

@@ -112,6 +112,12 @@
 		dat += "<A href='byond://?src=\ref[src];spell_choice=summonmagic'>Summon Magic</A> (One time use, global spell)<BR>"
 		dat += "<I>Share the wonders of magic with the crew and show them why they aren't to be trusted with it at the same time.</I><BR>"
 
+		dat += "<A href='byond://?src=\ref[src];spell_choice=summonmelee'>Summon Melee</A> (One time use, global spell)<BR>"
+		dat += "<I>Weapons of old, and Weapons of new, Powerful melee weapons for all the crew!</I><BR>"
+
+		dat	+= "<A href='byond://?src=\ref[src];spell_choice=summonmechs'>Summon Mechs</A> (One time use, global spell, Costs 2 uses per purchase!)<BR>"
+		dat += "<I>Summon powerful mecha for every member of the crew, sounds fun doesn't it?</I><BR>"
+
 		dat += "<HR>"
 
 		dat += "<A href='byond://?src=\ref[src];spell_choice=return'><B>Return</B></A><BR>"
@@ -196,7 +202,7 @@
 				uses--
 			/*
 			*/
-				var/list/available_spells = list(magicmissile = "Magic Missile", fireball = "Fireball", disintegrate = "Disintegrate", disabletech = "Disable Tech", smoke = "Smoke", blind = "Blind", mindswap = "Mind Transfer", forcewall = "Forcewall", blink = "Blink", teleport = "Teleport", mutate = "Mutate", etherealjaunt = "Ethereal Jaunt", knock = "Knock", horseman = "Curse of the Horseman", fleshtostone = "Flesh to Stone", summonguns = "Summon Guns", summonmagic = "Summon Magic", staffchange = "Staff of Change", soulstone = "Six Soul Stone Shards and the spell Artificer", armor = "Mastercrafted Armor Set", staffanimate = "Staff of Animation", staffchaos = "Staff of Chaos", staffdoor = "Staff of Door Creation", wands = "Wand Assortment")
+				var/list/available_spells = list(magicmissile = "Magic Missile", fireball = "Fireball", disintegrate = "Disintegrate", disabletech = "Disable Tech", smoke = "Smoke", blind = "Blind", mindswap = "Mind Transfer", forcewall = "Forcewall", blink = "Blink", teleport = "Teleport", mutate = "Mutate", etherealjaunt = "Ethereal Jaunt", knock = "Knock", horseman = "Curse of the Horseman", fleshtostone = "Flesh to Stone", summonguns = "Summon Guns", summonmagic = "Summon Magic", summonmechs = "Summon Mechs", summonmelee = "Summon Melee", staffchange = "Staff of Change", soulstone = "Six Soul Stone Shards and the spell Artificer", armor = "Mastercrafted Armor Set", staffanimate = "Staff of Animation", staffchaos = "Staff of Chaos", staffdoor = "Staff of Door Creation", wands = "Wand Assortment")
 				var/already_knows = 0
 				for(var/obj/effect/proc_holder/spell/aspell in H.mind.spell_list)
 					if(available_spells[href_list["spell_choice"]] == initial(aspell.name))
@@ -292,14 +298,30 @@
 							temp = "You have learned flesh to stone."
 						if("summonguns")
 							feedback_add_details("wizard_spell_learned","SG") //please do not change the abbreviation to keep data processing consistent. Add a unique id to any new spells
-							H.rightandwrong(0)
+							H.magic_summon("guns")
 							max_uses--
 							temp = "You have cast summon guns."
 						if("summonmagic")
 							feedback_add_details("wizard_spell_learned","SU") //please do not change the abbreviation to keep data processing consistent. Add a unique id to any new spells
-							H.rightandwrong(1)
+							H.magic_summon("magic")
 							max_uses--
 							temp = "You have cast summon magic."
+						if("summonmechs")
+							if(uses < 2)
+								temp = "You cannot afford to cast summon mechs."
+								uses++ //Refund
+								return
+							feedback_add_details("wizard_spell_learned","SMEC")
+							H.magic_summon("mechs")
+							max_uses -= 2
+							if(uses != 0)
+								uses-- //lower uses ONCE so the book doesn't appear to lie
+							temp = "You have cast summon mechs."
+						if("summonmelee")
+							feedback_add_details("wizard_spell_learned","SMEL")
+							H.magic_summon("melee")
+							max_uses--
+							temp = "You have cast summon melee weapons."
 						if("staffchange")
 							feedback_add_details("wizard_spell_learned","ST") //please do not change the abbreviation to keep data processing consistent. Add a unique id to any new spells
 							new /obj/item/weapon/gun/magic/staff/change(get_turf(H))
