@@ -19,6 +19,106 @@
 	user << "<font color='red'> You have <b>BANNED</b> [M]</font>"
 	playsound(loc, 'sound/effects/adminhelp.ogg', 15) //keep it at 15% volume so people don't jump out of their skin too much
 
+/obj/item/weapon/brassknuckles
+	name = "brass knuckles"
+	desc = "A pair of shiny brass knuckles."
+	icon_state = "brassknuckles"
+	item_state = "brassknuckles"
+	w_class = 1
+	force = 16
+	throw_speed = 3
+	throw_range = 4
+	throwforce = 7
+	attack_verb = list("beaten", "punched", "slammed", "smashed")
+
+/obj/item/weapon/baseballbat
+	name = "wooden bat"
+	desc = "HOME RUN!"
+	icon_state = "woodbat"
+	item_state = "classic_baton"
+	w_class = 2.0
+	force = 15
+	throw_speed = 3
+	throw_range = 7
+	throwforce = 7
+	attack_verb = list("smashed", "beaten", "slammed", "smacked", "striked", "home runned", "bonked")
+	hitsound = 'sound/weapons/genhit3.ogg'
+
+/obj/item/weapon/baseballbat/metal
+	name = "metal bat"
+	desc = "A shiny metal bat."
+	icon_state = "metalbat"
+	force = 16
+
+/obj/item/weapon/switchblade
+	name = "switch blade"
+	desc = "A switch blade."
+	icon_state = "switchblade"
+	item_state = null
+	hitsound = null
+	var/active = 0
+	w_class = 2
+	force = 2
+	throw_speed = 3
+	throw_range = 4
+	throwforce = 7
+	attack_verb = list("patted", "tapped")
+
+/obj/item/switchbladeconstruction
+	name = "unfinished switch blade"
+	desc = "An unfinished switch blade."
+	icon = 'icons/obj/buildingobject.dmi'
+	icon_state = "switchbladestep1"
+
+/obj/item/switchbladeconstruction/attackby(obj/item/W as obj, mob/user as mob)
+	if(istype(W,/obj/item/weapon/screwdriver))
+		user << "You finish the switchblade."
+		new /obj/item/weapon/switchblade(user.loc)
+		del(src)
+		return
+/obj/item/switchbladeblade
+	name = "switch blade"
+	desc = "A switch blade's blade."
+	icon = 'icons/obj/buildingobject.dmi'
+	icon_state = "switchblade2"
+/obj/item/switchbladehandle
+	name = "switch blade handle"
+	desc = "A switch blade's handle."
+	icon = 'icons/obj/buildingobject.dmi'
+	icon_state = "switchblade1"
+
+
+/obj/item/switchbladehandle/attackby(obj/item/W as obj, mob/user as mob)
+	if(istype(W,/obj/item/switchbladeblade))
+		user << "You attach the two switchblade parts."
+		new /obj/item/switchbladeconstruction(user.loc)
+		del(W)
+		del(src)
+		return
+
+/obj/item/weapon/switchblade/butterfly
+	name = "butterfly knife"
+	desc = "A butterfly knife"
+	icon_state = "butterflyknife"
+
+/obj/item/weapon/switchblade/attack_self(mob/user)
+	active = !active
+	if(active)
+		user << "<span class='notice'>You flip out your [src].</span>"
+		playsound(user, 'sound/weapons/flipblade.ogg', 15, 1)
+		force = 18
+		hitsound = 'sound/weapons/bladeslice.ogg'
+		icon_state += "_open"
+		w_class = 3
+		attack_verb = list("attacked", "slashed", "stabbed", "sliced", "torn", "ripped", "diced", "cut")
+	else
+		user << "<span class='notice'>The [src] can now be concealed.</span>"
+		force = initial(force)
+		hitsound = initial(hitsound)
+		icon_state = initial(icon_state)
+		w_class = initial(w_class)
+		attack_verb = initial(attack_verb)
+	add_fingerprint(user)
 
 /obj/item/weapon/nullrod
 	name = "null rod"

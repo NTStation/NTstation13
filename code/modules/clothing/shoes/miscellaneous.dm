@@ -12,6 +12,14 @@
 	icon_state = "mime"
 	item_color = "mime"
 
+/obj/item/clothing/shoes/boots
+	name = "warm boots"
+	desc = "A nice pair of boots to keep your feet toasty."
+	icon_state = "warmboots"
+	item_color = "warmboots"
+	cold_protection = FEET
+	min_cold_protection_temperature = SHOES_MIN_TEMP_PROTECT
+
 /obj/item/clothing/shoes/swat
 	name = "\improper SWAT shoes"
 	desc = "When you want to turn up the heat."

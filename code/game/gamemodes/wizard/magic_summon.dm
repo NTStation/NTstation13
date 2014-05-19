@@ -6,11 +6,11 @@
 */
 
 /mob/proc/magic_summon(var/summon_type)
-	var/list/summon_gunslist 			= list("taser","egun","laser","revolver","detective","smg","nuclear","deagle","gyrojet","pulse","silenced","cannon","doublebarrel","shotgun","combatshotgun","mateba","smg","uzi","crossbow","saw")
+	var/list/summon_gunslist 			= list("taser","egun","laser","revolver","detective","smg","nuclear","deagle","gyrojet","pulse","silenced","cannon","doublebarrel","shotgun","combatshotgun","mateba","smg","uzi","crossbow","saw","tommy","retro","stunrevolver","glock","m1911")
 	var/list/summon_magiclist 			= list("fireball","smoke","blind","mindswap","forcewall","knock","horsemask","charge","wandnothing", "wanddeath", "wandresurrection", "wandpolymorph", "wandteleport", "wanddoor", "wandfireball", "staffchange", "staffhealing", "armor", "scrying", "staffdoor", "special")
 	var/list/summon_magicspeciallist	= list("staffchange","staffanimation", "wandbelt", "contract", "staffchaos")
 	var/list/summon_mechslist			= list("durand","gygax","d-gygax","marauder","mauler","seraph","ripley","d-ripley","phazon","reticence","HONK","ody")
-	var/list/summon_meleelist			= list("katana","claymore","e-axe","e-sword","fireaxe","singu-ham","mjolnir","spear")
+	var/list/summon_meleelist			= list("katana","claymore","e-axe","e-sword","fireaxe","singu-ham","mjolnir","2-e-sword","spear")
 
 	usr << "<B>You summoned [summon_type]!</B>"
 	message_admins("[key_name_admin(usr, 1)] summoned [summon_type]!")
@@ -82,6 +82,17 @@
 						new /obj/item/weapon/gun/energy/crossbow(get_turf(H))
 					if("saw")
 						new /obj/item/weapon/gun/projectile/automatic/l6_saw(get_turf(H))
+					if("tommy")
+						new /obj/item/weapon/gun/projectile/automatic/tommygun(get_turf(H))
+					if("retro")
+						new /obj/item/weapon/gun/energy/laser/retro(get_turf(H))
+					if("stunrevolver")
+						new /obj/item/weapon/gun/energy/stunrevolver(get_turf(H))
+					if("glock")
+						new /obj/item/weapon/gun/projectile/automatic/deagle/glock(get_turf(H))
+					if("m1911")
+						new /obj/item/weapon/gun/projectile/automatic/deagle/m1911(get_turf(H))
+
 			if("magic")
 				switch (randomizemagic)
 					if("fireball")
