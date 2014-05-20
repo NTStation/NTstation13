@@ -44,7 +44,7 @@
 	var/datum/feed_message/wanted_issue
 
 /datum/feed_network/New()
-	CreateFeedChannel("Central Command", "Centcom Official", 1)
+	CreateFeedChannel("Station Announcements", "SS13", 1)
 
 /datum/feed_network/proc/CreateFeedChannel(var/channel_name, var/author, var/locked, var/adminChannel = 0)
 	var/datum/feed_channel/newChannel = new /datum/feed_channel
@@ -80,8 +80,8 @@ var/list/obj/machinery/newscaster/allCasters = list() //Global list that will co
 	desc = "Used to build newscasters, just secure to the wall."
 	icon_state = "newscaster"
 	item_state = "syringe_kit"
-	m_amt = 25000
-	g_amt = 15000
+	m_amt = 14000
+	g_amt = 8000
 
 /obj/item/newscaster_frame/proc/try_build(turf/on_wall)
 	if (get_dist(on_wall,usr)>1)

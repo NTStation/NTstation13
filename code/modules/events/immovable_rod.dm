@@ -16,7 +16,7 @@ In my current plan for it, 'solid' will be defined as anything with density == 1
 	announceWhen = 5
 
 /datum/round_event/immovable_rod/announce()
-	command_alert("What the fuck was that?!", "General Alert")
+	priority_announce("What the fuck was that?!", "General Alert")
 
 /datum/round_event/immovable_rod/start()
 	var/startx = 0
@@ -62,38 +62,36 @@ In my current plan for it, 'solid' will be defined as anything with density == 1
 	var/z_original = 0
 	var/destination
 
-/obj/effect/immovablerod/New(atom/start, atom/end)
-	loc = start
-	z_original = z
-	destination = end
-	if(end && end.z==z_original)
-		walk_towards(src, destination, 1)
+	New(atom/start, atom/end)
+		loc = start
+		z_original = z
+		destination = end
+		if(end && end.z==z_original)
+			walk_towards(src, destination, 1)
 
-/obj/effect/immovablerod/Move()
-	if(z != z_original || loc == destination)
-		qdel(src)
-	return ..()
-
-/obj/effect/immovablerod/Bump(atom/clong)
-	playsound(src, 'sound/effects/bang.ogg', 50, 1)
-	for (var/mob/O in hearers(src, null))
-		O.show_message("CLANG", 2)
-
-	if(istype(clong, /turf/unsimulated) || istype(clong, /turf/simulated/shuttle)) //Unstoppable force meets immovable object
-		explosion(src.loc, 4, 5, 6, 7, 0)
-		if(src)
+	Move()
+		if(z != z_original || loc == destination)
 			qdel(src)
-		return
+		return ..()
 
-	if(clong && prob(25))
-		src.loc = clong.loc
+	Bump(atom/clong)
+		if (istype(clong, /turf) && !istype(clong, /turf/unsimulated))
+			if(clong.density)
+				clong.ex_act(2)
+				for (var/mob/O in hearers(src, null))
+					O.show_message("CLANG", 2)
 
-	if (istype(clong, /turf) || istype(clong, /obj))
-		if(clong.density)
-			clong.ex_act(2)
+		else if (istype(clong, /obj))
+			if(clong.density)
+				clong.ex_act(2)
+				for (var/mob/O in hearers(src, null))
+					O.show_message("CLANG", 2)
 
-	else if (istype(clong, /mob))
-		if(clong.density || prob(10))
-			clong.meteorhit(src)
-	else
-		qdel(src)
+		else if (istype(clong, /mob))
+			if(clong.density || prob(10))
+				clong.ex_act(2)
+		else
+			qdel(src)
+
+		if(clong && prob(25))
+			src.loc = clong.loc

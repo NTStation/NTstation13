@@ -242,6 +242,22 @@
 	item_state = "clown_hat"
 	can_flip = null
 
+obj/item/clothing/mask/gas/clown_hat/attack_self(mob/user)
+
+	var/mob/M = usr
+	var/list/options = list()
+	options["True Form"] = "clown"
+	options["The Feminist"] = "sexyclown"
+	options["The Madman"] = "joker"
+	options["The Rainbow Color"] ="rainbow"
+
+	var/choice = input(M,"To what form do you wish to Morph this mask?","Morph Mask") in options
+
+	if(src && choice && !M.stat && in_range(M,src))
+		icon_state = options[choice]
+		M << "Your Clown Mask has now morphed into [choice], all praise the Honk Mother!"
+		return 1
+
 /obj/item/clothing/mask/gas/sexyclown
 	name = "sexy-clown wig and mask"
 	desc = "A feminine clown mask for the dabbling crossdressers or female entertainers."

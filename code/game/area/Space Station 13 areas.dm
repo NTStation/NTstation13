@@ -123,6 +123,7 @@ proc/process_ghost_teleport_locs()
 	power_light = 0
 	power_equip = 0
 	power_environ = 0
+	ambientsounds = list('sound/ambience/ambispace.ogg','sound/ambience/title2.ogg',)
 
 
 
@@ -693,6 +694,7 @@ proc/process_ghost_teleport_locs()
 /area/prison/morgue
 	name = "\improper Prison Morgue"
 	icon_state = "morgue"
+	ambientsounds = list('sound/ambience/ambimo1.ogg','sound/ambience/ambimo2.ogg')
 
 /area/prison/medical_research
 	name = "\improper Prison Genetic Research"
@@ -950,6 +952,7 @@ proc/process_ghost_teleport_locs()
 /area/chapel/main
 	name = "\improper Chapel"
 	icon_state = "chapel"
+	ambientsounds = list('sound/ambience/ambicha1.ogg','sound/ambience/ambicha2.ogg','sound/ambience/ambicha3.ogg','sound/ambience/ambicha4.ogg')
 
 /area/chapel/office
 	name = "\improper Chapel Office"
@@ -1014,26 +1017,32 @@ proc/process_ghost_teleport_locs()
 //Engineering
 
 /area/engine
-	engine_smes
-		name = "\improper Engineering SMES"
-		icon_state = "engine_smes"
-		requires_power = 0//This area only covers the batteries and they deal with their own power
+	ambientsounds = list('sound/ambience/ambisin1.ogg','sound/ambience/ambisin2.ogg','sound/ambience/ambisin3.ogg','sound/ambience/ambisin4.ogg')
 
-	engineering
-		name = "Engineering"
-		icon_state = "engine_smes"
+/area/engine/engine_smes
+	name = "\improper Engineering SMES"
+	icon_state = "engine_smes"
+	requires_power = 0//This area only covers the batteries and they deal with their own power
 
-	break_room
-		name = "\improper Engineering Foyer"
-		icon_state = "engine"
+/area/engine/engineering
+	name = "Engineering"
+	icon_state = "engine_smes"
 
-	chiefs_office
-		name = "\improper Chief Engineer's office"
-		icon_state = "engine_control"
+/area/engine/break_room
+	name = "\improper Engineering Foyer"
+	icon_state = "engine"
 
-	gravity_generator
-		name = "Gravity Generator Room"
-		icon_state = "blue"
+/area/engine/chiefs_office
+	name = "\improper Chief Engineer's office"
+	icon_state = "engine_control"
+
+/area/engine/secure_construction
+	name = "\improper Secure Construction Area"
+	icon_state = "engine"
+
+/area/engine/gravity_generator
+	name = "Gravity Generator Room"
+	icon_state = "blue"
 
 
 //Solars
@@ -1119,6 +1128,7 @@ proc/process_ghost_teleport_locs()
 	name = "\improper AI Satellite Teleporter Room"
 	icon_state = "teleporter"
 	music = "signal"
+	ambientsounds = list('sound/ambience/ambimalf.ogg')
 
 //MedBay
 
@@ -1161,6 +1171,7 @@ proc/process_ghost_teleport_locs()
 /area/medical/morgue
 	name = "\improper Morgue"
 	icon_state = "morgue"
+	ambientsounds = list('sound/ambience/ambimo1.ogg','sound/ambience/ambimo2.ogg')
 
 /area/medical/chemistry
 	name = "Chemistry"
@@ -1244,6 +1255,10 @@ proc/process_ghost_teleport_locs()
 						newIcon.GrayScale()
 						objectToGrayscale.icon = newIcon
 */
+
+/area/ai_monitored/nuke_storage
+	name = "\improper Vault"
+	icon_state = "nuke_storage"
 
 /area/ai_monitored/nuke_storage
 	name = "\improper Vault"
@@ -1557,6 +1572,10 @@ proc/process_ghost_teleport_locs()
 	name = "Emergency Storage"
 	icon_state = "storage"
 
+
+/area/turret_protected/
+	ambientsounds = list('sound/ambience/ambimalf.ogg')
+
 /area/turret_protected/ai_upload
 	name = "\improper AI Upload Chamber"
 	icon_state = "ai_upload"
@@ -1573,8 +1592,12 @@ proc/process_ghost_teleport_locs()
 	name = "\improper AI Satellite"
 	icon_state = "ai"
 
+/area/aisat
+	name = "\improper AI Satellite Exterior"
+	icon_state = "storage"
+
 /area/turret_protected/aisat_interior
-	name = "\improper AI Satellite"
+	name = "\improper AI Satellite Antechamber"
 	icon_state = "ai"
 
 /area/turret_protected/AIsatextFP
@@ -1635,6 +1658,9 @@ proc/process_ghost_teleport_locs()
 
 // Telecommunications Satellite
 
+/area/tcommsat
+	ambientsounds = list('sound/ambience/ambisin2.ogg', 'sound/ambience/signal.ogg', 'sound/ambience/signal.ogg', 'sound/ambience/ambigen10.ogg')
+
 /area/tcommsat/entrance
 	name = "\improper Telecoms Teleporter"
 	icon_state = "tcomsatentrance"
@@ -1646,18 +1672,22 @@ proc/process_ghost_teleport_locs()
 /area/turret_protected/tcomsat
 	name = "\improper Telecoms Satellite"
 	icon_state = "tcomsatlob"
+	ambientsounds = list('sound/ambience/ambisin2.ogg', 'sound/ambience/signal.ogg', 'sound/ambience/signal.ogg', 'sound/ambience/ambigen10.ogg')
 
 /area/turret_protected/tcomfoyer
 	name = "\improper Telecoms Foyer"
 	icon_state = "tcomsatentrance"
+	ambientsounds = list('sound/ambience/ambisin2.ogg', 'sound/ambience/signal.ogg', 'sound/ambience/signal.ogg', 'sound/ambience/ambigen10.ogg')
 
 /area/turret_protected/tcomwest
 	name = "\improper Telecommunications Satellite West Wing"
 	icon_state = "tcomsatwest"
+	ambientsounds = list('sound/ambience/ambisin2.ogg', 'sound/ambience/signal.ogg', 'sound/ambience/signal.ogg', 'sound/ambience/ambigen10.ogg')
 
 /area/turret_protected/tcomeast
 	name = "\improper Telecommunications Satellite East Wing"
 	icon_state = "tcomsateast"
+	ambientsounds = list('sound/ambience/ambisin2.ogg', 'sound/ambience/signal.ogg', 'sound/ambience/signal.ogg', 'sound/ambience/ambigen10.ogg')
 
 /area/tcommsat/computer
 	name = "\improper Telecoms Control Room"

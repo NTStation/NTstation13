@@ -247,7 +247,7 @@
 /obj/structure/mineral_door/wood/Dismantle(devastated = 0)
 	if(!devastated)
 		for(var/i = 1, i <= oreAmount, i++)
-			new/obj/item/stack/sheet/wood(get_turf(src))
+			new/obj/item/stack/sheet/mineral/wood(get_turf(src))
 	qdel(src)
 
 /obj/structure/mineral_door/resin
@@ -268,3 +268,6 @@
 	playsound(loc, 'sound/effects/attackblob.ogg', 100, 1)
 	..()
 
+/obj/structure/mineral_door/resin/BlockSuperconductivity()
+	if(opacity)
+		return 1

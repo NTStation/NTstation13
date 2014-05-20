@@ -70,8 +70,8 @@
 			var/new_softcap_icon_state = ""
 			var/new_softcap_name = ""
 			var/new_desc = "The colors are a bit dodgy."
-			for(var/T in typesof(/obj/item/clothing/under))
-				var/obj/item/clothing/under/J = new T
+			for(var/T in typesof(/obj/item/clothing/under/color))
+				var/obj/item/clothing/under/color/J = new T
 				if(wash_color == J.item_color)
 					new_jumpsuit_icon_state = J.icon_state
 					new_jumpsuit_item_state = J.item_state
@@ -88,8 +88,8 @@
 					qdel(G)
 					break
 				qdel(G)
-			for(var/T in typesof(/obj/item/clothing/shoes))
-				var/obj/item/clothing/shoes/S = new T
+			for(var/T in typesof(/obj/item/clothing/shoes/sneakers))
+				var/obj/item/clothing/shoes/sneakers/S = new T
 				if(wash_color == S.item_color)
 					new_shoe_icon_state = S.icon_state
 					new_shoe_name = S.name
@@ -113,7 +113,7 @@
 					break
 				qdel(H)
 			if(new_jumpsuit_icon_state && new_jumpsuit_item_state && new_jumpsuit_name)
-				for(var/obj/item/clothing/under/J in contents)
+				for(var/obj/item/clothing/under/color/J in contents)
 					if(!J.item_color)
 						continue
 					J.item_state = new_jumpsuit_item_state
@@ -132,7 +132,7 @@
 					G.name = new_glove_name
 					G.desc = new_desc
 			if(new_shoe_icon_state && new_shoe_name)
-				for(var/obj/item/clothing/shoes/S in contents)
+				for(var/obj/item/clothing/shoes/sneakers/S in contents)
 					if(!S.item_color)
 						continue
 					if(S.chained == 1)
@@ -241,6 +241,9 @@
 			return
 		if(istype(I, /obj/item/clothing/head/helmet))
 			user << "<span class='notice'>[I] does not fit.</span>"
+			return
+		if(W.flags & NODROP) //if "can't drop" item
+			user << "<span class='notice'>\The [W] is stuck to your hand, you cannot put it in the washing machine!</span>"
 			return
 
 		if(contents.len < 5)
