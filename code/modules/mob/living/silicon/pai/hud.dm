@@ -1,14 +1,14 @@
-/mob/living/silicon/pai/proc/regular_hud_updates()
+/mob/living/silicon/proc/regular_hud_updates()
 	if(client)
 		for(var/image/hud in client.images)
 			if(copytext(hud.icon_state,1,4) == "hud")
 				client.images -= hud
 
-/mob/living/silicon/pai/proc/securityHUD()
+mob/living/silicon/proc/securityHUD(mob/living/silicon/S as mob)
 	if(client)
 		var/image/holder
-		var/turf/T = get_turf(src.loc)
-		for(var/mob/living/carbon/human/perp in view(T))
+		var/turf/T = get_turf(S)
+		for(var/mob/living/carbon/human/perp in range(T))
 			holder = perp.hud_list[ID_HUD]
 			holder.icon_state = "hudno_id"
 			if(perp.wear_id)
@@ -29,11 +29,11 @@
 							return
 					client.images += holder
 
-/mob/living/silicon/pai/proc/medicalHUD()
+/mob/living/silicon/proc/medicalHUD(mob/living/silicon/S as mob)
 	if(client)
 		var/image/holder
-		var/turf/T = get_turf(src.loc)
-		for(var/mob/living/carbon/human/patient in view(T))
+		var/turf/T = get_turf(S)
+		for(var/mob/living/carbon/human/patient in range(T))
 
 			var/foundVirus = 0
 			for(var/datum/disease/D in patient.viruses)
@@ -59,7 +59,7 @@
 				holder.icon_state = "hudhealthy"
 			client.images += holder
 
-/mob/living/silicon/pai/proc/RoundHealth(health)
+/mob/living/silicon/proc/RoundHealth(health)
 	switch(health)
 		if(100 to INFINITY)
 			return "health100"
