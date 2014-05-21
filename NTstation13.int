@@ -2,13 +2,6 @@
 /*
 MAP_ICON_TYPE: 0
 <<<<<<< HEAD
-WINDOW: code\modules\mob\living\simple_animal\hostile\carp.dm;code\modules\events\carp_migration.dm;icons\mob\alienqueen.dmi;icons\mob\animal.dmi;icons\obj\clothing\masks.dmi;icons\mob\mask.dmi;icons\mob\uniform.dmi
-LAST_COMPILE_VERSION: 504.1234
-DIR: code code\modules code\modules\events code\modules\mob code\modules\mob\living code\modules\mob\living\simple_animal code\modules\mob\living\simple_animal\hostile icons icons\mob icons\obj icons\obj\clothing 
-FILE: icons\mob\mask.dmi
-LAST_COMPILE_TIME: 1400454827
-=======
->>>>>>> 125a7925e2a37c84840ef92c2924945328ca490a
 AUTO_FILE_DIR: OFF
 */
 // END_INTERNALS
