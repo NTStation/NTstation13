@@ -12,7 +12,7 @@
 	response_help = "pets"
 	response_disarm = "gently pushes aside"
 	response_harm = "hits"
-	speed = 0
+	speed = 1
 	maxHealth = 25
 	health = 25
 
@@ -71,11 +71,6 @@
 	minimum_distance = 5
 	projectiletype = /obj/item/projectile/beam
 
-/mob/living/simple_animal/hostile/carp/lasercarp/Die()
-	qdel(src)
-	return
-
-
 /mob/living/simple_animal/hostile/carp/megacarp
 	icon = 'icons/mob/alienqueen.dmi'
 	name = "Mega Space Carp"
@@ -89,7 +84,3 @@
 
 	melee_damage_lower = 20
 	melee_damage_upper = 20
-
-/mob/living/simple_animal/hostile/carp/mega/Die()
-	qdel(src)
-	return
