@@ -66,7 +66,7 @@
 	origin_tech = "combat=2"
 	ammo_type = /obj/item/ammo_casing/c9mm
 	caliber = "9mm"
-	max_ammo = 8
+	max_ammo = 12
 	multiple_sprites = 2
 
 /obj/item/ammo_box/magazine/msmg9mm
@@ -74,11 +74,11 @@
 	icon_state = "smg9mm"
 	ammo_type = /obj/item/ammo_casing/c9mm
 	caliber = "9mm"
-	max_ammo = 18
+	max_ammo = 20
 
 /obj/item/ammo_box/magazine/msmg9mm/update_icon()
 	..()
-	icon_state = "[initial(icon_state)]-[round(ammo_count(),3)]"
+	icon_state = "[initial(icon_state)]-[round(ammo_count(),5)]"
 
 /obj/item/ammo_box/magazine/m10mm
 	name = "magazine (10mm)"
@@ -103,10 +103,10 @@
 
 /obj/item/ammo_box/magazine/sm45
 	name = "magazine (.45)"
-	icon_state = "9x19p"
+	icon_state = "45"
 	ammo_type = /obj/item/ammo_casing/c45
 	caliber = ".45"
-	max_ammo = 12
+	max_ammo = 8
 
 /obj/item/ammo_box/magazine/sm45/update_icon()
 	..()
@@ -117,18 +117,19 @@
 	icon_state = "uzi45"
 	ammo_type = /obj/item/ammo_casing/c45
 	caliber = ".45"
-	max_ammo = 16
+	max_ammo = 20
 
 /obj/item/ammo_box/magazine/uzim45/update_icon()
 	..()
 	icon_state = "[initial(icon_state)]-[round(ammo_count(),2)]"
 
-obj/item/ammo_box/magazine/tommygunm45
+/obj/item/ammo_box/magazine/tommygunm45
 	name = "tommy gun drum (.45)"
 	icon_state = "drum45"
 	ammo_type = /obj/item/ammo_casing/c45
 	caliber = ".45"
 	max_ammo = 50
+	m_amt = 15000
 
 /obj/item/ammo_box/magazine/m50
 	name = "magazine (.50ae)"

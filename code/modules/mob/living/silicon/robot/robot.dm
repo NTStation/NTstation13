@@ -209,6 +209,7 @@
 
 	overlays -= "eyes" //Takes off the eyes that it started with
 
+	playsound(loc, 'sound/effects/transform.ogg', 75, 1)
 	transform_animation(animation_length)
 	notify_ai(2)
 	updateicon()
@@ -744,7 +745,7 @@
 		updatehealth()
 
 
-/mob/living/silicon/robot/attack_hand(mob/user)
+/mob/living/silicon/robot/attack_hand(mob/living/carbon/human/user)
 
 	add_fingerprint(user)
 
@@ -756,11 +757,17 @@
 			user << "You remove \the [cell]."
 			cell = null
 			updateicon()
+		return
 
 	if(!opened && (!istype(user, /mob/living/silicon)))
 		if (user.a_intent == "help")
 			user.visible_message("<span class='notice'>[user] pets [src]!</span>", \
 								"<span class='notice'>You pet [src]!</span>")
+
+		else
+			if((user.a_intent == "harm") && (HULK in user.mutations))
+				spark_system.start()
+			return ..(user)
 
 /mob/living/silicon/robot/attack_paw(mob/user)
 

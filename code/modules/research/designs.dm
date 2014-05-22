@@ -1654,11 +1654,31 @@ datum/design/large_grenade
 	reliability = 79
 	build_path = /obj/item/weapon/grenade/chem_grenade/large
 
-datum/design/smg
-	name = "Submachine Gun"
-	desc = "A lightweight, fast firing gun."
-	id = "smg"
+datum/design/glock
+	name = "9mm Handgun"
+	desc = "A medium-capacity ballistic handgun built on a classic design that uses light ammunition."
+	id = "glock"
 	req_tech = list("combat" = 4, "materials" = 3)
+	build_type = PROTOLATHE
+	materials = list("$metal" = 6000, "$glass" = 3750, "$silver" = 2000)
+	build_path = /obj/item/weapon/gun/projectile/automatic/deagle/glock
+	locked = 1
+
+datum/design/m1911
+	name = ".45 Handgun"
+	desc = "A low-capacity ballistic handgun built on a classic design that uses medium ammunition."
+	id = "m1911"
+	req_tech = list("combat" = 4, "materials" = 4)
+	build_type = PROTOLATHE
+	materials = list("$metal" = 6000, "$silver" = 3750, "$gold" = 1000)
+	build_path = /obj/item/weapon/gun/projectile/automatic/deagle/m1911
+	locked = 1
+
+datum/design/smg
+	name = "9mm Submachine Gun"
+	desc = "A prototype high-capacity ballistic submachine gun that uses light ammunition."
+	id = "smg"
+	req_tech = list("combat" = 4, "materials" = 5)
 	build_type = PROTOLATHE
 	materials = list("$metal" = 9000, "$silver" = 5000, "$diamond" = 1000)
 	build_path = /obj/item/weapon/gun/projectile/automatic
@@ -1684,22 +1704,31 @@ datum/design/ionrifle
 	build_path = /obj/item/weapon/gun/energy/ionrifle
 	locked = 1
 
-datum/design/ammo_9mm
-	name = "Ammunition Box (9mm)"
-	desc = "A box of prototype 9mm ammunition."
-	id = "ammo_9mm"
+datum/design/mag_glock
+	name = "Glock Magazine (9mm)"
+	desc = "A 12-rnd magazine of 9mm ammunition for the glock handgun."
+	id = "mag_glock"
 	req_tech = list("combat" = 4, "materials" = 3)
 	build_type = PROTOLATHE
-	materials = list("$metal" = 2000)
-	build_path = /obj/item/ammo_box/c9mm
+	materials = list("$metal" = 3750)
+	build_path = /obj/item/ammo_box/magazine/m9mm
+
+datum/design/mag_m1911
+	name = "M1911 Magazine (.45)"
+	desc = "An 8-rnd magazine of .45 ammunition for the M1911 handgun."
+	id = "mag_m1911"
+	req_tech = list("combat" = 4, "materials" = 4)
+	build_type = PROTOLATHE
+	materials = list("$metal" = 3750)
+	build_path = /obj/item/ammo_box/magazine/sm45
 
 datum/design/mag_smg
 	name = "Submachine Gun Magazine (9mm)"
-	desc = "A prototype magazine for the submachine gun."
+	desc = "A 20-rnd magazine of 9mm ammunition for the prototype submachine gun."
 	id = "mag_smg"
-	req_tech = list("combat" = 4, "materials" = 3)
+	req_tech = list("combat" = 4, "materials" = 5)
 	build_type = PROTOLATHE
-	materials = list("$metal" = 2000)
+	materials = list("$metal" = 3750)
 	build_path = /obj/item/ammo_box/magazine/msmg9mm
 
 datum/design/stunshell

@@ -70,6 +70,8 @@
 	..()
 	sleep(2)
 	new /obj/item/clothing/under/rank/janitor(src)
+	new /obj/item/clothing/under/janimaid(src)
+	new /obj/item/clothing/head/maidbow(src)
 	new /obj/item/weapon/cartridge/janitor(src)
 	new /obj/item/clothing/gloves/black(src)
 	new /obj/item/clothing/head/soft/purple(src)

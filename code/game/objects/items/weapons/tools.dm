@@ -425,9 +425,40 @@
 	w_class = 2.0
 	m_amt = 50
 	origin_tech = "engineering=1"
+	var/constructionsystem = 0
 	attack_verb = list("attacked", "bashed", "battered", "bludgeoned", "whacked")
 
 /obj/item/weapon/crowbar/red
 	icon = 'icons/obj/items.dmi'
 	icon_state = "red_crowbar"
 	item_state = "crowbar_red"
+
+/obj/item/weapon/crowbar/tireiron
+	name = "tire iron"
+	desc = "A tire iron."
+	icon = 'icons/obj/weapons.dmi'
+	icon_state = "tireiron"
+	force = 14.0
+
+/obj/item/weapon/crowbar/attackby(obj/item/W as obj, mob/user as mob)
+	if(istype(W,/obj/item/stack/sheet/plasteel))
+		if(!src.type == /obj/item/weapon/crowbar/tireiron)
+			if(constructionsystem == 0)
+				user << "You start to form a tire iron out of the crowbar using the plasteel."
+				var/obj/item/stack/sheet/plasteel/S = W
+				if(S.amount < 5)
+					user << "There's not enough material in this stack."
+					return
+				S.use(5)
+				icon_state = "tireiron"
+				constructionsystem = 1
+				return
+	else if(istype(W,/obj/item/weapon/weldingtool/))
+		if(constructionsystem == 1)
+			var/obj/item/weapon/weldingtool/T = W
+			if (T.remove_fuel(5, user))
+				playsound(user, 'sound/items/Welder2.ogg', 50, 1)
+				user << "You weld the plasteel in place to [src], finishing the tire iron."
+				new /obj/item/weapon/crowbar/tireiron(user.loc)
+				del(src)
+				return

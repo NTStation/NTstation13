@@ -12,7 +12,7 @@
 	response_help = "pets"
 	response_disarm = "gently pushes aside"
 	response_harm = "hits"
-	speed = 0
+	speed = 1
 	maxHealth = 25
 	health = 25
 
@@ -71,6 +71,16 @@
 	minimum_distance = 5
 	projectiletype = /obj/item/projectile/beam
 
-/mob/living/simple_animal/hostile/carp/lasercarp/Die()
-	qdel(src)
-	return
+/mob/living/simple_animal/hostile/carp/megacarp
+	icon = 'icons/mob/alienqueen.dmi'
+	name = "Mega Space Carp"
+	desc = "A ferocious, fang bearing creature that resembles a fish. This one seems especially ticked off."
+	icon_state = "megacarp"
+	icon_living = "megacarp"
+	icon_dead = "megacarp_dead"
+	icon_gib = "megacarp_gib"
+	maxHealth = 65
+	health = 65
+
+	melee_damage_lower = 20
+	melee_damage_upper = 20

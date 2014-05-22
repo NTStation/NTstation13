@@ -21,15 +21,6 @@
 	force = 14.0
 	mag_type = /obj/item/ammo_box/magazine/m50
 
-
-/obj/item/weapon/gun/projectile/automatic/deagle/afterattack(atom/target as mob|obj|turf|area, mob/living/user as mob|obj, flag)
-	..()
-	if(!chambered && !get_ammo() && !alarmed)
-		playsound(user, 'sound/weapons/smg_empty_alarm.ogg', 40, 1)
-		update_icon()
-		alarmed = 1
-	return
-
 /obj/item/weapon/gun/projectile/automatic/deagle/update_icon()
 	..()
 	icon_state = "[initial(icon_state)][magazine ? "" : "-e"]"
@@ -38,8 +29,6 @@
 	desc = "A gold plated gun folded over a million times by superior martian gunsmiths. Uses .50 AE ammo."
 	icon_state = "deagleg"
 	item_state = "deagleg"
-
-
 
 /obj/item/weapon/gun/projectile/automatic/deagle/camo
 	desc = "A Deagle brand Deagle for operators operating operationally. Uses .50 AE ammo."
@@ -74,7 +63,7 @@
 
 /obj/item/weapon/gun/projectile/automatic/pistol
 	name = "\improper Stechtkin pistol"
-	desc = "A small, easily concealable gun. Uses 10mm rounds."
+	desc = "A small, easily concealable handgun. Uses 10mm ammo."
 	icon_state = "pistol"
 	w_class = 2
 	silenced = 0
@@ -97,6 +86,21 @@
 			return
 	..()
 
+/obj/item/weapon/gun/projectile/automatic/deagle/m1911
+	name = "M1911"
+	desc = "An M1911 pistol. Uses .45 ammo."
+	icon_state = "m1911"
+	force = 13.0
+	origin_tech = "combat=4;materials=4"
+	mag_type = /obj/item/ammo_box/magazine/sm45
+
+/obj/item/weapon/gun/projectile/automatic/deagle/glock
+	name = "glock"
+	desc = "A glock pistol. Uses 9mm ammo."
+	icon_state = "glock"
+	force = 10.0
+	origin_tech = "combat=4;materials=3"
+	mag_type = /obj/item/ammo_box/magazine/m9mm
 
 /obj/item/weapon/gun/projectile/automatic/pistol/attackby(obj/item/I as obj, mob/user as mob)
 	if(istype(I, /obj/item/weapon/silencer))
