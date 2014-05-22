@@ -383,3 +383,23 @@
 	item_color = "black_tango"
 	fitted = 0
 	can_roll = 0
+
+/obj/item/clothing/under/maid
+	name = "maid costume"
+	desc = "Maid in China."
+	icon_state = "maid"
+	item_state = "maid"
+	item_color = "maid"
+	body_parts_covered = CHEST|GROIN
+	fitted = 0
+	can_roll = 0
+
+/obj/item/clothing/under/janimaid
+	name = "maid uniform"
+	desc = "A simple maid uniform for housekeeping."
+	icon_state = "janimaid"
+	item_state = "janimaid"
+	item_color = "janimaid"
+	body_parts_covered = CHEST|GROIN
+	fitted = 0
+	can_roll = 0
