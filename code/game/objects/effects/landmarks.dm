@@ -116,7 +116,8 @@
 	qdel(src)
 
 /obj/effect/landmark/costume/nyangirl/New()
-	new /obj/item/clothing/under/schoolgirl(src.loc)
+	var/CHOICE = pick( /obj/item/clothing/under/schoolgirl , /obj/item/clothing/under/blackskirt )
+	new CHOICE(src.loc)
 	new /obj/item/clothing/head/kitty(src.loc)
 	if (prob(50))
 		new /obj/item/clothing/glasses/sunglasses/blindfold(src.loc)
@@ -125,9 +126,10 @@
 	qdel(src)
 
 /obj/effect/landmark/costume/maid/New()
-	new /obj/item/clothing/under/blackskirt(src.loc)
-	var/CHOICE = pick( /obj/item/clothing/head/beret , /obj/item/clothing/head/rabbitears )
-	new CHOICE(src.loc)
+	var/CHOICEUNI = pick( /obj/item/clothing/under/maid , /obj/item/clothing/under/janimaid )
+	new CHOICEUNI(src.loc)
+	var/CHOICEHEAD = pick( /obj/item/clothing/head/maidbow , /obj/item/clothing/head/rabbitears )
+	new CHOICEHEAD(src.loc)
 	if (prob(50))
 		new /obj/item/clothing/glasses/sunglasses/blindfold(src.loc)
 	else
