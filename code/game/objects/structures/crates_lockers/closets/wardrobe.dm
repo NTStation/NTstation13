@@ -401,3 +401,38 @@
 	if(prob(40))
 		new /obj/item/clothing/under/redoveralls(src)
 	return
+
+/obj/structure/closet/wardrobe/casual
+	name = "casual wardrobe"
+	icon_state = "mixed"
+	icon_closed = "mixed"
+
+/obj/structure/closet/wardrobe/casual/New()
+	new /obj/item/clothing/head/beanie(src)
+	new /obj/item/clothing/head/beanie(src)
+	new /obj/item/clothing/head/beanie(src)
+	new /obj/item/clothing/head/beanie(src)
+	new /obj/item/clothing/mask/bandana/gold(src)
+	new /obj/item/clothing/mask/bandana/gold(src)
+	new /obj/item/clothing/mask/bandana/blue(src)
+	new /obj/item/clothing/mask/bandana/blue(src)
+	new /obj/item/clothing/mask/bandana/red(src)
+	new /obj/item/clothing/mask/bandana/red(src)
+	new /obj/item/clothing/mask/bandana/green(src)
+	new /obj/item/clothing/mask/bandana/green(src)
+	new /obj/item/clothing/suit/labcoat/coat/jacket(src)
+	new /obj/item/clothing/suit/labcoat/coat/jacket(src)
+	new /obj/item/clothing/suit/labcoat/coat/jacket(src)
+	new /obj/item/clothing/suit/labcoat/coat/jacket(src)
+	if(prob(50))
+		new /obj/item/clothing/under/jeans(src)
+	else
+		new /obj/item/clothing/under/trackpants(src)
+	new /obj/item/clothing/under/jeans(src)
+	new /obj/item/clothing/under/trackpants(src)
+	new /obj/item/clothing/under/khaki(src)
+	new /obj/item/clothing/shoes/black(src)
+	new /obj/item/clothing/shoes/brown(src)
+	new /obj/item/clothing/shoes/black(src)
+	new /obj/item/clothing/shoes/brown(src)
+	return
