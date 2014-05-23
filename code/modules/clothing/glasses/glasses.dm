@@ -59,11 +59,60 @@
 	icon_state = "hipster_glasses"
 	item_state = "hipster_glasses"
 
-/obj/item/clothing/glasses/gglasses
+/obj/item/clothing/glasses/greenglasses
 	name = "Green Glasses"
-	desc = "Forest green glasses, like the kind you'd wear when hatching a nasty scheme."
-	icon_state = "gglasses"
-	item_state = "gglasses"
+	desc = "Green-framed prescription glasses, like the kind you'd wear when hatching a nasty scheme."
+	icon_state = "greenglasses"
+	item_state = "greenglasses"
+
+/obj/item/clothing/glasses/redglasses
+	name = "Red Glasses"
+	desc = "Red-framed prescription glasses."
+	icon_state = "redglasses"
+	item_state = "redglasses"
+
+/obj/item/clothing/glasses/blueglasses
+	name = "Blue Glasses"
+	desc = "Blue-framed prescription glasses."
+	icon_state = "blueglasses"
+	item_state = "blueglasses"
+
+/obj/item/clothing/glasses/yellowglasses
+	name = "Yellow Glasses"
+	desc = "Yellow-framed prescription glasses."
+	icon_state = "yellowglasses"
+	item_state = "yellowglasses"
+
+/obj/item/clothing/glasses/brownglasses
+	name = "Brown Glasses"
+	desc = "Brown-framed prescription glasses."
+	icon_state = "brownglasses"
+	item_state = "brownglasses"
+
+/obj/item/clothing/glasses/pinkglasses
+	name = "Pink Glasses"
+	desc = "Pink-framed prescription glasses."
+	icon_state = "pinkglasses"
+	item_state = "pinkglasses"
+
+/obj/item/clothing/glasses/orangeglasses
+	name = "Orange Glasses"
+	desc = "Orange-framed prescription glasses."
+	icon_state = "orangeglasses"
+	item_state = "orangeglasses"
+
+/obj/item/clothing/glasses/purpleglasses
+	name = "Purple Glasses"
+	desc = "Purple-framed prescription glasses."
+	icon_state = "purpleglasses"
+	item_state = "purpleglasses"
+
+/obj/item/clothing/glasses/clearglasses
+	name = "Clear Glasses"
+	desc = "Clear-framed prescription glasses."
+	icon_state = "clearglasses"
+	item_state = "clearglasses"
+
 
 /obj/item/clothing/glasses/sunglasses
 	desc = "Strangely ancient technology used to help provide rudimentary eye cover. Enhanced shielding blocks many flashes."
