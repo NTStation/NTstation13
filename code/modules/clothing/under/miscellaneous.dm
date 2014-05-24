@@ -383,3 +383,56 @@
 	item_color = "black_tango"
 	fitted = 0
 	can_roll = 0
+
+/obj/item/clothing/under/maid
+	name = "maid costume"
+	desc = "Maid in China."
+	icon_state = "maid"
+	item_state = "maid"
+	item_color = "maid"
+	body_parts_covered = CHEST|GROIN
+	fitted = 0
+	can_roll = 0
+
+/obj/item/clothing/under/janimaid
+	name = "maid uniform"
+	desc = "A simple maid uniform for housekeeping."
+	icon_state = "janimaid"
+	item_state = "janimaid"
+	item_color = "janimaid"
+	body_parts_covered = CHEST|GROIN
+	fitted = 0
+	can_roll = 0
+
+/obj/item/clothing/under/jeans
+	name = "jeans"
+	desc = "A pair of tough blue jeans."
+	icon_state = "jeans"
+	item_state = "jeans"
+	item_color = "jeans"
+	gender = PLURAL
+	body_parts_covered = GROIN|LEGS
+	fitted = 0
+	can_roll = 0
+
+/obj/item/clothing/under/trackpants
+	name = "track pants"
+	desc = "A pair of track pants, for the athletic."
+	icon_state = "trackpants"
+	item_state = "trackpants"
+	item_color = "trackpants"
+	gender = PLURAL
+	body_parts_covered = GROIN|LEGS
+	fitted = 0
+	can_roll = 0
+
+/obj/item/clothing/under/khaki
+	name = "khaki pants"
+	desc = "A pair of dust beige khaki pants."
+	icon_state = "khaki"
+	item_state = "khaki"
+	item_color = "khaki"
+	gender = PLURAL
+	body_parts_covered = GROIN|LEGS
+	fitted = 0
+	can_roll = 0

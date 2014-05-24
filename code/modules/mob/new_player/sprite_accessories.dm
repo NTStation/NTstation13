@@ -264,6 +264,10 @@
 		name = "Hime Cut"
 		icon_state = "hair_himecut"
 
+	himeup
+		name = "Hime Updo"
+		icon_state = "hair_himeup"
+
 	antenna
 		name = "Ahoge"
 		icon_state = "hair_antenna"

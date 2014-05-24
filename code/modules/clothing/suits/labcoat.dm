@@ -108,6 +108,11 @@
 	icon_state = "jacket"
 	can_toggle = null
 
+/obj/item/clothing/suit/labcoat/coat/jacket/leather
+	name = "leather jacket"
+	desc = "Pompadour not included."
+	icon_state = "leatherjacket"
+
 /obj/item/clothing/suit/labcoat/coat/captain
 	name = "captain's winter coat"
 	desc = "A coat that protects against the bitter cold."

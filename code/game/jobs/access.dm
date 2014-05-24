@@ -229,20 +229,20 @@
 	switch(code)
 		if(0)
 			return "All"
-		if(1) //security
-			return "Security"
-		if(2) //medbay
-			return "Medbay"
-		if(3) //research
-			return "Research"
-		if(4) //engineering and maintenance
-			return "Engineering"
-		if(5) //command
-			return "Command"
-		if(6) //station general
+		if(1)
 			return "Station General"
-		if(7) //supply
+		if(2)
+			return "Security"
+		if(3)
+			return "Medbay"
+		if(4)
+			return "Research"
+		if(5)
+			return "Engineering"
+		if(6)
 			return "Supply"
+		if(7)
+			return "Command"
 
 
 /proc/get_access_desc(A)

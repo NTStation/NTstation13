@@ -52,8 +52,8 @@
 			qdel(W)
 			var/obj/machinery/singularity/singulo = new /obj/machinery/singularity (get_turf(src))
 			singulo.energy = 300 //should make it a bit bigger~
-			message_admins("[key_name_admin(user)] detonated a bag of holding")
-			log_game("[key_name(user)] detonated a bag of holding")
+			message_admins("[key_name_admin(user)] detonated a [src.name].")
+			log_game("[key_name(user)] detonated a [src.name].")
 			qdel(src)
 			return
 		..()
@@ -69,6 +69,13 @@
 			crit_fail = 1
 			icon_state = "brokenpack"
 
+/obj/item/weapon/storage/backpack/holding/belt //It is here instead of belts so it works with all the BoH code.
+	name = "belt of holding"
+	desc = "An experimental belt that opens into a small, localized pocket of Blue Space."
+	icon_state = "holdingbelt"
+	item_state = "holdingbelt"
+	max_w_class = 3 //It is a backpack for your belt!
+	slot_flags = SLOT_BELT
 
 /obj/item/weapon/storage/backpack/santabag
 	name = "Santa's Gift Bag"
