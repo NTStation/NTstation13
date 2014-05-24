@@ -146,7 +146,7 @@ obj/effect/proc_holder/changeling/sting/LSD
 	add_logs(user, target, "stung", object="LSD sting")
 	spawn(rand(300,600))
 		if(target)
-			target.hallucination += 400
+			target.hallucination = max(target.hallucination, 400)
 	feedback_add_details("changeling_powers","HS")
 	return 1
 
