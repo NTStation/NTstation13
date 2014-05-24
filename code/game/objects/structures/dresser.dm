@@ -29,6 +29,13 @@
 				if(new_undershirt)
 					H.undershirt = new_undershirt
 
+			if("Socks")
+				var/new_socks = input(user, "Select your socks", "Changing") as null|anything in socks_list
+				if(!Adjacent(user))
+					return
+				if(new_socks)
+					H.socks = new_socks
+
 		add_fingerprint(H)
 		H.update_body()
 
