@@ -229,19 +229,19 @@
 	switch(code)
 		if(0)
 			return "All"
-		if(1) //security
+		if(1)
 			return "Station General"
-		if(2) //medbay
+		if(2)
 			return "Security"
-		if(3) //research
+		if(3)
 			return "Medbay"
-		if(4) //engineering and maintenance
+		if(4)
 			return "Research"
-		if(5) //command
+		if(5)
 			return "Engineering"
-		if(6) //station general
+		if(6)
 			return "Supply"
-		if(7) //supply
+		if(7)
 			return "Command"
 
 
