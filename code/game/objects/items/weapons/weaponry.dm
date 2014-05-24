@@ -36,7 +36,7 @@
 	desc = "HOME RUN!"
 	icon_state = "woodbat"
 	item_state = "classic_baton"
-	w_class = 2.0
+	w_class = 3.0
 	force = 15
 	throw_speed = 3
 	throw_range = 7
