@@ -95,7 +95,7 @@ BLIND     // can't see anything
 		if(!usr.canmove || usr.stat || usr.restrained())
 			return
 		if(!can_flip)
-			usr << "You pushing your [src] out of the way, but is very uncomfortable and you look like a fool. You push it back into place."
+			usr << "You try pushing your [src] out of the way, but is very uncomfortable and you look like a fool. You push it back into place."
 			return
 		if(src.is_flipped == 2)
 			src.icon_state = initial(icon_state)
