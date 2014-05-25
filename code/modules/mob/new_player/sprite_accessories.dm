@@ -708,3 +708,85 @@
 		name = "Skull Shirt"
 		icon_state = "skullshirt"
 		gender = NEUTER
+
+///////////////////////
+// Socks Definitions //
+///////////////////////
+
+/datum/sprite_accessory/socks
+	icon = 'icons/mob/socks.dmi'
+
+	none
+		name = "None"
+		icon_state = null
+		gender = NEUTER
+
+	white_norm
+		name = "Normal White"
+		icon_state = "white_norm"
+		gender = NEUTER
+
+	black_norm
+		name = "Normal Black"
+		icon_state = "black_norm"
+		gender = NEUTER
+
+	white_short
+		name = "Short White"
+		icon_state = "white_short"
+		gender = NEUTER
+
+	black_short
+		name = "Short Black"
+		icon_state = "black_short"
+		gender = NEUTER
+
+	white_knee
+		name = "Knee-high White"
+		icon_state = "white_knee"
+		gender = NEUTER
+
+	black_knee
+		name = "Knee-high Black"
+		icon_state = "black_knee"
+		gender = NEUTER
+
+	thin_knee
+		name = "Knee-high Thin"
+		icon_state = "thin_knee"
+		gender = FEMALE
+
+	striped_knee
+		name = "Knee-high Striped"
+		icon_state = "striped_knee"
+		gender = NEUTER
+
+	rainbow_knee
+		name = "Knee-high Rainbow"
+		icon_state = "rainbow_knee"
+		gender = NEUTER
+
+	black_thigh
+		name = "Thigh-high Black"
+		icon_state = "black_thigh"
+		gender = NEUTER
+
+	thin_thigh
+		name = "Thigh-high Thin"
+		icon_state = "thin_thigh"
+		gender = FEMALE
+
+	striped_thigh
+		name = "Thigh-high Striped"
+		icon_state = "striped_thigh"
+		gender = NEUTER
+
+	rainbow_thigh
+		name = "Thigh-high Rainbow"
+		icon_state = "rainbow_thigh"
+		gender = NEUTER
+
+	pantyhose
+		name = "Pantyhose"
+		icon_state = "pantyhose"
+		gender = FEMALE

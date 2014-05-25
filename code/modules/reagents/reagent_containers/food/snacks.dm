@@ -1223,7 +1223,7 @@
 	filling_color = "#925322"
 	New()
 		..()
-		eatverb = pick("slurp","sip","suck","inhale","drink")
+		eatverb = pick("slurp","sip","suck","drink")
 		reagents.add_reagent("nutriment", 8)
 		reagents.add_reagent("water", 5)
 		bitesize = 5
@@ -1235,7 +1235,7 @@
 	filling_color = "#BA2823"
 	New()
 		..()
-		eatverb = pick("slurp","sip","suck","inhale","drink")
+		eatverb = pick("slurp","sip","suck","drink")
 		reagents.add_reagent("slimejelly", 5)
 		reagents.add_reagent("water", 10)
 		bitesize = 5
@@ -1247,7 +1247,7 @@
 	filling_color = "#FF0000"
 	New()
 		..()
-		eatverb = pick("slurp","sip","suck","inhale","drink")
+		eatverb = pick("slurp","sip","suck","drink")
 		reagents.add_reagent("nutriment", 2)
 		reagents.add_reagent("blood", 10)
 		reagents.add_reagent("water", 5)
@@ -1260,7 +1260,7 @@
 	filling_color = "#EA2BD4"
 	New()
 		..()
-		eatverb = pick("slurp","sip","suck","inhale","drink")
+		eatverb = pick("slurp","sip","suck","drink")
 		reagents.add_reagent("nutriment", 4)
 		reagents.add_reagent("banana", 5)
 		reagents.add_reagent("water", 10)
@@ -1274,7 +1274,7 @@
 	filling_color = "#105820"
 	New()
 		..()
-		eatverb = pick("slurp","sip","suck","inhale","drink")
+		eatverb = pick("slurp","sip","suck","drink")
 		reagents.add_reagent("nutriment", 8)
 		reagents.add_reagent("water", 5)
 		bitesize = 5
@@ -1287,7 +1287,7 @@
 	filling_color = "#285830"
 	New()
 		..()
-		eatverb = pick("slurp","sip","suck","inhale","drink")
+		eatverb = pick("slurp","sip","suck","drink")
 		reagents.add_reagent("nutriment", 8)
 		reagents.add_reagent("water", 5)
 		reagents.add_reagent("tricordrazine", 5)
@@ -1301,7 +1301,7 @@
 	filling_color = "#C5A30C"
 	New()
 		..()
-		eatverb = pick("slurp","sip","suck","inhale","drink")
+		eatverb = pick("slurp","sip","suck","drink")
 		switch(rand(1,10))
 			if(1)
 				reagents.add_reagent("nutriment", 6)
@@ -1347,7 +1347,7 @@
 	filling_color = "#4375E8"
 	New()
 		..()
-		eatverb = pick("slurp","sip","suck","inhale","drink")
+		eatverb = pick("slurp","sip","suck","drink")
 		reagents.add_reagent("water", 10)
 		bitesize = 5
 		if(prob(25))
@@ -1362,7 +1362,7 @@
 	filling_color = "#A30000"
 	New()
 		..()
-		eatverb = pick("slurp","sip","suck","inhale","drink")
+		eatverb = pick("slurp","sip","suck","drink")
 		reagents.add_reagent("nutriment", 6)
 		reagents.add_reagent("capsaicin", 3)
 		reagents.add_reagent("tomatojuice", 2)
@@ -1377,7 +1377,7 @@
 	filling_color = "#1B00A3"
 	New()
 		..()
-		eatverb = pick("slurp","sip","suck","inhale","drink")
+		eatverb = pick("slurp","sip","suck","drink")
 		reagents.add_reagent("nutriment", 6)
 		reagents.add_reagent("frostoil", 3)
 		reagents.add_reagent("tomatojuice", 2)
@@ -1549,7 +1549,7 @@
 	filling_color = "#E00000"
 	New()
 		..()
-		eatverb = pick("slurp","sip","suck","inhale","drink")
+		eatverb = pick("slurp","sip","suck","drink")
 		reagents.add_reagent("nutriment", 5)
 		reagents.add_reagent("tomatojuice", 10)
 		bitesize = 3
@@ -1574,7 +1574,7 @@
 	filling_color = "#C5A30C"
 	New()
 		..()
-		eatverb = pick("slurp","sip","suck","inhale","drink")
+		eatverb = pick("slurp","sip","suck","drink")
 		reagents.add_reagent("nutriment", 10)
 		reagents.add_reagent("tomatojuice", 5)
 		reagents.add_reagent("imidazoline", 5)
@@ -1630,7 +1630,7 @@
 	filling_color = "#C5A30C"
 	New()
 		..()
-		eatverb = pick("slurp","sip","suck","inhale","drink")
+		eatverb = pick("slurp","sip","suck","drink")
 		reagents.add_reagent("nutriment", 8)
 		reagents.add_reagent("water", 5)
 		bitesize = 4
@@ -1643,7 +1643,7 @@
 	filling_color = "#D98F09"
 	New()
 		..()
-		eatverb = pick("slurp","sip","suck","inhale","drink")
+		eatverb = pick("slurp","sip","suck","drink")
 		reagents.add_reagent("nutriment", 8)
 		bitesize = 2
 
@@ -1817,7 +1817,7 @@
 	filling_color = "#E2D5D6"
 	New()
 		..()
-		eatverb = pick("slurp","sip","suck","inhale","drink")
+		eatverb = pick("slurp","sip","suck","drink")
 		reagents.add_reagent("nutriment", 8)
 		bitesize = 3
 
@@ -1857,7 +1857,7 @@
 	filling_color = "#DAB5A3"
 	New()
 		..()
-		eatverb = pick("slurp","sip","suck","inhale","drink")
+		eatverb = pick("slurp","sip","suck","drink")
 		name = pick("borsch","bortsch","borstch","borsh","borshch","borscht")
 		reagents.add_reagent("nutriment", 8)
 		bitesize = 2
