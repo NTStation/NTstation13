@@ -586,7 +586,7 @@
 "ln" = (/obj/machinery/light/small,/turf/simulated/floor/wood,/area/awaymission/southblock)
 "lo" = (/obj/structure/reagent_dispensers/watertank,/turf/simulated/floor,/area/awaymission/arrivalblock)
 "lp" = (/obj/structure/table,/obj/item/weapon/book/manual/hydroponics_pod_people,/turf/simulated/floor,/area/awaymission/arrivalblock)
-"lq" = (/obj/item/weapon/grown/deathnettle,/obj/item/clothing/shoes/brown,/obj/item/clothing/under/rank/hydroponics,/obj/effect/decal/remains/human,/obj/effect/decal/cleanable/blood/splatter,/turf/simulated/floor,/area/awaymission/arrivalblock)
+"lq" = (/obj/item/weapon/grown/deathnettle,/obj/item/clothing/shoes/sneakers/brown,/obj/item/clothing/under/rank/hydroponics,/obj/effect/decal/remains/human,/obj/effect/decal/cleanable/blood/splatter,/turf/simulated/floor,/area/awaymission/arrivalblock)
 "lr" = (/obj/machinery/light{icon_state = "tube1"; dir = 8},/turf/simulated/floor{tag = "icon-whitehall (WEST)"; icon_state = "whitehall"; dir = 8},/area/awaymission/southblock)
 "ls" = (/obj/structure/window/reinforced/tinted{dir = 8; icon_state = "twindow"; tag = ""},/turf/simulated/floor,/area/awaymission/southblock)
 "lt" = (/obj/structure/stool/bed,/obj/structure/window/reinforced/tinted,/obj/item/weapon/bedsheet/medical,/turf/simulated/floor{icon_state = "whitehall"; dir = 4},/area/awaymission/southblock)
