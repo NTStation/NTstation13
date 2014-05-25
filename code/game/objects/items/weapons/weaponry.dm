@@ -49,6 +49,7 @@
 	desc = "A shiny metal bat."
 	icon_state = "metalbat"
 	force = 16
+	w_class = 3.0
 
 /obj/item/weapon/switchblade
 	name = "switch blade"

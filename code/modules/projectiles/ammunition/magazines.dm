@@ -68,6 +68,7 @@
 	caliber = "9mm"
 	max_ammo = 12
 	multiple_sprites = 2
+	m_amt = 15000
 
 /obj/item/ammo_box/magazine/msmg9mm
 	name = "SMG magazine (9mm)"
@@ -129,7 +130,6 @@
 	ammo_type = /obj/item/ammo_casing/c45
 	caliber = ".45"
 	max_ammo = 50
-	m_amt = 15000
 
 /obj/item/ammo_box/magazine/m50
 	name = "magazine (.50ae)"
