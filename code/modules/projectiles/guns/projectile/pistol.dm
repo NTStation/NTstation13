@@ -102,6 +102,57 @@
 	origin_tech = "combat=4;materials=3"
 	mag_type = /obj/item/ammo_box/magazine/m9mm
 
+/obj/item/glockbarrel
+	name = "handgun barrel"
+	desc = "One third of a low-caliber handgun."
+	icon = 'icons/obj/buildingobject.dmi'
+	icon_state = "glock1"
+	m_amt = 400000 // expensive, will need an autolathe upgrade to hold enough metal to produce the barrel. this way you need cooperation between 3 departments to finish even 1.
+
+/obj/item/glockconstruction
+	name = "handgun barrel and grip"
+	desc = "Two thirds of a low-caliber handgun."
+	icon = 'icons/obj/buildingobject.dmi'
+	icon_state = "glockstep1"
+	var/construction = 0
+
+/obj/item/glockconstruction/attackby(obj/item/W as obj, mob/user as mob)
+	if(istype(W,/obj/item/glockslide))
+		user << "You attach the slide to the gun."
+		construction = 1
+		del(W)
+		icon_state = "glockstep2"
+		name = "unfinished handgun"
+		desc = "An almost finished handgun."
+		return
+	if(istype(W,/obj/item/weapon/screwdriver))
+		if(construction)
+			user << "You finish the handgun."
+			new /obj/item/weapon/gun/projectile/automatic/deagle/glock(user.loc)
+			del(src)
+			return
+
+/obj/item/glockbarrel/attackby(obj/item/W as obj, mob/user as mob)
+	if(istype(W,/obj/item/glockgrip))
+		user << "You attach the grip to the barrel."
+		new /obj/item/glockconstruction(user.loc)
+		del(W)
+		del(src)
+		return
+
+/obj/item/glockgrip
+	name = "handgun grip"
+	desc = "One third of a low-caliber handgun."
+	icon = 'icons/obj/buildingobject.dmi'
+	icon_state = "glock2"
+
+/obj/item/glockslide
+	name = "handgun slide"
+	desc = "One third of a low-caliber handgun."
+	icon = 'icons/obj/buildingobject.dmi'
+	icon_state = "glock3"
+
+
 /obj/item/weapon/gun/projectile/automatic/pistol/attackby(obj/item/I as obj, mob/user as mob)
 	if(istype(I, /obj/item/weapon/silencer))
 		if(user.l_hand != src && user.r_hand != src)	//if we're not in his hands

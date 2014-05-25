@@ -121,56 +121,6 @@
 	mag_type = /obj/item/ammo_box/magazine/tommygunm45
 	fire_sound = 'sound/weapons/Gunshot_smg.ogg'
 
-/obj/item/tommybarrel
-	name = "tommy gun barrel"
-	desc = "A one third finished Chicago Typewriter."
-	icon = 'icons/obj/buildingobject.dmi'
-	icon_state = "tommygun1"
-	m_amt = 400000 // expensive, will need an autolathe upgrade to hold enough metal to produce the barrel. this way you need cooperation between 3 departments to finish even 1.
-
-/obj/item/tommygunconstruction
-	name = "tommy gun barrel and grip"
-	desc = "A two thirds finished Chicago Typewriter."
-	icon = 'icons/obj/buildingobject.dmi'
-	icon_state = "tommygunstep1"
-	var/construction = 0
-
-/obj/item/tommygunconstruction/attackby(obj/item/W as obj, mob/user as mob)
-	if(istype(W,/obj/item/tommystock))
-		user << "You attach the stock to the gun."
-		construction = 1
-		del(W)
-		icon_state = "tommygunstep2"
-		name = "unfinished tommy gun"
-		desc = "An almost finished Chicago Typewriter."
-		return
-	if(istype(W,/obj/item/weapon/screwdriver))
-		if(construction)
-			user << "You finish the tommy gun."
-			new /obj/item/weapon/gun/projectile/automatic/tommygun(user.loc)
-			del(src)
-			return
-
-/obj/item/tommybarrel/attackby(obj/item/W as obj, mob/user as mob)
-	if(istype(W,/obj/item/tommygrip))
-		user << "You attach the grip to the barrel."
-		new /obj/item/tommygunconstruction(user.loc)
-		del(W)
-		del(src)
-		return
-
-/obj/item/tommygrip
-	name = "tommy gun grip and foregrip"
-	desc = "A one third finished Chicago Typewriter."
-	icon = 'icons/obj/buildingobject.dmi'
-	icon_state = "tommygun2"
-
-/obj/item/tommystock
-	name = "tommy gun stock"
-	desc = "A one third finished Chicago Typewriter."
-	icon = 'icons/obj/buildingobject.dmi'
-	icon_state = "tommygun3"
-
 /* The thing I found with guns in ss13 is that they don't seem to simulate the rounds in the magazine in the gun.
    Afaik, since projectile.dm features a revolver, this would make sense since the magazine is part of the gun.
    However, it looks like subsequent guns that use removable magazines don't take that into account and just get
