@@ -95,7 +95,7 @@ BLIND     // can't see anything
 		if(!usr.canmove || usr.stat || usr.restrained())
 			return
 		if(!can_flip)
-			usr << "You try flipping up your [src], but is very uncomfortable and you look like a fool. You flip it back down."
+			usr << "You try flipping up your [src], but is very uncomfortable and you look like a fool. You push it back into place."
 			return
 		if(src.is_flipped == 2)
 			src.icon_state = initial(icon_state)
@@ -103,11 +103,11 @@ BLIND     // can't see anything
 			permeability_coefficient = initial(permeability_coefficient)
 			flags = initial(flags)
 			flags_inv = initial(flags_inv)
-			usr << "You push down your [src]."
+			usr << "You push your [src] back into place."
 			src.is_flipped = 1
 		else
 			src.icon_state += "_up"
-			usr << "You push up your [src]."
+			usr << "You push your [src] out of the way."
 			gas_transfer_coefficient = null
 			permeability_coefficient = null
 			flags = null
