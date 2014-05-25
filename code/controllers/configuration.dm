@@ -101,6 +101,7 @@
 	var/revival_brain_life = -1
 
 	var/rename_cyborg = 0
+	var/borg_remembers = 0
 	var/ooc_during_round = 0
 
 	//Used for modifying movement speed for mobs.
@@ -282,6 +283,8 @@
 					config.health_threshold_dead	= text2num(value)
 				if("revival_pod_plants")
 					config.revival_pod_plants		= text2num(value)
+				if("borg_remembers")
+					config.borg_remembers			= text2num(value)
 				if("revival_cloning")
 					config.revival_cloning			= text2num(value)
 				if("revival_brain_life")

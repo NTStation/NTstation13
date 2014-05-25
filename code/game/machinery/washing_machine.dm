@@ -242,8 +242,8 @@
 		if(istype(I, /obj/item/clothing/head/helmet))
 			user << "<span class='notice'>[I] does not fit.</span>"
 			return
-		if(W.flags & NODROP) //if "can't drop" item
-			user << "<span class='notice'>\The [W] is stuck to your hand, you cannot put it in the washing machine!</span>"
+		if(I && I.flags & NODROP) //if "can't drop" item
+			user << "<span class='notice'>\The [I] is stuck to your hand, you cannot put it in the washing machine!</span>"
 			return
 
 		if(contents.len < 5)

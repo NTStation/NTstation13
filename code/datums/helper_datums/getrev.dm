@@ -6,7 +6,7 @@ var/global/datum/getrev/revdata = new()
 	var/date
 	var/showinfo
 
-<<<<<<< HEAD
+
 	New()
 		if(fexists("config/git_host.txt"))
 			project_href = file2text("config/git_host.txt")
@@ -24,7 +24,7 @@ var/global/datum/getrev/revdata = new()
 					if(unix_time)
 						date = unix2date(unix_time)
 				break
-=======
+
 /datum/getrev/New()
 	if(fexists("config/git_host.txt"))
 		project_href = file2text("config/git_host.txt")
@@ -42,7 +42,7 @@ var/global/datum/getrev/revdata = new()
 				if(unix_time)
 					date = unix2date(unix_time)
 			break
->>>>>>> c5fd65e44a17e26948a1b2605083918cf4c5779b
+
 
 	showinfo = "<b>Server Revision:</b> "
 	if(revision)
@@ -67,13 +67,12 @@ var/global/datum/getrev/revdata = new()
 			return
 		usr << link("[project_href]/issues/new")
 
-<<<<<<< HEAD
+
 		world.log << "Running NTStation revision:"
 		world.log << date
 		world.log << revision
 		return
-=======
->>>>>>> c5fd65e44a17e26948a1b2605083918cf4c5779b
+
 
 client/verb/showrevinfo()
 	set category = "OOC"

@@ -12,7 +12,8 @@
 	new /obj/item/clothing/mask/bandana/blue(src)
 	new /obj/item/clothing/mask/bandana/blue(src)
 	new /obj/item/clothing/shoes/sneakers/brown(src)
-	new /obj/item/clothing/shoes/sneakers/brown(src)	return
+	new /obj/item/clothing/shoes/sneakers/brown(src)
+	return
 
 
 /obj/structure/closet/wardrobe/red
@@ -123,12 +124,13 @@
 	new /obj/item/clothing/mask/bandana/green(src)
 	new /obj/item/clothing/mask/bandana/green(src)
 	new /obj/item/clothing/mask/bandana/green(src)
-	new /obj/item/clothing/under/lightgreen(src)
-	new /obj/item/clothing/under/lightgreen(src)
-	new /obj/item/clothing/under/lightgreen(src)
+	new /obj/item/clothing/under/color/lightgreen(src)
+	new /obj/item/clothing/under/color/lightgreen(src)
+	new /obj/item/clothing/under/color/lightgreen(src)
 	new /obj/item/clothing/shoes/sneakers/black(src)
 	new /obj/item/clothing/shoes/sneakers/black(src)
-	new /obj/item/clothing/shoes/sneakers/black(src)	return
+	new /obj/item/clothing/shoes/sneakers/black(src)
+	return
 
 
 /obj/structure/closet/wardrobe/orange
@@ -161,7 +163,8 @@
 	new /obj/item/clothing/mask/bandana/gold(src)
 	new /obj/item/clothing/shoes/sneakers/orange(src)
 	new /obj/item/clothing/shoes/sneakers/orange(src)
-	new /obj/item/clothing/shoes/sneakers/orange(src)	return
+	new /obj/item/clothing/shoes/sneakers/orange(src)
+	return
 
 
 /obj/structure/closet/wardrobe/atmospherics_yellow
@@ -349,9 +352,9 @@
 	if(prob(40))
 		new /obj/item/clothing/under/assistantformal(src)
 	if(prob(40))
-		new /obj/item/clothing/under/brownoveralls(src)
+		new /obj/item/clothing/under/color/brownoveralls(src)
 	if(prob(40))
-		new /obj/item/clothing/under/brownoveralls(src)
+		new /obj/item/clothing/under/color/brownoveralls(src)
 	return
 
 
@@ -376,19 +379,19 @@
 	new /obj/item/clothing/mask/bandana/green(src)
 	new /obj/item/clothing/mask/bandana/green(src)
 	new /obj/item/clothing/under/lightpink(src)
-	new /obj/item/clothing/under/lightred(src)
-	new /obj/item/clothing/under/darkred(src)
-	new /obj/item/clothing/under/darkblue(src)
+	new /obj/item/clothing/under/color/lightred(src)
+	new /obj/item/clothing/under/color/darkred(src)
+	new /obj/item/clothing/under/color/darkblue(src)
 	new /obj/item/clothing/under/lightpink(src)
-	new /obj/item/clothing/under/lightgreen(src)
-	new /obj/item/clothing/under/yellowgreen(src)
-	new /obj/item/clothing/under/brown(src)
-	new /obj/item/clothing/under/lightbrown(src)
-	new /obj/item/clothing/under/lightpurple(src)
-	new /obj/item/clothing/under/purple(src)
-	new /obj/item/clothing/under/aqua(src)
-	new /obj/item/clothing/under/lightblue(src)
-	new /obj/item/clothing/under/aqua(src)
+	new /obj/item/clothing/under/color/lightgreen(src)
+	new /obj/item/clothing/under/color/yellowgreen(src)
+	new /obj/item/clothing/under/color/brown(src)
+	new /obj/item/clothing/under/color/lightbrown(src)
+	new /obj/item/clothing/under/color/lightpurple(src)
+	new /obj/item/clothing/under/color/purple(src)
+	new /obj/item/clothing/under/color/aqua(src)
+	new /obj/item/clothing/under/color/lightblue(src)
+	new /obj/item/clothing/under/color/aqua(src)
 	new /obj/item/clothing/shoes/sneakers/black(src)
 	new /obj/item/clothing/shoes/sneakers/brown(src)
 	new /obj/item/clothing/shoes/sneakers/white(src)

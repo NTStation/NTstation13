@@ -262,7 +262,7 @@
 	item_state = "lb_suit"
 	item_color = "overalls"
 
-/obj/item/clothing/under/brownoveralls
+/obj/item/clothing/under/color/brownoveralls
 	name = "brown overalls"
 	desc = "A set of old brown overalls for getting the job done."
 	icon_state = "b-overalls"

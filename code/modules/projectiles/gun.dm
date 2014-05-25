@@ -96,13 +96,12 @@
 				shoot_live_shot(user, 1, target)
 			else
 				shoot_live_shot(user)
-				add_custom_fiber(chambered.trace_residue)
-		else
-			shoot_with_empty_chamber(user)
-		process_chamber()
-		update_icon()
+	else
+		shoot_with_empty_chamber(user)
+	process_chamber()
+	update_icon()
 
-		user.update_inv_hands(0)
+	user.update_inv_hands(0)
 
 /obj/item/weapon/gun/attack(mob/M as mob, mob/user)
 	if(user.a_intent == "harm") //Flogging
