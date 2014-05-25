@@ -19,7 +19,8 @@ var/global/list/datum/stack_recipe/metal_recipes = list ( \
 	null, \
 	new/datum/stack_recipe("table parts", /obj/item/weapon/table_parts, 2), \
 	new/datum/stack_recipe("switchblade blade", /obj/item/switchbladeblade, 5), \
-	new/datum/stack_recipe("metal baseball bat", /obj/item/weapon/baseballbat/metal, 5), \
+	new/datum/stack_recipe("metal baseball bat", /obj/item/weapon/baseballbat/metal, 6), \
+	new/datum/stack_recipe("handgun slide", /obj/item/glockslide, 8), \
 	new/datum/stack_recipe("rack parts", /obj/item/weapon/rack_parts), \
 	new/datum/stack_recipe("closet", /obj/structure/closet, 2, time = 15, one_per_turf = 1, on_floor = 1), \
 	null, \
@@ -68,7 +69,8 @@ var/global/list/datum/stack_recipe/metal_recipes = list ( \
  */
 var/global/list/datum/stack_recipe/plasteel_recipes = list ( \
 	new/datum/stack_recipe("AI core", /obj/structure/AIcore, 4, time = 50, one_per_turf = 1), \
-	new/datum/stack_recipe("switchblade handle", /obj/item/switchbladehandle, 10), \
+	new/datum/stack_recipe("switchblade handle", /obj/item/switchbladehandle, 4), \
+	new/datum/stack_recipe("handgun grip", /obj/item/glockgrip, 6), \
 	)
 
 /obj/item/stack/sheet/plasteel
@@ -92,8 +94,6 @@ var/global/list/datum/stack_recipe/plasteel_recipes = list ( \
 var/global/list/datum/stack_recipe/wood_recipes = list ( \
 	new/datum/stack_recipe("wooden sandals", /obj/item/clothing/shoes/sandal, 1), \
 	new/datum/stack_recipe("baseball bat", /obj/item/weapon/baseballbat, 20), \
-	new/datum/stack_recipe("tommy gun grip", /obj/item/tommygrip, 20), \
-	new/datum/stack_recipe("tommy gun stock", /obj/item/tommystock, 20), \
 	new/datum/stack_recipe("wood floor tile", /obj/item/stack/tile/wood, 1, 4, 20), \
 	new/datum/stack_recipe("table parts", /obj/item/weapon/table_parts/wood, 2), \
 	new/datum/stack_recipe("wooden chair", /obj/structure/stool/bed/chair/wood/normal, 3, time = 10, one_per_turf = 1, on_floor = 1), \

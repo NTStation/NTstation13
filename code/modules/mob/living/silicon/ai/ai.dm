@@ -51,6 +51,10 @@ var/list/ai_list = list()
 	var/last_paper_seen = null
 	var/can_shunt = 1
 	var/last_announcement = "" // For AI VOX, if enabled
+	var/sensor_mode = 0 //Determines the AI's current HUD.
+	#define 	SEC_HUD 1 //Security HUD mode
+	#define 	MED_HUD 2 //Medical HUD mode
+	#define 	NIGHT 3   //Night vision mode
 
 /mob/living/silicon/ai/New(loc, var/datum/ai_laws/L, var/obj/item/device/mmi/B, var/safety = 0)
 	var/list/possibleNames = ai_names
@@ -92,7 +96,7 @@ var/list/ai_list = list()
 		verbs.Add(/mob/living/silicon/ai/proc/ai_call_shuttle,/mob/living/silicon/ai/proc/ai_camera_track, \
 		/mob/living/silicon/ai/proc/ai_camera_list, /mob/living/silicon/ai/proc/ai_network_change, \
 		/mob/living/silicon/ai/proc/ai_statuschange, /mob/living/silicon/ai/proc/ai_hologram_change, \
-		/mob/living/silicon/ai/proc/toggle_camera_light)
+		/mob/living/silicon/ai/proc/toggle_camera_light, /mob/living/silicon/ai/proc/sensor_mode)
 
 	if(!safety)//Only used by AIize() to successfully spawn an AI.
 		if (!B)//If there is no player/brain inside.
@@ -488,7 +492,6 @@ var/list/ai_list = list()
 		if(camera_light_on)	A.SetLuminosity(AI_CAMERA_LUMINOSITY)
 		else				A.SetLuminosity(0)
 
-
 /mob/living/silicon/ai/proc/switchCamera(var/obj/machinery/camera/C)
 
 	src.cameraFollow = null
@@ -504,6 +507,27 @@ var/list/ai_list = list()
 	//machine = src
 
 	return 1
+
+/mob/living/silicon/ai/proc/sensor_mode()
+	set category = "AI Commands"
+	set name = "Set Sensor Augmentation"
+	set desc = "Augment visual feed with internal sensor overlays."
+
+	var/sensor_type = input("Please select sensor type.", "Sensor Integration", null) in list("Security", "Medical","Light Amplification","Disable")
+	switch(sensor_type)
+		if ("Security")
+			src.sensor_mode = SEC_HUD
+			src << "<span class='notice'>Security records overlay enabled.</span>"
+
+		if ("Medical")
+			src.sensor_mode = MED_HUD
+			src << "<span class='notice'>Life signs monitor overlay enabled.</span>"
+		if ("Light Amplification")
+			src.sensor_mode = NIGHT
+			src << "<span class='notice'>Light amplification mode enabled.</span>"
+		if ("Disable")
+			src.sensor_mode = 0
+			src << "Sensor augmentations disabled."
 
 /mob/living/silicon/ai/triggerAlarm(var/class, area/A, var/O, var/alarmsource)
 	if (stat == 2)

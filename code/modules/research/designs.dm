@@ -1814,6 +1814,13 @@ datum/design/bag_holding
 	reliability = 80
 	build_path = /obj/item/weapon/storage/backpack/holding
 
+datum/design/bag_holding/belt
+	name = "Belt of Holding"
+	desc = "A belt that opens into a localized pocket of Blue Space."
+	id = "belt_holding"
+	materials = list("$gold" = 7500, "$diamond" = 3750, "$uranium" = 500, "$silver" = 3750)
+	build_path = /obj/item/weapon/storage/backpack/holding/belt
+
 datum/design/bluespace_crystal
 	name = "Artificial Bluespace Crystal"
 	desc = "A small blue crystal with mystical properties."

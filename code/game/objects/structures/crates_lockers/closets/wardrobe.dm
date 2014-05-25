@@ -80,9 +80,24 @@
 	new /obj/item/clothing/under/color/black(src)
 	new /obj/item/clothing/under/color/black(src)
 	new /obj/item/clothing/under/color/black(src)
+<<<<<<< HEAD
 	new /obj/item/clothing/shoes/sneakers/black(src)
 	new /obj/item/clothing/shoes/sneakers/black(src)
 	new /obj/item/clothing/shoes/sneakers/black(src)
+=======
+	new /obj/item/clothing/shoes/sneakers/black(src)
+	new /obj/item/clothing/shoes/sneakers/black(src)
+	new /obj/item/clothing/shoes/sneakers/black(src)
+	if(prob(75))
+		new /obj/item/clothing/mask/bandana/skull(src)
+	if(prob(75))
+		new /obj/item/clothing/mask/bandana/skull(src)
+	if(prob(75))
+		new /obj/item/clothing/mask/bandana/skull(src)
+	new /obj/item/clothing/mask/bandana/black(src)
+	new /obj/item/clothing/mask/bandana/black(src)
+	new /obj/item/clothing/mask/bandana/black(src)
+>>>>>>> e9c5cd5c9ed559fc558548e9b45681e4bcb5418d
 	new /obj/item/clothing/head/that(src)
 	new /obj/item/clothing/head/that(src)
 	new /obj/item/clothing/head/that(src)
@@ -399,4 +414,39 @@
 		new /obj/item/clothing/under/redoveralls(src)
 	if(prob(40))
 		new /obj/item/clothing/under/redoveralls(src)
+	return
+
+/obj/structure/closet/wardrobe/casual
+	name = "casual wardrobe"
+	icon_state = "mixed"
+	icon_closed = "mixed"
+
+/obj/structure/closet/wardrobe/casual/New()
+	new /obj/item/clothing/head/beanie(src)
+	new /obj/item/clothing/head/beanie(src)
+	new /obj/item/clothing/head/beanie(src)
+	new /obj/item/clothing/head/beanie(src)
+	new /obj/item/clothing/mask/bandana/gold(src)
+	new /obj/item/clothing/mask/bandana/gold(src)
+	new /obj/item/clothing/mask/bandana/blue(src)
+	new /obj/item/clothing/mask/bandana/blue(src)
+	new /obj/item/clothing/mask/bandana/red(src)
+	new /obj/item/clothing/mask/bandana/red(src)
+	new /obj/item/clothing/mask/bandana/green(src)
+	new /obj/item/clothing/mask/bandana/green(src)
+	new /obj/item/clothing/suit/labcoat/coat/jacket(src)
+	new /obj/item/clothing/suit/labcoat/coat/jacket(src)
+	new /obj/item/clothing/suit/labcoat/coat/jacket(src)
+	new /obj/item/clothing/suit/labcoat/coat/jacket(src)
+	if(prob(50))
+		new /obj/item/clothing/under/jeans(src)
+	else
+		new /obj/item/clothing/under/trackpants(src)
+	new /obj/item/clothing/under/jeans(src)
+	new /obj/item/clothing/under/trackpants(src)
+	new /obj/item/clothing/under/khaki(src)
+	new /obj/item/clothing/shoes/sneakers/black(src)
+	new /obj/item/clothing/shoes/sneakers/brown(src)
+	new /obj/item/clothing/shoes/sneakers/black(src)
+	new /obj/item/clothing/shoes/sneakers/brown(src)
 	return

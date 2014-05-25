@@ -58,10 +58,16 @@ var/global/list/autolathe_recipes_hidden = list( \
 		new /obj/item/weapon/weldingtool/largetank(), \
 		new /obj/item/weapon/handcuffs(), \
 		new /obj/item/ammo_box/a357(), \
+		new /obj/item/ammo_box/c10mm(), \
+		new /obj/item/ammo_box/a12mm(), \
+		new /obj/item/ammo_box/c9mm(), \
+		new /obj/item/ammo_box/c45(), \
+		new /obj/item/ammo_box/magazine/m9mm(), \
 		new /obj/item/ammo_casing/shotgun(), \
 		new /obj/item/ammo_casing/shotgun/buckshot(), \
 		new /obj/item/ammo_casing/shotgun/dart(), \
 		new /obj/item/ammo_casing/shotgun/incendiary(), \
+		new /obj/item/glockbarrel(), \
 		/* new /obj/item/weapon/shield/riot(), */ \
 	)
 
@@ -133,12 +139,12 @@ var/global/list/autolathe_recipes_hidden = list( \
 
 	if (panel_open)
 		if(istype(O, /obj/item/weapon/crowbar))
-			if(m_amount >= MINERAL_MATERIAL_AMOUNT)
+			if(m_amount >= 3750)
 				var/obj/item/stack/sheet/metal/G = new /obj/item/stack/sheet/metal(src.loc)
-				G.amount = round(m_amount / MINERAL_MATERIAL_AMOUNT)
-			if(g_amount >= MINERAL_MATERIAL_AMOUNT)
+				G.amount = round(m_amount / 3750)
+			if(g_amount >= 3750)
 				var/obj/item/stack/sheet/glass/G = new /obj/item/stack/sheet/glass(src.loc)
-				G.amount = round(g_amount / MINERAL_MATERIAL_AMOUNT)
+				G.amount = round(g_amount / 3750)
 			default_deconstruction_crowbar(O)
 			return 1
 		else
@@ -199,7 +205,7 @@ var/global/list/autolathe_recipes_hidden = list( \
 		if(href_list["make"])
 			var/coeff = 2 ** prod_coeff
 			var/turf/T = get_step(src.loc, get_dir(src,usr))
-				
+
 			// critical exploit fix start -walter0o
 			var/obj/item/template = null
 			var/attempting_to_build = locate(href_list["make"])
@@ -211,25 +217,25 @@ var/global/list/autolathe_recipes_hidden = list( \
 				template = attempting_to_build
 
 			else // somebody is trying to exploit, alert admins -walter0o
-				
+
 				var/turf/LOC = get_turf(usr)
 				message_admins("[key_name_admin(usr)] tried to exploit an autolathe to duplicate <a href='?_src_=vars;Vars=\ref[attempting_to_build]'>[attempting_to_build]</a> ! ([LOC ? "<a href='?_src_=holder;adminplayerobservecoodjump=1;X=[LOC.x];Y=[LOC.y];Z=[LOC.z]'>JMP</a>" : "null"])", 0)
-				log_admin("EXPLOIT : [key_name(usr)] tried to exploit an autolathe to duplicate [attempting_to_build] !")		
+				log_admin("EXPLOIT : [key_name(usr)] tried to exploit an autolathe to duplicate [attempting_to_build] !")
 				return
 
 			// now check for legit multiplier, also only stacks should pass with one to prevent raw-materials-manipulation -walter0o
 
 			var/multiplier = text2num(href_list["multiplier"])
-			
+
 			if (!multiplier) multiplier = 1
 			var/max_multiplier = 1
-			
+
 			if(istype(template, /obj/item/stack)) // stacks are the only items which can have a multiplier higher than 1 -walter0o
 				var/obj/item/stack/S = template
 				max_multiplier = min(S.max_amount, S.m_amt?round(m_amount/S.m_amt):INFINITY, S.g_amt?round(g_amount/S.g_amt):INFINITY)  // pasta from regular_win() to make sure the numbers match -walter0o
 
 			if( (multiplier > max_multiplier) || (multiplier <= 0) ) // somebody is trying to exploit, alert admins-walter0o
-					
+
 				var/turf/LOC = get_turf(usr)
 				message_admins("[key_name_admin(usr)] tried to exploit an autolathe with multiplier set to <u>[multiplier]</u> on <u>[template]</u>  ! ([LOC ? "<a href='?_src_=holder;adminplayerobservecoodjump=1;X=[LOC.x];Y=[LOC.y];Z=[LOC.z]'>JMP</a>" : "null"])" , 0)
 				log_admin("EXPLOIT : [key_name(usr)] tried to exploit an autolathe with multiplier set to [multiplier] on [template]  !")

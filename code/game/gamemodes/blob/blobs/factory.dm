@@ -43,6 +43,7 @@
 	pass_flags = PASSBLOB
 	health = 40
 	maxHealth = 40
+	speed = 1
 	melee_damage_lower = 2
 	melee_damage_upper = 4
 	attacktext = "hits"
@@ -95,6 +96,7 @@
 			maxHealth += A.armor["melee"] //That zombie's got armor, I want armor!
 	maxHealth += 40
 	health = maxHealth
+	speed = 1
 	name = "blob zombie"
 	desc = "A shambling corpse animated by the blob."
 	melee_damage_lower = 10

@@ -9,7 +9,7 @@
 	response_help = "pokes"
 	response_disarm = "shoves"
 	response_harm = "hits"
-	speed = 0
+	speed = 1
 	meat_type = list(/obj/item/weapon/reagent_containers/food/snacks/xenomeat)
 	maxHealth = 100
 	health = 100

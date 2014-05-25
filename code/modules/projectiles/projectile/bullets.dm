@@ -18,6 +18,8 @@
 	stun = 5
 	weaken = 5
 
+/obj/item/projectile/bullet/weakbullet3
+	damage = 20
 
 /obj/item/projectile/bullet/pellet
 	name = "pellet"

@@ -35,8 +35,8 @@
 	name = "wooden bat"
 	desc = "HOME RUN!"
 	icon_state = "woodbat"
-	item_state = "classic_baton"
-	w_class = 2.0
+	item_state = "nullrod"
+	w_class = 3.0
 	force = 15
 	throw_speed = 3
 	throw_range = 7
@@ -49,6 +49,7 @@
 	desc = "A shiny metal bat."
 	icon_state = "metalbat"
 	force = 16
+	w_class = 3.0
 
 /obj/item/weapon/switchblade
 	name = "switch blade"

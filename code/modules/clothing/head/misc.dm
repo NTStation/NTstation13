@@ -211,6 +211,12 @@
 	item_state = "fedora"
 	desc = "A really cool hat if you're a mobster. A really lame hat if you're not."
 
+/obj/item/clothing/head/maidbow
+	name = "maid bow"
+	icon_state = "maidbow"
+	item_state = "maidbow"
+	desc = "Domo arigato, Mr. Robusto."
+
 /obj/item/clothing/head/sombrero
 	name = "sombrero"
 	icon_state = "sombrero"
