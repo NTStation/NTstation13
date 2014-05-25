@@ -741,6 +741,11 @@
 		icon_state = "black_short"
 		gender = NEUTER
 
+	white_knee
+		name = "Knee-high White"
+		icon_state = "white_knee"
+		gender = NEUTER
+
 	black_knee
 		name = "Knee-high Black"
 		icon_state = "black_knee"
