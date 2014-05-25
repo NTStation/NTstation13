@@ -34,6 +34,10 @@
 		H.equip_to_slot_or_del(new /obj/item/clothing/suit/labcoat(H), slot_wear_suit)
 		H.equip_to_slot_or_del(new /obj/item/weapon/clipboard(H), slot_l_hand)
 		H.equip_to_slot_or_del(new /obj/item/device/laser_pointer(H), slot_l_store)
+		if(H.backbag == 1)
+			H.equip_to_slot_or_del(new /obj/item/weapon/storage/box/survival(H), slot_r_hand)
+		else
+			H.equip_to_slot_or_del(new /obj/item/weapon/storage/box/survival(H.back), slot_in_backpack)
 		return 1
 
 
@@ -61,6 +65,10 @@
 		H.equip_to_slot_or_del(new /obj/item/clothing/shoes/white(H), slot_shoes)
 		H.equip_to_slot_or_del(new /obj/item/device/pda/toxins(H), slot_belt)
 		H.equip_to_slot_or_del(new /obj/item/clothing/suit/labcoat/science(H), slot_wear_suit)
+		if(H.backbag == 1)
+			H.equip_to_slot_or_del(new /obj/item/weapon/storage/box/survival(H), slot_r_hand)
+		else
+			H.equip_to_slot_or_del(new /obj/item/weapon/storage/box/survival(H.back), slot_in_backpack)
 //		H.equip_to_slot_or_del(new /obj/item/clothing/mask/gas(H), slot_wear_mask)
 //		H.equip_to_slot_or_del(new /obj/item/weapon/tank/oxygen(H), slot_l_hand)
 		return 1
@@ -85,7 +93,7 @@
 		if(!H)	return 0
 		H.equip_to_slot_or_del(new /obj/item/device/radio/headset/headset_sci(H), slot_ears)
 		if(H.backbag == 2) H.equip_to_slot_or_del(new /obj/item/weapon/storage/backpack(H), slot_back)
-		if(H.backbag == 3) H.equip_to_slot_or_del(new /obj/item/weapon/storage/backpack/satchel_norm(H), slot_back)
+		if(H.backbag == 3) H.equip_to_slot_or_del(new /obj/item/weapon/storage/backpack/satchel_robo(H), slot_back)
 		H.equip_to_slot_or_del(new /obj/item/clothing/under/rank/roboticist(H), slot_w_uniform)
 		H.equip_to_slot_or_del(new /obj/item/clothing/shoes/black(H), slot_shoes)
 		H.equip_to_slot_or_del(new /obj/item/device/pda/roboticist(H), slot_belt)

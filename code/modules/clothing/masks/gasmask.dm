@@ -210,6 +210,7 @@
 	desc = "A close-fitting mask that acts both as an air filter and a post-modern fashion statement."
 	icon_state = "s-ninja"
 	item_state = "s-ninja_mask"
+	can_flip = null //a true ninja never reveals his identity
 	vchange = 1
 
 /obj/item/clothing/mask/gas/voice/space_ninja/speechModification(message)
