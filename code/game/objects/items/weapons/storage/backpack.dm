@@ -131,11 +131,6 @@
 	icon_state = "engiepack"
 	item_state = "engiepack"
 
-/obj/item/weapon/storage/backpack/miner
-	name = "mining backpack"
-	desc = "It's a tough backpack with sand in it you can't seem to shake out."
-	icon_state = "minerpack"
-
 /*
  * Satchel Types
  */
@@ -160,11 +155,6 @@
 	desc = "A tough satchel with extra pockets."
 	icon_state = "satchel-eng"
 	item_state = "engiepack"
-
-/obj/item/weapon/storage/backpack/satchel_miner
-	name = "mining satchel"
-	desc = "A tough satchel with sand in it you can't seem to shake out."
-	icon_state = "satchel-miner"
 
 /obj/item/weapon/storage/backpack/satchel_med
 	name = "medical satchel"
