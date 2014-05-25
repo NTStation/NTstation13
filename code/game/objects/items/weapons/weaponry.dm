@@ -35,7 +35,7 @@
 	name = "wooden bat"
 	desc = "HOME RUN!"
 	icon_state = "woodbat"
-	item_state = "classic_baton"
+	item_state = "nullrod"
 	w_class = 3.0
 	force = 15
 	throw_speed = 3
