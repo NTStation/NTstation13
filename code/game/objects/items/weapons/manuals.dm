@@ -740,7 +740,7 @@
 // A book that links to the wiki
 /obj/item/weapon/book/manual/wiki
 	var/page_link = ""
-	window_size = "800x600"
+	window_size = "970x710"
 
 /obj/item/weapon/book/manual/wiki/attack_self()
 	if(!dat)
@@ -796,7 +796,7 @@
 	icon_state = "book7"
 	author = "University of Bluespace"
 	title = "Teleportation Science - Bluespace for dummies!"
-	page_link = "Telescience"
+	page_link = "Guide_to_telescience"
 
 /obj/item/weapon/book/manual/wiki/engineering_hacking
 	name = "Hacking"

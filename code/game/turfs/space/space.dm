@@ -58,7 +58,7 @@
 		// if(ticker.mode.name == "nuclear emergency")	return
 		if(A.z > 6) return
 		if (A.x <= TRANSITIONEDGE || A.x >= (world.maxx - TRANSITIONEDGE - 1) || A.y <= TRANSITIONEDGE || A.y >= (world.maxy - TRANSITIONEDGE - 1))
-			if(istype(A, /obj/effect/meteor)||istype(A, /obj/effect/space_dust))
+			if(istype(A, /obj/effect/meteor))
 				qdel(A)
 				return
 
@@ -147,7 +147,7 @@
 	var/list/y_arr
 
 	if(src.x <= 1)
-		if(istype(A, /obj/effect/meteor)||istype(A, /obj/effect/space_dust))
+		if(istype(A, /obj/effect/meteor))
 			qdel(A)
 			return
 
@@ -222,7 +222,7 @@
 					A.loc.Entered(A)
 
 	else if (src.y >= world.maxy)
-		if(istype(A, /obj/effect/meteor)||istype(A, /obj/effect/space_dust))
+		if(istype(A, /obj/effect/meteor))
 			qdel(A)
 			return
 		var/list/cur_pos = src.get_global_map_pos()

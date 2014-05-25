@@ -36,9 +36,7 @@
 /mob/living/simple_animal/construct/Die()
 	..()
 	new /obj/item/weapon/ectoplasm (src.loc)
-	for(var/mob/M in viewers(src, null))
-		if((M.client && !( M.blinded )))
-			M.show_message("\red [src] collapses in a shattered heap. ")
+	visible_message("<span class='danger'>[src] collapses in a shattered heap.</span>")
 	ghostize()
 	qdel(src)
 	return
@@ -91,24 +89,36 @@
 	if(istype(M, /mob/living/simple_animal/construct/builder))
 		health += 5
 		M.emote("mends some of \the <EM>[src]'s</EM> wounds.")
-	else
+	else if(src != M)
 		if(M.melee_damage_upper <= 0)
 			M.emote("[M.friendly] \the <EM>[src]</EM>")
 		else
 			if(M.attack_sound)
 				playsound(loc, M.attack_sound, 50, 1, 1)
-			for(var/mob/O in viewers(src, null))
-				O.show_message("<span class='attack'>\The <EM>[M]</EM> [M.attacktext] \the <EM>[src]</EM>!</span>", 1)
+			visible_message("<span class='danger'>\The <EM>[M]</EM> [M.attacktext] \the <EM>[src]</EM>!</span>", \
+					"<span class='userdanger'>\The <EM>[M]</EM> [M.attacktext] \the <EM>[src]</EM>!</span>")
 			add_logs(M, src, "attacked", admin=0)
 			var/damage = rand(M.melee_damage_lower, M.melee_damage_upper)
 			adjustBruteLoss(damage)
+
+/mob/living/simple_animal/construct/attackby(var/obj/item/O as obj, var/mob/user as mob)
+	if(O.force)
+		var/damage = O.force
+		if(O.damtype == BURN || O.damtype == BRUTE)
+			adjustBruteLoss(damage)
+		visible_message("<span class='danger'>[src] has been attacked with [O] by [user]!</span>", \
+				"<span class='userdanger'>[src] has been attacked with [O] by [user]!</span>")
+	else
+		usr << "<span class='danger'>This weapon is ineffective, it does no damage.</span>"
+		visible_message("<span class='danger'>[user] gently taps [src] with [O].</span>")
 
 /mob/living/simple_animal/construct/bullet_act(var/obj/item/projectile/Proj)
 	if(!Proj)
 		return
 	if(Proj.damage_type == BURN || Proj.damage_type == BRUTE)
-		return ..(Proj)
-	return
+		adjustBruteLoss(Proj.damage)
+	Proj.on_hit(src, 0)
+	return 0
 
 
 
@@ -134,8 +144,20 @@
 	environment_smash = 2
 	attack_sound = 'sound/weapons/punch3.ogg'
 	status_flags = 0
-	force_threshold = 11
 	construct_spells = list(/obj/effect/proc_holder/spell/aoe_turf/conjure/lesserforcewall)
+
+/mob/living/simple_animal/construct/armoured/attackby(var/obj/item/O as obj, var/mob/user as mob)
+	if(O.force)
+		if(O.force >= 11)
+			if(O.damtype == BURN || O.damtype == BRUTE)
+				adjustBruteLoss(O.force)
+			visible_message("<span class='danger'>[src] has been attacked with [O] by [user]!</span>", \
+					"<span class='userdanger'>[src] has been attacked with [O] by [user]!</span>")
+		else
+			visible_message("<span class='danger'>[O] bounces harmlessly off of [src].</span>")
+	else
+		usr << "<span class='danger'> This weapon is ineffective, it does no damage.</span>"
+		visible_message("<span class='danger'>[user] gently taps [src] with [O].</span>")
 
 
 /mob/living/simple_animal/construct/armoured/bullet_act(var/obj/item/projectile/P)
@@ -239,9 +261,24 @@
 	speed = 5
 	environment_smash = 2
 	attack_sound = 'sound/weapons/punch4.ogg'
-	force_threshold = 11
 	var/energy = 0
 	var/max_energy = 1000
+
+/mob/living/simple_animal/construct/behemoth/attackby(var/obj/item/O as obj, var/mob/user as mob)
+	if(O.force)
+		if(O.force >= 11)
+			var/damage = O.force
+			if (O.damtype == STAMINA)
+				damage = 0
+			adjustBruteLoss(damage)
+			visible_message("<span class='danger'>[src] has been attacked with [O] by [user]!</span>", \
+					"<span class='userdanger'>[src] has been attacked with [O] by [user]!</span>")
+		else
+			visible_message("<span class='danger'>[O] bounces harmlessly off of [src].</span>")
+	else
+		usr << "<span class='danger'>This weapon is ineffective, it does no damage.</span>"
+		visible_message("<span class='danger'>[user] gently taps [src] with [O].</span>")
+
 
 
 ////////////////Powers//////////////////

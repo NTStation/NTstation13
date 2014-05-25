@@ -89,7 +89,6 @@
 	desc = "An incendiary shell"
 	icon_state = "ishell"
 	projectile_type = /obj/item/projectile/bullet/incendiary/shell
-	m_amt = 12500
 
 
 /obj/item/ammo_casing/shotgun/dart
@@ -97,7 +96,6 @@
 	desc = "A dart for use in shotguns. Can be injected with up to 30 units of any chemical."
 	icon_state = "cshell"
 	projectile_type = /obj/item/projectile/bullet/dart
-	m_amt = 12500
 
 /obj/item/ammo_casing/shotgun/dart/New()
 	..()

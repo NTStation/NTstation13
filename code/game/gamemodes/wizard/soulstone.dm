@@ -22,6 +22,13 @@
 		transfer_soul("VICTIM", M, user)
 		return
 
+	/*attack(mob/living/simple_animal/shade/M as mob, mob/user as mob)//APPARENTLY THEY NEED THEIR OWN SPECIAL SNOWFLAKE CODE IN THE LIVING ANIMAL DEFINES
+		if(!istype(M, /mob/living/simple_animal/shade))//If target is not a shade
+			return ..()
+		user.attack_log += text("\[[time_stamp()]\] <span class='danger'>Used the [src.name] to capture the soul of [M.name] ([M.ckey])</span>")
+
+		transfer_soul("SHADE", M, user)
+		return*/
 ///////////////////Options for using captured souls///////////////////////////////////////
 
 	attack_self(mob/user)
@@ -37,6 +44,9 @@
 		user << browse(dat, "window=aicard")
 		onclose(user, "aicard")
 		return
+
+
+
 
 	Topic(href, href_list)
 		var/mob/U = usr
@@ -99,14 +109,12 @@
 		if("VICTIM")
 			var/mob/living/carbon/human/T = target
 			var/obj/item/device/soulstone/C = src
-			if(game_is_cult_mode(ticker.mode))
-				var/datum/game_mode/cult/Cult = ticker.mode
-				if(T.mind == Cult.sacrifice_target)
-					if(iscultist(U))
-						U << "<span class='danger'>The Geometer of blood wants this mortal sacrificed with the rune.</span>"
-					else
-						U << "<span class='danger'>The soul stone doesn't work for no apparent reason.</span>"
-					return 0
+			if(ticker.mode.name == "cult" && T.mind == ticker.mode:sacrifice_target)
+				if(iscultist(U))
+					U << "<span class='danger'>The Geometer of blood wants this mortal sacrificed with the rune.</span>"
+				else
+					U << "<span class='danger'>The soul stone doesn't work for no apparent reason.</span>"
+				return 0
 			if(C.imprinted != "empty")
 				U << "<span class='userdanger'>Capture failed!</span>: The soul stone has already been imprinted with [C.imprinted]'s mind!"
 			else
@@ -154,9 +162,8 @@
 						var/mob/living/simple_animal/construct/armoured/Z = new /mob/living/simple_animal/construct/armoured (get_turf(T.loc))
 						Z.key = A.key
 						if(iscultist(U))
-							if(game_is_cult_mode(ticker.mode))
-								var/datum/game_mode/cult/Cult = ticker.mode
-								Cult.add_cultist(Z.mind)
+							if(ticker.mode.name == "cult")
+								ticker.mode:add_cultist(Z.mind)
 							else
 								ticker.mode.cult+=Z.mind
 							ticker.mode.update_cult_icons_added(Z.mind)
@@ -170,9 +177,8 @@
 						var/mob/living/simple_animal/construct/wraith/Z = new /mob/living/simple_animal/construct/wraith (get_turf(T.loc))
 						Z.key = A.key
 						if(iscultist(U))
-							if(game_is_cult_mode(ticker.mode))
-								var/datum/game_mode/cult/Cult = ticker.mode
-								Cult.add_cultist(Z.mind)
+							if(ticker.mode.name == "cult")
+								ticker.mode:add_cultist(Z.mind)
 							else
 								ticker.mode.cult+=Z.mind
 							ticker.mode.update_cult_icons_added(Z.mind)
@@ -186,9 +192,8 @@
 						var/mob/living/simple_animal/construct/builder/Z = new /mob/living/simple_animal/construct/builder (get_turf(T.loc))
 						Z.key = A.key
 						if(iscultist(U))
-							if(game_is_cult_mode(ticker.mode))
-								var/datum/game_mode/cult/Cult = ticker.mode
-								Cult.add_cultist(Z.mind)
+							if(ticker.mode.name == "cult")
+								ticker.mode:add_cultist(Z.mind)
 							else
 								ticker.mode.cult+=Z.mind
 							ticker.mode.update_cult_icons_added(Z.mind)
