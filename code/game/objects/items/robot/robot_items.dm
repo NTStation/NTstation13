@@ -6,7 +6,7 @@
 //Might want to move this into several files later but for now it works here
 /obj/item/borg/stun
 	name = "electrified arm"
-	icon = 'icons/mob/robot_items.dmi'
+	icon = 'icons/items/.dmi'
 	icon_state = "elecarm"
 
 	attack(mob/M as mob, mob/living/silicon/robot/user as mob)
@@ -22,11 +22,6 @@
 			if (O.client)
 				O.show_message("\red <B>[user] has prodded [M] with an electrically-charged arm!</B>", 1, "\red You hear someone fall", 2)
 		add_logs(user, M, "stunned", object="[src.name]", addition="(INTENT: [uppertext(user.a_intent)])")
-
-/obj/item/borg/overdrive
-	name = "overdrive"
-	icon = 'icons/obj/decals.dmi'
-	icon_state = "shock"
 
 /**********************************************************************
 						HUD/SIGHT things
