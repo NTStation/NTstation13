@@ -23,11 +23,6 @@
 				O.show_message("\red <B>[user] has prodded [M] with an electrically-charged arm!</B>", 1, "\red You hear someone fall", 2)
 		add_logs(user, M, "stunned", object="[src.name]", addition="(INTENT: [uppertext(user.a_intent)])")
 
-/obj/item/borg/overdrive
-	name = "overdrive"
-	icon = 'icons/obj/decals.dmi'
-	icon_state = "shock"
-
 /**********************************************************************
 						HUD/SIGHT things
 ***********************************************************************/
