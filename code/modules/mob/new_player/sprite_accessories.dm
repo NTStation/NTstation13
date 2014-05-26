@@ -766,6 +766,11 @@
 		icon_state = "rainbow_knee"
 		gender = NEUTER
 
+	white_thigh
+		name = "Thigh-high White"
+		icon_state = "white_thigh"
+		gender = NEUTER
+
 	black_thigh
 		name = "Thigh-high Black"
 		icon_state = "black_thigh"
