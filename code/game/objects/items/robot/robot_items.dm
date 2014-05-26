@@ -6,7 +6,7 @@
 //Might want to move this into several files later but for now it works here
 /obj/item/borg/stun
 	name = "electrified arm"
-	icon = 'icons/items/.dmi'
+	icon = 'icons/mob/robot_items.dmi'
 	icon_state = "elecarm"
 
 	attack(mob/M as mob, mob/living/silicon/robot/user as mob)
