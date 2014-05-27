@@ -1654,16 +1654,6 @@ datum/design/large_grenade
 	reliability = 79
 	build_path = /obj/item/weapon/grenade/chem_grenade/large
 
-datum/design/glock
-	name = "9mm Handgun"
-	desc = "A medium-capacity ballistic handgun built on a classic design that uses light ammunition."
-	id = "glock"
-	req_tech = list("combat" = 4, "materials" = 3)
-	build_type = PROTOLATHE
-	materials = list("$metal" = 6000, "$glass" = 3750, "$silver" = 2000)
-	build_path = /obj/item/weapon/gun/projectile/automatic/deagle/glock
-	locked = 1
-
 datum/design/m1911
 	name = ".45 Handgun"
 	desc = "A low-capacity ballistic handgun built on a classic design that uses medium ammunition."
@@ -1703,15 +1693,6 @@ datum/design/ionrifle
 	materials = list("$silver" = 20000, "$metal" = 10000, "$uranium" = 5000, "$glass" = 5000)
 	build_path = /obj/item/weapon/gun/energy/ionrifle
 	locked = 1
-
-datum/design/mag_glock
-	name = "Glock Magazine (9mm)"
-	desc = "A 12-rnd magazine of 9mm ammunition for the glock handgun."
-	id = "mag_glock"
-	req_tech = list("combat" = 4, "materials" = 3)
-	build_type = PROTOLATHE
-	materials = list("$metal" = 3750)
-	build_path = /obj/item/ammo_box/magazine/m9mm
 
 datum/design/mag_m1911
 	name = "M1911 Magazine (.45)"
@@ -1861,7 +1842,7 @@ datum/design/security_hud
 	build_type = PROTOLATHE
 	materials = list("$metal" = 50, "$glass" = 50)
 	build_path = /obj/item/clothing/glasses/hud/security
-	
+
 datum/design/security_hud_night
 	name = "Night Vision Security HUD"
 	desc = "A heads-up display which provides id data and vision in complete darkness."
