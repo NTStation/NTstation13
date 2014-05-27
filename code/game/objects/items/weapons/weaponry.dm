@@ -30,6 +30,7 @@
 	throw_range = 4
 	throwforce = 7
 	attack_verb = list("beaten", "punched", "slammed", "smashed")
+	hitsound = 'sound/weapons/punch3.ogg'
 
 /obj/item/weapon/baseballbat
 	name = "wooden bat"
