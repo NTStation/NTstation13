@@ -36,7 +36,7 @@ var/global/list/datum/stack_recipe/metal_recipes = list ( \
 	new/datum/stack_recipe("small light fixture frame", /obj/item/light_fixture_frame/small, 1), \
 	new/datum/stack_recipe("grenade casing", /obj/item/weapon/grenade/chem_grenade), \
 	new/datum/stack_recipe("switchblade blade", /obj/item/switchbladeblade, 6, time = 15), \
-	new/datum/stack_recipe("handgun slide", /obj/item/glockslide, 10, time = 20), \ //these things, they take time
+	new/datum/stack_recipe("handgun slide", /obj/item/glockslide, 10, time = 20), \
 	null, \
 	new/datum/stack_recipe("apc frame", /obj/item/apc_frame, 2), \
 	new/datum/stack_recipe("air alarm frame", /obj/item/alarm_frame, 2), \
@@ -67,10 +67,10 @@ var/global/list/datum/stack_recipe/metal_recipes = list ( \
  * Plasteel
  */
 var/global/list/datum/stack_recipe/plasteel_recipes = list ( \
-	new/datum/stack_recipe("AI core", /obj/structure/AIcore, 5, time = 50, one_per_turf = 1), \ //AI core is a cube, cubes have 6 sides, minus one for the screen
+	new/datum/stack_recipe("AI core", /obj/structure/AIcore, 5, time = 50, one_per_turf = 1), \
 	new/datum/stack_recipe("switchblade handle", /obj/item/switchbladehandle, 4, time = 15), \
 	new/datum/stack_recipe("handgun grip", /obj/item/glockgrip, 6, time = 20), \
-	)
+)
 
 /obj/item/stack/sheet/plasteel
 	name = "plasteel"
@@ -101,7 +101,7 @@ var/global/list/datum/stack_recipe/wood_recipes = list ( \
 	new/datum/stack_recipe("coffin", /obj/structure/closet/coffin, 5, time = 15, one_per_turf = 1, on_floor = 1), \
 	new/datum/stack_recipe("book case", /obj/structure/bookcase, 4, time = 15, one_per_turf = 1, on_floor = 1), \
 	new/datum/stack_recipe("drying rack", /obj/machinery/smartfridge/drying_rack, 10, time = 15, one_per_turf = 1, on_floor = 1), \
-	)
+)
 
 /obj/item/stack/sheet/mineral/wood
 	name = "wooden plank"
