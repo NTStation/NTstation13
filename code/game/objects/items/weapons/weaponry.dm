@@ -45,6 +45,13 @@
 	attack_verb = list("smashed", "beaten", "slammed", "smacked", "striked", "battered", "bonked")
 	hitsound = 'sound/weapons/genhit3.ogg'
 
+/obj/item/weapon/baseballbat/metal
+	name = "metal bat"
+	desc = "A shiny metal bat."
+	icon_state = "metalbat"
+	force = 12
+	w_class = 3.0
+
 /obj/item/weapon/switchblade
 	name = "switch blade"
 	desc = "A switch blade."
