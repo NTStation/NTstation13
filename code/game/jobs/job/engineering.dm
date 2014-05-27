@@ -88,6 +88,8 @@ Atmospheric Technician
 	default_pda = /obj/item/device/pda/atmos
 	default_pda_slot = slot_l_store
 	default_headset = /obj/item/device/radio/headset/headset_eng
+	default_backpack = /obj/item/weapon/storage/backpack/industrial
+	default_satchel = /obj/item/weapon/storage/backpack/satchel_eng
 	default_storagebox = /obj/item/weapon/storage/box/engineer
 
 	access = list(access_eva, access_engine, access_engine_equip, access_tech_storage, access_maint_tunnels,
