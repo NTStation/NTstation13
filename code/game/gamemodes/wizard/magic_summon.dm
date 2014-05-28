@@ -9,7 +9,7 @@
 	var/list/summon_gunslist 			= list("taser","egun","laser","revolver","detective","smg","nuclear","deagle","gyrojet","pulse","silenced","cannon","doublebarrel","shotgun","combatshotgun","mateba","smg","uzi","crossbow","saw","tommy","retro","stunrevolver","glock","m1911")
 	var/list/summon_magiclist 			= list("fireball","smoke","blind","mindswap","forcewall","knock","horsemask","charge","wandnothing", "wanddeath", "wandresurrection", "wandpolymorph", "wandteleport", "wanddoor", "wandfireball", "staffchange", "staffhealing", "armor", "scrying", "staffdoor", "special")
 	var/list/summon_magicspeciallist	= list("staffchange","staffanimation", "wandbelt", "contract", "staffchaos")
-	var/list/summon_mechslist			= list("durand","gygax","d-gygax","marauder","mauler","seraph","ripley","d-ripley","phazon","reticence","HONK","ody")
+	var/list/summon_mechslist			= list("durand","gygax","d-gygax","marauder","mauler","seraph","d-ripley","reticence","HONK")
 	var/list/summon_meleelist			= list("katana","claymore","e-axe","e-sword","fireaxe","singu-ham","mjolnir","2-e-sword","spear")
 
 	usr << "<B>You summoned [summon_type]!</B>"
@@ -173,21 +173,14 @@
 						summon_mechslist -= "seraph"
 						var/obj/mecha/combat/marauder/seraph/S = new /obj/mecha/combat/marauder/seraph(get_turf(H))
 						S.operation_req_access = list()
-					if("ripley")
-						new /obj/mecha/working/ripley/mining(get_turf(H))
 					if("d-ripley")
 						new /obj/mecha/working/ripley/deathripley(get_turf(H))
-					if("phazon")
-						summon_mechslist -= "phazon"
-						new /obj/mecha/combat/phazon(get_turf(H))
 					if("reticence")
 						var/obj/mecha/combat/reticence/R = new /obj/mecha/combat/reticence/loaded(get_turf(H))
 						R.operation_req_access = list()
 					if("HONK")
 						var/obj/mecha/combat/honker/HONK = new /obj/mecha/combat/honker/loaded(get_turf(H))
 						HONK.operation_req_access = list()
-					if("ody")
-						new /obj/mecha/medical/odysseus/loaded(get_turf(H))
 			if("melee")
 				switch(randomizemelee)
 					if("katana")
