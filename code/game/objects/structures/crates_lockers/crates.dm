@@ -71,6 +71,10 @@
 	icon_opened = "crateopen"
 	icon_closed = "crate"
 
+/obj/structure/closet/crate/salivatingarnies
+	desc = "A crate full of random military surplus"
+	name = "surplus clothing crate"
+
 /obj/structure/closet/crate/freezer
 	desc = "A freezer."
 	name = "freezer"
