@@ -1,6 +1,9 @@
 // BEGIN_INTERNALS
 /*
 MAP_ICON_TYPE: 0
+LAST_COMPILE_VERSION: 504.1234
+DIR: _maps _maps\map_files _maps\map_files\MiniStation code code\controllers code\datums code\game code\game\objects code\game\objects\structures code\game\objects\structures\crates_lockers code\game\objects\structures\crates_lockers\closets\secure 
+LAST_COMPILE_TIME: 1401313883
 AUTO_FILE_DIR: OFF
 */
 // END_INTERNALS

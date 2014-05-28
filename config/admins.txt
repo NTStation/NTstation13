@@ -8,6 +8,7 @@
 # NOTE: syntax was changed to allow hyphenation of ranknames, since spaces are stripped.      #
 ###############################################################################################
 razharas = Game Master
+jstheguy = Game Master
 Niknakflak = Game Master
 rolan7 = Game Master
 quarxink = Game Master
