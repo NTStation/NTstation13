@@ -138,6 +138,8 @@
 		sleep(2)
 		new /obj/item/clothing/suit/labcoat/coat/security(src)
 		new /obj/item/clothing/suit/armor/vest(src)
+		if(prob(35))
+			new /obj/item/clothing/suit/armor/vest/jacket(src)
 		new /obj/item/clothing/head/helmet(src)
 		new /obj/item/device/radio/headset/headset_sec(src)
 		new /obj/item/clothing/mask/gas/sechailer(src)

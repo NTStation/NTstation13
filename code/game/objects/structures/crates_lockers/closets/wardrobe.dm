@@ -52,6 +52,7 @@
 	new /obj/item/clothing/under/hosformalfem(src)
 	new /obj/item/clothing/under/hosformalmale(src)
 	new /obj/item/clothing/under/rank/head_of_security/jensen(src)
+	new /obj/item/clothing/suit/armor/vest/jacket(src)
 	return
 
 /obj/structure/closet/wardrobe/pink
@@ -435,10 +436,7 @@
 	new /obj/item/clothing/suit/labcoat/coat/jacket(src)
 	new /obj/item/clothing/suit/labcoat/coat/jacket(src)
 	new /obj/item/clothing/suit/labcoat/coat/jacket(src)
-	if(prob(50))
-		new /obj/item/clothing/under/jeans(src)
-	else
-		new /obj/item/clothing/under/trackpants(src)
+	new /obj/item/clothing/under/camo(src)
 	new /obj/item/clothing/under/jeans(src)
 	new /obj/item/clothing/under/trackpants(src)
 	new /obj/item/clothing/under/khaki(src)
