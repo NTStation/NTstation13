@@ -1081,54 +1081,9 @@ var/list/all_supply_groups = list(supply_emergency,supply_security,supply_engine
 					/obj/item/weapon/storage/fancy/cigarettes/dromedaryco,
 					/obj/item/weapon/lipstick/random)
 	name = "Contraband crate"
-	cost = 20
+	cost = 30
 	containername = "crate"	//let's keep it subtle, eh?
 	contraband = 1
-
-/datum/supply_packs/misc/randomised/salivatingarnies
-	num_contained = 10
-	contains = list(/obj/item/clothing/gloves/fingerless,
-					/obj/item/clothing/head/beanie,
-					/obj/item/clothing/head/flatcap,
-					/obj/item/clothing/head/soft/grey,
-					/obj/item/clothing/head/soft/black,
-					/obj/item/clothing/head/ushanka,
-					/obj/item/clothing/head/fedora,
-					/obj/item/clothing/head/sombrero,
-					/obj/item/clothing/glasses/regular,
-					/obj/item/clothing/glasses/sunglasses,
-					/obj/item/clothing/glasses/sunglasses/big,
-					/obj/item/clothing/mask/balaclava,
-					/obj/item/clothing/mask/bandana/red,
-					/obj/item/clothing/mask/bandana/blue,
-					/obj/item/clothing/mask/bandana/gold,
-					/obj/item/clothing/mask/bandana/green,
-					/obj/item/clothing/mask/bandana/skull,
-					/obj/item/clothing/mask/bandana/black,
-					/obj/item/clothing/shoes/sneakers/black,
-					/obj/item/clothing/shoes/sneakers/brown,
-					/obj/item/clothing/shoes/boots,
-					/obj/item/clothing/suit/apron/overalls,
-					/obj/item/clothing/suit/poncho,
-					/obj/item/clothing/suit/labcoat/coat/jacket,
-					/obj/item/clothing/suit/labcoat/coat,
-					/obj/item/clothing/suit/labcoat/coat/jacket/leather,
-					/obj/item/clothing/suit/lawyer/blackjacket,
-					/obj/item/clothing/suit/lawyer/bluejacket,
-					/obj/item/clothing/under/shorts/blue,
-					/obj/item/clothing/under/jeans,
-					/obj/item/clothing/under/trackpants,
-					/obj/item/clothing/under/khaki,
-					/obj/item/clothing/under/camo,
-					/obj/item/clothing/under/shorts/grey,
-					/obj/item/clothing/tie/black,
-					/obj/item/clothing/under/overalls,
-					/obj/item/clothing/under/color/brownoveralls,
-					/obj/item/clothing/under/redoveralls,
-					/obj/item/clothing/tie/red)
-	name = "Surplus Clothing Crate"
-	cost = 15
-	containername = "surplus clothing crate"
 
 /datum/supply_packs/misc/autodrobe
 	name = "Autodrobe Supply crate"
