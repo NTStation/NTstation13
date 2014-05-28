@@ -30,7 +30,6 @@ var/global/mulebot_count = 0
 	var/destination = ""		// destination description
 	var/home_destination = "" 	// tag of home beacon
 	req_access = list(access_cargo) // added robotics access so assembly line drop-off works properly -veyveyr //I don't think so, Tim. You need to add it to the MULE's hidden robot ID card. -NEO
-	var/path[] = new()
 
 	var/mode = 0		//0 = idle/ready
 						//1 = loading/unloading
@@ -67,7 +66,6 @@ var/global/mulebot_count = 0
 /obj/machinery/bot/mulebot/New()
 	..()
 	wires = new(src)
-	botcard = new(src)
 	var/datum/job/cargo_tech/J = new/datum/job/cargo_tech
 	botcard.access = J.get_access()
 //	botcard.access += access_robotics //Why --Ikki
@@ -521,6 +519,14 @@ var/global/mulebot_count = 0
 
 /obj/machinery/bot/mulebot/proc/process_bot()
 	//if(mode) world << "Mode: [mode]"
+	if (src.called)
+		src.path = src.called //Set the path given to it by the AI
+		src.target = src.path[src.path.len] //Target is the end point of the path, the waypoint set by the AI.
+		src.destination = src.target
+		src.called = 0 //Once the MULE is commanded, follow normal procedures to reach the waypoint.
+		src.auto_return = 0 //Prevents the MULE immediately scooting back home upon getting called.
+		start()
+
 	switch(mode)
 		if(0)		// idle
 			icon_state = "mulebot0"

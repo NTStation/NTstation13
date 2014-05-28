@@ -14,6 +14,10 @@
 	var/open = 0//Maint panel
 	var/locked = 1
 	var/hacked = 0 //Used to differentiate between being hacked by silicons and emagged by humans.
+	var/called = 0 //If the bot has been called by the AI.
+	var/list/path[] = new() //Every bot has this, so it is best to put it here.
+	var/pathset = 0
+	var/tries = 0 //Number of times the bot tried and failed to move.
 	//var/emagged = 0 //Urist: Moving that var to the general /bot tree as it's used by most bots
 
 
@@ -26,6 +30,13 @@
 /obj/machinery/bot/proc/turn_off()
 	on = 0
 	SetLuminosity(0)
+	called = 0 //Resets the AI's call on the bot, if any.
+	pathset = 0
+	src.botcard = new() //Reset's the bot's access incase it is disabled while under AI control.
+
+/obj/machinery/bot/New()
+	..()
+	src.botcard = new /obj/item/weapon/card/id(src)
 
 /obj/machinery/bot/proc/explode()
 	qdel(src)
@@ -166,6 +177,29 @@
 	for(var/mob/O in hearers(src, null))
 		O.show_message("<span class='game say'><span class='name'>[src]</span> beeps, \"[message]\"</span>",2)
 	return
+
+/obj/machinery/bot/proc/move_to_call()
+	if(src.path && src.path.len && tries < 5)
+		world << "[src] MOVING [src.path[1]] - [src.path.len] left. target - [src.path[src.path.len]]"
+		step_to(src, src.path[1])
+		world << "3"
+
+		if(src.loc == src.path[1])//Remove turfs from the path list if the bot moved there.
+			world <<  "4"
+			src.tries = 0
+			src.path -= src.path[1]
+		else //Could not move because of an obstruction.
+			src.tries++
+			world << "5"
+		world <<  "6"
+	else
+		src.called = 0
+		src.path = new()
+		src.pathset = 0
+		src.botcard = new()
+		src.tries = 0
+		world << "[src] arried or tried to arrive."
+		//world << "[src] MOVING [src.path[1]] - [src.path.len] left - [tries] tries."
 
 /******************************************************************/
 // Navigation procs

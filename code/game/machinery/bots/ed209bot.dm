@@ -51,7 +51,6 @@
 	var/new_destination		// pending new destination (waiting for beacon response)
 	var/destination			// destination description tag
 	var/next_destination	// the next destination in the patrol route
-	var/list/path = new				// list of path turfs
 
 	var/blockcount = 0		//number of times retried a blocked path
 	var/awaiting_beacon	= 0	// count of pticks awaiting a beacon response
@@ -77,7 +76,6 @@
 	if(created_lasercolor)	lasercolor = created_lasercolor
 	src.icon_state = "[lasercolor]ed209[src.on]"
 	spawn(3)
-		src.botcard = new /obj/item/weapon/card/id(src)
 		var/datum/job/detective/J = new/datum/job/detective
 		src.botcard.access = J.get_access()
 
@@ -236,6 +234,21 @@ Auto Patrol: []"},
 
 	if (!src.on || src.disabled)
 		return
+
+	if(src.called)
+		if(!src.pathset)
+			src.path = src.called
+			src.target = null
+			src.oldtarget_name = null
+			src.anchored = 0
+			src.mode = SECBOT_IDLE
+			walk_to(src,0)
+			src.pathset = 1
+		else
+			move_to_call(src.path)
+			move_to_call(src.path)
+		return
+
 	var/list/targets = list()
 	for (var/mob/living/carbon/C in view(9,src)) //Let's find us a target
 		var/threatlevel = 0

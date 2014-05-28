@@ -58,6 +58,12 @@
 		aicamera.camera_mode_off()
 		aicamera.captureimage(A, usr)
 		return
+	if(src.waypoint_mode)
+		src.waypoint = get_turf(A)
+		src << "Got Turf"
+		src.waypoint_mode = 0
+		call_bot(src.waypoint, src.B)
+		return
 
 	/*
 		AI restrained() currently does nothing

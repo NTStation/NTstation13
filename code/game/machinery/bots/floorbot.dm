@@ -44,7 +44,6 @@
 	var/turf/oldtarget
 	var/oldloc = null
 	req_access = list(access_construction)
-	var/path[] = new()
 	var/targetdirection
 
 
@@ -182,6 +181,18 @@
 		return
 	if(src.repairing)
 		return
+	if(src.called)
+		if(!src.pathset)
+			src.path = src.called
+			src.target = null
+			src.oldtarget = null
+			src.oldloc = null
+			src.pathset = 1
+		else
+			move_to_call(src.path)
+			move_to_call(src.path)
+		return
+
 	var/list/floorbottargets = list()
 	if(src.amount <= 0 && ((src.target == null) || !src.target))
 		if(src.eattiles)

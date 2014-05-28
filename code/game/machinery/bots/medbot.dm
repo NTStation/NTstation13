@@ -20,7 +20,6 @@
 	var/obj/item/weapon/reagent_containers/glass/reagent_glass = null //Can be set to draw from this for reagents.
 	var/skin = null //Set to "tox", "ointment" or "o2" for the other two firstaid kits.
 	var/frustration = 0
-	var/path[] = new()
 	var/mob/living/carbon/patient = null
 	var/mob/living/carbon/oldpatient = null
 	var/oldloc = null
@@ -73,7 +72,6 @@
 		if(src.skin)
 			src.overlays += image('icons/obj/aibots.dmi', "medskin_[src.skin]")
 
-		src.botcard = new /obj/item/weapon/card/id(src)
 		if(isnull(src.botcard_access) || (src.botcard_access.len < 1))
 			var/datum/job/doctor/J = new/datum/job/doctor
 			src.botcard.access = J.get_access()
@@ -260,6 +258,22 @@
 		if(src.stunned <= 0)
 			src.icon_state = "medibot[src.on]"
 			src.stunned = 0
+		return
+
+	if(src.called) //Stop what you are doing and answer the call!
+
+		if(!src.pathset) //Reset the bot before calling it.
+			src.path = src.called
+			src.pathset = 1
+			src.patient = null
+			src.oldpatient = null
+			src.oldloc = null
+			src.currently_healing = 0
+			src.last_found = world.time
+			world << "STARTING"
+		else
+			move_to_call(src.path)
+			move_to_call(src.path)
 		return
 
 	if(src.frustration > 8)

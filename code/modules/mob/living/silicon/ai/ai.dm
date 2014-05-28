@@ -1,6 +1,6 @@
 var/list/ai_list = list()
 
-//Not sure why this is necessary..
+//Not sure why this is necessary...
 /proc/AutoUpdateAI(obj/subject)
 	var/is_in_use = 0
 	if (subject!=null)
@@ -30,6 +30,7 @@ var/list/ai_list = list()
 	var/obj/item/device/pda/ai/aiPDA = null
 	var/obj/item/device/multitool/aiMulti = null
 	var/obj/item/device/camera/ai_camera/aicamera = null
+	var/obj/machinery/bot/B = null
 
 	//MALFUNCTION
 	var/datum/module_picker/malf_picker
@@ -51,6 +52,8 @@ var/list/ai_list = list()
 	var/last_paper_seen = null
 	var/can_shunt = 1
 	var/last_announcement = "" // For AI VOX, if enabled
+	var/turf/waypoint //Holds the turf of the currently selected waypoint.
+	var/waypoint_mode = 0 //Waypoint mode is for selecting a turf via clicking.
 	var/sensor_mode = 0 //Determines the AI's current HUD.
 	#define 	SEC_HUD 1 //Security HUD mode
 	#define 	MED_HUD 2 //Medical HUD mode
@@ -96,7 +99,8 @@ var/list/ai_list = list()
 		verbs.Add(/mob/living/silicon/ai/proc/ai_call_shuttle,/mob/living/silicon/ai/proc/ai_camera_track, \
 		/mob/living/silicon/ai/proc/ai_camera_list, /mob/living/silicon/ai/proc/ai_network_change, \
 		/mob/living/silicon/ai/proc/ai_statuschange, /mob/living/silicon/ai/proc/ai_hologram_change, \
-		/mob/living/silicon/ai/proc/toggle_camera_light, /mob/living/silicon/ai/proc/sensor_mode)
+		/mob/living/silicon/ai/proc/toggle_camera_light, /mob/living/silicon/ai/proc/botcall, \
+		/mob/living/silicon/ai/proc/sensor_mode)
 
 	if(!safety)//Only used by AIize() to successfully spawn an AI.
 		if (!B)//If there is no player/brain inside.
@@ -413,6 +417,16 @@ var/list/ai_list = list()
 			A.ai_actual_track(target)
 		return
 
+	if (href_list["callbot"]) //Command a bot to move to a selected location.
+		src.B = locate(href_list["callbot"]) in machines
+		src.waypoint_mode = 1
+		src << "<span class='notice'>Set your waypoint by clicking on a valid location free of obstructions.</span>"
+		return
+
+	if (href_list["interface"]) //Remotely connect to a bot!
+		src.B = locate(href_list["interface"]) in machines
+		B.attack_ai(src)
+
 	else if (href_list["faketrack"])
 		var/mob/target = locate(href_list["track"]) in mob_list
 		var/mob/living/silicon/ai/A = locate(href_list["track2"]) in mob_list
@@ -429,7 +443,6 @@ var/list/ai_list = list()
 				continue
 		return
 	return
-
 
 /mob/living/silicon/ai/bullet_act(var/obj/item/projectile/Proj)
 	..(Proj)
@@ -508,6 +521,55 @@ var/list/ai_list = list()
 	//machine = src
 
 	return 1
+
+/mob/living/silicon/ai/proc/botcall()
+	set category = "AI Commands"
+	set name = "Access Robot Control"
+	set desc = "Wirelessly control various automatic robots."
+	if(src.stat == 2)
+		src << "You can't control the bots, because you are dead!"
+		return
+	if(istype(usr,/mob/living/silicon/ai))
+		var/mob/living/silicon/ai/AI = src
+		if(AI.control_disabled)
+			usr << "Wireless control is disabled!"
+			return
+	var/d
+	var/area/bot_area
+	d += "<table width='100%'><tr><td width='40%'><h3>Name</h3></td><td width='30%'><h3>Status</h3></td><td width='30%'><h3>Location</h3></td><td width='10%'><h3>Control</h3></td></tr>"
+
+	for (B in machines)
+		if(B.z == src.z) //Only bots on the same Z-level are detected!
+			bot_area = get_area(B)
+			d += "<tr><td width='30%'>[B.name]</td><td width='30%'>[B.on ? "<span class='good'>Active</span>" : "<span class='average'>Inactive</span>"]</td><td width='30%'>[format_text(bot_area.name)]</td>"
+			d += "<td width='10%'><A HREF=?src=\ref[src];interface=\ref[B]>Interface</A></td>"
+			if(B.on) //You cannot call bots that are off!
+				d += "<td width='10%'><A HREF=?src=\ref[src];callbot=\ref[B]>Call</A></td>"
+			d += "</tr>"
+
+		src << "[B] - Detected - [src.z] - [B.z]"
+	var/datum/browser/popup = new(src, "botcall", "Remote Robot Control", 700, 400)
+	popup.set_content(d)
+	popup.open()
+
+/mob/living/silicon/ai/proc/call_bot(var/turf/end_loc, var/obj/machinery/bot/B)
+
+	if(src.waypoint)
+		end_loc = src.waypoint
+		src << "[B] called to [end_loc.x],[end_loc.y]."
+
+	else
+		end_loc = get_turf(src.eyeobj)
+		src << "[B] called to [end_loc.name]."
+
+	var/area/end_area = get_area(end_loc)
+
+	var/datum/job/captain/All = new/datum/job/captain
+	B.botcard.access = All.get_access() //Give the bot all-access while under the AI's command.
+
+	//var/eyeturf = get_turf(src.eyeobj)
+	B.called = AStar(B.loc, end_loc, /turf/proc/CardinalTurfsWithAccess, /turf/proc/Distance_cardinal, 0, 255, id=B.botcard)
+	src << "[B.called ? "<span class='notice'>[B] called to [end_area.name]</span>" : "<span class='danger'>Failed to calculate a valid route. Ensure destination is clear of obstructions.</span>"]"
 
 /mob/living/silicon/ai/proc/sensor_mode()
 	set category = "AI Commands"

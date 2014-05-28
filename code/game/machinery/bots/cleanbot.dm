@@ -31,7 +31,6 @@
 	var/obj/effect/decal/cleanable/oldtarget
 	var/oldloc = null
 	req_access = list(access_janitor)
-	var/path[] = new()
 	var/patrol_path[] = null
 	var/beacon_freq = 1445		// navigation beacon frequency
 	var/closest_dist
@@ -48,7 +47,6 @@
 
 	should_patrol = 1
 
-	src.botcard = new /obj/item/weapon/card/id(src)
 	var/datum/job/janitor/J = new/datum/job/janitor
 	src.botcard.access = J.get_access()
 
@@ -174,6 +172,18 @@ text("<A href='?src=\ref[src];operation=oddbutton'>[src.oddbutton ? "Yes" : "No"
 		return
 	if(src.cleaning)
 		return
+	if(src.called)
+		if(!src.pathset)
+			src.path = src.called
+			src.target = null
+			src.oldtarget = null
+			src.oldloc = null
+			src.pathset = 1
+		else
+			move_to_call(src.path)
+			move_to_call(src.path)
+		return
+
 	var/list/cleanbottargets = list()
 
 	if(!src.emagged && prob(5))
@@ -187,7 +197,7 @@ text("<A href='?src=\ref[src];operation=oddbutton'>[src.oddbutton ? "Yes" : "No"
 	if(src.emagged && prob(5)) //Spawns foam!
 		visible_message("<span class='danger'>[src] whirs and bubbles violently, before releasing a plume of froth!</span>")
 		new /obj/effect/effect/foam(src.loc)
-		
+
 	if(!src.target || src.target == null)
 		for (var/obj/effect/decal/cleanable/D in view(7,src))
 			for(var/T in src.target_types)
