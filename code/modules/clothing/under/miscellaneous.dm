@@ -436,3 +436,14 @@
 	body_parts_covered = GROIN|LEGS
 	fitted = 0
 	can_roll = 0
+
+/obj/item/clothing/under/camo
+	name = "camouflage pants"
+	desc = "A pair of woodland camouflage pants, not good for camouflage in this enviornment."
+	icon_state = "camopants"
+	item_state = "camopants"
+	item_color = "camopants"
+	gender = PLURAL
+	body_parts_covered = GROIN|LEGS
+	fitted = 0
+	can_roll = 0

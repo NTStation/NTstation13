@@ -17,6 +17,13 @@
 	blood_overlay_type = "armor"
 	armor = list(melee = 50, bullet = 15, laser = 50, energy = 10, bomb = 25, bio = 0, rad = 0)
 
+/obj/item/clothing/suit/armor/vest/jacket
+	name = "military jacket"
+	desc = "An old military jacket, it has armoring."
+	icon_state = "militaryjacket"
+	item_state = "militaryjacket"
+	body_parts_covered = CHEST|ARMS
+
 /obj/item/clothing/suit/armor/hos
 	name = "armored coat"
 	desc = "A greatcoat enchanced with a special alloy for some protection and style."
