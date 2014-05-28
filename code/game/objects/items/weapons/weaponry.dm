@@ -21,15 +21,16 @@
 
 /obj/item/weapon/brassknuckles
 	name = "brass knuckles"
-	desc = "A pair of shiny brass knuckles."
+	desc = "A pair of shiny, easily concealed brass knuckles. A miner's go-to bar fight weapon."
 	icon_state = "brassknuckles"
 	item_state = "brassknuckles"
 	w_class = 1
-	force = 16
+	force = 15
 	throw_speed = 3
 	throw_range = 4
 	throwforce = 7
 	attack_verb = list("beaten", "punched", "slammed", "smashed")
+	hitsound = 'sound/weapons/punch3.ogg'
 
 /obj/item/weapon/baseballbat
 	name = "wooden bat"
@@ -37,18 +38,18 @@
 	icon_state = "woodbat"
 	item_state = "nullrod"
 	w_class = 3.0
-	force = 15
+	force = 13 //1 brute better than a stun baton, because no stun
 	throw_speed = 3
 	throw_range = 7
 	throwforce = 7
-	attack_verb = list("smashed", "beaten", "slammed", "smacked", "striked", "home runned", "bonked")
+	attack_verb = list("smashed", "beaten", "slammed", "smacked", "striked", "battered", "bonked")
 	hitsound = 'sound/weapons/genhit3.ogg'
 
 /obj/item/weapon/baseballbat/metal
 	name = "metal bat"
 	desc = "A shiny metal bat."
 	icon_state = "metalbat"
-	force = 16
+	force = 12
 	w_class = 3.0
 
 /obj/item/weapon/switchblade
@@ -107,7 +108,7 @@
 	if(active)
 		user << "<span class='notice'>You flip out your [src].</span>"
 		playsound(user, 'sound/weapons/flipblade.ogg', 15, 1)
-		force = 18
+		force = 15 //this is as much as a null rod or butcher cleaver and those are rare comparatively
 		hitsound = 'sound/weapons/bladeslice.ogg'
 		icon_state += "_open"
 		w_class = 3

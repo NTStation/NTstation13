@@ -87,7 +87,7 @@
 	..()
 
 /obj/item/weapon/gun/projectile/automatic/deagle/m1911
-	name = "M1911"
+	name = "\improper M1911"
 	desc = "An M1911 pistol. Uses .45 ammo."
 	icon_state = "m1911"
 	force = 13.0

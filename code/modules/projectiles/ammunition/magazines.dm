@@ -66,9 +66,9 @@
 	origin_tech = "combat=2"
 	ammo_type = /obj/item/ammo_casing/c9mm
 	caliber = "9mm"
-	max_ammo = 12
+	max_ammo = 10
 	multiple_sprites = 2
-	m_amt = 15000
+	m_amt = 18750 //5 sheets of metal per magazine in the autolathe
 
 /obj/item/ammo_box/magazine/msmg9mm
 	name = "SMG magazine (9mm)"
