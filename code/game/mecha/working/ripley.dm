@@ -38,9 +38,11 @@
 /obj/mecha/working/ripley/deathripley/New()
 	..()
 	var/obj/item/mecha_parts/mecha_equipment/ME = new /obj/item/mecha_parts/mecha_equipment/tool/safety_clamp
+	var/obj/item/mecha_parts/mecha_equipment/weapon/ballistic/missile_rack/MR = new /obj/item/mecha_parts/mecha_equipment/weapon/ballistic/missile_rack
 	var/obj/item/mecha_parts/mecha_equipment/weapon/ballistic/missile_rack/flashbang/clusterbang/CB = new /obj/item/mecha_parts/mecha_equipment/weapon/ballistic/missile_rack/flashbang/clusterbang
 	ME.attach(src)
 	CB.attach(src)
+	MR.attach(src)
 	return
 
 /obj/mecha/working/ripley/mining
