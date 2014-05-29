@@ -181,6 +181,7 @@ text("<A href='?src=\ref[src];operation=oddbutton'>[src.oddbutton ? "Yes" : "No"
 			src.pathset = 1
 		else
 			move_to_call(src.path)
+			sleep(5)
 			move_to_call(src.path)
 		return
 

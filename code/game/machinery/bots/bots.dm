@@ -32,7 +32,8 @@
 	SetLuminosity(0)
 	called = 0 //Resets the AI's call on the bot, if any.
 	pathset = 0
-	src.botcard = new() //Reset's the bot's access incase it is disabled while under AI control.
+	src.botcard.access = src.req_access //Resets the bot's access incase it is disabled while under AI control.
+	src.botcard.access += src.req_one_access
 
 /obj/machinery/bot/New()
 	..()
@@ -196,7 +197,8 @@
 		src.called = 0
 		src.path = new()
 		src.pathset = 0
-		src.botcard = new()
+		src.botcard.access = src.req_access
+		src.botcard.access += src.req_one_access
 		src.tries = 0
 		world << "[src] arried or tried to arrive."
 		//world << "[src] MOVING [src.path[1]] - [src.path.len] left - [tries] tries."

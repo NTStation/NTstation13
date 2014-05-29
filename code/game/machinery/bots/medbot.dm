@@ -273,6 +273,7 @@
 			world << "STARTING"
 		else
 			move_to_call(src.path)
+			sleep(5)
 			move_to_call(src.path)
 		return
 

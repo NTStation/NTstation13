@@ -543,8 +543,7 @@ var/list/ai_list = list()
 			bot_area = get_area(B)
 			d += "<tr><td width='30%'>[B.name]</td><td width='30%'>[B.on ? "<span class='good'>Active</span>" : "<span class='average'>Inactive</span>"]</td><td width='30%'>[format_text(bot_area.name)]</td>"
 			d += "<td width='10%'><A HREF=?src=\ref[src];interface=\ref[B]>Interface</A></td>"
-			if(B.on) //You cannot call bots that are off!
-				d += "<td width='10%'><A HREF=?src=\ref[src];callbot=\ref[B]>Call</A></td>"
+			d += "<td width='10%'>[B.on ? "<A HREF=?src=\ref[src];callbot=\ref[B]>Call</A>" : " Call"]</td>"
 			d += "</tr>"
 
 		src << "[B] - Detected - [src.z] - [B.z]"
