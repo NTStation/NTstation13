@@ -88,8 +88,8 @@
 /obj/item/weapon/melee/telebaton/attack_self(mob/user as mob)
 	on = !on
 	if(on)
-		user.visible_message("\red With a flick of their wrist, [user] extends their telescopic baton.",\
-		"\red You extend the baton.",\
+		user.visible_message("<span class ='warning'>With a flick of their wrist, [user] extends their telescopic baton.</span>",\
+		"<span class ='warning'>You extend the baton.</span>",\
 		"You hear an ominous click.")
 		icon_state = "telebaton_1"
 		item_state = "nullrod"
@@ -97,8 +97,8 @@
 		force = 10//seclite damage
 		attack_verb = list("smacked", "struck", "cracked", "beaten")
 	else
-		user.visible_message("\blue [user] collapses their telescopic baton.",\
-		"\blue You collapse the baton.",\
+		user.visible_message("<span class ='notice'>[user] collapses their telescopic baton.</span>",\
+		"<span class ='notice'>You collapse the baton.</span>",\
 		"You hear a click.")
 		icon_state = "telebaton_0"
 		item_state = "telebaton_0" //no sprite in other words
@@ -124,7 +124,7 @@
 /obj/item/weapon/melee/telebaton/attack(mob/target as mob, mob/living/user as mob)
 	if(on)
 		if ((CLUMSY in user.mutations) && prob(50))
-			user << "\red You club yourself over the head."
+			user << "<span class ='danger'>You club yourself over the head.</span>"
 			user.Weaken(3 * force)
 			if(ishuman(user))
 				var/mob/living/carbon/human/H = user
@@ -140,7 +140,7 @@
 			playsound(get_turf(src), 'sound/effects/woodhit.ogg', 75, 1, -1)
 			target.Weaken(3)
 			src.add_fingerprint(user)
-			target.visible_message("\red <B>[target] has been knocked down with \the [src] by [user]!</B>")
+			target.visible_message("<span class ='danger'>[target] has been knocked down with \the [src] by [user]!</span>")
 			if(!iscarbon(user))
 				target.LAssailant = null
 			else
