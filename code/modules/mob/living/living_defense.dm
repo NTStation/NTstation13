@@ -44,25 +44,25 @@ proc/vol_by_throwforce_and_or_w_class(var/obj/item/I)
 /mob/living/hitby(atom/movable/AM)//Standardization and logging -Sieve
 	if(istype(AM, /obj/item))
 		var/obj/item/I = AM
-		var/zone = ran_zone("chest", 65)//Hits a random part of the body, geared towards the chest
+		var/zone = ran_zone("chest", 65)
 		var/dtype = BRUTE
 		var/volume = vol_by_throwforce_and_or_w_class(I)
-		if(istype(I,/obj/item/weapon)) //If the item is a weapon...
+		if(istype(I,/obj/item/weapon))
 			var/obj/item/weapon/W = I
 			dtype = W.damtype
 
-			if (W.throwforce > 0) //If the weapon's throwforce is greater than zero...
-				if (W.throwhitsound) //...and throwhitsound is defined...
-					playsound(loc, W.throwhitsound, volume, 1, -1) //...play the weapon's throwhitsound.
-				else if(W.hitsound) //Otherwise, if the weapon's hitsound is defined...
-					playsound(loc, W.hitsound, volume, 1, -1) //...play the weapon's hitsound.
-				else if(!W.throwhitsound) //Otherwise, if throwhitsound isn't defined...
-					playsound(loc, 'sound/weapons/genhit.ogg',volume, 1, -1) //...play genhit.ogg.
+			if (W.throwforce > 0)
+				if (W.throwhitsound)
+					playsound(loc, W.throwhitsound, volume, 1, -1)
+				else if(W.hitsound)
+					playsound(loc, W.hitsound, volume, 1, -1)
+				else if(!W.throwhitsound)
+					playsound(loc, 'sound/weapons/genhit.ogg',volume, 1, -1)
 
-		else if(!I.throwhitsound && I.throwforce > 0) //Otherwise, if the item doesn't have a throwhitsound and has a throwforce greater than zero...
-			playsound(loc, 'sound/weapons/genhit.ogg', volume, 1, -1)//...play genhit.ogg
-		if(!I.throwforce)// Otherwise, if the item's throwforce is 0...
-			playsound(loc, 'sound/weapons/throwtap.ogg', 1, volume, -1)//...play throwtap.ogg.
+		else if(!I.throwhitsound && I.throwforce > 0)
+			playsound(loc, 'sound/weapons/genhit.ogg', volume, 1, -1)
+		if(!I.throwforce).
+			playsound(loc, 'sound/weapons/throwtap.ogg', 1, volume, -1)
 
 		visible_message("<span class='danger'>[src] has been hit by [I].</span>", \
 						"<span class='userdanger'>[src] has been hit by [I].</span>")

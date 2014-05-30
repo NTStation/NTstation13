@@ -96,7 +96,7 @@
 	icon_state = "bike_horn"
 	item_state = "bike_horn"
 	throwforce = 0
-	hitsound = null //To prevent tap.ogg playing, as the item lacks of force
+	throwhitsound = 'sound/items/bikehorn.ogg'
 	w_class = 1.0
 	throw_speed = 3
 	throw_range = 7
@@ -196,7 +196,7 @@
 			playsound(src.loc, 'sound/effects/snap.ogg', 50, 1)
 			L.visible_message("<span class='danger'>[L] triggers \the [src].</span>", \
 					"<span class='userdanger'>You trigger \the [src]!</span>")
-		
+
 			if(ishuman(AM))
 				var/mob/living/carbon/H = AM
 				if(H.lying)

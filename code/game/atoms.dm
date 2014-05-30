@@ -21,12 +21,14 @@
 	if(istype(hit_atom,/mob/living))
 		var/mob/living/M = hit_atom
 		M.hitby(src)
+		on_throw_impact(hit_atom)
 
 	else if(isobj(hit_atom))
 		var/obj/O = hit_atom
 		if(!O.anchored)
 			step(O, src.dir)
 		O.hitby(src)
+		on_throw_impact(hit_atom)
 
 	else if(isturf(hit_atom))
 		var/turf/T = hit_atom
@@ -36,6 +38,10 @@
 			if(istype(src,/mob/living))
 				var/mob/living/M = src
 				M.take_organ_damage(20)
+
+//what this atom does when it hits something, for special effects/special actions, hitby() handles damage.
+/atom/proc/on_throw_impact(atom/hit_atom)
+	return
 
 /atom/proc/CheckParts()
 	return
