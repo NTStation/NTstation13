@@ -10,7 +10,7 @@
 	w_class = 3
 	origin_tech = "combat=4"
 	attack_verb = list("flogged", "whipped", "lashed", "disciplined")
-	hitsound = 'sound/weapons/slash.ogg' //pls replace
+	hitsound = 'sound/effects/woodhit.ogg'
 
 /obj/item/weapon/melee/chainofcommand/suicide_act(mob/user)
 		user.visible_message("<span class='suicide'>[user] is strangling \himself with the [src.name]! It looks like \he's trying to commit suicide.</span>")
@@ -21,8 +21,8 @@
 	desc = "A long metal chain. A brutal way of dispatching enemies."
 	icon_state = "longchain"
 	item_state = "chain"
-	hitsound = 'sound/weapons/genhit3.ogg'
-	force = 16
+	hitsound = 'sound/effects/woodhit.ogg'
+	force = 12
 	attack_verb = list("flogged", "whipped", "lashed", "brutalised")
 
 /obj/item/weapon/melee/classic_baton
@@ -63,7 +63,7 @@
 		M.visible_message("<span class='danger'>[M] has been beaten with [src] by [user]!</span>", \
 							"<span class='userdanger'>[M] has been beaten with [src] by [user]!</span>")
 	else
-		playsound(loc, 'sound/weapons/Genhit.ogg', 50, 1, -1)
+		playsound(loc, 'sound/effects/woodhit.ogg', 75, 1, -1)
 		M.Stun(7)
 		M.Weaken(7)
 		M.visible_message("<span class='danger'>[M] has been stunned with [src] by [user]!</span>", \
@@ -72,3 +72,79 @@
 	if(ishuman(M))
 		var/mob/living/carbon/human/H = M
 		H.forcesay(hit_appends)
+
+
+/obj/item/weapon/melee/telebaton
+	name = "telescopic baton"
+	desc = "A compact yet robust personal defense weapon. Can be concealed when folded."
+	icon = 'icons/obj/weapons.dmi'
+	icon_state = "telebaton_0"
+	item_state = "telebaton_0"
+	slot_flags = SLOT_BELT
+	w_class = 2
+	force = 3
+	var/on = 0
+
+/obj/item/weapon/melee/telebaton/attack_self(mob/user as mob)
+	on = !on
+	if(on)
+		user.visible_message("\red With a flick of their wrist, [user] extends their telescopic baton.",\
+		"\red You extend the baton.",\
+		"You hear an ominous click.")
+		icon_state = "telebaton_1"
+		item_state = "nullrod"
+		w_class = 3
+		force = 10//seclite damage
+		attack_verb = list("smacked", "struck", "cracked", "beaten")
+	else
+		user.visible_message("\blue [user] collapses their telescopic baton.",\
+		"\blue You collapse the baton.",\
+		"You hear a click.")
+		icon_state = "telebaton_0"
+		item_state = "telebaton_0" //no sprite in other words
+		w_class = 2
+		force = 3//not so robust now
+		attack_verb = list("hit", "poked")
+
+	playsound(src.loc, 'sound/weapons/flipblade.ogg', 50, 1)
+	add_fingerprint(user)
+
+	if(blood_overlay && blood_DNA && (blood_DNA.len >= 1)) //updates blood overlay, if any
+		overlays.Cut()//this might delete other item overlays as well but eeeeeeeh
+
+		var/icon/I = new /icon(src.icon, src.icon_state)
+		I.Blend(new /icon('icons/effects/blood.dmi', rgb(255,255,255)),ICON_ADD)
+		I.Blend(new /icon('icons/effects/blood.dmi', "itemblood"),ICON_MULTIPLY)
+		blood_overlay = I
+
+		overlays += blood_overlay
+
+	return
+
+/obj/item/weapon/melee/telebaton/attack(mob/target as mob, mob/living/user as mob)
+	if(on)
+		if ((CLUMSY in user.mutations) && prob(50))
+			user << "\red You club yourself over the head."
+			user.Weaken(3 * force)
+			if(ishuman(user))
+				var/mob/living/carbon/human/H = user
+				H.apply_damage(2*force, BRUTE, "head")
+			else
+				user.take_organ_damage(2*force)
+			return
+		if (user.a_intent == "harm")
+			if(!..()) return
+			if(!isrobot(target))
+				playsound(get_turf(src), "swing_hit", 50, 1, -1)
+		else
+			playsound(get_turf(src), 'sound/effects/woodhit.ogg', 75, 1, -1)
+			target.Weaken(3)
+			src.add_fingerprint(user)
+			target.visible_message("\red <B>[target] has been knocked down with \the [src] by [user]!</B>")
+			if(!iscarbon(user))
+				target.LAssailant = null
+			else
+				target.LAssailant = user
+		return
+	else
+		return ..()
