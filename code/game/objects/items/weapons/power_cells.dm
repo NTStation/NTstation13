@@ -88,7 +88,7 @@
 	name = "infinite-capacity power cell!"
 	icon_state = "icell"
 	origin_tech =  null
-	maxcharge = INFINITE
+	maxcharge = 30000
 	g_amt = 80
 	rating = 6
 	use()
