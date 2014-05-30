@@ -563,12 +563,22 @@ var/list/ai_list = list()
 
 	var/area/end_area = get_area(end_loc)
 
+	//For giving the bot all-access.
+	var/obj/item/weapon/card/id/all_access = new /obj/item/weapon/card/id
 	var/datum/job/captain/All = new/datum/job/captain
-	B.botcard.access = All.get_access() //Give the bot all-access while under the AI's command.
+	all_access.access = All.get_access()
 
-	//var/eyeturf = get_turf(src.eyeobj)
-	B.called = AStar(B.loc, end_loc, /turf/proc/CardinalTurfsWithAccess, /turf/proc/Distance_cardinal, 0, 255, id=B.botcard)
-	src << "[B.called ? "<span class='notice'>[B] called to [end_area.name]</span>" : "<span class='danger'>Failed to calculate a valid route. Ensure destination is clear of obstructions.</span>"]"
+	var/list/called
+	called = AStar(B.loc, end_loc, /turf/proc/CardinalTurfsWithAccess, /turf/proc/Distance_cardinal, 0, 255, id=all_access)
+
+	if(called && called.len) //Ensures that a valid path is calculated!
+		B.called = called //Send the path to the bot!
+		B.pathset = 0 //Forces the bot to accept a new rute if already under an AI call.
+		B.botcard = all_access //Give the bot all-access while under the AI's command.
+		B.calling_ai = src //Link the AI to the bot!
+		src << "<span class='notice'>[B] called to [end_area.name]. [called.len] meters to destination.</span>"
+	else
+		src << "<span class='danger'>Failed to calculate a valid route. Ensure destination is clear of obstructions.</span>"
 
 /mob/living/silicon/ai/proc/sensor_mode()
 	set category = "AI Commands"

@@ -18,6 +18,7 @@
 	var/list/path[] = new() //Every bot has this, so it is best to put it here.
 	var/pathset = 0
 	var/tries = 0 //Number of times the bot tried and failed to move.
+	var/mob/living/silicon/ai/calling_ai = null //Links a bot to the AI calling it.
 	//var/emagged = 0 //Urist: Moving that var to the general /bot tree as it's used by most bots
 
 
@@ -32,6 +33,7 @@
 	SetLuminosity(0)
 	called = 0 //Resets the AI's call on the bot, if any.
 	pathset = 0
+	calling_ai = null
 	src.botcard.access = src.req_access //Resets the bot's access incase it is disabled while under AI control.
 	src.botcard.access += src.req_one_access
 
@@ -180,7 +182,7 @@
 	return
 
 /obj/machinery/bot/proc/move_to_call()
-	if(src.path && src.path.len && tries < 5)
+	if(src.path && src.path.len && tries < 6)
 		world << "[src] MOVING [src.path[1]] - [src.path.len] left. target - [src.path[src.path.len]]"
 		step_to(src, src.path[1])
 		world << "3"
@@ -194,13 +196,15 @@
 			world << "5"
 		world <<  "6"
 	else
+		if(src.calling_ai)
+			src.calling_ai << "[tries ? "<span class='danger'>[src] failed to reach waypoint.</span>" : "<span class='notice'>[src] successfully arrived to waypoint.</span>"]"
+		src.calling_ai = null
 		src.called = 0
 		src.path = new()
 		src.pathset = 0
 		src.botcard.access = src.req_access
 		src.botcard.access += src.req_one_access
 		src.tries = 0
-		world << "[src] arried or tried to arrive."
 		//world << "[src] MOVING [src.path[1]] - [src.path.len] left - [tries] tries."
 
 /******************************************************************/
