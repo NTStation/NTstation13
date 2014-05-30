@@ -97,15 +97,12 @@
 	item_state = "bike_horn"
 	throwforce = 0
 	throwhitsound = 'sound/items/bikehorn.ogg'
+	hitsound = 'sound/items/bikehorn.ogg'
 	w_class = 1.0
 	throw_speed = 3
 	throw_range = 7
 	attack_verb = list("HONKED")
 	var/spam_flag = 0
-
-/obj/item/weapon/bikehorn/attack(mob/living/carbon/M as mob, mob/living/carbon/user as mob)
-	playsound(loc, 'sound/items/bikehorn.ogg', 50, 1, -1) //plays instead of tap.ogg!
-	return ..()
 
 /obj/item/weapon/c_tube
 	name = "cardboard tube"
