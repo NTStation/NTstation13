@@ -23,26 +23,34 @@
 		user << "That isn't food."
 		return
 	else
+		on = TRUE
 		var/obj/item/weapon/reagent_containers/food/snacks/F = I
 		var/obj/item/weapon/reagent_containers/food/snacks/customizable/C
+		var/batchsize
 		C = input("Select food to make.", "Cooking", C) in food_choices
+		batchsize = input("How many do you wish to make?", name, batchsize) as num
+		batchsize = Clamp(round(batchsize),1,12)
 		if(!C)
+			return
+		if(!batchsize)
 			return
 		else
 			user << "You put [F] into [src] for cooking."
 			user.drop_item()
 			F.loc = src
-			on = TRUE
 			if(!candy)
 				icon_state = "oven_on"
 			else
 				icon_state = "mixer_on"
-			sleep(100)
+			sleep(50*batchsize)
 			on = FALSE
 			if(!candy)
 				icon_state = "oven_off"
 			else
 				icon_state = "mixer_off"
+			for(var/i = 0, i < batchsize, i++)
+				var/obj/item/weapon/reagent_containers/food/snacks/customizable/B = C
+				B.loc
 			C.loc = get_turf(src)
 			C.attackby(F,user)
 			playsound(loc, 'sound/machines/ding.ogg', 50, 1)
