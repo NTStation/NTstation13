@@ -95,8 +95,8 @@
 	icon = 'icons/obj/items.dmi'
 	icon_state = "bike_horn"
 	item_state = "bike_horn"
-	force = 1 //No laughing matter, Honk
-	throwforce = 1
+	throwforce = 0
+	force = 0
 	throwhitsound = 'sound/items/bikehorn.ogg'
 	hitsound = 'sound/items/bikehorn.ogg'
 	w_class = 1.0
