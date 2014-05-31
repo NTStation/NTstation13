@@ -156,40 +156,40 @@
 				switch(randomizemechs)
 					if("durand")
 						var/obj/mecha/combat/durand/loaded/D = new /obj/mecha/combat/durand/loaded(get_turf(H))
-						D.cell = /obj/item/weapon/stock_parts/cell/infinite
+						D.cell = new /obj/item/weapon/stock_parts/cell/infinite(D)
 					if("gygax")
 						var/obj/mecha/combat/gygax/loaded/G = new /obj/mecha/combat/gygax/loaded(get_turf(H))
-						G.cell = /obj/item/weapon/stock_parts/cell/infinite
+						G.cell = new /obj/item/weapon/stock_parts/cell/infinite(G)
 					if("d-gygax")
 						var/obj/mecha/combat/gygax/dark/D = new /obj/mecha/combat/gygax/dark/loaded(get_turf(H))
 						D.operation_req_access = list()
-						D.cell = /obj/item/weapon/stock_parts/cell/infinite
+						D.cell = new /obj/item/weapon/stock_parts/cell/infinite(D)
 					if("marauder")
 						summon_mechslist -= "marauder"
 						var/obj/mecha/combat/marauder/M = new /obj/mecha/combat/marauder/loaded(get_turf(H))
 						M.operation_req_access = list()
-						M.cell = /obj/item/weapon/stock_parts/cell/infinite
+						M.cell = new /obj/item/weapon/stock_parts/cell/infinite(M)
 					if("mauler")
 						summon_mechslist -= "mauler"
 						var/obj/mecha/combat/marauder/mauler/MM = new /obj/mecha/combat/marauder/mauler/loaded(get_turf(H))
 						MM.operation_req_access = list()
-						MM.cell = /obj/item/weapon/stock_parts/cell/infinite
+						MM.cell = new /obj/item/weapon/stock_parts/cell/infinite(MM)
 					if("seraph")
 						summon_mechslist -= "seraph"
 						var/obj/mecha/combat/marauder/seraph/S = new /obj/mecha/combat/marauder/seraph(get_turf(H))
 						S.operation_req_access = list()
-						S.cell = /obj/item/weapon/stock_parts/cell/infinite
+						S.cell = new /obj/item/weapon/stock_parts/cell/infinite(S)
 					if("d-ripley")
 						var/obj/mecha/working/ripley/deathripley/DR = new /obj/mecha/working/ripley/deathripley(get_turf(H))
-						DR.cell = /obj/item/weapon/stock_parts/cell/infinite
+						DR.cell = new /obj/item/weapon/stock_parts/cell/infinite(DR)
 					if("reticence")
 						var/obj/mecha/combat/reticence/R = new /obj/mecha/combat/reticence/loaded(get_turf(H))
 						R.operation_req_access = list()
-						R.cell = /obj/item/weapon/stock_parts/cell/infinite
+						R.cell = new /obj/item/weapon/stock_parts/cell/infinite(R)
 					if("HONK")
 						var/obj/mecha/combat/honker/HONK = new /obj/mecha/combat/honker/loaded(get_turf(H))
 						HONK.operation_req_access = list()
-						HONK.cell = /obj/item/weapon/stock_parts/cell/infinite
+						HONK.cell = new /obj/item/weapon/stock_parts/cell/infinite(HONK)
 			if("melee")
 				switch(randomizemelee)
 					if("katana")
