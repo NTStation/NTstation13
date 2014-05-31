@@ -35,12 +35,10 @@
 	mag_type = /obj/item/ammo_box/magazine/c20rm
 	fire_sound = 'sound/weapons/Gunshot_smg.ogg'
 
-
 /obj/item/weapon/gun/projectile/automatic/c20r/New()
 	..()
 	update_icon()
 	return
-
 
 /obj/item/weapon/gun/projectile/automatic/c20r/afterattack(atom/target as mob|obj|turf|area, mob/living/user as mob|obj, flag)
 	..()
@@ -50,10 +48,20 @@
 		alarmed = 1
 	return
 
+/obj/item/weapon/gun/projectile/automatic/c20r/attack_hand(mob/user as mob)
+	if(loc == user)
+		if(silenced)
+			silencer_attack_hand(user)
+	..()
+
+/obj/item/weapon/gun/projectile/automatic/c20r/attackby(obj/item/I as obj, mob/user as mob)
+	if(istype(I, /obj/item/weapon/silencer))
+		silencer_attackby(I,user)
+	..()
 
 /obj/item/weapon/gun/projectile/automatic/c20r/update_icon()
 	..()
-	icon_state = "c20r[magazine ? "-[Ceiling(get_ammo(0)/4)*4]" : ""][chambered ? "" : "-e"]"
+	icon_state = "c20r[silenced ? "-silencer" : ""][magazine ? "-[Ceiling(get_ammo(0)/4)*4]" : ""][chambered ? "" : "-e"]"
 	return
 
 
