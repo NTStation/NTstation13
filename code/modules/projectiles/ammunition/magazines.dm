@@ -90,18 +90,6 @@
 	max_ammo = 8
 	multiple_sprites = 2
 
-/obj/item/ammo_box/magazine/m12mm
-	name = "magazine (12mm)"
-	icon_state = "12mm"
-	origin_tech = "combat=2"
-	ammo_type = /obj/item/ammo_casing/a12mm
-	caliber = "12mm"
-	max_ammo = 20
-
-/obj/item/ammo_box/magazine/m12mm/update_icon()
-	..()
-	icon_state = "[initial(icon_state)]-[round(ammo_count(),2)]"
-
 /obj/item/ammo_box/magazine/sm45
 	name = "magazine (.45)"
 	icon_state = "45"
@@ -121,6 +109,18 @@
 	max_ammo = 20
 
 /obj/item/ammo_box/magazine/uzim45/update_icon()
+	..()
+	icon_state = "[initial(icon_state)]-[round(ammo_count(),2)]"
+
+/obj/item/ammo_box/magazine/c20rm
+	name = "C-20r magazine (.45)"
+	icon_state = "c20rm"
+	origin_tech = "combat=2"
+	ammo_type = /obj/item/ammo_casing/c45
+	caliber = ".45"
+	max_ammo = 20
+
+/obj/item/ammo_box/magazine/c20rm/update_icon()
 	..()
 	icon_state = "[initial(icon_state)]-[round(ammo_count(),2)]"
 

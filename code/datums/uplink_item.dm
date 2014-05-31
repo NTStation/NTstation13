@@ -114,7 +114,7 @@ var/list/uplink_items = list()
 
 /datum/uplink_item/dangerous/smg
 	name = "C-20r Submachine Gun"
-	desc = "A fully-loaded Scarborough Arms-developed submachine gun that fires 12mm automatic rounds with a 20-round magazine."
+	desc = "A fully-loaded Scarborough Arms-developed submachine gun that fires .45 ACP rounds with a 20-round magazine."
 	item = /obj/item/weapon/gun/projectile/automatic/c20r
 	cost = 7
 	gamemodes = list(/datum/game_mode/nuclear)
@@ -212,9 +212,9 @@ var/list/uplink_items = list()
 	cost = 2
 
 /datum/uplink_item/ammo/smg
-	name = "Ammo-12mm"
-	desc = "A 20-round 12mm magazine for use in the C-20r submachine gun."
-	item = /obj/item/ammo_box/magazine/m12mm
+	name = "Ammo-45"
+	desc = "A 20-round .45 ACP magazine for use in the C-20r submachine gun."
+	item = /obj/item/ammo_box/magazine/c20rm
 	cost = 1
 	gamemodes = list(/datum/game_mode/nuclear)
 
