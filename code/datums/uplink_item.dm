@@ -108,20 +108,20 @@ var/list/uplink_items = list()
 
 /datum/uplink_item/dangerous/pistol
 	name = "Stechkin Pistol"
-	desc = "A small, easily concealable handgun that uses 10mm magazines and is compatible with silencers."
+	desc = "A small, easily concealable handgun that uses 8-round 10mm magazines and is compatible with silencers."
 	item = /obj/item/weapon/gun/projectile/automatic/pistol
 	cost = 5
 
 /datum/uplink_item/dangerous/smg
 	name = "C-20r Submachine Gun"
-	desc = "A fully-loaded Scarborough Arms-developed submachine gun that fires 12mm automatic rounds with a 20-round magazine."
+	desc = "A fully-loaded Scarborough Arms-developed submachine gun that uses 20-round .45 ACP magazines and is compatible with silencers."
 	item = /obj/item/weapon/gun/projectile/automatic/c20r
 	cost = 7
 	gamemodes = list(/datum/game_mode/nuclear)
 
 /datum/uplink_item/dangerous/machinegun
 	name = "L6 Squad Automatic Weapon"
-	desc = "A traditionally constructed machine gun made by AA-2531. This deadly weapon has a massive 50-round magazine of 7.62�51mm ammunition."
+	desc = "A traditionally constructed machine gun made by AA-2531. This deadly weapon has a massive 50-round magazine of 7.62x51mm ammunition."
 	item = /obj/item/weapon/gun/projectile/automatic/l6_saw
 	cost = 20
 	gamemodes = list(/datum/game_mode/nuclear)
@@ -161,7 +161,7 @@ var/list/uplink_items = list()
 
 /datum/uplink_item/dangerous/viscerators
 	name = "Viscerator Delivery Grenade"
-	desc = "A unique grenade that deploys a swarm of viscerators upon activation, which will chase down and shred any non-operatives in the area."
+	desc = "A unique grenade that deploys a swarm of razor-viscerators upon activation, which will chase down and shred any non-operatives in the area."
 	item = /obj/item/weapon/grenade/spawnergrenade/manhacks
 	cost = 4
 	gamemodes = list(/datum/game_mode/nuclear)
@@ -184,15 +184,16 @@ var/list/uplink_items = list()
 
 /datum/uplink_item/dangerous/mauler
 	name = "Mauler Exosuit"
-	desc = "A massive and incredibly deadly Syndicate exosuit. Features long-range targetting, thrust vectoring, and deployable smoke."
+	desc = "A massive and incredibly deadly Syndicate exosuit. Features long-range targetting, space thrusters, and mounted smoke-screen launchers."
 	item = /obj/mecha/combat/marauder/mauler/loaded
 	cost = 70
 	gamemodes = list(/datum/game_mode/nuclear)
+
 /datum/uplink_item/dangerous/syndieborg
 	name = "Syndicate Cyborg"
-	desc = "A cyborg designed and programmed for systematic extermination of non-Syndicate personnel."
+	desc = "A cyborg designed for extermination and slaved to syndicate agents. Delivered through a single-use bluespace hand teleporter and comes pre-equipped with a brain-loaded MMI."
 	item = /obj/item/weapon/antag_spawner/borg_tele
-	cost = 25
+	cost = 26 //can't buy two with 50tc
 	gamemodes = list(/datum/game_mode/nuclear)
 //for refunding the syndieborg teleporter
 /datum/uplink_item/dangerous/syndieborg/spawn_item()
@@ -212,9 +213,9 @@ var/list/uplink_items = list()
 	cost = 2
 
 /datum/uplink_item/ammo/smg
-	name = "Ammo-12mm"
-	desc = "A 20-round 12mm magazine for use in the C-20r submachine gun."
-	item = /obj/item/ammo_box/magazine/m12mm
+	name = "Ammo-45"
+	desc = "A 20-round .45 ACP magazine for use in the C-20r submachine gun."
+	item = /obj/item/ammo_box/magazine/c20rm
 	cost = 1
 	gamemodes = list(/datum/game_mode/nuclear)
 
@@ -258,8 +259,8 @@ var/list/uplink_items = list()
 	cost = 3
 
 /datum/uplink_item/stealthy_weapons/silencer
-	name = "Stetchkin Silencer"
-	desc = "Fitted for use on the Stetchkin pistol, this silencer will make its shots quieter when equipped onto it."
+	name = "Syndicate Silencer"
+	desc = "A universal small-arms silencer favored by stealth operatives, this will make shots quieter when equipped onto any low-caliber weapon."
 	item = /obj/item/weapon/silencer
 	cost = 2
 
