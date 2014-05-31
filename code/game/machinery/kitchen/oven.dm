@@ -11,7 +11,6 @@
 	idle_power_usage = 5
 	var/on = FALSE	//Is it making food already?
 	var/list/food_choices = list()
-
 /obj/machinery/cooking/New()
 	..()
 	updatefood()
@@ -24,37 +23,26 @@
 		user << "That isn't food."
 		return
 	else
-		on = TRUE
 		var/obj/item/weapon/reagent_containers/food/snacks/F = I
 		var/obj/item/weapon/reagent_containers/food/snacks/customizable/C
-		var/batchsize
 		C = input("Select food to make.", "Cooking", C) in food_choices
-		batchsize = input("How many do you wish to make?", name, batchsize) as num
-		batchsize = Clamp(round(batchsize),1,12)
 		if(!C)
-			return
-		if(!batchsize)
 			return
 		else
 			user << "You put [F] into [src] for cooking."
 			user.drop_item()
 			F.loc = src
+			on = TRUE
 			if(!candy)
 				icon_state = "oven_on"
 			else
 				icon_state = "mixer_on"
-			sleep(50*batchsize)
+			sleep(100)
 			on = FALSE
 			if(!candy)
 				icon_state = "oven_off"
 			else
 				icon_state = "mixer_off"
-
-/* This doesn't do anything fix your shit goofball.- Remie
-			for(var/i = 0, i < batchsize, i++)
-				var/obj/item/weapon/reagent_containers/food/snacks/customizable/B = C
-				B.loc
-*/
 			C.loc = get_turf(src)
 			C.attackby(F,user)
 			playsound(loc, 'sound/machines/ding.ogg', 50, 1)
