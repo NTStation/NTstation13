@@ -528,7 +528,8 @@ table tr:first-child th:first-child { border: none;}
 			usr << browse(null, "window=air_alarm")
 			return
 
-
+	if(locked && !istype(usr, /mob/living/silicon)) // exploit prevention -walter0o
+		return
 
 	if(href_list["command"])
 		var/device_id = href_list["id_tag"]
