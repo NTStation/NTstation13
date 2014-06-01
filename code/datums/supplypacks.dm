@@ -944,7 +944,7 @@ var/list/all_supply_groups = list(supply_emergency,supply_security,supply_engine
 					/obj/item/weapon/contraband/poster/legit,
 					/obj/item/weapon/contraband/poster/legit)
 	cost = 8
-	containername = "Corporate Posters Crate
+	containername = "Corporate Posters Crate"
 
 ///////////// Paper Work
 
