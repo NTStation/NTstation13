@@ -3,11 +3,12 @@
 	desc = "Cookies are ready, dear."
 	icon = 'icons/obj/cooking_machines.dmi'
 	icon_state = "oven_off"
+	var/orig = "oven"
+	var/production_meth = "cooking"
 	layer = 2.9
 	density = 1
 	anchored = 1
 	use_power = 1
-	var/candy = 0
 	idle_power_usage = 5
 	var/on = FALSE	//Is it making food already?
 	var/list/food_choices = list()
@@ -29,20 +30,14 @@
 		if(!C)
 			return
 		else
-			user << "You put [F] into [src] for cooking."
+			user << "You put [F] into [src] for [production_meth]."
 			user.drop_item()
 			F.loc = src
 			on = TRUE
-			if(!candy)
-				icon_state = "oven_on"
-			else
-				icon_state = "mixer_on"
+			icon_state = "[orig]_on"
 			sleep(100)
 			on = FALSE
-			if(!candy)
-				icon_state = "oven_off"
-			else
-				icon_state = "mixer_off"
+			icon_state = "[orig]_off"
 			C.loc = get_turf(src)
 			C.attackby(F,user)
 			playsound(loc, 'sound/machines/ding.ogg', 50, 1)
@@ -55,7 +50,6 @@
 /obj/machinery/cooking/oven
 	name = "oven"
 	desc = "Cookies are ready, dear."
-	icon = 'icons/obj/cooking_machines.dmi'
 	icon_state = "oven_off"
 
 /obj/machinery/cooking/oven/updatefood()
@@ -69,14 +63,30 @@
 /obj/machinery/cooking/candy
 	name = "candy machine"
 	desc = "Get yer box of deep fried deep fried deep fried deep fried cotton candy cereal sandwich cookies here!"
-	icon = 'icons/obj/cooking_machines.dmi'
 	icon_state = "mixer_off"
-	candy = 1
+	orig = "mixer"
+	production_meth = "candizing"
 
 /obj/machinery/cooking/candy/updatefood()
 	for(var/U in food_choices)
 		food_choices.Remove(U)
 	for(var/U in typesof(/obj/item/weapon/reagent_containers/food/snacks/customizable/candy)-(/obj/item/weapon/reagent_containers/food/snacks/customizable/candy))
 		var/obj/item/weapon/reagent_containers/food/snacks/customizable/candy/V = new U
+		src.food_choices += V
+	return
+
+
+/obj/machinery/cooking/still
+	name = "still"
+	desc = "Alright, so, t'make some moonshine, fust yo' gotta combine some of this hyar egg wif th' deep fried sausage."
+	icon_state = "still_off"
+	orig = "still"
+	production_meth = "brewing"
+
+/obj/machinery/cooking/still/updatefood()
+	for(var/U in food_choices)
+		food_choices.Remove(U)
+	for(var/U in typesof(/obj/item/weapon/reagent_containers/food/drinks/bottle/customizable/)-(/obj/item/weapon/reagent_containers/food/drinks/bottle/customizable/))
+		var/obj/item/weapon/reagent_containers/food/drinks/bottle/customizable/V = new U
 		src.food_choices += V
 	return
