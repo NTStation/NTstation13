@@ -4,6 +4,7 @@
 	icon_state = "meson"
 	item_state = "glasses"
 	origin_tech = "magnets=2;engineering=2"
+	darkness_view = 1
 	vision_flags = SEE_TURFS
 	invis_view = SEE_INVISIBLE_MINIMUM
 

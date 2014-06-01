@@ -160,6 +160,7 @@
 		new /datum/data/mining_equipment("Cigar",               /obj/item/clothing/mask/cigarette/cigar/havana,                    100),
 		new /datum/data/mining_equipment("Whiskey",             /obj/item/weapon/reagent_containers/food/drinks/bottle/whiskey,    150),
 		new /datum/data/mining_equipment("Soap",                /obj/item/weapon/soap/nanotrasen, 						           150),
+		new /datum/data/mining_equipment("Gar Glasses",         /obj/item/clothing/glasses/sunglasses/gar, 						   250),
 		new /datum/data/mining_equipment("Alien Toy",           /obj/item/clothing/mask/facehugger/toy, 		                   500),
 		new /datum/data/mining_equipment("Laser Pointer",       /obj/item/device/laser_pointer, 				                   500),
 		new /datum/data/mining_equipment("Stimulant Pills",     /obj/item/weapon/storage/pill_bottle/stimulant, 				   350),
