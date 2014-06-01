@@ -9,6 +9,7 @@
 	density = 1
 	anchored = 1
 	use_power = 1
+	var/grown_only = 0
 	idle_power_usage = 5
 	var/on = FALSE	//Is it making food already?
 	var/list/food_choices = list()
@@ -22,6 +23,9 @@
 		return
 	if(!istype(I,/obj/item/weapon/reagent_containers/food/snacks/))
 		user << "That isn't food."
+		return
+	if(!istype(I,/obj/item/weapon/reagent_containers/food/snacks/grown/) && grown_only)
+		user << "You can only still grown items."
 		return
 	else
 		var/obj/item/weapon/reagent_containers/food/snacks/F = I
@@ -81,6 +85,7 @@
 	desc = "Alright, so, t'make some moonshine, fust yo' gotta combine some of this hyar egg wif th' deep fried sausage."
 	icon_state = "still_off"
 	orig = "still"
+	grown_only = 1
 	production_meth = "brewing"
 
 /obj/machinery/cooking/still/updatefood()
