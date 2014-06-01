@@ -24,7 +24,7 @@
 	//weight = 1.0E7
 	health = 25
 	maxhealth = 25
-	var/cleaning = 0
+	busy_name = "Cleaning"
 	var/blood = 1
 	var/list/target_types = list()
 	var/obj/effect/decal/cleanable/target
@@ -170,15 +170,14 @@ text("<A href='?src=\ref[src];operation=oddbutton'>[src.oddbutton ? "Yes" : "No"
 
 	if(!src.on)
 		return
-	if(src.cleaning)
+	if(src.busy == busy_name)
 		return
 	if(src.called)
 		if(!src.pathset)
-			src.path = src.called
+			set_path()
 			src.target = null
 			src.oldtarget = null
 			src.oldloc = null
-			src.pathset = 1
 		else
 			move_to_call(src.path)
 			sleep(5)
@@ -328,9 +327,9 @@ text("<A href='?src=\ref[src];operation=oddbutton'>[src.oddbutton ? "Yes" : "No"
 	src.anchored = 1
 	src.icon_state = "cleanbot-c"
 	visible_message("<span class='danger'>[src] begins to clean up [target]</span>")
-	src.cleaning = 1
+	src.busy = busy_name
 	spawn(50)
-		src.cleaning = 0
+		src.busy = 0
 		qdel(target)
 		src.icon_state = "cleanbot[src.on]"
 		src.anchored = 0

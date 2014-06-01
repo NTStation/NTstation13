@@ -31,6 +31,7 @@
 #define SECBOT_START_PATROL	4		// start patrol
 #define SECBOT_PATROL		5		// patrolling
 #define SECBOT_SUMMON		6		// summoned by PDA
+	var/list/mode_names = list("In Pursuit","Arresting","Arresting","Starting Patrol","Patrolling","Summoned")
 
 	var/auto_patrol = 0		// set to make bot automatically patrol
 
@@ -213,13 +214,12 @@ Auto Patrol: []"},
 		return
 	if(src.called)
 		if(!src.pathset)
-			src.path = src.called
+			set_path()
 			src.target = null
 			src.oldtarget_name = null
 			src.anchored = 0
 			src.mode = SECBOT_IDLE
 			walk_to(src,0)
-			src.pathset = 1
 		else
 			move_to_call(src.path)
 			sleep(5)
@@ -363,7 +363,10 @@ Auto Patrol: []"},
 					patrol_step()
 					sleep(4)
 					patrol_step()
-
+	if(mode)
+		busy = mode_names[mode]
+	else
+		busy = 0
 	return
 
 

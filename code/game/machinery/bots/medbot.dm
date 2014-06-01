@@ -25,7 +25,7 @@
 	var/oldloc = null
 	var/last_found = 0
 	var/last_newpatient_speak = 0 //Don't spam the "HEY I'M COMING" messages
-	var/currently_healing = 0
+	busy_name = "Healing"
 	var/injection_amount = 15 //How much reagent do we inject at a time?
 	var/heal_threshold = 10 //Start healing when they have this much damage in a category
 	var/use_beaker = 0 //Use reagents in beaker instead of default treatment agents.
@@ -89,7 +89,7 @@
 	src.oldpatient = null
 	src.oldloc = null
 	src.path = new()
-	src.currently_healing = 0
+	src.busy = 0
 	src.last_found = world.time
 	src.icon_state = "medibot[src.on]"
 	src.updateUsrDialog()
@@ -233,7 +233,7 @@
 		flick("medibot_spark", src)
 		src.patient = null
 		if(user) src.oldpatient = user
-		src.currently_healing = 0
+		src.busy = 0
 		src.last_found = world.time
 		src.anchored = 0
 		src.emagged = 2
@@ -253,7 +253,7 @@
 
 		src.oldpatient = src.patient
 		src.patient = null
-		src.currently_healing = 0
+		src.busy = 0
 
 		if(src.stunned <= 0)
 			src.icon_state = "medibot[src.on]"
@@ -263,14 +263,11 @@
 	if(src.called) //Stop what you are doing and answer the call!
 
 		if(!src.pathset) //Reset the bot before calling it.
-			src.path = src.called
-			src.pathset = 1
+			set_path()
 			src.patient = null
 			src.oldpatient = null
 			src.oldloc = null
-			src.currently_healing = 0
 			src.last_found = world.time
-			world << "STARTING"
 		else
 			move_to_call(src.path)
 			sleep(5)
@@ -280,7 +277,7 @@
 	if(src.frustration > 8)
 		src.oldpatient = src.patient
 		src.patient = null
-		src.currently_healing = 0
+		src.busy = 0
 		src.last_found = world.time
 		src.path = new()
 
@@ -312,15 +309,15 @@
 
 
 	if(src.patient && (get_dist(src,src.patient) <= 1))
-		if(!src.currently_healing)
-			src.currently_healing = 1
+		if(!src.busy)
+			src.busy = busy_name
 			src.frustration = 0
 			src.medicate_patient(src.patient)
 		return
 
 	else if(src.patient && (src.path.len) && (get_dist(src.patient,src.path[src.path.len]) > 2))
 		src.path = new()
-		src.currently_healing = 0
+		src.busy = 0
 		src.last_found = world.time
 
 	if(src.patient && src.path.len == 0 && (get_dist(src,src.patient) > 1))
@@ -331,7 +328,7 @@
 			if(src.path.len == 0)
 				src.oldpatient = src.patient
 				src.patient = null
-				src.currently_healing = 0
+				src.busy = 0
 				src.last_found = world.time
 		return
 
@@ -394,7 +391,7 @@
 	if(!istype(C))
 		src.oldpatient = src.patient
 		src.patient = null
-		src.currently_healing = 0
+		src.busy = 0
 		src.last_found = world.time
 		return
 
@@ -403,7 +400,7 @@
 		src.speak(death_message)
 		src.oldpatient = src.patient
 		src.patient = null
-		src.currently_healing = 0
+		src.busy = 0
 		src.last_found = world.time
 		return
 
@@ -447,7 +444,7 @@
 	if(!reagent_id) //If they don't need any of that they're probably cured!
 		src.oldpatient = src.patient
 		src.patient = null
-		src.currently_healing = 0
+		src.busy = 0
 		src.last_found = world.time
 		var/message = pick("All patched up!","An apple a day keeps me away.","Feel better soon!")
 		src.speak(message)
@@ -468,7 +465,7 @@
 					"<span class='userdanger'>[src] injects [src.patient] with the syringe!</span>")
 
 			src.icon_state = "medibot[src.on]"
-			src.currently_healing = 0
+			src.busy = 0
 			return
 
 	reagent_id = null

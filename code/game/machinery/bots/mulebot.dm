@@ -18,6 +18,7 @@ var/global/mulebot_count = 0
 	maxhealth = 150
 	fire_dam_coeff = 0.7
 	brute_dam_coeff = 0.5
+	busy_name = "Working"
 	var/atom/movable/load = null		// the loaded crate (usually)
 	var/beacon_freq = 1400
 	var/control_freq = 1447
@@ -520,11 +521,11 @@ var/global/mulebot_count = 0
 /obj/machinery/bot/mulebot/proc/process_bot()
 	//if(mode) world << "Mode: [mode]"
 	if (src.called)
-		src.path = src.called //Set the path given to it by the AI
+		set_path() //Set the path given to it by the AI
 		src.target = src.path[src.path.len] //Target is the end point of the path, the waypoint set by the AI.
 		src.destination = src.target
 		src.called = 0 //Once the MULE is commanded, follow normal procedures to reach the waypoint.
-		src.auto_return = 0 //Prevents the MULE immediately scooting back home upon getting called.
+		src.auto_return = 0 //Prevents the MULE immediately scooting back home upon reaching the waypoint..
 		start()
 
 	switch(mode)
@@ -644,6 +645,10 @@ var/global/mulebot_count = 0
 			//world << "Pending path calc."
 		//if(7)
 			//world << "No dest / no route."
+	if(mode)
+		busy = busy_name
+	else
+		busy = 0
 	return
 
 

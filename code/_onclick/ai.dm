@@ -60,7 +60,7 @@
 		return
 	if(src.waypoint_mode)
 		src.waypoint = get_turf(A)
-		src << "Got Turf"
+		src << "[src.waypoint ? "<span class='notice'>Waypoint set.</span>" : "<span class='warning'>Failed to set waypoint.</span>"]"
 		src.waypoint_mode = 0
 		call_bot(src.waypoint, src.B)
 		return

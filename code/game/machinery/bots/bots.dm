@@ -17,7 +17,10 @@
 	var/called = 0 //If the bot has been called by the AI.
 	var/list/path[] = new() //Every bot has this, so it is best to put it here.
 	var/pathset = 0
+	var/busy = 0 //Standardizes the vars that indicate the bot is busy with its function.
+	var/busy_name = 0 //This holds text for what the bot is busy doing, reported on the AI's bot control interface.
 	var/tries = 0 //Number of times the bot tried and failed to move.
+	var/remote_disabled = 0 //If enabled, the AI cannot *Remotely* control a bot. It can still control it through cameras.
 	var/mob/living/silicon/ai/calling_ai = null //Links a bot to the AI calling it.
 	//var/emagged = 0 //Urist: Moving that var to the general /bot tree as it's used by most bots
 
@@ -55,6 +58,7 @@
 		user << "<span class='warning'>You bypass [src]'s controls.</span>"
 	if(!locked && open)
 		emagged = 2
+		remote_disabled = 1 //Manually emagging the bot locks out the AI.
 
 /obj/machinery/bot/examine()
 	set src in view()
@@ -181,20 +185,20 @@
 		O.show_message("<span class='game say'><span class='name'>[src]</span> beeps, \"[message]\"</span>",2)
 	return
 
+/obj/machinery/bot/proc/set_path() //Contains all the non-unique settings for prepairing a bot to be controlled by the AI.
+	src.pathset = 1
+	src.path = src.called
+	src.busy = "Responding"
+
 /obj/machinery/bot/proc/move_to_call()
 	if(src.path && src.path.len && tries < 6)
-		world << "[src] MOVING [src.path[1]] - [src.path.len] left. target - [src.path[src.path.len]]"
 		step_to(src, src.path[1])
-		world << "3"
 
 		if(src.loc == src.path[1])//Remove turfs from the path list if the bot moved there.
-			world <<  "4"
 			src.tries = 0
 			src.path -= src.path[1]
 		else //Could not move because of an obstruction.
 			src.tries++
-			world << "5"
-		world <<  "6"
 	else
 		if(src.calling_ai)
 			src.calling_ai << "[tries ? "<span class='danger'>[src] failed to reach waypoint.</span>" : "<span class='notice'>[src] successfully arrived to waypoint.</span>"]"
@@ -205,6 +209,7 @@
 		src.botcard.access = src.req_access
 		src.botcard.access += src.req_one_access
 		src.tries = 0
+		src.busy = 0
 		//world << "[src] MOVING [src.path[1]] - [src.path.len] left - [tries] tries."
 
 /******************************************************************/

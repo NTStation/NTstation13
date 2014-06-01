@@ -419,12 +419,16 @@ var/list/ai_list = list()
 
 	if (href_list["callbot"]) //Command a bot to move to a selected location.
 		src.B = locate(href_list["callbot"]) in machines
+		if(B.remote_disabled)
+			return
 		src.waypoint_mode = 1
 		src << "<span class='notice'>Set your waypoint by clicking on a valid location free of obstructions.</span>"
 		return
 
 	if (href_list["interface"]) //Remotely connect to a bot!
 		src.B = locate(href_list["interface"]) in machines
+		if(B.remote_disabled)
+			return
 		B.attack_ai(src)
 
 	else if (href_list["faketrack"])
@@ -527,13 +531,12 @@ var/list/ai_list = list()
 	set name = "Access Robot Control"
 	set desc = "Wirelessly control various automatic robots."
 	if(src.stat == 2)
-		src << "You can't control the bots, because you are dead!"
+		src << "<span class='danger'>Critical error. System offline.</span>"
 		return
-	if(istype(usr,/mob/living/silicon/ai))
-		var/mob/living/silicon/ai/AI = src
-		if(AI.control_disabled)
-			usr << "Wireless control is disabled!"
-			return
+	if(src.control_disabled)
+		usr << "Wireless control is disabled!"
+		return
+
 	var/d
 	var/area/bot_area
 	d += "<table width='100%'><tr><td width='40%'><h3>Name</h3></td><td width='30%'><h3>Status</h3></td><td width='30%'><h3>Location</h3></td><td width='10%'><h3>Control</h3></td></tr>"
@@ -541,12 +544,14 @@ var/list/ai_list = list()
 	for (B in machines)
 		if(B.z == src.z) //Only bots on the same Z-level are detected!
 			bot_area = get_area(B)
-			d += "<tr><td width='30%'>[B.name]</td><td width='30%'>[B.on ? "<span class='good'>Active</span>" : "<span class='average'>Inactive</span>"]</td><td width='30%'>[format_text(bot_area.name)]</td>"
-			d += "<td width='10%'><A HREF=?src=\ref[src];interface=\ref[B]>Interface</A></td>"
-			d += "<td width='10%'>[B.on ? "<A HREF=?src=\ref[src];callbot=\ref[B]>Call</A>" : " Call"]</td>"
+			d += "<tr><td width='30%'>[B.name]</td>"
+			//If the bot is on, it will display the bot's current busy status. If the bot is not busy, it will just report "Ready". "Inactive if it is not on at all.
+			d += "<td width='30%'>[B.on ? "[B.busy ? "<span class='average'>[B.busy]</span>": "<span class='good'>Ready</span>"]" : "<span class='bad'>Inactive</span>"]</td>"
+			d += "<td width='30%'>[format_text(bot_area.name)]</td>"
+			d += "<td width='10%'>[B.remote_disabled ? "--Offline--" : "<A HREF=?src=\ref[src];interface=\ref[B]>Interface</A></td> \
+			<td width='10%'><A HREF=?src=\ref[src];callbot=\ref[B]>Call</A></td>"]"
 			d += "</tr>"
 
-		src << "[B] - Detected - [src.z] - [B.z]"
 	var/datum/browser/popup = new(src, "botcall", "Remote Robot Control", 700, 400)
 	popup.set_content(d)
 	popup.open()
@@ -555,11 +560,9 @@ var/list/ai_list = list()
 
 	if(src.waypoint)
 		end_loc = src.waypoint
-		src << "[B] called to [end_loc.x],[end_loc.y]."
 
 	else
 		end_loc = get_turf(src.eyeobj)
-		src << "[B] called to [end_loc.name]."
 
 	var/area/end_area = get_area(end_loc)
 
@@ -572,11 +575,13 @@ var/list/ai_list = list()
 	called = AStar(B.loc, end_loc, /turf/proc/CardinalTurfsWithAccess, /turf/proc/Distance_cardinal, 0, 255, id=all_access)
 
 	if(called && called.len) //Ensures that a valid path is calculated!
-		B.called = called //Send the path to the bot!
+		if(!B.on)
+			B.turn_on() //Saves the AI the hassle of having to activate a bot manually.
 		B.pathset = 0 //Forces the bot to accept a new rute if already under an AI call.
+		B.called = called //Send the path to the bot!
 		B.botcard = all_access //Give the bot all-access while under the AI's command.
 		B.calling_ai = src //Link the AI to the bot!
-		src << "<span class='notice'>[B] called to [end_area.name]. [called.len] meters to destination.</span>"
+		src << "<span class='notice'>[B] called to [end_area.name]. [called.len-1] meters to destination.</span>"
 	else
 		src << "<span class='danger'>Failed to calculate a valid route. Ensure destination is clear of obstructions.</span>"
 

@@ -34,9 +34,9 @@
 	anchored = 0
 	health = 25
 	maxhealth = 25
+	busy_name = "Repairing"
 	//weight = 1.0E7
 	var/amount = 10
-	var/repairing = 0
 	var/improvefloors = 0
 	var/eattiles = 0
 	var/maketiles = 0
@@ -179,15 +179,14 @@
 
 	if(!src.on)
 		return
-	if(src.repairing)
+	if(src.busy == busy_name)
 		return
 	if(src.called)
 		if(!src.pathset)
-			src.path = src.called
 			src.target = null
 			src.oldtarget = null
 			src.oldloc = null
-			src.pathset = 1
+			set_path()
 		else
 			move_to_call(src.path)
 			sleep(5)
@@ -291,7 +290,7 @@
 		else if(emagged == 2 && istype(src.target,/turf/simulated/floor))
 			var/turf/simulated/floor/F = src.target
 			src.anchored = 1
-			src.repairing = 1
+			src.busy = busy_name
 			if(prob(90))
 				F.break_tile_to_plating()
 			else
@@ -300,7 +299,7 @@
 			spawn(50)
 				src.amount ++
 				src.anchored = 0
-				src.repairing = 0
+				src.busy = 0
 				src.target = null
 		src.path = new()
 		return
@@ -321,20 +320,20 @@
 	if(istype(target, /turf/space/))
 		visible_message("\red [src] begins to repair the hole")
 		var/obj/item/stack/tile/plasteel/T = new /obj/item/stack/tile/plasteel
-		src.repairing = 1
+		src.busy = busy_name
 		spawn(50)
 			T.build(src.loc)
-			src.repairing = 0
+			src.busy = 0
 			src.amount -= 1
 			src.updateicon()
 			src.anchored = 0
 			src.target = null
 	else
 		visible_message("\red [src] begins to improve the floor.")
-		src.repairing = 1
+		src.busy = busy_name
 		spawn(50)
 			src.loc.icon_state = "floor"
-			src.repairing = 0
+			src.busy = 0
 			src.amount -= 1
 			src.updateicon()
 			src.anchored = 0
@@ -344,11 +343,11 @@
 	if(!istype(T, /obj/item/stack/tile/plasteel))
 		return
 	visible_message("\red [src] begins to collect tiles.")
-	src.repairing = 1
+	src.busy = busy_name
 	spawn(20)
 		if(isnull(T))
 			src.target = null
-			src.repairing = 0
+			src.busy = 0
 			return
 		if(src.amount + T.amount > 50)
 			var/i = 50 - src.amount
@@ -359,7 +358,7 @@
 			qdel(T)
 		src.updateicon()
 		src.target = null
-		src.repairing = 0
+		src.busy = 0
 
 /obj/machinery/bot/floorbot/proc/maketile(var/obj/item/stack/sheet/metal/M)
 	if(!istype(M, /obj/item/stack/sheet/metal))
@@ -367,18 +366,18 @@
 	if(M.amount > 1)
 		return
 	visible_message("\red [src] begins to create tiles.")
-	src.repairing = 1
+	src.busy = busy_name
 	spawn(20)
 		if(isnull(M))
 			src.target = null
-			src.repairing = 0
+			src.busy = 0
 			return
 		var/obj/item/stack/tile/plasteel/T = new /obj/item/stack/tile/plasteel
 		T.amount = 4
 		T.loc = M.loc
 		qdel(M)
 		src.target = null
-		src.repairing = 0
+		src.busy = 0
 
 /obj/machinery/bot/floorbot/proc/updateicon()
 	if(src.amount > 0)
