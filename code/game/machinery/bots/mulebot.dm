@@ -528,6 +528,11 @@ var/global/mulebot_count = 0
 		src.auto_return = 0 //Prevents the MULE immediately scooting back home upon reaching the waypoint..
 		start()
 
+	if(mode)
+		busy = busy_name
+	else
+		busy = 0
+
 	switch(mode)
 		if(0)		// idle
 			icon_state = "mulebot0"
@@ -645,10 +650,7 @@ var/global/mulebot_count = 0
 			//world << "Pending path calc."
 		//if(7)
 			//world << "No dest / no route."
-	if(mode)
-		busy = busy_name
-	else
-		busy = 0
+
 	return
 
 
