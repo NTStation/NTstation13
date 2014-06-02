@@ -419,7 +419,7 @@ var/list/ai_list = list()
 
 	if (href_list["callbot"]) //Command a bot to move to a selected location.
 		src.B = locate(href_list["callbot"]) in machines
-		if(B.remote_disabled)
+		if(B.remote_disabled || !isturf(src.loc))
 			return
 		src.waypoint_mode = 1
 		src << "<span class='notice'>Set your waypoint by clicking on a valid location free of obstructions.</span>"
@@ -427,7 +427,7 @@ var/list/ai_list = list()
 
 	if (href_list["interface"]) //Remotely connect to a bot!
 		src.B = locate(href_list["interface"]) in machines
-		if(B.remote_disabled)
+		if(B.remote_disabled || !isturf(src.loc))
 			return
 		B.attack_ai(src)
 
@@ -533,8 +533,9 @@ var/list/ai_list = list()
 	if(src.stat == 2)
 		src << "<span class='danger'>Critical error. System offline.</span>"
 		return
-	if(src.control_disabled)
-		usr << "Wireless control is disabled!"
+
+	if(!isturf(src.loc)) //Carded AIs have no loc data, so they cannot use botcall().
+		src << "<span class='danger'>This function is not supported by current hardware.</span>"
 		return
 
 	var/d
@@ -544,7 +545,7 @@ var/list/ai_list = list()
 	for (B in machines)
 		if(B.z == src.z && !B.remote_disabled) //Only non-emagged bots on the same Z-level are detected!
 			bot_area = get_area(B)
-			d += "<tr><td width='30%'>[B.hacked ? "<span class='bad'>(!)</span>[B.name]" : B.name]</td>"
+			d += "<tr><td width='30%'>[B.hacked ? "<span class='bad'>(!) </span>[B.name]" : B.name]</td>"
 			//If the bot is on, it will display the bot's current busy status. If the bot is not busy, it will just report "Ready". "Inactive if it is not on at all.
 			d += "<td width='30%'>[B.on ? "[B.busy ? "<span class='average'>[B.busy]</span>": "<span class='good'>Ready</span>"]" : "<span class='bad'>Inactive</span>"]</td>"
 			d += "<td width='30%'>[format_text(bot_area.name)]</td>"
