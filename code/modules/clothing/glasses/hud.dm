@@ -114,7 +114,7 @@ obj/item/clothing/glasses/hud/security/gars
 	name = "HUD GAR glasses"
 	desc = "GAR glasses with a HUD."
 	icon_state = "gars"
-	item_state = "gars"
+	item_state = "garb"
 	darkness_view = 1
 	flash_protect = 1
 	tint = 1
@@ -127,7 +127,7 @@ obj/item/clothing/glasses/hud/security/supergars
 	name = "SUPER HUD GAR glasses"
 	desc = "SUPER GAR glasses with a HUD."
 	icon_state = "supergars"
-	item_state = "supergars"
+	item_state = "garb"
 	darkness_view = 1
 	flash_protect = 1
 	tint = 1

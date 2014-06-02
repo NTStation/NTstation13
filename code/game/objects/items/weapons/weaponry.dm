@@ -111,6 +111,7 @@
 		force = 15 //this is as much as a null rod or butcher cleaver and those are rare comparatively
 		hitsound = 'sound/weapons/bladeslice.ogg'
 		icon_state += "_open"
+		item_state = "switchblade_open"
 		w_class = 3
 		attack_verb = list("attacked", "slashed", "stabbed", "sliced", "torn", "ripped", "diced", "cut")
 	else
