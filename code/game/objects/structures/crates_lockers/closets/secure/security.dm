@@ -144,10 +144,7 @@
 		..()
 		sleep(2)
 
-		if(prob(35))
-			new /obj/item/clothing/suit/armor/vest/jacket(src)
-		else
-			new /obj/item/clothing/suit/labcoat/coat/security(src)
+		new /obj/item/clothing/suit/labcoat/coat/security(src)
 		new /obj/item/clothing/suit/armor/vest(src)
 		new /obj/item/clothing/head/helmet(src)
 		new /obj/item/weapon/contraband/poster/legit(src)
