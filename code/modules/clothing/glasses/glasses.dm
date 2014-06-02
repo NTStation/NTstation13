@@ -8,6 +8,12 @@
 	vision_flags = SEE_TURFS
 	invis_view = SEE_INVISIBLE_MINIMUM
 
+/obj/item/clothing/glasses/meson/gar
+	name = "Gar Mesons"
+	icon_state = "garm"
+	item_state = "garm"
+	desc = "Do the impossible, see the invisible!"
+
 /obj/item/clothing/glasses/science
 	name = "Science Goggles"
 	desc = "nothing"
