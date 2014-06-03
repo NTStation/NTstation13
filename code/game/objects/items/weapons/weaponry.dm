@@ -38,7 +38,7 @@
 	icon_state = "woodbat"
 	item_state = "woodbat"
 	w_class = 3.0
-	force = 12 //basically a stunless stun baton for muh balance
+	force = 13
 	throw_speed = 3
 	throw_range = 7
 	throwforce = 7
