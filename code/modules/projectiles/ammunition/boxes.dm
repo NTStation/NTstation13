@@ -51,10 +51,3 @@
 	origin_tech = "combat=2"
 	ammo_type = /obj/item/ammo_casing/c45
 	max_ammo = 20
-
-/obj/item/ammo_box/a12mm
-	name = "Ammunition Box (12mm)"
-	icon_state = "12mmbox"
-	origin_tech = "combat=2"
-	ammo_type = /obj/item/ammo_casing/a12mm
-	max_ammo = 40

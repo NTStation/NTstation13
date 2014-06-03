@@ -151,7 +151,7 @@
 	icon_state = "satchel-norm"
 
 /obj/item/weapon/storage/backpack/satchel_eng
-	name = "industrial satchel"
+	name = "engineering satchel"
 	desc = "A tough satchel with extra pockets."
 	icon_state = "satchel-eng"
 	item_state = "engiepack"
@@ -182,15 +182,20 @@
 	desc = "Useful for holding research materials."
 	icon_state = "satchel-tox"
 
+/obj/item/weapon/storage/backpack/satchel_robo
+	name = "roboticist satchel"
+	desc = "A satchel made with static-free materials for roboticists."
+	icon_state = "satchel-robo"
+
 /obj/item/weapon/storage/backpack/satchel_sec
 	name = "security satchel"
-	desc = "A robust satchel for security related needs."
+	desc = "A robust satchel used by security staff."
 	icon_state = "satchel-sec"
 	item_state = "securitypack"
 
 /obj/item/weapon/storage/backpack/satchel_hyd
 	name = "hydroponics satchel"
-	desc = "A green satchel for plant related work."
+	desc = "A completely biodegradable satchel used by avid botanists."
 	icon_state = "satchel_hyd"
 
 /obj/item/weapon/storage/backpack/satchel_cap

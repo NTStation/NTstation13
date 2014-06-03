@@ -11,9 +11,8 @@
 	new /obj/item/clothing/mask/bandana/blue(src)
 	new /obj/item/clothing/mask/bandana/blue(src)
 	new /obj/item/clothing/mask/bandana/blue(src)
-	new /obj/item/clothing/shoes/brown(src)
-	new /obj/item/clothing/shoes/brown(src)
-	new /obj/item/clothing/shoes/brown(src)
+	new /obj/item/clothing/shoes/sneakers/brown(src)
+	new /obj/item/clothing/shoes/sneakers/brown(src)
 	return
 
 
@@ -45,7 +44,7 @@
 	return
 
 /obj/structure/closet/wardrobe/hos
-	name = "head of security wardrobe"
+	name = "\proper head of security's wardrobe"
 	icon_state = "red"
 	icon_closed = "red"
 
@@ -53,6 +52,7 @@
 	new /obj/item/clothing/under/hosformalfem(src)
 	new /obj/item/clothing/under/hosformalmale(src)
 	new /obj/item/clothing/under/rank/head_of_security/jensen(src)
+	new /obj/item/clothing/suit/armor/vest/jacket(src)
 	return
 
 /obj/structure/closet/wardrobe/pink
@@ -67,9 +67,9 @@
 	new /obj/item/clothing/under/color/pink(src)
 	new /obj/item/clothing/under/color/pink(src)
 	new /obj/item/clothing/under/color/pink(src)
-	new /obj/item/clothing/shoes/brown(src)
-	new /obj/item/clothing/shoes/brown(src)
-	new /obj/item/clothing/shoes/brown(src)
+	new /obj/item/clothing/shoes/sneakers/brown(src)
+	new /obj/item/clothing/shoes/sneakers/brown(src)
+	new /obj/item/clothing/shoes/sneakers/brown(src)
 	return
 
 /obj/structure/closet/wardrobe/black
@@ -81,9 +81,12 @@
 	new /obj/item/clothing/under/color/black(src)
 	new /obj/item/clothing/under/color/black(src)
 	new /obj/item/clothing/under/color/black(src)
-	new /obj/item/clothing/shoes/black(src)
-	new /obj/item/clothing/shoes/black(src)
-	new /obj/item/clothing/shoes/black(src)
+	new /obj/item/clothing/shoes/sneakers/black(src)
+	new /obj/item/clothing/shoes/sneakers/black(src)
+	new /obj/item/clothing/shoes/sneakers/black(src)
+	new /obj/item/clothing/shoes/sneakers/black(src)
+	new /obj/item/clothing/shoes/sneakers/black(src)
+	new /obj/item/clothing/shoes/sneakers/black(src)
 	if(prob(75))
 		new /obj/item/clothing/mask/bandana/skull(src)
 	if(prob(75))
@@ -110,7 +113,7 @@
 
 /obj/structure/closet/wardrobe/chaplain_black/New()
 	new /obj/item/clothing/under/rank/chaplain(src)
-	new /obj/item/clothing/shoes/black(src)
+	new /obj/item/clothing/shoes/sneakers/black(src)
 	new /obj/item/clothing/suit/nun(src)
 	new /obj/item/clothing/head/nun_hood(src)
 	new /obj/item/clothing/suit/chaplain_hoodie(src)
@@ -134,12 +137,12 @@
 	new /obj/item/clothing/mask/bandana/green(src)
 	new /obj/item/clothing/mask/bandana/green(src)
 	new /obj/item/clothing/mask/bandana/green(src)
-	new /obj/item/clothing/under/lightgreen(src)
-	new /obj/item/clothing/under/lightgreen(src)
-	new /obj/item/clothing/under/lightgreen(src)
-	new /obj/item/clothing/shoes/black(src)
-	new /obj/item/clothing/shoes/black(src)
-	new /obj/item/clothing/shoes/black(src)
+	new /obj/item/clothing/under/color/lightgreen(src)
+	new /obj/item/clothing/under/color/lightgreen(src)
+	new /obj/item/clothing/under/color/lightgreen(src)
+	new /obj/item/clothing/shoes/sneakers/black(src)
+	new /obj/item/clothing/shoes/sneakers/black(src)
+	new /obj/item/clothing/shoes/sneakers/black(src)
 	return
 
 
@@ -153,9 +156,9 @@
 	new /obj/item/clothing/under/color/prison(src)
 	new /obj/item/clothing/under/color/prison(src)
 	new /obj/item/clothing/under/color/prison(src)
-	new /obj/item/clothing/shoes/orange(src)
-	new /obj/item/clothing/shoes/orange(src)
-	new /obj/item/clothing/shoes/orange(src)
+	new /obj/item/clothing/shoes/sneakers/orange(src)
+	new /obj/item/clothing/shoes/sneakers/orange(src)
+	new /obj/item/clothing/shoes/sneakers/orange(src)
 	return
 
 
@@ -171,9 +174,9 @@
 	new /obj/item/clothing/mask/bandana/gold(src)
 	new /obj/item/clothing/mask/bandana/gold(src)
 	new /obj/item/clothing/mask/bandana/gold(src)
-	new /obj/item/clothing/shoes/orange(src)
-	new /obj/item/clothing/shoes/orange(src)
-	new /obj/item/clothing/shoes/orange(src)
+	new /obj/item/clothing/shoes/sneakers/orange(src)
+	new /obj/item/clothing/shoes/sneakers/orange(src)
+	new /obj/item/clothing/shoes/sneakers/orange(src)
 	return
 
 
@@ -191,9 +194,9 @@
 	new /obj/item/device/analyzer(src)
 	new /obj/item/device/analyzer(src)
 	new /obj/item/device/analyzer(src)
-	new /obj/item/clothing/shoes/black(src)
-	new /obj/item/clothing/shoes/black(src)
-	new /obj/item/clothing/shoes/black(src)
+	new /obj/item/clothing/shoes/sneakers/black(src)
+	new /obj/item/clothing/shoes/sneakers/black(src)
+	new /obj/item/clothing/shoes/sneakers/black(src)
 	return
 
 
@@ -207,9 +210,9 @@
 	new /obj/item/clothing/under/rank/engineer(src)
 	new /obj/item/clothing/under/rank/engineer(src)
 	new /obj/item/clothing/under/rank/engineer(src)
-	new /obj/item/clothing/shoes/orange(src)
-	new /obj/item/clothing/shoes/orange(src)
-	new /obj/item/clothing/shoes/orange(src)
+	new /obj/item/clothing/shoes/sneakers/orange(src)
+	new /obj/item/clothing/shoes/sneakers/orange(src)
+	new /obj/item/clothing/shoes/sneakers/orange(src)
 	return
 
 
@@ -222,14 +225,14 @@
 	new /obj/item/clothing/under/color/white(src)
 	new /obj/item/clothing/under/color/white(src)
 	new /obj/item/clothing/under/color/white(src)
-	new /obj/item/clothing/shoes/white(src)
-	new /obj/item/clothing/shoes/white(src)
-	new /obj/item/clothing/shoes/white(src)
+	new /obj/item/clothing/shoes/sneakers/white(src)
+	new /obj/item/clothing/shoes/sneakers/white(src)
+	new /obj/item/clothing/shoes/sneakers/white(src)
 	return
 
 
 /obj/structure/closet/wardrobe/pjs
-	name = "Pajama wardrobe"
+	name = "pajama wardrobe"
 	icon_state = "white"
 	icon_closed = "white"
 
@@ -238,10 +241,10 @@
 	new /obj/item/clothing/under/pj/red(src)
 	new /obj/item/clothing/under/pj/blue(src)
 	new /obj/item/clothing/under/pj/blue(src)
-	new /obj/item/clothing/shoes/white(src)
-	new /obj/item/clothing/shoes/white(src)
-	new /obj/item/clothing/shoes/white(src)
-	new /obj/item/clothing/shoes/white(src)
+	new /obj/item/clothing/shoes/sneakers/white(src)
+	new /obj/item/clothing/shoes/sneakers/white(src)
+	new /obj/item/clothing/shoes/sneakers/white(src)
+	new /obj/item/clothing/shoes/sneakers/white(src)
 	return
 
 
@@ -257,9 +260,9 @@
 	new /obj/item/clothing/suit/labcoat(src)
 	new /obj/item/clothing/suit/labcoat(src)
 	new /obj/item/clothing/suit/labcoat(src)
-	new /obj/item/clothing/shoes/white(src)
-	new /obj/item/clothing/shoes/white(src)
-	new /obj/item/clothing/shoes/white(src)
+	new /obj/item/clothing/shoes/sneakers/white(src)
+	new /obj/item/clothing/shoes/sneakers/white(src)
+	new /obj/item/clothing/shoes/sneakers/white(src)
 	return
 
 
@@ -273,8 +276,8 @@
 	new /obj/item/clothing/under/rank/roboticist(src)
 	new /obj/item/clothing/suit/labcoat(src)
 	new /obj/item/clothing/suit/labcoat(src)
-	new /obj/item/clothing/shoes/black(src)
-	new /obj/item/clothing/shoes/black(src)
+	new /obj/item/clothing/shoes/sneakers/black(src)
+	new /obj/item/clothing/shoes/sneakers/black(src)
 	new /obj/item/clothing/gloves/black(src)
 	new /obj/item/clothing/gloves/black(src)
 	new /obj/item/clothing/head/soft/black(src)
@@ -290,8 +293,8 @@
 /obj/structure/closet/wardrobe/chemistry_white/New()
 	new /obj/item/clothing/under/rank/chemist(src)
 	new /obj/item/clothing/under/rank/chemist(src)
-	new /obj/item/clothing/shoes/white(src)
-	new /obj/item/clothing/shoes/white(src)
+	new /obj/item/clothing/shoes/sneakers/white(src)
+	new /obj/item/clothing/shoes/sneakers/white(src)
 	new /obj/item/clothing/suit/labcoat/chemist(src)
 	new /obj/item/clothing/suit/labcoat/chemist(src)
 	return
@@ -305,8 +308,8 @@
 /obj/structure/closet/wardrobe/genetics_white/New()
 	new /obj/item/clothing/under/rank/geneticist(src)
 	new /obj/item/clothing/under/rank/geneticist(src)
-	new /obj/item/clothing/shoes/white(src)
-	new /obj/item/clothing/shoes/white(src)
+	new /obj/item/clothing/shoes/sneakers/white(src)
+	new /obj/item/clothing/shoes/sneakers/white(src)
 	new /obj/item/clothing/suit/labcoat/genetics(src)
 	new /obj/item/clothing/suit/labcoat/genetics(src)
 	return
@@ -320,8 +323,8 @@
 /obj/structure/closet/wardrobe/virology_white/New()
 	new /obj/item/clothing/under/rank/virologist(src)
 	new /obj/item/clothing/under/rank/virologist(src)
-	new /obj/item/clothing/shoes/white(src)
-	new /obj/item/clothing/shoes/white(src)
+	new /obj/item/clothing/shoes/sneakers/white(src)
+	new /obj/item/clothing/shoes/sneakers/white(src)
 	new /obj/item/clothing/suit/labcoat/virologist(src)
 	new /obj/item/clothing/suit/labcoat/virologist(src)
 	new /obj/item/clothing/mask/surgical(src)
@@ -343,9 +346,9 @@
 	new /obj/item/clothing/under/color/grey(src)
 	new /obj/item/clothing/under/color/grey(src)
 	new /obj/item/clothing/under/color/grey(src)
-	new /obj/item/clothing/shoes/black(src)
-	new /obj/item/clothing/shoes/black(src)
-	new /obj/item/clothing/shoes/black(src)
+	new /obj/item/clothing/shoes/sneakers/black(src)
+	new /obj/item/clothing/shoes/sneakers/black(src)
+	new /obj/item/clothing/shoes/sneakers/black(src)
 	if(prob(40))
 		new /obj/item/clothing/shoes/boots(src)
 	if(prob(40))
@@ -362,9 +365,9 @@
 	if(prob(40))
 		new /obj/item/clothing/under/assistantformal(src)
 	if(prob(40))
-		new /obj/item/clothing/under/brownoveralls(src)
+		new /obj/item/clothing/under/color/brownoveralls(src)
 	if(prob(40))
-		new /obj/item/clothing/under/brownoveralls(src)
+		new /obj/item/clothing/under/color/brownoveralls(src)
 	return
 
 
@@ -389,22 +392,22 @@
 	new /obj/item/clothing/mask/bandana/green(src)
 	new /obj/item/clothing/mask/bandana/green(src)
 	new /obj/item/clothing/under/lightpink(src)
-	new /obj/item/clothing/under/lightred(src)
-	new /obj/item/clothing/under/darkred(src)
-	new /obj/item/clothing/under/darkblue(src)
+	new /obj/item/clothing/under/color/lightred(src)
+	new /obj/item/clothing/under/color/darkred(src)
+	new /obj/item/clothing/under/color/darkblue(src)
 	new /obj/item/clothing/under/lightpink(src)
-	new /obj/item/clothing/under/lightgreen(src)
-	new /obj/item/clothing/under/yellowgreen(src)
-	new /obj/item/clothing/under/brown(src)
-	new /obj/item/clothing/under/lightbrown(src)
-	new /obj/item/clothing/under/lightpurple(src)
-	new /obj/item/clothing/under/purple(src)
-	new /obj/item/clothing/under/aqua(src)
-	new /obj/item/clothing/under/lightblue(src)
-	new /obj/item/clothing/under/aqua(src)
-	new /obj/item/clothing/shoes/black(src)
-	new /obj/item/clothing/shoes/brown(src)
-	new /obj/item/clothing/shoes/white(src)
+	new /obj/item/clothing/under/color/lightgreen(src)
+	new /obj/item/clothing/under/color/yellowgreen(src)
+	new /obj/item/clothing/under/color/brown(src)
+	new /obj/item/clothing/under/color/lightbrown(src)
+	new /obj/item/clothing/under/color/lightpurple(src)
+	new /obj/item/clothing/under/color/purple(src)
+	new /obj/item/clothing/under/color/aqua(src)
+	new /obj/item/clothing/under/color/lightblue(src)
+	new /obj/item/clothing/under/color/aqua(src)
+	new /obj/item/clothing/shoes/sneakers/black(src)
+	new /obj/item/clothing/shoes/sneakers/brown(src)
+	new /obj/item/clothing/shoes/sneakers/white(src)
 	if(prob(40))
 		new /obj/item/clothing/under/redoveralls(src)
 	if(prob(40))
@@ -433,15 +436,12 @@
 	new /obj/item/clothing/suit/labcoat/coat/jacket(src)
 	new /obj/item/clothing/suit/labcoat/coat/jacket(src)
 	new /obj/item/clothing/suit/labcoat/coat/jacket(src)
-	if(prob(50))
-		new /obj/item/clothing/under/jeans(src)
-	else
-		new /obj/item/clothing/under/trackpants(src)
+	new /obj/item/clothing/under/camo(src)
 	new /obj/item/clothing/under/jeans(src)
 	new /obj/item/clothing/under/trackpants(src)
 	new /obj/item/clothing/under/khaki(src)
-	new /obj/item/clothing/shoes/black(src)
-	new /obj/item/clothing/shoes/brown(src)
-	new /obj/item/clothing/shoes/black(src)
-	new /obj/item/clothing/shoes/brown(src)
+	new /obj/item/clothing/shoes/sneakers/black(src)
+	new /obj/item/clothing/shoes/sneakers/brown(src)
+	new /obj/item/clothing/shoes/sneakers/black(src)
+	new /obj/item/clothing/shoes/sneakers/brown(src)
 	return

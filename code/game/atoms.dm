@@ -1,7 +1,7 @@
 /atom
 	layer = 2
 	var/level = 2
-	var/flags = null
+	var/flags = 0
 	var/list/fingerprints
 	var/list/fingerprintshidden
 	var/fingerprintslast = null
@@ -21,12 +21,14 @@
 	if(istype(hit_atom,/mob/living))
 		var/mob/living/M = hit_atom
 		M.hitby(src)
+		on_throw_impact(hit_atom)
 
 	else if(isobj(hit_atom))
 		var/obj/O = hit_atom
 		if(!O.anchored)
 			step(O, src.dir)
 		O.hitby(src)
+		on_throw_impact(hit_atom)
 
 	else if(isturf(hit_atom))
 		var/turf/T = hit_atom
@@ -37,15 +39,12 @@
 				var/mob/living/M = src
 				M.take_organ_damage(20)
 
-/atom/proc/CheckParts()
+//what this atom does when it hits something, for special effects/special actions, hitby() handles damage.
+/atom/proc/on_throw_impact(atom/hit_atom)
 	return
 
-/atom/Destroy()
-	if(reagents)
-		reagents.delete()
-		qdel(reagents)
-	invisibility = 101
-	// Do not call ..()
+/atom/proc/CheckParts()
+	return
 
 /atom/proc/assume_air(datum/gas_mixture/giver)
 	del(giver)
@@ -86,9 +85,6 @@
 		return flags & INSERT_CONTAINER
 */
 
-
-/atom/proc/meteorhit(obj/meteor as obj)
-	return
 
 /atom/proc/allow_drop()
 	return 1

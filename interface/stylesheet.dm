@@ -50,12 +50,13 @@ h1.alert, h2.alert		{color: #000000;}
 .userdanger				{color: #ff0000;	font-weight: bold;}
 .danger					{color: #ff0000;}
 .warning				{color: #ff0000;	font-style: italic;}
-.success				{color: #00b627;}
+.announce 				{color: #228b22;	font-weight: bold;}
 .rose					{color: #ff5050;}
 .info					{color: #0000CC;}
 .notice					{color: #000099;}
 .unconscious			{color: #0000FF;	font-weight: bold;}
 .suicide				{color: #ff5050;	font-style: italic;}
+.green					{color: #03ff39;}
 
 .alien					{color: #543354;}
 .newscaster				{color: #800000;}

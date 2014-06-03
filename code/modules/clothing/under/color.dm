@@ -71,74 +71,80 @@
 	item_state = "y_suit"
 	item_color = "yellow"
 
-/obj/item/clothing/under/psyche
+/obj/item/clothing/under/color/psyche
 	name = "psychedelic jumpsuit"
 	desc = "Groovy!"
 	icon_state = "psyche"
 	item_color = "psyche"
 
-/obj/item/clothing/under/lightblue
+/obj/item/clothing/under/color/lightblue
 	name = "lightblue jumpsuit"
 	desc = "A light blue jumpsuit."
 	icon_state = "lightblue"
 	item_color = "lightblue"
 
-/obj/item/clothing/under/aqua
+/obj/item/clothing/under/color/aqua
 	name = "aqua jumpsuit"
 	desc = "An aqua jumpsuit."
 	icon_state = "aqua"
 	item_color = "aqua"
 
-/obj/item/clothing/under/purple
+/obj/item/clothing/under/color/purple
 	name = "purple jumpsuit"
 	desc = "A purple jumpsuit."
 	icon_state = "purple"
 	item_state = "p_suit"
 	item_color = "purple"
 
-/obj/item/clothing/under/lightpurple
+/obj/item/clothing/under/color/lightpurple
 	name = "lightpurple jumpsuit"
 	desc = "A purple jumpsuit in a lighter shade."
 	icon_state = "lightpurple"
 	item_color = "lightpurple"
 
-/obj/item/clothing/under/lightgreen
+/obj/item/clothing/under/color/lightgreen
 	name = "lightgreen jumpsuit"
 	desc = "A green jumpsuit in a lighter shade."
 	icon_state = "lightgreen"
 	item_color = "lightgreen"
 
-/obj/item/clothing/under/lightbrown
+/obj/item/clothing/under/color/lightblue
+	name = "lightblue jumpsuit"
+	desc = "lightblue"
+	icon_state = "lightblue"
+	item_color = "lightblue"
+
+/obj/item/clothing/under/color/lightbrown
 	name = "lightbrown jumpsuit"
 	desc = "A brown jumpsuit in a lighter shade"
 	icon_state = "lightbrown"
 	item_color = "lightbrown"
 
-/obj/item/clothing/under/brown
+/obj/item/clothing/under/color/brown
 	name = "brown jumpsuit"
 	desc = "A brown jumpsuit."
 	icon_state = "brown"
 	item_color = "brown"
 
-/obj/item/clothing/under/yellowgreen
+/obj/item/clothing/under/color/yellowgreen
 	name = "yellowgreen jumpsuit"
 	desc = "A jumpsuit in a yellowish-green flavour."
 	icon_state = "yellowgreen"
 	item_color = "yellowgreen"
 
-/obj/item/clothing/under/darkblue
+/obj/item/clothing/under/color/darkblue
 	name = "darkblue jumpsuit"
 	desc = "A dark blue jumpsuit."
 	icon_state = "darkblue"
 	item_color = "darkblue"
 
-/obj/item/clothing/under/lightred
+/obj/item/clothing/under/color/lightred
 	name = "lightred jumpsuit"
 	desc = "A red jumpsuit in a lighter shade."
 	icon_state = "lightred"
 	item_color = "lightred"
 
-/obj/item/clothing/under/darkred
+/obj/item/clothing/under/color/darkred
 	name = "darkred jumpsuit"
 	desc = "A dark red jumpsuit."
 	icon_state = "darkred"

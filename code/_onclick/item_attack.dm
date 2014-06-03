@@ -42,11 +42,6 @@
 /obj/item/proc/afterattack(atom/target, mob/user, proximity_flag, click_parameters)
 	return
 
-// Overrides the weapon attack so it can attack any atoms like when we want to have an effect on an object independent of attackby
-// It is a powerfull proc but it should be used wisely, if there is other alternatives instead use those
-// If it returns 1 it exits click code. Always . = 1 at start of the function if you delete src.
-/obj/item/proc/preattack(atom/target, mob/user, proximity_flag, click_parameters)
-	return
 
 obj/item/proc/get_clamped_volume()
 	if(force && w_class)
@@ -59,10 +54,10 @@ obj/item/proc/get_clamped_volume()
 	if(!istype(M))	//not sure if this is the right thing...
 		return
 
-	if(hitsound && force > 0)									//If an item's hitsound is defined and the item's force is greater than zero...
-		playsound(loc, hitsound, get_clamped_volume(), 1, -1)	//...play the item's hitsound at get_clamped_volume() with varying frequency and -1 extra range.
-	else if(force == 0)															//Otherwise, if the item's force is zero...
-		playsound(loc, 'sound/weapons/tap.ogg', get_clamped_volume(), 1, -1)	//...play tap.ogg at get_clamped_volume()
+	if(hitsound)
+		playsound(loc, hitsound, get_clamped_volume(), 1, -1)
+	else
+		playsound(loc, 'sound/weapons/tap.ogg', get_clamped_volume(), 1, -1)
 
 	user.lastattacked = M
 	M.lastattacker = user

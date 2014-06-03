@@ -62,6 +62,7 @@
 /var/const/access_gateway = 62
 /var/const/access_sec_doors = 63 // Security front doors
 /var/const/access_mineral_storeroom = 64
+/var/const/access_minisat = 65
 
 	//BEGIN CENTCOM ACCESS
 	/*Should leave plenty of room if we need to add more access levels.

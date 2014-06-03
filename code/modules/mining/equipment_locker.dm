@@ -3,7 +3,7 @@
 
 /obj/machinery/mineral/ore_redemption
 	name = "ore redemption machine"
-	desc = "A machine that accepts ore and instantly transforms it into workable material sheets, but cannot produce alloys such as Plasteel. Points for ore are generated based on type and can be redeemed at a mining equipment locker."
+	desc = "A machine that accepts ore and instantly transforms it into workable material sheets, but cannot produce alloys such as Plasteel. Points for ore are generated based on type and can be redeemed at a mining equipment vendor."
 	icon = 'icons/obj/machines/mining_machines.dmi'
 	icon_state = "ore_redemption"
 	density = 1
@@ -145,11 +145,11 @@
 /obj/machinery/mineral/ore_redemption/ex_act()
 	return //So some chucklefuck doesn't ruin miners reward with an explosion
 
-/**********************Mining Equipment Locker**************************/
+/**********************Mining Equipment Vendor**************************/
 
-/obj/machinery/mineral/equipment_locker
-	name = "mining equipment locker"
-	desc = "An equipment locker for miners, points collected at an ore redemption machine can be spent here."
+/obj/machinery/mineral/equipment_vendor
+	name = "mining equipment vendor"
+	desc = "An equipment vendor for miners, points collected at an ore redemption machine can be spent here."
 	icon = 'icons/obj/machines/mining_machines.dmi'
 	icon_state = "mining"
 	density = 1
@@ -160,18 +160,20 @@
 		new /datum/data/mining_equipment("Cigar",               /obj/item/clothing/mask/cigarette/cigar/havana,                    100),
 		new /datum/data/mining_equipment("Whiskey",             /obj/item/weapon/reagent_containers/food/drinks/bottle/whiskey,    150),
 		new /datum/data/mining_equipment("Soap",                /obj/item/weapon/soap/nanotrasen, 						           150),
-		new /datum/data/mining_equipment("Stimulant pills",     /obj/item/weapon/storage/pill_bottle/stimulant, 				   350),
-		new /datum/data/mining_equipment("Alien toy",           /obj/item/clothing/mask/facehugger/toy, 		                   250),
-		new /datum/data/mining_equipment("Laser pointer",       /obj/item/device/laser_pointer, 				                   500),
-		new /datum/data/mining_equipment("Point card",    		/obj/item/weapon/card/mining_point_card,               			   500),
-		new /datum/data/mining_equipment("Lazarus injector",    /obj/item/weapon/lazarus_injector,                                1000),
-		new /datum/data/mining_equipment("Space cash",    		/obj/item/weapon/spacecash/c1000,                    			  5000),
-		new /datum/data/mining_equipment("Sonic jackhammer",    /obj/item/weapon/pickaxe/jackhammer,                               500),
-		new /datum/data/mining_equipment("Mining drone",        /mob/living/simple_animal/hostile/mining_drone/,                   500),
-		new /datum/data/mining_equipment("Jaunter",             /obj/item/device/wormhole_jaunter,                                 200),
+		new /datum/data/mining_equipment("Gar Mesons",			/obj/item/clothing/glasses/meson/gar, 							   200),
+		new /datum/data/mining_equipment("Alien Toy",           /obj/item/clothing/mask/facehugger/toy, 		                   500),
+		new /datum/data/mining_equipment("Laser Pointer",       /obj/item/device/laser_pointer, 				                   500),
+		new /datum/data/mining_equipment("Stimulant Pills",     /obj/item/weapon/storage/pill_bottle/stimulant, 				   350),
+		new /datum/data/mining_equipment("Sonic Jackhammer",    /obj/item/weapon/pickaxe/jackhammer,                               500),
+		new /datum/data/mining_equipment("Mining Drone",        /mob/living/simple_animal/hostile/mining_drone/,                   500),
 		new /datum/data/mining_equipment("Resonator",           /obj/item/weapon/resonator,                                        750),
-		new /datum/data/mining_equipment("Kinetic accelerator", /obj/item/weapon/gun/energy/kinetic_accelerator,                  1000),
+		new /datum/data/mining_equipment("Kinetic Accelerator", /obj/item/weapon/gun/energy/kinetic_accelerator,                  1000),
+		new /datum/data/mining_equipment("Brass Knuckles", 		/obj/item/weapon/brassknuckles,        					          2000),
 		new /datum/data/mining_equipment("Jetpack",             /obj/item/weapon/tank/jetpack/carbondioxide/mining,               2000),
+		new /datum/data/mining_equipment("Jaunter",             /obj/item/device/wormhole_jaunter,                                 200),
+		new /datum/data/mining_equipment("Lazarus Injector",    /obj/item/weapon/lazarus_injector,                                1000),
+		new /datum/data/mining_equipment("Point Card",    		/obj/item/weapon/card/mining_point_card,               			   500),
+		new /datum/data/mining_equipment("Space Cash",    		/obj/item/weapon/spacecash/c1000,                    			  5000),
 		)
 
 /datum/data/mining_equipment/
@@ -184,14 +186,14 @@
 	src.equipment_path = path
 	src.cost = cost
 
-/obj/machinery/mineral/equipment_locker/attack_hand(user as mob)
+/obj/machinery/mineral/equipment_vendor/attack_hand(user as mob)
 	if(..())
 		return
 	interact(user)
 
-/obj/machinery/mineral/equipment_locker/interact(mob/user)
+/obj/machinery/mineral/equipment_vendor/interact(mob/user)
 	var/dat
-	dat += text("<b>Mining Equipment Locker</b><br><br>")
+	dat += text("<b>Mining Equipment vendor</b><br><br>")
 
 	if(istype(inserted_id))
 		dat += "You have [inserted_id.mining_points] mining points collected. <A href='?src=\ref[src];choice=eject'>Eject ID.</A><br>"
@@ -203,10 +205,10 @@
 		dat += "<tr><td>[prize.equipment_name]</td><td>[prize.cost]</td><td><A href='?src=\ref[src];purchase=\ref[prize]'>Purchase</A></td></tr>"
 	dat += "</table>"
 
-	user << browse("[dat]", "window=mining_equipment_locker")
+	user << browse("[dat]", "window=mining_equipment_vendor")
 	return
 
-/obj/machinery/mineral/equipment_locker/Topic(href, href_list)
+/obj/machinery/mineral/equipment_vendor/Topic(href, href_list)
 	if(..())
 		return
 	if(href_list["choice"])
@@ -234,7 +236,7 @@
 	updateUsrDialog()
 	return
 
-/obj/machinery/mineral/equipment_locker/attackby(obj/item/I as obj, mob/user as mob)
+/obj/machinery/mineral/equipment_vendor/attackby(obj/item/I as obj, mob/user as mob)
 	if(istype(I, /obj/item/weapon/mining_voucher))
 		RedeemVoucher(I, user)
 		return
@@ -248,7 +250,7 @@
 		return
 	..()
 
-/obj/machinery/mineral/equipment_locker/proc/RedeemVoucher(obj/item/weapon/mining_voucher/voucher, mob/redeemer)
+/obj/machinery/mineral/equipment_vendor/proc/RedeemVoucher(obj/item/weapon/mining_voucher/voucher, mob/redeemer)
 	var/selection = input(redeemer, "Pick your equipment", "Mining Voucher Redemption") as null|anything in list("Resonator", "Kinetic Accelerator", "Mining Drone")
 	if(!selection || !Adjacent(redeemer) || voucher.gc_destroyed || voucher.loc != redeemer)
 		return
@@ -262,16 +264,16 @@
 			new /obj/item/weapon/weldingtool/hugetank(src.loc)
 	qdel(voucher)
 
-/obj/machinery/mineral/equipment_locker/ex_act()
+/obj/machinery/mineral/equipment_vendor/ex_act()
 	return
 
-/**********************Mining Equipment Locker Items**************************/
+/**********************Mining Equipment Vendor Items**************************/
 
 /**********************Mining Equipment Voucher**********************/
 
 /obj/item/weapon/mining_voucher
 	name = "mining voucher"
-	desc = "A token to redeem a piece of equipment. Use it on a mining equipment locker."
+	desc = "A token to redeem a piece of equipment. Use it on a mining equipment vendor."
 	icon = 'icons/obj/items.dmi'
 	icon_state = "mining_voucher"
 	w_class = 1
@@ -592,6 +594,7 @@
 	throw_speed = 3
 	throw_range = 5
 	var/loaded = 1
+	var/malfunctioning = 0
 
 /obj/item/weapon/lazarus_injector/afterattack(atom/target, mob/user, proximity_flag)
 	if(!loaded)
@@ -600,13 +603,17 @@
 		if(istype(target, /mob/living/simple_animal))
 			var/mob/living/simple_animal/M = target
 			if(M.stat == DEAD)
-				M.factions += "lazarus"
+				M.factions = list("neutral")
 				M.revive()
 				if(istype(target, /mob/living/simple_animal/hostile))
 					var/mob/living/simple_animal/hostile/H = M
-					H.friends += user
-					H.attack_same = 1 //No invincible army of completely loyal mobs
-					log_game("[user] has revived hostile mob [target] with a lazarus injector")
+					if(malfunctioning)
+						M.factions = list("lazarus")
+						H.friends += user
+						H.attack_same = 1
+						log_game("[user] has revived hostile mob [target] with a malfunctioning lazarus injector")
+					else
+						H.attack_same = 0
 				loaded = 0
 				user.visible_message("<span class='notice'>[user] injects [M] with [src], reviving it.</span>")
 				playsound(src,'sound/effects/refill.ogg',50,1)
@@ -619,10 +626,16 @@
 			user << "<span class='info'>[src] is only effective on lesser beings.</span>"
 			return
 
+/obj/item/weapon/lazarus_injector/emp_act()
+	if(!malfunctioning)
+		malfunctioning = 1
+
 /obj/item/weapon/lazarus_injector/examine()
 	..()
 	if(!loaded)
 		usr << "<span class='info'>[src] is empty.</span>"
+	if(malfunctioning)
+		usr << "<span class='info'>The display on [src] seems to be flickering.</span>"
 
 /**********************Mining Scanner**********************/
 /obj/item/device/mining_scanner
@@ -659,6 +672,15 @@
 				spawn(30)
 					if(C)
 						C.images -= I
+
+//Debug item to identify all ore spread quickly
+/obj/item/device/mining_scanner/admin
+
+/obj/item/device/mining_scanner/admin/attack_self(mob/user)
+	for(var/turf/simulated/mineral/M in world)
+		if(M.scan_state)
+			M.icon_state = M.scan_state
+	del(src)
 
 /**********************Xeno Warning Sign**********************/
 /obj/structure/sign/xeno_warning_mining

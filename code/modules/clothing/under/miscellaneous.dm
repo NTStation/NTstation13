@@ -262,7 +262,7 @@
 	item_state = "lb_suit"
 	item_color = "overalls"
 
-/obj/item/clothing/under/brownoveralls
+/obj/item/clothing/under/color/brownoveralls
 	name = "brown overalls"
 	desc = "A set of old brown overalls for getting the job done."
 	icon_state = "b-overalls"
@@ -432,6 +432,17 @@
 	icon_state = "khaki"
 	item_state = "khaki"
 	item_color = "khaki"
+	gender = PLURAL
+	body_parts_covered = GROIN|LEGS
+	fitted = 0
+	can_roll = 0
+
+/obj/item/clothing/under/camo
+	name = "camouflage pants"
+	desc = "A pair of woodland camouflage pants, not good for camouflage in this enviornment."
+	icon_state = "camopants"
+	item_state = "camopants"
+	item_color = "camopants"
 	gender = PLURAL
 	body_parts_covered = GROIN|LEGS
 	fitted = 0

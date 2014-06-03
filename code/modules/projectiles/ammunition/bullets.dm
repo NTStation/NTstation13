@@ -44,12 +44,6 @@
 	projectile_type = /obj/item/projectile/bullet/midbullet
 
 
-/obj/item/ammo_casing/a12mm
-	desc = "A 12mm bullet casing."
-	caliber = "12mm"
-	projectile_type = /obj/item/projectile/bullet/midbullet
-
-
 /obj/item/ammo_casing/shotgun
 	name = "shotgun slug"
 	desc = "A 12 gauge slug."
@@ -89,7 +83,6 @@
 	desc = "An incendiary shell"
 	icon_state = "ishell"
 	projectile_type = /obj/item/projectile/bullet/incendiary/shell
-	m_amt = 12500
 
 
 /obj/item/ammo_casing/shotgun/dart
@@ -97,7 +90,6 @@
 	desc = "A dart for use in shotguns. Can be injected with up to 30 units of any chemical."
 	icon_state = "cshell"
 	projectile_type = /obj/item/projectile/bullet/dart
-	m_amt = 12500
 
 /obj/item/ammo_casing/shotgun/dart/New()
 	..()

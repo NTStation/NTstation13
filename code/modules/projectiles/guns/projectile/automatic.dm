@@ -27,20 +27,18 @@
 
 /obj/item/weapon/gun/projectile/automatic/c20r
 	name = "\improper C-20r SMG"
-	desc = "A lightweight, fast firing gun, for when you REALLY need someone dead. Uses 12mm rounds. Has a 'Scarborough Arms - Per falcis, per pravitas' buttstamp"
+	desc = "A lightweight, fast firing gun, for when you REALLY need someone dead. Uses .45 ACP rounds. Has a 'Scarborough Arms - Per falcis, per pravitas' buttstamp"
 	icon_state = "c20r"
 	item_state = "c20r"
 	w_class = 3.0
 	origin_tech = "combat=5;materials=2;syndicate=8"
-	mag_type = /obj/item/ammo_box/magazine/m12mm
+	mag_type = /obj/item/ammo_box/magazine/c20rm
 	fire_sound = 'sound/weapons/Gunshot_smg.ogg'
-
 
 /obj/item/weapon/gun/projectile/automatic/c20r/New()
 	..()
 	update_icon()
 	return
-
 
 /obj/item/weapon/gun/projectile/automatic/c20r/afterattack(atom/target as mob|obj|turf|area, mob/living/user as mob|obj, flag)
 	..()
@@ -50,10 +48,20 @@
 		alarmed = 1
 	return
 
+/obj/item/weapon/gun/projectile/automatic/c20r/attack_hand(mob/user as mob)
+	if(loc == user)
+		if(silenced)
+			silencer_attack_hand(user)
+	..()
+
+/obj/item/weapon/gun/projectile/automatic/c20r/attackby(obj/item/I as obj, mob/user as mob)
+	if(istype(I, /obj/item/weapon/silencer))
+		silencer_attackby(I,user)
+	..()
 
 /obj/item/weapon/gun/projectile/automatic/c20r/update_icon()
 	..()
-	icon_state = "c20r[magazine ? "-[Ceiling(get_ammo(0)/4)*4]" : ""][chambered ? "" : "-e"]"
+	icon_state = "c20r[silenced ? "-silencer" : ""][magazine ? "-[Ceiling(get_ammo(0)/4)*4]" : ""][chambered ? "" : "-e"]"
 	return
 
 
@@ -120,56 +128,6 @@
 	origin_tech = "combat=5;materials=1;syndicate=2"
 	mag_type = /obj/item/ammo_box/magazine/tommygunm45
 	fire_sound = 'sound/weapons/Gunshot_smg.ogg'
-
-/obj/item/tommybarrel
-	name = "tommy gun barrel"
-	desc = "A one third finished Chicago Typewriter."
-	icon = 'icons/obj/buildingobject.dmi'
-	icon_state = "tommygun1"
-	m_amt = 400000 // expensive, will need an autolathe upgrade to hold enough metal to produce the barrel. this way you need cooperation between 3 departments to finish even 1.
-
-/obj/item/tommygunconstruction
-	name = "tommy gun barrel and grip"
-	desc = "A two thirds finished Chicago Typewriter."
-	icon = 'icons/obj/buildingobject.dmi'
-	icon_state = "tommygunstep1"
-	var/construction = 0
-
-/obj/item/tommygunconstruction/attackby(obj/item/W as obj, mob/user as mob)
-	if(istype(W,/obj/item/tommystock))
-		user << "You attach the stock to the gun."
-		construction = 1
-		del(W)
-		icon_state = "tommygunstep2"
-		name = "unfinished tommy gun"
-		desc = "An almost finished Chicago Typewriter."
-		return
-	if(istype(W,/obj/item/weapon/screwdriver))
-		if(construction)
-			user << "You finish the tommy gun."
-			new /obj/item/weapon/gun/projectile/automatic/tommygun(user.loc)
-			del(src)
-			return
-
-/obj/item/tommybarrel/attackby(obj/item/W as obj, mob/user as mob)
-	if(istype(W,/obj/item/tommygrip))
-		user << "You attach the grip to the barrel."
-		new /obj/item/tommygunconstruction(user.loc)
-		del(W)
-		del(src)
-		return
-
-/obj/item/tommygrip
-	name = "tommy gun grip and foregrip"
-	desc = "A one third finished Chicago Typewriter."
-	icon = 'icons/obj/buildingobject.dmi'
-	icon_state = "tommygun2"
-
-/obj/item/tommystock
-	name = "tommy gun stock"
-	desc = "A one third finished Chicago Typewriter."
-	icon = 'icons/obj/buildingobject.dmi'
-	icon_state = "tommygun3"
 
 /* The thing I found with guns in ss13 is that they don't seem to simulate the rounds in the magazine in the gun.
    Afaik, since projectile.dm features a revolver, this would make sense since the magazine is part of the gun.

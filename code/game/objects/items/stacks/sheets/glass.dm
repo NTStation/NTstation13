@@ -13,7 +13,7 @@
 	desc = "HOLY SHEET! That is a lot of glass."
 	singular_name = "glass sheet"
 	icon_state = "sheet-glass"
-	g_amt = 3750
+	g_amt = MINERAL_MATERIAL_AMOUNT
 	origin_tech = "materials=1"
 
 
@@ -246,15 +246,15 @@
 	force = 5.0
 	throwforce = 10.0
 	item_state = "shard-glass"
-	g_amt = 3750
+	g_amt = MINERAL_MATERIAL_AMOUNT
 	attack_verb = list("stabbed", "slashed", "sliced", "cut")
 	hitsound = 'sound/weapons/bladeslice.ogg'
 	var/cooldown = 0
 
-	suicide_act(mob/user)
-		viewers(user) << pick("<span class='suicide'>[user] is slitting \his wrists with the shard of glass! It looks like \he's trying to commit suicide.</span>", \
-							"<span class='suicide'>[user] is slitting \his throat with the shard of glass! It looks like \he's trying to commit suicide.</span>")
-		return (BRUTELOSS)
+/obj/item/weapon/shard/suicide_act(mob/user)
+	user.visible_message(pick("<span class='suicide'>[user] is slitting \his wrists with the shard of glass! It looks like \he's trying to commit suicide.</span>", \
+						"<span class='suicide'>[user] is slitting \his throat with the shard of glass! It looks like \he's trying to commit suicide.</span>"))
+	return (BRUTELOSS)
 
 
 /obj/item/weapon/shard/New()

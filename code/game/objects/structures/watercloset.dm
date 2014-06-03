@@ -89,7 +89,9 @@
 		if(w_items + I.w_class > 5)
 			user << "<span class='notice'>The cistern is full.</span>"
 			return
-		user.drop_item()
+		if(!user.drop_item())
+			user << "<span class='notice'>\The [I] is stuck to your hand, you cannot put it in the cistern!</span>"
+			return
 		I.loc = src
 		w_items += I.w_class
 		user << "<span class='notice'>You carefully place [I] into the cistern.</span>"
@@ -152,11 +154,8 @@
 	on = !on
 	update_icon()
 	if(on)
-		if (M.loc == loc)
-			wash(M)
-			check_heat(M)
 		for (var/atom/movable/G in loc)
-			G.clean_blood()
+			Crossed(G)
 
 
 /obj/machinery/shower/attackby(obj/item/I, mob/user)
@@ -319,16 +318,14 @@
 			C << "<span class='danger'>The water is searing!</span>"
 			return
 
-
-
 /obj/item/weapon/bikehorn/rubberducky
 	name = "rubber ducky"
 	desc = "Rubber ducky you're so fine, you make bathtime lots of fuuun. Rubber ducky I'm awfully fooooond of yooooouuuu~"	//thanks doohl
 	icon = 'icons/obj/watercloset.dmi'
 	icon_state = "rubberducky"
 	item_state = "rubberducky"
-
-
+	hitsound = null
+	throwhitsound = null
 
 /obj/structure/sink
 	name = "sink"

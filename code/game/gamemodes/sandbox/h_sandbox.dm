@@ -31,7 +31,7 @@ datum/hSB
 		/obj/item/weapon/grab, /obj/item/tk_grab, /obj/item/weapon/implant, // not implanter, the actual thing that is inside you
 		/obj/item/assembly,/obj/item/device/onetankbomb, /obj/item/radio, /obj/item/device/pda/ai,
 		/obj/item/device/uplink/hidden, /obj/item/smallDelivery, /obj/item/missile,/obj/item/projectile,
-		/obj/item/borg/sight,/obj/item/borg/overdrive,/obj/item/borg/stun,/obj/item/weapon/robot_module)
+		/obj/item/borg/sight,/obj/item/borg/stun,/obj/item/weapon/robot_module)
 
 	proc
 		update()
@@ -195,7 +195,7 @@ datum/hSB
 					new/obj/item/stack/sheet/glass{amount=50}(usr.loc)
 
 				if("hsbwood")
-					new/obj/item/stack/sheet/wood{amount=50}(usr.loc)
+					new/obj/item/stack/sheet/mineral/wood{amount=50}(usr.loc)
 
 				//
 				// All access ID
@@ -205,7 +205,7 @@ datum/hSB
 					ID.registered_name = usr.real_name
 					ID.assignment = "Sandbox"
 					ID.access = get_all_accesses()
-					ID.name = "[ID.registered_name]'s ID Card ([ID.assignment])"
+					ID.update_label()
 
 				//
 				// RCD - starts with full clip

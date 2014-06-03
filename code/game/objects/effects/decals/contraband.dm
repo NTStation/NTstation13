@@ -1,7 +1,9 @@
 
 //########################## CONTRABAND ;3333333333333333333 -Agouri ###################################################
 
-#define NUM_OF_POSTER_DESIGNS 21
+#define NUM_OF_POSTER_DESIGNS 21 //subtype 0-contraband posters
+
+#define NUM_OF_POSTER_DESIGNS_LEGIT 8 //subtype 1-corporate approved posters
 
 /obj/item/weapon/contraband
 	name = "contraband item"
@@ -16,12 +18,17 @@
 	icon_state = "rolled_poster"
 	var/serial_number = 0
 	var/obj/structure/sign/poster/resulting_poster = null //The poster that will be created is initialised and stored through contraband/poster's constructor
+	var/subtype = 0
 
 
 /obj/item/weapon/contraband/poster/New(turf/loc, given_serial = 0)
 	if(given_serial == 0)
-		serial_number = rand(1, NUM_OF_POSTER_DESIGNS)
-		resulting_poster = new(serial_number)
+		if(subtype == 0)
+			serial_number = rand(1, NUM_OF_POSTER_DESIGNS)
+			resulting_poster = new(serial_number,subtype)
+		if(subtype == 1)
+			serial_number = rand(1, NUM_OF_POSTER_DESIGNS_LEGIT)
+			resulting_poster = new(serial_number,subtype)
 	else
 		serial_number = given_serial
 		//We don't give it a resulting_poster because if we called it with a given_serial it means that we're rerolling an already used poster.
@@ -67,88 +74,123 @@
 
 obj/structure/sign/poster
 	name = "poster"
-	desc = "A large piece of space-resistant printed paper. It's considered contraband."
+	desc = "A large piece of space-resistant printed paper."
 	icon = 'icons/obj/contraband.dmi'
 	anchored = 1
 	var/serial_number	//Will hold the value of src.loc if nobody initialises it
 	var/ruined = 0
+	var/subtype = 0
 
-
-obj/structure/sign/poster/New(serial)
+obj/structure/sign/poster/New(serial,subtype)
 	serial_number = serial
 
 	if(serial_number == loc)
-		serial_number = rand(1, NUM_OF_POSTER_DESIGNS)	//This is for the mappers that want individual posters without having to use rolled posters.
-
-	icon_state = "poster[serial_number]"
-
-	switch(serial_number)
-		if(1)
-			name += " - Free Tonto"
-			desc += " A framed shred of a much larger flag, colors bled together and faded from age."
-		if(2)
-			name += " - Atmosia Declaration of Independence"
-			desc += " A relic of a failed rebellion"
-		if(3)
-			name += " - Fun Police"
-			desc += " A poster condemning the station's security forces."
-		if(4)
-			name += " - Lusty Xeno"
-			desc += " A heretical poster depicting the titular star of an equally heretical book."
-		if(5)
-			name += " - Syndicate Recruitment Poster"
-			desc += " See the galaxy! Shatter corrupt megacorporations! Join today!"
-		if(6)
-			name += " - Clown"
-			desc += " Honk."
-		if(7)
-			name += " - Smoke"
-			desc += " A poster depicting a carton of cigarettes."
-		if(8)
-			name += " - Grey Tide"
-			desc += " A rebellious poster symbolizing assistant solidarity."
-		if(9)
-			name += " - Missing Gloves"
-			desc += " This poster is about the uproar that followed Nanotrasen's financial cuts towards insulated-glove purchases."
-		if(10)
-			name += " - Hacking Guide"
-			desc += " This poster details the internal workings of the common Nanotrasen airlock."
-		if(11)
-			name += " - RIP Badger"
-			desc += " This poster commemorates the day hundreds of badgers worldwide were sacrificed for the greater good."
-		if(12)
-			name += " - Ambrosia Vulgaris"
-			desc += " This poster is lookin' pretty trippy man."
-		if(13)
-			name += " - Donut Corp."
-			desc += " This poster is an advertisement for Donut Corp."
-		if(14)
-			name += " - EAT"
-			desc += " This poster is advising that you eat."
-		if(15)
-			name += " - Tools"
-			desc += " This poster is an advertisement for tools."
-		if(16)
-			name += " - Power"
-			desc += " A poster all about power."
-		if(17)
-			name += " - Power to the People"
-			desc += " Screw those EDF guys!"
-		if(18)
-			name += " - Communist state"
-			desc += " All hail the Communist party!"
-		if(19)
-			name += " - Lamarr"
-			desc += " This poster depicts Lamarr. Probably made by the research director."
-		if(20)
-			name += " - Borg Fancy"
-			desc += " Being fancy can be for any borg, Just need a suit."
-		if(21)
-			name += " - Borg Fancy v2"
-			desc += " Borg Fancy, Now only taking the most fancy."
-		else
-			name = "This shit just bugged. Report it to Agouri - polyxenitopalidou@gmail.com"
-			desc = "Why are you still here?"
+		if(subtype == 0)
+			serial_number = rand(1, NUM_OF_POSTER_DESIGNS)	//This is for the mappers that want individual posters without having to use rolled posters.
+		if(subtype == 1)
+			serial_number = rand(1, NUM_OF_POSTER_DESIGNS_LEGIT)
+	if(subtype == 0)
+		icon_state = "poster[serial_number]"
+		switch(serial_number)
+			if(1)
+				name += " - Free Tonto"
+				desc += " A framed shred of a much larger flag, colors bled together and faded from age."
+			if(2)
+				name += " - Atmosia Declaration of Independence"
+				desc += " A relic of a failed rebellion"
+			if(3)
+				name += " - Fun Police"
+				desc += " A poster condemning the station's security forces."
+			if(4)
+				name += " - Lusty Xeno"
+				desc += " A heretical poster depicting the titular star of an equally heretical book."
+			if(5)
+				name += " - Syndicate Recruitment Poster"
+				desc += " See the galaxy! Shatter corrupt megacorporations! Join today!"
+			if(6)
+				name += " - Clown"
+				desc += " Honk."
+			if(7)
+				name += " - Smoke"
+				desc += " A poster depicting a carton of cigarettes."
+			if(8)
+				name += " - Grey Tide"
+				desc += " A rebellious poster symbolizing assistant solidarity."
+			if(9)
+				name += " - Missing Gloves"
+				desc += " This poster is about the uproar that followed Nanotrasen's financial cuts towards insulated-glove purchases."
+			if(10)
+				name += " - Hacking Guide"
+				desc += " This poster details the internal workings of the common Nanotrasen airlock."
+			if(11)
+				name += " - RIP Badger"
+				desc += " This poster commemorates the day hundreds of badgers worldwide were sacrificed for the greater good."
+			if(12)
+				name += " - Ambrosia Vulgaris"
+				desc += " This poster is lookin' pretty trippy man."
+			if(13)
+				name += " - Donut Corp."
+				desc += " This poster is an advertisement for Donut Corp."
+			if(14)
+				name += " - EAT"
+				desc += " This poster is advising that you eat."
+			if(15)
+				name += " - Tools"
+				desc += " This poster is an advertisement for tools."
+			if(16)
+				name += " - Power"
+				desc += " A poster all about power."
+			if(17)
+				name += " - Power to the People"
+				desc += " Screw those EDF guys!"
+			if(18)
+				name += " - Communist state"
+				desc += " All hail the Communist party!"
+			if(19)
+				name += " - Lamarr"
+				desc += " This poster depicts Lamarr. Probably made by the research director."
+			if(20)
+				name += " - Borg Fancy"
+				desc += " Being fancy can be for any borg, Just need a suit."
+			if(21)
+				name += " - Borg Fancy v2"
+				desc += " Borg Fancy, Now only taking the most fancy."
+			else
+				name += " - Error (subtype 0 serial_number)"
+				desc += " This is a bug, please report the circumstances under which you encountered this poster at https://github.com/NTStation/NTstation13/issues."
+	if(subtype == 1)
+		icon_state = "poster[serial_number]_legit"
+		switch(serial_number)
+			if(1)
+				name += " - Here for Your Saftey"
+				desc += " A poster glorifying the station's security force."
+			if(2)
+				name += " - Nanotrasen Logo"
+				desc += " A poster depicting the logo of Nanotrasen"
+			if(3)
+				name += " - Cleanliness"
+				desc += " A poster warning of the dangers of poor hygene."
+			if(4)
+				name += " - Help Others"
+				desc += " A poster encouraging you to help fellow crewmembers."
+			if(5)
+				name += " - Build"
+				desc += " A poster glorifying the engineerning team."
+			if(6)
+				name += " - Bless This Spess"
+				desc += " A poster blessing this area."
+			if(7)
+				name += " - Science"
+				desc += " A poster depicting an atom."
+			if(8)
+				name += " - Ian"
+				desc += " Arf Arf."
+			else
+				name += " - Error (subtype 1 serial_number)"
+				desc += " This is a bug, please report the circumstances under which you encountered this poster at https://github.com/NTStation/NTstation13/issues."
+	else
+		name += " - Error (subtype)"
+		desc += " This is a bug, please report the circumstances under which you encountered this poster at https://github.com/NTStation/NTstation13/issues."
 	..()
 
 obj/structure/sign/poster/attackby(obj/item/I, mob/user)
@@ -221,3 +263,10 @@ obj/structure/sign/poster/attackby(obj/item/I, mob/user)
 	else
 		D.roll_and_drop(temp_loc)
 	return
+
+//Putting non-contraband posters here because everything else here is related to posters anyway. -JS
+
+/obj/item/weapon/contraband/poster/legit
+	desc = "The poster comes with its own automatic adhesive mechanism, for easy pinning to any vertical surface. It's contents go through Nanotrasen's strict content guidlines."
+	icon_state = "rolled_poster_legit"
+	subtype = 1

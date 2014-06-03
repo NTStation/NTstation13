@@ -85,6 +85,22 @@
 				message = "<B>[src]</B> flaps its wings."
 				m_type = 2
 
+		if ("flipoff")
+			if (!src.buckled)
+				var/M = null
+				if (param)
+					for (var/mob/A in view(1, src))
+						if (param == A.name)
+							M = A
+							break
+				if (!M)
+					param = null
+				if (param)
+					message = "<B>[src]</B> flips the bird at [param]!"
+				else
+					message = "<B>[src]</B> flips the bird."
+			m_type = 1
+
 		if ("frown")
 			message = "<B>[src]</B> frowns."
 			m_type = 1
@@ -172,6 +188,26 @@
 					message = "<B>[src]</B> points to [M]."
 				else
 			m_type = 1
+		
+		if ("pout")
+			message = "<B>[src]</B> pouts."
+			m_type = 1
+
+		if ("rude")
+			if (!src.buckled)
+				var/M = null
+				if (param)
+					for (var/mob/A in view(1, src))
+						if (param == A.name)
+							M = A
+							break
+				if (!M)
+					param = null
+				if (param)
+					message = "<B>[src]</B> makes a rude gesture at [param]!"
+				else
+					message = "<B>[src]</B> makes a rude gesture."
+			m_type = 1
 
 		if ("scream")
 			message = "<B>[src]</B> screams!"
@@ -192,6 +228,14 @@
 		if ("smile")
 			message = "<B>[src]</B> smiles."
 			m_type = 1
+		
+		if ("smirk")
+			message = "<B>[src]</B> smirks."
+			m_type = 1
+
+		if ("snap")
+			message = "<B>[src]</B> snaps their fingers."
+			m_type = 2
 
 		if ("sneeze")
 			message = "<B>[src]</B> sneezes."
@@ -204,6 +248,26 @@
 		if ("snore")
 			message = "<B>[src]</B> snores."
 			m_type = 2
+
+		if ("snort")
+			message = "<B>[src]</B> snorts."
+			m_type = 2
+
+		if ("spit")
+			if (!src.buckled)
+				var/M = null
+				if (param)
+					for (var/mob/A in view(1, src))
+						if (param == A.name)
+							M = A
+							break
+				if (!M)
+					param = null
+				if (param)
+					message = "<B>[src]</B> spits at [param]."
+				else
+					message = "<B>[src]</B> spits on the ground."
+			m_type = 1
 
 		if ("stare")
 			var/M = null
@@ -227,6 +291,18 @@
 			message = "<B>[src]</B> sways around dizzily."
 			m_type = 1
 
+		if ("tap")
+			message = "<B>[src]</B> taps their foot impatiently."
+			m_type = 1
+
+		if ("thumbsdown")
+			message = "<B>[src]</B> gives a thumbs down."
+			m_type = 1
+		
+		if ("thumbsup")
+			message = "<B>[src]</B> gives a thumbs up!"
+			m_type = 1
+
 		if ("tremble")
 			message = "<B>[src]</B> trembles in fear!"
 			m_type = 1
@@ -246,16 +322,24 @@
 		if ("whimper")
 			message = "<B>[src]</B> whimpers."
 			m_type = 2
+			
+		if ("whistle")
+			message = "<B>[src]</B> whistles."
+			m_type = 2
+
+		if ("whistle2")
+			message = "<B>[src]</B> whistles a tune."
+			m_type = 2
 
 		if ("yawn")
 			message = "<B>[src]</B> yawns."
 			m_type = 2
 
 		if ("help")
-			src << "Help for emotes. You can use these emotes with say \"*emote\":\n\naflap, blush, bow-(none)/mob, burp, choke, chuckle, clap, collapse, cough, dance, deathgasp, drool, flap, frown, gasp, giggle, glare-(none)/mob, grin, jump, laugh, look, me, nod, point-atom, scream, shake, sit, sigh, smile, sneeze, sniff, snore, stare-(none)/mob, sulk, sway, tremble, twitch, twitch_s, wave, whimper, yawn"
+			src << "Help for emotes. You can use these emotes with say \"*emote\":\n\naflap, blush, bow-(none)/mob, burp, choke, chuckle, clap, collapse, cough, dance, deathgasp, drool, flap, flipoff, frown, gasp, giggle, glare-(none)/mob, grin, jump, laugh, look, me, nod, point-atom, pout, rude, scream, shake, sit, sigh, smile, smirk, snap, sneeze, sniff, snore, snort, spit, stare-(none)/mob, sulk, sway, tap, thumbsup, thumbsdown, tremble, twitch, twitch_s, wave, whimper, whistle, whistle2 yawn"
 
 		else
-			src << "\blue Unusable emote '[act]'. Say *help for a list."
+			src << "<span class='notice'> Unusable emote '[act]'. Say *help for a list.</span>"
 
 
 

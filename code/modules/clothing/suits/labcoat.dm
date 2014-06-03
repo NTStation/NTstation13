@@ -103,8 +103,8 @@
 	armor = list(melee = 0, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 10, rad = 0)
 
 /obj/item/clothing/suit/labcoat/coat/jacket
-	name = "jacket"
-	desc = "A nice warm jacket."
+	name = "bomber jacket"
+	desc = "Aviators not included."
 	icon_state = "jacket"
 	can_toggle = null
 

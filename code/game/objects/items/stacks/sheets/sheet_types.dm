@@ -18,8 +18,6 @@ var/global/list/datum/stack_recipe/metal_recipes = list ( \
 	new/datum/stack_recipe("bed", /obj/structure/stool/bed, 2, one_per_turf = 1, on_floor = 1), \
 	null, \
 	new/datum/stack_recipe("table parts", /obj/item/weapon/table_parts, 2), \
-	new/datum/stack_recipe("switchblade blade", /obj/item/switchbladeblade, 5), \
-	new/datum/stack_recipe("metal baseball bat", /obj/item/weapon/baseballbat/metal, 5), \
 	new/datum/stack_recipe("rack parts", /obj/item/weapon/rack_parts), \
 	new/datum/stack_recipe("closet", /obj/structure/closet, 2, time = 15, one_per_turf = 1, on_floor = 1), \
 	null, \
@@ -34,9 +32,11 @@ var/global/list/datum/stack_recipe/metal_recipes = list ( \
 	new/datum/stack_recipe("machine frame", /obj/machinery/constructable_frame/machine_frame, 5, time = 25, one_per_turf = 1, on_floor = 1), \
 	new/datum/stack_recipe("turret frame", /obj/machinery/porta_turret_construct, 5, time = 25, one_per_turf = 1, on_floor = 1), \
 	null, \
-	new/datum/stack_recipe("grenade casing", /obj/item/weapon/grenade/chem_grenade), \
 	new/datum/stack_recipe("light fixture frame", /obj/item/light_fixture_frame, 2), \
 	new/datum/stack_recipe("small light fixture frame", /obj/item/light_fixture_frame/small, 1), \
+	new/datum/stack_recipe("grenade casing", /obj/item/weapon/grenade/chem_grenade), \
+	new/datum/stack_recipe("switchblade blade", /obj/item/switchbladeblade, 6, time = 20), \
+	new/datum/stack_recipe("handgun slide", /obj/item/glockslide, 10, time = 30), \
 	null, \
 	new/datum/stack_recipe("apc frame", /obj/item/apc_frame, 2), \
 	new/datum/stack_recipe("air alarm frame", /obj/item/alarm_frame, 2), \
@@ -67,9 +67,10 @@ var/global/list/datum/stack_recipe/metal_recipes = list ( \
  * Plasteel
  */
 var/global/list/datum/stack_recipe/plasteel_recipes = list ( \
-	new/datum/stack_recipe("AI core", /obj/structure/AIcore, 4, time = 50, one_per_turf = 1), \
-	new/datum/stack_recipe("switchblade handle", /obj/item/switchbladehandle, 10), \
-	)
+	new/datum/stack_recipe("AI core", /obj/structure/AIcore, 5, time = 50, one_per_turf = 1), \
+	new/datum/stack_recipe("switchblade handle", /obj/item/switchbladehandle, 4, time = 20), \
+	new/datum/stack_recipe("handgun grip", /obj/item/glockgrip, 6, time = 30), \
+)
 
 /obj/item/stack/sheet/plasteel
 	name = "plasteel"
@@ -91,9 +92,7 @@ var/global/list/datum/stack_recipe/plasteel_recipes = list ( \
  */
 var/global/list/datum/stack_recipe/wood_recipes = list ( \
 	new/datum/stack_recipe("wooden sandals", /obj/item/clothing/shoes/sandal, 1), \
-	new/datum/stack_recipe("baseball bat", /obj/item/weapon/baseballbat, 20), \
-	new/datum/stack_recipe("tommy gun grip", /obj/item/tommygrip, 20), \
-	new/datum/stack_recipe("tommy gun stock", /obj/item/tommystock, 20), \
+	new/datum/stack_recipe("baseball bat", /obj/item/weapon/baseballbat, 10, time = 20), \
 	new/datum/stack_recipe("wood floor tile", /obj/item/stack/tile/wood, 1, 4, 20), \
 	new/datum/stack_recipe("table parts", /obj/item/weapon/table_parts/wood, 2), \
 	new/datum/stack_recipe("wooden chair", /obj/structure/stool/bed/chair/wood/normal, 3, time = 10, one_per_turf = 1, on_floor = 1), \
@@ -102,16 +101,16 @@ var/global/list/datum/stack_recipe/wood_recipes = list ( \
 	new/datum/stack_recipe("coffin", /obj/structure/closet/coffin, 5, time = 15, one_per_turf = 1, on_floor = 1), \
 	new/datum/stack_recipe("book case", /obj/structure/bookcase, 4, time = 15, one_per_turf = 1, on_floor = 1), \
 	new/datum/stack_recipe("drying rack", /obj/machinery/smartfridge/drying_rack, 10, time = 15, one_per_turf = 1, on_floor = 1), \
-	)
+)
 
-/obj/item/stack/sheet/wood
+/obj/item/stack/sheet/mineral/wood
 	name = "wooden plank"
 	desc = "One can only guess that this is a bunch of wood."
 	singular_name = "wood plank"
 	icon_state = "sheet-wood"
 	origin_tech = "materials=1;biotech=1"
 
-/obj/item/stack/sheet/wood/New(var/loc, var/amount=null)
+/obj/item/stack/sheet/mineral/wood/New(var/loc, var/amount=null)
 	recipes = wood_recipes
 	return ..()
 
