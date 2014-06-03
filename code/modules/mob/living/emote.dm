@@ -339,7 +339,7 @@
 			src << "Help for emotes. You can use these emotes with say \"*emote\":\n\naflap, blush, bow-(none)/mob, burp, choke, chuckle, clap, collapse, cough, dance, deathgasp, drool, flap, flipoff, frown, gasp, giggle, glare-(none)/mob, grin, jump, laugh, look, me, nod, point-atom, pout, rude, scream, shake, sit, sigh, smile, smirk, snap, sneeze, sniff, snore, snort, spit, stare-(none)/mob, sulk, sway, tap, thumbsup, thumbsdown, tremble, twitch, twitch_s, wave, whimper, whistle, whistle2 yawn"
 
 		else
-			src << "<span class="notice"> Unusable emote '[act]'. Say *help for a list.</span>"
+			src << "<span class='notice'> Unusable emote '[act]'. Say *help for a list.</span>"
 
 
 
