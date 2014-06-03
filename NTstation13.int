@@ -1,12 +1,11 @@
 // BEGIN_INTERNALS
 /*
 MAP_ICON_TYPE: 0
-<<<<<<< HEAD
+WINDOW: icons\mob\animal.dmi
 LAST_COMPILE_VERSION: 506.1247
-DIR: code code\game code\game\gamemodes\blob code\game\gamemodes\blob\blobs code\game\objects code\game\objects\items code\game\objects\items\weapons code\game\objects\structures code\game\objects\structures\crates_lockers code\game\objects\structures\crates_lockers\closets code\modules code\modules\clothing code\modules\clothing\masks icons icons\mob icons\obj icons\obj\clothing 
+DIR: code code\game code\game\gamemodes\blob code\game\gamemodes\blob\blobs code\game\objects code\game\objects\items code\game\objects\items\weapons code\game\objects\structures code\game\objects\structures\crates_lockers icons icons\mob 
+FILE: icons\mob\animal.dmi
 LAST_COMPILE_TIME: 1400974108
-=======
->>>>>>> cef84a8105b64bb7cca096cf61b0b54ecd71e924
 AUTO_FILE_DIR: OFF
 */
 // END_INTERNALS
