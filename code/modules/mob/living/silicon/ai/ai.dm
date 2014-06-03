@@ -514,7 +514,7 @@ var/list/ai_list = list()
 	set name = "Set Sensor Augmentation"
 	set desc = "Augment visual feed with internal sensor overlays."
 
-	var/sensor_type = input("Please select sensor type.", "Sensor Integration", null) in list("Security", "Medical","Light Amplification","Disable")
+	var/sensor_type = input("Please select sensor type.", "Sensor Integration", null) in list("Security", "Medical"/*,"Light Amplification"*/,"Disable")
 	switch(sensor_type)
 		if ("Security")
 			src.sensor_mode = SEC_HUD
@@ -522,10 +522,10 @@ var/list/ai_list = list()
 
 		if ("Medical")
 			src.sensor_mode = MED_HUD
-			src << "<span class='notice'>Life signs monitor overlay enabled.</span>"
+			src << "<span class='notice'>Life signs monitor overlay enabled.</span>"/*
 		if ("Light Amplification")
 			src.sensor_mode = NIGHT
-			src << "<span class='notice'>Light amplification mode enabled.</span>"
+			src << "<span class='notice'>Light amplification mode enabled.</span>"*/
 		if ("Disable")
 			src.sensor_mode = 0
 			src << "Sensor augmentations disabled."
