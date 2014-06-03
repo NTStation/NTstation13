@@ -1,9 +1,9 @@
 
 //########################## CONTRABAND ;3333333333333333333 -Agouri ###################################################
 
-#define NUM_OF_POSTER_DESIGNS 21 //subtype 0-contraband posters
+#define NUM_OF_POSTER_DESIGNS 22 //subtype 0-contraband posters
 
-#define NUM_OF_POSTER_DESIGNS_LEGIT 8 //subtype 1-corporate approved posters
+#define NUM_OF_POSTER_DESIGNS_LEGIT 21 //subtype 1-corporate approved posters
 
 /obj/item/weapon/contraband
 	name = "contraband item"
@@ -155,6 +155,9 @@ obj/structure/sign/poster/New(serial,subtype)
 			if(21)
 				name += " - Borg Fancy v2"
 				desc += " Borg Fancy, Now only taking the most fancy."
+			if(22)
+				name += " - Kosmicheskaya Stantsiya 13 Does Not Exist"
+				desc += " A poster denying the existence of the derelict station near Space Station 13."
 			else
 				name += " - Error (subtype 0 serial_number)"
 				desc += " This is a bug, please report the circumstances under which you encountered this poster at https://github.com/NTStation/NTstation13/issues."
@@ -185,11 +188,50 @@ obj/structure/sign/poster/New(serial,subtype)
 			if(8)
 				name += " - Ian"
 				desc += " Arf Arf."
+			if(9)
+				name += " - Obey"
+				desc += " A poster instructing the viewer to obey authority."
+			if(10)
+				name += " - Walk"
+				desc += " A poster instructing the viewer to walk instead of running."
+			if(11)
+				name += " - State Laws"
+				desc += " A poster instructing cyborgs to state their laws."
+			if(12)
+				name += " - Love Ian"
+				desc += " Ian is love, Ian is life."
+			if(13)
+				name += " - Space Cops"
+				desc += " A poster advertising the television show Space Cops."
+			if(14)
+				name += " - Ue No"
+				desc += " This thing is all in Japanese."
+			if(15)
+				name += " - Get Your LEGS"
+				desc += " LEGS: Leadership, Experiance, Genius, S(Opportunity)."
+			if(16)
+				name += " - Do Not Question"
+				desc += " A poster instructing the viewer not to ask about things they aren't meant to know."
+			if(17)
+				name += " - Work for a Future"
+				desc += " A poster encouraging you to work for your future, what it is, no one is really sure."
+			if(18)
+				name += " - Soft Cap Pop Art"
+				desc += " A poster reprint of some cheap pop art."
+			if(19)
+				name += " - Saftey: Internals"
+				desc += " A poster instructing the viewer to wear internals in enviornments where there is no oxygen or the air has been rendered toxic."
+			if(20)
+				name += " - Saftey: Eye Protection"
+				desc += " A poster instructing the viewer to wear eye protection when dealing with chemicals, smoke, or bright lights."
+			if(21)
+				name += " - Saftey: Report"
+				desc += " A poster instructing the viewer to report suspicious activity to the security force."
 			else
 				name += " - Error (subtype 1 serial_number)"
 				desc += " This is a bug, please report the circumstances under which you encountered this poster at https://github.com/NTStation/NTstation13/issues."
 	else
-		name += " - Error (subtype)"
+		name += " - Error (subtype/pre-placed poster serial_number generator)"
 		desc += " This is a bug, please report the circumstances under which you encountered this poster at https://github.com/NTStation/NTstation13/issues."
 	..()
 
