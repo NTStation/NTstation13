@@ -519,7 +519,6 @@ var/list/ai_list = list()
 		if ("Security")
 			src.sensor_mode = SEC_HUD
 			src << "<span class='notice'>Security records overlay enabled.</span>"
-
 		if ("Medical")
 			src.sensor_mode = MED_HUD
 			src << "<span class='notice'>Life signs monitor overlay enabled.</span>"

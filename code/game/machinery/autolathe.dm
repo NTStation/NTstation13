@@ -52,6 +52,7 @@ var/global/list/autolathe_recipes = list( \
 	)
 
 var/global/list/autolathe_recipes_hidden = list( \
+		new /obj/item/weapon/baseballbat/metal(), \
 		new /obj/item/weapon/flamethrower/full(), \
 		new /obj/item/weapon/rcd(), \
 		new /obj/item/device/radio/electropack(), \

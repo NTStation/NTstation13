@@ -1,9 +1,11 @@
 /obj/item/clothing/gloves/captain
-	desc = "Regal blue gloves, with a nice gold trim. Swanky."
+	desc = "Regal blue gloves, with a nice gold trim and insulated fingertips. Swanky."
 	name = "captain's gloves"
 	icon_state = "captain"
 	item_state = "egloves"
 	item_color = "captain"
+	siemens_coefficient = 0
+
 	cold_protection = HANDS
 	min_cold_protection_temperature = GLOVES_MIN_TEMP_PROTECT
 	heat_protection = HANDS
