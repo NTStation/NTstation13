@@ -57,6 +57,8 @@
 
 	changeling.absorb_dna(target)
 
+	changeling.absorbedcount++
+
 	if(user.nutrition < 400) user.nutrition = min((user.nutrition + target.nutrition), 400)
 
 	if(target.mind)//if the victim has got a mind
@@ -81,7 +83,7 @@
 
 
 
-//Absorbs the target DNA.
+//Absorbs the target appearance
 /datum/changeling/proc/absorb_dna(mob/living/carbon/T)
 	if(absorbed_dna.len)
 		absorbed_dna.Cut(1,2)
@@ -93,4 +95,3 @@
 	new_dna.mutantrace = T.dna.mutantrace
 	new_dna.blood_type = T.dna.blood_type
 	absorbed_dna |= new_dna //And add the target DNA to our absorbed list.
-	absorbedcount++ //all that done, let's increment the objective counter.
