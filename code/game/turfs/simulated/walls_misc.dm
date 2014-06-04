@@ -15,4 +15,5 @@
 	name = "rusted reinforced wall"
 	desc = "A huge chunk of rusted reinforced metal."
 	icon_state = "rrust"
+	walltype = "rrust"
 	hardness = 15
