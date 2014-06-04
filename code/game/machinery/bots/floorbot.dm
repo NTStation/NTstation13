@@ -181,7 +181,7 @@
 		return
 	if(src.busy == busy_name)
 		return
-	if(src.called)
+	if(src.call_path)
 		if(!src.pathset)
 			src.target = null
 			src.oldtarget = null

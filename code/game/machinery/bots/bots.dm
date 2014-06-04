@@ -14,7 +14,7 @@
 	var/open = 0//Maint panel
 	var/locked = 1
 	var/hacked = 0 //Used to differentiate between being hacked by silicons and emagged by humans.
-	var/called = 0 //If the bot has been called by the AI.
+	var/list/call_path[] = 0 //Path calculated by the AI and given to the bot to follow.
 	var/list/path[] = new() //Every bot has this, so it is best to put it here.
 	var/pathset = 0
 	var/busy = 0 //Standardizes the vars that indicate the bot is busy with its function.
@@ -34,7 +34,7 @@
 /obj/machinery/bot/proc/turn_off()
 	on = 0
 	SetLuminosity(0)
-	called = 0 //Resets the AI's call on the bot, if any.
+	call_path = 0 //Resets the AI's call on the bot, if any.
 	pathset = 0
 	calling_ai = null
 	src.botcard.access = src.req_access //Resets the bot's access incase it is disabled while under AI control.
@@ -187,30 +187,27 @@
 
 /obj/machinery/bot/proc/set_path() //Contains all the non-unique settings for prepairing a bot to be controlled by the AI.
 	src.pathset = 1
-	src.path = src.called
 	src.busy = "Responding"
 
 /obj/machinery/bot/proc/move_to_call()
-	if(src.path && src.path.len && tries < 6)
-		step_to(src, src.path[1])
+	if(src.call_path && src.call_path.len && tries < 6)
+		step_to(src, src.call_path[1])
 
-		if(src.loc == src.path[1])//Remove turfs from the path list if the bot moved there.
+		if(src.loc == src.call_path[1])//Remove turfs from the path list if the bot moved there.
 			src.tries = 0
-			src.path -= src.path[1]
+			src.call_path -= src.call_path[1]
 		else //Could not move because of an obstruction.
 			src.tries++
 	else
 		if(src.calling_ai)
 			src.calling_ai << "[tries ? "<span class='danger'>[src] failed to reach waypoint.</span>" : "<span class='notice'>[src] successfully arrived to waypoint.</span>"]"
 		src.calling_ai = null
-		src.called = 0
-		src.path = new()
+		src.call_path = 0
 		src.pathset = 0
 		src.botcard.access = src.req_access
 		src.botcard.access += src.req_one_access
 		src.tries = 0
 		src.busy = 0
-		//world << "[src] MOVING [src.path[1]] - [src.path.len] left - [tries] tries."
 
 /******************************************************************/
 // Navigation procs

@@ -520,11 +520,11 @@ var/global/mulebot_count = 0
 
 /obj/machinery/bot/mulebot/proc/process_bot()
 	//if(mode) world << "Mode: [mode]"
-	if (src.called)
-		set_path() //Set the path given to it by the AI
-		src.target = src.path[src.path.len] //Target is the end point of the path, the waypoint set by the AI.
-		src.destination = src.target
-		src.called = 0 //Once the MULE is commanded, follow normal procedures to reach the waypoint.
+	if (src.call_path)
+		src.target = src.call_path[src.call_path.len] //Target is the end point of the path, the waypoint set by the AI.
+		src.destination = format_text(get_area(src.target))
+		src.path = call_path
+		src.call_path = 0 //Once the MULE is commanded, follow normal procedures to reach the waypoint.
 		src.auto_return = 0 //Prevents the MULE immediately scooting back home upon reaching the waypoint..
 		start()
 

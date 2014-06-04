@@ -212,7 +212,7 @@ Auto Patrol: []"},
 
 	if(!src.on)
 		return
-	if(src.called)
+	if(src.call_path)
 		if(!src.pathset)
 			set_path()
 			src.target = null

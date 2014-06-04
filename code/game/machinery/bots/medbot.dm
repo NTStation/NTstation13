@@ -260,7 +260,7 @@
 			src.stunned = 0
 		return
 
-	if(src.called) //Stop what you are doing and answer the call!
+	if(src.call_path) //Stop what you are doing and answer the call!
 
 		if(!src.pathset) //Reset the bot before calling it.
 			set_path()

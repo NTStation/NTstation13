@@ -419,7 +419,7 @@ var/list/ai_list = list()
 
 	if (href_list["callbot"]) //Command a bot to move to a selected location.
 		src.B = locate(href_list["callbot"]) in machines
-		if(B.remote_disabled || !isturf(src.loc))
+		if(B.remote_disabled || src.control_disabled)
 			return
 		src.waypoint_mode = 1
 		src << "<span class='notice'>Set your waypoint by clicking on a valid location free of obstructions.</span>"
@@ -427,7 +427,7 @@ var/list/ai_list = list()
 
 	if (href_list["interface"]) //Remotely connect to a bot!
 		src.B = locate(href_list["interface"]) in machines
-		if(B.remote_disabled || !isturf(src.loc))
+		if(B.remote_disabled || src.control_disabled)
 			return
 		B.attack_ai(src)
 
@@ -534,24 +534,27 @@ var/list/ai_list = list()
 		src << "<span class='danger'>Critical error. System offline.</span>"
 		return
 
-	if(!isturf(src.loc)) //Carded AIs have no loc data, so they cannot use botcall().
-		src << "<span class='danger'>This function is not supported by current hardware.</span>"
+	if(src.control_disabled)
+		src << "Wireless communication is disabled."
 		return
 
+	var/turf/ai_current_turf = get_turf(src)
+	var/ai_Zlevel = ai_current_turf.z
 	var/d
 	var/area/bot_area
 	d += "<table width='100%'><tr><td width='40%'><h3>Name</h3></td><td width='30%'><h3>Status</h3></td><td width='30%'><h3>Location</h3></td><td width='10%'><h3>Control</h3></td></tr>"
 
 	for (B in machines)
-		if(B.z == src.z && !B.remote_disabled) //Only non-emagged bots on the same Z-level are detected!
+		if(B.z == ai_Zlevel && !B.remote_disabled) //Only non-emagged bots on the same Z-level are detected!
 			bot_area = get_area(B)
 			d += "<tr><td width='30%'>[B.hacked ? "<span class='bad'>(!) </span>[B.name]" : B.name]</td>"
 			//If the bot is on, it will display the bot's current busy status. If the bot is not busy, it will just report "Ready". "Inactive if it is not on at all.
 			d += "<td width='30%'>[B.on ? "[B.busy ? "<span class='average'>[B.busy]</span>": "<span class='good'>Ready</span>"]" : "<span class='bad'>Inactive</span>"]</td>"
-			d += "<td width='30%'>[format_text(bot_area.name)]</td>"
+			d += "<td width='30%'>[bot_area.name]</td>"
 			d += "<td width='10%'><A HREF=?src=\ref[src];interface=\ref[B]>Interface</A></td>"
 			d += "<td width='10%'><A HREF=?src=\ref[src];callbot=\ref[B]>Call</A></td>"
 			d += "</tr>"
+			d = format_text(d)
 
 	var/datum/browser/popup = new(src, "botcall", "Remote Robot Control", 700, 400)
 	popup.set_content(d)
@@ -572,17 +575,17 @@ var/list/ai_list = list()
 	var/datum/job/captain/All = new/datum/job/captain
 	all_access.access = All.get_access()
 
-	var/list/called
-	called = AStar(B.loc, end_loc, /turf/proc/CardinalTurfsWithAccess, /turf/proc/Distance_cardinal, 0, 255, id=all_access)
+	var/list/call_path[]
+	call_path = AStar(B.loc, end_loc, /turf/proc/CardinalTurfsWithAccess, /turf/proc/Distance_cardinal, 0, 255, id=all_access)
 
-	if(called && called.len) //Ensures that a valid path is calculated!
+	if(call_path && call_path.len) //Ensures that a valid path is calculated!
 		if(!B.on)
 			B.turn_on() //Saves the AI the hassle of having to activate a bot manually.
 		B.pathset = 0 //Forces the bot to accept a new rute if already under an AI call.
-		B.called = called //Send the path to the bot!
+		B.call_path = call_path //Send the path to the bot!
 		B.botcard = all_access //Give the bot all-access while under the AI's command.
 		B.calling_ai = src //Link the AI to the bot!
-		src << "<span class='notice'>[B] called to [end_area.name]. [called.len-1] meters to destination.</span>"
+		src << "<span class='notice'>[B] called to [end_area.name]. [call_path.len-1] meters to destination.</span>"
 	else
 		src << "<span class='danger'>Failed to calculate a valid route. Ensure destination is clear of obstructions.</span>"
 

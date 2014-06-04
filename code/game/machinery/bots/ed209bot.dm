@@ -236,15 +236,14 @@ Auto Patrol: []"},
 	if (!src.on || src.disabled)
 		return
 
-	if(src.called)
+	if(src.call_path)
 		if(!src.pathset)
-			src.path = src.called
+			set_path()
 			src.target = null
 			src.oldtarget_name = null
 			src.anchored = 0
 			src.mode = SECBOT_IDLE
 			walk_to(src,0)
-			src.pathset = 1
 		else
 			move_to_call(src.path)
 			sleep(5)

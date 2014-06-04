@@ -172,7 +172,7 @@ text("<A href='?src=\ref[src];operation=oddbutton'>[src.oddbutton ? "Yes" : "No"
 		return
 	if(src.busy == busy_name)
 		return
-	if(src.called)
+	if(src.call_path)
 		if(!src.pathset)
 			set_path()
 			src.target = null
