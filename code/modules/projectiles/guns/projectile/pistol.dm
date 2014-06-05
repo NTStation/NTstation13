@@ -63,7 +63,7 @@
 
 /obj/item/weapon/gun/projectile/automatic/pistol
 	name = "\improper Stechkin pistol"
-	desc = "A small, easily concealable handgun. Uses 10mm ammo and is compatible with silencers."
+	desc = "A small, easily concealable handgun. Uses 10mm ammo and has a threaded barrel for silencers."
 	icon_state = "pistol"
 	w_class = 2
 	silenced = 0

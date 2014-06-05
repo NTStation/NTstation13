@@ -27,7 +27,7 @@
 
 /obj/item/weapon/gun/projectile/automatic/c20r
 	name = "\improper C-20r SMG"
-	desc = "A lightweight, compact bullpup SMG. Uses .45 ACP rounds in medium-capacity magazines and is compatible with silencers. Has a 'Scarborough Arms - Per falcis, per pravitas' buttstamp."
+	desc = "A lightweight, compact bullpup SMG. Uses .45 ACP rounds in medium-capacity magazines and has a threaded barrel for silencers. Has a 'Scarborough Arms - Per falcis, per pravitas' buttstamp."
 	icon_state = "c20r"
 	item_state = "c20r"
 	w_class = 3.0
