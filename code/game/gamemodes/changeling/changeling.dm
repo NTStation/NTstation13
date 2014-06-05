@@ -102,7 +102,7 @@ var/list/possible_changeling_IDs = list("Alpha","Beta","Gamma","Delta","Epsilon"
 
 	var/datum/objective/absorb/absorb_objective = new
 	absorb_objective.owner = changeling
-	absorb_objective.gen_amount_goal(1, 3)
+	absorb_objective.gen_amount_goal(2, 4)
 	changeling.objectives += absorb_objective
 
 	var/datum/objective/assassinate/kill_objective = new
@@ -110,17 +110,10 @@ var/list/possible_changeling_IDs = list("Alpha","Beta","Gamma","Delta","Epsilon"
 	kill_objective.find_target()
 	changeling.objectives += kill_objective
 
-	switch(rand(1,100))
-		if(1 to 60)
-			var/datum/objective/steal/steal_objective = new
-			steal_objective.owner = changeling
-			steal_objective.find_target()
-			changeling.objectives += steal_objective
-		else
-			var/datum/objective/debrain/debrain_objective = new
-			debrain_objective.owner = changeling
-			debrain_objective.find_target()
-			changeling.objectives += debrain_objective
+	var/datum/objective/steal/steal_objective = new
+	steal_objective.owner = changeling
+	steal_objective.find_target()
+	changeling.objectives += steal_objective
 
 	if (!(locate(/datum/objective/escape) in changeling.objectives))
 		var/datum/objective/escape/escape_objective = new
