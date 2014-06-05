@@ -55,9 +55,8 @@
 	user.visible_message("<span class='danger'>[user] sucks the fluids from [target]!</span>")
 	target << "<span class='danger'>You have been absorbed by the changeling!</span>"
 
-	changeling.absorb_dna(target)
-
 	changeling.absorbedcount++
+	changeling.absorb_dna(target, user)
 
 	if(user.nutrition < 400) user.nutrition = min((user.nutrition + target.nutrition), 400)
 
