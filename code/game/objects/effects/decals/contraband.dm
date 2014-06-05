@@ -14,7 +14,7 @@
 
 /obj/item/weapon/contraband/poster
 	name = "rolled-up poster"
-	desc = "The poster comes with its own automatic adhesive mechanism, for easy pinning to any vertical surface. Its vulgar themes have marked it as Contraband aboard Nanotrasen© Space Facilities."
+	desc = "The poster comes with its own automatic adhesive mechanism, for easy pinning to any vertical surface. Its vulgar themes have marked it as Contraband aboard Nanotrasen? Space Facilities."
 	icon_state = "rolled_poster"
 	var/serial_number = 0
 	var/obj/structure/sign/poster/resulting_poster = null //The poster that will be created is initialised and stored through contraband/poster's constructor
@@ -158,6 +158,12 @@ obj/structure/sign/poster/New(serial,subtype)
 			if(22)
 				name += " - Kosmicheskaya Stantsiya 13 Does Not Exist"
 				desc += " A poster denying the existence of the derelict station near Space Station 13."
+			if(23)
+				name += " - Rebels Unite!"
+				desc += " A poster telling the viewer to rebel against Nanotrasen."
+			if(24)
+				name += " - C-20r Advertisment"
+				desc += " A poster advertising the Scarborough Arms C-20r."
 			else
 				name += " - Error (subtype 0 serial_number)"
 				desc += " This is a bug, please report the circumstances under which you encountered this poster at https://github.com/NTStation/NTstation13/issues."
@@ -227,6 +233,12 @@ obj/structure/sign/poster/New(serial,subtype)
 			if(21)
 				name += " - Saftey: Report"
 				desc += " A poster instructing the viewer to report suspicious activity to the security force."
+			if(22)
+				name += " - Report Crimes"
+				desc += " Report Crimes At: 1-800-FUCKING-TERRORISTS or at https://www.sectorthirteen.nt/malconetents."
+			if(23)
+				name += " - Ion Rifle"
+				desc += " A poster displaying an Ion Rifle."
 			else
 				name += " - Error (subtype 1 serial_number)"
 				desc += " This is a bug, please report the circumstances under which you encountered this poster at https://github.com/NTStation/NTstation13/issues."
