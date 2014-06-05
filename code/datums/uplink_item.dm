@@ -134,13 +134,6 @@ var/list/uplink_items = list()
 	cost = 5
 	excludefrom = list(/datum/game_mode/nuclear)
 
-/datum/uplink_item/dangerous/flamethrower
-	name = "Flamethrower"
-	desc = "A flamethrower, fueled by a portion of highly flammable biotoxins stolen previously from Nanotrasen stations. Make a statement by roasting the filth in their own greed. Use with caution."
-	item = /obj/item/weapon/flamethrower/full/tank
-	cost = 6
-	gamemodes = list(/datum/game_mode/nuclear)
-
 /datum/uplink_item/dangerous/sword
 	name = "Energy Sword"
 	desc = "The energy sword is an edged weapon with a blade of pure energy. The sword is small enough to be pocketed when inactive. Activating it produces a loud, distinctive noise."
@@ -450,6 +443,47 @@ var/list/uplink_items = list()
 	desc = "An implant granting you the knowledge of Non-secure Airlock and Door wire systems"
 	item = /obj/item/weapon/storage/box/syndie_kit/imp_wire_door
 	cost = 2 //2 because unlike the Emag, this needs tools
+
+// STOLEN TECH
+/datum/uplink_item/stolen
+	category = "Stolen Tech"
+
+/datum/uplink_item/stolen/magboots
+	name = "Stolen Magboots"
+	desc = "A pair of magnetic boots that assist with freer movement in space or on-station during gravitational generator failures. \
+	These reverse-engineered knockoffs of Nanotrasen's 'Advanced Magboots' slow you down in simulated-gravity environments much like the standard issue variety."
+	item = /obj/item/clothing/shoes/magboots/syndie
+	cost = 2
+	gamemodes = list(/datum/game_mode/nuclear)
+
+/datum/uplink_item/stolen/flamethrower
+	name = "Syndicate Flamethrower"
+	desc = "Ammunition sold seperately! A flamethrower, fueled by highly flammable biotoxins stolen previously from Nanotrasen stations. Make a statement by roasting the filth in their own greed. \
+	Caution: Recommended only to be used by agents familiar with plasma and its properties."
+	item = /obj/item/weapon/flamethrower/syndie
+	cost = 4
+	gamemodes = list(/datum/game_mode/nuclear)
+
+/datum/uplink_item/stolen/plasmatank
+	name = "Stolen Plasma Tank"
+	desc = "A stolen tank full of a highly flammable gas known as 'plasma'. Our agents have recovered this tank for careful testing and analysis, and turning it back on Nanotrasen is the perfect 'trial by fire.'"
+	item = /obj/item/weapon/tank/plasma/full
+	cost = 3
+	gamemodes = list(/datum/game_mode/nuclear)
+
+/datum/uplink_item/stolen/rcd
+	name = "Stolen Rapid-Construction Device"
+	desc = "A stolen RCD that uses modified compressed matter cartridges to rapidly assemble or disassemble basic structures such as walls or airlocks."
+	item = /obj/item/weapon/rcd/syndie
+	cost = 6
+	gamemodes = list(/datum/game_mode/nuclear)
+
+/datum/uplink_item/stolen/mcmc
+	name = "Modified Compressed Matter Cartridge"
+	desc = "A stolen compressed matter cartridge that has been modified to completely fill an RCD to its limit. Is it safe? Not our problem!"
+	item = /obj/item/weapon/rcd_ammo/syndie
+	cost = 3
+	gamemodes = list(/datum/game_mode/nuclear)
 
 // POINTLESS BADASSERY
 

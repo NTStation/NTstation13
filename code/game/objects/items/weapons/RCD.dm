@@ -6,7 +6,7 @@ RCD
 */
 /obj/item/weapon/rcd
 	name = "rapid-construction-device (RCD)"
-	desc = "A device used to rapidly build walls/floor."
+	desc = "A device that uses compressed matter to rapidly assemble and disassemble basic structures such as walls, flooring, and airlocks."
 	icon = 'icons/obj/items.dmi'
 	icon_state = "rcd"
 	opacity = 0
@@ -262,3 +262,14 @@ RCD
 	origin_tech = "materials=2"
 	m_amt = 16000
 	g_amt = 8000
+
+/obj/item/weapon/rcd/syndie
+	name = "stolen rapid-construction-device"
+	desc = "A device that uses compressed matter to rapidly assemble and disassemble basic structures such as walls, flooring, and airlocks. There's something distinct about this model that screams 'tactical'."
+	icon_state = "rcdsyndie"
+
+/obj/item/weapon/rcd_ammo/syndie
+	name = "modified compressed matter cartridge"
+	desc = "Extra-highly compressed matter for the RCD."
+	m_amt = 48000
+	g_amt = 24000

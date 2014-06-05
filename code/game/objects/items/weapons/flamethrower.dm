@@ -206,3 +206,9 @@
 	..()
 	ptank = new /obj/item/weapon/tank/plasma/full(src)
 	update_icon()
+
+/obj/item/weapon/flamethrower/syndie
+	name = "syndicate flamethrower"
+	desc = "A military-grade flamethrower that is fueled by stolen plasma."
+	icon_state = "flamethrowersyndie"
+	origin_tech = "combat=1;plasmatech=1"
