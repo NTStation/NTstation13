@@ -9,8 +9,6 @@
 /obj/item/weapon/gun/energy/taser/cyborg
 	name = "taser gun"
 	desc = "An integrated taser that draws directly from a cyborg's power cell. Used by security cyborgs and defense turrets to subdue humanoids at range. Integrated into the weapon is a limiter to prevent the cyborg's power cell from overheating."
-	icon = 'icons/mob/robot_items.dmi'
-	icon_state = "taserarm"
 	fire_sound = 'sound/weapons/Taser.ogg'
 	cell_type = "/obj/item/weapon/stock_parts/cell/secborg"
 	var/charge_tick = 0
