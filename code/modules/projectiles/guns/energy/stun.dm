@@ -10,6 +10,7 @@
 	name = "taser gun"
 	desc = "An integrated taser that draws directly from a cyborg's power cell. Used by security cyborgs and defense turrets to subdue humanoids at range. Integrated into the weapon is a limiter to prevent the cyborg's power cell from overheating."
 	fire_sound = 'sound/weapons/Taser.ogg'
+	icon_state = "taser"
 	cell_type = "/obj/item/weapon/stock_parts/cell/secborg"
 	var/charge_tick = 0
 	var/recharge_time = 10 //Time it takes for shots to recharge (in ticks)
