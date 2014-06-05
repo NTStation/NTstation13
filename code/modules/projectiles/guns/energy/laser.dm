@@ -1,6 +1,6 @@
 /obj/item/weapon/gun/energy/laser
 	name = "laser gun"
-	desc = "An energy-based laser gun that uses normal energy cells to ignite and fire concentrated beams of plasma that pass through glass and thin metal."
+	desc = "An energy-based laser gun that uses normal energy cells to fire concentrated beams of light that pass through glass and thin metal."
 	icon_state = "laser"
 	item_state = "laser"
 	w_class = 3.0
@@ -76,7 +76,7 @@ obj/item/weapon/gun/energy/laser/retro
 
 /obj/item/weapon/gun/energy/lasercannon
 	name = "laser cannon"
-	desc = "A heavier, experimental version of the common laser gun. The concentrated plasma is enclosed in a tube lined with uranium-235 and subjected to high neutron flux in a nuclear reactor core. This incredible technology may help YOU achieve high excitation rates with smaller plasma volumes!"
+	desc = "A heavier, experimental version of the common laser gun. The concentrated light is fired through a housing lined with uranium-235 and subjected to high neutron flux in a nuclear reactor core. This incredible technology may help YOU achieve high excitation rates with less energy charge!"
 	icon_state = "lasercannon"
 	item_state = "laser"
 	origin_tech = "combat=4;materials=3;powerstorage=3"
