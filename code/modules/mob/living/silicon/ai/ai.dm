@@ -562,13 +562,8 @@ var/list/ai_list = list()
 
 /mob/living/silicon/ai/proc/call_bot(var/turf/end_loc, var/obj/machinery/bot/B)
 
-	if(waypoint)
-		end_loc = waypoint
-
-	else
-		end_loc = get_turf(src.eyeobj)
-
 	var/area/end_area = get_area(end_loc)
+	var/turf/start_loc = get_turf(B) //Get the bot's location.
 
 	//For giving the bot all-access.
 	var/obj/item/weapon/card/id/all_access = new /obj/item/weapon/card/id
@@ -576,7 +571,7 @@ var/list/ai_list = list()
 	all_access.access = All.get_access()
 
 	var/list/call_path = list()
-	call_path = AStar(B.loc, end_loc, /turf/proc/CardinalTurfsWithAccess, /turf/proc/Distance_cardinal, 0, 255, id=all_access)
+	call_path = AStar(start_loc, end_loc, /turf/proc/CardinalTurfsWithAccess, /turf/proc/Distance_cardinal, 0, 255, id=all_access)
 
 	if(call_path && call_path.len) //Ensures that a valid path is calculated!
 		if(!B.on)
@@ -585,7 +580,7 @@ var/list/ai_list = list()
 		B.call_path = call_path //Send the path to the bot!
 		B.botcard = all_access //Give the bot all-access while under the AI's command.
 		B.calling_ai = src //Link the AI to the bot!
-		src << "<span class='notice'>[B] called to [end_area.name]. [call_path.len-1] meters to destination.</span>"
+		src << "<span class='notice'>[B.name] called to [end_area.name]. [call_path.len-1] meters to destination.</span>"
 	else
 		src << "<span class='danger'>Failed to calculate a valid route. Ensure destination is clear of obstructions.</span>"
 

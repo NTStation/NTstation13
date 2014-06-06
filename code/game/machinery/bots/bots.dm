@@ -35,7 +35,7 @@
 	#define BOT_WORKING			9	// for MULEbots, when moving.
 	#define BOT_HEALING			10	// healing people (medbots)
 	#define BOT_RESPONDING		11	// responding to a call from the AI
-	var/list/busy_name = list("In Pursuit","Arresting","Arresting","Begining Patrol","Patrolling","Summoned by PDA", \
+	var/list/busy_name = list("In Pursuit","Arresting","Arresting","Beginning Patrol","Patrolling","Summoned by PDA", \
 	"Cleaning", "Repairing", "Working","Healing","Responding")	//This holds text for what the bot is busy doing, reported on the AI's bot control interface.
 
 
