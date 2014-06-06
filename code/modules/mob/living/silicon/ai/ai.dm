@@ -530,11 +530,11 @@ var/list/ai_list = list()
 	set category = "AI Commands"
 	set name = "Access Robot Control"
 	set desc = "Wirelessly control various automatic robots."
-	if(src.stat == 2)
+	if(stat == 2)
 		src << "<span class='danger'>Critical error. System offline.</span>"
 		return
 
-	if(src.control_disabled)
+	if(control_disabled)
 		src << "Wireless communication is disabled."
 		return
 
@@ -549,7 +549,7 @@ var/list/ai_list = list()
 			bot_area = get_area(B)
 			d += "<tr><td width='30%'>[B.hacked ? "<span class='bad'>(!) </span>[B.name]" : B.name]</td>"
 			//If the bot is on, it will display the bot's current busy status. If the bot is not busy, it will just report "Ready". "Inactive if it is not on at all.
-			d += "<td width='30%'>[B.on ? "[B.busy ? "<span class='average'>[B.busy]</span>": "<span class='good'>Ready</span>"]" : "<span class='bad'>Inactive</span>"]</td>"
+			d += "<td width='30%'>[B.on ? "[B.busy ? "<span class='average'>[ B.busy_name[B.busy] ]</span>": "<span class='good'>Ready</span>"]" : "<span class='bad'>Inactive</span>"]</td>"
 			d += "<td width='30%'>[bot_area.name]</td>"
 			d += "<td width='10%'><A HREF=?src=\ref[src];interface=\ref[B]>Interface</A></td>"
 			d += "<td width='10%'><A HREF=?src=\ref[src];callbot=\ref[B]>Call</A></td>"
@@ -562,8 +562,8 @@ var/list/ai_list = list()
 
 /mob/living/silicon/ai/proc/call_bot(var/turf/end_loc, var/obj/machinery/bot/B)
 
-	if(src.waypoint)
-		end_loc = src.waypoint
+	if(waypoint)
+		end_loc = waypoint
 
 	else
 		end_loc = get_turf(src.eyeobj)
@@ -575,7 +575,7 @@ var/list/ai_list = list()
 	var/datum/job/captain/All = new/datum/job/captain
 	all_access.access = All.get_access()
 
-	var/list/call_path[]
+	var/list/call_path = list()
 	call_path = AStar(B.loc, end_loc, /turf/proc/CardinalTurfsWithAccess, /turf/proc/Distance_cardinal, 0, 255, id=all_access)
 
 	if(call_path && call_path.len) //Ensures that a valid path is calculated!

@@ -18,7 +18,6 @@ var/global/mulebot_count = 0
 	maxhealth = 150
 	fire_dam_coeff = 0.7
 	brute_dam_coeff = 0.5
-	busy_name = "Working"
 	var/atom/movable/load = null		// the loaded crate (usually)
 	var/beacon_freq = 1400
 	var/control_freq = 1447
@@ -99,7 +98,7 @@ var/global/mulebot_count = 0
 		locked = !locked
 		user << "\blue You [locked ? "lock" : "unlock"] the mulebot's controls!"
 		flick("mulebot-emagged", src)
-		playsound(src.loc, 'sound/effects/sparks1.ogg', 100, 0)
+		playsound(loc, 'sound/effects/sparks1.ogg', 100, 0)
 	else if(istype(I, /obj/item/weapon/card/id))
 		if(toggle_lock(user))
 			user << "\blue Controls [(locked ? "locked" : "unlocked")]."
@@ -117,17 +116,17 @@ var/global/mulebot_count = 0
 
 		open = !open
 		if(open)
-			src.visible_message("[user] opens the maintenance hatch of [src]", "\blue You open [src]'s maintenance hatch.")
+			visible_message("[user] opens the maintenance hatch of [src]", "\blue You open [src]'s maintenance hatch.")
 			on = 0
 			icon_state="mulebot-hatch"
 		else
-			src.visible_message("[user] closes the maintenance hatch of [src]", "\blue You close [src]'s maintenance hatch.")
+			visible_message("[user] closes the maintenance hatch of [src]", "\blue You close [src]'s maintenance hatch.")
 			icon_state = "mulebot0"
 
 		updateDialog()
 	else if (istype(I, /obj/item/weapon/wrench))
-		if (src.health < maxhealth)
-			src.health = min(maxhealth, src.health+25)
+		if (health < maxhealth)
+			health = min(maxhealth, health+25)
 			user.visible_message(
 				"\red [user] repairs [src]!",
 				"\blue You repair [src]!"
@@ -163,7 +162,7 @@ var/global/mulebot_count = 0
 	if(prob(50) && !isnull(load))
 		unload(0)
 	if(prob(25))
-		src.visible_message("\red Something shorts out inside [src]!")
+		visible_message("\red Something shorts out inside [src]!")
 		wires.RandomCut()
 	..()
 
@@ -246,7 +245,7 @@ var/global/mulebot_count = 0
 	//onclose(user, "mulebot")
 	var/datum/browser/popup = new(user, "mulebot", "M.U.L.E. Mk. III [suffix ? "([suffix])" : ""]", 350, 500)
 	popup.set_content(dat)
-	popup.set_title_image(user.browse_rsc_icon(src.icon, src.icon_state))
+	popup.set_title_image(user.browse_rsc_icon(icon, icon_state))
 	popup.open()
 	return
 
@@ -260,7 +259,7 @@ var/global/mulebot_count = 0
 		return
 	if (usr.stat)
 		return
-	if ((in_range(src, usr) && istype(src.loc, /turf)) || (istype(usr, /mob/living/silicon)))
+	if ((in_range(src, usr) && istype(loc, /turf)) || (istype(usr, /mob/living/silicon)))
 		usr.set_machine(src)
 
 		switch(href_list["op"])
@@ -268,7 +267,7 @@ var/global/mulebot_count = 0
 				toggle_lock(usr)
 
 			if("power")
-				if (src.on)
+				if (on)
 					turn_off()
 				else if (cell && !open)
 					if (!turn_on())
@@ -361,7 +360,7 @@ var/global/mulebot_count = 0
 				usr << browse(null,"window=mulebot")
 
 		updateDialog()
-		//src.updateUsrDialog()
+		//updateUsrDialog()
 	else
 		usr << browse(null, "window=mulebot")
 		usr.unset_machine()
@@ -374,7 +373,7 @@ var/global/mulebot_count = 0
 	return !open && cell && cell.charge > 0 && wires.HasPower()
 
 /obj/machinery/bot/mulebot/proc/toggle_lock(var/mob/user)
-	if(src.allowed(user))
+	if(allowed(user))
 		locked = !locked
 		updateDialog()
 		return 1
@@ -402,8 +401,8 @@ var/global/mulebot_count = 0
 // called to load a crate
 /obj/machinery/bot/mulebot/proc/load(var/atom/movable/C)
 	if(wires.LoadCheck() && !istype(C,/obj/structure/closet/crate))
-		src.visible_message("[src] makes a sighing buzz.", "You hear an electronic buzzing sound.")
-		playsound(src.loc, 'sound/machines/buzz-sigh.ogg', 50, 0)
+		visible_message("[src] makes a sighing buzz.", "You hear an electronic buzzing sound.")
+		playsound(loc, 'sound/machines/buzz-sigh.ogg', 50, 0)
 		return		// if not emagged, only allow crates to be loaded
 
 	//I'm sure someone will come along and ask why this is here... well people were dragging screen items onto the mule, and that was not cool.
@@ -422,9 +421,9 @@ var/global/mulebot_count = 0
 	if(istype(crate))
 		crate.close()
 
-	C.loc = src.loc
+	C.loc = loc
 	sleep(2)
-	if(C.loc != src.loc) //To prevent you from going onto more thano ne bot.
+	if(C.loc != loc) //To prevent you from going onto more thano ne bot.
 		return
 	C.loc = src
 	load = C
@@ -460,11 +459,11 @@ var/global/mulebot_count = 0
 			M.client.eye = src
 
 
-	load.loc = src.loc
+	load.loc = loc
 	load.pixel_y -= 9
 	load.layer = initial(load.layer)
 	if(dirn)
-		var/turf/T = src.loc
+		var/turf/T = loc
 		var/turf/newT = get_step(T,dirn)
 		if(load.CanPass(load,newT)) //Can't get off onto anything that wouldn't let you pass normally
 			step(load, dirn)
@@ -478,7 +477,7 @@ var/global/mulebot_count = 0
 	for(var/atom/movable/AM in src)
 		if(AM == cell || AM == botcard) continue
 
-		AM.loc = src.loc
+		AM.loc = loc
 		AM.layer = initial(AM.layer)
 		AM.pixel_y = initial(AM.pixel_y)
 		if(ismob(AM))
@@ -520,16 +519,18 @@ var/global/mulebot_count = 0
 
 /obj/machinery/bot/mulebot/proc/process_bot()
 	//if(mode) world << "Mode: [mode]"
-	if (src.call_path)
-		src.target = src.call_path[src.call_path.len] //Target is the end point of the path, the waypoint set by the AI.
-		src.destination = format_text(get_area(src.target))
-		src.path = call_path
-		src.call_path = 0 //Once the MULE is commanded, follow normal procedures to reach the waypoint.
-		src.auto_return = 0 //Prevents the MULE immediately scooting back home upon reaching the waypoint..
+	var/area/dest_area
+	if (call_path && call_path.len)
+		target = call_path[call_path.len] //Target is the end point of the path, the waypoint set by the AI.
+		dest_area = get_area(target)
+		destination = format_text(dest_area.name)
+		path = call_path
+		call_path = null //Once the MULE is commanded, follow normal procedures to reach the waypoint.
+		auto_return = 0 //Prevents the MULE immediately scooting back home upon reaching the waypoint..
 		start()
 
 	if(mode)
-		busy = busy_name
+		busy = BOT_WORKING
 	else
 		busy = 0
 
@@ -600,26 +601,26 @@ var/global/mulebot_count = 0
 						blockcount++
 						mode = 4
 						if(blockcount == 3)
-							src.visible_message("[src] makes an annoyed buzzing sound.", "You hear an electronic buzzing sound.")
-							playsound(src.loc, 'sound/machines/buzz-two.ogg', 50, 0)
+							visible_message("[src] makes an annoyed buzzing sound.", "You hear an electronic buzzing sound.")
+							playsound(loc, 'sound/machines/buzz-two.ogg', 50, 0)
 
 						if(blockcount > 5)	// attempt 5 times before recomputing
 							// find new path excluding blocked turf
-							src.visible_message("[src] makes a sighing buzz.", "You hear an electronic buzzing sound.")
-							playsound(src.loc, 'sound/machines/buzz-sigh.ogg', 50, 0)
+							visible_message("[src] makes a sighing buzz.", "You hear an electronic buzzing sound.")
+							playsound(loc, 'sound/machines/buzz-sigh.ogg', 50, 0)
 
 							spawn(2)
 								calc_path(next)
 								if(path.len > 0)
-									src.visible_message("[src] makes a delighted ping!", "You hear a ping.")
-									playsound(src.loc, 'sound/machines/ping.ogg', 50, 0)
+									visible_message("[src] makes a delighted ping!", "You hear a ping.")
+									playsound(loc, 'sound/machines/ping.ogg', 50, 0)
 								mode = 4
 							mode =6
 							return
 						return
 				else
-					src.visible_message("[src] makes an annoyed buzzing sound.", "You hear an electronic buzzing sound.")
-					playsound(src.loc, 'sound/machines/buzz-two.ogg', 50, 0)
+					visible_message("[src] makes an annoyed buzzing sound.", "You hear an electronic buzzing sound.")
+					playsound(loc, 'sound/machines/buzz-two.ogg', 50, 0)
 					//world << "Bad turf."
 					mode = 5
 					return
@@ -638,12 +639,12 @@ var/global/mulebot_count = 0
 				if(path.len > 0)
 					blockcount = 0
 					mode = 4
-					src.visible_message("[src] makes a delighted ping!", "You hear a ping.")
-					playsound(src.loc, 'sound/machines/ping.ogg', 50, 0)
+					visible_message("[src] makes a delighted ping!", "You hear a ping.")
+					playsound(loc, 'sound/machines/ping.ogg', 50, 0)
 
 				else
-					src.visible_message("[src] makes a sighing buzz.", "You hear an electronic buzzing sound.")
-					playsound(src.loc, 'sound/machines/buzz-sigh.ogg', 50, 0)
+					visible_message("[src] makes a sighing buzz.", "You hear an electronic buzzing sound.")
+					playsound(loc, 'sound/machines/buzz-sigh.ogg', 50, 0)
 
 					mode = 7
 		//if(6)
@@ -657,9 +658,9 @@ var/global/mulebot_count = 0
 // calculates a path to the current destination
 // given an optional turf to avoid
 /obj/machinery/bot/mulebot/proc/calc_path(var/turf/avoid = null)
-	src.path = AStar(src.loc, src.target, /turf/proc/CardinalTurfsWithAccess, /turf/proc/Distance_cardinal, 0, 250, id=botcard, exclude=avoid)
-	if(!src.path)
-		src.path = list()
+	path = AStar(loc, target, /turf/proc/CardinalTurfsWithAccess, /turf/proc/Distance_cardinal, 0, 250, id=botcard, exclude=avoid)
+	if(!path)
+		path = list()
 
 
 // sets the current destination
@@ -690,8 +691,8 @@ var/global/mulebot_count = 0
 // called when bot reaches current target
 /obj/machinery/bot/mulebot/proc/at_target()
 	if(!reached_target)
-		src.visible_message("[src] makes a chiming sound!", "You hear a chime.")
-		playsound(src.loc, 'sound/machines/chime.ogg', 50, 0)
+		visible_message("[src] makes a chiming sound!", "You hear a chime.")
+		playsound(loc, 'sound/machines/chime.ogg', 50, 0)
 		reached_target = 1
 
 		if(load)		// if loaded, unload at target
@@ -728,9 +729,9 @@ var/global/mulebot_count = 0
 		var/mob/M = obs
 		if(ismob(M))
 			if(istype(M,/mob/living/silicon/robot))
-				src.visible_message("\red [src] bumps into [M]!")
+				visible_message("\red [src] bumps into [M]!")
 			else
-				src.visible_message("\red [src] knocks over [M]!")
+				visible_message("\red [src] knocks over [M]!")
 				M.stop_pulling()
 				M.Stun(8)
 				M.Weaken(5)
@@ -744,8 +745,8 @@ var/global/mulebot_count = 0
 // called from mob/living/carbon/human/Crossed()
 // when mulebot is in the same loc
 /obj/machinery/bot/mulebot/proc/RunOver(var/mob/living/carbon/human/H)
-	src.visible_message("\red [src] drives over [H]!")
-	playsound(src.loc, 'sound/effects/splat.ogg', 50, 1)
+	visible_message("\red [src] drives over [H]!")
+	playsound(loc, 'sound/effects/splat.ogg', 50, 1)
 
 	var/damage = rand(5,15)
 	H.apply_damage(2*damage, BRUTE, "head")
@@ -755,7 +756,7 @@ var/global/mulebot_count = 0
 	H.apply_damage(0.5*damage, BRUTE, "l_arm")
 	H.apply_damage(0.5*damage, BRUTE, "r_arm")
 
-	var/obj/effect/decal/cleanable/blood/B = new(src.loc)
+	var/obj/effect/decal/cleanable/blood/B = new(loc)
 	B.blood_DNA = list()
 	B.blood_DNA[H.dna.unique_enzymes] = H.dna.blood_type
 
@@ -900,7 +901,7 @@ var/global/mulebot_count = 0
 
 
 /obj/machinery/bot/mulebot/explode()
-	src.visible_message("\red <B>[src] blows apart!</B>", 1)
+	visible_message("\red <B>[src] blows apart!</B>", 1)
 	var/turf/Tsec = get_turf(src)
 
 	new /obj/item/device/assembly/prox_sensor(Tsec)
@@ -916,6 +917,6 @@ var/global/mulebot_count = 0
 	s.set_up(3, 1, src)
 	s.start()
 
-	new /obj/effect/decal/cleanable/oil(src.loc)
+	new /obj/effect/decal/cleanable/oil(loc)
 	unload(0)
 	qdel(src)

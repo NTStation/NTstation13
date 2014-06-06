@@ -58,11 +58,11 @@
 		aicamera.camera_mode_off()
 		aicamera.captureimage(A, usr)
 		return
-	if(src.waypoint_mode)
-		src.waypoint = get_turf(A)
-		src << "[src.waypoint ? "<span class='notice'>Waypoint set.</span>" : "<span class='warning'>Failed to set waypoint.</span>"]"
-		src.waypoint_mode = 0
-		call_bot(src.waypoint, src.B)
+	if(waypoint_mode)
+		waypoint = get_turf(A)
+		src << "[waypoint ? "<span class='notice'>Waypoint set.</span>" : "<span class='warning'>Failed to set waypoint.</span>"]"
+		waypoint_mode = 0
+		call_bot(waypoint, src.B)
 		return
 
 	/*

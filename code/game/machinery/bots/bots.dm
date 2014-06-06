@@ -14,15 +14,29 @@
 	var/open = 0//Maint panel
 	var/locked = 1
 	var/hacked = 0 //Used to differentiate between being hacked by silicons and emagged by humans.
-	var/list/call_path[] = 0 //Path calculated by the AI and given to the bot to follow.
-	var/list/path[] = new() //Every bot has this, so it is best to put it here.
+	var/list/call_path = list() //Path calculated by the AI and given to the bot to follow.
+	var/list/path = new() //Every bot has this, so it is best to put it here.
 	var/pathset = 0
 	var/busy = 0 //Standardizes the vars that indicate the bot is busy with its function.
-	var/busy_name = 0 //This holds text for what the bot is busy doing, reported on the AI's bot control interface.
 	var/tries = 0 //Number of times the bot tried and failed to move.
 	var/remote_disabled = 0 //If enabled, the AI cannot *Remotely* control a bot. It can still control it through cameras.
 	var/mob/living/silicon/ai/calling_ai = null //Links a bot to the AI calling it.
 	//var/emagged = 0 //Urist: Moving that var to the general /bot tree as it's used by most bots
+
+	#define BOT_IDLE 			0	// idle
+	#define BOT_HUNT 			1	// found target, hunting
+	#define BOT_PREP_ARREST 	2	// at target, preparing to arrest
+	#define BOT_ARREST			3	// arresting target
+	#define BOT_START_PATROL	4	// start patrol
+	#define BOT_PATROL			5	// patrolling
+	#define BOT_SUMMON			6	// summoned by PDA
+	#define BOT_CLEANING 		7	// cleaning (cleanbots)
+	#define BOT_REPAIRING		8	// repairing hull breaches (floorbots)
+	#define BOT_WORKING			9	// for MULEbots, when moving.
+	#define BOT_HEALING			10	// healing people (medbots)
+	#define BOT_RESPONDING		11	// responding to a call from the AI
+	var/list/busy_name = list("In Pursuit","Arresting","Arresting","Begining Patrol","Patrolling","Summoned by PDA", \
+	"Cleaning", "Repairing", "Working","Healing","Responding")	//This holds text for what the bot is busy doing, reported on the AI's bot control interface.
 
 
 /obj/machinery/bot/proc/turn_on()
@@ -34,15 +48,15 @@
 /obj/machinery/bot/proc/turn_off()
 	on = 0
 	SetLuminosity(0)
-	call_path = 0 //Resets the AI's call on the bot, if any.
+	call_path = null //Resets the AI's call on the bot, if any.
 	pathset = 0
 	calling_ai = null
-	src.botcard.access = src.req_access //Resets the bot's access incase it is disabled while under AI control.
-	src.botcard.access += src.req_one_access
+	botcard.access = req_access //Resets the bot's access incase it is disabled while under AI control.
+	botcard.access += req_one_access
 
 /obj/machinery/bot/New()
 	..()
-	src.botcard = new /obj/item/weapon/card/id(src)
+	botcard = new /obj/item/weapon/card/id(src)
 
 /obj/machinery/bot/proc/explode()
 	qdel(src)
@@ -171,8 +185,8 @@
 /obj/machinery/bot/proc/hack(mob/user)
 	var/hack
 	if(issilicon(user))
-		hack += "[src.emagged ? "Software compromised! Unit may exhibit dangerous or erratic behavior." : "Unit operating normally. Release safety lock?"]<BR>"
-		hack += "Harm Prevention Safety System: <A href='?src=\ref[src];operation=hack'>[src.emagged ? "DANGER" : "Engaged"]</A><BR>"
+		hack += "[emagged ? "Software compromised! Unit may exhibit dangerous or erratic behavior." : "Unit operating normally. Release safety lock?"]<BR>"
+		hack += "Harm Prevention Safety System: <A href='?src=\ref[src];operation=hack'>[emagged ? "DANGER" : "Engaged"]</A><BR>"
 	return hack
 
 /obj/machinery/bot/attack_ai(mob/user as mob)
@@ -186,28 +200,28 @@
 	return
 
 /obj/machinery/bot/proc/set_path() //Contains all the non-unique settings for prepairing a bot to be controlled by the AI.
-	src.pathset = 1
-	src.busy = "Responding"
+	pathset = 1
+	busy = BOT_RESPONDING
 
 /obj/machinery/bot/proc/move_to_call()
-	if(src.call_path && src.call_path.len && tries < 6)
-		step_to(src, src.call_path[1])
+	if(call_path && call_path.len && tries < 6)
+		step_to(src, call_path[1])
 
-		if(src.loc == src.call_path[1])//Remove turfs from the path list if the bot moved there.
-			src.tries = 0
-			src.call_path -= src.call_path[1]
+		if(loc == call_path[1])//Remove turfs from the path list if the bot moved there.
+			tries = 0
+			call_path -= call_path[1]
 		else //Could not move because of an obstruction.
-			src.tries++
+			tries++
 	else
-		if(src.calling_ai)
-			src.calling_ai << "[tries ? "<span class='danger'>[src] failed to reach waypoint.</span>" : "<span class='notice'>[src] successfully arrived to waypoint.</span>"]"
-		src.calling_ai = null
-		src.call_path = 0
-		src.pathset = 0
-		src.botcard.access = src.req_access
-		src.botcard.access += src.req_one_access
-		src.tries = 0
-		src.busy = 0
+		if(calling_ai)
+			calling_ai << "[tries ? "<span class='danger'>[src] failed to reach waypoint.</span>" : "<span class='notice'>[src] successfully arrived to waypoint.</span>"]"
+		calling_ai = null
+		call_path = null
+		pathset = 0
+		botcard.access = src.req_access
+		botcard.access += src.req_one_access
+		tries = 0
+		busy = BOT_IDLE
 
 /******************************************************************/
 // Navigation procs
