@@ -275,6 +275,12 @@
 					set_picture("ai_tongue")
 				if("Loading")
 					set_picture("ai_loading")
+				if("Angery")
+					set_picture("ai_angery")
+				if("Love")
+					set_picture("ai_heart")
+
+
 			return
 
 		if(mode==2)	// BSOD
