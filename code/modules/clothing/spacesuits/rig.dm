@@ -108,7 +108,7 @@
 //Syndicate rig
 /obj/item/clothing/head/helmet/space/rig/syndi
 	name = "blood-red hardsuit helmet"
-	desc = "An advanced helmet designed for work in special operations. Property of Gorlex Marauders."
+	desc = "An advanced helmet designed for work in special operations. Property of the Gorlex Marauders."
 	icon_state = "rig0-syndi"
 	item_state = "syndie_helm"
 	item_color = "syndi"
@@ -117,7 +117,7 @@
 /obj/item/clothing/suit/space/rig/syndi
 	icon_state = "rig-syndi"
 	name = "blood-red hardsuit"
-	desc = "An advanced suit that protects against injuries during special operations. Property of Gorlex Marauders."
+	desc = "An advanced suit that protects against injuries during special operations. Property of the Gorlex Marauders."
 	item_state = "syndie_hardsuit"
 	slowdown = 1
 	w_class = 3
@@ -128,7 +128,7 @@
 //Syndicate Stealth Rig
 /obj/item/clothing/head/helmet/space/rig/syndistealth
 	name = "night-black hardsuit helmet"
-	desc = "An advanced helmet designed for work in covert operations. Property of Gorlex Marauders."
+	desc = "An advanced helmet designed for work in covert operations. Property of the Spider Clan."
 	icon_state = "rig0-stealth"
 	item_state = "stealth_helm"
 	item_color = "stealth"
@@ -137,7 +137,7 @@
 /obj/item/clothing/suit/space/rig/syndistealth
 	icon_state = "stealth"
 	name = "night-black hardsuit"
-	desc = "An advanced suit that protects against injuries during covert operations. Property of Gorlex Marauders."
+	desc = "An advanced suit that protects against injuries during covert operations. Property of the Spider Clan."
 	item_state = "syndie_hardsuit"
 	slowdown = 1
 	w_class = 3

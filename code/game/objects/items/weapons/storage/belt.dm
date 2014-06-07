@@ -1,11 +1,12 @@
 /obj/item/weapon/storage/belt
-	name = "belt"
-	desc = "Can hold various things."
+	name = "leather belt"
+	desc = "A leather belt with extra wide pouches that can hold a variety of items."
 	icon = 'icons/obj/clothing/belts.dmi'
-	icon_state = "utilitybelt"
-	item_state = "utility"
+	icon_state = "leatherbelt"
+	item_state = "leather"
+	storage_slots = 5
 	slot_flags = SLOT_BELT
-	attack_verb = list("whipped", "lashed", "disciplined")
+	attack_verb = list("whipped", "lashed", "smacked")
 
 
 /obj/item/weapon/storage/belt/proc/can_use()
@@ -37,9 +38,11 @@
 
 /obj/item/weapon/storage/belt/utility
 	name = "toolbelt" //Carn: utility belt is nicer, but it bamboozles the text parsing.
-	desc = "Holds tools."
+	desc = "A leather belt designed to hold various engineering tools."
 	icon_state = "utilitybelt"
 	item_state = "utility"
+	storage_slots = 7
+	max_w_class = 3 //for extinguisher just in case
 	can_hold = list(
 		/obj/item/weapon/crowbar,
 		/obj/item/weapon/screwdriver,
@@ -50,7 +53,9 @@
 		/obj/item/device/flashlight,
 		/obj/item/stack/cable_coil,
 		/obj/item/device/t_scanner,
-		/obj/item/device/analyzer)
+		/obj/item/device/analyzer,
+		/obj/item/weapon/extinguisher
+		)
 
 
 /obj/item/weapon/storage/belt/utility/full/New()
@@ -76,9 +81,10 @@
 
 /obj/item/weapon/storage/belt/medical
 	name = "medical belt"
-	desc = "Can hold various medical equipment."
+	desc = "A sterile belt designed to hold various medical equipment."
 	icon_state = "medicalbelt"
 	item_state = "medical"
+	storage_slots = 7
 	can_hold = list(
 		/obj/item/device/healthanalyzer,
 		/obj/item/weapon/dnainjector,
@@ -92,12 +98,12 @@
 		/obj/item/weapon/storage/pill_bottle,
 		/obj/item/stack/medical,
 		/obj/item/device/flashlight/pen
-	)
+		)
 
 
 /obj/item/weapon/storage/belt/security
 	name = "security belt"
-	desc = "Can hold security gear like handcuffs and flashes."
+	desc = "A dark leather belt with a baton holster designed to hold security gear like handcuffs and flashes."
 	icon_state = "securitybelt"
 	item_state = "security"//Could likely use a better one.
 	storage_slots = 5
@@ -124,7 +130,7 @@
 
 /obj/item/weapon/storage/belt/soulstone
 	name = "soul stone belt"
-	desc = "Designed for ease of access to the shards during a fight, as to not let a single enemy spirit slip away"
+	desc = "A magical belt with shimmering pouches designed to hold soulstones."
 	icon_state = "soulstonebelt"
 	item_state = "soulstonebelt"
 	storage_slots = 6
@@ -154,13 +160,13 @@
 
 /obj/item/weapon/storage/belt/military
 	name = "military belt"
-	desc = "A syndicate belt designed to be used by boarding parties. It can hold a large variety of weapons and gadgets."
+	desc = "A syndicate combat belt designed to hold a large variety of weapons and gadgets. Property of the Gorlex Marauders."
 	icon_state = "militarybelt"
 	item_state = "military"
 
 /obj/item/weapon/storage/belt/wands
 	name = "wand belt"
-	desc = "A belt designed to hold various rods of power. A veritable fanny pack of exotic magic."
+	desc = "A magical belt designed to hold various rods of power. A veritable fanny pack of exotic magic."
 	icon_state = "soulstonebelt"
 	item_state = "soulstonebelt"
 	storage_slots = 6
@@ -183,7 +189,7 @@
 
 /obj/item/weapon/storage/belt/janitor
 	name = "janibelt"
-	desc = "A belt used to hold most janitorial supplies."
+	desc = "A purple leather belt designed to hold most janitorial supplies."
 	icon_state = "janibelt"
 	item_state = "janibelt"
 	storage_slots = 6
