@@ -6,7 +6,7 @@
 	item_state = "leather"
 	storage_slots = 5
 	slot_flags = SLOT_BELT
-	attack_verb = list("whipped", "lashed", "smacked")
+	attack_verb = list("whipped", "lashed", "disciplined")
 
 
 /obj/item/weapon/storage/belt/proc/can_use()
