@@ -84,7 +84,7 @@ Roboticist
 	default_headset = /obj/item/device/radio/headset/headset_sci
 	default_satchel = /obj/item/weapon/storage/backpack/satchel_robo
 
-	access = list(access_robotics, access_tech_storage, access_morgue, access_research, access_mineral_storeroom)
+	access = list(access_robotics, access_tech_storage, access_morgue, access_research, access_tox, access_mineral_storeroom)
 	minimal_access = list(access_robotics, access_tech_storage, access_morgue, access_research, access_mineral_storeroom)
 
 /datum/job/roboticist/equip_items(var/mob/living/carbon/human/H)
