@@ -1,7 +1,7 @@
 //Regular rig suits
 /obj/item/clothing/head/helmet/space/rig
 	name = "engineering hardsuit helmet"
-	desc = "A special helmet designed for work in a hazardous, low-pressure environment. Has radiation shielding."
+	desc = "A special helmet designed for work in a hazardous, low-pressure environment. Equippped with basic radiation shielding."
 	icon_state = "rig0-engineering"
 	item_state = "eng_helm"
 	armor = list(melee = 10, bullet = 5, laser = 10,energy = 5, bomb = 10, bio = 100, rad = 75)
@@ -37,7 +37,7 @@
 
 /obj/item/clothing/suit/space/rig
 	name = "engineering hardsuit"
-	desc = "A special suit that protects against hazardous, low pressure environments. Has radiation shielding."
+	desc = "A special suit that protects against hazardous, low pressure environments. Equippped with basic radiation shielding."
 	icon_state = "rig-engineering"
 	item_state = "eng_hardsuit"
 	slowdown = 2
@@ -47,7 +47,7 @@
 //Atmospherics
 /obj/item/clothing/head/helmet/space/rig/atmos
 	name = "atmospherics hardsuit helmet"
-	desc = "A special helmet designed for work in a hazardous, low-pressure environment. Has thermal shielding."
+	desc = "An armored space helmet designed for fire fighting in hazardous, low-pressure environments. Equippped with advanced thermal shielding."
 	icon_state = "rig0-atmospherics"
 	item_state = "atmo_helm"
 	item_color = "atmospherics"
@@ -57,7 +57,7 @@
 
 /obj/item/clothing/suit/space/rig/atmos
 	name = "atmospherics hardsuit"
-	desc = "A special suit that protects against hazardous, low pressure environments. Has thermal shielding."
+	desc = "An armored space suit designed for fire fighting in hazardous, low-pressure environments. Equippped with advanced thermal shielding."
 	icon_state = "rig-atmospherics"
 	item_state = "atmo_hardsuit"
 	armor = list(melee = 10, bullet = 5, laser = 10,energy = 5, bomb = 10, bio = 100, rad = 0)
@@ -67,7 +67,7 @@
 //Chief Engineer's rig
 /obj/item/clothing/head/helmet/space/rig/elite
 	name = "advanced hardsuit helmet"
-	desc = "An advanced helmet designed for work in a hazardous, low pressure environment. Shines with a high polish."
+	desc = "An advanced, armored space helmet designed for work in a hazardous, low pressure environment. Equipped with advanced radiation shielding and shines with an intense polish."
 	icon_state = "rig0-white"
 	item_state = "ce_helm"
 	item_color = "white"
@@ -78,7 +78,7 @@
 /obj/item/clothing/suit/space/rig/elite
 	icon_state = "rig-white"
 	name = "advanced hardsuit"
-	desc = "An advanced suit that protects against hazardous, low pressure environments. Shines with a high polish."
+	desc = "An advanced, armored space suit that protects against hazardous, low pressure environments. Equipped with advanced radiation shielding and shines with an intense polish."
 	item_state = "ce_hardsuit"
 	armor = list(melee = 40, bullet = 5, laser = 10,energy = 5, bomb = 50, bio = 100, rad = 90)
 	heat_protection = CHEST|GROIN|LEGS|FEET|ARMS|HANDS					//Uncomment to enable firesuit protection
@@ -89,7 +89,7 @@
 //Mining rig
 /obj/item/clothing/head/helmet/space/rig/mining
 	name = "mining hardsuit helmet"
-	desc = "A special helmet designed for work in a hazardous, low pressure environment. Has reinforced plating."
+	desc = "A special helmet designed for work in a hazardous, low pressure environment. Equippped with reinforced plating to protect against hostile wildlife."
 	icon_state = "rig0-mining"
 	item_state = "mining_helm"
 	item_color = "mining"
@@ -98,7 +98,7 @@
 /obj/item/clothing/suit/space/rig/mining
 	icon_state = "rig-mining"
 	name = "mining hardsuit"
-	desc = "A special suit that protects against hazardous, low pressure environments. Has reinforced plating."
+	desc = "A special suit that protects against hazardous, low pressure environments. Equippped with reinforced plating to protect against hostile wildlife."
 	item_state = "mining_hardsuit"
 	armor = list(melee = 40, bullet = 5, laser = 10,energy = 5, bomb = 50, bio = 100, rad = 50)
 	allowed = list(/obj/item/device/flashlight,/obj/item/weapon/tank,/obj/item/weapon/storage/bag/ore,/obj/item/weapon/pickaxe)
@@ -108,7 +108,7 @@
 //Syndicate rig
 /obj/item/clothing/head/helmet/space/rig/syndi
 	name = "blood-red hardsuit helmet"
-	desc = "An advanced helmet designed for work in special operations. Property of the Gorlex Marauders."
+	desc = "An armored space helmet designed for work in special operations. Property of the Gorlex Marauders."
 	icon_state = "rig0-syndi"
 	item_state = "syndie_helm"
 	item_color = "syndi"
@@ -117,7 +117,7 @@
 /obj/item/clothing/suit/space/rig/syndi
 	icon_state = "rig-syndi"
 	name = "blood-red hardsuit"
-	desc = "An advanced suit that protects against injuries during special operations. Property of the Gorlex Marauders."
+	desc = "An armored space suit that protects against injuries during special operations. Unique syndicate technology allows it to be carried in a backpack when not in use. Property of the Gorlex Marauders."
 	item_state = "syndie_hardsuit"
 	slowdown = 1
 	w_class = 3
@@ -128,7 +128,7 @@
 //Syndicate Stealth Rig
 /obj/item/clothing/head/helmet/space/rig/syndistealth
 	name = "night-black hardsuit helmet"
-	desc = "An advanced helmet designed for work in covert operations. Property of the Spider Clan."
+	desc = "A sleek, armored space helmet designed for work in covert operations. Property of MI13."
 	icon_state = "rig0-stealth"
 	item_state = "stealth_helm"
 	item_color = "stealth"
@@ -137,7 +137,7 @@
 /obj/item/clothing/suit/space/rig/syndistealth
 	icon_state = "stealth"
 	name = "night-black hardsuit"
-	desc = "An advanced suit that protects against injuries during covert operations. Property of the Spider Clan."
+	desc = "A sleek, armored space suit that protects the wearer against injuries during covert operations. Unique syndicate technology allows it to be carried in a backpack when not in use. Property of MI13."
 	item_state = "syndie_hardsuit"
 	slowdown = 1
 	w_class = 3
@@ -148,7 +148,7 @@
 //Wizard Rig
 /obj/item/clothing/head/helmet/space/rig/wizard
 	name = "gem-encrusted hardsuit helmet"
-	desc = "A bizarre gem-encrusted helmet that radiates magical energies."
+	desc = "A bizarre gem-encrusted space helmet that radiates magical energies."
 	icon_state = "rig0-wiz"
 	item_state = "wiz_helm"
 	item_color = "wiz"
@@ -160,7 +160,7 @@
 /obj/item/clothing/suit/space/rig/wizard
 	icon_state = "rig-wiz"
 	name = "gem-encrusted hardsuit"
-	desc = "A bizarre gem-encrusted suit that radiates magical energies."
+	desc = "A bizarre gem-encrusted space suit that radiates magical energies."
 	item_state = "wiz_hardsuit"
 	slowdown = 1
 	w_class = 3
@@ -174,7 +174,7 @@
 //Medical Rig
 /obj/item/clothing/head/helmet/space/rig/medical
 	name = "medical hardsuit helmet"
-	desc = "A special helmet designed for work in a hazardous, low pressure environment. Built with lightweight materials for extra comfort."
+	desc = "A lightly-armored space helmet designed for medical work in hazardous, low pressure environments. Designed to protect the wearer from all foreign biohazards."
 	icon_state = "rig0-medical"
 	item_state = "medical_helm"
 	item_color = "medical"
@@ -183,7 +183,7 @@
 /obj/item/clothing/suit/space/rig/medical
 	icon_state = "rig-medical"
 	name = "medical hardsuit"
-	desc = "A special suit that protects against hazardous, low pressure environments. Built with lightweight materials for easier movement."
+	desc = "A lightly-armored space suit designed for medical work in hazardous, low pressure environments. Designed to protect the wearer from all foreign biohazards."
 	item_state = "medical_hardsuit"
 	slowdown = 1
 	allowed = list(/obj/item/device/flashlight,/obj/item/weapon/tank,/obj/item/weapon/storage/firstaid,/obj/item/device/healthanalyzer,/obj/item/stack/medical)
@@ -192,7 +192,7 @@
 	//Security
 /obj/item/clothing/head/helmet/space/rig/security
 	name = "security hardsuit helmet"
-	desc = "A special helmet designed for work in a hazardous, low pressure environment. Has an additional layer of armor."
+	desc = "A heavily-armored space helmet that protects against hazardous, low pressure environments. Equipped with a multitude of ballistic and energy weapon shieldings."
 	icon_state = "rig0-sec"
 	item_state = "sec_helm"
 	item_color = "sec"
@@ -201,7 +201,7 @@
 /obj/item/clothing/suit/space/rig/security
 	icon_state = "rig-sec"
 	name = "security hardsuit"
-	desc = "A special suit that protects against hazardous, low pressure environments. Has an additional layer of armor."
+	desc = "A heavily-armored space suit that protects against hazardous, low pressure environments. Equipped with a multitude of ballistic and energy weapon shieldings."
 	item_state = "sec_hardsuit"
 	allowed = list(/obj/item/device/flashlight,/obj/item/weapon/tank, /obj/item/weapon/gun/energy,/obj/item/weapon/reagent_containers/spray/pepper,/obj/item/weapon/gun/projectile,/obj/item/ammo_box,/obj/item/ammo_casing,/obj/item/weapon/melee/baton,/obj/item/weapon/handcuffs)
 	armor = list(melee = 50, bullet = 30, laser = 50,energy = 10, bomb = 25, bio = 100, rad = 50)
