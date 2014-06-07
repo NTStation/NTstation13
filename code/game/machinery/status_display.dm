@@ -275,8 +275,8 @@
 					set_picture("ai_tongue")
 				if("Loading")
 					set_picture("ai_loading")
-				if("Angery")
-					set_picture("ai_angery")
+				if("Angry")
+					set_picture("ai_angry")
 				if("Love")
 					set_picture("ai_heart")
 
