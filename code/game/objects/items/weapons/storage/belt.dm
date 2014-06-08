@@ -75,6 +75,7 @@
 	new /obj/item/weapon/weldingtool(src)
 	new /obj/item/weapon/crowbar(src)
 	new /obj/item/weapon/wirecutters(src)
+	new /obj/item/weapon/extinguisher(src)
 	new /obj/item/device/t_scanner(src)
 
 
@@ -163,6 +164,7 @@
 	desc = "A syndicate combat belt designed to hold a large variety of weapons and gadgets. Property of the Gorlex Marauders."
 	icon_state = "militarybelt"
 	item_state = "military"
+	storage_slots = 7
 
 /obj/item/weapon/storage/belt/wands
 	name = "wand belt"
