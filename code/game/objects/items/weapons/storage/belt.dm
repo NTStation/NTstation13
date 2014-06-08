@@ -42,7 +42,6 @@
 	icon_state = "utilitybelt"
 	item_state = "utility"
 	storage_slots = 7
-	max_w_class = 3 //for extinguisher just in case
 	can_hold = list(
 		/obj/item/weapon/crowbar,
 		/obj/item/weapon/screwdriver,
@@ -54,7 +53,7 @@
 		/obj/item/stack/cable_coil,
 		/obj/item/device/t_scanner,
 		/obj/item/device/analyzer,
-		/obj/item/weapon/extinguisher
+		/obj/item/weapon/extinguisher/mini
 		)
 
 
@@ -75,7 +74,7 @@
 	new /obj/item/weapon/weldingtool(src)
 	new /obj/item/weapon/crowbar(src)
 	new /obj/item/weapon/wirecutters(src)
-	new /obj/item/weapon/extinguisher(src)
+	new /obj/item/weapon/extinguisher/mini(src)
 	new /obj/item/device/t_scanner(src)
 
 
@@ -98,7 +97,8 @@
 		/obj/item/weapon/storage/fancy/cigarettes,
 		/obj/item/weapon/storage/pill_bottle,
 		/obj/item/stack/medical,
-		/obj/item/device/flashlight/pen
+		/obj/item/device/flashlight/pen,
+		/obj/item/weapon/extinguisher/mini
 		)
 
 
