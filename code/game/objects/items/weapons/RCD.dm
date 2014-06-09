@@ -263,11 +263,6 @@ RCD
 	m_amt = 16000
 	g_amt = 8000
 
-/obj/item/weapon/rcd/syndie
-	name = "stolen rapid-construction-device"
-	desc = "A device that uses compressed matter to rapidly assemble and disassemble basic structures such as walls, flooring, and airlocks. There's something distinct about this model that screams 'tactical'."
-	icon_state = "rcdsyndie"
-
 /obj/item/weapon/rcd_ammo/syndie
 	name = "modified compressed matter cartridge"
 	desc = "Extra-highly compressed matter for the RCD."
