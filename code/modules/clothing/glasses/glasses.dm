@@ -140,7 +140,7 @@
 	desc = "Believe in us humans."
 	name = "black super gar glasses"
 	icon_state = "supergarb"
-	item_state = "supergarb"
+	item_state = "garb"
 	force = 12
 	throwforce = 12
 	attack_verb = list("sliced")
@@ -160,7 +160,7 @@
 	desc = "We evolve past the person we were a minute before. Little by little we advance with each turn. That's how a drill works!"
 	name = "super gar glasses"
 	icon_state = "supergar"
-	item_state = "supergar"
+	item_state = "gar"
 	force = 12
 	throwforce = 12
 	attack_verb = list("sliced")

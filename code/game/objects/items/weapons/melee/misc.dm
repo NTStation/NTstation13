@@ -83,6 +83,7 @@
 	slot_flags = SLOT_BELT
 	w_class = 2
 	force = 3
+	var/cooldown = 0
 	var/on = 0
 
 /obj/item/weapon/melee/telebaton/attack_self(mob/user as mob)
@@ -93,8 +94,8 @@
 		"You hear an ominous click.")
 		icon_state = "telebaton_1"
 		item_state = "nullrod"
-		w_class = 3
-		force = 10//seclite damage
+		w_class = 4 //doesnt fit in backpack when its on for balance
+		force = 10 //seclite damage
 		attack_verb = list("smacked", "struck", "cracked", "beaten")
 	else
 		user.visible_message("<span class ='notice'>[user] collapses their telescopic baton.</span>",\
@@ -102,8 +103,9 @@
 		"You hear a click.")
 		icon_state = "telebaton_0"
 		item_state = "telebaton_0" //no sprite in other words
+		slot_flags = SLOT_BELT
 		w_class = 2
-		force = 3//not so robust now
+		force = 3 //not so robust now
 		attack_verb = list("hit", "poked")
 
 	playsound(src.loc, 'sound/weapons/flipblade.ogg', 50, 1)
@@ -125,14 +127,18 @@
 			if(!isrobot(target))
 				playsound(get_turf(src), "swing_hit", 50, 1, -1)
 		else
-			playsound(get_turf(src), 'sound/effects/woodhit.ogg', 75, 1, -1)
-			target.Weaken(3)
-			src.add_fingerprint(user)
-			target.visible_message("<span class ='danger'>[target] has been knocked down with \the [src] by [user]!</span>")
-			if(!iscarbon(user))
-				target.LAssailant = null
-			else
-				target.LAssailant = user
+			if(cooldown <= 0)
+				playsound(get_turf(src), 'sound/effects/woodhit.ogg', 75, 1, -1)
+				target.Weaken(3)
+				src.add_fingerprint(user)
+				target.visible_message("<span class ='danger'>[target] has been knocked down with \the [src] by [user]!</span>")
+				if(!iscarbon(user))
+					target.LAssailant = null
+				else
+					target.LAssailant = user
+				cooldown = 1
+				spawn(30)
+					cooldown = 0
 		return
 	else
 		return ..()

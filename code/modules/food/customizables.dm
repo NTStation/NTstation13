@@ -359,12 +359,159 @@
 	if(length(name) > 80) name = "[pick(list("absurd","colossal","enormous","ridiculous","massive","oversized","cardiac-arresting","pipe-clogging","edible but sickening","sickening","gargantuan","mega","belly-burster","chest-burster"))] [basename]"
 	w_class = n_ceil(Clamp((ingredients.len/2),1,3))
 
-/obj/item/weapon/reagent_containers/food/snacks/customizable/Del()
+/obj/item/weapon/reagent_containers/food/snacks/customizable/Destroy()
 	for(var/obj/item/O in ingredients)
-		del(O)
+		del(O) // qdelling certain foods causes runtimes up the ass sometimes, best just to standard del()
 	..()
 
 /obj/item/weapon/reagent_containers/food/snacks/customizable/examine()
+	..()
+	var/whatsinside = pick(ingredients)
+
+	usr << "<span class='notice'> You think you can see [whatsinside] in there.</span>"
+
+/obj/item/weapon/reagent_containers/food/drinks/bottle/customizable // Shamelessly stolen from original customizables, so that I can easily use the oven code.
+	name = "Customizable Drink"
+	desc = "If you can see this, tell a coder."
+	icon_state = "winecustom"
+	var/baseicon = "winecustom"
+	var/basename = "wine"
+	var/top = 1	//Do we have a top?
+	var/add_overlays = 1	//Do we stack?
+//	var/offsetstuff = 1 //Do we offset the overlays?
+	var/sandwich_limit = 1
+	var/fullycustom = 0
+	volume = 100
+	gulp_size = 2
+
+	var/list/ingredients = list()
+
+	New()
+		..()
+		reagents.add_reagent("nutriment", 1)
+
+
+/obj/item/weapon/reagent_containers/food/drinks/bottle/customizable/wine
+	name = "wine bottle"
+	desc = "Tasty."
+	icon_state = "winecustom"
+	baseicon = "winecustom"
+	basename = "wine bottle"
+	add_overlays = 0
+	top = 0
+	New()
+		..()
+		reagents.add_reagent("wine", 50)
+/obj/item/weapon/reagent_containers/food/drinks/bottle/customizable/whiskey
+	name = "whiskey bottle"
+	desc = "Tasty."
+	icon_state = "whiskeycustom"
+	baseicon = "whiskeycustom"
+	basename = "whiskey bottle"
+	add_overlays = 0
+	top = 0
+	New()
+		..()
+		reagents.add_reagent("whiskey", 50)
+/obj/item/weapon/reagent_containers/food/drinks/bottle/customizable/vermouth
+	name = "vermouth bottle"
+	desc = "Tasty."
+	icon_state = "vermouthcustom"
+	baseicon = "vermouthcustom"
+	basename = "vermouth bottle"
+	add_overlays = 0
+	top = 0
+	New()
+		..()
+		reagents.add_reagent("vermouth", 50)
+/obj/item/weapon/reagent_containers/food/drinks/bottle/customizable/vodka
+	name = "vodka"
+	desc = "Tasty."
+	icon_state = "vodkacustom"
+	baseicon = "vodkacustom"
+	basename = "vodka"
+	add_overlays = 0
+	top = 0
+	New()
+		..()
+		reagents.add_reagent("vodka", 50)
+/obj/item/weapon/reagent_containers/food/drinks/bottle/customizable/ale
+	name = "ale"
+	desc = "Strike the asteroid!"
+	icon_state = "alecustom"
+	baseicon = "alecustom"
+	basename = "ale"
+	add_overlays = 0
+	top = 0
+	New()
+		..()
+		reagents.add_reagent("wine", 50)
+/obj/item/weapon/reagent_containers/food/drinks/bottle/customizable/attackby(obj/item/W as obj, mob/user as mob)
+	if(src.contents.len > sandwich_limit)
+		user << "<span class='warning'>If you put anything else in or on [src] it's going to make a mess.</span>"
+		return
+	else if(istype(W,/obj/item/weapon/reagent_containers/food/snacks))
+		user << "<span class='notice'> You add [W] to [src].</span>"
+		var/obj/item/weapon/reagent_containers/F = W
+		F.reagents.trans_to(src, F.reagents.total_volume)
+		user.drop_item()
+		W.loc = src
+		ingredients += W
+		update()
+		return
+	..()
+
+/obj/item/weapon/reagent_containers/food/drinks/bottle/customizable/proc/update()
+	var/fullname = "" //We need to build this from the contents of the var.
+	var/i = 0
+
+	overlays.Cut()
+
+	for(var/obj/item/weapon/reagent_containers/food/snacks/O in ingredients)
+
+		i++
+		if(i == 1)
+			fullname += "[O.name]"
+		else if(i == ingredients.len)
+			fullname += " and [O.name]"
+		else
+			fullname += ", [O.name]"
+
+		if(!fullycustom)
+			var/image/I = new(src.icon, "[baseicon]_filling")
+			if(istype(O, /obj/item/weapon/reagent_containers/food/snacks))
+				var/obj/item/weapon/reagent_containers/food/snacks/food = O
+				if(!food.filling_color == "#FFFFFF")
+					I.color = food.filling_color
+				else
+					I.color = pick("#FF0000","#0000FF","#008000","#FFFF00")
+			if(add_overlays)
+				I.pixel_x = pick(list(-1,0,1))
+				I.pixel_y = (i*2)+1
+			overlays += I
+		else
+			var/image/F = new(O.icon, O.icon_state)
+			F.pixel_x = pick(list(-1,0,1))
+			F.pixel_y = pick(list(-1,0,1))
+			overlays += F
+			overlays += O.overlays
+
+	if(top)
+		var/image/T = new(src.icon, "[baseicon]_top")
+		T.pixel_x = pick(list(-1,0,1))
+		T.pixel_y = (ingredients.len * 2)+1
+		overlays += T
+
+	name = lowertext("[fullname] [basename]")
+	if(length(name) > 80) name = "incomprehensible mixture [basename]"
+	w_class = n_ceil(Clamp((ingredients.len/2),1,3))
+
+/obj/item/weapon/reagent_containers/food/drinks/bottle/customizable/Destroy()
+	for(var/obj/item/O in ingredients)
+		del(O) // qdelling certain foods causes runtimes up the ass sometimes, best just to standard del()
+	..()
+
+/obj/item/weapon/reagent_containers/food/drinks/bottle/customizable/examine()
 	..()
 	var/whatsinside = pick(ingredients)
 
