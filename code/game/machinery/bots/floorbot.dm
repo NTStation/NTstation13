@@ -187,9 +187,9 @@
 			oldloc = null
 			set_path()
 		else
-			move_to_call(path)
+			move_to_call()
 			sleep(5)
-			move_to_call(path)
+			move_to_call()
 		return
 
 	var/list/floorbottargets = list()

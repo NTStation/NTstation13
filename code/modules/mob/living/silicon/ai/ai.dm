@@ -30,7 +30,7 @@ var/list/ai_list = list()
 	var/obj/item/device/pda/ai/aiPDA = null
 	var/obj/item/device/multitool/aiMulti = null
 	var/obj/item/device/camera/ai_camera/aicamera = null
-	var/obj/machinery/bot/B = null
+	var/obj/machinery/bot/Bot = null
 
 	//MALFUNCTION
 	var/datum/module_picker/malf_picker
@@ -418,18 +418,18 @@ var/list/ai_list = list()
 		return
 
 	if (href_list["callbot"]) //Command a bot to move to a selected location.
-		src.B = locate(href_list["callbot"]) in machines
-		if(B.remote_disabled || src.control_disabled)
-			return
-		src.waypoint_mode = 1
+		Bot = locate(href_list["callbot"]) in machines
+		if(!Bot || Bot.remote_disabled || src.control_disabled)
+			return //True if there is no bot found, the bot is manually emagged, or the AI is carded with wireless off.
+		waypoint_mode = 1
 		src << "<span class='notice'>Set your waypoint by clicking on a valid location free of obstructions.</span>"
 		return
 
 	if (href_list["interface"]) //Remotely connect to a bot!
-		src.B = locate(href_list["interface"]) in machines
-		if(B.remote_disabled || src.control_disabled)
+		Bot = locate(href_list["interface"]) in machines
+		if(!Bot || Bot.remote_disabled || src.control_disabled)
 			return
-		B.attack_ai(src)
+		Bot.attack_ai(src)
 
 	else if (href_list["faketrack"])
 		var/mob/target = locate(href_list["track"]) in mob_list
@@ -537,22 +537,21 @@ var/list/ai_list = list()
 	if(control_disabled)
 		src << "Wireless communication is disabled."
 		return
-
 	var/turf/ai_current_turf = get_turf(src)
 	var/ai_Zlevel = ai_current_turf.z
 	var/d
 	var/area/bot_area
 	d += "<table width='100%'><tr><td width='40%'><h3>Name</h3></td><td width='30%'><h3>Status</h3></td><td width='30%'><h3>Location</h3></td><td width='10%'><h3>Control</h3></td></tr>"
 
-	for (B in machines)
-		if(B.z == ai_Zlevel && !B.remote_disabled) //Only non-emagged bots on the same Z-level are detected!
-			bot_area = get_area(B)
-			d += "<tr><td width='30%'>[B.hacked ? "<span class='bad'>(!) </span>[B.name]" : B.name]</td>"
+	for (Bot in machines)
+		if(Bot.z == ai_Zlevel && !Bot.remote_disabled) //Only non-emagged bots on the same Z-level are detected!
+			bot_area = get_area(Bot)
+			d += "<tr><td width='30%'>[Bot.hacked ? "<span class='bad'>(!) </span>[Bot.name]" : Bot.name]</td>"
 			//If the bot is on, it will display the bot's current busy status. If the bot is not busy, it will just report "Ready". "Inactive if it is not on at all.
-			d += "<td width='30%'>[B.on ? "[B.busy ? "<span class='average'>[ B.busy_name[B.busy] ]</span>": "<span class='good'>Ready</span>"]" : "<span class='bad'>Inactive</span>"]</td>"
+			d += "<td width='30%'>[Bot.on ? "[Bot.busy ? "<span class='average'>[ Bot.busy_name[Bot.busy] ]</span>": "<span class='good'>Idle</span>"]" : "<span class='bad'>Inactive</span>"]</td>"
 			d += "<td width='30%'>[bot_area.name]</td>"
-			d += "<td width='10%'><A HREF=?src=\ref[src];interface=\ref[B]>Interface</A></td>"
-			d += "<td width='10%'><A HREF=?src=\ref[src];callbot=\ref[B]>Call</A></td>"
+			d += "<td width='10%'><A HREF=?src=\ref[src];interface=\ref[Bot]>Interface</A></td>"
+			d += "<td width='10%'><A HREF=?src=\ref[src];callbot=\ref[Bot]>Call</A></td>"
 			d += "</tr>"
 			d = format_text(d)
 
@@ -560,10 +559,20 @@ var/list/ai_list = list()
 	popup.set_content(d)
 	popup.open()
 
-/mob/living/silicon/ai/proc/call_bot(var/turf/end_loc, var/obj/machinery/bot/B)
+/mob/living/silicon/ai/proc/set_waypoint(var/atom/A)
+	var/turf/turf_check = get_turf(A)
+		//The target must be in view of a camera or near the core.
+	if(turf_check in range(src))
+		call_bot(turf_check, Bot)
+	else if(cameranet && cameranet.checkTurfVis(turf_check))
+		call_bot(turf_check, Bot)
+	else
+		src << "<span class='danger'>Selected location is not visible.</span>"
+
+/mob/living/silicon/ai/proc/call_bot(var/turf/end_loc)
 
 	var/area/end_area = get_area(end_loc)
-	var/turf/start_loc = get_turf(B) //Get the bot's location.
+	var/turf/start_loc = get_turf(Bot) //Get the bot's location.
 
 	//For giving the bot all-access.
 	var/obj/item/weapon/card/id/all_access = new /obj/item/weapon/card/id
@@ -571,16 +580,16 @@ var/list/ai_list = list()
 	all_access.access = All.get_access()
 
 	var/list/call_path = list()
-	call_path = AStar(start_loc, end_loc, /turf/proc/CardinalTurfsWithAccess, /turf/proc/Distance_cardinal, 0, 255, id=all_access)
+	call_path = AStar(start_loc, end_loc, /turf/proc/CardinalTurfsWithAccess, /turf/proc/Distance_cardinal, 0, 128, id=all_access)
 
 	if(call_path && call_path.len) //Ensures that a valid path is calculated!
-		if(!B.on)
-			B.turn_on() //Saves the AI the hassle of having to activate a bot manually.
-		B.pathset = 0 //Forces the bot to accept a new rute if already under an AI call.
-		B.call_path = call_path //Send the path to the bot!
-		B.botcard = all_access //Give the bot all-access while under the AI's command.
-		B.calling_ai = src //Link the AI to the bot!
-		src << "<span class='notice'>[B.name] called to [end_area.name]. [call_path.len-1] meters to destination.</span>"
+		if(!Bot.on)
+			Bot.turn_on() //Saves the AI the hassle of having to activate a bot manually.
+		Bot.pathset = 0 //Forces the bot to accept a new rute if already under an AI call.
+		Bot.call_path = call_path //Send the path to the bot!
+		Bot.botcard = all_access //Give the bot all-access while under the AI's command.
+		Bot.calling_ai = src //Link the AI to the bot!
+		src << "<span class='notice'>[Bot.name] called to [end_area.name]. [call_path.len-1] meters to destination.</span>"
 	else
 		src << "<span class='danger'>Failed to calculate a valid route. Ensure destination is clear of obstructions.</span>"
 

@@ -178,9 +178,9 @@ text("<A href='?src=\ref[src];operation=oddbutton'>[oddbutton ? "Yes" : "No"]</A
 			oldtarget = null
 			oldloc = null
 		else
-			move_to_call(path)
+			move_to_call()
 			sleep(5)
-			move_to_call(path)
+			move_to_call()
 		return
 
 	var/list/cleanbottargets = list()

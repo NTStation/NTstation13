@@ -268,9 +268,9 @@
 			oldloc = null
 			last_found = world.time
 		else
-			move_to_call(path)
+			move_to_call()
 			sleep(5)
-			move_to_call(path)
+			move_to_call()
 		return
 
 	if(frustration > 8)

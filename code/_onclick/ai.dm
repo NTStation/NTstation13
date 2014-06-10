@@ -59,14 +59,7 @@
 		aicamera.captureimage(A, usr)
 		return
 	if(waypoint_mode)
-		var/turf/turf_check = get_turf(A)
-			//The target must be in view of a camera or near the core.
-		if(turf_check in range(src))
-			call_bot(turf_check, src.B)
-		else if(cameranet && cameranet.checkTurfVis(turf_check))
-			call_bot(turf_check, src.B)
-		else
-			src << "<span class='danger'>Selected location is not visible.</span>"
+		set_waypoint(A)
 		waypoint_mode = 0
 		return
 

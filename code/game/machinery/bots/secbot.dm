@@ -211,9 +211,9 @@ Auto Patrol: []"},
 			mode = BOT_IDLE
 			walk_to(src,0)
 		else
-			move_to_call(path)
+			move_to_call()
 			sleep(5)
-			move_to_call(path)
+			move_to_call()
 		return
 
 	switch(mode)
