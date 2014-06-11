@@ -163,7 +163,8 @@
 
 /obj/item/ammo_box/magazine/m12g
 	name = "shotgun magazine (12g stun slug)"
-	icon_state = "m12g-s"
+	icon_state = "m12gs"
+	mag_type = "stun"
 	origin_tech = "combat=3"
 	ammo_type = /obj/item/ammo_casing/shotgun/stunslug
 	caliber = "shotgun"
@@ -176,7 +177,8 @@
 
 /obj/item/ammo_box/magazine/m12g/buckshot
 	name = "shotgun magazine (12g buckshot)"
-	icon_state = "m12g-b"
+	icon_state = "m12gb"
+	mag_type = "buck"
 	ammo_type = /obj/item/ammo_casing/shotgun/buckshot
 
 /obj/item/ammo_box/magazine/m12g/stun/update_icon()
@@ -186,7 +188,9 @@
 
 /obj/item/ammo_box/magazine/m12g/dragon
 	name = "shotgun magazine (12g dragon's breath)"
-	icon_state = "m12g-f"
+	icon_state = "m12gf"
+	mag_type = "dragon"
+	origin_tech = "combat=3, syndicate=1"
 	ammo_type = /obj/item/ammo_casing/shotgun/dragon
 
 /obj/item/ammo_box/magazine/m12g/dragon/update_icon()
