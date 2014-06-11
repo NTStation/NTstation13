@@ -580,7 +580,7 @@ var/list/ai_list = list()
 	all_access.access = All.get_access()
 
 	var/list/call_path = list()
-	call_path = AStar(start_loc, end_loc, /turf/proc/CardinalTurfsWithAccess, /turf/proc/Distance_cardinal, 0, 128, id=all_access)
+	call_path = AStar(start_loc, end_loc, /turf/proc/CardinalTurfsWithAccess, /turf/proc/Distance_cardinal, 0, 150, id=all_access)
 
 	if(call_path && call_path.len) //Ensures that a valid path is calculated!
 		if(!Bot.on)
@@ -591,7 +591,7 @@ var/list/ai_list = list()
 		Bot.calling_ai = src //Link the AI to the bot!
 		src << "<span class='notice'>[Bot.name] called to [end_area.name]. [call_path.len-1] meters to destination.</span>"
 	else
-		src << "<span class='danger'>Failed to calculate a valid route. Ensure destination is clear of obstructions.</span>"
+		src << "<span class='danger'>Failed to calculate a valid route. Ensure destination is clear of obstructions and within range.</span>"
 
 /mob/living/silicon/ai/proc/sensor_mode()
 	set category = "AI Commands"

@@ -42,7 +42,7 @@
 	var/turf/target
 	var/turf/oldtarget
 	var/oldloc = null
-	req_access = list(access_construction)
+	req_one_access = list(access_construction)
 	var/targetdirection
 
 
@@ -106,7 +106,7 @@
 		user << "<span class='notice'>You load [loaded] tiles into the floorbot. He now contains [amount] tiles.</span>"
 		updateicon()
 	else if(istype(W, /obj/item/weapon/card/id)||istype(W, /obj/item/device/pda))
-		if(allowed(usr) && !open && !emagged)
+		if(allowed(user) && !open && !emagged)
 			locked = !locked
 			user << "<span class='notice'>You [locked ? "lock" : "unlock"] the [src] behaviour controls.</span>"
 		else
