@@ -228,19 +228,19 @@ var/list/uplink_items = list()
 /datum/uplink_item/ammo/bullstun
 	name = "Ammo-12g Stun Slug"
 	desc = "An additional 8-round stun slug magazine for use in the Bulldog shotgun. Accurate, reliable, powerful."
-	item = /obj/item/ammo_box/magazine/m12gs
+	item = /obj/item/ammo_box/magazine/m12g
 	cost = 2
 
 /datum/uplink_item/ammo/bullbuck
 	name = "Ammo-12g Buckshot"
 	desc = "An alternative 8-round buckshot magazine for use in the Bulldog shotgun. Front towards enemy."
-	item = /obj/item/ammo_box/magazine/m12gb
+	item = /obj/item/ammo_box/magazine/m12g/buckshot
 	cost = 2
 
 /datum/uplink_item/ammo/bulldragon
 	name = "Ammo-12g Dragon's Breath"
 	desc = "An alternative 8-round dragon's breath magazine for use in the Bulldog shotgun. I'm a fire starter, twisted fire starter!"
-	item = /obj/item/ammo_box/magazine/m12gf
+	item = /obj/item/ammo_box/magazine/m12g/dragon
 	cost = 3
 
 /datum/uplink_item/ammo/machinegun
