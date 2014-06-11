@@ -139,7 +139,7 @@
 	..()
 	if(istype(magazine, /obj/item/ammo_box/magazine/m12g)) icon_state = "bulldog-stun"
 	if(istype(magazine, /obj/item/ammo_box/magazine/m12g/buckshot)) icon_state = "bulldog-buck"
-	if(istype(magazine, /obj/item/ammo_box/magazine/m12g/flame)) icon_state = "bulldog-flame"
+	if(istype(magazine, /obj/item/ammo_box/magazine/m12g/dragon)) icon_state = "bulldog-dragon"
 	return
 
 /obj/item/weapon/gun/projectile/automatic/bulldog/afterattack(atom/target as mob|obj|turf|area, mob/living/user as mob|obj, flag)

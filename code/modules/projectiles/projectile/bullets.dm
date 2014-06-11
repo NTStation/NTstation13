@@ -57,8 +57,8 @@
 	damage = 20
 
 
-/obj/item/projectile/bullet/stunshot
-	name = "stunshot"
+/obj/item/projectile/bullet/stunslug
+	name = "stunslug"
 	damage = 5
 	stun = 10
 	weaken = 10

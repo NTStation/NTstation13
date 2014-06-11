@@ -1686,7 +1686,7 @@ datum/design/xray
 
 datum/design/ionrifle
 	name = "Ion Rifle"
-	desc = "How to dismantle a cyborg : The gun."
+	desc = "A man-portable anti-armor weapon designed to disable mechanical threats at range."
 	id = "ionrifle"
 	req_tech = list("combat" = 5, "materials" = 4, "magnets" = 4)
 	build_type = PROTOLATHE
@@ -1712,14 +1712,33 @@ datum/design/mag_smg
 	materials = list("$metal" = 3750)
 	build_path = /obj/item/ammo_box/magazine/msmg9mm
 
-datum/design/stunshell
-	name = "Stun Shell"
-	desc = "A stunning shell for a shotgun."
-	id = "stunshell"
+datum/design/stunslug
+	name = "Stun Slug"
+	desc = "A stunning, electrified slug for a shotgun."
+	id = "stunslug"
 	req_tech = list("combat" = 3, "materials" = 3)
 	build_type = PROTOLATHE
 	materials = list("$metal" = 1000)
+	build_path = /obj/item/ammo_casing/shotgun/stunslug
+
+datum/design/stunshell
+	name = "Stun Shell"
+	desc = "A stunning shell of rubber pellets for a shotgun."
+	id = "stunshell"
+	req_tech = list("combat" = 4, "materials" = 3)
+	build_type = PROTOLATHE
+	materials = list("$metal" = 1000)
 	build_path = /obj/item/ammo_casing/shotgun/stunshell
+
+datum/design/dragonshell
+	name = "Dragon's Breath Shell"
+	desc = "A shell full of flammable pellets for a shotgun."
+	id = "dragonshell"
+	req_tech = list("combat" = 4, "materials" = 5, "syndicate" = 2)
+	build_type = PROTOLATHE
+	materials = list("$metal" = 1000)
+	build_path = /obj/item/ammo_casing/shotgun/dragon
+
 
 /////////////////////////////////////////
 /////////////////Mining//////////////////
