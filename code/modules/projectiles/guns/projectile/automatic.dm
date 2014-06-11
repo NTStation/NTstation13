@@ -137,7 +137,7 @@
 
 /obj/item/weapon/gun/projectile/automatic/bulldog/update_icon()
 	..()
-	icon_state = "bulldog[dfghd ? "-[magazine.mag_type]" : ""][chambered ? "" : "-e"]"
+	icon_state = "bulldog[chambered ? "" : "-e"]"
 	return
 
 /obj/item/weapon/gun/projectile/automatic/bulldog/afterattack(atom/target as mob|obj|turf|area, mob/living/user as mob|obj, flag)
