@@ -179,7 +179,7 @@
 	icon_state = "m12gb"
 	ammo_type = /obj/item/ammo_casing/shotgun/buckshot
 
-/obj/item/ammo_box/magazine/m12g/stun/update_icon()
+/obj/item/ammo_box/magazine/m12g/buckshot/update_icon()
 	..()
 	icon_state = "[initial(icon_state)]-[Ceiling(ammo_count(0)/8)*8]"
 
