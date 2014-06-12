@@ -1727,7 +1727,7 @@ datum/design/stunshell
 	id = "stunshell"
 	req_tech = list("combat" = 4, "materials" = 3)
 	build_type = PROTOLATHE
-	materials = list("$metal" = 1000)
+	materials = list("$metal" = 1500)
 	build_path = /obj/item/ammo_casing/shotgun/stunshell
 
 datum/design/dragonshell
@@ -1736,7 +1736,7 @@ datum/design/dragonshell
 	id = "dragonshell"
 	req_tech = list("combat" = 4, "materials" = 5, "syndicate" = 2)
 	build_type = PROTOLATHE
-	materials = list("$metal" = 1000, "$plasma" = 100)
+	materials = list("$metal" = 1500, "$plasma" = 100)
 	build_path = /obj/item/ammo_casing/shotgun/dragon
 
 
