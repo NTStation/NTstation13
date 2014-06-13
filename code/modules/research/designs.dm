@@ -1712,6 +1712,15 @@ datum/design/mag_smg
 	materials = list("$metal" = 3750)
 	build_path = /obj/item/ammo_box/magazine/msmg9mm
 
+datum/design/mag_smgincendiary
+	name = "Submachine Gun Magazine (9mm incendiary)"
+	desc = "A 10-rnd magazine of 9mm plasma-coated ammunition for the prototype submachine gun."
+	id = "mag_smgincendiary"
+	req_tech = list("combat" = 4, "materials" = 5, "syndicate" = 2)
+	build_type = PROTOLATHE
+	materials = list("$metal" = 3750, "$plasma" = 1000)
+	build_path = /obj/item/ammo_box/magazine/msmg9mm/icendiary
+
 datum/design/stunslug
 	name = "Stun Slug"
 	desc = "A stunning, electrified slug for a shotgun."
