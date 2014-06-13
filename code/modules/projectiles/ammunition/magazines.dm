@@ -81,6 +81,17 @@
 	..()
 	icon_state = "[initial(icon_state)]-[round(ammo_count(),5)]"
 
+/obj/item/ammo_box/magazine/msmg9mm/incendiary
+	name = "SMG magazine (9mm incendiary)"
+	icon_state = "smg9mmi"
+	ammo_type = /obj/item/ammo_casing/c9mm/incendiary
+	max_ammo = 10
+
+/obj/item/ammo_box/magazine/msmg9mm/update_icon()
+	..()
+	icon_state = "[initial(icon_state)]-[round(ammo_count(),2)]"
+
+
 /obj/item/ammo_box/magazine/m10mm
 	name = "magazine (10mm)"
 	icon_state = "9x19p"
@@ -121,6 +132,16 @@
 	max_ammo = 20
 
 /obj/item/ammo_box/magazine/c20rm/update_icon()
+	..()
+	icon_state = "[initial(icon_state)]-[round(ammo_count(),2)]"
+
+/obj/item/ammo_box/magazine/c20rm/incendiary
+	name = "C-20r magazine (.45 incendiary)"
+	icon_state = "c20rmi"
+	ammo_type = /obj/item/ammo_casing/c45/incendiary
+	max_ammo = 10
+
+/obj/item/ammo_box/magazine/c20rm/incendiary/update_icon()
 	..()
 	icon_state = "[initial(icon_state)]-[round(ammo_count(),2)]"
 

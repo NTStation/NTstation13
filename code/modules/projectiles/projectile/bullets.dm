@@ -83,6 +83,8 @@
 /obj/item/projectile/bullet/incendiary/mech
 	damage = 5
 
+/obj/item/projectile/bullet/incendiary/mid
+	damage = 10
 
 /obj/item/projectile/bullet/mime
 	damage = 20

@@ -13,7 +13,6 @@
 	caliber = "357"
 	projectile_type = /obj/item/projectile/bullet/suffocationbullet
 
-
 /obj/item/ammo_casing/a666
 	desc = "A .666 bullet casing."
 	caliber = "357"
@@ -37,11 +36,19 @@
 	caliber = "9mm"
 	projectile_type = /obj/item/projectile/bullet/weakbullet3
 
+/obj/item/ammo_casing/c9mm/incendiary
+	desc = "A 9mm incendiary bullet casing."
+	projectile_type = /obj/item/projectile/bullet/incendiary/mech
+
 
 /obj/item/ammo_casing/c45
 	desc = "A .45 bullet casing."
 	caliber = ".45"
 	projectile_type = /obj/item/projectile/bullet/midbullet
+
+/obj/item/ammo_casing/c45/incendiary
+	desc = "A .45 incendiary bullet casing."
+	projectile_type = /obj/item/projectile/bullet/incendiary/mid
 
 
 /obj/item/ammo_casing/shotgun
