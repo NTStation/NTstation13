@@ -1719,7 +1719,7 @@ datum/design/mag_smgincendiary
 	req_tech = list("combat" = 4, "materials" = 5, "syndicate" = 2)
 	build_type = PROTOLATHE
 	materials = list("$metal" = 3750, "$plasma" = 1000)
-	build_path = /obj/item/ammo_box/magazine/msmg9mm/icendiary
+	build_path = /obj/item/ammo_box/magazine/msmg9mm/incendiary
 
 datum/design/stunslug
 	name = "Stun Slug"
