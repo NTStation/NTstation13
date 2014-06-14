@@ -137,7 +137,7 @@
 				else
 					target.LAssailant = user
 				cooldown = 1
-				spawn(30)
+				spawn(40)
 					cooldown = 0
 		return
 	else
