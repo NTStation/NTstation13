@@ -223,7 +223,7 @@ var/list/uplink_items = list()
 	name = "Ammo-.45 Incendiary"
 	desc = "A 10-round .45 incendiary magazine for use in the C-20r submachine gun. These rounds do not stun and are weaker on impact than typical ammo but are coated with incendiary."
 	item = /obj/item/ammo_box/magazine/c20rm/incendiary
-	cost = 2
+	cost = 1
 	gamemodes = list(/datum/game_mode/nuclear)
 
 /datum/uplink_item/ammo/pistol
