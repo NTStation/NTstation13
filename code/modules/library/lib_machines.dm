@@ -271,7 +271,7 @@ datum/borrowbook // Datum used to keep track of who has borrowed what when and f
 			dat += "<A href='?src=\ref[src];arccheckout=1'>Yes.</A><BR>"
 			dat += "<A href='?src=\ref[src];switchscreen=0'>No.</A><BR>"
 		if(9)
-			dat += "<h3>Accessing spessnet.hownew.ru/nothinginhere/notporn/posters/random.post</h3>"
+			dat += "<h3>Accessing spessnet.hownew.ru/fun/posters/random.post</h3>"
 			dat += "Are you sure you would like spessnet.hownew.ru to access this printer?<p>"
 			dat += "<A href='?src=\ref[src];concheckout=1'>Yes</A><BR>"
 			dat += "<A href='?src=\ref[src];switchscreen=0'>No</A><BR>"
