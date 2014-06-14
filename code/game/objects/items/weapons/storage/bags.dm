@@ -257,7 +257,7 @@
 	icon = 'icons/obj/library.dmi'
 	icon_state = "bookbag"
 	display_contents_with_number = 0 //This would look really stupid otherwise
-	storage_slots = 6
+	storage_slots = 7
 	max_combined_w_class = 21
 	max_w_class = 3
 	w_class = 3 //Ore bags can hold tons of ore and they used to be smaller sooo
