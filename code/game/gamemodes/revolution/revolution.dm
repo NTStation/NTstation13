@@ -355,7 +355,7 @@
 /datum/game_mode/proc/auto_declare_completion_revolution()
 	var/list/targets = list()
 
-	if(head_revolutionaries.len || game_is_rev_mode(ticker.mode))
+	if(head_revolutionaries.len || gamemode_is("revolution"))
 		var/text = "<br><font size=3><b>The head revolutionaries were:</b></font>"
 
 		for(var/datum/mind/headrev in head_revolutionaries)
@@ -379,7 +379,7 @@
 
 		world << text
 
-	if(revolutionaries.len || game_is_rev_mode(ticker.mode))
+	if(revolutionaries.len || gamemode_is("revolution"))
 		var/text = "<br><font size=3><b>The revolutionaries were:</b></font>"
 
 		for(var/datum/mind/rev in revolutionaries)
@@ -401,7 +401,7 @@
 		world << text
 
 
-	if( head_revolutionaries.len || revolutionaries.len || game_is_rev_mode(ticker.mode) )
+	if( head_revolutionaries.len || revolutionaries.len || gamemode_is("revolution") )
 		var/text = "<br><font size=3><b>The heads of staff were:</b></font>"
 
 		var/list/heads = get_all_heads()

@@ -171,7 +171,7 @@
 	set category = "Malfunction"
 	set name = "System Override"
 	set desc = "Start the victory timer"
-	if (!game_is_malf_mode(ticker.mode))
+	if (!gamemode_is("AI malfunction"))
 		usr << "You cannot begin a takeover in this round type!."
 		return
 
@@ -206,7 +206,7 @@
 	set name = "Explode"
 	set desc = "Station go boom"
 
-	if(!game_is_malf_mode(ticker.mode))
+	if(!gamemode_is("AI malfunction"))
 		return
 
 	var/datum/game_mode/malfunction/Malf = ticker.mode
@@ -276,7 +276,7 @@
 
 
 /datum/game_mode/proc/auto_declare_completion_malfunction()
-	if( malf_ai.len || game_is_malf_mode(ticker.mode) )
+	if( malf_ai.len || gamemode_is("AI malfunction") )
 		var/text = "<br><FONT size=3><B>The malfunctioning AI were:</B></FONT>"
 
 		for(var/datum/mind/malf in malf_ai)

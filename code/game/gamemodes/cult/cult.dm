@@ -15,7 +15,7 @@
 	if(istype(mind.current, /mob/living/carbon/human) && (mind.assigned_role in list("Captain", "Chaplain")))	return 0
 	if(isloyal(mind.current))
 		return 0
-	if(game_is_cult_mode(ticker.mode))
+	if(gamemode_is("cult"))
 		if(mind.current == ticker.mode.sacrifice_target)	return 0
 	return 1
 
