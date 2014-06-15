@@ -30,6 +30,8 @@
 	else
 		var/obj/item/weapon/reagent_containers/food/snacks/F = I
 		var/obj/item/weapon/reagent_containers/food/snacks/customizable/C
+		user.drop_item()
+		F.loc = src
 		C = input("Select food to make.", "Cooking", C) in food_choices
 		if(!C)
 			return
