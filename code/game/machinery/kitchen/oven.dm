@@ -34,6 +34,7 @@
 		F.loc = src
 		C = input("Select food to make.", "Cooking", C) in food_choices
 		if(!C)
+			F.loc = user.loc
 			return
 		else
 			user << "You put [F] into [src] for [production_meth]."
