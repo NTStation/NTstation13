@@ -44,6 +44,7 @@
 	var/oldloc = null
 	req_one_access = list(access_construction)
 	var/targetdirection
+	bot_type = "floorbot"
 
 
 /obj/machinery/bot/floorbot/New()
@@ -83,6 +84,7 @@
 		dat += "Improves floors: <A href='?src=\ref[src];operation=improve'>[improvefloors ? "Yes" : "No"]</A><BR>"
 		dat += "Finds tiles: <A href='?src=\ref[src];operation=tiles'>[eattiles ? "Yes" : "No"]</A><BR>"
 		dat += "Make singles pieces of metal into tiles when empty: <A href='?src=\ref[src];operation=make'>[maketiles ? "Yes" : "No"]</A><BR>"
+		dat += "Patrol Station: <A href='?src=\ref[src];operation=patrol'>[auto_patrol ? "Yes" : "No"]</A><BR>"
 		var/bmode
 		if (targetdirection)
 			bmode = dir2text(targetdirection)
@@ -145,6 +147,9 @@
 		if("make")
 			maketiles = !maketiles
 			updateUsrDialog()
+		if("patrol")
+			auto_patrol = !auto_patrol
+			updateUsrDialog()
 		if("hack")
 			if(!emagged)
 				emagged = 2
@@ -178,7 +183,7 @@
 
 	if(!on)
 		return
-	if(busy == BOT_REPAIRING)
+	if(mode == BOT_REPAIRING)
 		return
 	if(call_path)
 		if(!pathset)
@@ -230,6 +235,7 @@
 		if(!target || target == null)
 			for (var/turf/space/D in view(7,src))
 				if(!(D in floorbottargets) && D != oldtarget && (D.loc.name != "Space"))
+					mode = BOT_WORKING
 					oldtarget = D
 					target = D
 					break
@@ -238,12 +244,14 @@
 				if(!(F in floorbottargets) && F != oldtarget && F.icon_state == "Floor1" && !(istype(F, /turf/simulated/floor/plating)))
 					oldtarget = F
 					target = F
+					mode = BOT_WORKING
 					break
 		if((!target || target == null) && eattiles)
 			for(var/obj/item/stack/tile/plasteel/T in view(7, src))
 				if(!(T in floorbottargets) && T != oldtarget)
 					oldtarget = T
 					target = T
+					mode = BOT_WORKING
 					break
 
 	if((!target || target == null) && emagged == 2)
@@ -252,7 +260,15 @@
 				if(!(D in floorbottargets) && D != oldtarget && D.floor_tile)
 					oldtarget = D
 					target = D
+					mode = BOT_WORKING
 					break
+
+	if((!target || target == null) && auto_patrol)
+		if(mode == BOT_IDLE || mode == BOT_START_PATROL)
+			start_patrol()
+
+		if(mode == BOT_PATROL)
+			bot_patrol()
 
 	if(!target || target == null)
 		if(loc != oldloc)
@@ -263,14 +279,15 @@
 		spawn(0)
 			if(!istype(target, /turf/))
 				var/turf/TL = get_turf(target)
-				path = AStar(loc, TL, /turf/proc/AdjacentTurfsSpace, /turf/proc/Distance, 0, 30)
+				path = AStar(loc, TL, /turf/proc/AdjacentTurfsSpace, /turf/proc/Distance, 0, 30, id=botcard)
 			else
-				path = AStar(loc, target, /turf/proc/AdjacentTurfsSpace, /turf/proc/Distance, 0, 30)
+				path = AStar(loc, target, /turf/proc/AdjacentTurfsSpace, /turf/proc/Distance, 0, 30, id=botcard)
 			if(!path)
 				path = list()
 			if(path.len == 0)
 				oldtarget = target
 				target = null
+				mode = BOT_IDLE
 		return
 	if(path.len > 0 && target && (target != null))
 		step_to(src, path[1])
@@ -289,7 +306,7 @@
 		else if(emagged == 2 && istype(target,/turf/simulated/floor))
 			var/turf/simulated/floor/F = target
 			anchored = 1
-			busy = BOT_REPAIRING
+			mode = BOT_REPAIRING
 			if(prob(90))
 				F.break_tile_to_plating()
 			else
@@ -298,12 +315,13 @@
 			spawn(50)
 				amount ++
 				anchored = 0
-				busy = 0
+				mode = BOT_IDLE
 				target = null
 		path = new()
 		return
 
 	oldloc = loc
+
 
 
 /obj/machinery/bot/floorbot/proc/repair(var/turf/target)
@@ -319,34 +337,34 @@
 	if(istype(target, /turf/space/))
 		visible_message("\red [src] begins to repair the hole")
 		var/obj/item/stack/tile/plasteel/T = new /obj/item/stack/tile/plasteel
-		busy = BOT_REPAIRING
+		mode = BOT_REPAIRING
 		spawn(50)
 			T.build(loc)
-			busy = 0
+			mode = BOT_IDLE
 			amount -= 1
 			updateicon()
 			anchored = 0
-			target = null
+			src.target = null
 	else
 		visible_message("\red [src] begins to improve the floor.")
-		busy = BOT_REPAIRING
+		mode = BOT_REPAIRING
 		spawn(50)
 			loc.icon_state = "floor"
-			busy = 0
+			mode = BOT_IDLE
 			amount -= 1
 			updateicon()
 			anchored = 0
-			target = null
+			src.target = null
 
 /obj/machinery/bot/floorbot/proc/eattile(var/obj/item/stack/tile/plasteel/T)
 	if(!istype(T, /obj/item/stack/tile/plasteel))
 		return
 	visible_message("\red [src] begins to collect tiles.")
-	busy = BOT_REPAIRING
+	mode = BOT_REPAIRING
 	spawn(20)
 		if(isnull(T))
 			target = null
-			busy = 0
+			mode = BOT_IDLE
 			return
 		if(amount + T.amount > 50)
 			var/i = 50 - amount
@@ -357,7 +375,7 @@
 			qdel(T)
 		updateicon()
 		target = null
-		busy = 0
+		mode = BOT_IDLE
 
 /obj/machinery/bot/floorbot/proc/maketile(var/obj/item/stack/sheet/metal/M)
 	if(!istype(M, /obj/item/stack/sheet/metal))
@@ -365,18 +383,18 @@
 	if(M.amount > 1)
 		return
 	visible_message("\red [src] begins to create tiles.")
-	busy = BOT_REPAIRING
+	mode = BOT_REPAIRING
 	spawn(20)
 		if(isnull(M))
 			target = null
-			busy = 0
+			mode = BOT_IDLE
 			return
 		var/obj/item/stack/tile/plasteel/T = new /obj/item/stack/tile/plasteel
 		T.amount = 4
 		T.loc = M.loc
 		qdel(M)
 		target = null
-		busy = 0
+		mode = BOT_IDLE
 
 /obj/machinery/bot/floorbot/proc/updateicon()
 	if(amount > 0)

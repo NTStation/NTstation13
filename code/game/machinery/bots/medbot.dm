@@ -36,6 +36,7 @@
 	var/treatment_tox = "tricordrazine"
 	var/treatment_virus = "spaceacillin"
 	var/shut_up = 0 //self explanatory :)
+	bot_type = "medbot"
 
 /obj/machinery/bot/medbot/mysterious
 	name = "\improper Mysterious Medibot"
@@ -76,6 +77,7 @@
 			botcard.access = J.get_access()
 		else
 			botcard.access = botcard_access
+		prev_access = botcard.access
 
 /obj/machinery/bot/medbot/turn_on()
 	. = ..()
@@ -88,7 +90,7 @@
 	oldpatient = null
 	oldloc = null
 	path = new()
-	busy = 0
+	mode = BOT_IDLE
 	last_found = world.time
 	icon_state = "medibot[on]"
 	updateUsrDialog()
@@ -129,7 +131,8 @@
 		dat += "Reagent Source: "
 		dat += "<a href='?src=\ref[src];use_beaker=1'>[use_beaker ? "Loaded Beaker (When available)" : "Internal Synthesizer"]</a><br>"
 
-		dat += "The speaker switch is [shut_up ? "off" : "on"]. <a href='?src=\ref[src];togglevoice=[1]'>Toggle</a>"
+		dat += "The speaker switch is [shut_up ? "off" : "on"]. <a href='?src=\ref[src];togglevoice=[1]'>Toggle</a><br>"
+		dat += "Patrol Station: <a href='?src=\ref[src];patrol=1'>[auto_patrol ? "Yes" : "No"]</a><br>"
 
 	user << browse("<HEAD><TITLE>Medibot v1.0 controls</TITLE></HEAD>[dat]", "window=automed")
 	onclose(user, "automed")
@@ -164,6 +167,9 @@
 
 	else if((href_list["use_beaker"]) && (!locked || issilicon(usr)))
 		use_beaker = !use_beaker
+
+	else if((href_list["patrol"]) && (!locked || issilicon(usr)))
+		auto_patrol = !auto_patrol
 
 	else if (href_list["eject"] && (!isnull(reagent_glass)))
 		if(!locked)
@@ -232,7 +238,7 @@
 		flick("medibot_spark", src)
 		patient = null
 		if(user) oldpatient = user
-		busy = 0
+		mode = BOT_IDLE
 		last_found = world.time
 		anchored = 0
 		emagged = 2
@@ -252,7 +258,7 @@
 
 		oldpatient = patient
 		patient = null
-		busy = 0
+		mode = BOT_IDLE
 
 		if(stunned <= 0)
 			icon_state = "medibot[on]"
@@ -276,7 +282,7 @@
 	if(frustration > 8)
 		oldpatient = patient
 		patient = null
-		busy = 0
+		mode = BOT_IDLE
 		last_found = world.time
 		path = new()
 
@@ -308,15 +314,15 @@
 
 
 	if(patient && (get_dist(src,patient) <= 1))
-		if(!busy)
-			busy = BOT_HEALING
+		if(mode != BOT_HEALING)
+			mode = BOT_HEALING
 			frustration = 0
 			medicate_patient(patient)
 		return
 
 	else if(patient && (path.len) && (get_dist(patient,path[path.len]) > 2))
 		path = new()
-		busy = 0
+		mode = BOT_IDLE
 		last_found = world.time
 
 	if(patient && path.len == 0 && (get_dist(src,patient) > 1))
@@ -327,7 +333,7 @@
 			if(path.len == 0)
 				oldpatient = patient
 				patient = null
-				busy = 0
+				mode = BOT_IDLE
 				last_found = world.time
 		return
 
@@ -341,6 +347,13 @@
 
 	if(path.len > 8 && patient)
 		frustration++
+
+	if((!patient) && auto_patrol)
+		if(mode == BOT_IDLE || mode == BOT_START_PATROL)
+			start_patrol()
+
+		if(mode == BOT_PATROL)
+			bot_patrol()
 
 	return
 
@@ -390,7 +403,7 @@
 	if(!istype(C))
 		oldpatient = patient
 		patient = null
-		busy = 0
+		mode = BOT_IDLE
 		last_found = world.time
 		return
 
@@ -399,7 +412,7 @@
 		speak(death_message)
 		oldpatient = patient
 		patient = null
-		busy = 0
+		mode = BOT_IDLE
 		last_found = world.time
 		return
 
@@ -443,7 +456,7 @@
 	if(!reagent_id) //If they don't need any of that they're probably cured!
 		oldpatient = patient
 		patient = null
-		busy = 0
+		mode = BOT_IDLE
 		last_found = world.time
 		var/message = pick("All patched up!","An apple a day keeps me away.","Feel better soon!")
 		speak(message)
@@ -464,7 +477,7 @@
 					"<span class='userdanger'>[src] injects [patient] with the syringe!</span>")
 
 			icon_state = "medibot[on]"
-			busy = 0
+			mode = BOT_IDLE
 			return
 
 	reagent_id = null

@@ -441,7 +441,7 @@ Code:
 						menu += "No bots found.<BR>"
 
 					else
-						for(var/obj/machinery/bot/secbot/B in SC.botlist)
+						for(var/obj/machinery/bot/B in SC.botlist)
 							menu += "<A href='byond://?src=\ref[SC];op=control;bot=\ref[B]'>[B] at [B.loc.loc]</A><BR>"
 
 					menu += "<BR><A href='byond://?src=\ref[SC];op=scanbots'><img src=pda_scanner.png> Scan for active bots</A><BR>"
@@ -458,18 +458,20 @@ Code:
 						menu += "Mode: "
 
 						switch(SC.botstatus["mode"])
-							if(0)
+							if(BOT_IDLE)
 								menu += "Ready"
-							if(1)
+							if(BOT_HUNT)
 								menu += "Apprehending target"
-							if(2,3)
+							if(BOT_PREP_ARREST,BOT_ARREST)
 								menu += "Arresting target"
-							if(4)
+							if(BOT_START_PATROL)
 								menu += "Starting patrol"
-							if(5)
+							if(BOT_PATROL)
 								menu += "On patrol"
-							if(6)
+							if(BOT_SUMMON)
 								menu += "Responding to summons"
+							if(BOT_RESPONDING)
+								menu += "Proceeding to AI waypoint"
 
 						menu += "<BR>\[<A href='byond://?src=\ref[SC];op=stop'>Stop Patrol</A>\] "
 						menu += "\[<A href='byond://?src=\ref[SC];op=go'>Start Patrol</A>\] "
@@ -524,19 +526,19 @@ Code:
 						menu += "Mode: "
 
 						switch(QC.botstatus["mode"])
-							if(0)
+							if(BOT_IDLE)
 								menu += "Ready"
-							if(1)
+							if(BOT_LOADING)
 								menu += "Loading/Unloading"
-							if(2)
+							if(BOT_DELIVER)
 								menu += "Navigating to Delivery Location"
-							if(3)
+							if(BOT_GO_HOME)
 								menu += "Navigating to Home"
-							if(4)
+							if(BOT_BLOCKED)
 								menu += "Waiting for clear path"
-							if(5,6)
+							if(BOT_NAV,BOT_WAIT_FOR_NAV)
 								menu += "Calculating navigation path"
-							if(7)
+							if(BOT_NO_ROUTE)
 								menu += "Unable to locate destination"
 						var/obj/structure/closet/crate/C = QC.botstatus["load"]
 						menu += "<BR>Current Load: [ !C ? "<i>none</i>" : "[C.name] (<A href='byond://?src=\ref[QC];op=unload'><i>unload</i></A>)" ]<BR>"

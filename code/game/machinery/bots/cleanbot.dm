@@ -30,24 +30,25 @@
 	var/obj/effect/decal/cleanable/oldtarget
 	var/oldloc = null
 	req_one_access = list(access_janitor)
-	var/patrol_path[] = null
-	var/beacon_freq = 1445		// navigation beacon frequency
+//	var/patrol_path[] = null
+//	var/beacon_freq = 1445		// navigation beacon frequency
 	var/closest_dist
 	var/closest_loc
 	var/failed_steps
-	var/should_patrol
 	var/next_dest
 	var/next_dest_loc
+	bot_type = "cleanbot"
 
 /obj/machinery/bot/cleanbot/New()
 	..()
 	get_targets()
 	icon_state = "cleanbot[on]"
 
-	should_patrol = 1
+	auto_patrol = 1
 
 	var/datum/job/janitor/J = new/datum/job/janitor
 	botcard.access = J.get_access()
+	prev_access = botcard.access
 
 	if(radio_controller)
 		radio_controller.add_object(src, beacon_freq, filter = RADIO_NAVBEACONS)
@@ -85,7 +86,7 @@ Maintenance panel panel is [open ? "opened" : "closed"]"},
 text("<A href='?src=\ref[src];operation=start'>[on ? "On" : "Off"]</A>"))
 	if(!locked || issilicon(user))
 		dat += text({"<BR>Cleans Blood: []<BR>"}, text("<A href='?src=\ref[src];operation=blood'>[blood ? "Yes" : "No"]</A>"))
-		dat += text({"<BR>Patrol station: []<BR>"}, text("<A href='?src=\ref[src];operation=patrol'>[should_patrol ? "Yes" : "No"]</A>"))
+		dat += text({"<BR>Patrol station: []<BR>"}, text("<A href='?src=\ref[src];operation=patrol'>[auto_patrol ? "Yes" : "No"]</A>"))
 	//	dat += text({"<BR>Beacon frequency: []<BR>"}, text("<A href='?src=\ref[src];operation=freq'>[beacon_freq]</A>"))
 /*	if(open && !locked)
 		dat += text({"
@@ -114,8 +115,8 @@ text("<A href='?src=\ref[src];operation=oddbutton'>[oddbutton ? "Yes" : "No"]</A
 			get_targets()
 			updateUsrDialog()
 		if("patrol")
-			should_patrol =!should_patrol
-			patrol_path = null
+			auto_patrol =!auto_patrol
+			//patrol_path = null
 			updateUsrDialog()
 		if("freq")
 			var/freq = text2num(input("Select frequency for  navigation beacons", "Frequency", num2text(beacon_freq / 10))) * 10
@@ -169,7 +170,7 @@ text("<A href='?src=\ref[src];operation=oddbutton'>[oddbutton ? "Yes" : "No"]</A
 
 	if(!on)
 		return
-	if(busy == BOT_CLEANING)
+	if(mode == BOT_CLEANING)
 		return
 	if(call_path)
 		if(!pathset)
@@ -209,39 +210,21 @@ text("<A href='?src=\ref[src];operation=oddbutton'>[oddbutton ? "Yes" : "No"]</A
 		if(loc != oldloc)
 			oldtarget = null
 
-		if (!should_patrol)
+		if (!auto_patrol)
 			return
 
-		if (!patrol_path || patrol_path.len < 1)
-			var/datum/radio_frequency/frequency = radio_controller.return_frequency(beacon_freq)
+		if(mode == BOT_IDLE || mode == BOT_START_PATROL)
+			start_patrol()
 
-			if(!frequency) return
-
-			closest_dist = 9999
-			closest_loc = null
-			next_dest_loc = null
-
-			var/datum/signal/signal = new()
-			signal.source = src
-			signal.transmission_method = 1
-			signal.data = list("findbeacon" = "patrol")
-			frequency.post_signal(src, signal, filter = RADIO_NAVBEACONS)
-			spawn(5)
-				if (!next_dest_loc)
-					next_dest_loc = closest_loc
-				if (next_dest_loc)
-					patrol_path = AStar(loc, next_dest_loc, /turf/proc/CardinalTurfsWithAccess, /turf/proc/Distance_cardinal, 0, 120, id=botcard, exclude=null)
-					if(!patrol_path)
-						patrol_path = list()
-		else
-			patrol_move()
+		if(mode == BOT_PATROL)
+			bot_patrol()
 
 		return
 
 	if(target && path.len == 0)
 		spawn(0)
 			if(!src || !target) return
-			path = AStar(loc, target.loc, /turf/proc/AdjacentTurfs, /turf/proc/Distance, 0, 30)
+			path = AStar(loc, target.loc, /turf/proc/AdjacentTurfs, /turf/proc/Distance, 0, 30, id=botcard)
 			if(!path)
 				path = list()
 			if(path.len == 0)
@@ -255,7 +238,7 @@ text("<A href='?src=\ref[src];operation=oddbutton'>[oddbutton ? "Yes" : "No"]</A
 		step_to(src, target)
 
 	if(target && (target != null))
-		patrol_path = null
+		patrol_path = new()
 		if(loc == target.loc)
 			clean(target)
 			path = new()
@@ -264,6 +247,7 @@ text("<A href='?src=\ref[src];operation=oddbutton'>[oddbutton ? "Yes" : "No"]</A
 
 	oldloc = loc
 
+/*
 /obj/machinery/bot/cleanbot/proc/patrol_move()
 	if (patrol_path.len <= 0)
 		return
@@ -298,6 +282,7 @@ text("<A href='?src=\ref[src];operation=oddbutton'>[oddbutton ? "Yes" : "No"]</A
 	if (recv == next_dest)
 		next_dest_loc = signal.source.loc
 		next_dest = signal.data["next_patrol"]
+		*/
 
 /obj/machinery/bot/cleanbot/proc/get_targets()
 	target_types = new/list()
@@ -326,9 +311,9 @@ text("<A href='?src=\ref[src];operation=oddbutton'>[oddbutton ? "Yes" : "No"]</A
 	anchored = 1
 	icon_state = "cleanbot-c"
 	visible_message("<span class='danger'>[src] begins to clean up [target]</span>")
-	busy = BOT_CLEANING
+	mode = BOT_CLEANING
 	spawn(50)
-		busy = 0
+		mode = BOT_IDLE
 		qdel(target)
 		icon_state = "cleanbot[on]"
 		anchored = 0

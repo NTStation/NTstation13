@@ -19,28 +19,21 @@ var/global/mulebot_count = 0
 	fire_dam_coeff = 0.7
 	brute_dam_coeff = 0.5
 	var/atom/movable/load = null		// the loaded crate (usually)
-	var/beacon_freq = 1400
-	var/control_freq = 1447
+	beacon_freq = 1400
+	control_freq = 1447
 
 	suffix = ""
 
 	var/turf/target				// this is turf to navigate to (location of beacon)
 	var/loaddir = 0				// this the direction to unload onto/load from
-	var/new_destination = ""	// pending new destination (waiting for beacon response)
-	var/destination = ""		// destination description
+	new_destination = ""	// pending new destination (waiting for beacon response)
+	destination = ""		// destination description
 	var/home_destination = "" 	// tag of home beacon
-	req_access = list(access_cargo) // added robotics access so assembly line drop-off works properly -veyveyr //I don't think so, Tim. You need to add it to the MULE's hidden robot ID card. -NEO
+	req_one_access = list(access_cargo) // added robotics access so assembly line drop-off works properly -veyveyr //I don't think so, Tim. You need to add it to the MULE's hidden robot ID card. -NEO
 
-	var/mode = 0		//0 = idle/ready
-						//1 = loading/unloading
-						//2 = moving to deliver
-						//3 = returning to home
-						//4 = blocked
-						//5 = computing navigation
-						//6 = waiting for nav computation
-						//7 = no destination beacon found (or no route)
+	mode = BOT_IDLE
 
-	var/blockcount	= 0		//number of times retried a blocked path
+	blockcount	= 0		//number of times retried a blocked path
 	var/reached_target = 1 	//true if already reached the target
 
 	var/refresh = 1		// true to refresh dialogue
@@ -68,6 +61,7 @@ var/global/mulebot_count = 0
 	wires = new(src)
 	var/datum/job/cargo_tech/J = new/datum/job/cargo_tech
 	botcard.access = J.get_access()
+	prev_access = botcard.access
 //	botcard.access += access_robotics //Why --Ikki
 	cell = new(src)
 	cell.charge = 2000
@@ -187,22 +181,23 @@ var/global/mulebot_count = 0
 	if(!open)
 
 		dat += "<h3>Status</h3>"
+
 		dat += "<div class='statusDisplay'>"
 		switch(mode)
-			if(0)
+			if(BOT_IDLE)
 				dat += "Ready"
-			if(1)
-				dat += "<span class='good'>Loading/Unloading</span>"
-			if(2)
-				dat += "<span class='good'>Navigating to Delivery Location</span>"
-			if(3)
-				dat += "<span class='good'>Navigating to Home</span>"
-			if(4)
-				dat += "<span class='average'>Waiting for clear path</span>"
-			if(5,6)
-				dat += "<span class='average'>Calculating navigation path</span>"
-			if(7)
-				dat += "<span class='bad'>Unable to reach destination</span>"
+			if(BOT_LOADING)
+				dat += "<span class='good'>[mode_name[BOT_LOADING]]</span>"
+			if(BOT_DELIVER)
+				dat += "<span class='good'>[mode_name[BOT_DELIVER]]</span>"
+			if(BOT_GO_HOME)
+				dat += "<span class='good'>[mode_name[BOT_GO_HOME]]</span>"
+			if(BOT_BLOCKED)
+				dat += "<span class='average'>[mode_name[BOT_BLOCKED]]</span>"
+			if(BOT_NAV,BOT_WAIT_FOR_NAV)
+				dat += "<span class='average'>[mode_name[BOT_NAV]]</span>"
+			if(BOT_NO_ROUTE)
+				dat += "<span class='bad'>[mode_name[BOT_NO_ROUTE]]</span>"
 		dat += "</div>"
 
 		dat += "<b>Current Load:</b> [load ? load.name : "<i>none</i>"]<BR>"
@@ -303,17 +298,17 @@ var/global/mulebot_count = 0
 
 
 			if("stop")
-				if(mode >=2)
-					mode = 0
+				if(mode >= BOT_DELIVER)
+					mode = BOT_IDLE
 					updateDialog()
 
 			if("go")
-				if(mode == 0)
+				if(mode == BOT_IDLE)
 					start()
 					updateDialog()
 
 			if("home")
-				if(mode == 0 || mode == 2)
+				if(mode == BOT_IDLE || mode == BOT_DELIVER)
 					start_home()
 					updateDialog()
 
@@ -414,7 +409,7 @@ var/global/mulebot_count = 0
 
 	if(get_dist(C, src) > 1 || load || !on)
 		return
-	mode = 1
+	mode = BOT_LOADING
 
 	// if a create, close before loading
 	var/obj/structure/closet/crate/crate = C
@@ -439,7 +434,7 @@ var/global/mulebot_count = 0
 			M.client.perspective = EYE_PERSPECTIVE
 			M.client.eye = src
 
-	mode = 0
+	mode = BOT_IDLE
 	send_status()
 
 // called to unload the bot
@@ -449,7 +444,7 @@ var/global/mulebot_count = 0
 	if(!load)
 		return
 
-	mode = 1
+	mode = BOT_LOADING
 	overlays.Cut()
 
 	if(ismob(load))
@@ -485,7 +480,7 @@ var/global/mulebot_count = 0
 			if(M.client)
 				M.client.perspective = MOB_PERSPECTIVE
 				M.client.eye = src
-	mode = 0
+	mode = BOT_IDLE
 
 
 /obj/machinery/bot/mulebot/process()
@@ -527,20 +522,16 @@ var/global/mulebot_count = 0
 		path = call_path
 		call_path = null //Once the MULE is commanded, follow normal procedures to reach the waypoint.
 		auto_return = 0 //Prevents the MULE immediately scooting back home upon reaching the waypoint..
+		pathset = 1 //Indicates the AI's custom path is initialized.
 		start()
 
-	if(mode)
-		busy = BOT_WORKING
-	else
-		busy = 0
-
 	switch(mode)
-		if(0)		// idle
+		if(BOT_IDLE)		// idle
 			icon_state = "mulebot0"
 			return
-		if(1)		// loading/unloading
+		if(BOT_LOADING)		// loading/unloading
 			return
-		if(2,3,4)		// navigating to deliver,home, or blocked
+		if(BOT_DELIVER,BOT_GO_HOME,BOT_BLOCKED)		// navigating to deliver,home, or blocked
 
 			if(loc == target)		// reached target
 				at_target()
@@ -583,14 +574,14 @@ var/global/mulebot_count = 0
 						path -= loc
 
 
-						if(mode==4)
+						if(mode == BOT_BLOCKED)
 							spawn(1)
 								send_status()
 
 						if(destination == home_destination)
-							mode = 3
+							mode = BOT_GO_HOME
 						else
-							mode = 2
+							mode = BOT_DELIVER
 
 					else		// failed to move
 
@@ -599,7 +590,7 @@ var/global/mulebot_count = 0
 
 
 						blockcount++
-						mode = 4
+						mode = BOT_BLOCKED
 						if(blockcount == 3)
 							visible_message("[src] makes an annoyed buzzing sound.", "You hear an electronic buzzing sound.")
 							playsound(loc, 'sound/machines/buzz-two.ogg', 50, 0)
@@ -614,31 +605,31 @@ var/global/mulebot_count = 0
 								if(path.len > 0)
 									visible_message("[src] makes a delighted ping!", "You hear a ping.")
 									playsound(loc, 'sound/machines/ping.ogg', 50, 0)
-								mode = 4
-							mode =6
+								mode = BOT_BLOCKED
+							mode = BOT_WAIT_FOR_NAV
 							return
 						return
 				else
 					visible_message("[src] makes an annoyed buzzing sound.", "You hear an electronic buzzing sound.")
 					playsound(loc, 'sound/machines/buzz-two.ogg', 50, 0)
 					//world << "Bad turf."
-					mode = 5
+					mode = BOT_NAV
 					return
 			else
 				//world << "No path."
-				mode = 5
+				mode = BOT_NAV
 				return
 
-		if(5)		// calculate new path
+		if(BOT_NAV)	// calculate new path
 			//world << "Calc new path."
-			mode = 6
+			mode = BOT_WAIT_FOR_NAV
 			spawn(0)
 
 				calc_path()
 
 				if(path.len > 0)
 					blockcount = 0
-					mode = 4
+					mode = BOT_BLOCKED
 					visible_message("[src] makes a delighted ping!", "You hear a ping.")
 					playsound(loc, 'sound/machines/ping.ogg', 50, 0)
 
@@ -646,7 +637,7 @@ var/global/mulebot_count = 0
 					visible_message("[src] makes a sighing buzz.", "You hear an electronic buzzing sound.")
 					playsound(loc, 'sound/machines/buzz-sigh.ogg', 50, 0)
 
-					mode = 7
+					mode = BOT_NO_ROUTE
 		//if(6)
 			//world << "Pending path calc."
 		//if(7)
@@ -657,7 +648,7 @@ var/global/mulebot_count = 0
 
 // calculates a path to the current destination
 // given an optional turf to avoid
-/obj/machinery/bot/mulebot/proc/calc_path(var/turf/avoid = null)
+/obj/machinery/bot/mulebot/calc_path(var/turf/avoid = null)
 	path = AStar(loc, target, /turf/proc/CardinalTurfsWithAccess, /turf/proc/Distance_cardinal, 0, 250, id=botcard, exclude=avoid)
 	if(!path)
 		path = list()
@@ -666,7 +657,7 @@ var/global/mulebot_count = 0
 // sets the current destination
 // signals all beacons matching the delivery code
 // beacons will return a signal giving their locations
-/obj/machinery/bot/mulebot/proc/set_destination(var/new_dest)
+/obj/machinery/bot/mulebot/set_destination(var/new_dest)
 	spawn(0)
 		new_destination = new_dest
 		post_signal(beacon_freq, "findbeacon", "delivery")
@@ -675,9 +666,9 @@ var/global/mulebot_count = 0
 // starts bot moving to current destination
 /obj/machinery/bot/mulebot/proc/start()
 	if(destination == home_destination)
-		mode = 3
+		mode = BOT_GO_HOME
 	else
-		mode = 2
+		mode = BOT_DELIVER
 	icon_state = "mulebot[(wires.MobAvoid() != 0)]"
 
 // starts bot moving to home
@@ -685,7 +676,7 @@ var/global/mulebot_count = 0
 /obj/machinery/bot/mulebot/proc/start_home()
 	spawn(0)
 		set_destination(home_destination)
-		mode = 4
+		mode = BOT_BLOCKED
 	icon_state = "mulebot[(wires.MobAvoid() != 0)]"
 
 // called when bot reaches current target
@@ -694,6 +685,12 @@ var/global/mulebot_count = 0
 		visible_message("[src] makes a chiming sound!", "You hear a chime.")
 		playsound(loc, 'sound/machines/chime.ogg', 50, 0)
 		reached_target = 1
+
+		if(pathset) //The AI called us here, so tell it we arrived.
+			if(calling_ai)
+				calling_ai << "[src] wirelessly plays a chiming sound!"
+				playsound(calling_ai, 'sound/machines/chime.ogg',40, 0)
+			call_reset()
 
 		if(load)		// if loaded, unload at target
 			unload(loaddir)
@@ -715,9 +712,9 @@ var/global/mulebot_count = 0
 		if(auto_return && destination != home_destination)
 			// auto return set and not at home already
 			start_home()
-			mode = 4
+			mode = BOT_BLOCKED
 		else
-			mode = 0	// otherwise go idle
+			mode = BOT_IDLE	// otherwise go idle
 
 	send_status()	// report status to anyone listening
 
@@ -794,7 +791,7 @@ var/global/mulebot_count = 0
 		// process control input
 		switch(recv)
 			if("stop")
-				mode = 0
+				mode = BOT_IDLE
 				return
 
 			if("go")
@@ -845,11 +842,11 @@ var/global/mulebot_count = 0
 			updateDialog()
 
 // send a radio signal with a single data key/value pair
-/obj/machinery/bot/mulebot/proc/post_signal(var/freq, var/key, var/value)
+/obj/machinery/bot/mulebot/post_signal(var/freq, var/key, var/value)
 	post_signal_multiple(freq, list("[key]" = value) )
 
 // send a radio signal with multiple data key/values
-/obj/machinery/bot/mulebot/proc/post_signal_multiple(var/freq, var/list/keyval)
+/obj/machinery/bot/mulebot/post_signal_multiple(var/freq, var/list/keyval)
 
 	if(freq == beacon_freq && !(wires.BeaconRX()))
 		return
@@ -877,7 +874,7 @@ var/global/mulebot_count = 0
 		frequency.post_signal(src, signal)
 
 // signals bot status etc. to controller
-/obj/machinery/bot/mulebot/proc/send_status()
+/obj/machinery/bot/mulebot/send_status()
 	var/list/kv = list(
 		"type" = "mulebot",
 		"name" = suffix,

@@ -22,28 +22,15 @@
 	var/idcheck = 0 //If false, all station IDs are authorized for weapons.
 	var/check_records = 1 //Does it check security records?
 	var/arrest_type = 0 //If true, don't handcuff
-	var/mode = 0
-	var/auto_patrol = 0		// set to make bot automatically patrol
+	bot_type = "secbot"
 
-	var/beacon_freq = 1445		// navigation beacon frequency
-	var/control_freq = 1447		// bot control frequency
+
 
 	//List of weapons that secbots will not arrest for
 	var/safe_weapons = list(\
 		/obj/item/weapon/gun/energy/laser/bluetag,\
 		/obj/item/weapon/gun/energy/laser/redtag,\
 		/obj/item/weapon/gun/energy/laser/practice)
-
-	var/turf/patrol_target	// this is turf to navigate to (location of beacon)
-	var/new_destination		// pending new destination (waiting for beacon response)
-	var/destination			// destination description tag
-	var/next_destination	// the next destination in the patrol route
-
-	var/blockcount = 0		//number of times retried a blocked path
-	var/awaiting_beacon	= 0	// count of pticks awaiting a beacon response
-
-	var/nearest_beacon			// the nearest beacon's tag
-	var/turf/nearest_beacon_loc	// the nearest beacon's location
 
 
 /obj/machinery/bot/secbot/beepsky
@@ -63,16 +50,15 @@
 
 
 
-/obj/machinery/bot/secbot
-	New()
-		..()
-		icon_state = "secbot[on]"
-		spawn(3)
-			var/datum/job/detective/J = new/datum/job/detective
-			botcard.access = J.get_access()
-			if(radio_controller)
-				radio_controller.add_object(src, control_freq, filter = RADIO_SECBOT)
-				radio_controller.add_object(src, beacon_freq, filter = RADIO_NAVBEACONS)
+/obj/machinery/bot/secbot/New()
+	..()
+	icon_state = "secbot[on]"
+	spawn(3)
+		var/datum/job/detective/J = new/datum/job/detective
+		botcard.access = J.get_access()
+		prev_access = botcard.access
+		if(radio_controller)
+			radio_controller.add_object(src, control_freq, filter = RADIO_SECBOT)
 
 
 /obj/machinery/bot/secbot/turn_on()
@@ -208,7 +194,6 @@ Auto Patrol: []"},
 			target = null
 			oldtarget_name = null
 			anchored = 0
-			mode = BOT_IDLE
 			walk_to(src,0)
 		else
 			move_to_call()
@@ -234,7 +219,7 @@ Auto Patrol: []"},
 				target = null
 				last_found = world.time
 				frustration = 0
-				mode = 0
+				mode = BOT_IDLE
 				walk_to(src,0)
 
 			if(target)		// make sure target exists
@@ -318,264 +303,15 @@ Auto Patrol: []"},
 				mode = BOT_IDLE
 				return
 
+		if(BOT_START_PATROL)
+			start_patrol()
 
-		if(BOT_START_PATROL)	// start a patrol
+		if(BOT_PATROL)
+			bot_patrol()
 
-			if(path.len > 0 && patrol_target)	// have a valid path, so just resume
-				mode = BOT_PATROL
-				return
-
-			else if(patrol_target)		// has patrol target already
-				spawn(0)
-					calc_path()		// so just find a route to it
-					if(path.len == 0)
-						patrol_target = 0
-						return
-					mode = BOT_PATROL
-
-
-			else					// no patrol target, so need a new one
-				find_patrol_target()
-				speak("Engaging patrol mode.")
-
-
-		if(BOT_PATROL)		// patrol mode
-
-			patrol_step()
-			spawn(5)
-				if(mode == BOT_PATROL)
-					patrol_step()
-
-		if(BOT_SUMMON)		// summoned to PDA
-			patrol_step()
-			spawn(4)
-				if(mode == BOT_SUMMON)
-					patrol_step()
-					sleep(4)
-					patrol_step()
-	busy = mode
+		if(BOT_SUMMON)
+			bot_summon()
 	return
-
-
-// perform a single patrol step
-
-/obj/machinery/bot/secbot/proc/patrol_step()
-
-	if(loc == patrol_target)		// reached target
-		at_patrol_target()
-		return
-
-	else if(path.len > 0 && patrol_target)		// valid path
-
-		var/turf/next = path[1]
-		if(next == loc)
-			path -= next
-			return
-
-
-		if(istype( next, /turf/simulated))
-
-			var/moved = step_towards(src, next)	// attempt to move
-			if(moved)	// successful move
-				blockcount = 0
-				path -= loc
-
-				look_for_perp()
-			else		// failed to move
-
-				blockcount++
-
-				if(blockcount > 5)	// attempt 5 times before recomputing
-					// find new path excluding blocked turf
-
-					spawn(2)
-						calc_path(next)
-						if(path.len == 0)
-							find_patrol_target()
-						else
-							blockcount = 0
-
-					return
-
-				return
-
-		else	// not a valid turf
-			mode = BOT_IDLE
-			return
-
-	else	// no path, so calculate new one
-		mode = BOT_START_PATROL
-
-
-// finds a new patrol target
-/obj/machinery/bot/secbot/proc/find_patrol_target()
-	send_status()
-	if(awaiting_beacon)			// awaiting beacon response
-		awaiting_beacon++
-		if(awaiting_beacon > 5)	// wait 5 secs for beacon response
-			find_nearest_beacon()	// then go to nearest instead
-		return
-
-	if(next_destination)
-		set_destination(next_destination)
-	else
-		find_nearest_beacon()
-	return
-
-
-// finds the nearest beacon to self
-// signals all beacons matching the patrol code
-/obj/machinery/bot/secbot/proc/find_nearest_beacon()
-	nearest_beacon = null
-	new_destination = "__nearest__"
-	post_signal(beacon_freq, "findbeacon", "patrol")
-	awaiting_beacon = 1
-	spawn(10)
-		awaiting_beacon = 0
-		if(nearest_beacon)
-			set_destination(nearest_beacon)
-		else
-			auto_patrol = 0
-			mode = BOT_IDLE
-			speak("Disengaging patrol mode.")
-			send_status()
-
-
-/obj/machinery/bot/secbot/proc/at_patrol_target()
-	find_patrol_target()
-	return
-
-
-// sets the current destination
-// signals all beacons matching the patrol code
-// beacons will return a signal giving their locations
-/obj/machinery/bot/secbot/proc/set_destination(var/new_dest)
-	new_destination = new_dest
-	post_signal(beacon_freq, "findbeacon", "patrol")
-	awaiting_beacon = 1
-
-
-// receive a radio signal
-// used for beacon reception
-
-/obj/machinery/bot/secbot/receive_signal(datum/signal/signal)
-	//log_admin("DEBUG \[[world.timeofday]\]: /obj/machinery/bot/secbot/receive_signal([signal.debug_print()])")
-	if(!on)
-		return
-
-	/*
-	world << "rec signal: [signal.source]"
-	for(var/x in signal.data)
-		world << "* [x] = [signal.data[x]]"
-	*/
-
-	var/recv = signal.data["command"]
-	// process all-bot input
-	if(recv=="bot_status")
-		send_status()
-
-	// check to see if we are the commanded bot
-	if(signal.data["active"] == src)
-	// process control input
-		switch(recv)
-			if("stop")
-				mode = BOT_IDLE
-				auto_patrol = 0
-				return
-
-			if("go")
-				mode = BOT_IDLE
-				auto_patrol = 1
-				return
-
-			if("summon")
-				patrol_target = signal.data["target"]
-				next_destination = destination
-				destination = null
-				awaiting_beacon = 0
-				mode = BOT_SUMMON
-				calc_path()
-				speak("Responding.")
-
-				return
-
-
-
-	// receive response from beacon
-	recv = signal.data["beacon"]
-	var/valid = signal.data["patrol"]
-	if(!recv || !valid)
-		return
-
-	if(recv == new_destination)	// if the recvd beacon location matches the set destination
-								// the we will navigate there
-		destination = new_destination
-		patrol_target = signal.source.loc
-		next_destination = signal.data["next_patrol"]
-		awaiting_beacon = 0
-
-	// if looking for nearest beacon
-	else if(new_destination == "__nearest__")
-		var/dist = get_dist(src,signal.source.loc)
-		if(nearest_beacon)
-
-			// note we ignore the beacon we are located at
-			if(dist>1 && dist<get_dist(src,nearest_beacon_loc))
-				nearest_beacon = recv
-				nearest_beacon_loc = signal.source.loc
-				return
-			else
-				return
-		else if(dist > 1)
-			nearest_beacon = recv
-			nearest_beacon_loc = signal.source.loc
-	return
-
-
-// send a radio signal with a single data key/value pair
-/obj/machinery/bot/secbot/proc/post_signal(var/freq, var/key, var/value)
-	post_signal_multiple(freq, list("[key]" = value) )
-
-// send a radio signal with multiple data key/values
-/obj/machinery/bot/secbot/proc/post_signal_multiple(var/freq, var/list/keyval)
-
-	var/datum/radio_frequency/frequency = radio_controller.return_frequency(freq)
-
-	if(!frequency) return
-
-	var/datum/signal/signal = new()
-	signal.source = src
-	signal.transmission_method = 1
-	//for(var/key in keyval)
-	//	signal.data[key] = keyval[key]
-	signal.data = keyval
-		//world << "sent [key],[keyval[key]] on [freq]"
-	if(signal.data["findbeacon"])
-		frequency.post_signal(src, signal, filter = RADIO_NAVBEACONS)
-	else if(signal.data["type"] == "secbot")
-		frequency.post_signal(src, signal, filter = RADIO_SECBOT)
-	else
-		frequency.post_signal(src, signal)
-
-// signals bot status etc. to controller
-/obj/machinery/bot/secbot/proc/send_status()
-	var/list/kv = list(
-	"type" = "secbot",
-	"name" = name,
-	"loca" = loc.loc,	// area
-	"mode" = mode
-	)
-	post_signal_multiple(control_freq, kv)
-
-
-
-// calculates a path to the current destination
-// given an optional turf to avoid
-/obj/machinery/bot/secbot/proc/calc_path(var/turf/avoid = null)
-	path = AStar(loc, patrol_target, /turf/proc/CardinalTurfsWithAccess, /turf/proc/Distance_cardinal, 0, 120, id=botcard, exclude=avoid)
-	if(!path)
-		path = list()
-
 
 // look for a criminal in view of the bot
 

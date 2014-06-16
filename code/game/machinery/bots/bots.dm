@@ -6,6 +6,7 @@
 	luminosity = 3
 	use_power = 0
 	var/obj/item/weapon/card/id/botcard			// the ID card that the bot "holds"
+	var/list/prev_access = list()
 	var/on = 1
 	var/health = 0 //do not forget to set health for your bot!
 	var/maxhealth = 0
@@ -16,12 +17,28 @@
 	var/hacked = 0 //Used to differentiate between being hacked by silicons and emagged by humans.
 	var/list/call_path = list() //Path calculated by the AI and given to the bot to follow.
 	var/list/path = new() //Every bot has this, so it is best to put it here.
+	var/list/patrol_path = list() //The path a bot has while on patrol.
 	var/pathset = 0
-	var/busy = 0 //Standardizes the vars that indicate the bot is busy with its function.
+	var/mode = 0 //Standardizes the vars that indicate the bot is busy with its function.
 	var/tries = 0 //Number of times the bot tried and failed to move.
 	var/remote_disabled = 0 //If enabled, the AI cannot *Remotely* control a bot. It can still control it through cameras.
 	var/mob/living/silicon/ai/calling_ai = null //Links a bot to the AI calling it.
 	//var/emagged = 0 //Urist: Moving that var to the general /bot tree as it's used by most bots
+	var/auto_patrol = 0		// set to make bot automatically patrol
+	var/turf/patrol_target	// this is turf to navigate to (location of beacon)
+	var/new_destination		// pending new destination (waiting for beacon response)
+	var/destination			// destination description tag
+	var/next_destination	// the next destination in the patrol route
+
+	var/blockcount = 0		//number of times retried a blocked path
+	var/awaiting_beacon	= 0	// count of pticks awaiting a beacon response
+
+	var/nearest_beacon			// the nearest beacon's tag
+	var/turf/nearest_beacon_loc	// the nearest beacon's location
+
+	var/beacon_freq = 1445		// navigation beacon frequency
+	var/control_freq = 1447		// bot control frequency
+	var/bot_type = "bot" //The type of bot it is, for radio control.
 
 	#define BOT_IDLE 			0	// idle
 	#define BOT_HUNT 			1	// found target, hunting
@@ -32,11 +49,20 @@
 	#define BOT_SUMMON			6	// summoned by PDA
 	#define BOT_CLEANING 		7	// cleaning (cleanbots)
 	#define BOT_REPAIRING		8	// repairing hull breaches (floorbots)
-	#define BOT_WORKING			9	// for MULEbots, when moving.
+	#define BOT_WORKING			9	// for clean/floor bots, when moving.
 	#define BOT_HEALING			10	// healing people (medbots)
 	#define BOT_RESPONDING		11	// responding to a call from the AI
-	var/list/busy_name = list("In Pursuit","Preparing to Arrest","Arresting","Beginning Patrol","Patrolling","Summoned by PDA", \
-	"Cleaning", "Repairing", "Working","Healing","Responding")	//This holds text for what the bot is busy doing, reported on the AI's bot control interface.
+	#define BOT_LOADING			12	// loading/unloading
+	#define BOT_DELIVER			13	// moving to deliver
+	#define BOT_GO_HOME			14	// returning to home
+	#define BOT_BLOCKED			15	// blocked
+	#define BOT_NAV				16	// computing navigation
+	#define BOT_WAIT_FOR_NAV	17	// waiting for nav computation
+	#define BOT_NO_ROUTE		18	// no destination beacon found (or no route)
+	var/list/mode_name = list("In Pursuit","Preparing to Arrest","Arresting","Beginning Patrol","Patrolling","Summoned by PDA", \
+	"Cleaning", "Repairing", "Working","Healing","Responding","Loading/Unloading","Navigating to Delivery Location","Navigating to Home", \
+	"Waiting for clear path","Calculating navigation path","Pinging beacon network","Unable to reach destination")
+	//This holds text for what the bot is mode doing, reported on the AI's bot control interface.
 
 
 /obj/machinery/bot/proc/turn_on()
@@ -48,15 +74,13 @@
 /obj/machinery/bot/proc/turn_off()
 	on = 0
 	SetLuminosity(0)
-	call_path = null //Resets the AI's call on the bot, if any.
-	pathset = 0
-	calling_ai = null
-	botcard.access = req_access //Resets the bot's access incase it is disabled while under AI control.
-	botcard.access += req_one_access
+	call_reset() //Resets an AI's call, should it exist.
 
 /obj/machinery/bot/New()
 	..()
 	botcard = new /obj/item/weapon/card/id(src)
+	if(radio_controller)
+		radio_controller.add_object(src, beacon_freq, filter = RADIO_NAVBEACONS)
 
 /obj/machinery/bot/proc/explode()
 	qdel(src)
@@ -201,7 +225,8 @@
 
 /obj/machinery/bot/proc/set_path() //Contains all the non-unique settings for prepairing a bot to be controlled by the AI.
 	pathset = 1
-	busy = BOT_RESPONDING
+	mode = BOT_RESPONDING
+	tries = 0
 
 /obj/machinery/bot/proc/move_to_call()
 	if(call_path && call_path.len && tries < 6)
@@ -215,14 +240,289 @@
 	else
 		if(calling_ai)
 			calling_ai << "[tries ? "<span class='danger'>[src] failed to reach waypoint.</span>" : "<span class='notice'>[src] successfully arrived to waypoint.</span>"]"
-		calling_ai = null
-		call_path = null
-		path = new()
-		pathset = 0
-		botcard.access = src.req_access
-		botcard.access += src.req_one_access
+		call_reset()
+
+obj/machinery/bot/proc/call_reset()
+
+	calling_ai = null
+	call_path = null
+	path = new()
+	patrol_path = new()
+	pathset = 0
+	botcard.access = prev_access
+	tries = 0
+	mode = BOT_IDLE
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+//Experimental patrol code!
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+/obj/machinery/bot/proc/bot_patrol()
+	patrol_step()
+	spawn(5)
+		if(mode == BOT_PATROL)
+			patrol_step()
+	return
+
+obj/machinery/bot/proc/start_patrol()
+
+	if(tries >= 5) //Bot is trapped, so stop trying to patrol.
+		auto_patrol = 0
 		tries = 0
-		busy = BOT_IDLE
+		speak("Unable to start patrol.")
+		return
+
+	if(!auto_patrol)
+		mode = BOT_IDLE
+		return
+
+	if(patrol_path && patrol_path.len > 0 && patrol_target)	// have a valid path, so just resume
+		mode = BOT_PATROL
+		return
+
+	else if(patrol_target)		// has patrol target already
+		spawn(0)
+			calc_path()		// so just find a route to it
+			if(patrol_path.len == 0)
+				patrol_target = 0
+				return
+			mode = BOT_PATROL
+	else					// no patrol target, so need a new one
+		find_patrol_target()
+		speak("Engaging patrol mode.")
+	tries++
+	return
+
+obj/machinery/bot/proc/bot_summon()
+		// summoned to PDA
+	patrol_step()
+	spawn(4)
+		if(mode == BOT_SUMMON)
+			patrol_step()
+			sleep(4)
+			patrol_step()
+	return
+// perform a single patrol step
+
+/obj/machinery/bot/proc/patrol_step()
+
+	if(loc == patrol_target)		// reached target
+
+
+		at_patrol_target()
+		return
+
+	else if(patrol_path.len > 0 && patrol_target)		// valid path
+		var/turf/next = patrol_path[1]
+		if(next == loc)
+			patrol_path -= next
+			return
+
+
+		if(istype( next, /turf/simulated))
+
+			var/moved = step_towards(src, next)	// attempt to move
+			if(moved)	// successful move
+				blockcount = 0
+				patrol_path -= loc
+
+			else		// failed to move
+				blockcount++
+
+				if(blockcount > 5)	// attempt 5 times before recomputing
+					// find new path excluding blocked turf
+
+					spawn(2)
+						calc_path(next)
+						if(patrol_path.len == 0)
+							find_patrol_target()
+						else
+							blockcount = 0
+
+					return
+
+				return
+
+		else	// not a valid turf
+			mode = BOT_IDLE
+			return
+
+	else	// no path, so calculate new one
+		mode = BOT_START_PATROL
+		// world << "[src] return to start patrol mode"
+	tries = 0
+	return
+
+
+// finds a new patrol target
+/obj/machinery/bot/proc/find_patrol_target()
+	// world << "finding patrol target()"
+	send_status()
+	if(awaiting_beacon)			// awaiting beacon response
+		awaiting_beacon++
+		if(awaiting_beacon > 5)	// wait 5 secs for beacon response
+			find_nearest_beacon()	// then go to nearest instead
+		return
+
+	if(next_destination)
+		set_destination(next_destination)
+	else
+		find_nearest_beacon()
+	return
+
+
+// finds the nearest beacon to self
+// signals all beacons matching the patrol code
+/obj/machinery/bot/proc/find_nearest_beacon()
+	nearest_beacon = null
+	new_destination = "__nearest__"
+	post_signal(beacon_freq, "findbeacon", "patrol")
+	awaiting_beacon = 1
+	spawn(10)
+		awaiting_beacon = 0
+		if(nearest_beacon)
+			set_destination(nearest_beacon)
+			tries = 0
+		else
+			auto_patrol = 0
+			mode = BOT_IDLE
+			speak("Disengaging patrol mode.")
+			send_status()
+
+
+/obj/machinery/bot/proc/at_patrol_target()
+	find_patrol_target()
+	return
+
+
+// sets the current destination
+// signals all beacons matching the patrol code
+// beacons will return a signal giving their locations
+/obj/machinery/bot/proc/set_destination(var/new_dest)
+	new_destination = new_dest
+	post_signal(beacon_freq, "findbeacon", "patrol")
+	awaiting_beacon = 1
+
+
+// receive a radio signal
+// used for beacon reception
+
+/obj/machinery/bot/receive_signal(datum/signal/signal)
+	//log_admin("DEBUG \[[// world.timeofday]\]: /obj/machinery/bot/receive_signal([signal.debug_print()])")
+	if(!on)
+		return
+
+	/*
+	// world << "rec signal: [signal.source]"
+	for(var/x in signal.data)
+		// world << "* [x] = [signal.data[x]]"
+	*/
+
+	var/recv = signal.data["command"]
+	// process all-bot input
+	if(recv=="bot_status")
+		send_status()
+
+	// check to see if we are the commanded bot
+	if(signal.data["active"] == src)
+	// process control input
+		switch(recv)
+			if("stop")
+				mode = BOT_IDLE
+				auto_patrol = 0
+				return
+
+			if("go")
+				mode = BOT_IDLE
+				auto_patrol = 1
+				return
+
+			if("summon")
+				patrol_target = signal.data["target"]
+				next_destination = destination
+				destination = null
+				awaiting_beacon = 0
+				mode = BOT_SUMMON
+				calc_path()
+				speak("Responding.")
+
+				return
+
+
+
+	// receive response from beacon
+	recv = signal.data["beacon"]
+	var/valid = signal.data["patrol"]
+	if(!recv || !valid)
+		return
+
+	if(recv == new_destination)	// if the recvd beacon location matches the set destination
+								// the we will navigate there
+		destination = new_destination
+		patrol_target = signal.source.loc
+		next_destination = signal.data["next_patrol"]
+		awaiting_beacon = 0
+
+	// if looking for nearest beacon
+	else if(new_destination == "__nearest__")
+		var/dist = get_dist(src,signal.source.loc)
+		if(nearest_beacon)
+			// note we ignore the beacon we are located at
+			if(dist>1 && dist<get_dist(src,nearest_beacon_loc))
+				nearest_beacon = recv
+				nearest_beacon_loc = signal.source.loc
+				return
+			else
+				return
+		else if(dist > 1)
+			nearest_beacon = recv
+			nearest_beacon_loc = signal.source.loc
+	return
+
+
+// send a radio signal with a single data key/value pair
+/obj/machinery/bot/proc/post_signal(var/freq, var/key, var/value)
+	post_signal_multiple(freq, list("[key]" = value) )
+
+// send a radio signal with multiple data key/values
+/obj/machinery/bot/proc/post_signal_multiple(var/freq, var/list/keyval)
+	var/datum/radio_frequency/frequency = radio_controller.return_frequency(freq)
+
+	if(!frequency) return
+
+	var/datum/signal/signal = new()
+	signal.source = src
+	signal.transmission_method = 1
+//	for(var/key in keyval)
+//		signal.data[key] = keyval[key]
+	signal.data = keyval
+//	world << "sent [key],[keyval[key]] on [freq]"
+	if(signal.data["findbeacon"])
+		frequency.post_signal(src, signal, filter = RADIO_NAVBEACONS)
+	else if(signal.data["type"] == "secbot")
+		frequency.post_signal(src, signal, filter = RADIO_SECBOT)
+	else
+		frequency.post_signal(src, signal)
+
+// signals bot status etc. to controller
+/obj/machinery/bot/proc/send_status()
+	var/list/kv = list(
+	"type" = src.bot_type,
+	"name" = name,
+	"loca" = loc.loc,	// area
+	"mode" = mode
+	)
+	post_signal_multiple(control_freq, kv)
+
+
+
+// calculates a path to the current destination
+// given an optional turf to avoid
+/obj/machinery/bot/proc/calc_path(var/turf/avoid = null)
+	patrol_path = AStar(loc, patrol_target, /turf/proc/CardinalTurfsWithAccess, /turf/proc/Distance_cardinal, 0, 120, id=botcard, exclude=avoid)
+	if(!patrol_path)
+		patrol_path = list()
+
+
 
 /******************************************************************/
 // Navigation procs
