@@ -116,7 +116,7 @@ var/list/sacrificed = list()
 					else
 						M << "<font color=\"purple\"><b><i>Your blood pulses. Your head throbs. The world goes red. All at once you are aware of a horrible, horrible truth. The veil of reality has been ripped away and in the festering wound left behind something sinister takes root.</b></i></font>"
 						M << "<font color=\"red\"><b>And not a single fuck was given, exterminate the cult at all costs.</b></font>"
-						if(game_is_cult_mode(ticker.mode))
+						if(gamemode_is("cult"))
 							if(M.mind == ticker.mode.sacrifice_target)
 								for(var/mob/living/carbon/human/cultist in cultsinrange)
 									cultist << "<span class='h2.userdanger'>The Chosen One!! <BR>KILL THE CHOSEN ONE!!! </span>"
@@ -137,7 +137,7 @@ var/list/sacrificed = list()
 					M.say("Tok-lyr rqa'nap g[pick("'","`")]lt-ulotf!")
 					cultist_count += M
 			if(cultist_count.len >= 9)
-				if(game_is_cult_mode(ticker.mode))
+				if(gamemode_is("cult"))
 					var/datum/game_mode/cult/Cult = ticker.mode
 					if("eldergod" in Cult.cult_objectives)
 						Cult.eldergod = 0
@@ -249,7 +249,7 @@ var/list/sacrificed = list()
 			var/is_sacrifice_target = 0
 			for(var/mob/living/carbon/human/M in src.loc)
 				if(M.stat == DEAD)
-					if(game_is_cult_mode(ticker.mode))
+					if(gamemode_is("cult"))
 						var/datum/game_mode/cult/Cult = ticker.mode
 						if(M.mind == Cult.sacrifice_target)
 							is_sacrifice_target = 1
@@ -269,7 +269,7 @@ var/list/sacrificed = list()
 				for(var/obj/effect/rune/R in world)
 					if(R.word1==wordblood && R.word2==wordjoin && R.word3==wordhell)
 						for(var/mob/living/carbon/human/N in R.loc)
-							if(game_is_cult_mode(ticker.mode))
+							if(gamemode_is("cult"))
 								var/datum/game_mode/cult/Cult = ticker.mode
 								if(N.mind && N.mind == Cult.sacrifice_target)
 									is_sacrifice_target = 1
@@ -405,7 +405,7 @@ var/list/sacrificed = list()
 
 			D.key = ghost.key
 
-			if(game_is_cult_mode(ticker.mode))
+			if(gamemode_is("cult"))
 				var/datum/game_mode/cult/Cult = ticker.mode
 				Cult.add_cultist(D.mind)
 			else
@@ -581,7 +581,7 @@ var/list/sacrificed = list()
 					C.say("Barhah hra zar[pick("'","`")]garis!")
 					if(cultsinrange.len >= 3) break		//we only need to check for three alive cultists, loop breaks so their aren't extra cultists getting word rewards
 			for(var/mob/H in victims)
-				if (game_is_cult_mode(ticker.mode))
+				if (gamemode_is("cult"))
 					var/datum/game_mode/cult/Cult = ticker.mode
 					if(H.mind == Cult.sacrifice_target)
 						if(cultsinrange.len >= 3)
@@ -648,7 +648,7 @@ var/list/sacrificed = list()
 								usr << "\red However, a mere dead body is not enough to satisfy Him."
 							stone_or_gib(H)
 			for(var/mob/living/carbon/monkey/M in src.loc)
-				if (game_is_cult_mode(ticker.mode))
+				if (gamemode_is("cult"))
 					var/datum/game_mode/cult/Cult = ticker.mode
 					if(M.mind == Cult.sacrifice_target)
 						if(cultsinrange.len >= 3)

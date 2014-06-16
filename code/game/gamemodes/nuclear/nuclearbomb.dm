@@ -180,14 +180,14 @@ var/bomb_set
 		off_station = 2
 
 	if(ticker)
-		if(ticker.mode && game_is_nuclear_mode(ticker.mode))
+		if(ticker.mode && gamemode_is("nuclear emergency"))
 			var/datum/game_mode/nuclear/Nuke = ticker.mode
 			var/obj/machinery/computer/syndicate_station/syndie_location = locate(/obj/machinery/computer/syndicate_station)
 			if(syndie_location)
 				Nuke.syndies_didnt_escape = (syndie_location.z > 1 ? 0 : 1)	//muskets will make me change this, but it will do for now
 			Nuke.nuke_off_station = off_station
 		ticker.station_explosion_cinematic(off_station,null)
-		if(ticker.mode && game_is_nuclear_mode(ticker.mode))
+		if(ticker.mode && gamemode_is("nuclear emergency"))
 			var/datum/game_mode/nuclear/Nuke = ticker.mode
 			ticker.mode.explosion_in_progress = 0
 			if(Nuke.name == "nuclear emergency")
