@@ -206,9 +206,16 @@ var/list/uplink_items = list()
 	cost = 2
 
 /datum/uplink_item/ammo/smg
-	name = "Ammo-45"
-	desc = "A 20-round .45 ACP magazine for use in the C-20r submachine gun."
+	name = "Ammo-.45 ACP"
+	desc = "A 20-round .45 ACP magazine for use in the C-20r submachine gun. These rounds have a short stunning effect and medium impact damage."
 	item = /obj/item/ammo_box/magazine/c20rm
+	cost = 1
+	gamemodes = list(/datum/game_mode/nuclear)
+
+/datum/uplink_item/ammo/smgincendiary
+	name = "Ammo-.45 Incendiary"
+	desc = "A 10-round .45 incendiary magazine for use in the C-20r submachine gun. These rounds do not stun and are weaker on impact than typical ammo but are coated with incendiary."
+	item = /obj/item/ammo_box/magazine/c20rm/incendiary
 	cost = 1
 	gamemodes = list(/datum/game_mode/nuclear)
 
@@ -217,6 +224,24 @@ var/list/uplink_items = list()
 	desc = "An additional 8-round 10mm magazine for use in the Stetchkin pistol."
 	item = /obj/item/ammo_box/magazine/m10mm
 	cost = 1
+
+/datum/uplink_item/ammo/bullstun
+	name = "Ammo-12g Stun Slug"
+	desc = "An additional 8-round stun slug magazine for use in the Bulldog shotgun. Accurate, reliable, powerful."
+	item = /obj/item/ammo_box/magazine/m12g
+	cost = 2
+
+/datum/uplink_item/ammo/bullbuck
+	name = "Ammo-12g Buckshot"
+	desc = "An alternative 8-round buckshot magazine for use in the Bulldog shotgun. Front towards enemy."
+	item = /obj/item/ammo_box/magazine/m12g/buckshot
+	cost = 2
+
+/datum/uplink_item/ammo/bulldragon
+	name = "Ammo-12g Dragon's Breath"
+	desc = "An alternative 8-round dragon's breath magazine for use in the Bulldog shotgun. I'm a fire starter, twisted fire starter!"
+	item = /obj/item/ammo_box/magazine/m12g/dragon
+	cost = 3
 
 /datum/uplink_item/ammo/machinegun
 	name = "Ammo-7.62�51mm"
