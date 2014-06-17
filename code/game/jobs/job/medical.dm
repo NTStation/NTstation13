@@ -66,6 +66,9 @@ Medical Doctor
 	H.equip_to_slot_or_del(new /obj/item/weapon/storage/firstaid/regular(H), slot_l_hand)
 	H.equip_to_slot_or_del(new /obj/item/device/flashlight/pen(H), slot_s_store)
 
+	if(H.backbag != 1)
+		H.equip_to_slot_or_del(new /obj/item/bodybag(H), slot_in_backpack)
+
 /*
 Chemist
 */
