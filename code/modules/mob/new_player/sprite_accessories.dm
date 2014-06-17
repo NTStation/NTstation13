@@ -336,6 +336,9 @@
 		name = "Bun Head"
 		icon_state = "hair_bun"
 
+	braidtail
+		name = "Braided Tail"
+		icon_state = "hair_braidtail"
 /////////////////////////////
 // Facial Hair Definitions //
 /////////////////////////////
