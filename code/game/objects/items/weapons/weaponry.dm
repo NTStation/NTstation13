@@ -54,7 +54,7 @@
 	m_amt = 18750 //5 sheets of metal per bat in the autolathe
 
 /obj/item/weapon/butterfly
-	name = "/proper butterfly knife"
+	name = "butterfly knife"
 	desc = "A basic metal blade concealed in a lightweight plasteel grip. Small enough when folded to fit in a pocket."
 	icon_state = "butterflyknife"
 	item_state = null

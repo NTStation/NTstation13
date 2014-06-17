@@ -134,13 +134,6 @@ var/list/uplink_items = list()
 	cost = 5
 	excludefrom = list(/datum/game_mode/nuclear)
 
-/datum/uplink_item/dangerous/flamethrower
-	name = "Flamethrower"
-	desc = "A flamethrower, fueled by a portion of highly flammable biotoxins stolen previously from Nanotrasen stations. Make a statement by roasting the filth in their own greed. Use with caution."
-	item = /obj/item/weapon/flamethrower/full/tank
-	cost = 6
-	gamemodes = list(/datum/game_mode/nuclear)
-
 /datum/uplink_item/dangerous/sword
 	name = "Energy Sword"
 	desc = "The energy sword is an edged weapon with a blade of pure energy. The sword is small enough to be pocketed when inactive. Activating it produces a loud, distinctive noise."
@@ -213,9 +206,16 @@ var/list/uplink_items = list()
 	cost = 2
 
 /datum/uplink_item/ammo/smg
-	name = "Ammo-45"
-	desc = "A 20-round .45 ACP magazine for use in the C-20r submachine gun."
+	name = "Ammo-.45 ACP"
+	desc = "A 20-round .45 ACP magazine for use in the C-20r submachine gun. These rounds have a short stunning effect and medium impact damage."
 	item = /obj/item/ammo_box/magazine/c20rm
+	cost = 1
+	gamemodes = list(/datum/game_mode/nuclear)
+
+/datum/uplink_item/ammo/smgincendiary
+	name = "Ammo-.45 Incendiary"
+	desc = "A 10-round .45 incendiary magazine for use in the C-20r submachine gun. These rounds do not stun and are weaker on impact than typical ammo but are coated with incendiary."
+	item = /obj/item/ammo_box/magazine/c20rm/incendiary
 	cost = 1
 	gamemodes = list(/datum/game_mode/nuclear)
 
@@ -224,6 +224,24 @@ var/list/uplink_items = list()
 	desc = "An additional 8-round 10mm magazine for use in the Stetchkin pistol."
 	item = /obj/item/ammo_box/magazine/m10mm
 	cost = 1
+
+/datum/uplink_item/ammo/bullstun
+	name = "Ammo-12g Stun Slug"
+	desc = "An additional 8-round stun slug magazine for use in the Bulldog shotgun. Accurate, reliable, powerful."
+	item = /obj/item/ammo_box/magazine/m12g
+	cost = 2
+
+/datum/uplink_item/ammo/bullbuck
+	name = "Ammo-12g Buckshot"
+	desc = "An alternative 8-round buckshot magazine for use in the Bulldog shotgun. Front towards enemy."
+	item = /obj/item/ammo_box/magazine/m12g/buckshot
+	cost = 2
+
+/datum/uplink_item/ammo/bulldragon
+	name = "Ammo-12g Dragon's Breath"
+	desc = "An alternative 8-round dragon's breath magazine for use in the Bulldog shotgun. I'm a fire starter, twisted fire starter!"
+	item = /obj/item/ammo_box/magazine/m12g/dragon
+	cost = 3
 
 /datum/uplink_item/ammo/machinegun
 	name = "Ammo-7.62�51mm"
@@ -419,6 +437,56 @@ var/list/uplink_items = list()
 	desc = "An incredibly useful personal shield projector, capable of reflecting energy projectiles and defending against other attacks."
 	item = /obj/item/weapon/shield/energy
 	cost = 8
+	gamemodes = list(/datum/game_mode/nuclear)
+
+// STOLEN TECH
+
+/datum/uplink_item/stolen
+	category = "Stolen Tech"
+
+/datum/uplink_item/stolen/pinpointer
+	name = "Nuclear Authentication Disk Pinpointer"
+	desc = "A stolen Nanotrasen pinpointer that, when activated, will pinpoint the approximate location of any nuclear authentication disks within 10km. Don't lose this."
+	item = /obj/item/weapon/pinpointer
+	cost = 3
+	excludefrom = list(/datum/game_mode/nuclear)
+
+/datum/uplink_item/stolen/magboots
+	name = "Stolen Magboots"
+	desc = "A pair of magnetic boots that assist with freer movement in space or on-station during gravitational generator failures. \
+	These reverse-engineered knockoffs of Nanotrasen's 'Advanced Magboots' slow you down in simulated-gravity environments much like the standard issue variety."
+	item = /obj/item/clothing/shoes/magboots/syndie
+	cost = 2
+	gamemodes = list(/datum/game_mode/nuclear)
+
+/datum/uplink_item/stolen/flamethrower
+	name = "Flamethrower"
+	desc = "A flamethrower, fueled by highly flammable biotoxins stolen previously from Nanotrasen stations. Make a statement by roasting the filth in their own greed. \
+	Caution: Recommended only to be used by agents familiar with plasma and its properties. \
+	Full tank included with purchase!"
+	item = /obj/item/weapon/flamethrower/full/tank
+	cost = 6
+	gamemodes = list(/datum/game_mode/nuclear)
+
+/datum/uplink_item/stolen/plasmatank
+	name = "Stolen Plasma Tank"
+	desc = "A stolen tank full of a highly flammable gas known as 'plasma'. Our agents have recovered this tank for careful testing and analysis, and turning it back on Nanotrasen is the perfect 'trial by fire.'"
+	item = /obj/item/weapon/tank/plasma/full
+	cost = 3
+	gamemodes = list(/datum/game_mode/nuclear)
+
+/datum/uplink_item/stolen/rcd
+	name = "Stolen Rapid-Construction Device"
+	desc = "A stolen RCD that uses modified compressed matter cartridges to rapidly assemble or disassemble basic structures such as walls or airlocks."
+	item = /obj/item/weapon/rcd
+	cost = 6
+	gamemodes = list(/datum/game_mode/nuclear)
+
+/datum/uplink_item/stolen/mcmc
+	name = "Modified Compressed Matter Cartridge"
+	desc = "A stolen compressed matter cartridge that has been modified to completely fill an RCD to its limit. Is it safe? Not our problem!"
+	item = /obj/item/weapon/rcd_ammo/syndie
+	cost = 3 //RCD + full ammo mag costs 9tc
 	gamemodes = list(/datum/game_mode/nuclear)
 
 // IMPLANTS

@@ -205,11 +205,11 @@
 
 /obj/item/mecha_parts/mecha_equipment/weapon/ballistic/carbine
 	name = "\improper FNX-99 \"Hades\" Carbine"
-	desc = "A weapon for combat exosuits. Shoots incendiary bullets."
+	desc = "A weapon for combat exosuits. Shoots 9mm incendiary bullets in a modified 25-round magazine."
 	icon_state = "mecha_carbine"
 	equip_cooldown = 5
 	projectile = /obj/item/projectile/bullet/incendiary/mech
-	projectiles = 24
+	projectiles = 25
 	projectile_energy_cost = 15
 
 /obj/item/mecha_parts/mecha_equipment/weapon/ballistic/silenced

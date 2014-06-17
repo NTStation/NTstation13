@@ -55,7 +55,8 @@
 	user.visible_message("<span class='danger'>[user] sucks the fluids from [target]!</span>")
 	target << "<span class='danger'>You have been absorbed by the changeling!</span>"
 
-	changeling.absorb_dna(target)
+	changeling.absorbedcount++
+	changeling.absorb_dna(target, user)
 
 	if(user.nutrition < 400) user.nutrition = min((user.nutrition + target.nutrition), 400)
 
@@ -81,7 +82,7 @@
 
 
 
-//Absorbs the target DNA.
+//Absorbs the target appearance
 /datum/changeling/proc/absorb_dna(mob/living/carbon/T)
 	if(absorbed_dna.len)
 		absorbed_dna.Cut(1,2)
@@ -93,4 +94,3 @@
 	new_dna.mutantrace = T.dna.mutantrace
 	new_dna.blood_type = T.dna.blood_type
 	absorbed_dna |= new_dna //And add the target DNA to our absorbed list.
-	absorbedcount++ //all that done, let's increment the objective counter.
