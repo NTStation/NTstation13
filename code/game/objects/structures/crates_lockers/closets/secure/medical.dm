@@ -69,30 +69,14 @@
 		else
 			new /obj/item/weapon/storage/backpack/satchel_med(src)
 		new /obj/item/clothing/suit/labcoat/coat/medical(src)
-		new /obj/item/clothing/under/rank/nursesuit (src)
-		new /obj/item/clothing/head/nursehat (src)
-		switch(pick("blue", "green", "purple"))
-			if ("blue")
-				new /obj/item/clothing/under/rank/medical/blue(src)
-			if ("green")
-				new /obj/item/clothing/under/rank/medical/green(src)
-			if ("purple")
-				new /obj/item/clothing/under/rank/medical/purple(src)
-		switch(pick("blue", "green", "purple"))
-			if ("blue")
-				new /obj/item/clothing/under/rank/medical/blue(src)
-			if ("green")
-				new /obj/item/clothing/under/rank/medical/green(src)
-			if ("purple")
-				new /obj/item/clothing/under/rank/medical/purple(src)
-		new /obj/item/clothing/under/rank/medical(src)
-		new /obj/item/clothing/suit/labcoat(src)
-		new /obj/item/clothing/shoes/sneakers/white(src)
+		new /obj/item/clothing/suit/labcoat/coat/medical(src)
 //		new /obj/item/weapon/cartridge/medical(src)
 		new /obj/item/device/radio/headset/headset_med(src)
+		new /obj/item/clothing/tie/stethoscope(src)
+		new /obj/item/weapon/reagent_containers/spray/pepper(src)
 		new /obj/item/weapon/storage/belt/medical(src)
+		new /obj/item/clothing/glasses/hud/health(src)
 		return
-
 
 
 /obj/structure/closet/secure_closet/CMO

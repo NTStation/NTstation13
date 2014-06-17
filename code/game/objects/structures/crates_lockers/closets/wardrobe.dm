@@ -29,17 +29,13 @@
 	new /obj/item/clothing/mask/bandana/red(src)
 	new /obj/item/clothing/mask/bandana/red(src)
 	new /obj/item/clothing/mask/bandana/red(src)
-	if(prob(40))
+	if(prob(30))
 		new /obj/item/clothing/suit/armor/vest/jacket(src)
-	if(prob(40))
+	if(prob(30))
 		new /obj/item/clothing/suit/armor/vest/jacket(src)
-	if(prob(40))
-		new /obj/item/clothing/suit/armor/vest/jacket(src)
-	if(prob(40))
+	if(prob(30))
 		new /obj/item/clothing/under/camo(src)
-	if(prob(40))
-		new /obj/item/clothing/under/camo(src)
-	if(prob(40))
+	if(prob(30))
 		new /obj/item/clothing/under/camo(src)
 	new /obj/item/clothing/under/rank/security(src)
 	new /obj/item/clothing/under/rank/security(src)
@@ -270,6 +266,8 @@
 	icon_closed = "white"
 
 /obj/structure/closet/wardrobe/toxins_white/New()
+	new /obj/item/weapon/storage/backpack/satchel_tox(src)
+	new /obj/item/weapon/storage/backpack/satchel_tox(src)
 	new /obj/item/clothing/under/rank/scientist(src)
 	new /obj/item/clothing/under/rank/scientist(src)
 	new /obj/item/clothing/under/rank/scientist(src)
@@ -288,10 +286,12 @@
 	icon_closed = "black"
 
 /obj/structure/closet/wardrobe/robotics_black/New()
-	new /obj/item/clothing/under/rank/roboticist(src)
-	new /obj/item/clothing/under/rank/roboticist(src)
+	new /obj/item/weapon/storage/backpack/satchel_robo(src)
+	new /obj/item/weapon/storage/backpack/satchel_robo(src)
 	new /obj/item/clothing/suit/labcoat(src)
 	new /obj/item/clothing/suit/labcoat(src)
+	new /obj/item/clothing/under/rank/roboticist(src)
+	new /obj/item/clothing/under/rank/roboticist(src)
 	if(prob(40))
 		new /obj/item/clothing/mask/bandana/skull(src)
 	else
@@ -311,12 +311,16 @@
 	icon_closed = "white"
 
 /obj/structure/closet/wardrobe/chemistry_white/New()
+	if(prob(40))
+		new /obj/item/weapon/storage/backpack/satchel_chem(src)
+	if(prob(40))
+		new /obj/item/weapon/storage/backpack/satchel_chem(src)
+	new /obj/item/clothing/suit/labcoat/chemist(src)
+	new /obj/item/clothing/suit/labcoat/chemist(src)
 	new /obj/item/clothing/under/rank/chemist(src)
 	new /obj/item/clothing/under/rank/chemist(src)
 	new /obj/item/clothing/shoes/sneakers/white(src)
 	new /obj/item/clothing/shoes/sneakers/white(src)
-	new /obj/item/clothing/suit/labcoat/chemist(src)
-	new /obj/item/clothing/suit/labcoat/chemist(src)
 	return
 
 
@@ -326,12 +330,16 @@
 	icon_closed = "white"
 
 /obj/structure/closet/wardrobe/genetics_white/New()
+	if(prob(40))
+		new /obj/item/weapon/storage/backpack/satchel_gen(src)
+	if(prob(40))
+		new /obj/item/weapon/storage/backpack/satchel_gen(src)
+	new /obj/item/clothing/suit/labcoat/genetics(src)
+	new /obj/item/clothing/suit/labcoat/genetics(src)
 	new /obj/item/clothing/under/rank/geneticist(src)
 	new /obj/item/clothing/under/rank/geneticist(src)
 	new /obj/item/clothing/shoes/sneakers/white(src)
 	new /obj/item/clothing/shoes/sneakers/white(src)
-	new /obj/item/clothing/suit/labcoat/genetics(src)
-	new /obj/item/clothing/suit/labcoat/genetics(src)
 	return
 
 
@@ -341,12 +349,16 @@
 	icon_closed = "white"
 
 /obj/structure/closet/wardrobe/virology_white/New()
+	if(prob(40))
+		new /obj/item/weapon/storage/backpack/satchel_vir(src)
+	if(prob(40))
+		new /obj/item/weapon/storage/backpack/satchel_vir(src)
+	new /obj/item/clothing/suit/labcoat/virologist(src)
+	new /obj/item/clothing/suit/labcoat/virologist(src)
 	new /obj/item/clothing/under/rank/virologist(src)
 	new /obj/item/clothing/under/rank/virologist(src)
 	new /obj/item/clothing/shoes/sneakers/white(src)
 	new /obj/item/clothing/shoes/sneakers/white(src)
-	new /obj/item/clothing/suit/labcoat/virologist(src)
-	new /obj/item/clothing/suit/labcoat/virologist(src)
 	new /obj/item/clothing/mask/surgical(src)
 	new /obj/item/clothing/mask/surgical(src)
 	return
@@ -453,3 +465,41 @@
 	if(prob(40))
 		new /obj/item/clothing/under/redoveralls(src)
 	return
+
+/obj/structure/closet/wardrobe/medical
+	name = "medical wardrobe"
+	icon_state = "white"
+	icon_closed = "white"
+
+/obj/structure/closet/wardrobe/medical/New()
+	new /obj/item/clothing/under/rank/nursesuit (src)
+	new /obj/item/clothing/head/nursehat (src)
+	if(prob(40))
+		new /obj/item/clothing/suit/labcoat/emt(src)
+	if(prob(40))
+		new /obj/item/clothing/suit/labcoat/emt(src)
+	new /obj/item/clothing/suit/labcoat(src)
+	switch(pick("blue", "green", "purple"))
+		if ("blue")
+			new /obj/item/clothing/under/rank/medical/blue(src)
+		if ("green")
+			new /obj/item/clothing/under/rank/medical/green(src)
+		if ("purple")
+			new /obj/item/clothing/under/rank/medical/purple(src)
+	switch(pick("blue", "green", "purple"))
+		if ("blue")
+			new /obj/item/clothing/under/rank/medical/blue(src)
+		if ("green")
+			new /obj/item/clothing/under/rank/medical/green(src)
+		if ("purple")
+			new /obj/item/clothing/under/rank/medical/purple(src)
+	switch(pick("blue", "green", "purple"))
+		if ("blue")
+			new /obj/item/clothing/under/rank/medical/blue(src)
+		if ("green")
+			new /obj/item/clothing/under/rank/medical/green(src)
+		if ("purple")
+			new /obj/item/clothing/under/rank/medical/purple(src)
+	new /obj/item/clothing/under/rank/medical(src)
+	new /obj/item/clothing/shoes/sneakers/white(src)
+	new /obj/item/clothing/shoes/sneakers/white(src)

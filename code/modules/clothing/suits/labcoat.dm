@@ -54,6 +54,11 @@
 	desc = "A suit that protects against minor chemical spills. Offers slightly more protection against biohazards than the standard model. Has a green stripe on the shoulder."
 	icon_state = "labcoat_vir"
 
+/obj/item/clothing/suit/labcoat/emt
+	name = "first responder jacket"
+	desc = "A basic medical jacket with reflective strips that designate a first responder."
+	icon_state = "labcoat_emt"
+
 /obj/item/clothing/suit/labcoat/science
 	name = "scientist labcoat"
 	desc = "A suit that protects against minor chemical spills. Has a purple stripe on the shoulder."
