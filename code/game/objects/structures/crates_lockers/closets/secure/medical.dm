@@ -73,11 +73,11 @@
 //		new /obj/item/weapon/cartridge/medical(src)
 		new /obj/item/device/radio/headset/headset_med(src)
 		new /obj/item/clothing/tie/stethoscope(src)
-		new /obj/item/weapon/reagent_containers/spray/pepper(src)
+		new /obj/item/clothing/gloves/latex(src)
+		new /obj/item/clothing/mask/surgical(src)
 		new /obj/item/weapon/storage/belt/medical(src)
 		new /obj/item/clothing/glasses/hud/health(src)
 		return
-
 
 /obj/structure/closet/secure_closet/CMO
 	name = "\proper chief medical officer's locker"
