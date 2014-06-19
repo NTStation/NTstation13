@@ -33,7 +33,7 @@
 							/obj/item/toy/figure/bartender					= 1,
 							/obj/item/toy/figure/borg						= 1,
 							/obj/item/toy/figure/botanist					= 1,
-							/obj/item/toy/figure/captian					= 1,
+							/obj/item/toy/figure/captain					= 1,
 							/obj/item/toy/figure/cargotech					= 1,
 							/obj/item/toy/figure/ce							= 1,
 							/obj/item/toy/figure/chaplain					= 1,
