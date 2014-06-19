@@ -23,6 +23,10 @@ REVIVAL_BRAIN_LIFE -1
 # Whether cyborgs can rename themselves at roundstart or when built.  Has no effect on roboticists renaming cyborgs the normal way.  Set to 0 to disable self-renaming.
 RENAME_CYBORG 1
 
+### OOC DURING ROUND ###
+#Comment this out if you want OOC to be automatically disabled during the round, it will be enabled during the lobby and after the round end results.
+OOC_DURING_ROUND
+
 ### MEMORY ###
 
 # Whether cyborgs remember their past lives, 1 = Remember, 0 = Don't remember

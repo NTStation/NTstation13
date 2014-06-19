@@ -16,9 +16,9 @@
 
 /obj/item/weapon/gun/projectile/automatic/deagle
 	name = "desert eagle"
-	desc = "A robust handgun that uses .50 AE ammo"
+	desc = "A robust handgun that uses .50 AE ammo."
 	icon_state = "deagle"
-	force = 14.0
+	force = 14
 	mag_type = /obj/item/ammo_box/magazine/m50
 
 /obj/item/weapon/gun/projectile/automatic/deagle/update_icon()
@@ -62,8 +62,8 @@
 	return
 
 /obj/item/weapon/gun/projectile/automatic/pistol
-	name = "\improper Stechtkin pistol"
-	desc = "A small, easily concealable handgun. Uses 10mm ammo."
+	name = "\improper Stechkin pistol"
+	desc = "A small, easily concealable handgun. Uses 10mm ammo and has a threaded barrel for silencers."
 	icon_state = "pistol"
 	w_class = 2
 	silenced = 0
@@ -155,7 +155,7 @@
 
 /obj/item/weapon/silencer
 	name = "silencer"
-	desc = "A universal small-arms silencer."
+	desc = "A universal syndicate small-arms silencer."
 	icon = 'icons/obj/gun.dmi'
 	icon_state = "silencer"
 	w_class = 2
