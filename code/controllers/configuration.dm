@@ -8,7 +8,7 @@
 /datum/configuration
 	var/server_name = null				// server name (for world name / status)
 	var/server_suffix = 0				// generate numeric suffix based on server port
-	var/lobby_countdown = 120			// In between round countdown.
+	var/lobby_countdown = 180			// In between round countdown.
 
 	var/log_ooc = 0						// log OOC channel
 	var/log_access = 0					// log login/logout
