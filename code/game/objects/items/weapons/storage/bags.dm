@@ -260,5 +260,5 @@
 	storage_slots = 7
 	max_combined_w_class = 21
 	max_w_class = 3
-	w_class = 4 //Bigger than a book because physics
+	w_class = 3 //Ore bags can hold tons of ore and they used to be smaller sooo
 	can_hold = list(/obj/item/weapon/book, /obj/item/weapon/spellbook) //No bibles, consistent with bookcase
