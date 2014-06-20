@@ -148,7 +148,7 @@ datum/controller/vote
 							master_mode = .
 				if("crew_transfer")
 					if(. == "Initiate Crew Transfer")
-						call_shuttle_proc(null, 1)
+						init_shift_change(null, 1)
 		if(restart)
 			world << "World restarting due to vote..."
 			feedback_set_details("end_error","restart vote")
