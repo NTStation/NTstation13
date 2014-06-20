@@ -1,6 +1,6 @@
 /obj/item/weapon/reagent_containers/hypospray
 	name = "hypospray"
-	desc = "The DeForest Medical Corporation hypospray is a sterile, air-needle autoinjector for rapid administration of drugs to patients."
+	desc = "The DeForest Medical Corporation hypospray is a sterile, micro-needle autoinjector for rapid administration of drugs to patients."
 	icon = 'icons/obj/syringe.dmi'
 	item_state = "hypo"
 	icon_state = "hypo"
@@ -55,3 +55,38 @@
 /obj/item/weapon/reagent_containers/hypospray/combat/New()
 	..()
 	reagents.add_reagent("synaptizine", 30)
+
+/obj/item/weapon/reagent_containers/hypospray/medipen
+	name = "\improper MediPen" //lol epipen is copyrighted
+	desc = "A rapid and safe way to stabilize patients in critical condition for personnel without advanced medical knowledge."
+	icon_state = "medipen"
+	item_state = "medipen"
+	amount_per_transfer_from_this = 5
+	volume = 5
+
+/obj/item/weapon/reagent_containers/hypospray/medipen/New()
+	..()
+	reagents.remove_reagent("tricordrazine", 30)
+	reagents.add_reagent("inaprovaline", 5)
+	update_icon()
+	return
+
+/obj/item/weapon/reagent_containers/hypospray/medipen/attack(mob/M as mob, mob/user as mob)
+	..()
+	if(reagents.total_volume <= 0) //Prevents medipens from being refilled.
+		flags &= ~OPENCONTAINER
+	update_icon()
+	return
+
+/obj/item/weapon/reagent_containers/hypospray/medipen/update_icon()
+	if(reagents.total_volume > 0)
+		icon_state = "[initial(icon_state)]1"
+	else
+		icon_state = "[initial(icon_state)]0"
+
+/obj/item/weapon/reagent_containers/hypospray/medipen/examine()
+	..()
+	if(reagents && reagents.reagent_list.len)
+		usr << "<span class='notice'>It is currently loaded.</span>"
+	else
+		usr << "<span class='notice'>It is spent.</span>"
