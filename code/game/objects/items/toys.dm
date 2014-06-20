@@ -1004,7 +1004,7 @@ obj/item/toy/cards/deck/syndicate
 	name = "Captain action figure"
 	desc = "A \"Space Life\" brand Captian action figure."
 	icon_state = "captain"
-	toysay = "Any Heads of Staff?"
+	toysay = "Any heads of staff?"
 
 /obj/item/toy/figure/cargotech
 	name = "Cargo Technician action figure"
@@ -1028,7 +1028,7 @@ obj/item/toy/cards/deck/syndicate
 	name = "Chef action figure"
 	desc = "A \"Space Life\" brand Chef action figure."
 	icon_state = "chef"
-	toysay = "Bartender is a tastey burger."
+	toysay = "Bartender is a tasty burger."
 
 /obj/item/toy/figure/chemist
 	name = "Chemist action figure"
@@ -1046,13 +1046,13 @@ obj/item/toy/cards/deck/syndicate
 	name = "Ian action figure"
 	desc = "A \"Space Life\" brand Ian action figure."
 	icon_state = "ian"
-	toysay = "Aruuu!"
+	toysay = "Arf!"
 
 /obj/item/toy/figure/detective
 	name = "Detective action figure"
 	desc = "A \"Space Life\" brand Detective action figure."
 	icon_state = "detective"
-	toysay = "The airlock has grey jumpsuit and insulated glove fibers on it."
+	toysay = "This airlock has grey jumpsuit and insulated glove fibers on it."
 
 /obj/item/toy/figure/dsquad
 	name = "Death Squad Officer action figure"
@@ -1064,7 +1064,7 @@ obj/item/toy/cards/deck/syndicate
 	name = "Engineer action figure"
 	desc = "A \"Space Life\" brand Engineer action figure."
 	icon_state = "engineer"
-	toysay = "The singularity just ate the entire engineering wing!"
+	toysay = "Oh god, the singularity is loose!"
 
 /obj/item/toy/figure/geneticist
 	name = "Geneticist action figure"
@@ -1088,7 +1088,7 @@ obj/item/toy/cards/deck/syndicate
 	name = "Quartermaster action figure"
 	desc = "A \"Space Life\" brand Quartermaster action figure."
 	icon_state = "qm"
-	toysay = "Please sign this form in triplicate and we will see about geting you a welding mask within 3 buisness days."
+	toysay = "Please sign this form in triplicate and we will see about geting you a welding mask within 3 business days."
 
 /obj/item/toy/figure/janitor
 	name = "Janitor action figure"
@@ -1151,7 +1151,7 @@ obj/item/toy/cards/deck/syndicate
 	toysay = "Big stompy mechs!"
 
 /obj/item/toy/figure/scientist
-	name = "Roboticist action figure"
+	name = "Scientist action figure"
 	desc = "A \"Space Life\" brand Scientist action figure."
 	icon_state = "scientist"
 	toysay = "For science!"
@@ -1178,4 +1178,4 @@ obj/item/toy/cards/deck/syndicate
 	name = "Warden action figure"
 	desc = "A \"Space Life\" brand Warden action figure."
 	icon_state = "warden"
-	toysay = "17 Minutes for coughing at an officer!"
+	toysay = "Seventeen minutes for coughing at an officer!"
