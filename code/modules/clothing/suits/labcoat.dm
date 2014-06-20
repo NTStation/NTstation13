@@ -55,8 +55,8 @@
 	icon_state = "labcoat_vir"
 
 /obj/item/clothing/suit/labcoat/emt
-	name = "first responder jacket"
-	desc = "A basic medical jacket with reflective strips that designate a first responder."
+	name = "first-responder jacket"
+	desc = "A basic medical jacket with reflective strips that designate emergency medical personnel."
 	icon_state = "labcoat_emt"
 
 /obj/item/clothing/suit/labcoat/science
