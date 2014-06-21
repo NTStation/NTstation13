@@ -36,7 +36,7 @@
 	var/treatment_tox = "tricordrazine"
 	var/treatment_virus = "spaceacillin"
 	var/shut_up = 0 //self explanatory :)
-	bot_type = "medbot"
+	bot_type = MED_BOT
 
 /obj/machinery/bot/medbot/mysterious
 	name = "\improper Mysterious Medibot"
@@ -78,6 +78,7 @@
 		else
 			botcard.access = botcard_access
 		prev_access = botcard.access
+		add_to_beacons()
 
 /obj/machinery/bot/medbot/turn_on()
 	. = ..()

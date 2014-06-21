@@ -13,7 +13,7 @@
 		if (istype(loc.loc, /obj/item/device/pda))
 			hostpda = loc.loc
 
-	proc/post_signal(var/freq, var/key, var/value, var/key2, var/value2, var/key3, var/value3, s_filter)
+	proc/post_signal(var/freq, var/key, var/value, var/key2, var/value2, var/key3, var/value3, var/key4, var/value4, s_filter)
 
 		//world << "Post: [freq]: [key]=[value], [key2]=[value2]"
 		var/datum/radio_frequency/frequency = radio_controller.return_frequency(freq)
@@ -28,6 +28,8 @@
 			signal.data[key2] = value2
 		if(key3)
 			signal.data[key3] = value3
+		if(key4)
+			signal.data[key4] = value4
 
 		frequency.post_signal(src, signal, filter = s_filter)
 
@@ -70,7 +72,7 @@
 		for(var/d in signal.data)
 			world << "- [d] = [signal.data[d]]"
 		*/
-		if (signal.data["type"] == "secbot")
+		if (signal.data["type"] == SEC_BOT)
 			if(!botlist)
 				botlist = new()
 
@@ -105,7 +107,7 @@
 				post_signal(control_freq, "command", "bot_status", "active", active, s_filter = RADIO_SECBOT)
 
 			if("summon")
-				post_signal(control_freq, "command", "summon", "active", active, "target", get_turf(PDA) , s_filter = RADIO_SECBOT)
+				post_signal(control_freq, "command", "summon", "active", active, "target", get_turf(PDA) , "useraccess", PDA.GetAccess(), s_filter = RADIO_SECBOT)
 				post_signal(control_freq, "command", "bot_status", "active", active, s_filter = RADIO_SECBOT)
 		PDA.cartridge.unlock()
 
@@ -141,7 +143,7 @@
 		for(var/d in signal.data)
 			world << "- [d] = [signal.data[d]]"
 		*/
-		if(signal.data["type"] == "mulebot")
+		if(signal.data["type"] == MULE_BOT)
 			if(!botlist)
 				botlist = new()
 

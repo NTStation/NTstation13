@@ -37,22 +37,19 @@
 	var/failed_steps
 	var/next_dest
 	var/next_dest_loc
-	bot_type = "cleanbot"
+	bot_type = CLEAN_BOT
 
 /obj/machinery/bot/cleanbot/New()
 	..()
 	get_targets()
 	icon_state = "cleanbot[on]"
 
-	auto_patrol = 1
-
 	var/datum/job/janitor/J = new/datum/job/janitor
 	botcard.access = J.get_access()
 	prev_access = botcard.access
 
-	if(radio_controller)
-		radio_controller.add_object(src, beacon_freq, filter = RADIO_NAVBEACONS)
-
+	spawn(5)
+		add_to_beacons()
 
 /obj/machinery/bot/cleanbot/turn_on()
 	. = ..()

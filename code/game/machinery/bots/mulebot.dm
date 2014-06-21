@@ -21,6 +21,7 @@ var/global/mulebot_count = 0
 	var/atom/movable/load = null		// the loaded crate (usually)
 	beacon_freq = 1400
 	control_freq = 1447
+	bot_type = MULE_BOT
 
 	suffix = ""
 
@@ -68,9 +69,7 @@ var/global/mulebot_count = 0
 	cell.maxcharge = 2000
 
 	spawn(5)	// must wait for map loading to finish
-		if(radio_controller)
-			radio_controller.add_object(src, control_freq, filter = RADIO_MULEBOT)
-			radio_controller.add_object(src, beacon_freq, filter = RADIO_NAVBEACONS)
+		add_to_beacons()
 
 		mulebot_count += 1
 		if(!suffix)
@@ -868,7 +867,7 @@ var/global/mulebot_count = 0
 		//world << "sent [key],[keyval[key]] on [freq]"
 	if (signal.data["findbeacon"])
 		frequency.post_signal(src, signal, filter = RADIO_NAVBEACONS)
-	else if (signal.data["type"] == "mulebot")
+	else if (signal.data["type"] == MULE_BOT)
 		frequency.post_signal(src, signal, filter = RADIO_MULEBOT)
 	else
 		frequency.post_signal(src, signal)
@@ -876,7 +875,7 @@ var/global/mulebot_count = 0
 // signals bot status etc. to controller
 /obj/machinery/bot/mulebot/send_status()
 	var/list/kv = list(
-		"type" = "mulebot",
+		"type" = MULE_BOT,
 		"name" = suffix,
 		"loca" = (loc ? loc.loc : "Unknown"),	// somehow loc can be null and cause a runtime - Quarxink
 		"mode" = mode,

@@ -39,17 +39,20 @@
 	var/improvefloors = 0
 	var/eattiles = 0
 	var/maketiles = 0
+	var/fixfloors = 0
 	var/turf/target
 	var/turf/oldtarget
 	var/oldloc = null
 	req_one_access = list(access_construction)
 	var/targetdirection
-	bot_type = "floorbot"
+	bot_type = FLOOR_BOT
 
 
 /obj/machinery/bot/floorbot/New()
 	..()
 	updateicon()
+	spawn(5)
+		add_to_beacons()
 
 /obj/machinery/bot/floorbot/turn_on()
 	. = ..()
@@ -84,6 +87,7 @@
 		dat += "Improves floors: <A href='?src=\ref[src];operation=improve'>[improvefloors ? "Yes" : "No"]</A><BR>"
 		dat += "Finds tiles: <A href='?src=\ref[src];operation=tiles'>[eattiles ? "Yes" : "No"]</A><BR>"
 		dat += "Make singles pieces of metal into tiles when empty: <A href='?src=\ref[src];operation=make'>[maketiles ? "Yes" : "No"]</A><BR>"
+		dat += "Repair damaged tiles and platings: <A href='?src=\ref[src];operation=fix'>[fixfloors ? "Yes" : "No"]</A><BR>"
 		dat += "Patrol Station: <A href='?src=\ref[src];operation=patrol'>[auto_patrol ? "Yes" : "No"]</A><BR>"
 		var/bmode
 		if (targetdirection)
@@ -146,6 +150,9 @@
 			updateUsrDialog()
 		if("make")
 			maketiles = !maketiles
+			updateUsrDialog()
+		if("fix")
+			fixfloors = !fixfloors
 			updateUsrDialog()
 		if("patrol")
 			auto_patrol = !auto_patrol
@@ -218,7 +225,7 @@
 	if(prob(5))
 		visible_message("[src] makes an excited booping beeping sound!")
 
-	if((!target || target == null) && emagged < 2)
+	if((!target || target == null) && emagged < 2 && amount > 0)
 		if(targetdirection != null)
 			/*
 			for (var/turf/space/D in view(7,src))
@@ -235,22 +242,24 @@
 		if(!target || target == null)
 			for (var/turf/space/D in view(7,src))
 				if(!(D in floorbottargets) && D != oldtarget && (D.loc.name != "Space"))
+					calling_ai = floorbottargets
 					mode = BOT_WORKING
 					oldtarget = D
 					target = D
 					break
 		if((!target || target == null ) && improvefloors)
 			for (var/turf/simulated/floor/F in view(7,src))
-				if(!(F in floorbottargets) && F != oldtarget && F.icon_state == "Floor1" && !(istype(F, /turf/simulated/floor/plating)))
+					//The target must be the floor and not a tile. The floor must not already have a floortile.
+				if(!(F in floorbottargets) && F != oldtarget && F.is_plating() && !(istype(F, /turf/simulated/floor/plating)))
 					oldtarget = F
 					target = F
 					mode = BOT_WORKING
 					break
-		if((!target || target == null) && eattiles)
-			for(var/obj/item/stack/tile/plasteel/T in view(7, src))
-				if(!(T in floorbottargets) && T != oldtarget)
-					oldtarget = T
-					target = T
+		if((!target || target == null) && fixfloors)
+			for(var/turf/simulated/floor/F in view(7, src))
+				if(!(F in floorbottargets) && F != oldtarget && (F.broken || F.burnt))
+					oldtarget = F
+					target = F
 					mode = BOT_WORKING
 					break
 
@@ -311,7 +320,7 @@
 				F.break_tile_to_plating()
 			else
 				F.ReplaceWithLattice()
-			visible_message("\red [src] makes an excited booping sound.")
+			visible_message("<span class='notice'> [src] makes an excited booping sound.</span>")
 			spawn(50)
 				amount ++
 				anchored = 0
@@ -325,31 +334,40 @@
 
 
 /obj/machinery/bot/floorbot/proc/repair(var/turf/target)
+
 	if(istype(target, /turf/space/))
 		if(target.loc.name == "Space")
 			return
 	else if(!istype(target, /turf/simulated/floor))
 		return
 	if(amount <= 0)
+		mode = BOT_IDLE
+		src.target = null
 		return
+	var/turf/simulated/floor/F
 	anchored = 1
 	icon_state = "floorbot-c"
 	if(istype(target, /turf/space/))
-		visible_message("\red [src] begins to repair the hole")
-		var/obj/item/stack/tile/plasteel/T = new /obj/item/stack/tile/plasteel
+		visible_message("<span class='notice'> [src] begins to repair the hole. </span>")
+		//var/obj/item/stack/tile/plasteel/T = new /obj/item/stack/tile/plasteel
 		mode = BOT_REPAIRING
 		spawn(50)
-			T.build(loc)
+			//T.build(loc)
+			F = target.ChangeTurf(/turf/simulated/floor)
 			mode = BOT_IDLE
 			amount -= 1
 			updateicon()
 			anchored = 0
 			src.target = null
 	else
-		visible_message("\red [src] begins to improve the floor.")
+
+		F = target
+		var/obj/item/stack/tile/plasteel/T = new /obj/item/stack/tile/plasteel
 		mode = BOT_REPAIRING
+		visible_message("<span class='notice'> [src] begins repairing the floor.</span>")
 		spawn(50)
-			loc.icon_state = "floor"
+			F = target
+			F.make_plasteel_floor(T)
 			mode = BOT_IDLE
 			amount -= 1
 			updateicon()
@@ -359,7 +377,7 @@
 /obj/machinery/bot/floorbot/proc/eattile(var/obj/item/stack/tile/plasteel/T)
 	if(!istype(T, /obj/item/stack/tile/plasteel))
 		return
-	visible_message("\red [src] begins to collect tiles.")
+	visible_message("<span class='notice'> [src] begins to collect tiles.</span>")
 	mode = BOT_REPAIRING
 	spawn(20)
 		if(isnull(T))
@@ -382,7 +400,7 @@
 		return
 	if(M.amount > 1)
 		return
-	visible_message("\red [src] begins to create tiles.")
+	visible_message("<span class='notice'> [src] begins to create tiles.</span>")
 	mode = BOT_REPAIRING
 	spawn(20)
 		if(isnull(M))
@@ -404,7 +422,7 @@
 
 /obj/machinery/bot/floorbot/explode()
 	on = 0
-	visible_message("\red <B>[src] blows apart!</B>", 1)
+	visible_message("<span class='danger'> <B>[src] blows apart!</B></span>", 1)
 	var/turf/Tsec = get_turf(src)
 
 	var/obj/item/weapon/storage/toolbox/mechanical/N = new /obj/item/weapon/storage/toolbox/mechanical(Tsec)

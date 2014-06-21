@@ -22,7 +22,7 @@
 	var/idcheck = 0 //If false, all station IDs are authorized for weapons.
 	var/check_records = 1 //Does it check security records?
 	var/arrest_type = 0 //If true, don't handcuff
-	bot_type = "secbot"
+	bot_type = SEC_BOT
 
 
 
@@ -54,11 +54,11 @@
 	..()
 	icon_state = "secbot[on]"
 	spawn(3)
+
 		var/datum/job/detective/J = new/datum/job/detective
 		botcard.access = J.get_access()
 		prev_access = botcard.access
-		if(radio_controller)
-			radio_controller.add_object(src, control_freq, filter = RADIO_SECBOT)
+		add_to_beacons()
 
 
 /obj/machinery/bot/secbot/turn_on()

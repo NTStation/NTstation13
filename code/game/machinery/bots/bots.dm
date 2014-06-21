@@ -24,7 +24,7 @@
 	var/remote_disabled = 0 //If enabled, the AI cannot *Remotely* control a bot. It can still control it through cameras.
 	var/mob/living/silicon/ai/calling_ai = null //Links a bot to the AI calling it.
 	//var/emagged = 0 //Urist: Moving that var to the general /bot tree as it's used by most bots
-	var/auto_patrol = 0		// set to make bot automatically patrol
+	var/auto_patrol = 0// set to make bot automatically patrol
 	var/turf/patrol_target	// this is turf to navigate to (location of beacon)
 	var/new_destination		// pending new destination (waiting for beacon response)
 	var/destination			// destination description tag
@@ -38,8 +38,15 @@
 
 	var/beacon_freq = 1445		// navigation beacon frequency
 	var/control_freq = 1447		// bot control frequency
-	var/bot_type = "bot" //The type of bot it is, for radio control.
 
+	var/bot_type = 0 //The type of bot it is, for radio control.
+	#define SEC_BOT				1	// Secutritrons (Beepsky) and ED-209s
+	#define MULE_BOT			2	// MULEbots
+	#define FLOOR_BOT			3	// Floorbots
+	#define CLEAN_BOT			4	// Cleanbots
+	#define MED_BOT				5	// Medibots
+
+	//Mode defines
 	#define BOT_IDLE 			0	// idle
 	#define BOT_HUNT 			1	// found target, hunting
 	#define BOT_PREP_ARREST 	2	// at target, preparing to arrest
@@ -79,8 +86,26 @@
 /obj/machinery/bot/New()
 	..()
 	botcard = new /obj/item/weapon/card/id(src)
+
+/obj/machinery/bot/proc/add_to_beacons() //Master filter control for bots. Must be placed in the bot's local New() to support map spawned bots.
+	var/bot_filter = null
 	if(radio_controller)
 		radio_controller.add_object(src, beacon_freq, filter = RADIO_NAVBEACONS)
+		switch(bot_type)
+			if(SEC_BOT)
+				bot_filter = RADIO_SECBOT
+			if(MULE_BOT)
+				bot_filter = RADIO_MULEBOT
+			if(FLOOR_BOT)
+				bot_filter = RADIO_FLOORBOT
+			if(CLEAN_BOT)
+				bot_filter = RADIO_CLEANBOT
+			if(MED_BOT)
+				bot_filter = RADIO_MEDBOT
+		if(bot_filter)
+			radio_controller.add_object(src, control_freq, filter = bot_filter)
+
+
 
 /obj/machinery/bot/proc/explode()
 	qdel(src)
@@ -269,9 +294,10 @@ obj/machinery/bot/proc/start_patrol()
 		auto_patrol = 0
 		tries = 0
 		speak("Unable to start patrol.")
+
 		return
 
-	if(!auto_patrol)
+	if(!auto_patrol) //A bot not set to patrol should not be patrolling.
 		mode = BOT_IDLE
 		return
 
@@ -348,24 +374,22 @@ obj/machinery/bot/proc/bot_summon()
 
 	else	// no path, so calculate new one
 		mode = BOT_START_PATROL
-		// world << "[src] return to start patrol mode"
+
 	tries = 0
 	return
 
-
 // finds a new patrol target
 /obj/machinery/bot/proc/find_patrol_target()
-	// world << "finding patrol target()"
 	send_status()
 	if(awaiting_beacon)			// awaiting beacon response
 		awaiting_beacon++
 		if(awaiting_beacon > 5)	// wait 5 secs for beacon response
 			find_nearest_beacon()	// then go to nearest instead
 		return
-
 	if(next_destination)
 		set_destination(next_destination)
 	else
+
 		find_nearest_beacon()
 	return
 
@@ -390,6 +414,10 @@ obj/machinery/bot/proc/bot_summon()
 
 
 /obj/machinery/bot/proc/at_patrol_target()
+	if(mode == BOT_SUMMON) //Restore a bot's original access should it have been changed by a summons.
+		botcard.access = prev_access
+		mode = BOT_IDLE
+
 	find_patrol_target()
 	return
 
@@ -410,11 +438,11 @@ obj/machinery/bot/proc/bot_summon()
 	//log_admin("DEBUG \[[// world.timeofday]\]: /obj/machinery/bot/receive_signal([signal.debug_print()])")
 	if(!on)
 		return
+/*
+	if(!signal.data["beacon"])
 
-	/*
-	// world << "rec signal: [signal.source]"
-	for(var/x in signal.data)
-		// world << "* [x] = [signal.data[x]]"
+		for(var/x in signal.data)
+			world << "* [x] = [signal.data[x]]"
 	*/
 
 	var/recv = signal.data["command"]
@@ -437,7 +465,10 @@ obj/machinery/bot/proc/bot_summon()
 				return
 
 			if("summon")
-				patrol_target = signal.data["target"]
+				var/list/user_access = signal.data["useraccess"]
+				patrol_target = signal.data["target"]	//Location of the user
+				if(user_access.len != 0)
+					botcard.access = user_access	//Adds the user's access, if any.
 				next_destination = destination
 				destination = null
 				awaiting_beacon = 0
@@ -447,14 +478,11 @@ obj/machinery/bot/proc/bot_summon()
 
 				return
 
-
-
 	// receive response from beacon
 	recv = signal.data["beacon"]
 	var/valid = signal.data["patrol"]
 	if(!recv || !valid)
 		return
-
 	if(recv == new_destination)	// if the recvd beacon location matches the set destination
 								// the we will navigate there
 		destination = new_destination
@@ -498,7 +526,7 @@ obj/machinery/bot/proc/bot_summon()
 //	world << "sent [key],[keyval[key]] on [freq]"
 	if(signal.data["findbeacon"])
 		frequency.post_signal(src, signal, filter = RADIO_NAVBEACONS)
-	else if(signal.data["type"] == "secbot")
+	else if(signal.data["type"] == SEC_BOT)
 		frequency.post_signal(src, signal, filter = RADIO_SECBOT)
 	else
 		frequency.post_signal(src, signal)
@@ -507,9 +535,9 @@ obj/machinery/bot/proc/bot_summon()
 /obj/machinery/bot/proc/send_status()
 	var/list/kv = list(
 	"type" = src.bot_type,
-	"name" = name,
-	"loca" = loc.loc,	// area
-	"mode" = mode
+	"name" = src.name,
+	"loca" = src.loc.loc,	// area
+	"mode" = src.mode
 	)
 	post_signal_multiple(control_freq, kv)
 
