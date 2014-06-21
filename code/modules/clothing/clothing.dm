@@ -93,7 +93,7 @@ BLIND     // can't see anything
 		set name = "Toggle Mask"
 		set category = "Object"
 		set src in usr
-		if(ignore_flip == 1)
+		if(ignore_flip)
 			return
 		else
 			if(!usr.canmove || usr.stat || usr.restrained())
