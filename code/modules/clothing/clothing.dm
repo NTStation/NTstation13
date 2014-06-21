@@ -87,33 +87,37 @@ BLIND     // can't see anything
 	var/alloweat = 0
 	var/can_flip = null
 	var/is_flipped = 1
+	var/ignore_flip = 0
 
 	/obj/item/clothing/mask/verb/togglemask()
 		set name = "Toggle Mask"
 		set category = "Object"
 		set src in usr
-		if(!usr.canmove || usr.stat || usr.restrained())
+		if(ignore_flip == 1)
 			return
-		if(!can_flip)
-			usr << "You try pushing \the [src] out of the way, but it is very uncomfortable and you look like a fool. You push it back into place."
-			return
-		if(src.is_flipped == 2)
-			src.icon_state = initial(icon_state)
-			gas_transfer_coefficient = initial(gas_transfer_coefficient)
-			permeability_coefficient = initial(permeability_coefficient)
-			flags = initial(flags)
-			flags_inv = initial(flags_inv)
-			usr << "You push \the [src] back into place."
-			src.is_flipped = 1
 		else
-			src.icon_state += "_up"
-			usr << "You push \the [src] out of the way."
-			gas_transfer_coefficient = null
-			permeability_coefficient = null
-			flags = null
-			flags_inv = null
-			src.is_flipped = 2
-		usr.update_inv_wear_mask()
+			if(!usr.canmove || usr.stat || usr.restrained())
+				return
+			if(!can_flip)
+				usr << "You try pushing \the [src] out of the way, but it is very uncomfortable and you look like a fool. You push it back into place."
+				return
+			if(src.is_flipped == 2)
+				src.icon_state = initial(icon_state)
+				gas_transfer_coefficient = initial(gas_transfer_coefficient)
+				permeability_coefficient = initial(permeability_coefficient)
+				flags = initial(flags)
+				flags_inv = initial(flags_inv)
+				usr << "You push \the [src] back into place."
+				src.is_flipped = 1
+			else
+				src.icon_state += "_up"
+				usr << "You push \the [src] out of the way."
+				gas_transfer_coefficient = null
+				permeability_coefficient = null
+				flags = null
+				flags_inv = null
+				src.is_flipped = 2
+			usr.update_inv_wear_mask()
 
 /obj/item/clothing/mask/attack_self()
 	togglemask()
@@ -176,7 +180,7 @@ BLIND     // can't see anything
 	name = "space suit"
 	desc = "A suit that protects against low pressure environments. Has a big 13 on the back."
 	icon_state = "space"
-	item_state = "s_suit"
+	item_state = "space"
 	w_class = 4//bulky item
 	gas_transfer_coefficient = 0.01
 	permeability_coefficient = 0.02
