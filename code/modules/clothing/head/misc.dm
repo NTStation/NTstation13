@@ -162,6 +162,11 @@
 	flags = BLOCKHAIR
 	flags_inv = HIDEMASK|HIDEEARS|HIDEEYES|HIDEFACE
 
+/obj/item/clothing/head/bearpelt
+	name = "bear pelt hat"
+	desc = "Fuzzy."
+	icon_state = "bearpelt"
+
 /obj/item/clothing/head/xenos
 	name = "xenos helmet"
 	icon_state = "xenos"
