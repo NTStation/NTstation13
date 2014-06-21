@@ -66,7 +66,7 @@
 
 /obj/item/weapon/reagent_containers/hypospray/medipen/New()
 	..()
-	reagents.remove_reagent("tricordrazine", 30)
+	reagents.remove_reagent("doctorsdelight", 30)
 	reagents.add_reagent("inaprovaline", 5)
 	update_icon()
 	return
