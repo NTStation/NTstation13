@@ -286,7 +286,6 @@
 				if(locate(/mob, contents))
 					var/mob/M = locate(/mob, contents)
 					M.gib()
-					new /obj/item/clothing/head/ianpelt(loc)
 			for(var/atom/movable/O in contents)
 				O.loc = loc
 			crayon = null

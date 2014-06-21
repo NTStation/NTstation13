@@ -162,41 +162,6 @@
 	flags = BLOCKHAIR
 	flags_inv = HIDEMASK|HIDEEARS|HIDEEYES|HIDEFACE
 
-/obj/item/clothing/head/bearpelt
-	name = "bear pelt hat"
-	desc = "Fuzzy."
-	icon_state = "bearpelt"
-	flags = BLOCKHAIR
-
-/obj/item/clothing/head/monkeypelt
-	name = "monkey pelt hat"
-	desc = "Pun Pun lived too long anyway."
-	icon_state = "monkeypelt"
-	flags = BLOCKHAIR
-
-/obj/item/clothing/head/ianpelt
-	name = "ian pelt hat"
-	desc = "You Monster."
-	icon_state = "ianpelt"
-	flags = BLOCKHAIR
-
-/obj/item/clothing/head/runtimepelt
-	name = "runtime pelt hat"
-	desc = "Medicine can't save everything."
-	icon_state = "runtimepelt"
-	flags = BLOCKHAIR
-
-/obj/item/clothing/head/lizardpelt
-	name = "lizard pelt hat"
-	desc = "Here lies Xemo. How coldblooded of you."
-	icon_state = "lizardpelt"
-	flags = BLOCKHAIR
-
-/obj/item/clothing/head/polypelt
-	name = "poly pelt hat"
-	desc = "Who is the chucklefuck now?"
-	icon_state = "polypelt"
-
 /obj/item/clothing/head/xenos
 	name = "xenos helmet"
 	icon_state = "xenos"
