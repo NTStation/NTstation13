@@ -1624,6 +1624,7 @@ datum/design/largecrossbow
 	build_type = PROTOLATHE
 	materials = list("$metal" = 8000, "$glass" = 4000, "$uranium" = 3750, "$silver" = 2000)
 	build_path = /obj/item/weapon/gun/energy/crossbow/largecrossbow
+	locked = 1
 
 datum/design/temp_gun
 	name = "Temperature Gun"
