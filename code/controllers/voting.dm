@@ -214,11 +214,9 @@ datum/controller/vote
 			world << "\n<font color='purple'><b>[text]</b>\nType <b>vote</b> to place your votes.\nYou have [config.vote_period/10] seconds to vote.</font>"
 			switch(vote_type)
 				if("crew_transfer")
-					world << sound('sound/ambience/alarm4.ogg')
+					world << sound('sound/misc/votealarm.ogg')
 				if("gamemode")
-					world << sound('sound/ambience/alarm4.ogg')
-				if("custom")
-					world << sound('sound/ambience/alarm4.ogg')
+					world << sound('sound/misc/votealarm.ogg')
 			time_remaining = round(config.vote_period/10)
 			return 1
 		return 0
