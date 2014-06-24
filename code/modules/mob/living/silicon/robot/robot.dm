@@ -753,7 +753,7 @@
 								"<span class='notice'>You pet [src]!</span>")
 
 		else
-			if((user.a_intent == "harm") && (HULK in user.mutations))
+			if((user.a_intent == "harm") && user.has_organic_effect(/datum/organic_effect/hulk))
 				spark_system.start()
 			return ..(user)
 

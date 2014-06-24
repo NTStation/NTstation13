@@ -227,7 +227,7 @@
 
 	M.disabilities = 0
 	M.sdisabilities = 0
-	M.mutations.Cut()
+	M.organic_effects.Cut()
 
 	M.see_in_dark = initial(M.see_in_dark)
 	M.see_invisible = initial(M.see_invisible)
@@ -258,7 +258,7 @@
 		M << "<span class='danger'>You start coughing.</span>"
 	if(blocks[CLUMSYBLOCK])
 		M << "<span class='danger'>You feel lightheaded.</span>"
-		M.mutations |= CLUMSY
+		M.add_organic_effect(/datum/organic_effect/clumsy)
 	if(blocks[TOURETTESBLOCK])
 		M.disabilities |= TOURETTES
 		M << "<span class='danger'>You twitch.</span>"
@@ -274,22 +274,22 @@
 		M << "<span class='danger'>You can't seem to see anything.</span>"
 	if(blocks[HULKBLOCK])
 		if(inj || prob(10))
-			M.mutations |= HULK
+			M.add_organic_effect(/datum/organic_effect/hulk)
 			M << "<span class='notice'>Your muscles hurt.</span>"
 	if(blocks[XRAYBLOCK])
 		if(inj || prob(30))
-			M.mutations |= XRAY
+			M.add_organic_effect(/datum/organic_effect/xray)
 			M << "<span class='notice'>The walls suddenly disappear.</span>"
 			M.sight |= SEE_MOBS|SEE_OBJS|SEE_TURFS
 			M.see_in_dark = 8
 			M.see_invisible = SEE_INVISIBLE_LEVEL_TWO
 	if(blocks[FIREBLOCK])
 		if(inj || prob(30))
-			M.mutations |= COLD_RESISTANCE
+			M.add_organic_effect(/datum/organic_effect/cold_res)
 			M << "<span class='notice'>Your body feels warm.</span>"
 	if(blocks[TELEBLOCK])
 		if(inj || prob(25))
-			M.mutations |= TK
+			M.add_organic_effect(/datum/organic_effect/tk)
 			M << "<span class='notice'>You feel smarter.</span>"
 
 
@@ -577,7 +577,7 @@
 	if(connected)
 		if(connected.occupant)	//set occupant_status message
 			viable_occupant = connected.occupant
-			if(check_dna_integrity(viable_occupant) && (!(NOCLONE in viable_occupant.mutations) || (connected.scan_level == 3)))	//occupent is viable for dna modification
+			if(check_dna_integrity(viable_occupant) && (!viable_occupant.has_organic_effect(/datum/organic_effect/noclone) || (connected.scan_level == 3)))	//occupent is viable for dna modification
 				occupant_status += "[viable_occupant.name] => "
 				switch(viable_occupant.stat)
 					if(CONSCIOUS)	occupant_status += "<span class='good'>Conscious</span>"
@@ -770,7 +770,7 @@
 	var/mob/living/carbon/viable_occupant
 	if(connected)
 		viable_occupant = connected.occupant
-		if(!istype(viable_occupant) || !viable_occupant.dna || (NOCLONE in viable_occupant.mutations))
+		if(!istype(viable_occupant) || !viable_occupant.dna || viable_occupant.has_organic_effect(/datum/organic_effect/noclone))
 			viable_occupant = null
 
 	//Basic Tasks///////////////////////////////////////////

@@ -66,6 +66,10 @@
 					adjustToxLoss(3)
 					updatehealth()
 
+		if(organic_effects.len)
+			for(var/datum/organic_effect/OE in organic_effects)
+				OE.trigger()
+
 
 	proc/handle_environment(datum/gas_mixture/environment)
 		if(!environment)
@@ -207,7 +211,7 @@
 
 	proc/handle_regular_hud_updates()
 
-		if (stat == 2 || (XRAY in src.mutations))
+		if (stat == 2 || has_organic_effect(/datum/organic_effect/xray))
 			sight |= SEE_TURFS
 			sight |= SEE_MOBS
 			sight |= SEE_OBJS

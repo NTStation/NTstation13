@@ -490,9 +490,9 @@
 		else
 			prot = 1
 
-		if(prot > 0 || (COLD_RESISTANCE in user.mutations))
+		if(prot > 0 || user.has_organic_effect(/datum/organic_effect/cold_res))
 			user << "You remove the light [fitting]"
-		else if(TK in user.mutations)
+		else if(user.has_organic_effect(/datum/organic_effect/tk))
 			user << "You telekinetically remove the light [fitting]."
 		else
 			user << "You try to remove the light [fitting], but you burn your hand on it!"

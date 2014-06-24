@@ -90,7 +90,7 @@ Please contact me on #coderbus IRC. ~Carnie x
 		if("skeleton")
 			base_icon_state = "skeleton"
 		else
-			if(HUSK in mutations)
+			if(has_organic_effect(/datum/organic_effect/husk))
 				base_icon_state = "husk"
 			else
 				base_icon_state = "[skin_tone]_[(gender == FEMALE) ? "f" : "m"]"
@@ -145,7 +145,7 @@ Please contact me on #coderbus IRC. ~Carnie x
 	remove_overlay(HAIR_LAYER)
 
 	//mutants don't have hair. masks and helmets can obscure our hair too.
-	if( (HUSK in mutations) || (dna && dna.mutantrace) || (head && (head.flags & BLOCKHAIR)) || (wear_mask && (wear_mask.flags & BLOCKHAIR)) )
+	if( has_organic_effect(/datum/organic_effect/husk) || (dna && dna.mutantrace) || (head && (head.flags & BLOCKHAIR)) || (wear_mask && (wear_mask.flags & BLOCKHAIR)) )
 		return
 
 	if( (wear_suit) && (wear_suit.flags & BLOCKHAIR) && (!wear_suit.has_hood) )
@@ -199,16 +199,15 @@ Please contact me on #coderbus IRC. ~Carnie x
 	var/list/standing	= list()
 
 	var/g = (gender == FEMALE) ? "f" : "m"
-	for(var/mut in mutations)
-		switch(mut)
-			if(HULK)
-				standing	+= image("icon"='icons/effects/genetics.dmi', "icon_state"="hulk_[g]_s", "layer"=-MUTATIONS_LAYER)
-			if(COLD_RESISTANCE)
-				standing	+= image("icon"='icons/effects/genetics.dmi', "icon_state"="fire_s", "layer"=-MUTATIONS_LAYER)
-			if(TK)
-				standing	+= image("icon"='icons/effects/genetics.dmi', "icon_state"="telekinesishead_s", "layer"=-MUTATIONS_LAYER)
-			if(LASER)
-				standing	+= image("icon"='icons/effects/genetics.dmi', "icon_state"="lasereyes_s", "layer"=-MUTATIONS_LAYER)
+
+	if(has_organic_effect(/datum/organic_effect/hulk))
+		standing	+= image("icon"='icons/effects/genetics.dmi', "icon_state"="hulk_[g]_s", "layer"=-MUTATIONS_LAYER)
+	if(has_organic_effect(/datum/organic_effect/cold_res))
+		standing	+= image("icon"='icons/effects/genetics.dmi', "icon_state"="fire_s", "layer"=-MUTATIONS_LAYER)
+	if(has_organic_effect(/datum/organic_effect/tk))
+		standing	+= image("icon"='icons/effects/genetics.dmi', "icon_state"="telekinesishead_s", "layer"=-MUTATIONS_LAYER)
+	if(has_organic_effect(/datum/organic_effect/laser))
+		standing	+= image("icon"='icons/effects/genetics.dmi', "icon_state"="lasereyes_s", "layer"=-MUTATIONS_LAYER)
 	if(standing.len)
 		overlays_standing[MUTATIONS_LAYER]	= standing
 

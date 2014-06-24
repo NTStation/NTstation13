@@ -77,14 +77,14 @@
 			if("Power")
 				user << "<B>Your wish is granted, but at a terrible cost...</B>"
 				user << "The Wish Granter punishes you for your selfishness, claiming your soul and warping your body to match the darkness in your heart."
-				if (!(LASER in user.mutations))
-					user.mutations.Add(LASER)
+				if (!user.has_organic_effect(/datum/organic_effect/laser))
+					user.add_organic_effect(/datum/organic_effect/laser)
 					user << "\blue You feel pressure building behind your eyes."
-				if (!(COLD_RESISTANCE in user.mutations))
-					user.mutations.Add(COLD_RESISTANCE)
+				if (!user.has_organic_effect(/datum/organic_effect/cold_res))
+					user.add_organic_effect(/datum/organic_effect/cold_res)
 					user << "\blue Your body feels warm."
-				if (!(XRAY in user.mutations))
-					user.mutations.Add(XRAY)
+				if (!user.has_organic_effect(/datum/organic_effect/xray))
+					user.add_organic_effect(/datum/organic_effect/xray)
 					user.sight |= (SEE_MOBS|SEE_OBJS|SEE_TURFS)
 					user.see_in_dark = 8
 					user.see_invisible = SEE_INVISIBLE_LEVEL_TWO

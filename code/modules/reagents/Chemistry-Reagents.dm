@@ -626,9 +626,9 @@ datum
 			on_mob_life(var/mob/living/M as mob)
 				if(!M) M = holder.my_atom
 
-				var/needs_update = M.mutations.len > 0
+				var/needs_update = M.organic_effects.len > 0
 
-				M.mutations = list()
+				M.organic_effects = list()
 				M.disabilities = 0
 				M.sdisabilities = 0
 
@@ -1431,7 +1431,7 @@ datum
 
 			on_mob_life(var/mob/living/M as mob)
 				if(!M) M = holder.my_atom
-				if (FAT in M.mutations)
+				if (M.has_organic_effect(/datum/organic_effect/fat))
 					M.gib()
 				..()
 				return
@@ -3234,7 +3234,7 @@ datum
 			description = "The Detective's undercover drink of choice. He never could stomach gin..."
 			color = "#664300" // rgb: 102, 67, 0
 			boozepwr = 40
-			
+
 		ethanol/manhattan_proj
 			name = "Manhattan Project"
 			id = "manhattan_proj"

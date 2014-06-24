@@ -69,13 +69,13 @@
 						if(!check_dna_integrity(T))
 							user << "<span class='notice'>You are unable to locate any blood.</span>"
 							return
-						if(NOCLONE in T.mutations)	//target done been et, no more blood in him
+						if(T.has_organic_effect(/datum/organic_effect/noclone))	//target done been et, no more blood in him
 							user << "<span class='notice'>You are unable to locate any blood.</span>"
 							return
 						if(target != user)
 							target.visible_message("<span class='danger'>[user] is trying to take a blood sample from  [target]!</span>", \
 											"<span class='userdanger'>[user] is trying to take a blood sample from [target]!</span>")
-							if(!do_mob(user, target)) 
+							if(!do_mob(user, target))
 								return
 						B.holder = src
 						B.volume = amount

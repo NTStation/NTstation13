@@ -16,7 +16,7 @@
 
 
 /obj/item/weapon/handcuffs/attack(mob/living/carbon/C, mob/user)
-	if(CLUMSY in user.mutations && prob(50))
+	if(user.has_organic_effect(/datum/organic_effect/clumsy) && prob(50))
 		user << "<span class='warning'>Uh... how do those things work?!</span>"
 		if(!C.handcuffed)
 			user.drop_item()
