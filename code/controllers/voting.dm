@@ -35,17 +35,20 @@ datum/controller/vote
 			else
 				var/datum/browser/client_popup
 				while(i<=voting.len)
-					var/client/C = voting[i]					
+					var/client/C = voting[i]
 					if(C)
 						//C << browse(vote.interface(C),"window=vote;can_close=0")
 						client_popup = new(C, "vote", "Voting Panel")
 						client_popup.set_window_options("can_close=0")
 						client_popup.set_content(vote.interface(C))
 						client_popup.open(0)
-						
+
 						i++
 					else
 						voting.Cut(i,i+1)
+
+	proc/autotransfer()
+		initiate_vote("crew_transfer","the server")
 
 	proc/reset()
 		initiator = null
@@ -78,6 +81,23 @@ datum/controller/vote
 						choices[master_mode] += non_voters
 						if(choices[master_mode] >= greatest_votes)
 							greatest_votes = choices[master_mode]
+				else if(mode == "crew_transfer")
+					var/factor = 0.5
+					switch(world.time / (10 * 60)) // minutes
+						if(0 to 60)
+							factor = 0.5
+						if(61 to 120)
+							factor = 0.8
+						if(121 to 240)
+							factor = 1
+						if(241 to 300)
+							factor = 1.2
+						else
+							factor = 1.4
+					choices["Initiate Crew Transfer"] = round(choices["Initiate Crew Transfer"] * factor)
+					world << "<font color='purple'>Crew Transfer Factor: [factor]</font>"
+					greatest_votes = max(choices["Initiate Crew Transfer"], choices["Continue The Round"])
+
 		//get all options with that many votes and return them in a list
 		. = list()
 		if(greatest_votes)
@@ -126,7 +146,9 @@ datum/controller/vote
 							restart = 1
 						else
 							master_mode = .
-
+				if("crew_transfer")
+					if(. == "Initiate Crew Transfer")
+						init_shift_change(null, 1)
 		if(restart)
 			world << "World restarting due to vote..."
 			feedback_set_details("end_error","restart vote")
@@ -161,6 +183,19 @@ datum/controller/vote
 			switch(vote_type)
 				if("restart")	choices.Add("Restart Round","Continue Playing")
 				if("gamemode")	choices.Add(config.votable_modes)
+				if("crew_transfer")
+					if(check_rights(R_ADMIN, 0))
+						question = "End the shift?"
+						choices.Add("Initiate Crew Transfer", "Continue The Round")
+					else
+						if (get_security_level() == "red" || get_security_level() == "delta")
+							initiator_key << "The current alert status is too high to call for a crew transfer!"
+							return 0
+						if(ticker.current_state <= 2)
+							return 0
+							initiator_key << "The crew transfer button has been disabled!"
+						question = "End the shift?"
+						choices.Add("Initiate Crew Transfer", "Continue The Round")
 				if("custom")
 					question = html_encode(input(usr,"What is the vote for?") as text|null)
 					if(!question)	return 0
@@ -177,6 +212,11 @@ datum/controller/vote
 				text += "\n[question]"
 			log_vote(text)
 			world << "\n<font color='purple'><b>[text]</b>\nType <b>vote</b> to place your votes.\nYou have [config.vote_period/10] seconds to vote.</font>"
+			switch(vote_type)
+				if("crew_transfer")
+					world << sound('sound/misc/votealarm.ogg')
+				if("gamemode")
+					world << sound('sound/misc/votealarm.ogg')
 			time_remaining = round(config.vote_period/10)
 			return 1
 		return 0
@@ -209,6 +249,11 @@ datum/controller/vote
 				. += "<a href='?src=\ref[src];vote=restart'>Restart</a>"
 			else
 				. += "<font color='grey'>Restart (Disallowed)</font>"
+			. += "</li><li>"
+			if(trialmin || config.allow_vote_restart)
+				. += "<a href='?src=\ref[src];vote=crew_transfer'>Crew Transfer</a>"
+			else
+				. += "<font color='grey'>Crew Transfer (Disallowed)</font>"
 			if(trialmin)
 				. += "\t(<a href='?src=\ref[src];vote=toggle_restart'>[config.allow_vote_restart?"Allowed":"Disallowed"]</a>)"
 			. += "</li><li>"
@@ -251,6 +296,9 @@ datum/controller/vote
 			if("gamemode")
 				if(config.allow_vote_mode || usr.client.holder)
 					initiate_vote("gamemode",usr.key)
+			if("crew_transfer")
+				if(config.allow_vote_restart || usr.client.holder)
+					initiate_vote("crew_transfer",usr.key)
 			if("custom")
 				if(usr.client.holder)
 					initiate_vote("custom",usr.key)
