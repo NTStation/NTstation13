@@ -46,10 +46,8 @@
 				I.loc = src
 				I.layer = 20
 				I.add_fingerprint(src)
-				src.update_inv_l_hand()
-				src.update_inv_r_hand()
-				usr.update_inv_l_hand()
-				usr.update_inv_r_hand()
+				src.update_inv_hands()
+				usr.update_inv_hands()
 				src.visible_message("<span class='notice'>[usr.name] handed \the [I.name] to [src.name].</span>")
 			if("No")
 				src.visible_message("<span class='warning'>[usr.name] tried to hand [I.name] to [src.name] but [src.name] didn't want it.</span>")
