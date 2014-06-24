@@ -919,6 +919,7 @@
 #include "code\modules\mob\living\carbon\carbon_defense.dm"
 #include "code\modules\mob\living\carbon\carbon_defines.dm"
 #include "code\modules\mob\living\carbon\emote.dm"
+#include "code\modules\mob\living\carbon\give.dm"
 #include "code\modules\mob\living\carbon\inventory.dm"
 #include "code\modules\mob\living\carbon\update_icons.dm"
 #include "code\modules\mob\living\carbon\alien\alien.dm"
