@@ -1,45 +1,17 @@
 
-//bitflags for mutations
-	// Extra powers:
-#define SHADOW			(1<<10)	// shadow teleportation (create in/out portals anywhere) (25%)
-#define SCREAM			(1<<11)	// supersonic screaming (25%)
-#define EXPLOSIVE		(1<<12)	// exploding on-demand (15%)
-#define REGENERATION	(1<<13)	// superhuman regeneration (30%)
-#define REPROCESSOR		(1<<14)	// eat anything (50%)
-#define SHAPESHIFTING	(1<<15)	// take on the appearance of anything (40%)
-#define PHASING			(1<<16)	// ability to phase through walls (40%)
-#define SHIELD			(1<<17)	// shielding from all projectile attacks (30%)
-#define SHOCKWAVE		(1<<18)	// attack a nearby tile and cause a massive shockwave, knocking most people on their asses (25%)
-#define ELECTRICITY		(1<<19)	// ability to shoot electric attacks (15%)
+//Organic Effects typepath shortcuts
 
+#define TK					/datum/organic_effect/tk
+#define COLD_RESISTANCE		/datum/organic_effect/cold_res
+#define XRAY				/datum/organic_effect/xray
+#define HULK				/datum/organic_effect/hulk
+#define CLUMSY				/datum/organic_effect/clumsy
+#define FAT					/datum/organic_effect/fat
+#define HUSK				/datum/organic_effect/husk
+#define NOCLONE				/datum/organic_effect/noclone
+#define LASER				/datum/organic_effect/laser
+#define HEAL				/datum/organic_effect/heal
 
-// String identifiers for associative list lookup
-// mob/var/list/mutations
-
-	// Generic mutations:
-#define	TK				1
-#define COLD_RESISTANCE	2
-#define XRAY			3
-#define HULK			4
-#define CLUMSY			5
-#define FAT				6
-#define HUSK			7
-#define NOCLONE			8
-
-
-	// Extra powers:
-#define LASER			9 	// harm intent - click anywhere to shoot lasers from eyes
-#define HEAL			10 	// healing people with hands
-#define SHADOW			11 	// shadow teleportation (create in/out portals anywhere) (25%)
-#define SCREAM			12 	// supersonic screaming (25%)
-#define EXPLOSIVE		13 	// exploding on-demand (15%)
-#define REGENERATION	14 	// superhuman regeneration (30%)
-#define REPROCESSOR		15 	// eat anything (50%)
-#define SHAPESHIFTING	16 	// take on the appearance of anything (40%)
-#define PHASING			17 	// ability to phase through walls (40%)
-#define SHIELD			18 	// shielding from all projectile attacks (30%)
-#define SHOCKWAVE		19 	// attack a nearby tile and cause a massive shockwave, knocking most people on their asses (25%)
-#define ELECTRICITY		20 	// ability to shoot electric attacks (15%)
 
 //disabilities
 #define NEARSIGHTED		1
@@ -81,3 +53,55 @@
 //Organ stuff, It's here because "Genetics" is the most relevant file for organs
 #define ORGAN_ORGANIC   1
 #define ORGAN_ROBOTIC   2
+
+
+
+/* //OLD MUTATION BITFLAGS
+
+//bitflags for mutations
+	// Extra powers:
+#define SHADOW			(1<<10)	// shadow teleportation (create in/out portals anywhere) (25%)
+#define SCREAM			(1<<11)	// supersonic screaming (25%)
+#define EXPLOSIVE		(1<<12)	// exploding on-demand (15%)
+#define REGENERATION	(1<<13)	// superhuman regeneration (30%)
+#define REPROCESSOR		(1<<14)	// eat anything (50%)
+#define SHAPESHIFTING	(1<<15)	// take on the appearance of anything (40%)
+#define PHASING			(1<<16)	// ability to phase through walls (40%)
+#define SHIELD			(1<<17)	// shielding from all projectile attacks (30%)
+#define SHOCKWAVE		(1<<18)	// attack a nearby tile and cause a massive shockwave, knocking most people on their asses (25%)
+#define ELECTRICITY		(1<<19)	// ability to shoot electric attacks (15%)
+
+
+// String identifiers for associative list lookup
+// mob/var/list/mutations
+
+*/
+
+/* //OLD MUTATION DEFINES
+
+	// Generic mutations:
+#define	TK				1
+#define COLD_RESISTANCE	2
+#define XRAY			3
+#define HULK			4
+#define CLUMSY			5
+#define FAT				6
+#define HUSK			7
+#define NOCLONE			8
+
+
+	// Extra powers:
+#define LASER			9 	// harm intent - click anywhere to shoot lasers from eyes
+#define HEAL			10 	// healing people with hands
+#define SHADOW			11 	// shadow teleportation (create in/out portals anywhere) (25%)
+#define SCREAM			12 	// supersonic screaming (25%)
+#define EXPLOSIVE		13 	// exploding on-demand (15%)
+#define REGENERATION	14 	// superhuman regeneration (30%)
+#define REPROCESSOR		15 	// eat anything (50%)
+#define SHAPESHIFTING	16 	// take on the appearance of anything (40%)
+#define PHASING			17 	// ability to phase through walls (40%)
+#define SHIELD			18 	// shielding from all projectile attacks (30%)
+#define SHOCKWAVE		19 	// attack a nearby tile and cause a massive shockwave, knocking most people on their asses (25%)
+#define ELECTRICITY		20 	// ability to shoot electric attacks (15%)
+
+*/

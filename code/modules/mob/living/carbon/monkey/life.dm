@@ -103,15 +103,15 @@
 	proc/handle_mutations_and_radiation()
 
 		if(getFireLoss())
-			if((COLD_RESISTANCE in mutations) && prob(50))
+			if(has_organic_effect(/datum/organic_effect/cold_res) && prob(50))
 				switch(getFireLoss())
 					if(1 to 50)
 						adjustFireLoss(-1)
 					if(51 to 100)
 						adjustFireLoss(-5)
 
-		if ((HULK in mutations) && health <= 25)
-			mutations.Remove(HULK)
+		if (has_organic_effect(/datum/organic_effect/hulk) && health <= 25)
+			remove_organic_effect(/datum/organic_effect/hulk)
 			src << "\red You suddenly feel very weak."
 			Weaken(3)
 			emote("collapse")
@@ -150,6 +150,9 @@
 						emote("gasp")
 					updatehealth()
 
+		if(organic_effects.len)
+			for(var/datum/organic_effect/OE in organic_effects)
+				OE.trigger()
 
 	proc/breathe()
 		if(reagents)
@@ -354,7 +357,7 @@
 			if(HAZARD_LOW_PRESSURE to WARNING_LOW_PRESSURE)
 				pressure_alert = -1
 			else
-				if( !(COLD_RESISTANCE in mutations) )
+				if( !has_organic_effect(/datum/organic_effect/cold_res) )
 					adjustBruteLoss( LOW_PRESSURE_DAMAGE )
 					pressure_alert = -2
 				else
@@ -472,7 +475,7 @@
 
 	proc/handle_regular_hud_updates()
 
-		if (stat == 2 || (XRAY in mutations))
+		if (stat == 2 || has_organic_effect(/datum/organic_effect/xray))
 			sight |= SEE_TURFS
 			sight |= SEE_MOBS
 			sight |= SEE_OBJS

@@ -214,7 +214,7 @@ obj/item/weapon/twohanded/
 
 /obj/item/weapon/twohanded/dualsaber/attack(target as mob, mob/living/user as mob)
 	..()
-	if((CLUMSY in user.mutations) && (wielded) && prob(40))
+	if(user.has_organic_effect(/datum/organic_effect/clumsy) && (wielded) && prob(40))
 		impale(user)
 		return
 	if((wielded) && prob(50))
@@ -240,9 +240,9 @@ obj/item/weapon/twohanded/
 	..()
 	var/mob/living/M = loc
 	if(istype(loc, /mob/living))
-		if (HULK in M.mutations)
+		if (M.has_organic_effect(/datum/organic_effect/hulk))
 			loc << "<span class='warning'>You lack the grace to wield this to its full extent.</span>"
-	hitsound = 'sound/weapons/blade1.ogg' 
+	hitsound = 'sound/weapons/blade1.ogg'
 
 
 /obj/item/weapon/twohanded/dualsaber/unwield() //Specific unwield () to switch hitsounds.
@@ -253,7 +253,7 @@ obj/item/weapon/twohanded/
 	if(wielded)
 		var/mob/living/M = loc
 		if(istype(loc, /mob/living))
-			if (HULK in M.mutations)
+			if (M.has_organic_effect(/datum/organic_effect/hulk))
 				return
 			return 1
 

@@ -465,7 +465,7 @@
 		return
 
 /obj/structure/table/attack_paw(mob/user)
-	if(HULK in user.mutations)
+	if(user.has_organic_effect(/datum/organic_effect/hulk))
 		user.say(pick(";RAAAAAAAARGH!", ";HNNNNNNNNNGGGGGGH!", ";GWAAAAAAAARRRHHH!", "NNNNNNNNGGGGGGGGHH!", ";AAAAAAARRRGH!" ))
 		visible_message("<span class='danger'>[user] smashes the table apart!</span>")
 		if(istype(src, /obj/structure/table/reinforced))
@@ -506,7 +506,7 @@
 
 
 /obj/structure/table/attack_hand(mob/user)
-	if(HULK in user.mutations)
+	if(user.has_organic_effect(/datum/organic_effect/hulk))
 		visible_message("<span class='danger'>[user] smashes [src] apart!</span>")
 		user.say(pick(";RAAAAAAAARGH!", ";HNNNNNNNNNGGGGGGH!", ";GWAAAAAAAARRRHHH!", "NNNNNNNNGGGGGGGGHH!", ";AAAAAAARRRGH!" ))
 		if(istype(src, /obj/structure/table/reinforced))
@@ -739,7 +739,7 @@ Destroy type values:
 
 
 /obj/structure/rack/attack_hand(mob/user)
-	if(HULK in user.mutations)
+	if(user.has_organic_effect(/datum/organic_effect/hulk))
 		visible_message("<span class='danger'>[user] smashes [src] apart!</span>")
 		user.say(pick(";RAAAAAAAARGH!", ";HNNNNNNNNNGGGGGGH!", ";GWAAAAAAAARRRHHH!", "NNNNNNNNGGGGGGGGHH!", ";AAAAAAARRRGH!" ))
 		new /obj/item/weapon/rack_parts(loc)
@@ -748,7 +748,7 @@ Destroy type values:
 
 
 /obj/structure/rack/attack_paw(mob/user)
-	if(HULK in user.mutations)
+	if(user.has_organic_effect(/datum/organic_effect/hulk))
 		user.say(pick(";RAAAAAAAARGH!", ";HNNNNNNNNNGGGGGGH!", ";GWAAAAAAAARRRHHH!", "NNNNNNNNGGGGGGGGHH!", ";AAAAAAARRRGH!" ))
 		visible_message("<span class='danger'>[user] smashes [src] apart!</span>")
 		new /obj/item/weapon/rack_parts(loc)

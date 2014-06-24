@@ -34,7 +34,7 @@
 
 	if(shock(user, 70))
 		return
-	if(HULK in user.mutations)
+	if(user.has_organic_effect(/datum/organic_effect/hulk))
 		health -= 5
 	else
 		health -= 3

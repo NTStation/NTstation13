@@ -413,9 +413,8 @@ proc/is_special_character(mob/M) // returns 1 for special characters and 2 for h
 		return 1
 	return 0
 
-/mob/proc/has_mutation(var/mutation)
-	return mutation in src.mutations ? 1 : 0
-
 /proc/get_both_hands(mob/living/carbon/M)
 	var/list/hands = list(M.l_hand, M.r_hand)
 	return hands
+
+//For organic_effects helpers see /code/datums/organic_effects

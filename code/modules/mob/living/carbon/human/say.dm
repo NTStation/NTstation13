@@ -57,7 +57,7 @@
 		if(wear_mask)
 			message = wear_mask.speechModification(message)
 
-		if ((HULK in mutations) && health >= 25 && length(message))
+		if (has_organic_effect(/datum/organic_effect/hulk) && health >= 25 && length(message))
 			if(copytext(message, 1, 2) != "*")
 				message = "[uppertext(replacetext(message, ".", "!"))]!!" //because I don't know how to code properly in getting vars from other files -Bro
 

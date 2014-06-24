@@ -164,11 +164,11 @@
 
 	proc/handle_mutations_and_radiation()
 		if(getFireLoss())
-			if((COLD_RESISTANCE in mutations) || (prob(1)))
+			if(has_organic_effect(/datum/organic_effect/cold_res) || (prob(1)))
 				heal_organ_damage(0,1)
 
-		if ((HULK in mutations) && health <= 25)
-			mutations.Remove(HULK)
+		if (has_organic_effect(/datum/organic_effect/hulk) && health <= 25)
+			remove_organic_effect(/datum/organic_effect/hulk)
 			update_mutations()		//update our mutation overlays
 			src << "\red You suddenly feel very weak."
 			Weaken(3)
@@ -219,6 +219,9 @@
 							emote("gasp")
 						updatehealth()
 
+		if(organic_effects.len)
+			for(var/datum/organic_effect/OE in organic_effects)
+				OE.trigger()
 
 	proc/breathe()
 
@@ -406,7 +409,7 @@
 					if(prob(20))
 						spawn(0) emote(pick("giggle", "laugh"))
 
-		if( (abs(310.15 - breath.temperature) > 50) && !(COLD_RESISTANCE in mutations)) // Hot air hurts :(
+		if( (abs(310.15 - breath.temperature) > 50) && !has_organic_effect(/datum/organic_effect/cold_res)) // Hot air hurts :(
 			if(breath.temperature < 260.15)
 				if(prob(20))
 					src << "\red You feel your face freezing and an icicle forming in your lungs!"
@@ -511,7 +514,7 @@
 			if(HAZARD_LOW_PRESSURE to WARNING_LOW_PRESSURE)
 				pressure_alert = -1
 			else
-				if( !(COLD_RESISTANCE in mutations) )
+				if( !has_organic_effect(/datum/organic_effect/cold_res) )
 					adjustBruteLoss( LOW_PRESSURE_DAMAGE )
 					pressure_alert = -2
 				else
@@ -647,7 +650,7 @@
 
 	proc/get_cold_protection(temperature)
 
-		if(COLD_RESISTANCE in mutations)
+		if(has_organic_effect(/datum/organic_effect/cold_res))
 			return 1 //Fully protected from the cold.
 
 		temperature = max(temperature, 2.7) //There is an occasional bug where the temperature is miscalculated in ares with a small amount of gas on them, so this is necessary to ensure that that bug does not affect this calculation. Space's temperature is 2.7K and most suits that are intended to protect against any cold, protect down to 2.0K.
@@ -770,16 +773,16 @@
 				heal_overall_damage(1,1)
 
 		//The fucking FAT mutation is the dumbest shit ever. It makes the code so difficult to work with
-		if(FAT in mutations)
+		if(has_organic_effect(/datum/organic_effect/fat))
 			if(overeatduration < 100)
 				src << "\blue You feel fit again!"
-				mutations -= FAT
+				remove_organic_effect(/datum/organic_effect/fat)
 				update_inv_w_uniform(0)
 				update_inv_wear_suit()
 		else
 			if(overeatduration > 500)
 				src << "\red You suddenly feel blubbery!"
-				mutations |= FAT
+				add_organic_effect(/datum/organic_effect/fat)
 				update_inv_w_uniform(0)
 				update_inv_wear_suit()
 
@@ -1067,7 +1070,7 @@
 					else
 						see_in_dark = 2
 
-			if(XRAY in mutations)
+			if(has_organic_effect(/datum/organic_effect/xray))
 				sight |= SEE_TURFS|SEE_MOBS|SEE_OBJS
 				see_in_dark = 8
 				see_invisible = SEE_INVISIBLE_LEVEL_TWO

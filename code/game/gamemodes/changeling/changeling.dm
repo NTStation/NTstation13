@@ -131,7 +131,7 @@ var/list/possible_changeling_IDs = list("Alpha","Beta","Gamma","Delta","Epsilon"
 	if (changeling.current.mind)
 		if (changeling.current.mind.assigned_role == "Clown")
 			changeling.current << "You have evolved beyond your clownish nature, allowing you to wield weapons without harming yourself."
-			changeling.current.mutations.Remove(CLUMSY)
+			changeling.current.remove_organic_effect(/datum/organic_effect/clumsy)
 
 	var/obj_count = 1
 	for(var/datum/objective/objective in changeling.objectives)
@@ -259,7 +259,7 @@ var/list/possible_changeling_IDs = list("Alpha","Beta","Gamma","Delta","Epsilon"
 		return
 	if(!target)
 		return
-	if(NOCLONE in target.mutations || HUSK in target.mutations)
+	if(target.has_organic_effect(/datum/organic_effect/noclone) || target.has_organic_effect(/datum/organic_effect/husk))
 		user << "<span class='warning'>DNA of [target] is ruined beyond usability!</span>"
 		return
 	if(!ishuman(target))//Absorbing monkeys is entirely possible, but it can cause issues with transforming. That's what lesser form is for anyway!

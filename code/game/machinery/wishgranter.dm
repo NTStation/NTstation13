@@ -36,26 +36,23 @@
 		charges--
 		insisting = 0
 
-		if (!(HULK in user.mutations))
-			user.mutations.Add(HULK)
+		if (!user.has_organic_effect(/datum/organic_effect/hulk))
+			user.add_organic_effect(/datum/organic_effect/hulk)
 
-		if (!(LASER in user.mutations))
-			user.mutations.Add(LASER)
+		if (!user.has_organic_effect(/datum/organic_effect/laser))
+			user.add_organic_effect(/datum/organic_effect/laser)
 
-		if (!(XRAY in user.mutations))
-			user.mutations.Add(XRAY)
+		if (!user.has_organic_effect(/datum/organic_effect/xray))
+			user.add_organic_effect(/datum/organic_effect/xray)
 			user.sight |= (SEE_MOBS|SEE_OBJS|SEE_TURFS)
 			user.see_in_dark = 8
 			user.see_invisible = SEE_INVISIBLE_LEVEL_TWO
 
-		if (!(COLD_RESISTANCE in user.mutations))
-			user.mutations.Add(COLD_RESISTANCE)
+		if (!user.has_organic_effect(/datum/organic_effect/cold_res))
+			user.add_organic_effect(/datum/organic_effect/cold_res)
 
-		if (!(TK in user.mutations))
-			user.mutations.Add(TK)
-
-		if(!(HEAL in user.mutations))
-			user.mutations.Add(HEAL)
+		if (!user.has_organic_effect(/datum/organic_effect/tk))
+			user.add_organic_effect(/datum/organic_effect/tk)
 
 		user.update_mutations()
 

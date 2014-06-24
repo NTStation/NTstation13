@@ -216,7 +216,7 @@
 		else
 			var/damage = rand(1, 9)
 			if (prob(90))
-				if (HULK in M.mutations)
+				if (M.has_organic_effect(/datum/organic_effect/hulk))
 					damage += 5
 					spawn(0)
 						Paralyse(1)

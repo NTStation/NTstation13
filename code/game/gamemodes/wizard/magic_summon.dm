@@ -132,8 +132,8 @@
 						new /obj/item/clothing/head/helmet/space/rig/wizard(get_turf(H))
 					if("scrying")
 						new /obj/item/weapon/scrying(get_turf(H))
-						if (!(XRAY in H.mutations))
-							H.mutations.Add(XRAY)
+						if (!H.has_organic_effect(/datum/organic_effect/xray))
+							H.add_organic_effect(/datum/organic_effect/xray)
 							H.sight |= (SEE_MOBS|SEE_OBJS|SEE_TURFS)
 							H.see_in_dark = 8
 							H.see_invisible = SEE_INVISIBLE_LEVEL_TWO
