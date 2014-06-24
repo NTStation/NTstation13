@@ -30,6 +30,7 @@
 
 /obj/item/weapon/gun/proc/shoot_with_empty_chamber(mob/living/user as mob|obj)
 	user << "<span class='warning'>*click*</span>"
+	playsound(user, 'sound/weapons/emptyclick.ogg', 40, 1)
 	return
 
 /obj/item/weapon/gun/proc/shoot_live_shot(mob/living/user as mob|obj, var/pointblank = 0, var/mob/pbtarget = null)
