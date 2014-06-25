@@ -992,7 +992,7 @@ obj/item/toy/cards/deck/syndicate
 	name = "Cyborg action figure"
 	desc = "A \"Space Life\" brand Cyborg action figure."
 	icon_state = "borg"
-	toysay = "I live again."
+	toysay = "I. LIVE. AGAIN."
 
 /obj/item/toy/figure/botanist
 	name = "Botanist action figure"
@@ -1016,7 +1016,7 @@ obj/item/toy/cards/deck/syndicate
 	name = "Chief Engineer action figure"
 	desc = "A \"Space Life\" brand Chief Engineer action figure."
 	icon_state = "ce"
-	toysay = "Oh god the singularity is loose!"
+	toysay = "Wire the solars!"
 
 /obj/item/toy/figure/chaplain
 	name = "Chaplain action figure"
@@ -1028,7 +1028,7 @@ obj/item/toy/cards/deck/syndicate
 	name = "Chef action figure"
 	desc = "A \"Space Life\" brand Chef action figure."
 	icon_state = "chef"
-	toysay = "Bartender is a tasty burger."
+	toysay = "Pun-Pun is a tasty burger."
 
 /obj/item/toy/figure/chemist
 	name = "Chemist action figure"
@@ -1100,7 +1100,7 @@ obj/item/toy/cards/deck/syndicate
 	name = "Lawyer action figure"
 	desc = "A \"Space Life\" brand Lawyer action figure."
 	icon_state = "lawyer"
-	toysay = "My client is not guilty!"
+	toysay = "My client is a dirty traitor!"
 
 /obj/item/toy/figure/librarian
 	name = "Librarian action figure"
