@@ -390,10 +390,9 @@
 		..()
 		reagents.add_reagent("nutriment", 1)
 
-
 /obj/item/weapon/reagent_containers/food/drinks/bottle/customizable/wine
 	name = "wine bottle"
-	desc = "Tasty."
+	desc = "Classy."
 	icon_state = "winecustom"
 	baseicon = "winecustom"
 	basename = "wine bottle"
@@ -402,9 +401,10 @@
 	New()
 		..()
 		reagents.add_reagent("wine", 50)
+
 /obj/item/weapon/reagent_containers/food/drinks/bottle/customizable/whiskey
 	name = "whiskey bottle"
-	desc = "Tasty."
+	desc = "A bottle of quite-a-bit-proof whiskey."
 	icon_state = "whiskeycustom"
 	baseicon = "whiskeycustom"
 	basename = "whiskey bottle"
@@ -413,9 +413,10 @@
 	New()
 		..()
 		reagents.add_reagent("whiskey", 50)
+
 /obj/item/weapon/reagent_containers/food/drinks/bottle/customizable/vermouth
 	name = "vermouth bottle"
-	desc = "Tasty."
+	desc = "Shaken, not stirred."
 	icon_state = "vermouthcustom"
 	baseicon = "vermouthcustom"
 	basename = "vermouth bottle"
@@ -424,9 +425,10 @@
 	New()
 		..()
 		reagents.add_reagent("vermouth", 50)
+
 /obj/item/weapon/reagent_containers/food/drinks/bottle/customizable/vodka
 	name = "vodka"
-	desc = "Tasty."
+	desc = "Get drunk, comrade."
 	icon_state = "vodkacustom"
 	baseicon = "vodkacustom"
 	basename = "vodka"
@@ -435,6 +437,7 @@
 	New()
 		..()
 		reagents.add_reagent("vodka", 50)
+
 /obj/item/weapon/reagent_containers/food/drinks/bottle/customizable/ale
 	name = "ale"
 	desc = "Strike the asteroid!"
@@ -446,9 +449,15 @@
 	New()
 		..()
 		reagents.add_reagent("wine", 50)
+
 /obj/item/weapon/reagent_containers/food/drinks/bottle/customizable/attackby(obj/item/W as obj, mob/user as mob)
+	if(istype(W,/obj/item/weapon/pen))
+		var/n_name = copytext(sanitize(input(usr, "What would you like to name this bottle?", "Food Renaming", null)  as text), 1, MAX_NAME_LEN)
+		if((loc == usr && usr.stat == 0))
+			name = "[n_name]"
+		return
 	if(src.contents.len > sandwich_limit)
-		user << "<span class='warning'>If you put anything else in or on [src] it's going to make a mess.</span>"
+		user << "<span class='warning'>You can't fit it into the [src].</span>"
 		return
 	else if(istype(W,/obj/item/weapon/reagent_containers/food/snacks))
 		user << "<span class='notice'> You add [W] to [src].</span>"
@@ -473,9 +482,9 @@
 		if(i == 1)
 			fullname += "[O.name]"
 		else if(i == ingredients.len)
-			fullname += " and [O.name]"
+			fullname += ""
 		else
-			fullname += ", [O.name]"
+			fullname += ""
 
 		if(!fullycustom)
 			var/image/I = new(src.icon, "[baseicon]_filling")
