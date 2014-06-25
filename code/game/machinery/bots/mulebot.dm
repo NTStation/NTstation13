@@ -22,6 +22,7 @@ var/global/mulebot_count = 0
 	beacon_freq = 1400
 	control_freq = 1447
 	bot_type = MULE_BOT
+	bot_filter = RADIO_MULEBOT
 
 	suffix = ""
 
@@ -69,7 +70,7 @@ var/global/mulebot_count = 0
 	cell.maxcharge = 2000
 
 	spawn(5)	// must wait for map loading to finish
-		add_to_beacons()
+		add_to_beacons(bot_filter)
 
 		mulebot_count += 1
 		if(!suffix)

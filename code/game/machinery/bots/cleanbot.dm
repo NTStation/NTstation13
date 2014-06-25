@@ -38,6 +38,7 @@
 	var/next_dest
 	var/next_dest_loc
 	bot_type = CLEAN_BOT
+	bot_filter = RADIO_CLEANBOT
 
 /obj/machinery/bot/cleanbot/New()
 	..()
@@ -49,7 +50,7 @@
 	prev_access = botcard.access
 
 	spawn(5)
-		add_to_beacons()
+		add_to_beacons(bot_filter)
 
 /obj/machinery/bot/cleanbot/turn_on()
 	. = ..()
@@ -207,14 +208,16 @@ text("<A href='?src=\ref[src];operation=oddbutton'>[oddbutton ? "Yes" : "No"]</A
 		if(loc != oldloc)
 			oldtarget = null
 
-		if (!auto_patrol)
-			return
+		if(mode == BOT_SUMMON)
+			bot_summon()
+		if(auto_patrol)
+			if(mode == BOT_IDLE || mode == BOT_START_PATROL)
+				start_patrol()
 
-		if(mode == BOT_IDLE || mode == BOT_START_PATROL)
-			start_patrol()
+			if(mode == BOT_PATROL)
+				bot_patrol()
 
-		if(mode == BOT_PATROL)
-			bot_patrol()
+
 
 		return
 

@@ -32,6 +32,7 @@
 	var/arrest_type = 0 //If true, don't handcuff
 	var/projectile = null//Holder for projectile type, to avoid so many else if chains
 	bot_type = SEC_BOT
+	bot_filter = RADIO_SECBOT
 /*	var/mode = 0
 	var/auto_patrol = 0		// set to make bot automatically patrol
 
@@ -73,7 +74,7 @@
 		prev_access = botcard.access
 
 
-		add_to_beacons()
+		add_to_beacons(bot_filter)
 		if(lasercolor)
 			shot_delay = 6//Longer shot delay because JESUS CHRIST
 			check_records = 0//Don't actively target people set to arrest
@@ -233,7 +234,6 @@ Auto Patrol: []"},
 			target = null
 			oldtarget_name = null
 			anchored = 0
-			mode = BOT_IDLE
 			walk_to(src,0)
 		else
 			move_to_call()

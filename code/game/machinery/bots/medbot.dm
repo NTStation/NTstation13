@@ -37,6 +37,7 @@
 	var/treatment_virus = "spaceacillin"
 	var/shut_up = 0 //self explanatory :)
 	bot_type = MED_BOT
+	bot_filter = RADIO_MEDBOT
 
 /obj/machinery/bot/medbot/mysterious
 	name = "\improper Mysterious Medibot"
@@ -57,7 +58,7 @@
 	var/skin = null //Same as medbot, set to tox or ointment for the respective kits.
 	w_class = 3.0
 
-	New()
+	/obj/item/weapon/firstaid_arm_assembly/New()
 		..()
 		spawn(5)
 			if(skin)
@@ -78,7 +79,7 @@
 		else
 			botcard.access = botcard_access
 		prev_access = botcard.access
-		add_to_beacons()
+		add_to_beacons(bot_filter)
 
 /obj/machinery/bot/medbot/turn_on()
 	. = ..()
@@ -349,12 +350,16 @@
 	if(path.len > 8 && patient)
 		frustration++
 
-	if((!patient) && auto_patrol)
-		if(mode == BOT_IDLE || mode == BOT_START_PATROL)
-			start_patrol()
+	if(!patient)
 
-		if(mode == BOT_PATROL)
-			bot_patrol()
+		if(mode == BOT_SUMMON)
+			bot_summon()
+		if(auto_patrol)
+			if(mode == BOT_IDLE || mode == BOT_START_PATROL)
+				start_patrol()
+
+			if(mode == BOT_PATROL)
+				bot_patrol()
 
 	return
 

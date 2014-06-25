@@ -46,13 +46,14 @@
 	req_one_access = list(access_construction)
 	var/targetdirection
 	bot_type = FLOOR_BOT
+	bot_filter = RADIO_FLOORBOT
 
 
 /obj/machinery/bot/floorbot/New()
 	..()
 	updateicon()
 	spawn(5)
-		add_to_beacons()
+		add_to_beacons(bot_filter)
 
 /obj/machinery/bot/floorbot/turn_on()
 	. = ..()
@@ -272,12 +273,15 @@
 					mode = BOT_WORKING
 					break
 
-	if((!target || target == null) && auto_patrol)
-		if(mode == BOT_IDLE || mode == BOT_START_PATROL)
-			start_patrol()
+	if(!target || target == null)
+		if(mode == BOT_SUMMON)
+			bot_summon()
+		if(auto_patrol)
+			if(mode == BOT_IDLE || mode == BOT_START_PATROL)
+				start_patrol()
 
-		if(mode == BOT_PATROL)
-			bot_patrol()
+			if(mode == BOT_PATROL)
+				bot_patrol()
 
 	if(!target || target == null)
 		if(loc != oldloc)

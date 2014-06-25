@@ -39,6 +39,8 @@
 	var/beacon_freq = 1445		// navigation beacon frequency
 	var/control_freq = 1447		// bot control frequency
 
+	var/bot_filter 				// The radio filter the bot uses to identify itself on the network.
+
 	var/bot_type = 0 //The type of bot it is, for radio control.
 	#define SEC_BOT				1	// Secutritrons (Beepsky) and ED-209s
 	#define MULE_BOT			2	// MULEbots
@@ -87,23 +89,11 @@
 	..()
 	botcard = new /obj/item/weapon/card/id(src)
 
-/obj/machinery/bot/proc/add_to_beacons() //Master filter control for bots. Must be placed in the bot's local New() to support map spawned bots.
-	var/bot_filter = null
+/obj/machinery/bot/proc/add_to_beacons(bot_filter) //Master filter control for bots. Must be placed in the bot's local New() to support map spawned bots.
 	if(radio_controller)
 		radio_controller.add_object(src, beacon_freq, filter = RADIO_NAVBEACONS)
-		switch(bot_type)
-			if(SEC_BOT)
-				bot_filter = RADIO_SECBOT
-			if(MULE_BOT)
-				bot_filter = RADIO_MULEBOT
-			if(FLOOR_BOT)
-				bot_filter = RADIO_FLOORBOT
-			if(CLEAN_BOT)
-				bot_filter = RADIO_CLEANBOT
-			if(MED_BOT)
-				bot_filter = RADIO_MEDBOT
-		if(bot_filter)
-			radio_controller.add_object(src, control_freq, filter = bot_filter)
+	if(bot_filter)
+		radio_controller.add_object(src, control_freq, filter = bot_filter)
 
 
 
@@ -248,6 +238,10 @@
 		O.show_message("<span class='game say'><span class='name'>[src]</span> beeps, \"[message]\"</span>",2)
 	return
 
+/obj/machinery/bot/proc/check_bot_access()
+	if(mode != BOT_SUMMON && mode != BOT_RESPONDING)
+		botcard.access = prev_access
+
 /obj/machinery/bot/proc/set_path() //Contains all the non-unique settings for prepairing a bot to be controlled by the AI.
 	pathset = 1
 	mode = BOT_RESPONDING
@@ -255,7 +249,7 @@
 
 /obj/machinery/bot/proc/move_to_call()
 	if(call_path && call_path.len && tries < 6)
-		step_to(src, call_path[1])
+		step_towards(src, call_path[1])
 
 		if(loc == call_path[1])//Remove turfs from the path list if the bot moved there.
 			tries = 0
@@ -315,7 +309,7 @@ obj/machinery/bot/proc/start_patrol()
 	else					// no patrol target, so need a new one
 		find_patrol_target()
 		speak("Engaging patrol mode.")
-	tries++
+		tries++
 	return
 
 obj/machinery/bot/proc/bot_summon()
@@ -363,6 +357,7 @@ obj/machinery/bot/proc/bot_summon()
 							find_patrol_target()
 						else
 							blockcount = 0
+							tries = 0
 
 					return
 
@@ -372,10 +367,13 @@ obj/machinery/bot/proc/bot_summon()
 			mode = BOT_IDLE
 			return
 
+	else if(mode == BOT_SUMMON && patrol_target) //Try to find the user again.
+		calc_path()
+		tries++
+
 	else	// no path, so calculate new one
 		mode = BOT_START_PATROL
 
-	tries = 0
 	return
 
 // finds a new patrol target
@@ -414,7 +412,7 @@ obj/machinery/bot/proc/bot_summon()
 
 
 /obj/machinery/bot/proc/at_patrol_target()
-	if(mode == BOT_SUMMON) //Restore a bot's original access should it have been changed by a summons.
+	if(mode == BOT_SUMMON)
 		botcard.access = prev_access
 		mode = BOT_IDLE
 
@@ -455,12 +453,12 @@ obj/machinery/bot/proc/bot_summon()
 	// process control input
 		switch(recv)
 			if("stop")
-				mode = BOT_IDLE
+				call_reset() //Override the AI.
 				auto_patrol = 0
 				return
 
 			if("go")
-				mode = BOT_IDLE
+				call_reset()
 				auto_patrol = 1
 				return
 
@@ -526,8 +524,8 @@ obj/machinery/bot/proc/bot_summon()
 //	world << "sent [key],[keyval[key]] on [freq]"
 	if(signal.data["findbeacon"])
 		frequency.post_signal(src, signal, filter = RADIO_NAVBEACONS)
-	else if(signal.data["type"] == SEC_BOT)
-		frequency.post_signal(src, signal, filter = RADIO_SECBOT)
+	else if(signal.data["type"] == bot_type)
+		frequency.post_signal(src, signal, filter = bot_filter)
 	else
 		frequency.post_signal(src, signal)
 
@@ -546,6 +544,7 @@ obj/machinery/bot/proc/bot_summon()
 // calculates a path to the current destination
 // given an optional turf to avoid
 /obj/machinery/bot/proc/calc_path(var/turf/avoid = null)
+	check_bot_access()
 	patrol_path = AStar(loc, patrol_target, /turf/proc/CardinalTurfsWithAccess, /turf/proc/Distance_cardinal, 0, 120, id=botcard, exclude=avoid)
 	if(!patrol_path)
 		patrol_path = list()

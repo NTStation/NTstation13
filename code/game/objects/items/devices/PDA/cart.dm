@@ -33,64 +33,84 @@
 	var/message2
 	var/list/stored_data = list()
 
-	engineering
+	/obj/item/weapon/cartridge/engineering
 		name = "\improper Power-ON cartridge"
 		icon_state = "cart-e"
 		access_engine = 1
 
-	atmos
+		/obj/item/weapon/cartridge/engineering/New()
+			..()
+			radio = new /obj/item/radio/integrated/floorbot(src)
+
+	/obj/item/weapon/cartridge/atmos
 		name = "\improper BreatheDeep cartridge"
 		icon_state = "cart-a"
 		access_atmos = 1
 
-	medical
+		/obj/item/weapon/cartridge/atmos/New()
+			..()
+			radio = new /obj/item/radio/integrated/floorbot(src)
+
+	/obj/item/weapon/cartridge/medical
 		name = "\improper Med-U cartridge"
 		icon_state = "cart-m"
 		access_medical = 1
 
-	chemistry
+		/obj/item/weapon/cartridge/medical/New()
+			..()
+			radio = new /obj/item/radio/integrated/medbot(src)
+
+	/obj/item/weapon/cartridge/chemistry
 		name = "\improper ChemWhiz cartridge"
 		icon_state = "cart-chem"
 		access_reagent_scanner = 1
 
-	security
+		/obj/item/weapon/cartridge/chemistry/New()
+			..()
+			radio = new /obj/item/radio/integrated/medbot(src)
+
+	/obj/item/weapon/cartridge/security
 		name = "\improper R.O.B.U.S.T. cartridge"
 		icon_state = "cart-s"
 		access_security = 1
 
-		New()
+		/obj/item/weapon/cartridge/security/New()
 			..()
 			radio = new /obj/item/radio/integrated/beepsky(src)
 
-	detective
+	/obj/item/weapon/cartridge/detective
 		name = "\improper D.E.T.E.C.T. cartridge"
 		icon_state = "cart-s"
 		access_security = 1
 		access_medical = 1
 		access_manifest = 1
 
-		New()
+		/obj/item/weapon/cartridge/detective/New()
 			..()
 			radio = new /obj/item/radio/integrated/beepsky(src)
 
-	janitor
+	/obj/item/weapon/cartridge/janitor
 		name = "\improper CustodiPRO cartridge"
 		desc = "The ultimate in clean-room design."
 		icon_state = "cart-j"
 		access_janitor = 1
 
-	lawyer
+		/obj/item/weapon/cartridge/janitor/New()
+			..()
+			radio = new /obj/item/radio/integrated/cleanbot(src)
+
+	/obj/item/weapon/cartridge/lawyer
 		name = "\improper P.R.O.V.E. cartridge"
 		icon_state = "cart-s"
 		access_security = 1
 
-	clown
+	/obj/item/weapon/cartridge/clown
 		name = "\improper Honkworks 5.0 cartridge"
 		icon_state = "cart-clown"
 		access_clown = 1
 		var/honk_charges = 5
 
-	mime
+	/obj/item/weapon/cartridge/mime
 		name = "\improper Gestur-O 1000 cartridge"
 		icon_state = "cart-mi"
 		access_mime = 1
@@ -102,40 +122,40 @@
 		access_flora = 1
 */
 
-	signal
+	/obj/item/weapon/cartridge/signal
 		name = "generic signaler cartridge"
 		desc = "A data cartridge with an integrated radio signaler module."
 
-		toxins
+		/obj/item/weapon/cartridge/signal/toxins
 			name = "\improper Signal Ace 2 cartridge"
 			desc = "Complete with integrated radio signaler!"
 			icon_state = "cart-tox"
 			access_reagent_scanner = 1
 			access_atmos = 1
 
-		New()
+		/obj/item/weapon/cartridge/signal/New()
 			..()
 			radio = new /obj/item/radio/integrated/signal(src)
 
 
 
-	quartermaster
+	/obj/item/weapon/cartridge/quartermaster
 		name = "space parts & space vendors cartridge"
 		desc = "Perfect for the Quartermaster on the go!"
 		icon_state = "cart-q"
 		access_quartermaster = 1
 
-		New()
+		/obj/item/weapon/cartridge/quartermaster/New()
 			..()
 			radio = new /obj/item/radio/integrated/mule(src)
 
-	head
+	/obj/item/weapon/cartridge/head
 		name = "\improper Easy-Record DELUXE cartridge"
 		icon_state = "cart-h"
 		access_manifest = 1
 		access_status_display = 1
 
-	hop
+	/obj/item/weapon/cartridge/hop
 		name = "\improper HumanResources9001 cartridge"
 		icon_state = "cart-h"
 		access_manifest = 1
@@ -148,18 +168,18 @@
 			..()
 			radio = new /obj/item/radio/integrated/mule(src)
 
-	hos
+	/obj/item/weapon/cartridge/hos
 		name = "\improper R.O.B.U.S.T. DELUXE cartridge"
 		icon_state = "cart-hos"
 		access_manifest = 1
 		access_status_display = 1
 		access_security = 1
 
-		New()
+		/obj/item/weapon/cartridge/hos/New()
 			..()
 			radio = new /obj/item/radio/integrated/beepsky(src)
 
-	ce
+	/obj/item/weapon/cartridge/ce
 		name = "\improper Power-On DELUXE cartridge"
 		icon_state = "cart-ce"
 		access_manifest = 1
@@ -167,7 +187,11 @@
 		access_engine = 1
 		access_atmos = 1
 
-	cmo
+		/obj/item/weapon/cartridge/ce/New()
+			..()
+			radio = new /obj/item/radio/integrated/floorbot(src)
+
+	/obj/item/weapon/cartridge/cmo
 		name = "\improper Med-U DELUXE cartridge"
 		icon_state = "cart-cmo"
 		access_manifest = 1
@@ -175,7 +199,11 @@
 		access_reagent_scanner = 1
 		access_medical = 1
 
-	rd
+		/obj/item/weapon/cartridge/cmo/New()
+			..()
+			radio = new /obj/item/radio/integrated/medbot(src)
+
+	/obj/item/weapon/cartridge/rd
 		name = "\improper Signal Ace DELUXE cartridge"
 		icon_state = "cart-rd"
 		access_manifest = 1
@@ -187,7 +215,7 @@
 			..()
 			radio = new /obj/item/radio/integrated/signal(src)
 
-	captain
+	/obj/item/weapon/cartridge/captain
 		name = "\improper Value-PAK cartridge"
 		desc = "Now with 200% more value!"
 		icon_state = "cart-c"
@@ -199,18 +227,18 @@
 		access_status_display = 1
 		access_atmos = 1
 
-		New()
+		/obj/item/weapon/cartridge/captain/New()
 			..()
 			radio = new /obj/item/radio/integrated/beepsky(src)
 
-	syndicate
+	/obj/item/weapon/cartridge/syndicate
 		name = "\improper Detomatix cartridge"
 		icon_state = "cart"
 		access_remote_door = 1
 		remote_door_id = "smindicate" //Make sure this matches the syndicate shuttle's shield/door id!!	//don't ask about the name, testing.
 		var/shock_charges = 4
 
-	proc/unlock()
+	/obj/item/weapon/cartridge/proc/unlock()
 		if (!istype(loc, /obj/item/device/pda))
 			return
 
@@ -218,7 +246,7 @@
 		print_to_host(menu)
 		return
 
-	proc/print_to_host(var/text)
+	/obj/item/weapon/cartridge/proc/print_to_host(var/text)
 		if (!istype(loc, /obj/item/device/pda))
 			return
 		loc:cart = text
@@ -229,7 +257,7 @@
 
 		return
 
-	proc/post_status(var/command, var/data1, var/data2)
+	/obj/item/weapon/cartridge/proc/post_status(var/command, var/data1, var/data2)
 
 		var/datum/radio_frequency/frequency = radio_controller.return_frequency(1435)
 
@@ -249,7 +277,67 @@
 
 		frequency.post_signal(src, status_signal)
 
-	proc/generate_menu()
+	/obj/item/weapon/cartridge/proc/bot_control(var/obj/item/radio/integrated/SC)
+
+
+		if(!SC)
+			menu = "Interlink Error - Please reinsert cartridge."
+			return
+
+		if(!SC.active)
+			// list of bots
+			if(!SC.botlist || (SC.botlist && SC.botlist.len==0))
+				menu += "No bots found.<BR>"
+
+			else
+				for(var/obj/machinery/bot/B in SC.botlist)
+					menu += "<A href='byond://?src=\ref[SC];op=control;bot=\ref[B]'>[B] at [B.loc.loc]</A><BR>"
+
+			menu += "<BR><A href='byond://?src=\ref[SC];op=scanbots'><img src=pda_scanner.png> Scan for active bots</A><BR>"
+
+		else	// bot selected, control it
+
+			menu += "<B>[SC.active]</B><BR> Status: (<A href='byond://?src=\ref[SC];op=control;bot=\ref[SC.active]'><img src=pda_refresh.png><i>refresh</i></A>)<BR>"
+
+			if(!SC.botstatus)
+				menu += "Waiting for response...<BR>"
+			else
+
+				menu += "Location: [SC.botstatus["loca"] ]<BR>"
+				menu += "Mode: "
+
+				switch(SC.botstatus["mode"])
+					if(BOT_IDLE)
+						menu += "Ready"
+					if(BOT_HUNT)
+						menu += "Apprehending target"
+					if(BOT_PREP_ARREST,BOT_ARREST)
+						menu += "Arresting target"
+					if(BOT_START_PATROL)
+						menu += "Starting patrol"
+					if(BOT_PATROL)
+						menu += "On patrol"
+					if(BOT_SUMMON)
+						menu += "Responding to summons"
+					if(BOT_CLEANING)
+						menu += "Cleaning"
+					if(BOT_WORKING)
+						menu += "Proceeding to work site"
+					if(BOT_REPAIRING)
+						menu += "Performing repairs"
+					if(BOT_HEALING)
+						menu += "Medicating patient"
+					if(BOT_RESPONDING)
+						menu += "Proceeding to AI waypoint"
+
+				menu += "<BR>\[<A href='byond://?src=\ref[SC];op=stop'>Stop Patrol</A>\] "
+				menu += "\[<A href='byond://?src=\ref[SC];op=go'>Start Patrol</A>\] "
+				menu += "\[<A href='byond://?src=\ref[SC];op=summon'>Summon Bot</A>\]<BR>"
+				menu += "<HR><A href='byond://?src=\ref[SC];op=botlist'><img src=pda_back.png>Return to bot list</A>"
+		return menu
+
+
+	/obj/item/weapon/cartridge/proc/generate_menu()
 		switch(mode)
 			if(40) //signaller
 				menu = "<h4><img src=pda_signaler.png> Remote Signaling System</h4>"
@@ -425,58 +513,12 @@ Code:
 					menu += "[active3.fields["notes"]]"
 				else
 					menu += "<b>Record Lost!</b><br>"
-
 				menu += "<br>"
+
 			if (46) //beepsky control
 				var/obj/item/radio/integrated/beepsky/SC = radio
-				if(!SC)
-					menu = "Interlink Error - Please reinsert cartridge."
-					return
-
 				menu = "<h4><img src=pda_cuffs.png> Securitron Interlink</h4>"
-
-				if(!SC.active)
-					// list of bots
-					if(!SC.botlist || (SC.botlist && SC.botlist.len==0))
-						menu += "No bots found.<BR>"
-
-					else
-						for(var/obj/machinery/bot/B in SC.botlist)
-							menu += "<A href='byond://?src=\ref[SC];op=control;bot=\ref[B]'>[B] at [B.loc.loc]</A><BR>"
-
-					menu += "<BR><A href='byond://?src=\ref[SC];op=scanbots'><img src=pda_scanner.png> Scan for active bots</A><BR>"
-
-				else	// bot selected, control it
-
-					menu += "<B>[SC.active]</B><BR> Status: (<A href='byond://?src=\ref[SC];op=control;bot=\ref[SC.active]'><img src=pda_refresh.png><i>refresh</i></A>)<BR>"
-
-					if(!SC.botstatus)
-						menu += "Waiting for response...<BR>"
-					else
-
-						menu += "Location: [SC.botstatus["loca"] ]<BR>"
-						menu += "Mode: "
-
-						switch(SC.botstatus["mode"])
-							if(BOT_IDLE)
-								menu += "Ready"
-							if(BOT_HUNT)
-								menu += "Apprehending target"
-							if(BOT_PREP_ARREST,BOT_ARREST)
-								menu += "Arresting target"
-							if(BOT_START_PATROL)
-								menu += "Starting patrol"
-							if(BOT_PATROL)
-								menu += "On patrol"
-							if(BOT_SUMMON)
-								menu += "Responding to summons"
-							if(BOT_RESPONDING)
-								menu += "Proceeding to AI waypoint"
-
-						menu += "<BR>\[<A href='byond://?src=\ref[SC];op=stop'>Stop Patrol</A>\] "
-						menu += "\[<A href='byond://?src=\ref[SC];op=go'>Start Patrol</A>\] "
-						menu += "\[<A href='byond://?src=\ref[SC];op=summon'>Summon Bot</A>\]<BR>"
-						menu += "<HR><A href='byond://?src=\ref[SC];op=botlist'><img src=pda_back.png>Return to bot list</A>"
+				bot_control(SC)
 
 			if (47) //quartermaster order records
 				menu = "<h4><img src=pda_crate.png> Supply Record Interlink</h4>"
@@ -614,6 +656,21 @@ Code:
 				else
 					menu += "ERROR: Unable to determine current location."
 				menu += "<br><br><A href='byond://?src=\ref[src];choice=49'>Refresh GPS Locator</a>"
+
+			if (50) //Cleanbot control
+				menu = "<br><h4><img src=pda_floorbot.png> Cleanbot Interlink</h4>"
+				var/obj/item/radio/integrated/cleanbot/SC = radio
+				bot_control(SC)
+
+			if (51) //floorbot control
+				menu = "<h4><img src=pda_floorbot.png> Floorbot Interlink</h4>"
+				var/obj/item/radio/integrated/floorbot/SC = radio
+				bot_control(SC)
+
+			if (52) //medbot control
+				menu = "<h4><img src=pda_medbot.png> Medibot Interlink</h4>"
+				var/obj/item/radio/integrated/medbot/SC = radio
+				bot_control(SC)
 
 
 /obj/item/weapon/cartridge/Topic(href, href_list)

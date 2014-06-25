@@ -23,6 +23,7 @@
 	var/check_records = 1 //Does it check security records?
 	var/arrest_type = 0 //If true, don't handcuff
 	bot_type = SEC_BOT
+	bot_filter = RADIO_SECBOT
 
 
 
@@ -58,7 +59,7 @@
 		var/datum/job/detective/J = new/datum/job/detective
 		botcard.access = J.get_access()
 		prev_access = botcard.access
-		add_to_beacons()
+		add_to_beacons(bot_filter)
 
 
 /obj/machinery/bot/secbot/turn_on()

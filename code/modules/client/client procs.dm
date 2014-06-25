@@ -275,6 +275,8 @@ var/next_external_rsc = 0
 		'icons/pda_icons/pda_refresh.png',
 		'icons/pda_icons/pda_scanner.png',
 		'icons/pda_icons/pda_signaler.png',
+		'icons/pda_icons/pda_medbot.png',
+		'icons/pda_icons/pda_floorbot.png',
 		'icons/pda_icons/pda_status.png',
 		'icons/spideros_icons/sos_1.png',
 		'icons/spideros_icons/sos_2.png',
