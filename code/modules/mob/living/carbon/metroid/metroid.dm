@@ -409,7 +409,7 @@
 
 			attacked += 10
 			if (prob(90))
-				if (HULK in M.mutations)
+				if (M.has_organic_effect(/datum/organic_effect/hulk))
 					damage += 5
 					if(Victim || Target)
 						Victim = null

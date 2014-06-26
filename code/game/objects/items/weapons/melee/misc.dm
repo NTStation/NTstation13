@@ -36,7 +36,7 @@
 
 /obj/item/weapon/melee/classic_baton/attack(mob/M, mob/living/user)
 	add_fingerprint(user)
-	if((CLUMSY in user.mutations) && prob(50))
+	if(user.has_organic_effect(/datum/organic_effect/clumsy) && prob(50))
 		user << "<span class='warning'>You club yourself over the head!</span>"
 		user.Weaken(3 * force)
 		if(ishuman(user))
@@ -56,7 +56,7 @@
 
 	if(user.a_intent == "harm")
 		if(!..()) return
-		if(M.stuttering < 7 && !(HULK in M.mutations))
+		if(M.stuttering < 7 && !M.has_organic_effect(/datum/organic_effect/hulk))
 			M.stuttering = 7
 		M.Stun(7)
 		M.Weaken(7)
@@ -113,7 +113,7 @@
 
 /obj/item/weapon/melee/telebaton/attack(mob/target as mob, mob/living/user as mob)
 	if(on)
-		if ((CLUMSY in user.mutations) && prob(50))
+		if (user.has_organic_effect(/datum/organic_effect/clumsy) && prob(50))
 			user << "<span class ='danger'>You club yourself over the head.</span>"
 			user.Weaken(3 * force)
 			if(ishuman(user))

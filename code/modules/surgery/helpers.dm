@@ -10,7 +10,7 @@
 					continue
 				if(S.target_must_be_dead && M.stat != DEAD)
 					continue
-				if(S.target_must_be_fat && !(FAT in M.mutations))
+				if(S.target_must_be_fat && !M.has_organic_effect(/datum/organic_effect/fat))
 					continue
 
 				if(istype(M, /mob/living/carbon/human))

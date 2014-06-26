@@ -117,8 +117,8 @@
 
 	var/radiation = 0//Carbon
 
-	var/list/mutations = list() //Carbon -- Doohl
-	//see: setup.dm for list of mutations
+	var/list/organic_effects = list() //Carbon -- Remie
+	//see /code/datums/organic_effects for a list of organic_effects
 
 	var/voice_name = "unidentifiable voice"
 	var/voice_message = null // When you are not understood by others (replaced with just screeches, hisses, chimpers etc.)

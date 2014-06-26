@@ -96,7 +96,7 @@
 	add_fingerprint(user)
 
 /obj/item/weapon/melee/baton/attack(mob/M, mob/user)
-	if(status && (CLUMSY in user.mutations) && prob(50))
+	if(status && user.has_organic_effect(/datum/organic_effect/clumsy) && prob(50))
 		user << "<span class='danger'>You accidentally hit yourself with [src]!</span>"
 		user.Weaken(stunforce*3)
 		deductcharge(hitcost)

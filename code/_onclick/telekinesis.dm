@@ -39,13 +39,13 @@ var/const/tk_maxrange = 15
 
 /obj/item/attack_tk(mob/user)
 	if(user.stat || !isturf(loc)) return
-	if((TK in user.mutations) && !user.get_active_hand()) // both should already be true to get here
+	if(user.has_organic_effect(/datum/organic_effect/tk) && !user.get_active_hand()) // both should already be true to get here
 		var/obj/item/tk_grab/O = new(src)
 		user.put_in_active_hand(O)
 		O.host = user
 		O.focus_object(src)
 	else
-		WARNING("Strange attack_tk(): TK([TK in user.mutations]) empty hand([!user.get_active_hand()])")
+		WARNING("Strange attack_tk(): TK([user.has_organic_effect(/datum/organic_effect/tk)]) empty hand([!user.get_active_hand()])")
 	return
 
 
@@ -101,7 +101,7 @@ var/const/tk_maxrange = 15
 		if(!host || host != user)
 			qdel(src)
 			return
-		if(!(TK in host.mutations))
+		if(!host.has_organic_effect(/datum/organic_effect/tk))
 			qdel(src)
 			return
 		if(isobj(target) && !isturf(target.loc))

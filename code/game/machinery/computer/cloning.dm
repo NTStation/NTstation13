@@ -357,7 +357,7 @@
 	if (subject.suiciding == 1)
 		scantemp = "<font class='bad'>Subject's brain is not responding to scanning stimuli.</font>"
 		return
-	if (NOCLONE in subject.mutations && src.scanner.scan_level < 2)
+	if (subject.has_organic_effect(/datum/organic_effect/noclone) && src.scanner.scan_level < 2)
 		scantemp = "<font class='bad'>Subject no longer contains the fundamental materials required to create a living clone.</font>"
 		return
 	if ((!subject.ckey) || (!subject.client))
