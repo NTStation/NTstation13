@@ -1002,7 +1002,7 @@ obj/item/toy/cards/deck/syndicate
 
 /obj/item/toy/figure/captain
 	name = "Captain action figure"
-	desc = "A \"Space Life\" brand Captian action figure."
+	desc = "A \"Space Life\" brand Captain action figure."
 	icon_state = "captain"
 	toysay = "Any heads of staff?"
 
