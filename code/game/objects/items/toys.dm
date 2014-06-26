@@ -1106,7 +1106,7 @@ obj/item/toy/cards/deck/syndicate
 	name = "Librarian action figure"
 	desc = "A \"Space Life\" brand Librarian action figure."
 	icon_state = "librarian"
-	toysay = "One day while Andy was masturbating..."
+	toysay = "One day while..."
 
 /obj/item/toy/figure/md
 	name = "Medical Doctor action figure"
@@ -1130,7 +1130,7 @@ obj/item/toy/cards/deck/syndicate
 	name = "Ninja action figure"
 	desc = "A \"Space Life\" brand Ninja action figure."
 	icon_state = "ninja"
-	toysay = "..."
+	toysay = "Oh god! Stop shooting, I'm friendly!"
 
 /obj/item/toy/figure/wizard
 	name = "Wizard action figure"
