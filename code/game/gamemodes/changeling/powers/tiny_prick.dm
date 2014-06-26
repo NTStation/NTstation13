@@ -78,7 +78,7 @@
 /obj/effect/proc_holder/changeling/sting/transformation/can_sting(var/mob/user, var/mob/target)
 	if(!..())
 		return
-	if((HUSK in target.mutations) || !check_dna_integrity(target))
+	if(target.has_organic_effect(/datum/organic_effect/husk) || !check_dna_integrity(target))
 		user << "<span class='warning'>Our sting appears ineffective against its DNA.</span>"
 		return 0
 	return 1
@@ -103,7 +103,7 @@ obj/effect/proc_holder/changeling/sting/extract_dna
 
 /obj/effect/proc_holder/changeling/sting/extract_dna/can_sting(var/mob/user, var/mob/target)
 	if(..())
-		return user.mind.changeling.can_absorb_dna(user, target)
+		return user.mind.changeling.can_extract_sting(user, target)
 
 /obj/effect/proc_holder/changeling/sting/extract_dna/sting_action(var/mob/user, var/mob/target)
 	add_logs(user, target, "stung", object="extraction sting")

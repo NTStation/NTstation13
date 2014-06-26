@@ -108,20 +108,20 @@ var/list/uplink_items = list()
 
 /datum/uplink_item/dangerous/pistol
 	name = "Stechkin Pistol"
-	desc = "A small, easily concealable handgun that uses 10mm magazines and is compatible with silencers."
+	desc = "A small, easily concealable handgun that uses 8-round 10mm magazines and is compatible with silencers."
 	item = /obj/item/weapon/gun/projectile/automatic/pistol
 	cost = 5
 
 /datum/uplink_item/dangerous/smg
 	name = "C-20r Submachine Gun"
-	desc = "A fully-loaded Scarborough Arms-developed submachine gun that fires 12mm automatic rounds with a 20-round magazine."
+	desc = "A fully-loaded Scarborough Arms-developed submachine gun that uses 20-round .45 ACP magazines and is compatible with silencers."
 	item = /obj/item/weapon/gun/projectile/automatic/c20r
 	cost = 7
 	gamemodes = list(/datum/game_mode/nuclear)
 
 /datum/uplink_item/dangerous/machinegun
 	name = "L6 Squad Automatic Weapon"
-	desc = "A traditionally constructed machine gun made by AA-2531. This deadly weapon has a massive 50-round magazine of 7.62�51mm ammunition."
+	desc = "A traditionally constructed machine gun made by AA-2531. This deadly weapon has a massive 50-round magazine of 7.62x51mm ammunition."
 	item = /obj/item/weapon/gun/projectile/automatic/l6_saw
 	cost = 20
 	gamemodes = list(/datum/game_mode/nuclear)
@@ -133,13 +133,6 @@ var/list/uplink_items = list()
 	item = /obj/item/weapon/gun/energy/crossbow
 	cost = 5
 	excludefrom = list(/datum/game_mode/nuclear)
-
-/datum/uplink_item/dangerous/flamethrower
-	name = "Flamethrower"
-	desc = "A flamethrower, fueled by a portion of highly flammable biotoxins stolen previously from Nanotrasen stations. Make a statement by roasting the filth in their own greed. Use with caution."
-	item = /obj/item/weapon/flamethrower/full/tank
-	cost = 6
-	gamemodes = list(/datum/game_mode/nuclear)
 
 /datum/uplink_item/dangerous/sword
 	name = "Energy Sword"
@@ -161,7 +154,7 @@ var/list/uplink_items = list()
 
 /datum/uplink_item/dangerous/viscerators
 	name = "Viscerator Delivery Grenade"
-	desc = "A unique grenade that deploys a swarm of viscerators upon activation, which will chase down and shred any non-operatives in the area."
+	desc = "A unique grenade that deploys a swarm of razor-viscerators upon activation, which will chase down and shred any non-operatives in the area."
 	item = /obj/item/weapon/grenade/spawnergrenade/manhacks
 	cost = 4
 	gamemodes = list(/datum/game_mode/nuclear)
@@ -184,15 +177,16 @@ var/list/uplink_items = list()
 
 /datum/uplink_item/dangerous/mauler
 	name = "Mauler Exosuit"
-	desc = "A massive and incredibly deadly Syndicate exosuit. Features long-range targetting, thrust vectoring, and deployable smoke."
+	desc = "A massive and incredibly deadly Syndicate exosuit. Features long-range targetting, space thrusters, and mounted smoke-screen launchers."
 	item = /obj/mecha/combat/marauder/mauler/loaded
 	cost = 70
 	gamemodes = list(/datum/game_mode/nuclear)
+
 /datum/uplink_item/dangerous/syndieborg
 	name = "Syndicate Cyborg"
-	desc = "A cyborg designed and programmed for systematic extermination of non-Syndicate personnel."
+	desc = "A cyborg designed for extermination and slaved to syndicate agents. Delivered through a single-use bluespace hand teleporter and comes pre-equipped with a brain-loaded MMI."
 	item = /obj/item/weapon/antag_spawner/borg_tele
-	cost = 25
+	cost = 26 //can't buy two with 50tc
 	gamemodes = list(/datum/game_mode/nuclear)
 //for refunding the syndieborg teleporter
 /datum/uplink_item/dangerous/syndieborg/spawn_item()
@@ -212,9 +206,16 @@ var/list/uplink_items = list()
 	cost = 2
 
 /datum/uplink_item/ammo/smg
-	name = "Ammo-12mm"
-	desc = "A 20-round 12mm magazine for use in the C-20r submachine gun."
-	item = /obj/item/ammo_box/magazine/m12mm
+	name = "Ammo-.45 ACP"
+	desc = "A 20-round .45 ACP magazine for use in the C-20r submachine gun. These rounds have a short stunning effect and medium impact damage."
+	item = /obj/item/ammo_box/magazine/c20rm
+	cost = 1
+	gamemodes = list(/datum/game_mode/nuclear)
+
+/datum/uplink_item/ammo/smgincendiary
+	name = "Ammo-.45 Incendiary"
+	desc = "A 10-round .45 incendiary magazine for use in the C-20r submachine gun. These rounds do not stun and are weaker on impact than typical ammo but are coated with incendiary."
+	item = /obj/item/ammo_box/magazine/c20rm/incendiary
 	cost = 1
 	gamemodes = list(/datum/game_mode/nuclear)
 
@@ -223,6 +224,27 @@ var/list/uplink_items = list()
 	desc = "An additional 8-round 10mm magazine for use in the Stetchkin pistol."
 	item = /obj/item/ammo_box/magazine/m10mm
 	cost = 1
+
+/datum/uplink_item/ammo/bullstun
+	name = "Ammo-12g Stun Slug"
+	desc = "An additional 8-round stun slug magazine for use in the Bulldog shotgun. Accurate, reliable, powerful."
+	item = /obj/item/ammo_box/magazine/m12g
+	cost = 2
+	gamemodes = list(/datum/game_mode/nuclear)
+
+/datum/uplink_item/ammo/bullbuck
+	name = "Ammo-12g Buckshot"
+	desc = "An alternative 8-round buckshot magazine for use in the Bulldog shotgun. Front towards enemy."
+	item = /obj/item/ammo_box/magazine/m12g/buckshot
+	cost = 2
+	gamemodes = list(/datum/game_mode/nuclear)
+
+/datum/uplink_item/ammo/bulldragon
+	name = "Ammo-12g Dragon's Breath"
+	desc = "An alternative 8-round dragon's breath magazine for use in the Bulldog shotgun. I'm a fire starter, twisted fire starter!"
+	item = /obj/item/ammo_box/magazine/m12g/dragon
+	cost = 3
+	gamemodes = list(/datum/game_mode/nuclear)
 
 /datum/uplink_item/ammo/machinegun
 	name = "Ammo-7.62�51mm"
@@ -241,7 +263,7 @@ var/list/uplink_items = list()
 	desc = "A syringe disguised as a functional pen, filled with a neuromuscular-blocking drug that renders a target immobile on injection and makes them seem dead to observers. \
 	Side effects of the drug include noticeable drooling. The pen holds one dose of paralyzing agent, and cannot be refilled."
 	item = /obj/item/weapon/pen/paralysis
-	cost = 3
+	cost = 4
 	excludefrom = list(/datum/game_mode/nuclear)
 
 /datum/uplink_item/stealthy_weapons/soap
@@ -258,8 +280,8 @@ var/list/uplink_items = list()
 	cost = 3
 
 /datum/uplink_item/stealthy_weapons/silencer
-	name = "Stetchkin Silencer"
-	desc = "Fitted for use on the Stetchkin pistol, this silencer will make its shots quieter when equipped onto it."
+	name = "Syndicate Silencer"
+	desc = "A universal small-arms silencer favored by stealth operatives, this will make shots quieter when equipped onto any low-caliber weapon."
 	item = /obj/item/weapon/silencer
 	cost = 2
 
@@ -396,7 +418,6 @@ var/list/uplink_items = list()
 	You can wrench the bomb down to prevent removal. The crew may attempt to defuse the bomb."
 	item = /obj/item/device/sbeacondrop/bomb
 	cost = 5
-	excludefrom = list(/datum/game_mode/traitor/double_agents)
 
 /datum/uplink_item/device_tools/syndicate_detonator
 	name = "Syndicate Detonator"
@@ -418,6 +439,56 @@ var/list/uplink_items = list()
 	desc = "An incredibly useful personal shield projector, capable of reflecting energy projectiles and defending against other attacks."
 	item = /obj/item/weapon/shield/energy
 	cost = 8
+	gamemodes = list(/datum/game_mode/nuclear)
+
+// STOLEN TECH
+
+/datum/uplink_item/stolen
+	category = "Stolen Tech"
+
+/datum/uplink_item/stolen/pinpointer
+	name = "Nuclear Authentication Disk Pinpointer"
+	desc = "A stolen Nanotrasen pinpointer that, when activated, will pinpoint the approximate location of any nuclear authentication disks within 10km. Don't lose this."
+	item = /obj/item/weapon/pinpointer
+	cost = 3
+	excludefrom = list(/datum/game_mode/nuclear)
+
+/datum/uplink_item/stolen/magboots
+	name = "Stolen Magboots"
+	desc = "A pair of magnetic boots that assist with freer movement in space or on-station during gravitational generator failures. \
+	These reverse-engineered knockoffs of Nanotrasen's 'Advanced Magboots' slow you down in simulated-gravity environments much like the standard issue variety."
+	item = /obj/item/clothing/shoes/magboots/syndie
+	cost = 2
+	gamemodes = list(/datum/game_mode/nuclear)
+
+/datum/uplink_item/stolen/flamethrower
+	name = "Flamethrower"
+	desc = "A flamethrower, fueled by highly flammable biotoxins stolen previously from Nanotrasen stations. Make a statement by roasting the filth in their own greed. \
+	Caution: Recommended only to be used by agents familiar with plasma and its properties. \
+	Full tank included with purchase!"
+	item = /obj/item/weapon/flamethrower/full/tank
+	cost = 6
+	gamemodes = list(/datum/game_mode/nuclear)
+
+/datum/uplink_item/stolen/plasmatank
+	name = "Stolen Plasma Tank"
+	desc = "A stolen tank full of a highly flammable gas known as 'plasma'. Our agents have recovered this tank for careful testing and analysis, and turning it back on Nanotrasen is the perfect 'trial by fire.'"
+	item = /obj/item/weapon/tank/plasma/full
+	cost = 3
+	gamemodes = list(/datum/game_mode/nuclear)
+
+/datum/uplink_item/stolen/rcd
+	name = "Stolen Rapid-Construction Device"
+	desc = "A stolen RCD that uses modified compressed matter cartridges to rapidly assemble or disassemble basic structures such as walls or airlocks."
+	item = /obj/item/weapon/rcd
+	cost = 6
+	gamemodes = list(/datum/game_mode/nuclear)
+
+/datum/uplink_item/stolen/mcmc
+	name = "Modified Compressed Matter Cartridge"
+	desc = "A stolen compressed matter cartridge that has been modified to completely fill an RCD to its limit. Is it safe? Not our problem!"
+	item = /obj/item/weapon/rcd_ammo/syndie
+	cost = 3 //RCD + full ammo mag costs 9tc
 	gamemodes = list(/datum/game_mode/nuclear)
 
 // IMPLANTS

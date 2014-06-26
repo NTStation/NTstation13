@@ -77,7 +77,7 @@ MASS SPECTROMETER
 /obj/item/device/healthanalyzer/attack(mob/living/M as mob, mob/living/user as mob)
 
 	// Clumsiness/brain damage check
-	if ((CLUMSY in user.mutations || user.getBrainLoss() >= 60) && prob(50))
+	if (user.has_organic_effect(/datum/organic_effect/clumsy) || (user.getBrainLoss() >= 60) && prob(50))
 		user << text("<span class='notice'>You stupidly try to analyze the floor's vitals!</span>")
 		user.visible_message(text("<span class='alert'>[user] has analyzed the floor's vitals!</span>"))
 		user.show_message(text("<span class='notice'>Analyzing Results for The floor:\n\t Overall Status: Healthy"), 1)

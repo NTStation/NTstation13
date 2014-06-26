@@ -246,7 +246,7 @@
 	can_roll = 0
 
 /obj/item/clothing/under/schoolgirl
-	name = "schoolgirl uniform"
+	name = "blue schoolgirl uniform"
 	desc = "It's just like one of my Japanese animes!"
 	icon_state = "schoolgirl"
 	item_state = "schoolgirl"
@@ -254,6 +254,24 @@
 	body_parts_covered = CHEST|GROIN|ARMS
 	fitted = 0
 	can_roll = 0
+
+/obj/item/clothing/under/schoolgirl/red
+	name = "red schoolgirl uniform"
+	icon_state = "schoolgirlred"
+	item_state = "schoolgirlred"
+	item_color = "schoolgirlred"
+
+/obj/item/clothing/under/schoolgirl/green
+	name = "green schoolgirl uniform"
+	icon_state = "schoolgirlgreen"
+	item_state = "schoolgirlgreen"
+	item_color = "schoolgirlgreen"
+
+/obj/item/clothing/under/schoolgirl/orange
+	name = "orange schoolgirl uniform"
+	icon_state = "schoolgirlorange"
+	item_state = "schoolgirlorange"
+	item_color = "schoolgirlorange"
 
 /obj/item/clothing/under/overalls
 	name = "laborer's overalls"
@@ -432,6 +450,17 @@
 	icon_state = "khaki"
 	item_state = "khaki"
 	item_color = "khaki"
+	gender = PLURAL
+	body_parts_covered = GROIN|LEGS
+	fitted = 0
+	can_roll = 0
+
+/obj/item/clothing/under/camo
+	name = "camouflage pants"
+	desc = "A pair of woodland camouflage pants, not good for camouflage in this enviornment."
+	icon_state = "camopants"
+	item_state = "camopants"
+	item_color = "camopants"
 	gender = PLURAL
 	body_parts_covered = GROIN|LEGS
 	fitted = 0

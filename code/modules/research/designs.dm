@@ -1624,6 +1624,7 @@ datum/design/largecrossbow
 	build_type = PROTOLATHE
 	materials = list("$metal" = 8000, "$glass" = 4000, "$uranium" = 3750, "$silver" = 2000)
 	build_path = /obj/item/weapon/gun/energy/crossbow/largecrossbow
+	locked = 1
 
 datum/design/temp_gun
 	name = "Temperature Gun"
@@ -1653,16 +1654,6 @@ datum/design/large_grenade
 	materials = list("$metal" = 1800)
 	reliability = 79
 	build_path = /obj/item/weapon/grenade/chem_grenade/large
-
-datum/design/glock
-	name = "9mm Handgun"
-	desc = "A medium-capacity ballistic handgun built on a classic design that uses light ammunition."
-	id = "glock"
-	req_tech = list("combat" = 4, "materials" = 3)
-	build_type = PROTOLATHE
-	materials = list("$metal" = 6000, "$glass" = 3750, "$silver" = 2000)
-	build_path = /obj/item/weapon/gun/projectile/automatic/deagle/glock
-	locked = 1
 
 datum/design/m1911
 	name = ".45 Handgun"
@@ -1696,22 +1687,13 @@ datum/design/xray
 
 datum/design/ionrifle
 	name = "Ion Rifle"
-	desc = "How to dismantle a cyborg : The gun."
+	desc = "A man-portable anti-armor weapon designed to disable mechanical threats at range."
 	id = "ionrifle"
 	req_tech = list("combat" = 5, "materials" = 4, "magnets" = 4)
 	build_type = PROTOLATHE
 	materials = list("$silver" = 20000, "$metal" = 10000, "$uranium" = 5000, "$glass" = 5000)
 	build_path = /obj/item/weapon/gun/energy/ionrifle
 	locked = 1
-
-datum/design/mag_glock
-	name = "Glock Magazine (9mm)"
-	desc = "A 12-rnd magazine of 9mm ammunition for the glock handgun."
-	id = "mag_glock"
-	req_tech = list("combat" = 4, "materials" = 3)
-	build_type = PROTOLATHE
-	materials = list("$metal" = 3750)
-	build_path = /obj/item/ammo_box/magazine/m9mm
 
 datum/design/mag_m1911
 	name = "M1911 Magazine (.45)"
@@ -1731,14 +1713,42 @@ datum/design/mag_smg
 	materials = list("$metal" = 3750)
 	build_path = /obj/item/ammo_box/magazine/msmg9mm
 
-datum/design/stunshell
-	name = "Stun Shell"
-	desc = "A stunning shell for a shotgun."
-	id = "stunshell"
+datum/design/mag_smgincendiary
+	name = "Submachine Gun Magazine (9mm incendiary)"
+	desc = "A 10-rnd magazine of 9mm plasma-coated ammunition for the prototype submachine gun."
+	id = "mag_smgincendiary"
+	req_tech = list("combat" = 4, "materials" = 5, "syndicate" = 2)
+	build_type = PROTOLATHE
+	materials = list("$metal" = 3750, "$plasma" = 1000)
+	build_path = /obj/item/ammo_box/magazine/msmg9mm/incendiary
+
+datum/design/stunslug
+	name = "Stun Slug"
+	desc = "A stunning, electrified slug for a shotgun."
+	id = "stunslug"
 	req_tech = list("combat" = 3, "materials" = 3)
 	build_type = PROTOLATHE
 	materials = list("$metal" = 1000)
+	build_path = /obj/item/ammo_casing/shotgun/stunslug
+
+datum/design/stunshell
+	name = "Stun Shell"
+	desc = "A stunning shell of rubber pellets for a shotgun."
+	id = "stunshell"
+	req_tech = list("combat" = 4, "materials" = 3)
+	build_type = PROTOLATHE
+	materials = list("$metal" = 1500)
 	build_path = /obj/item/ammo_casing/shotgun/stunshell
+
+datum/design/dragonshell
+	name = "Dragon's Breath Shell"
+	desc = "A shell full of flammable pellets for a shotgun."
+	id = "dragonshell"
+	req_tech = list("combat" = 4, "materials" = 5, "syndicate" = 2)
+	build_type = PROTOLATHE
+	materials = list("$metal" = 1500, "$plasma" = 100)
+	build_path = /obj/item/ammo_casing/shotgun/dragon
+
 
 /////////////////////////////////////////
 /////////////////Mining//////////////////
@@ -1861,7 +1871,7 @@ datum/design/security_hud
 	build_type = PROTOLATHE
 	materials = list("$metal" = 50, "$glass" = 50)
 	build_path = /obj/item/clothing/glasses/hud/security
-	
+
 datum/design/security_hud_night
 	name = "Night Vision Security HUD"
 	desc = "A heads-up display which provides id data and vision in complete darkness."
@@ -1950,21 +1960,12 @@ datum/design/welding_mask
 
 datum/design/mesons
 	name = "Optical Meson Scanners"
-	desc = "Used for seeing walls, floors, and stuff through anything."
+	desc = "Used by engineering and mining staff to see basic structural and terrain layouts through walls, regardless of lighting condition."
 	id = "mesons"
-	req_tech = list("magnets" = 2, "engineering" = 2)
-	build_type = PROTOLATHE
-	materials = list("$metal" = 50, "$glass" = 50)
-	build_path = /obj/item/clothing/glasses/meson
-
-datum/design/advanced_mesons
-	name = "Advanced Optical Meson Scanner"
-	desc = "More powerful than your standard mesons, these ones make everything appear to be lit extremely brightly."
-	id = "advanced_mesons"
-	req_tech = list("magnets" = 4, "engineering" = 4)
+	req_tech = list("materials" = 2, "magnets" = 3, "engineering" = 4)
 	build_type = PROTOLATHE
 	materials = list("$metal" = 200, "$glass" = 200, "$plasma" = 100)
-	build_path = /obj/item/clothing/glasses/meson/advanced
+	build_path = /obj/item/clothing/glasses/meson
 
 datum/design/night_vision_goggles
 	name = "Night Vision Goggles"

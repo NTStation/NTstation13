@@ -20,7 +20,7 @@
 	if(back)
 		. += back.slowdown
 
-	if(FAT in mutations)
+	if(has_organic_effect(/datum/organic_effect/fat))
 		. += 1.5
 	if(bodytemperature < 283.222)
 		. += (283.222 - bodytemperature) / 10 * 1.75
@@ -71,3 +71,12 @@
 	if(isobj(shoes) && (shoes.flags&NOSLIP) && !(lube&GALOSHES_DONT_HELP))
 		return 0
 	.=..()
+
+/mob/living/carbon/human/mob_has_gravity()
+	. = ..()
+	if(!.)
+		if(mob_negates_gravity())
+			. = 1
+
+/mob/living/carbon/human/mob_negates_gravity()
+	return shoes && shoes.negates_gravity()

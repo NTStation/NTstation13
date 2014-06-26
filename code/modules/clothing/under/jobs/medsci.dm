@@ -96,21 +96,21 @@
 	armor = list(melee = 0, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 10, rad = 0)
 
 /obj/item/clothing/under/rank/medical/blue
-	name = "medical scrubs"
+	name = "blue medical scrubs"
 	desc = "It's made of a special fiber that provides minor protection against biohazards. This one is in baby blue."
 	icon_state = "scrubsblue"
 	item_color = "scrubsblue"
 	can_roll = 0
 
 /obj/item/clothing/under/rank/medical/green
-	name = "medical scrubs"
+	name = "green medical scrubs"
 	desc = "It's made of a special fiber that provides minor protection against biohazards. This one is in dark green."
 	icon_state = "scrubsgreen"
 	item_color = "scrubsgreen"
 	can_roll = 0
 
 /obj/item/clothing/under/rank/medical/purple
-	name = "medical scrubs"
+	name = "purple medical scrubs"
 	desc = "It's made of a special fiber that provides minor protection against biohazards. This one is in deep purple."
 	icon_state = "scrubspurple"
 	item_color = "scrubspurple"

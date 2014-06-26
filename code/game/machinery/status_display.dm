@@ -267,6 +267,19 @@
 					set_picture("ai_sal")
 				if("Red Glow")
 					set_picture("ai_hal")
+				if("Little Happy")
+					set_picture("ai_kindahappy")
+				if("Dead")
+					set_picture("ai_dead")
+				if("Tongue")
+					set_picture("ai_tongue")
+				if("Loading")
+					set_picture("ai_loading")
+				if("Angry")
+					set_picture("ai_angry")
+				if("Love")
+					set_picture("ai_heart")
+
 
 			return
 

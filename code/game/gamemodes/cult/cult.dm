@@ -15,7 +15,7 @@
 	if(istype(mind.current, /mob/living/carbon/human) && (mind.assigned_role in list("Captain", "Chaplain")))	return 0
 	if(isloyal(mind.current))
 		return 0
-	if(game_is_cult_mode(ticker.mode))
+	if(gamemode_is("cult"))
 		if(mind.current == ticker.mode.sacrifice_target)	return 0
 	return 1
 
@@ -139,7 +139,7 @@
 	if (mob.mind)
 		if (mob.mind.assigned_role == "Clown")
 			mob << "Your training has allowed you to overcome your clownish nature, allowing you to wield weapons without harming yourself."
-			mob.mutations.Remove(CLUMSY)
+			mob.remove_organic_effect(/datum/organic_effect/clumsy)
 
 
 	var/obj/item/weapon/paper/talisman/supply/T = new(mob)

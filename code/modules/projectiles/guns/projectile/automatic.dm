@@ -19,7 +19,7 @@
 
 /obj/item/weapon/gun/projectile/automatic/mini_uzi
 	name = "Uzi"
-	desc = "A lightweight, fast firing gun, for when you want someone dead. Uses .45 rounds."
+	desc = "A lightweight, fast firing gun, for when you really want someone dead. Uses .45 rounds."
 	icon_state = "mini-uzi"
 	w_class = 3.0
 	origin_tech = "combat=5;materials=2;syndicate=8"
@@ -27,20 +27,18 @@
 
 /obj/item/weapon/gun/projectile/automatic/c20r
 	name = "\improper C-20r SMG"
-	desc = "A lightweight, fast firing gun, for when you REALLY need someone dead. Uses 12mm rounds. Has a 'Scarborough Arms - Per falcis, per pravitas' buttstamp"
+	desc = "A lightweight, compact bullpup SMG. Uses .45 ACP rounds in medium-capacity magazines and has a threaded barrel for silencers. Has a 'Scarborough Arms - Per falcis, per pravitas' buttstamp."
 	icon_state = "c20r"
 	item_state = "c20r"
 	w_class = 3.0
 	origin_tech = "combat=5;materials=2;syndicate=8"
-	mag_type = /obj/item/ammo_box/magazine/m12mm
+	mag_type = /obj/item/ammo_box/magazine/c20rm
 	fire_sound = 'sound/weapons/Gunshot_smg.ogg'
-
 
 /obj/item/weapon/gun/projectile/automatic/c20r/New()
 	..()
 	update_icon()
 	return
-
 
 /obj/item/weapon/gun/projectile/automatic/c20r/afterattack(atom/target as mob|obj|turf|area, mob/living/user as mob|obj, flag)
 	..()
@@ -50,17 +48,27 @@
 		alarmed = 1
 	return
 
+/obj/item/weapon/gun/projectile/automatic/c20r/attack_hand(mob/user as mob)
+	if(loc == user)
+		if(silenced)
+			silencer_attack_hand(user)
+	..()
+
+/obj/item/weapon/gun/projectile/automatic/c20r/attackby(obj/item/I as obj, mob/user as mob)
+	if(istype(I, /obj/item/weapon/silencer))
+		silencer_attackby(I,user)
+	..()
 
 /obj/item/weapon/gun/projectile/automatic/c20r/update_icon()
 	..()
-	icon_state = "c20r[magazine ? "-[Ceiling(get_ammo(0)/4)*4]" : ""][chambered ? "" : "-e"]"
+	icon_state = "c20r[silenced ? "-silencer" : ""][magazine ? "-[Ceiling(get_ammo(0)/4)*4]" : ""][chambered ? "" : "-e"]"
 	return
 
 
 
 /obj/item/weapon/gun/projectile/automatic/l6_saw
 	name = "\improper L6 SAW"
-	desc = "A rather traditionally made light machine gun with a pleasantly lacquered wooden pistol grip. Has 'Aussec Armoury- 2531' engraved on the reciever"
+	desc = "A heavily modified light machine gun with a tactical plasteel frame resting on a rather traditionally-made ballistic weapon. Has 'Aussec Armoury - 2531' engraved on the reciever, as well as '7.62x51mm'."
 	icon_state = "l6closed100"
 	item_state = "l6closedmag"
 	w_class = 5
@@ -110,6 +118,42 @@
 		user << "<span class='notice'>[src]'s cover is closed! You can't insert a new mag!</span>"
 		return
 	..()
+
+
+/obj/item/weapon/gun/projectile/automatic/bulldog
+	name = "\improper Bulldog shotgun"
+	desc = "A compact, mag-fed semi-automatic shotgun for combat in narrow corridors. Compatible only with specialized magazines."
+	icon_state = "bulldog"
+	item_state = "bulldog"
+	w_class = 3.0
+	origin_tech = "combat=5;materials=4;syndicate=6"
+	mag_type = /obj/item/ammo_box/magazine/m12g
+	fire_sound = 'sound/weapons/Gunshot.ogg'
+
+/obj/item/weapon/gun/projectile/automatic/bulldog/New()
+	..()
+	update_icon()
+	return
+
+/obj/item/weapon/gun/projectile/automatic/bulldog/proc/update_magazine()
+	if(magazine)
+		src.overlays = 0
+		overlays += "[magazine.icon_state]"
+		return
+
+/obj/item/weapon/gun/projectile/automatic/bulldog/update_icon()
+	src.overlays = 0
+	update_magazine()
+	icon_state = "bulldog[chambered ? "" : "-e"]"
+	return
+
+/obj/item/weapon/gun/projectile/automatic/bulldog/afterattack(atom/target as mob|obj|turf|area, mob/living/user as mob|obj, flag)
+	..()
+	if(!chambered && !get_ammo() && !alarmed)
+		playsound(user, 'sound/weapons/smg_empty_alarm.ogg', 40, 1)
+		update_icon()
+		alarmed = 1
+	return
 
 /obj/item/weapon/gun/projectile/automatic/tommygun
 	name = "tommy gun"

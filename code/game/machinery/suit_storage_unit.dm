@@ -48,6 +48,11 @@
 	HELMET_TYPE = /obj/item/clothing/head/helmet/space/rig
 	MASK_TYPE = /obj/item/clothing/mask/breath
 
+/obj/machinery/suit_storage_unit/medical
+	SUIT_TYPE = /obj/item/clothing/suit/space/rig/medical
+	HELMET_TYPE = /obj/item/clothing/head/helmet/space/rig/medical
+	MASK_TYPE = /obj/item/clothing/mask/breath
+
 /obj/machinery/suit_storage_unit/ce
 	SUIT_TYPE = /obj/item/clothing/suit/space/rig/elite
 	HELMET_TYPE = /obj/item/clothing/head/helmet/space/rig/elite

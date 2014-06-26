@@ -38,7 +38,7 @@
 			if (M.stat == 2)
 				user << "<span class='warning'>[M] has died. There is nothing more you can do.</span>"
 				return
-			user.visible_message("<span class='success'>[user] applies the [src] on [M].</span>", "<span class='success'>You apply the [src] on [M]</span>")
+			user.visible_message("<span class='green'>[user] applies the [src] on [M].</span>", "<span class='green'>You apply the [src] on [M]</span>")
 		else
 			var/t_himself = "itself"
 			if (user.gender == MALE)
@@ -47,7 +47,7 @@
 				t_himself = "herself"
 			user.visible_message("<span class='notice'>[user] starts to apply the [src] on [t_himself]...</span>", "<span class='notice'>You begin applying the [src] on yourself...</span>")
 			if(!do_mob(user, M, 60))	return
-			user.visible_message("<span class='success'>[user] applies the [src] on [t_himself].</span>", "<span class='success'>You apply the [src] on yourself.</span>")
+			user.visible_message("<span class='green'>[user] applies the [src] on [t_himself].</span>", "<span class='green'>You apply the [src] on yourself.</span>")
 
 	if (istype(M, /mob/living/carbon/human))
 

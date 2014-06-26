@@ -466,17 +466,18 @@ var/global/list/uneatable = list(
 
 
 /obj/machinery/singularity/narsie //Moving narsie to a child object of the singularity so it can be made to function differently. --NEO
+	gender = NEUTER
 	name = "Nar-sie's Avatar"
 	desc = "Your mind begins to bubble and ooze as it tries to comprehend what it sees."
 	icon = 'icons/obj/magic_terror.dmi'
 	pixel_x = -89
 	pixel_y = -85
 	current_size = 9 //It moves/eats like a max-size singulo, aside from range. --NEO
-	contained = 0 //Are we going to move around?
-	dissipate = 0 //Do we lose energy over time?
-	move_self = 1 //Do we move on our own?
-	grav_pull = 5 //How many tiles out do we pull?
-	consume_range = 6 //How many tiles out do we eat
+	contained = 0
+	dissipate = 0
+	move_self = 1
+	grav_pull = 5
+	consume_range = 6
 
 /obj/machinery/singularity/narsie/large
 	name = "Nar-Sie"
@@ -485,16 +486,28 @@ var/global/list/uneatable = list(
 	pixel_x = -236
 	pixel_y = -256
 	current_size = 12
-	move_self = 1 //Do we move on our own?
 	grav_pull = 10
-	consume_range = 12 //How many tiles out do we eat
+	consume_range = 12
+
 
 /obj/machinery/singularity/narsie/large/New()
 	..()
 	world << "<font size='15' color='red'><b>NAR-SIE HAS RISEN</b></font>"
 	world << pick(sound('sound/hallucinations/im_here1.ogg'), sound('sound/hallucinations/im_here2.ogg'))
+	spawn_animation()
 	if(emergency_shuttle)
 		emergency_shuttle.incall(0.3) // Cannot recall
+
+
+/obj/machinery/singularity/narsie/proc/spawn_animation()
+	icon = 'icons/obj/narsie_spawn_anim.dmi'
+	src.dir = SOUTH
+	move_self = 0
+	flick("narsie_spawn_anim", src)
+	sleep(11) //0.5 longer than the animation.
+	move_self = 1
+	icon = initial(icon)
+
 
 /obj/machinery/singularity/narsie/process()
 	eat()
@@ -553,7 +566,7 @@ var/global/list/uneatable = list(
 /obj/machinery/singularity/narsie/ex_act() //No throwing bombs at it either. --NEO
 	return
 
-/obj/machinery/singularity/narsie/proc/pickcultist() //Narsie rewards his cultists with being devoured first, then picks a ghost to follow. --NEO
+/obj/machinery/singularity/narsie/proc/pickcultist() //Narsie rewards it's cultists with being devoured first, then picks a ghost to follow. --NEO
 	var/list/cultists = list()
 	for(var/datum/mind/cult_nh_mind in ticker.mode.cult)
 		if(!cult_nh_mind.current)
@@ -597,7 +610,7 @@ var/global/list/uneatable = list(
 	if(ishuman(target))
 		target << "\red <b>NAR-SIE HUNGERS FOR YOUR SOUL</b>"
 	else
-		target << "\red <b>NAR-SIE HAS CHOSEN YOU TO LEAD HIM TO HIS NEXT MEAL</b>"
+		target << "\red <b>NAR-SIE HAS CHOSEN YOU TO LEAD THEM TO THEIR NEXT MEAL</b>"
 
 //Wizard narsie
 

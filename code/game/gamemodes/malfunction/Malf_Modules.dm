@@ -290,7 +290,7 @@
 	set name = "Hack intercept"
 	src.verbs -= /mob/living/silicon/ai/proc/interhack
 
-	if(game_is_malf_mode(ticker.mode))
+	if(gamemode_is("AI malfunction"))
 		var/datum/game_mode/malfunction/Malf = ticker.mode
 		Malf.hack_intercept()
 		src << "<span class='notice'>Status update intercepted and modified.</span>"

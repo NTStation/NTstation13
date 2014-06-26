@@ -236,7 +236,7 @@ Auto Patrol: []"},
 					var/mob/living/carbon/M = target
 					var/maxstuns = 4
 					if(istype(M, /mob/living/carbon/human))
-						if(M.stuttering < 10 && (!(HULK in M.mutations)))
+						if(M.stuttering < 10 && (!M.has_organic_effect(/datum/organic_effect/hulk)))
 							M.stuttering = 10
 						M.Stun(10)
 						M.Weaken(10)
@@ -272,9 +272,9 @@ Auto Patrol: []"},
 
 			if(iscarbon(target) && target.canBeHandcuffed())
 				if(!target.handcuffed && !arrest_type)
-					playsound(loc, 'sound/weapons/handcuffs.ogg', 30, 1, -2)
+					playsound(src.loc, 'sound/weapons/cablecuff.ogg', 30, 1, -2)
 					mode = BOT_ARREST
-					visible_message("\red <B>[src] is trying to put handcuffs on [target]!</B>")
+					visible_message("\red <B>[src] is trying to restrain [src.target] with zipties!</B>")
 
 					spawn(60)
 						if(get_dist(src, target) <= 1)
@@ -282,7 +282,7 @@ Auto Patrol: []"},
 								return
 
 							if(istype(target,/mob/living/carbon))
-								target.handcuffed = new /obj/item/weapon/handcuffs(target)
+								target.handcuffed = new /obj/item/weapon/handcuffs/cyborg(target)
 								target.update_inv_handcuffed(0)	//update the handcuffs overlay
 
 							mode = BOT_IDLE

@@ -298,7 +298,7 @@ Auto Patrol: []"},
 					var/mob/living/carbon/M = target
 					var/maxstuns = 4
 					if (istype(M, /mob/living/carbon/human))
-						if (M.stuttering < 10 && (!(HULK in M.mutations))  /*&& (!istype(M:wear_suit, /obj/item/clothing/suit/judgerobe))*/)
+						if (M.stuttering < 10 && (!M.has_organic_effect(/datum/organic_effect/hulk))  /*&& (!istype(M:wear_suit, /obj/item/clothing/suit/judgerobe))*/)
 							M.stuttering = 10
 						M.Stun(10)
 						M.Weaken(10)
@@ -340,9 +340,9 @@ Auto Patrol: []"},
 
 			if(iscarbon(target) && target.canBeHandcuffed())
 				if (!target.handcuffed && !arrest_type)
-					playsound(loc, 'sound/weapons/handcuffs.ogg', 30, 1, -2)
+					playsound(src.loc, 'sound/weapons/cablecuff.ogg', 30, 1, -2)
 					mode = BOT_ARREST
-					visible_message("\red <B>[src] is trying to put handcuffs on [target]!</B>")
+					visible_message("\red <B>[src] is trying to restrain [src.target] with zipties!</B>")
 
 					spawn(60)
 						if (get_dist(src, target) <= 1)

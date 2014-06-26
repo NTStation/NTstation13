@@ -13,7 +13,6 @@
 	caliber = "357"
 	projectile_type = /obj/item/projectile/bullet/suffocationbullet
 
-
 /obj/item/ammo_casing/a666
 	desc = "A .666 bullet casing."
 	caliber = "357"
@@ -37,62 +36,75 @@
 	caliber = "9mm"
 	projectile_type = /obj/item/projectile/bullet/weakbullet3
 
+/obj/item/ammo_casing/c9mm/incendiary
+	desc = "A 9mm incendiary bullet casing."
+	projectile_type = /obj/item/projectile/bullet/incendiary/mech
+
 
 /obj/item/ammo_casing/c45
 	desc = "A .45 bullet casing."
 	caliber = ".45"
 	projectile_type = /obj/item/projectile/bullet/midbullet
 
-
-/obj/item/ammo_casing/a12mm
-	desc = "A 12mm bullet casing."
-	caliber = "12mm"
-	projectile_type = /obj/item/projectile/bullet/midbullet
+/obj/item/ammo_casing/c45/incendiary
+	desc = "A .45 incendiary bullet casing."
+	projectile_type = /obj/item/projectile/bullet/incendiary/mid
 
 
 /obj/item/ammo_casing/shotgun
-	name = "shotgun slug"
-	desc = "A 12 gauge slug."
+	name = "shotgun slug"							//classic
+	desc = "A 12 gauge lead slug for shotguns."
 	icon_state = "blshell"
 	caliber = "shotgun"
 	projectile_type = /obj/item/projectile/bullet
 	m_amt = 6500
 
-
 /obj/item/ammo_casing/shotgun/buckshot
-	name = "shotgun shell"
-	desc = "A 12 gauge shell."
+	name = "buckshot shell"							 //combat
+	desc = "A 12 gauge buckshot shell for shotguns."
 	icon_state = "gshell"
 	projectile_type = /obj/item/projectile/bullet/pellet
 	pellets = 5
 	variance = 0.8
 
-
 /obj/item/ammo_casing/shotgun/beanbag
-	name = "beanbag shell"
-	desc = "A weak beanbag shell."
+	name = "beanbag slug"							//bartender
+	desc = "A weak beanbag slug for shotguns."
 	icon_state = "bshell"
 	projectile_type = /obj/item/projectile/bullet/weakbullet
 	m_amt = 250
 
-
-/obj/item/ammo_casing/shotgun/stunshell
-	name = "stun shell"
-	desc = "A stunning shell."
+/obj/item/ammo_casing/shotgun/stunslug
+	name = "stun slug"								//protolathe beanbag upgrade
+	desc = "An electrified, stunning taser slug for shotguns."
 	icon_state = "stunshell"
-	projectile_type = /obj/item/projectile/bullet/stunshot
+	projectile_type = /obj/item/projectile/bullet/stunslug
 	m_amt = 200
 
+/obj/item/ammo_casing/shotgun/stunshell
+	name = "stun shell"								//riot control
+	desc = "A stunning shell of weak rubber pellets for a shotgun."
+	icon_state = "stunshell"
+	projectile_type = /obj/item/projectile/bullet/weakbullet
+	pellets = 5
+	variance = 0.8
 
 /obj/item/ammo_casing/shotgun/incendiary
-	name = "incendiary shell"
-	desc = "An incendiary shell"
+	name = "incendiary shell"						//hacked autolathe
+	desc = "An incendiary slug."
 	icon_state = "ishell"
 	projectile_type = /obj/item/projectile/bullet/incendiary/shell
 
+/obj/item/ammo_casing/shotgun/dragon
+	name = "dragon's breath shell"					//syndie chaos
+	desc = "A dragon's breath shell."
+	icon_state = "ishell"
+	projectile_type = /obj/item/projectile/bullet/incendiary/mech
+	pellets = 5
+	variance = 0.8
 
 /obj/item/ammo_casing/shotgun/dart
-	name = "shotgun dart"
+	name = "shotgun dart" 							//hacked autolathe
 	desc = "A dart for use in shotguns. Can be injected with up to 30 units of any chemical."
 	icon_state = "cshell"
 	projectile_type = /obj/item/projectile/bullet/dart

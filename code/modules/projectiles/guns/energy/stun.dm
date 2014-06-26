@@ -1,6 +1,6 @@
 /obj/item/weapon/gun/energy/taser
 	name = "taser gun"
-	desc = "A small, low capacity gun used for non-lethal takedowns."
+	desc = "A low-capacity, energy-based stun gun used by security teams to subdue targets at range."
 	icon_state = "taser"
 	item_state = null	//so the human update icon uses the icon_state instead.
 	ammo_type = list(/obj/item/ammo_casing/energy/electrode)
@@ -8,9 +8,9 @@
 
 /obj/item/weapon/gun/energy/taser/cyborg
 	name = "taser gun"
-	desc = "A small, low capacity gun used for non-lethal takedowns."
-	icon_state = "taser"
+	desc = "An integrated taser that draws directly from a cyborg's power cell. Used by security cyborgs and defense turrets to subdue humanoids at range. Integrated into the weapon is a limiter to prevent the cyborg's power cell from overheating."
 	fire_sound = 'sound/weapons/Taser.ogg'
+	icon_state = "taser"
 	cell_type = "/obj/item/weapon/stock_parts/cell/secborg"
 	var/charge_tick = 0
 	var/recharge_time = 10 //Time it takes for shots to recharge (in ticks)
@@ -43,7 +43,7 @@
 
 /obj/item/weapon/gun/energy/stunrevolver
 	name = "stun revolver"
-	desc = "A high-tech revolver that fires stun cartridges. The stun cartridges can be recharged using a conventional energy weapon recharger."
+	desc = "A high-tech revolver that fires disposable, compressed stun cartidges. The stun cartridges can be recharged using a conventional energy weapon recharger and their compact size allows for more shots over the standard taser before the cell needs recharging."
 	icon_state = "stunrevolver"
 	origin_tech = "combat=3;materials=3;powerstorage=2"
 	ammo_type = list(/obj/item/ammo_casing/energy/electrode/gun)
@@ -53,7 +53,7 @@
 
 /obj/item/weapon/gun/energy/crossbow
 	name = "mini energy-crossbow"
-	desc = "A weapon favored by many of the syndicates stealth specialists."
+	desc = "A weapon favored by many syndicate stealth specialists."
 	icon_state = "crossbow"
 	w_class = 2.0
 	item_state = "crossbow"

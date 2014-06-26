@@ -30,6 +30,7 @@
 
 /obj/item/weapon/gun/proc/shoot_with_empty_chamber(mob/living/user as mob|obj)
 	user << "<span class='warning'>*click*</span>"
+	playsound(user, 'sound/weapons/emptyclick.ogg', 40, 1)
 	return
 
 /obj/item/weapon/gun/proc/shoot_live_shot(mob/living/user as mob|obj, var/pointblank = 0, var/mob/pbtarget = null)
@@ -62,7 +63,7 @@
 	if(clumsy_check)
 		if(istype(user, /mob/living))
 			var/mob/living/M = user
-			if ((CLUMSY in M.mutations) && prob(40))
+			if (M.has_organic_effect(/datum/organic_effect/clumsy) && prob(40))
 				M << "<span class='danger'>You shoot yourself in the foot with \the [src]!</span>"
 				afterattack(user, user)
 				M.drop_item()
@@ -75,7 +76,7 @@
 	if(trigger_guard)
 		if(istype(user, /mob/living))
 			var/mob/living/M = user
-			if (HULK in M.mutations)
+			if (M.has_organic_effect(/datum/organic_effect/hulk))
 				M << "<span class='notice'>Your meaty finger is much too large for the trigger guard!</span>"
 				return
 		if(ishuman(user))

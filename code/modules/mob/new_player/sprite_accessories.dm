@@ -69,8 +69,12 @@
 		icon_state = "hair_vlong"
 
 	long_over_eye
-		name = "Over eye"
+		name = "Over-eye Long"
 		icon_state = "hair_longovereye"
+
+	short_over_eye
+		name = "Over-eye Short"
+		icon_state = "hair_shortovereye"
 
 	longest
 		name = "Very Long Hair"
@@ -332,6 +336,9 @@
 		name = "Bun Head"
 		icon_state = "hair_bun"
 
+	braidtail
+		name = "Braided Tail"
+		icon_state = "hair_braidtail"
 /////////////////////////////
 // Facial Hair Definitions //
 /////////////////////////////

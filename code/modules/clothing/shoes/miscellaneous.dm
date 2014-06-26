@@ -80,10 +80,17 @@
 
 /obj/item/clothing/shoes/jackboots
 	name = "jackboots"
-	desc = "Nanotrasen-issue Security combat boots for combat scenarios or combat situations. All combat, all the time."
+	desc = "Nanotrasen-issue Security laceless combat boots for combat scenarios or combat situations. All combat, all the time."
 	icon_state = "jackboots"
 	item_state = "jackboots"
 	item_color = "hosred"
+
+/obj/item/clothing/shoes/steeltoe
+	name = "steel-toed boots"
+	desc = "Nanotrasen-issue lace-up boots with metal toe lining for first responders."
+	icon_state = "steeltoe"
+	item_color = "steeltoe"
+	permeability_coefficient = 0.01
 
 /obj/item/clothing/shoes/cult
 	name = "boots"

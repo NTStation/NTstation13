@@ -1,15 +1,18 @@
 /obj/item/clothing/glasses/meson
 	name = "Optical Meson Scanner"
-	desc = "Used for seeing walls, floors, and stuff through anything."
+	desc = "Used by engineering and mining staff to see basic structural and terrain layouts through walls, regardless of lighting condition."
 	icon_state = "meson"
 	item_state = "glasses"
 	origin_tech = "magnets=2;engineering=2"
+	darkness_view = 1
 	vision_flags = SEE_TURFS
-
-/obj/item/clothing/glasses/meson/advanced
-	name = "Advanced Optical Meson Scanner"
-	desc = "More powerful than your standard mesons, these ones make everything appear to be lit extremely brightly."
 	invis_view = SEE_INVISIBLE_MINIMUM
+
+/obj/item/clothing/glasses/meson/gar
+	name = "Gar Mesons"
+	icon_state = "garm"
+	item_state = "garm"
+	desc = "Do the impossible, see the invisible!"
 
 /obj/item/clothing/glasses/science
 	name = "Science Goggles"
@@ -137,7 +140,7 @@
 	desc = "Believe in us humans."
 	name = "black super gar glasses"
 	icon_state = "supergarb"
-	item_state = "supergarb"
+	item_state = "garb"
 	force = 12
 	throwforce = 12
 	attack_verb = list("sliced")
@@ -157,7 +160,7 @@
 	desc = "We evolve past the person we were a minute before. Little by little we advance with each turn. That's how a drill works!"
 	name = "super gar glasses"
 	icon_state = "supergar"
-	item_state = "supergar"
+	item_state = "gar"
 	force = 12
 	throwforce = 12
 	attack_verb = list("sliced")

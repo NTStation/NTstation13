@@ -122,9 +122,6 @@ lines 294-301 in living/say.dm (speech buffer)
 		held_item = null
 	walk(src,0)
 	..()
-	if(!ckey)
-		new /obj/item/clothing/head/polypelt(loc)
-		qdel(src)
 
 /mob/living/simple_animal/parrot/Stat()
 	..()

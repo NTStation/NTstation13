@@ -32,6 +32,7 @@ var/const/CALL_SHUTTLE_REASON_LENGTH = 12
 	var/const/STATE_ALERT_LEVEL = 8
 	var/const/STATE_CONFIRM_LEVEL = 9
 	var/const/STATE_TOGGLE_EMERGENCY = 10
+	var/const/STATE_CREWTRANSFER = 11
 
 	var/status_display_freq = "1435"
 	var/stat_msg1
@@ -574,7 +575,7 @@ var/const/CALL_SHUTTLE_REASON_LENGTH = 12
 	if ((!( ticker ) || emergency_shuttle.location))
 		return
 	if(world.time - round_start_time < config.shuttle_refuel_delay)
-		user << "The emergency shuttle is refueling. Please wait another [round((config.shuttle_refuel_delay - round_start_time)/600)] minutes before trying again."
+		user << "The emergency shuttle is refueling. Please wait another [abs(round(((world.time - round_start_time) - config.shuttle_refuel_delay)/600))] minutes before trying again."
 		return
 
 	if(emergency_shuttle.direction == -1)
@@ -605,6 +606,39 @@ var/const/CALL_SHUTTLE_REASON_LENGTH = 12
 
 	return
 
+/proc/init_shift_change(var/mob/user, var/force = 0)
+	if ((!( ticker ) || emergency_shuttle.location))
+		return
+
+	if(emergency_shuttle.direction == -1)
+		user << "The shuttle may not be called while returning to CentCom."
+		return
+
+	if(emergency_shuttle.online)
+		user << "The shuttle is already on its way."
+		return
+
+	// if force is 0, some things may stop the shuttle call
+	if(!force)
+
+		if(world.time < 54000) // 30 minute grace period to let the game get going
+			user << "The shuttle is refueling. Please wait another [round((54000-world.time)/600)] minutes before trying again."//may need to change "/600"
+			return
+
+		if(ticker.mode.name == "revolution" || ticker.mode.name == "AI malfunction" || ticker.mode.name == "sandbox")
+			//New version pretends to call the shuttle but cause the shuttle to return after a random duration.
+			emergency_shuttle.fake_recall = rand(300,500)
+
+		if(ticker.mode.name == "blob" || ticker.mode.name == "epidemic")
+			user << "Under directive 7-10, [station_name()] is quarantined until further notice."
+			return
+
+	emergency_shuttle.incall()
+	log_game("[key_name(user)] has called the shuttle.")
+	message_admins("[key_name_admin(user)] has called the shuttle.", 1)
+	priority_announce("A crew transfer has been initiated. The shuttle to Central Command has been called. It will arrive in [round(emergency_shuttle.timeleft()/60)] minutes.", null, 'sound/AI/attention.ogg', "Priority")
+
+	return
 
 /proc/cancel_call_proc(var/mob/user)
 	if ((!( ticker ) || emergency_shuttle.location || emergency_shuttle.direction == 0))
@@ -651,4 +685,6 @@ var/const/CALL_SHUTTLE_REASON_LENGTH = 12
 	shuttle_caller_list -= src
 	emergency_shuttle.autoshuttlecall()
 	..()
+
+
 

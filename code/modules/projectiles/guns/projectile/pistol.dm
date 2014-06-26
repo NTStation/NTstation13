@@ -16,9 +16,9 @@
 
 /obj/item/weapon/gun/projectile/automatic/deagle
 	name = "desert eagle"
-	desc = "A robust handgun that uses .50 AE ammo"
+	desc = "A robust handgun that uses .50 AE ammo."
 	icon_state = "deagle"
-	force = 14.0
+	force = 14
 	mag_type = /obj/item/ammo_box/magazine/m50
 
 /obj/item/weapon/gun/projectile/automatic/deagle/update_icon()
@@ -62,8 +62,8 @@
 	return
 
 /obj/item/weapon/gun/projectile/automatic/pistol
-	name = "\improper Stechtkin pistol"
-	desc = "A small, easily concealable handgun. Uses 10mm ammo."
+	name = "\improper Stechkin pistol"
+	desc = "A small, easily concealable handgun. Uses 10mm ammo and has a threaded barrel for silencers."
 	icon_state = "pistol"
 	w_class = 2
 	silenced = 0
@@ -73,21 +73,22 @@
 /obj/item/weapon/gun/projectile/automatic/pistol/attack_hand(mob/user as mob)
 	if(loc == user)
 		if(silenced)
-			if(user.l_hand != src && user.r_hand != src)
-				..()
-				return
-			user << "<span class='notice'>You unscrew [silenced] from [src].</span>"
-			user.put_in_hands(silenced)
-			var/obj/item/weapon/silencer/S = silenced
-			fire_sound = S.oldsound
-			silenced = 0
-			w_class = 2
-			update_icon()
-			return
+			silencer_attack_hand(user)
 	..()
 
+/obj/item/weapon/gun/projectile/automatic/pistol/attackby(obj/item/I as obj, mob/user as mob)
+	if(istype(I, /obj/item/weapon/silencer))
+		silencer_attackby(I,user)
+	..()
+
+/obj/item/weapon/gun/projectile/automatic/pistol/update_icon()
+	..()
+	icon_state = "[initial(icon_state)][silenced ? "-silencer" : ""][chambered ? "" : "-e"]"
+	return
+
+
 /obj/item/weapon/gun/projectile/automatic/deagle/m1911
-	name = "M1911"
+	name = "\improper M1911"
 	desc = "An M1911 pistol. Uses .45 ammo."
 	icon_state = "m1911"
 	force = 13.0
@@ -152,32 +153,9 @@
 	icon = 'icons/obj/buildingobject.dmi'
 	icon_state = "glock3"
 
-
-/obj/item/weapon/gun/projectile/automatic/pistol/attackby(obj/item/I as obj, mob/user as mob)
-	if(istype(I, /obj/item/weapon/silencer))
-		if(user.l_hand != src && user.r_hand != src)	//if we're not in his hands
-			user << "<span class='notice'>You'll need [src] in your hands to do that.</span>"
-			return
-		user.drop_item()
-		user << "<span class='notice'>You screw [I] onto [src].</span>"
-		silenced = I	//dodgy?
-		var/obj/item/weapon/silencer/S = I
-		S.oldsound = fire_sound
-		fire_sound = 'sound/weapons/Gunshot_silenced.ogg'
-		w_class = 3
-		I.loc = src		//put the silencer into the gun
-		update_icon()
-		return
-	..()
-
-/obj/item/weapon/gun/projectile/automatic/pistol/update_icon()
-	..()
-	icon_state = "[initial(icon_state)][silenced ? "-silencer" : ""][chambered ? "" : "-e"]"
-	return
-
 /obj/item/weapon/silencer
 	name = "silencer"
-	desc = "a silencer"
+	desc = "A universal syndicate small-arms silencer."
 	icon = 'icons/obj/gun.dmi'
 	icon_state = "silencer"
 	w_class = 2

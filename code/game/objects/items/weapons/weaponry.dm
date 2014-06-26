@@ -21,40 +21,42 @@
 
 /obj/item/weapon/brassknuckles
 	name = "brass knuckles"
-	desc = "A pair of shiny brass knuckles."
+	desc = "A pair of shiny, easily concealed brass knuckles. A miner's go-to bar fight weapon."
 	icon_state = "brassknuckles"
 	item_state = "brassknuckles"
 	w_class = 1
-	force = 16
+	force = 15
 	throw_speed = 3
 	throw_range = 4
 	throwforce = 7
 	attack_verb = list("beaten", "punched", "slammed", "smashed")
+	hitsound = 'sound/weapons/punch3.ogg'
 
 /obj/item/weapon/baseballbat
 	name = "wooden bat"
 	desc = "HOME RUN!"
 	icon_state = "woodbat"
-	item_state = "nullrod"
+	item_state = "woodbat"
 	w_class = 3.0
-	force = 15
+	force = 13
 	throw_speed = 3
 	throw_range = 7
 	throwforce = 7
-	attack_verb = list("smashed", "beaten", "slammed", "smacked", "striked", "home runned", "bonked")
+	attack_verb = list("smashed", "beaten", "slammed", "smacked", "striked", "battered", "bonked")
 	hitsound = 'sound/weapons/genhit3.ogg'
 
 /obj/item/weapon/baseballbat/metal
 	name = "metal bat"
 	desc = "A shiny metal bat."
 	icon_state = "metalbat"
-	force = 16
+	item_state = "metalbat"
 	w_class = 3.0
+	m_amt = 18750 //5 sheets of metal per bat in the autolathe
 
-/obj/item/weapon/switchblade
-	name = "switch blade"
-	desc = "A switch blade."
-	icon_state = "switchblade"
+/obj/item/weapon/butterfly
+	name = "butterfly knife"
+	desc = "A basic metal blade concealed in a lightweight plasteel grip. Small enough when folded to fit in a pocket."
+	icon_state = "butterflyknife"
 	item_state = null
 	hitsound = null
 	var/active = 0
@@ -65,49 +67,50 @@
 	throwforce = 7
 	attack_verb = list("patted", "tapped")
 
-/obj/item/switchbladeconstruction
-	name = "unfinished switch blade"
-	desc = "An unfinished switch blade."
+/obj/item/butterflyconstruction
+	name = "unfinished concealed knife"
+	desc = "An unfinished concealed knife, it looks like the screws need to be tightened."
 	icon = 'icons/obj/buildingobject.dmi'
-	icon_state = "switchbladestep1"
+	icon_state = "butterflystep1"
 
-/obj/item/switchbladeconstruction/attackby(obj/item/W as obj, mob/user as mob)
+/obj/item/butterflyconstruction/attackby(obj/item/W as obj, mob/user as mob)
 	if(istype(W,/obj/item/weapon/screwdriver))
-		user << "You finish the switchblade."
-		new /obj/item/weapon/switchblade(user.loc)
+		user << "You finish the concealed blade weapon."
+		new /obj/item/weapon/butterfly(user.loc)
 		del(src)
 		return
-/obj/item/switchbladeblade
-	name = "switch blade"
-	desc = "A switch blade's blade."
+
+/obj/item/butterflyblade
+	name = "knife blade"
+	desc = "A knife blade. Unusable as a weapon without a grip."
 	icon = 'icons/obj/buildingobject.dmi'
-	icon_state = "switchblade2"
-/obj/item/switchbladehandle
-	name = "switch blade handle"
-	desc = "A switch blade's handle."
+	icon_state = "butterfly2"
+/obj/item/butterflyhandle
+	name = "concealed knife grip"
+	desc = "A plasteel grip with screw fittings for a blade."
 	icon = 'icons/obj/buildingobject.dmi'
-	icon_state = "switchblade1"
+	icon_state = "butterfly1"
 
 
-/obj/item/switchbladehandle/attackby(obj/item/W as obj, mob/user as mob)
-	if(istype(W,/obj/item/switchbladeblade))
-		user << "You attach the two switchblade parts."
-		new /obj/item/switchbladeconstruction(user.loc)
+/obj/item/butterflyhandle/attackby(obj/item/W as obj, mob/user as mob)
+	if(istype(W,/obj/item/butterflyblade))
+		user << "You attach the two concealed blade parts."
+		new /obj/item/butterflyconstruction(user.loc)
 		del(W)
 		del(src)
 		return
 
-/obj/item/weapon/switchblade/butterfly
-	name = "butterfly knife"
-	desc = "A butterfly knife"
-	icon_state = "butterflyknife"
+/obj/item/weapon/butterfly/switchblade
+	name = "/proper switchblade"
+	desc = "A classic switchblade with gold engraving. Just holding it makes you feel like a gangster."
+	icon_state = "switchblade"
 
-/obj/item/weapon/switchblade/attack_self(mob/user)
+/obj/item/weapon/butterfly/attack_self(mob/user)
 	active = !active
 	if(active)
 		user << "<span class='notice'>You flip out your [src].</span>"
 		playsound(user, 'sound/weapons/flipblade.ogg', 15, 1)
-		force = 18
+		force = 15 //this is as much as a null rod or butcher cleaver and those just as rare or hard to obtain
 		hitsound = 'sound/weapons/bladeslice.ogg'
 		icon_state += "_open"
 		w_class = 3

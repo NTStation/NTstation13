@@ -22,6 +22,7 @@
 	throw_range = 7
 	m_amt = 10
 	pressure_resistance = 2
+	origin_tech = "materials=1"
 	var/colour = "black"	//what colour the ink is!
 
 
@@ -55,7 +56,7 @@
 /*
  * Parapens
  */
- /obj/item/weapon/pen/paralysis
+/obj/item/weapon/pen/paralysis
 	origin_tech = "materials=2;syndicate=5"
 
 

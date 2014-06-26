@@ -29,7 +29,10 @@
 		icon_state = "[magboot_state]1"
 		user << "You enable the mag-pulse traction system."
 	user.update_inv_shoes(0)	//so our mob-overlays update
+	user.update_gravity(user.mob_has_gravity())
 
+/obj/item/clothing/shoes/magboots/negates_gravity()
+	return flags & NOSLIP
 
 /obj/item/clothing/shoes/magboots/examine()
 	set src in view()
@@ -46,3 +49,9 @@
 	icon_state = "advmag0"
 	magboot_state = "advmag"
 	slowdown_off = SHOES_SLOWDOWN
+
+/obj/item/clothing/shoes/magboots/syndie
+	desc = "Reverse-engineered magnetic boots that have a custom syndicate paintjob for use in combat."
+	name = "gorlex magboots"
+	icon_state = "syndiemag0"
+	magboot_state = "syndiemag"

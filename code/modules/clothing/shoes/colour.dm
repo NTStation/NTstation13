@@ -4,7 +4,7 @@
 	name = "black shoes"
 	icon_state = "black"
 	item_color = "black"
-	desc = "A pair of black shoes."
+	desc = "A pair of classic black shoes."
 
 	cold_protection = FEET
 	min_cold_protection_temperature = SHOES_MIN_TEMP_PROTECT
@@ -16,7 +16,7 @@
 
 /obj/item/clothing/shoes/sneakers/brown
 	name = "brown shoes"
-	desc = "A pair of brown shoes."
+	desc = "A pair of classy brown shoes."
 	icon_state = "brown"
 	item_color = "brown"
 
@@ -35,21 +35,25 @@
 
 /obj/item/clothing/shoes/sneakers/blue
 	name = "blue shoes"
+	desc = "A pair of blue shoes."
 	icon_state = "blue"
 	item_color = "blue"
 
 /obj/item/clothing/shoes/sneakers/green
 	name = "green shoes"
+	desc = "A pair of green shoes."
 	icon_state = "green"
 	item_color = "green"
 
 /obj/item/clothing/shoes/sneakers/yellow
 	name = "yellow shoes"
+	desc = "A pair of yellow shoes."
 	icon_state = "yellow"
 	item_color = "yellow"
 
 /obj/item/clothing/shoes/sneakers/purple
 	name = "purple shoes"
+	desc = "A pair of purple shoes."
 	icon_state = "purple"
 	item_color = "purple"
 
@@ -60,19 +64,20 @@
 
 /obj/item/clothing/shoes/sneakers/red
 	name = "red shoes"
-	desc = "Stylish red shoes."
+	desc = "A pair of red shoes."
 	icon_state = "red"
 	item_color = "red"
 
 /obj/item/clothing/shoes/sneakers/white
 	name = "white shoes"
+	desc = "A pair of sterile white shoes."
 	icon_state = "white"
 	permeability_coefficient = 0.01
 	item_color = "white"
 
 /obj/item/clothing/shoes/sneakers/rainbow
 	name = "rainbow shoes"
-	desc = "Very gay shoes."
+	desc = "Very happy shoes!"
 	icon_state = "rain_bow"
 	item_color = "rainbow"
 

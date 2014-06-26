@@ -16,7 +16,7 @@
 
 
 /obj/item/weapon/handcuffs/attack(mob/living/carbon/C, mob/user)
-	if(CLUMSY in user.mutations && prob(50))
+	if(user.has_organic_effect(/datum/organic_effect/clumsy) && prob(50))
 		user << "<span class='warning'>Uh... how do those things work?!</span>"
 		if(!C.handcuffed)
 			user.drop_item()
@@ -101,21 +101,31 @@
 
 		qdel(src)
 
+/obj/item/weapon/handcuffs/cyborg
+	name = "zipties"
+	desc = "Plastic zipties designed to be disposable and convenient."
+	icon_state = "cuff_white"
+	item_state = "coil_white"
+	breakouttime = 300 //Deciseconds = 30s
+
 /obj/item/weapon/handcuffs/cyborg/attack(mob/living/carbon/C, mob/user)
 	if(isrobot(user))
 		if(!C.handcuffed)
-			playsound(loc, 'sound/weapons/handcuffs.ogg', 30, 1, -2)
-			C.visible_message("<span class='danger'>[user] is trying to put handcuffs on [C]!</span>", \
-								"<span class='userdanger'>[user] is trying to put handcuffs on [C]!</span>")
+			playsound(loc, 'sound/weapons/cablecuff.ogg', 30, 1, -2)
+			C.visible_message("<span class='danger'>[user] is trying to restrain [C] with zipties!</span>", \
+								"<span class='userdanger'>[user] is trying to restrain [C] with zipties!</span>")
 			if(do_mob(user, C, 30))
 				if(C.handcuffed)
 					return
-				C.handcuffed = new /obj/item/weapon/handcuffs(C)
+				C.handcuffed = new /obj/item/weapon/handcuffs/cyborg(C)
 				C.update_inv_handcuffed(0)
 		else
-			C.visible_message("<span class='danger'>[user] tries to remove [C]'s handcuffs.</span>", \
-							"<span class='notice'>[user] tries to remove [C]'s handcuffs.</span>")
+			C.visible_message("<span class='danger'>[user] tries to cut [C]'s zipties.</span>", \
+							"<span class='notice'>[user] tries to cut [C]'s zipties.</span>")
 			if(do_mob(user, C, 30))
 				if(!C.handcuffed)
 					return
 				C.unEquip(C.handcuffed)
+
+/obj/item/weapon/handcuffs/cyborg/dropped(mob/user)
+	qdel(src)

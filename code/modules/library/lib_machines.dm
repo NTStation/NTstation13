@@ -125,6 +125,8 @@ datum/borrowbook // Datum used to keep track of who has borrowed what when and f
 	anchored = 1
 	density = 1
 	var/arcanecheckout = 0
+	var/corpcheckout = 0
+	var/concheckout = 0
 	var/screenstate = 0 // 0 - Main Menu, 1 - Inventory, 2 - Checked Out, 3 - Check Out a Book
 	var/buffer_book
 	var/buffer_mob
@@ -135,6 +137,7 @@ datum/borrowbook // Datum used to keep track of who has borrowed what when and f
 	var/obj/machinery/libraryscanner/scanner // Book scanner that will be used when uploading books to the Archive
 
 	var/bibledelay = 0 // LOL NO SPAM (1 minute delay) -- Doohl
+	var/posterdelay = 0
 
 /obj/machinery/librarycomp/attack_hand(var/mob/user as mob)
 	usr.set_machine(src)
@@ -148,13 +151,39 @@ datum/borrowbook // Datum used to keep track of who has borrowed what when and f
 			dat += "<A href='?src=\ref[src];switchscreen=4'>4. Connect to External Archive</A><BR>"
 			dat += "<A href='?src=\ref[src];switchscreen=5'>5. Upload New Title to Archive</A><BR>"
 			dat += "<A href='?src=\ref[src];switchscreen=6'>6. Print a Bible</A><BR>"
+			dat += "<A href='?src=\ref[src];switchscreen=7'>7. Print a Corporate Poster</A><BR>"
 			if(src.emagged)
-				dat += "<A href='?src=\ref[src];switchscreen=7'>7. Access the Forbidden Lore Vault</A><BR>"
+				dat += "<A href='?src=\ref[src];switchscreen=8'>8. Access the Forbidden Lore Vault</A><BR>"
+				dat += "<A href='?src=\ref[src];switchscreen=9'>9. Access Deep-Web Poster Printing</A><BR>"
 			if(src.arcanecheckout)
 				new /obj/item/weapon/tome(src.loc)
 				user << "<span class='warning'>Your sanity barely endures the seconds spent in the vault's browsing window. The only thing to remind you of this when you stop browsing is a dusty old tome sitting on the desk. You don't really remember printing it.</span>"
-				user.visible_message("[user] stares at the blank screen for a few moments, his expression frozen in fear. When he finally awakens from it, he looks a lot older.", 2)
+				user.visible_message("[user] stares at the blank screen for a few moments, \his expression frozen in fear. When \he finally awakens from it, \he looks a lot older.", 2)
 				src.arcanecheckout = 0
+			if(src.corpcheckout)
+				if(!posterdelay)
+
+					new /obj/item/weapon/contraband/poster/legit(src.loc)
+					user << "<span class='notice'>You notice the printer humming as it inks one side of a large poster, appearing on the user end of the printer with a blue trim soon afterwards.</span>"
+					posterdelay = 1
+					spawn(100)
+						posterdelay = 0
+						src.corpcheckout = 0
+				else
+					for (var/mob/V in hearers(src))
+						V.show_message("<b>[src]</b>'s monitor flashes, \"Poster printer currently unavailable, please wait a moment.\"")
+			if(src.concheckout)
+				if(!posterdelay)
+
+					new /obj/item/weapon/contraband/poster(src.loc)
+					user << "<span class='warning'>The computer's screen freezes for a moment as you access deep-web poster schematics, a warm poster with red trimming appearing on the other side soon afterwards.</span>"
+					posterdelay = 1
+					spawn(100)
+						posterdelay = 0
+						src.concheckout = 0
+				else
+					for (var/mob/V in hearers(src))
+						V.show_message("<b>[src]</b>'s monitor flashes, \"Poster printer currently unavailable, please wait a moment.\"")
 		if(1)
 			// Inventory
 			dat += "<H3>Inventory</H3><BR>"
@@ -232,10 +261,21 @@ datum/borrowbook // Datum used to keep track of who has borrowed what when and f
 				dat += "<A href='?src=\ref[src];upload=1'>\[Upload\]</A><BR>"
 			dat += "<A href='?src=\ref[src];switchscreen=0'>(Return to main menu)</A><BR>"
 		if(7)
+			dat += "<h3>Accessing spessnet.nanofiles.nt/corporateimages/posters/random.post</h3>"
+			dat += "Are you sure you would like spessnet.nanofiles.nt to access this printer?<p>"
+			dat += "<A href='?src=\ref[src];corpcheckout=1'>Yes</A><BR>"
+			dat += "<A href='?src=\ref[src];switchscreen=0'>No</A><BR>"
+		if(8)
 			dat += "<h3>Accessing Forbidden Lore Vault v 1.3</h3>"
 			dat += "Are you absolutely sure you want to proceed? EldritchTomes Inc. takes no responsibilities for loss of sanity resulting from this action.<p>"
 			dat += "<A href='?src=\ref[src];arccheckout=1'>Yes.</A><BR>"
 			dat += "<A href='?src=\ref[src];switchscreen=0'>No.</A><BR>"
+		if(9)
+			dat += "<h3>Accessing spessnet.hownew.ru/fun/posters/random.post</h3>"
+			dat += "Are you sure you would like spessnet.hownew.ru to access this printer?<p>"
+			dat += "<A href='?src=\ref[src];concheckout=1'>Yes</A><BR>"
+			dat += "<A href='?src=\ref[src];switchscreen=0'>No</A><BR>"
+
 
 	//dat += "<A HREF='?src=\ref[user];mach_close=library'>Close</A><br><br>"
 	//user << browse(dat, "window=library")
@@ -294,12 +334,22 @@ datum/borrowbook // Datum used to keep track of who has borrowed what when and f
 				else
 					for (var/mob/V in hearers(src))
 						V.show_message("<b>[src]</b>'s monitor flashes, \"Bible printer currently unavailable, please wait a moment.\"")
-
 			if("7")
 				screenstate = 7
+			if("8")
+				screenstate = 8
+			if("9")
+				screenstate = 9
+	if(href_list["corpcheckout"])
+		src.corpcheckout = 1
+		src.screenstate = 0
 	if(href_list["arccheckout"])
 		if(src.emagged)
 			src.arcanecheckout = 1
+		src.screenstate = 0
+	if(href_list["concheckout"])
+		if(src.emagged)
+			src.concheckout = 1
 		src.screenstate = 0
 	if(href_list["increasetime"])
 		checkoutperiod += 1

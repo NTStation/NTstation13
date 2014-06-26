@@ -6,9 +6,9 @@
 	icon_dead = "bat_dead"
 	icon_gib = "bat_dead"
 	turns_per_move = 1
-	response_help = "brushes aside"
+	response_help = "brushes"
 	response_disarm = "flails at"
-	response_harm = "hits"
+	response_harm = "swats at"
 	speak_chance = 0
 	a_intent = "harm"
 	stop_automated_movement_when_pulled = 0

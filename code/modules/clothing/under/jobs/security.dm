@@ -16,6 +16,7 @@
 	item_state = "r_suit"
 	item_color = "warden"
 	armor = list(melee = 10, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 0, rad = 0)
+	can_roll = 0
 
 /obj/item/clothing/under/rank/security
 	name = "security officer's jumpsuit"
@@ -24,6 +25,7 @@
 	item_state = "r_suit"
 	item_color = "secred"
 	armor = list(melee = 10, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 0, rad = 0)
+	can_roll = 0
 
 /*
  * Detective
@@ -46,13 +48,14 @@
 	item_state = "r_suit"
 	item_color = "hosred"
 	armor = list(melee = 10, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 0, rad = 0)
+	can_roll = 0
 
 /*
  * Jensen cosplay gear
  */
 /obj/item/clothing/under/rank/head_of_security/jensen
-	desc = "You never asked for anything that stylish."
 	name = "head of security's jumpsuit"
+	desc = "You never asked for anything that stylish."
 	icon_state = "jensen"
 	item_state = "jensen"
 	item_color = "jensen"
@@ -76,6 +79,7 @@
 	icon_state = "officerblueclothes"
 	item_state = "officerblueclothes"
 	item_color = "officerblueclothes"
+	can_roll = 0
 
 /obj/item/clothing/under/rank/head_of_security/navyblue
 	desc = "The insignia on this uniform tells you that this uniform belongs to the Head of Security."
@@ -83,6 +87,7 @@
 	icon_state = "hosblueclothes"
 	item_state = "hosblueclothes"
 	item_color = "hosblueclothes"
+	can_roll = 0
 
 /obj/item/clothing/under/rank/warden/navyblue
 	desc = "The insignia on this uniform tells you that this uniform belongs to the Warden."

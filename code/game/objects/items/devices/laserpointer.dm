@@ -78,7 +78,7 @@
 	if (!user.IsAdvancedToolUser())
 		user << "<span class='warning'>You don't have the dexterity to do this!</span>"
 		return
-	if(user.has_mutation(HULK))
+	if(user.has_organic_effect(/datum/organic_effect/hulk))
 		user << "<span class='warning'>Your meaty finger is too large for the button!</span>"
 		return
 	if(iscarbon(user))

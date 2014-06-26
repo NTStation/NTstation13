@@ -8,7 +8,7 @@
 /datum/configuration
 	var/server_name = null				// server name (for world name / status)
 	var/server_suffix = 0				// generate numeric suffix based on server port
-	var/lobby_countdown = 120			// In between round countdown.
+	var/lobby_countdown = 180			// In between round countdown.
 
 	var/log_ooc = 0						// log OOC channel
 	var/log_access = 0					// log login/logout
@@ -31,6 +31,8 @@
 	var/allow_vote_mode = 0				// allow votes to change mode
 	var/vote_delay = 6000				// minimum time between voting sessions (deciseconds, 10 minute default)
 	var/vote_period = 600				// length of voting period (deciseconds, default 1 minute)
+	var/vote_autotransfer_initial = 72000 // Length of time before the first autotransfer vote is called
+	var/vote_autotransfer_interval = 36000 // length of time before next sequential autotransfer vote
 	var/vote_no_default = 0				// vote does not default to nochange/norestart (tbi)
 	var/vote_no_dead = 0				// dead people can't vote (tbi)
 	var/del_new_on_log = 1				// del's new players if they log before they spawn in
@@ -226,6 +228,10 @@
 					config.vote_delay = text2num(value)
 				if("vote_period")
 					config.vote_period = text2num(value)
+				if("vote_autotransfer_initial")
+					config.vote_autotransfer_initial = text2num(value)
+				if("vote_autotransfer_interval")
+					config.vote_autotransfer_interval = text2num(value)
 				if("norespawn")
 					config.respawn = 0
 				if("servername")
