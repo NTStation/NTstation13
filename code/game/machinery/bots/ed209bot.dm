@@ -171,6 +171,10 @@ Auto Patrol: []"},
 			auto_patrol = !auto_patrol
 			mode = BOT_IDLE
 			updateUsrDialog()
+		if("remote")
+			if(emagged != 2)
+				remote_disabled = !remote_disabled
+				updateUsrDialog()
 		if("hack")
 			if(!emagged)
 				emagged = 2

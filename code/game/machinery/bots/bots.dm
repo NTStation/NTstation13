@@ -223,9 +223,11 @@
 
 /obj/machinery/bot/proc/hack(mob/user)
 	var/hack
-	if(issilicon(user))
+	if(issilicon(user)) //Allows silicons to toggle the emag status of a bot.
 		hack += "[emagged ? "Software compromised! Unit may exhibit dangerous or erratic behavior." : "Unit operating normally. Release safety lock?"]<BR>"
 		hack += "Harm Prevention Safety System: <A href='?src=\ref[src];operation=hack'>[emagged ? "DANGER" : "Engaged"]</A><BR>"
+	else if(!locked) //Humans with access can use this option to hide a bot from the AI's remote control panel.
+		hack += "AI remote control network port: <A href='?src=\ref[src];operation=remote'>[remote_disabled ? "Closed" : "Open"]</A><BR><BR>"
 	return hack
 
 /obj/machinery/bot/attack_ai(mob/user as mob)

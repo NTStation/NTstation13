@@ -158,6 +158,10 @@
 		if("patrol")
 			auto_patrol = !auto_patrol
 			updateUsrDialog()
+		if("remote")
+			if(emagged != 2)
+				remote_disabled = !remote_disabled
+				updateUsrDialog()
 		if("hack")
 			if(!emagged)
 				emagged = 2

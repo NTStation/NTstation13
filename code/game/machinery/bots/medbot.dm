@@ -173,6 +173,10 @@
 	else if((href_list["patrol"]) && (!locked || issilicon(usr)))
 		auto_patrol = !auto_patrol
 
+	else if((href_list["remote"]) && !locked)
+		if(emagged != 2)
+			remote_disabled = !remote_disabled
+
 	else if (href_list["eject"] && (!isnull(reagent_glass)))
 		if(!locked)
 			reagent_glass.loc = get_turf(src)

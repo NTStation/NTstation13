@@ -431,6 +431,10 @@ var/list/ai_list = list()
 			return
 		Bot.attack_ai(src)
 
+	if (href_list["botrefresh"]) //Refreshes the bot control panel.
+		botcall()
+		return
+
 	else if (href_list["faketrack"])
 		var/mob/target = locate(href_list["track"]) in mob_list
 		var/mob/living/silicon/ai/A = locate(href_list["track2"]) in mob_list
@@ -541,13 +545,14 @@ var/list/ai_list = list()
 	var/ai_Zlevel = ai_current_turf.z
 	var/d
 	var/area/bot_area
+	d += "<A HREF=?src=\ref[src];botrefresh=\ref[Bot]>Query network status</A><br>"
 	d += "<table width='100%'><tr><td width='40%'><h3>Name</h3></td><td width='30%'><h3>Status</h3></td><td width='30%'><h3>Location</h3></td><td width='10%'><h3>Control</h3></td></tr>"
 
 	for (Bot in machines)
 		if(Bot.z == ai_Zlevel && !Bot.remote_disabled) //Only non-emagged bots on the same Z-level are detected!
 			bot_area = get_area(Bot)
 			d += "<tr><td width='30%'>[Bot.hacked ? "<span class='bad'>(!) </span>[Bot.name]" : Bot.name]</td>"
-			//If the bot is on, it will display the bot's current mode status. If the bot is not mode, it will just report "Ready". "Inactive if it is not on at all.
+			//If the bot is on, it will display the bot's current mode status. If the bot is not mode, it will just report "Idle". "Inactive if it is not on at all.
 			d += "<td width='30%'>[Bot.on ? "[Bot.mode ? "<span class='average'>[ Bot.mode_name[Bot.mode] ]</span>": "<span class='good'>Idle</span>"]" : "<span class='bad'>Inactive</span>"]</td>"
 			d += "<td width='30%'>[bot_area.name]</td>"
 			d += "<td width='10%'><A HREF=?src=\ref[src];interface=\ref[Bot]>Interface</A></td>"
@@ -570,6 +575,10 @@ var/list/ai_list = list()
 		src << "<span class='danger'>Selected location is not visible.</span>"
 
 /mob/living/silicon/ai/proc/call_bot(var/turf/end_loc)
+
+	if(Bot.calling_ai && Bot.calling_ai != src) //Prevents an override if another AI is controlling this bot.
+		src << "<span class='danger'>Interface error. Unit is already in use.</span>"
+		return
 
 	var/area/end_area = get_area(end_loc)
 	var/turf/start_loc = get_turf(Bot) //Get the bot's location.

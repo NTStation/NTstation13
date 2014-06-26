@@ -121,6 +121,10 @@ text("<A href='?src=\ref[src];operation=oddbutton'>[oddbutton ? "Yes" : "No"]</A
 			if (freq > 0)
 				beacon_freq = freq
 			updateUsrDialog()
+		if("remote")
+			if(emagged != 2)
+				remote_disabled = !remote_disabled
+				updateUsrDialog()
 /*		if("screw")
 			screwloose = !screwloose
 			usr << "<span class='notice>You twiddle the screw.</span>"
@@ -187,12 +191,12 @@ text("<A href='?src=\ref[src];operation=oddbutton'>[oddbutton ? "Yes" : "No"]</A
 	if(!emagged && prob(5))
 		visible_message("[src] makes an excited beeping booping sound!")
 
-	if(emagged && prob(10)) //Wets floors randomly
+	if(emagged == 2 && prob(10)) //Wets floors randomly
 		if(istype(loc,/turf/simulated))
 			var/turf/simulated/T = loc
 			T.MakeSlippery()
 
-	if(emagged && prob(5)) //Spawns foam!
+	if(emagged == 2 && prob(5)) //Spawns foam!
 		visible_message("<span class='danger'>[src] whirs and bubbles violently, before releasing a plume of froth!</span>")
 		new /obj/effect/effect/foam(loc)
 
