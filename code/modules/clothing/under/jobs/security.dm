@@ -38,6 +38,13 @@
 	item_color = "detective"
 	armor = list(melee = 10, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 0, rad = 0)
 
+/obj/item/clothing/under/det/grey
+	name = "grey hard-worn suit"
+	desc = "A hard-boiled private investigator's grey suit, complete with tie clip."
+	icon_state = "greydet"
+	item_state = "greydet"
+	item_color = "greydet"
+
 /*
  * Head of Security
  */

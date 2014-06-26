@@ -123,22 +123,24 @@ Detective
 
 /datum/job/detective/equip_items(var/mob/living/carbon/human/H)
 	H.equip_to_slot_or_del(new /obj/item/clothing/under/det(H), slot_w_uniform)
-	H.equip_to_slot_or_del(new /obj/item/clothing/shoes/sneakers/brown(H), slot_shoes)
+	H.equip_to_slot_or_del(new /obj/item/clothing/shoes/laceup(H), slot_shoes)
 	H.equip_to_slot_or_del(new /obj/item/clothing/head/det_hat(H), slot_head)
+	H.equip_to_slot_or_del(new /obj/item/clothing/glasses/sunglasses(H), slot_glasses)
 	H.equip_to_slot_or_del(new /obj/item/clothing/gloves/black(H), slot_gloves)
 	H.equip_to_slot_or_del(new /obj/item/clothing/suit/det_suit(H), slot_wear_suit)
 	H.equip_to_slot_or_del(new /obj/item/weapon/lighter/zippo(H), slot_l_store)
+	H.equip_to_slot_or_del(new /obj/item/device/detective_scanner(H), slot_r_store)
+	H.equip_to_slot_or_del(new /obj/item/weapon/reagent_containers/food/drinks/flask/detective(H), slot_s_store)
+
 
 	var/obj/item/clothing/mask/cigarette/cig = new /obj/item/clothing/mask/cigarette(H)
 	cig.light("")
 	H.equip_to_slot_or_del(cig, slot_wear_mask)
 
-	if(H.backbag == 1)//Why cant some of these things spawn in his office?
-		H.equip_to_slot_or_del(new /obj/item/weapon/storage/box/evidence(H), slot_l_hand)
-		H.equip_to_slot_or_del(new /obj/item/device/detective_scanner(H), slot_r_store)
+	if(H.backbag == 1)//Gives him his telebaton.
+		H.equip_to_slot_or_del(new /obj/item/weapon/melee/telebaton(H), slot_l_hand)
 	else
-		H.equip_to_slot_or_del(new /obj/item/weapon/storage/box/evidence(H), slot_in_backpack)
-		H.equip_to_slot_or_del(new /obj/item/device/detective_scanner(H), slot_in_backpack)
+		H.equip_to_slot_or_del(new /obj/item/weapon/melee/telebaton(H), slot_in_backpack)
 
 	var/obj/item/weapon/implant/loyalty/L = new/obj/item/weapon/implant/loyalty(H)
 	L.imp_in = H
