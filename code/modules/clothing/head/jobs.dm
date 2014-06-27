@@ -53,7 +53,7 @@
 
 /obj/item/clothing/head/det_hat/grey
 	name = "grey fedora"
-	desc = "A hard-boiled private investigator's grey trilby."
+	desc = "A hard-boiled private investigator's grey fedora."
 	icon_state = "greydet"
 
 //Mime
