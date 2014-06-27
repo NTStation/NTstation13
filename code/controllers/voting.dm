@@ -249,13 +249,16 @@ datum/controller/vote
 				. += "<a href='?src=\ref[src];vote=restart'>Restart</a>"
 			else
 				. += "<font color='grey'>Restart (Disallowed)</font>"
+			if(trialmin)
+				. += "\t(<a href='?src=\ref[src];vote=toggle_restart'>[config.allow_vote_restart?"Allowed":"Disallowed"]</a>)"
 			. += "</li><li>"
-			if(trialmin || config.allow_vote_restart)
+			//transfer
+			if(trialmin || config.allow_vote_transfer)
 				. += "<a href='?src=\ref[src];vote=crew_transfer'>Crew Transfer</a>"
 			else
 				. += "<font color='grey'>Crew Transfer (Disallowed)</font>"
 			if(trialmin)
-				. += "\t(<a href='?src=\ref[src];vote=toggle_restart'>[config.allow_vote_restart?"Allowed":"Disallowed"]</a>)"
+				. += "\t(<a href='?src=\ref[src];vote=crew_transfer'>[config.allow_vote_transfer?"Allowed":"Disallowed"]</a>)"
 			. += "</li><li>"
 			//gamemode
 			if(trialmin || config.allow_vote_mode)
@@ -264,8 +267,7 @@ datum/controller/vote
 				. += "<font color='grey'>GameMode (Disallowed)</font>"
 			if(trialmin)
 				. += "\t(<a href='?src=\ref[src];vote=toggle_gamemode'>[config.allow_vote_mode?"Allowed":"Disallowed"]</a>)"
-
-			. += "</li>"
+			. += "</li><li>"
 			//custom
 			if(trialmin)
 				. += "<li><a href='?src=\ref[src];vote=custom'>Custom</a></li>"
@@ -290,6 +292,9 @@ datum/controller/vote
 			if("toggle_gamemode")
 				if(usr.client.holder)
 					config.allow_vote_mode = !config.allow_vote_mode
+			if("toggle_transfer")
+				if(usr.client.holder)
+					config.allow_vote_mode = !config.allow_vote_transfer
 			if("restart")
 				if(config.allow_vote_restart || usr.client.holder)
 					initiate_vote("restart",usr.key)
@@ -297,7 +302,7 @@ datum/controller/vote
 				if(config.allow_vote_mode || usr.client.holder)
 					initiate_vote("gamemode",usr.key)
 			if("crew_transfer")
-				if(config.allow_vote_restart || usr.client.holder)
+				if(config.allow_vote_transfer || usr.client.holder)
 					initiate_vote("crew_transfer",usr.key)
 			if("custom")
 				if(usr.client.holder)
