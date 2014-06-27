@@ -163,9 +163,9 @@ Auto Patrol: []"},
 			if(emagged)
 				user << "<span class='warning'>ERROR</span>"
 			if(open)
-				user << "\red Please close the access panel before locking it."
+				user << "<span class='danger'>Please close the access panel before locking it.</span>"
 			else
-				user << "\red Access denied."
+				user << "<span class='danger'> Access denied.</span>"
 	else
 		..()
 		if(!istype(W, /obj/item/weapon/screwdriver) && !istype(W, /obj/item/weapon/weldingtool) && (W.force) && (!target)) // Added check for welding tool to fix #2432. Welding tool behavior is handled in superclass.
@@ -175,10 +175,10 @@ Auto Patrol: []"},
 /obj/machinery/bot/secbot/Emag(mob/user as mob)
 	..()
 	if(open && !locked)
-		if(user) user << "\red You short out [src]'s target assessment circuits."
+		if(user) user << "<span class='danger'> You short out [src]'s target assessment circuits.</span>"
 		spawn(0)
 			for(var/mob/O in hearers(src, null))
-				O.show_message("\red <B>[src] buzzes oddly!</B>", 1)
+				O.show_message("<span class='danger'><B>[src] buzzes oddly!</B></span>", 1)
 		target = null
 		if(user) oldtarget_name = user.name
 		last_found = world.time
@@ -247,7 +247,7 @@ Auto Patrol: []"},
 					maxstuns--
 					if(maxstuns <= 0)
 						target = null
-					visible_message("\red <B>[target] has been stunned by [src]!</B>")
+					visible_message("<span class='danger'> <B>[target] has been stunned by [src]!</B></span>")
 
 					mode = BOT_PREP_ARREST
 					anchored = 1
@@ -274,7 +274,7 @@ Auto Patrol: []"},
 				if(!target.handcuffed && !arrest_type)
 					playsound(src.loc, 'sound/weapons/cablecuff.ogg', 30, 1, -2)
 					mode = BOT_ARREST
-					visible_message("\red <B>[src] is trying to restrain [src.target] with zipties!</B>")
+					visible_message("span class='danger'> <B>[src] is trying to restrain [src.target] with zipties!</B></span>")
 
 					spawn(60)
 						if(get_dist(src, target) <= 1)
@@ -307,6 +307,9 @@ Auto Patrol: []"},
 				anchored = 0
 				mode = BOT_IDLE
 				return
+			else //Try arresting again if the target escapes.
+				mode = BOT_PREP_ARREST
+				anchored = 0
 
 		if(BOT_START_PATROL)
 			start_patrol()
@@ -418,7 +421,7 @@ Auto Patrol: []"},
 /obj/machinery/bot/secbot/explode()
 
 	walk_to(src,0)
-	visible_message("\red <B>[src] blows apart!</B>", 1)
+	visible_message("span class='danger'> <B>[src] blows apart!</B></span>", 1)
 	var/turf/Tsec = get_turf(src)
 
 	var/obj/item/weapon/secbot_assembly/Sa = new /obj/item/weapon/secbot_assembly(Tsec)

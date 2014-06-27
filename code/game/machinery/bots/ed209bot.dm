@@ -215,7 +215,7 @@ Auto Patrol: []"},
 		if(user) user << "<span class='warning'>You short out [src]'s target assessment circuits.</span>"
 		spawn(0)
 			for(var/mob/O in hearers(src, null))
-				O.show_message("\red <B>[src] buzzes oddly!</B>", 1)
+				O.show_message("span class='danger'> <B>[src] buzzes oddly!</B></span>", 1)
 		target = null
 		if(user) oldtarget_name = user.name
 		last_found = world.time
@@ -309,7 +309,7 @@ Auto Patrol: []"},
 					maxstuns--
 					if (maxstuns <= 0)
 						target = null
-					visible_message("\red <B>[target] has been stunned by [src]!</B>")
+					visible_message("span class='danger'> <B>[target] has been stunned by [src]!</B></span>")
 
 					mode = BOT_PREP_ARREST
 					anchored = 1
@@ -342,7 +342,7 @@ Auto Patrol: []"},
 				if (!target.handcuffed && !arrest_type)
 					playsound(src.loc, 'sound/weapons/cablecuff.ogg', 30, 1, -2)
 					mode = BOT_ARREST
-					visible_message("\red <B>[src] is trying to restrain [src.target] with zipties!</B>")
+					visible_message("span class='danger'> <B>[src] is trying to restrain [src.target] with zipties!</B></span>")
 
 					spawn(60)
 						if (get_dist(src, target) <= 1)
@@ -377,6 +377,9 @@ Auto Patrol: []"},
 				anchored = 0
 				mode = BOT_IDLE
 				return
+			else
+				mode = BOT_PREP_ARREST
+				anchored = 0
 
 		if(BOT_START_PATROL)
 			start_patrol()
@@ -514,7 +517,7 @@ Auto Patrol: []"},
 
 /obj/machinery/bot/ed209/explode()
 	walk_to(src,0)
-	visible_message("\red <B>[src] blows apart!</B>", 1)
+	visible_message("span class='danger'> <B>[src] blows apart!</B></span>", 1)
 	var/turf/Tsec = get_turf(src)
 
 	var/obj/item/weapon/ed209_assembly/Sa = new /obj/item/weapon/ed209_assembly(Tsec)
