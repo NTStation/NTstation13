@@ -1022,7 +1022,8 @@ obj/item/toy/cards/deck/syndicate
 	name = "Chaplain action figure"
 	desc = "A \"Space Life\" brand Chaplain action figure."
 	icon_state = "chaplain"
-	toysay = "Join my religion, you fucks."
+	var/deity = pick(bibledeitynames) //bibledeitynames IS the name of the random deity list.
+	toysay = "Glory to [deity]!"
 
 /obj/item/toy/figure/chef
 	name = "Chef action figure"
