@@ -45,15 +45,15 @@
 	flags = HEADCOVERSEYES|BLOCKHAIR
 
 /obj/item/clothing/head/det_hat
-	name = "trilby"
+	name = "brown fedora"
 	desc = "Someone who wears this will look very smart."
 	icon_state = "detective"
 	allowed = list(/obj/item/weapon/reagent_containers/food/snacks/candy_corn, /obj/item/weapon/pen)
 	armor = list(melee = 50, bullet = 5, laser = 25,energy = 10, bomb = 0, bio = 0, rad = 0)
 
 /obj/item/clothing/head/det_hat/grey
-	name = "grey trilby"
-	desc = "A hard-boiled private investigator's grey trilby."
+	name = "grey fedora"
+	desc = "A hard-boiled private investigator's grey fedora."
 	icon_state = "greydet"
 
 //Mime
