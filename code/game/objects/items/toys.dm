@@ -947,7 +947,6 @@ obj/item/toy/cards/deck/syndicate
 	var/cooldown = 0
 	var/toysay = "What the fuck did you do?"
 	var/obj/item/toy/accessory/hastoy = null
-	var/toydeity = "pick(bibledeitynames)" //bibledeitynames IS the name of the random deity list.
 
 /obj/item/toy/figure/attack_self(mob/user as mob)
 	if(!cooldown)
@@ -1023,7 +1022,7 @@ obj/item/toy/cards/deck/syndicate
 	name = "Chaplain action figure"
 	desc = "A \"Space Life\" brand Chaplain action figure."
 	icon_state = "chaplain"
-	toysay = "Glory to [toydeity]!"
+	toysay = "Join my religion, you fucks!"
 
 /obj/item/toy/figure/chef
 	name = "Chef action figure"
