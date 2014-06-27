@@ -283,7 +283,7 @@
 	icon_state = "flask"
 	volume = 60
 
-/obj/item/weapon/reagent_containers/food/drinks/flask/detflask
+/obj/item/weapon/reagent_containers/food/drinks/flask/detective
 	name = "detective's flask"
 	desc = "The detective's only true friend."
 	icon_state = "detflask"
