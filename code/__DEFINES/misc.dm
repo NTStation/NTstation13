@@ -30,6 +30,3 @@
 
 #define MINERAL_MATERIAL_AMOUNT 2000
 //The amount of materials you get from a sheet of mineral like iron/diamond/glass etc
-
-#define MAX_TAPE_RANGE 5
-//The max length of a line of sec/engie tape

@@ -1,4 +1,7 @@
-//Define all tape types in policetape.dm
+#define MAX_TAPE_RANGE 5
+//The max length of a line of hazard tape by tile range, this is
+
+//Define all tape types in hazardtape.dm
 /obj/item/taperoll
 	name = "tape roll"
 	icon = 'icons/obj/hazardtape.dmi'
@@ -18,7 +21,7 @@
 
 /obj/item/taperoll/security
 	name = "secruity tape roll"
-	desc = "A roll of security hazard tape used to block off crime scenes from the public."
+	desc = "A roll of security hazard tape used to block crime scenes from non-security staff. It can be placed in segments along hallways or on airlocks to restrict access."
 	icon_state = "security_start"
 	tape_type = /obj/item/tape/security
 	icon_base = "security"
@@ -31,7 +34,7 @@
 
 /obj/item/taperoll/engineering
 	name = "engineering tape roll"
-	desc = "A roll of engineering hazard tape used to block off working areas from the public."
+	desc = "A roll of engineering hazard tape used to block hazardous areas from non-engineering staff. It can be placed in segments along hallways or on airlocks to restrict access."
 	icon_state = "engineering_start"
 	tape_type = /obj/item/tape/engineering
 	icon_base = "engineering"
@@ -42,7 +45,7 @@
 	req_one_access = list(access_engine,access_atmospherics)
 	icon_base = "engineering"
 
-/obj/item/taperoll/attack_self(mob/user as mob)
+/obj/item/taperoll/attack_self(var/mob/user)
 	if(icon_state == "[icon_base]_start")
 		start = get_turf(src)
 		usr << "<span class='notice'>You place the first end of the [src].</span>"
@@ -52,6 +55,9 @@
 		end = get_turf(src)
 		if(start.y != end.y && start.x != end.x || start.z != end.z)
 			usr << "<span class='warning'>[src] can only be laid horizontally or vertically.</span>"
+			return
+		if(get_dist(start,end) >= MAX_TAPE_RANGE)
+			usr << "<span class='warning'>Your tape segment is too long! It must be [MAX_TAPE_RANGE] tiles long or shorter!</span>"
 			return
 
 		var/turf/cur = start
@@ -96,19 +102,19 @@
 	//is_blocked_turf(var/turf/T)
 		usr << "<span class='notice'>You finish placing the [src].</span>"	//Git Test
 
-/obj/item/taperoll/afterattack(var/atom/A, mob/user as mob)
+/obj/item/taperoll/afterattack(var/atom/A, var/mob/user)
 	if (istype(A, /obj/machinery/door/airlock))
 		var/turf/T = get_turf(A)
 		var/obj/item/tape/P = new tape_type(T.x,T.y,T.z)
 		P.loc = locate(T.x,T.y,T.z)
 		P.icon_state = "[src.icon_base]_door"
 		P.layer = 3.2
-		user << "<span class='notice'>You finish placing the [src].</span>"
+		usr << "<span class='notice'>You finish placing the [src].</span>"
 
-/obj/item/tape/Bumped(M as mob)
+/obj/item/tape/Bumped(var/mob/M)
 	if(src.allowed(M))
 		var/turf/T = get_turf(src)
-		M:loc = T
+		M.loc = T
 
 /obj/item/tape/CanPass(atom/movable/mover, turf/target, height=0, air_group=0)
 	if(!density) return 1
@@ -119,7 +125,7 @@
 	else
 		return 0
 
-/obj/item/tape/attackby(obj/item/weapon/W as obj, mob/user as mob)
+/obj/item/tape/attackby(var/obj/item/weapon/W, var/mob/user)
 	breaktape(W, user)
 
 /obj/item/tape/attack_hand(mob/user as mob)
@@ -131,10 +137,10 @@
 	else
 		breaktape(null, user)
 
-/obj/item/tape/attack_paw(mob/user as mob)
+/obj/item/tape/attack_paw(var/mob/user)
 	breaktape(/obj/item/weapon/wirecutters,user)
 
-/obj/item/tape/proc/breaktape(obj/item/weapon/W as obj, mob/user as mob)
+/obj/item/tape/proc/breaktape(var/obj/item/weapon/W, var/mob/user)
 	if(user.a_intent == "help" && ((!is_sharp(W) && src.allowed(user))))
 		user << "You can't break the [src] with that!"
 		return
@@ -162,3 +168,5 @@
 
 	del(src)
 	return
+
+#undef MAX_TAPE_RANGE
