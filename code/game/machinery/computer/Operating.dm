@@ -26,7 +26,6 @@
 	if(get_dist(src, user) > 1 || stat & (BROKEN|NOPOWER))
 		if(!istype(user, /mob/living/silicon))
 			user.unset_machine()
-			user << browse(null, "window=op")
 			return
 
 	user.set_machine(src)
@@ -47,13 +46,22 @@
 			if(patient.surgeries.len)
 				dat += "<BR><B>Initiated Procedures:</B><BR>"
 				for(var/datum/surgery/procedure in patient.surgeries)
-					dat += "[procedure.name]<BR>"
+					dat += "[procedure.name]:<BR>"
+					var/new_stat = procedure.status
+					if(!(new_stat > procedure.steps.len))
+						var/next_procedure = procedure.steps[new_stat]
+						var/datum/surgery_step/Step = new next_procedure
+						dat += "[steps2text(Step)].<BR>"
+						qdel(Step)
 		else
 			patient = null
-			dat += "<B>No patient detected</B>"
+			dat += "<B>No patient detected.</B>"
 	else
 		dat += "<B>Operating table not found.</B>"
 	dat += "</BODY>"
 
-	user << browse(dat, "window=op")
-	onclose(user, "op")
+	var/datum/browser/popup = new(user, "Operating", "Operating Computer")
+	popup.set_content(dat)
+	popup.set_title_image(user.browse_rsc_icon(src.icon, src.icon_state))
+	popup.open()
+	return

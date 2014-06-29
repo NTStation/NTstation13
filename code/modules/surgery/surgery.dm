@@ -7,9 +7,8 @@
 	var/location = "chest"										//Surgery location
 	var/target_must_be_dead = 0									//Needs to be dead
 	var/target_must_be_fat = 0									//Needs to be fat
-	var/requires_organic_chest = 0								//Prevents you from performing an operation on Robotic chests***
-	var/has_multi_loc = 0 										//Multiple locations - RR
-
+	var/requires_organic_chest = 0								//Prevents you from performing an operation on Robotic chests
+	var/has_multi_loc = 0 										//Multiple locations
 
 
 
@@ -18,6 +17,7 @@
 
 	var/procedure = steps[status]
 	var/datum/surgery_step/S = new procedure
+
 	if(S)
 		if(S.try_op(user, target, user.zone_sel.selecting, user.get_active_hand(), src))
 			return 1
@@ -27,6 +27,46 @@
 /datum/surgery/proc/complete(mob/living/carbon/human/target)
 	target.surgeries -= src
 	src = null
+
+
+proc/steps2text(var/datum/surgery_step/Step)
+	var/txt = "You're unsure how to proceed"
+
+	switch(Step.type)
+		if(/datum/surgery_step/incise)
+			txt = "You should make a small incision"
+		if(/datum/surgery_step/retract_skin)
+			txt = "You should retract the skin"
+		if(/datum/surgery_step/clamp_bleeders)
+			txt = "You should clamp some bleeders in the patient"
+		if(/datum/surgery_step/fix_eyes)
+			txt = "You should cut behind the eyes"
+		if(/datum/surgery_step/close)
+			txt = "You should close the wound"
+		if(/datum/surgery_step/saw)
+			txt = "You should saw through the bone"
+		if(/datum/surgery_step/cut_fat)
+			txt = "You should cut away the fat"
+		if(/datum/surgery_step/remove_fat)
+			txt = "You should extract the fat"
+		if(/datum/surgery_step/extract_appendix)
+			txt = "You should extract the patient's appendix"
+		if(/datum/surgery_step/extract_core)
+			txt = "You should extract the patient's core"
+		if(/datum/surgery_step/reshape_genitals)
+			txt = "You should shape the patient's genitals"
+		if(/datum/surgery_step/extract_implant)
+			txt = "You should remove any implants in the patient"
+		if(/datum/surgery_step/replace)
+			txt = "You should sever the muscles on the target area"
+		if(/datum/surgery_step/add_limb)
+			txt = "You should add the patient's new body part"
+		if(/datum/surgery_step/reshape_face)
+			txt = "You should reshape the patient's face"
+		if(/datum/surgery_step/xenomorph_removal)
+			txt = "You should remove the xenomorph larva from the patient"
+
+	return "[txt]"
 
 
 
@@ -50,9 +90,6 @@
 
 
 //RESOLVED ISSUES //"Todo" jobs that have been completed
-//combine hands/feet into the arms - Hands/feet were removed - RR
-//surgeries (not steps) that can be initiated on any body part (corresponding with damage locations) - Call this one done, see multiple_location_example.dm - RR
+//combine hands/feet into the arms - Hands/feet were removed
+//surgeries (not steps) that can be initiated on any body part (corresponding with damage locations) - Call this one done, see multiple_location_example.dm
 
-
-//*** This may seem entirely redundant because of Organic organs only having operations but you CAN circumvent that due to
-//all surgeries (except augmentation) not checking where the surgeon aims so this is just a double check, it IS needed - RR
