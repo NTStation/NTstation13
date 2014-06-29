@@ -51,11 +51,11 @@
 					if(!(new_stat > procedure.steps.len))
 						var/next_procedure = procedure.steps[new_stat]
 						var/datum/surgery_step/Step = new next_procedure
-						dat += "[steps2text(Step)]<BR>"
+						dat += "[steps2text(Step)].<BR>"
 						qdel(Step)
 		else
 			patient = null
-			dat += "<B>No patient detected</B>"
+			dat += "<B>No patient detected.</B>"
 	else
 		dat += "<B>Operating table not found.</B>"
 	dat += "</BODY>"
