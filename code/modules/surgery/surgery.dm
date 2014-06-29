@@ -30,7 +30,7 @@
 
 
 proc/steps2text(var/datum/surgery_step/Step)
-	var/txt = "You're unsure how to proceeed"
+	var/txt = "You're unsure how to proceed"
 
 	switch(Step.type)
 		if(/datum/surgery_step/incise)
