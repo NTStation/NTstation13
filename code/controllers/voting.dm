@@ -49,7 +49,6 @@ datum/controller/vote
 
 	proc/autotransfer()
 		initiate_vote("crew_transfer","the server")
-		log_debug("The server has called a crew transfer vote")
 
 	proc/reset()
 		initiator = null
