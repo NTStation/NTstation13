@@ -76,6 +76,8 @@ datum/controller/game_controller/proc/setup()
 	setupgenetics()
 	setupfactions()
 
+	transfer_controller = new
+
 	spawn(0)
 		if(ticker)
 			ticker.pregame()
@@ -127,6 +129,7 @@ datum/controller/game_controller/proc/process()
 				controller_iteration++
 
 				vote.process()
+				transfer_controller.process()
 
 				//AIR
 				if(!air_processing_killed)

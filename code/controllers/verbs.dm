@@ -28,7 +28,7 @@
 	return
 
 
-/client/proc/debug_controller(controller in list("Master","Failsafe","Ticker","Lighting","Garbage","Air","Jobs","Sun","Radio","Supply Shuttle","Emergency Shuttle","Configuration","pAI", "Cameras", "Events"))
+/client/proc/debug_controller(controller in list("Master","Failsafe","Ticker","Lighting","Garbage","Air","Jobs","Sun","Radio","Supply Shuttle","Emergency Shuttle","Configuration","pAI", "Cameras", "Events", "Transfer Controller"))
 	set category = "Debug"
 	set name = "Debug Controller"
 	set desc = "Debug the various periodic loop controllers for the game (be careful!)"
@@ -80,5 +80,8 @@
 		if("Events")
 			debug_variables(events)
 			feedback_add_details("admin_verb","DEvents")
+		if("Transfer Controller")
+			debug_variables(transfer_controller)
+			feedback_add_details("admin_verb","DAutovoter")
 	message_admins("Admin [key_name_admin(usr)] is debugging the [controller] controller.")
 	return
