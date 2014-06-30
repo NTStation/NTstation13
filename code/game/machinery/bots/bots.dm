@@ -15,9 +15,11 @@
 	var/open = 0//Maint panel
 	var/locked = 1
 	var/hacked = 0 //Used to differentiate between being hacked by silicons and emagged by humans.
+	var/frustration = 0 //Used by some bots for tracking failures to reach their target.
 	var/list/call_path = list() //Path calculated by the AI and given to the bot to follow.
 	var/list/path = new() //Every bot has this, so it is best to put it here.
 	var/list/patrol_path = list() //The path a bot has while on patrol.
+	var/list/summon_path = list() //Path bot has while summoned.
 	var/pathset = 0
 	var/mode = 0 //Standardizes the vars that indicate the bot is busy with its function.
 	var/tries = 0 //Number of times the bot tried and failed to move.
@@ -26,6 +28,7 @@
 	//var/emagged = 0 //Urist: Moving that var to the general /bot tree as it's used by most bots
 	var/auto_patrol = 0// set to make bot automatically patrol
 	var/turf/patrol_target	// this is turf to navigate to (location of beacon)
+	var/turf/summon_target	// The turf of a user summoning a bot.
 	var/new_destination		// pending new destination (waiting for beacon response)
 	var/destination			// destination description tag
 	var/next_destination	// the next destination in the patrol route
@@ -83,7 +86,7 @@
 /obj/machinery/bot/proc/turn_off()
 	on = 0
 	SetLuminosity(0)
-	call_reset() //Resets an AI's call, should it exist.
+	bot_reset() //Resets an AI's call, should it exist.
 
 /obj/machinery/bot/New()
 	..()
@@ -261,14 +264,16 @@
 	else
 		if(calling_ai)
 			calling_ai << "[tries ? "<span class='danger'>[src] failed to reach waypoint.</span>" : "<span class='notice'>[src] successfully arrived to waypoint.</span>"]"
-		call_reset()
+		bot_reset()
 
-obj/machinery/bot/proc/call_reset()
+obj/machinery/bot/proc/bot_reset()
 
 	calling_ai = null
 	call_path = null
 	path = new()
-	patrol_path = new()
+	patrol_path = list()
+	summon_path = list()
+	summon_target = null
 	pathset = 0
 	botcard.access = prev_access
 	tries = 0
@@ -314,15 +319,6 @@ obj/machinery/bot/proc/start_patrol()
 		tries++
 	return
 
-obj/machinery/bot/proc/bot_summon()
-		// summoned to PDA
-	patrol_step()
-	spawn(4)
-		if(mode == BOT_SUMMON)
-			patrol_step()
-			sleep(4)
-			patrol_step()
-	return
 // perform a single patrol step
 
 /obj/machinery/bot/proc/patrol_step()
@@ -369,10 +365,6 @@ obj/machinery/bot/proc/bot_summon()
 			mode = BOT_IDLE
 			return
 
-	else if(mode == BOT_SUMMON && patrol_target) //Try to find the user again.
-		calc_path()
-		tries++
-
 	else	// no path, so calculate new one
 		mode = BOT_START_PATROL
 
@@ -414,9 +406,6 @@ obj/machinery/bot/proc/bot_summon()
 
 
 /obj/machinery/bot/proc/at_patrol_target()
-	if(mode == BOT_SUMMON)
-		botcard.access = prev_access
-		mode = BOT_IDLE
 
 	find_patrol_target()
 	return
@@ -455,27 +444,24 @@ obj/machinery/bot/proc/bot_summon()
 	// process control input
 		switch(recv)
 			if("stop")
-				call_reset() //Override the AI.
+				bot_reset() //Override the AI.
 				auto_patrol = 0
 				return
 
 			if("go")
-				call_reset()
+				bot_reset()
 				auto_patrol = 1
 				return
 
 			if("summon")
+				bot_reset()
 				var/list/user_access = signal.data["useraccess"]
-				patrol_target = signal.data["target"]	//Location of the user
+				summon_target = signal.data["target"]	//Location of the user
 				if(user_access.len != 0)
 					botcard.access = user_access	//Adds the user's access, if any.
-				next_destination = destination
-				destination = null
-				awaiting_beacon = 0
 				mode = BOT_SUMMON
-				calc_path()
+				calc_summon_path()
 				speak("Responding.")
-
 				return
 
 	// receive response from beacon
@@ -542,6 +528,15 @@ obj/machinery/bot/proc/bot_summon()
 	post_signal_multiple(control_freq, kv)
 
 
+obj/machinery/bot/proc/bot_summon()
+		// summoned to PDA
+	summon_step()
+	spawn(4)
+		if(mode == BOT_SUMMON)
+			summon_step()
+			sleep(4)
+			summon_step()
+	return
 
 // calculates a path to the current destination
 // given an optional turf to avoid
@@ -551,6 +546,65 @@ obj/machinery/bot/proc/bot_summon()
 	if(!patrol_path)
 		patrol_path = list()
 
+/obj/machinery/bot/proc/calc_summon_path(var/turf/avoid = null)
+	check_bot_access()
+	summon_path = AStar(loc, summon_target, /turf/proc/CardinalTurfsWithAccess, /turf/proc/Distance_cardinal, 0, 150, id=botcard, exclude=avoid)
+	if(!summon_path || tries >= 5)
+		bot_reset()
+
+/obj/machinery/bot/proc/summon_step()
+
+	if(loc == summon_target)		// Arrived to summon location.
+		bot_reset()
+		return
+
+	else if(summon_path.len > 0 && summon_target)		// valid path
+		var/turf/next = summon_path[1]
+		if(next == loc)
+			summon_path -= next
+			return
+
+
+		if(istype( next, /turf/simulated))
+
+			var/moved = step_towards(src, next)	// attempt to move
+			if(moved)	// successful move
+				blockcount = 0
+				summon_path -= loc
+
+			else		// failed to move
+				blockcount++
+
+				if(blockcount > 5)	// attempt 5 times before recomputing
+					// find new path excluding blocked turf
+					spawn(2)
+						calc_summon_path(next)
+						tries++
+						return
+
+				return
+
+		else	// not a valid turf
+			bot_reset()
+			return
+
+	else	// no path, so calculate new one
+		bot_reset()
+
+	return
+
+
+/obj/machinery/bot/Bump(M as mob|obj) //Leave no door unopened!
+	if((istype(M, /obj/machinery/door/airlock) ||  istype(M, /obj/machinery/door/window)) && (!isnull(botcard)))
+		var/obj/machinery/door/D = M
+		if(D.check_access(botcard))
+			D.open()
+			frustration = 0
+	else if((istype(M, /mob/living/)) && (!anchored))
+		var/mob/living/Mb
+		loc = Mb.loc
+		frustration = 0
+	return
 
 
 /******************************************************************/
@@ -597,7 +651,7 @@ obj/machinery/bot/proc/bot_summon()
 		return 1
 
 	for(var/obj/O in B)
-		if(O.density && !istype(O, /obj/machinery/door) && !(O.flags & ON_BORDER))
+		if(O.density && !istype(O, /obj/machinery/door/airlock) && !istype(O, /obj/machinery/door/window) && !(O.flags & ON_BORDER))
 			return 1
 
 	return 0

@@ -19,7 +19,6 @@
 	var/list/botcard_access = list(access_medical)
 	var/obj/item/weapon/reagent_containers/glass/reagent_glass = null //Can be set to draw from this for reagents.
 	var/skin = null //Set to "tox", "ointment" or "o2" for the other two firstaid kits.
-	var/frustration = 0
 	var/mob/living/carbon/patient = null
 	var/mob/living/carbon/oldpatient = null
 	var/oldloc = null
@@ -520,17 +519,6 @@
 	s.set_up(3, 1, src)
 	s.start()
 	qdel(src)
-	return
-
-/obj/machinery/bot/medbot/Bump(M as mob|obj) //Leave no door unopened!
-	if ((istype(M, /obj/machinery/door)) && (!isnull(botcard)))
-		var/obj/machinery/door/D = M
-		if (!istype(D, /obj/machinery/door/firedoor) && D.check_access(botcard))
-			D.open()
-			frustration = 0
-	else if ((istype(M, /mob/living/)) && (!anchored))
-		loc = M:loc
-		frustration = 0
 	return
 
 /* terrible

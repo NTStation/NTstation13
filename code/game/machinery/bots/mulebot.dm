@@ -690,7 +690,7 @@ var/global/mulebot_count = 0
 			if(calling_ai)
 				calling_ai << "[src] wirelessly plays a chiming sound!"
 				playsound(calling_ai, 'sound/machines/chime.ogg',40, 0)
-			call_reset()
+			bot_reset()
 
 		if(load)		// if loaded, unload at target
 			unload(loaddir)

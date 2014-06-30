@@ -25,7 +25,6 @@
 	var/threatlevel = 0
 	var/target_lastloc //Loc of target when arrested.
 	var/last_found //There's a delay
-	var/frustration = 0
 //var/emagged = 0 //Emagged Secbots view everyone as a criminal
 	var/idcheck = 1 //If false, all station IDs are authorized for weapons.
 	var/check_records = 1 //Does it check security records?
@@ -215,7 +214,7 @@ Auto Patrol: []"},
 		if(user) user << "<span class='warning'>You short out [src]'s target assessment circuits.</span>"
 		spawn(0)
 			for(var/mob/O in hearers(src, null))
-				O.show_message("span class='danger'> <B>[src] buzzes oddly!</B></span>", 1)
+				O.show_message("<span class='danger'> <B>[src] buzzes oddly!</B></span>", 1)
 		target = null
 		if(user) oldtarget_name = user.name
 		last_found = world.time
@@ -309,7 +308,7 @@ Auto Patrol: []"},
 					maxstuns--
 					if (maxstuns <= 0)
 						target = null
-					visible_message("span class='danger'> <B>[target] has been stunned by [src]!</B></span>")
+					visible_message("<span class='danger'> <B>[target] has been stunned by [src]!</B></span>")
 
 					mode = BOT_PREP_ARREST
 					anchored = 1
@@ -342,7 +341,7 @@ Auto Patrol: []"},
 				if (!target.handcuffed && !arrest_type)
 					playsound(src.loc, 'sound/weapons/cablecuff.ogg', 30, 1, -2)
 					mode = BOT_ARREST
-					visible_message("span class='danger'> <B>[src] is trying to restrain [src.target] with zipties!</B></span>")
+					visible_message("<span class='danger'> <B>[src] is trying to restrain [src.target] with zipties!</B></span>")
 
 					spawn(60)
 						if (get_dist(src, target) <= 1)
@@ -496,17 +495,6 @@ Auto Patrol: []"},
 
 	return threatcount
 
-/obj/machinery/bot/ed209/Bump(M as mob|obj) //Leave no door unopened!
-	if ((istype(M, /obj/machinery/door)) && (!isnull(botcard)))
-		var/obj/machinery/door/D = M
-		if (!istype(D, /obj/machinery/door/firedoor) && D.check_access(botcard))
-			D.open()
-			frustration = 0
-	else if ((istype(M, /mob/living/)) && (!anchored))
-		loc = M:loc
-		frustration = 0
-	return
-
 /* terrible
 /obj/machinery/bot/ed209/Bumped(atom/movable/M as mob|obj)
 	spawn(0)
@@ -517,7 +505,7 @@ Auto Patrol: []"},
 
 /obj/machinery/bot/ed209/explode()
 	walk_to(src,0)
-	visible_message("span class='danger'> <B>[src] blows apart!</B></span>", 1)
+	visible_message("<span class='danger'> <B>[src] blows apart!</B></span>", 1)
 	var/turf/Tsec = get_turf(src)
 
 	var/obj/item/weapon/ed209_assembly/Sa = new /obj/item/weapon/ed209_assembly(Tsec)
