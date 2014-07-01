@@ -7,7 +7,7 @@
 
 /mob/living/simple_animal/drone
 	name = "drone"
-	desc = "A maintenance drone. An expendable robot built to preform station repairs"
+	desc = "A maintenance drone. An expendable robot built to perform station repairs"
 	icon = 'icons/mob/drone.dmi'
 	icon_state = "drone_grey"
 	icon_living = "drone_grey"
