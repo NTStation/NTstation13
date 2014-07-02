@@ -614,6 +614,9 @@ var/list/slot_equipment_priority = list( \
 			add_stings_to_statpanel(mind.changeling.purchasedpowers)
 	add_spells_to_statpanel(mob_spell_list)
 
+	for(var/obj/O in src)
+		O.Stat()
+
 /mob/proc/add_spells_to_statpanel(var/list/spells)
 	for(var/obj/effect/proc_holder/spell/S in spells)
 		if(S.can_be_cast_by(src))

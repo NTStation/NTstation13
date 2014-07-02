@@ -1,3 +1,10 @@
+/mob/living/carbon/human/Move(NewLoc, direct)
+	. = ..()
+	if(.)
+		if(istype(wear_suit, /obj/item/clothing/suit/powered))
+			var/obj/item/clothing/suit/powered/powersuit = wear_suit
+			powersuit.onmove()
+
 /mob/living/carbon/human/movement_delay()
 	if(!has_gravity(src))
 		return -1	//It's hard to be slowed down in space by... anything
