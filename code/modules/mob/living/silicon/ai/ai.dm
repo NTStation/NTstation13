@@ -568,13 +568,16 @@ var/list/ai_list = list()
 	var/turf/turf_check = get_turf(A)
 		//The target must be in view of a camera or near the core.
 	if(turf_check in range(src))
-		call_bot(turf_check, Bot)
+		call_bot(turf_check)
 	else if(cameranet && cameranet.checkTurfVis(turf_check))
-		call_bot(turf_check, Bot)
+		call_bot(turf_check)
 	else
 		src << "<span class='danger'>Selected location is not visible.</span>"
 
 /mob/living/silicon/ai/proc/call_bot(var/turf/end_loc)
+
+	if(!Bot)
+		return
 
 	if(Bot.calling_ai && Bot.calling_ai != src) //Prevents an override if another AI is controlling this bot.
 		src << "<span class='danger'>Interface error. Unit is already in use.</span>"

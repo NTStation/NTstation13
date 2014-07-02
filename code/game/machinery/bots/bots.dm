@@ -601,7 +601,7 @@ obj/machinery/bot/proc/bot_summon()
 			D.open()
 			frustration = 0
 	else if((istype(M, /mob/living/)) && (!anchored))
-		var/mob/living/Mb
+		var/mob/living/Mb = M
 		loc = Mb.loc
 		frustration = 0
 	return

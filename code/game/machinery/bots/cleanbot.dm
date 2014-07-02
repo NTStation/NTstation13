@@ -236,6 +236,7 @@ text("<A href='?src=\ref[src];operation=oddbutton'>[oddbutton ? "Yes" : "No"]</A
 				target = null
 		return
 	if(path.len > 0 && target && (target != null))
+		mode = BOT_WORKING
 		step_to(src, path[1])
 		path -= path[1]
 	else if(path.len == 1)
