@@ -1022,7 +1022,7 @@ obj/item/toy/cards/deck/syndicate
 	name = "Chaplain action figure"
 	desc = "A \"Space Life\" brand Chaplain action figure."
 	icon_state = "chaplain"
-	diety = ""
+	var/diety = ""
 	toysay = "Praise Space Jesus!"
 
 /obj/item/toy/figure/chaplain/New()
