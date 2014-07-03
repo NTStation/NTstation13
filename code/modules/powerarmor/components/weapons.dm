@@ -2,15 +2,6 @@
 	proc/pattack(var/atom/A, var/mob/living/carbon/user)
 		return 0
 
-	drop()
-		..()
-		if(src == parent.meele)
-			parent.meele = null
-		if(src == parent.ranged_l)
-			parent.ranged_l = null
-		if(src == parent.ranged_r)
-			parent.ranged_r = null
-
 
 // MEELE
 /obj/item/weapon/powerarmor/weapon/meele/multiplier
@@ -18,7 +9,7 @@
 	desc = "Repeats your hand's movements with a set of servos."
 
 	pattack(var/atom/A, var/mob/living/carbon/user)
-		if(ismob(A) && parent.use_power(120))
+		if(ismob(A) && parent.use_power(80))
 			A.attack_hand(user)
 			A.attack_hand(user)
 			A.attack_hand(user)
@@ -58,25 +49,29 @@
 
 /obj/item/weapon/powerarmor/weapon/ranged/energy
 	name = "mounted proto-kinetic accelerator"
-	icon_state = ""
-	shot_cost = 200
+	desc = "According to Nanotrasen accounting, this is mining equipment used for crushing rocks. It's not very powerful unless used in a low pressure environment."
+	icon_state = "kineticgun"
+	shot_cost = 180
+	gun_name = "rapid proto-kinetic accelerator"
 	var/list/ammo_type = list(/obj/item/ammo_casing/energy/kinetic)
 
 	pattack(var/atom/A, var/mob/living/carbon/user)
-		gun.afterattack(A, user, 0, "")
+		return gun.afterattack(A, user, 0, "")
+
+	New()
+		..()
+		gun = new /obj/item/weapon/gun/energy/powersuit(src)
 
 
 /obj/item/weapon/gun/energy/powersuit
 	var/obj/item/weapon/powerarmor/weapon/ranged/energy/holder
 
-
 	New(var/atom/A)
-		..()
 		holder = A
 		fire_sound = holder.fire_sound
 		name = holder.gun_name
 		ammo_type = holder.ammo_type
-
+		..()
 
 	newshot()
 		if (!ammo_type || !holder.parent)	return
@@ -88,6 +83,7 @@
 
 /obj/item/weapon/powerarmor/weapon/ranged/proj
 	name = "mounted Bulldog"
+	desc = "A mag-fed semi-automatic shotgun for combat in narrow corridors. Compatible only with specialized magazines."
 	icon_state = "bulldog"
 	shot_cost = 60
 	gun_name = "\improper Bulldog shotgun"
@@ -96,7 +92,7 @@
 
 	pattack(var/atom/A, var/mob/living/carbon/user)
 		if(parent.use_power(shot_cost))
-			gun.afterattack(A, user, 0, "")
+			return gun.afterattack(A, user, 0, "")
 
 	load(var/obj/item/I, var/mob/user)
 		var/obj/item/weapon/gun/projectile/automatic/powersuit/proj_gun = gun
@@ -153,6 +149,7 @@
 
 /obj/item/weapon/powerarmor/weapon/ranged/proj/l6
 	name = "mounted L6 SAW"
+	desc = "A heavily modified light machine gun with a tactical plasteel frame resting on a rather traditionally-made ballistic weapon. Has 'Aussec Armoury - 2531' engraved on the reciever, as well as '7.62x51mm'."
 	icon_state = "l6"
 	w_class = 5
 
