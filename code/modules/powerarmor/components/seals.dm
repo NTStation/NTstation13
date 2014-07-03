@@ -24,8 +24,6 @@
 				if(parent.glovesrequired)
 					parent.gloves.gas_transfer_coefficient = 1
 					parent.gloves.permeability_coefficient = 1
-					parent.gloves.max_heat_protection_temperature = null
-					parent.gloves.min_cold_protection_temperature = null
 				if(parent.shoesrequired)
 					parent.shoes.gas_transfer_coefficient = 1
 					parent.shoes.permeability_coefficient = 1
@@ -38,25 +36,23 @@
 				parent.gas_transfer_coefficient = 0.01
 				parent.permeability_coefficient = 0.02
 				parent.flags |= STOPSPRESSUREDMAGE
-				parent.max_heat_protection_temperature = FIRESUIT_MAX_HEAT_PROTECITON_TEMPERATURE
-				parent.min_cold_protection_temperature = SPACE_SUIT_MIN_COLD_PROTECITON_TEMPERATURE
+				parent.max_heat_protection_temperature = FIRE_SUIT_MAX_TEMP_PROTECT
+				parent.min_cold_protection_temperature = SPACE_SUIT_MIN_TEMP_PROTECT
 				if(parent.helmrequired && parent.helm)
 					parent.helm.gas_transfer_coefficient = 0.01
 					parent.helm.permeability_coefficient = 0.02
-					parent.helm.max_heat_protection_temperature = FIRE_HELMET_MAX_HEAT_PROTECITON_TEMPERATURE
-					parent.helm.min_cold_protection_temperature = SPACE_HELMET_MIN_COLD_PROTECITON_TEMPERATURE
+					parent.helm.max_heat_protection_temperature = FIRE_HELM_MAX_TEMP_PROTECT
+					parent.helm.min_cold_protection_temperature = SPACE_HELM_MIN_TEMP_PROTECT
 					parent.helm.flags |= STOPSPRESSUREDMAGE
 					parent.helm.parent = parent
 				if(parent.glovesrequired && parent.gloves)
 					parent.gloves.gas_transfer_coefficient = 0.01
 					parent.gloves.permeability_coefficient = 0.02
-					parent.gloves.max_heat_protection_temperature = GLOVES_MAX_HEAT_PROTECITON_TEMPERATURE
-					parent.gloves.min_cold_protection_temperature = GLOVES_MIN_COLD_PROTECITON_TEMPERATURE
 				if(parent.shoesrequired && parent.shoes)
 					parent.shoes.gas_transfer_coefficient = 0.01
 					parent.shoes.permeability_coefficient = 0.02
-					parent.shoes.max_heat_protection_temperature = SHOE_MAX_HEAT_PROTECITON_TEMPERATURE
-					parent.shoes.min_cold_protection_temperature = SHOE_MIN_COLD_PROTECITON_TEMPERATURE
+					parent.shoes.max_heat_protection_temperature = SHOES_MAX_TEMP_PROTECT
+					parent.shoes.min_cold_protection_temperature = SHOES_MIN_TEMP_PROTECT
 				sealed = 1
 
 	adminbus
@@ -99,8 +95,8 @@
 					sleep(20)
 					parent.helm.gas_transfer_coefficient = 0.01
 					parent.helm.permeability_coefficient = 0.02
-					parent.helm.max_heat_protection_temperature = FIRE_HELMET_MAX_HEAT_PROTECITON_TEMPERATURE
-					parent.helm.min_cold_protection_temperature = SPACE_HELMET_MIN_COLD_PROTECITON_TEMPERATURE
+					parent.helm.max_heat_protection_temperature = FIRE_HELM_MAX_TEMP_PROTECT
+					parent.helm.min_cold_protection_temperature = SPACE_HELM_MIN_TEMP_PROTECT
 					parent.helm.flags |= STOPSPRESSUREDMAGE
 					user << "\blue Helmet atmospheric seals engaged."
 					if(manual)

@@ -2,7 +2,7 @@
 	name = "powered helmet"
 	icon_state = "swat"
 	desc = "Not for rookies."
-	flags = FPRINT | HEADCOVERSEYES | BLOCKHAIR | HEADCOVERSMOUTH
+	flags = HEADCOVERSEYES | BLOCKHAIR | HEADCOVERSMOUTH
 	var/brightness_on = 6 //luminosity when on
 	var/power = 5
 	var/on = 0
