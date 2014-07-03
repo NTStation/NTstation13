@@ -70,3 +70,30 @@
 	stat_button(var/name)
 		if(name == "Inject")
 			Inject()
+
+
+/obj/item/weapon/powerarmor/autoext
+	name = "automatic fire extinguisher"
+	desc = ""
+	icon_state = "suit_autoext"
+
+	toggle(sudden = 0)
+		switch(parent.active)
+			if(1)
+				if(!sudden)
+					usr << "\blue Automatic fire extinguisher disengaged."
+			if(0)
+				usr << "\blue Automatic fire extinguisher engaged."
+
+	is_subsystem()
+		return 1
+
+	process()
+		..()
+		if(ishuman(parent.loc))
+			var/mob/living/carbon/human/H = parent.loc
+			if(H.on_fire && parent.use_power(150))
+				H << "\blue *fssszt*"
+				H << "\blue Fire extinguished."
+				H.ExtinguishMob()
+				H.bodytemperature -= rand(25,30)
