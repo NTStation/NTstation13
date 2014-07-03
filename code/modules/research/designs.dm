@@ -1521,7 +1521,7 @@ datum/design/mmi_radio
 
 datum/design/drone_shell
 	name = "Drone shell"
-	desc = "A Maintenance drone shell, An expendable robot built to perform station repairs."
+	desc = "A shell of a Maintenance drone, An expendable robot built to perform station repairs."
 	id = "drone_shell"
 	req_tech = list("programming" = 2, "biotech" = 4)
 	build_type = PROTOLATHE | MECHFAB
