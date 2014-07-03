@@ -35,13 +35,16 @@
 		ranged_l = new /obj/item/weapon/powerarmor/weapon/ranged/proj(src)
 		ranged_l.add_to(src)
 		var/obj/item/weapon/powerarmor/weapon/ranged/proj/P = ranged_l
-		del(P.gun.chambered)
-		P.gun.magazine = new /obj/item/ammo_box/magazine/m12g/dragon(P.gun)
+		var/obj/item/weapon/gun/projectile/automatic/powersuit/gun = P.gun
+		del(gun.chambered)
+		gun.magazine = new /obj/item/ammo_box/magazine/m12g/dragon(gun)
+		gun.process_chamber()
 
 /obj/item/clothing/suit/powered/spawnable/syndie/supercell/New()
 	..()
 	powercell = new /obj/item/weapon/stock_parts/cell/super(src)
 
+/*
 // HEV
 /obj/item/clothing/suit/powered/spawnable/hev
 	name = "HEV"
@@ -57,15 +60,7 @@
 	name = "batmask"
 	icon_state = "batmanmask"
 	brightness_on = 0
-
-
-// orderly_riot
-/obj/item/clothing/suit/powered/spawnable/full/orderly_riot
-	icon_state = "orderly_riot"
-
-/obj/item/clothing/head/powered/spawnable/orderly_riot
-	icon_state = "powered-riot2"
-	brightness_on = 0
+*/
 
 
 // SYNDIE
