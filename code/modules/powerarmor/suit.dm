@@ -252,6 +252,9 @@
 				var/obj/item/weapon/powerarmor/C = W
 				var/installed = 0
 				if(C.is_subsystem())
+					for(var/obj/item/weapon/powerarmor/A in subsystems)
+						if(istype(A, C.type))
+							return
 					subsystems.Add(C)
 					installed = 1
 
