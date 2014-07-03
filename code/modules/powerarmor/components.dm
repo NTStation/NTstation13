@@ -39,6 +39,16 @@
 		else if(src == parent.power)
 			parent.power = null
 
+		else if(src == parent.meele)
+			parent.meele = null
+
+		else if(src == parent.ranged_l)
+			parent.ranged_l = null
+
+		else if(src == parent.ranged_r)
+			parent.ranged_r = null
+
+
 		else if(src in parent.subsystems)
 			parent.subsystems.Remove(src)
 
