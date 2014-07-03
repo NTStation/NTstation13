@@ -7,7 +7,7 @@
 
 /mob/living/simple_animal/drone
 	name = "drone"
-	desc = "A maintenance drone. An expendable robot built to perform station repairs"
+	desc = "A shell of a Maintenance drone, An expendable robot built to perform station repairs."
 	icon = 'icons/mob/drone.dmi'
 	icon_state = "drone_grey"
 	icon_living = "drone_grey"
@@ -57,7 +57,7 @@
 			else
 				D << "<span class='notice'>You're already in perfect condition!</span>"
 		else
-			user << ",span class='notice'>You can't salvage parts from [src] while they're still alive!</span>"
+			user << "<span class='notice'>You can't salvage parts from [src] while they're still alive!</span>"
 		return
 
 	..()
@@ -184,7 +184,7 @@
 
 /obj/item/drone_shell
 	name = "drone shell"
-	desc = "A Maintenance drone shell, An expendable robot built to perform station repairs."
+	desc = "A shell of a Maintenance drone, An expendable robot built to perform station repairs."
 	icon = 'icons/mob/drone.dmi'
 	icon_state = "drone_item"
 	origin_tech = "programming=2;biotech=4"
