@@ -1,8 +1,17 @@
 /obj/item/weapon/powerarmor/atmoseal
-	name = "power armor atmospheric seals"
+	name = "atmospheric seals"
 	desc = "Keeps the bad stuff out."
 	slowdown = 0
 	var/sealed = 0
+
+	var/suit_max = FIRE_SUIT_MAX_TEMP_PROTECT
+	var/suit_min = SPACE_SUIT_MIN_TEMP_PROTECT
+
+	var/helmet_max = FIRE_HELM_MAX_TEMP_PROTECT
+	var/helmet_min = SPACE_HELM_MIN_TEMP_PROTECT
+
+	var/boots_max = SHOES_MAX_TEMP_PROTECT
+	var/boots_min = SHOES_MIN_TEMP_PROTECT
 
 	toggle(sudden = 0)
 		switch(parent.active)
@@ -31,18 +40,26 @@
 					parent.shoes.min_cold_protection_temperature = null
 				sealed = 0
 
+				parent.armor["bio"] = initial(parent.armor["bio"])
+				if(parent.helm)
+					parent.helm.armor["bio"] = initial(parent.helm.armor["bio"])
+				if(parent.gloves)
+					parent.gloves.armor["bio"] = initial(parent.gloves.armor["bio"])
+				if(parent.shoes)
+					parent.shoes.armor["bio"] = initial(parent.shoes.armor["bio"])
+
 			if(0)
 				usr << "\blue Atmospheric seals engaged."
 				parent.gas_transfer_coefficient = 0.01
 				parent.permeability_coefficient = 0.02
 				parent.flags |= STOPSPRESSUREDMAGE
-				parent.max_heat_protection_temperature = FIRE_SUIT_MAX_TEMP_PROTECT
-				parent.min_cold_protection_temperature = SPACE_SUIT_MIN_TEMP_PROTECT
+				parent.max_heat_protection_temperature = suit_max
+				parent.min_cold_protection_temperature = suit_min
 				if(parent.helmrequired && parent.helm)
 					parent.helm.gas_transfer_coefficient = 0.01
 					parent.helm.permeability_coefficient = 0.02
-					parent.helm.max_heat_protection_temperature = FIRE_HELM_MAX_TEMP_PROTECT
-					parent.helm.min_cold_protection_temperature = SPACE_HELM_MIN_TEMP_PROTECT
+					parent.helm.max_heat_protection_temperature = helmet_max
+					parent.helm.min_cold_protection_temperature = helmet_min
 					parent.helm.flags |= STOPSPRESSUREDMAGE
 					parent.helm.parent = parent
 				if(parent.glovesrequired && parent.gloves)
@@ -51,17 +68,21 @@
 				if(parent.shoesrequired && parent.shoes)
 					parent.shoes.gas_transfer_coefficient = 0.01
 					parent.shoes.permeability_coefficient = 0.02
-					parent.shoes.max_heat_protection_temperature = SHOES_MAX_TEMP_PROTECT
-					parent.shoes.min_cold_protection_temperature = SHOES_MIN_TEMP_PROTECT
+					parent.shoes.max_heat_protection_temperature = boots_max
+					parent.shoes.min_cold_protection_temperature = boots_min
 				sealed = 1
 
-	adminbus
-		name = "AdminBUS power armor atmospheric seals"
-		desc = "Made with the rare Badminium molecule."
-		slowdown = 0
+				parent.armor["bio"] = 100
+				if(parent.helm)
+					parent.helm.armor["bio"] = 100
+				if(parent.gloves)
+					parent.gloves.armor["bio"] = 100
+				if(parent.shoes)
+					parent.shoes.armor["bio"] = 100
+
 
 	optional
-		name = "togglable power armor atmospheric seals"
+		name = "togglable atmospheric seals"
 		desc = "Keeps the bad stuff out, but lets you remove your helmet without having to turn the whole suit off."
 
 		New()
@@ -95,13 +116,14 @@
 					sleep(20)
 					parent.helm.gas_transfer_coefficient = 0.01
 					parent.helm.permeability_coefficient = 0.02
-					parent.helm.max_heat_protection_temperature = FIRE_HELM_MAX_TEMP_PROTECT
-					parent.helm.min_cold_protection_temperature = SPACE_HELM_MIN_TEMP_PROTECT
+					parent.helm.max_heat_protection_temperature = helmet_max
+					parent.helm.min_cold_protection_temperature = helmet_min
 					parent.helm.flags |= STOPSPRESSUREDMAGE
 					user << "\blue Helmet atmospheric seals engaged."
 					if(manual)
 						for (var/armorvar in helm.armor)
 							helm.armor[armorvar] = parent.armor[armorvar]
+							helm.armor["bio"] = 100
 					return
 				else
 					if(manual)
@@ -114,6 +136,7 @@
 					if(manual)
 						for (var/armorvar in helm.armor)
 							helm.armor[armorvar] = parent.reactive.togglearmor[armorvar]
+							helm.armor["bio"] = initial(helm.armor["bio"])
 					if(parent.helm.on)
 						parent.helm.on = 0
 						parent.helm.update_icon()
@@ -126,7 +149,9 @@
 						parent.helm = null
 						helm.parent = null
 
-		adminbus
-			name = "AdminBUS togglable power armor atmospheric seals"
-			desc = "Made with the rare Badminium molecule."
-			slowdown = 0
+		standart // Spaceproof, but not fireproof
+			name = "togglable atmospheric seals"
+			desc = "Keeps the vacuum out, but lets you remove your helmet without having to turn the whole suit off."
+
+			suit_max = SPACE_SUIT_MAX_TEMP_PROTECT
+			helmet_max = SPACE_HELM_MAX_TEMP_PROTECT

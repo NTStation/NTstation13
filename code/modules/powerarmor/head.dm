@@ -7,6 +7,7 @@
 	var/power = 5
 	var/on = 0
 	item_state = "swat"
+	flash_protect = 2
 	armor = list(melee = 40, bullet = 30, laser = 20,energy = 15, bomb = 25, bio = 10, rad = 10)
 	var/obj/item/clothing/suit/powered/parent
 	var/obj/effect/proc_holder/stat_button/button
@@ -29,7 +30,7 @@
 		return suit.active
 
 	update_icon()
-		icon_state = "powered[on]-[item_color]"
+		icon_state = "rig[on]-[item_color]"
 		if(ishuman(loc))
 			var/mob/living/carbon/human/H = loc
 			H.update_inv_head()
@@ -47,8 +48,9 @@
 
 	Stat()
 		..()
-		if(!istype(parent))	return
 		if(!brightness_on)	return
+		if(!istype(parent))	return
+		if(!is_armor_on())	return
 		statpanel("Power Armor", "Helmet lights:", "")
 		statpanel("Power Armor", on ? "\[ON\]" :"\[OFF\]", button)
 

@@ -163,7 +163,9 @@
 		sleep(delay)
 
 		if(sudden)
-			user << "\red Your armor loses power!"
+			user.visible_message("<span class='warning'>[user]'s armor loses power!</span>",
+			"<span class='warning'>Your armor loses power!</span>",
+			"<span class='notice'>You hear a click!</span>")
 		else
 			user << "\blue All systems disengaged."
 
@@ -214,7 +216,9 @@
 	attackby(obj/item/weapon/W as obj, mob/user as mob)
 		if(powercell)
 			if(istype(W, /obj/item/weapon/screwdriver))
-				user << "\red You remove [src]'s power cell!"
+				user.visible_message("<span class='warning'>[user] removes [src]'s power cell!</span>",
+				"<span class='warning'>You remove [src]'s power cell!</span>",
+				"<span class='notice'>You hear a click!</span>")
 				powercell.loc = get_turf(src)
 				powercell = null
 				return
@@ -229,23 +233,40 @@
 				if(subsystems.len)
 					for(var/obj/item/weapon/powerarmor/I in subsystems)
 						I.drop()
-					user << "\red You remove [src]'s subsystems!"
+					user.visible_message("<span class='warning'>[user] removes [src]'s subsystems!</span>",
+					"<span class='warning'>You remove [src]'s subsystems!</span>",
+					"<span class='notice'>You hear a click!</span>")
 
 				else if(meele)
-					user << "\red You remove [meele] from [src]!"
+					user.visible_message("<span class='warning'>[user] removes [meele] from [src]!</span>",
+					"<span class='warning'>You remove [meele] from [src]!</span>",
+					"<span class='notice'>You hear a click!</span>")
 					meele.drop()
 
 				else if(ranged_l)
-					user << "\red You remove [ranged_l] from [src]!"
+					user.visible_message("<span class='warning'>[user] removes [ranged_l] from [src]!</span>",
+					"<span class='warning'>You remove [ranged_l] from [src]!</span>",
+					"<span class='notice'>You hear a click!</span>")
 					ranged_l.drop()
 
 				else if(ranged_r)
-					user << "\red You remove [ranged_r] from [src]!"
+					user.visible_message("<span class='warning'>[user] removes [ranged_r] from [src]!</span>",
+					"<span class='warning'>You remove [ranged_r] from [src]!</span>",
+					"<span class='notice'>You hear a click!</span>")
 					ranged_r.drop()
 
 				else if(power)
-					user << "\red You remove [src]'s power generator!"
+					user.visible_message("<span class='warning'>[user] removes [src]'s power generator!</span>",
+					"<span class='warning'>You remove [src]'s power generator!</span>",
+					"<span class='notice'>You hear a click!</span>")
 					power.drop()
+
+				else if(reactive)
+					user.visible_message("<span class='warning'>[user] removes [src]'s armor plating!</span>",
+					"<span class='warning'>You remove [src]'s armor plating!</span>",
+					"<span class='notice'>You hear a crunch!</span>")
+					reactive.drop()
+
 				return
 
 			if(istype(W, /obj/item/weapon/powerarmor))
@@ -266,17 +287,23 @@
 					meele = C
 					installed = 1
 
-				else if(istype(C, /obj/item/weapon/powerarmor/weapon/ranged) && !ranged_l)
-					ranged_l = C
-					installed = 1
-
 				else if(istype(C, /obj/item/weapon/powerarmor/weapon/ranged) && !ranged_r)
 					ranged_r = C
 					installed = 1
 
+				else if(istype(C, /obj/item/weapon/powerarmor/weapon/ranged) && !ranged_l)
+					ranged_l = C
+					installed = 1
+
+				else if(istype(C, /obj/item/weapon/powerarmor/reactive) && !reactive)
+					reactive = C
+					installed = 1
+
 				if(installed)
 					C.add_to(src)
-					user << "\blue You attach [C] to [src]."
+					user.visible_message("<span class='notice'>[user] attaches [C] to [src].</span>",
+					"<span class='notice'>You attach [C] to [src].</span>",
+					"<span class='notice'>You hear a click!</span>")
 
 		if(istype(power) && power.fuel(W, user))
 			return

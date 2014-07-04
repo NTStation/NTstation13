@@ -1,6 +1,6 @@
 /obj/item/weapon/powerarmor/servos
 	name = "movement assist servos"
-	desc = ""
+	desc = "A set of movement assist servos for a powersuit."
 	icon = 'icons/obj/module.dmi'
 	icon_state = "servo"
 	var/toggleslowdown = 7
@@ -22,6 +22,11 @@
 	proc/onmove()
 		parent.use_power(powerusage)
 
+/obj/item/weapon/powerarmor/servos/cheap
+	name = "cheap servos"
+	desc = "A set of cheap and weak servos for a powersuit."
+	toggleslowdown = 5
+	powerusage = 4
 
 /obj/item/weapon/powerarmor/medinj
 	name = "medical injector"
