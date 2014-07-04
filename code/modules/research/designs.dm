@@ -1520,8 +1520,8 @@ datum/design/mmi_radio
 	category = "Misc"
 
 datum/design/drone_shell
-	name = "Drone shell"
-	desc = "A shell of a Maintenance drone, An expendable robot built to perform station repairs."
+	name = "drone shell"
+	desc = "A shell of a maintenance drone, an expendable robot built to perform station repairs."
 	id = "drone_shell"
 	req_tech = list("programming" = 2, "biotech" = 4)
 	build_type = PROTOLATHE | MECHFAB
