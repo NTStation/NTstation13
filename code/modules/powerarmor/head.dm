@@ -46,8 +46,9 @@
 		user.SetLuminosity(user.luminosity - brightness_on)
 		update_icon()
 
-/obj/item/clothing/head/powered/Stat()
+/obj/item/clothing/head/powered/Stat(var/stat = 0)
 	..()
+	if(!stat)			return
 	if(!brightness_on)	return
 	if(!istype(parent))	return
 	if(!is_armor_on())	return

@@ -184,6 +184,9 @@
 		statpanel("Power Armor", "Power:", "\[MISSING\]")
 	statpanel("Power Armor", "", " ")
 
+	if(helm)
+		helm.Stat(1)
+
 	var/i = ""
 	for(var/obj/item/weapon/powerarmor/I in src)
 		i += "  "
