@@ -1,43 +1,43 @@
 /obj/item/clothing/suit/powered/full
 	helmrequired = 1
 
-	New()
-		atmoseal = new /obj/item/weapon/powerarmor/atmoseal/optional/standart(src)
-		atmoseal.add_to(src)
-		..()
+/obj/item/clothing/suit/powered/full/New()
+	atmoseal = new /obj/item/weapon/powerarmor/atmoseal/optional/standart(src)
+	atmoseal.add_to(src)
+	..()
 
 
 /obj/item/clothing/suit/powered/syndie
 	shoesrequired = 1
 
-	New()
-		..()
-		var/obj/item/weapon/powerarmor/C = new /obj/item/weapon/powerarmor/servos(src)
-		C.add_to(src)
-		subsystems.Add(C)
+/obj/item/clothing/suit/powered/syndie/New()
+	..()
+	var/obj/item/weapon/powerarmor/C = new /obj/item/weapon/powerarmor/servos(src)
+	C.add_to(src)
+	subsystems.Add(C)
 
-		reactive = new /obj/item/weapon/powerarmor/reactive/centcomm(src)
-		reactive.add_to(src)
+	reactive = new /obj/item/weapon/powerarmor/reactive/centcomm(src)
+	reactive.add_to(src)
 
-		C = new /obj/item/weapon/powerarmor/medinj(src)
-		C.add_to(src)
-		subsystems.Add(C)
+	C = new /obj/item/weapon/powerarmor/medinj(src)
+	C.add_to(src)
+	subsystems.Add(C)
 
-		meele = new /obj/item/weapon/powerarmor/weapon/meele/pneumatic(src)
-		meele.add_to(src)
+	meele = new /obj/item/weapon/powerarmor/weapon/meele/pneumatic(src)
+	meele.add_to(src)
 
-		ranged_r = new /obj/item/weapon/powerarmor/weapon/ranged/proj/l6(src)
-		ranged_r.add_to(src)
+	ranged_r = new /obj/item/weapon/powerarmor/weapon/ranged/proj/l6(src)
+	ranged_r.add_to(src)
 
-		ranged_l = new /obj/item/weapon/powerarmor/weapon/ranged/proj(src)
-		ranged_l.add_to(src)
-		var/obj/item/weapon/powerarmor/weapon/ranged/proj/P = ranged_l
-		var/obj/item/weapon/gun/projectile/automatic/powersuit/gun = P.gun
-		del(gun.chambered)
-		gun.magazine = new /obj/item/ammo_box/magazine/m12g/dragon(gun)
-		gun.process_chamber()
+	ranged_l = new /obj/item/weapon/powerarmor/weapon/ranged/proj(src)
+	ranged_l.add_to(src)
+	var/obj/item/weapon/powerarmor/weapon/ranged/proj/P = ranged_l
+	var/obj/item/weapon/gun/projectile/automatic/powersuit/gun = P.gun
+	del(gun.chambered)
+	gun.magazine = new /obj/item/ammo_box/magazine/m12g/dragon(gun)
+	gun.process_chamber()
 
-/obj/item/clothing/suit/powered/spawnable/supercell/New()
+/obj/item/clothing/suit/powered/syndie/supercell/New()
 	..()
 	powercell = new /obj/item/weapon/stock_parts/cell/super(src)
 
@@ -90,11 +90,11 @@
 	slowdown = 7
 	armor = list(melee = 5, bullet = 5, laser = 5, energy = 5, bomb = 5, bio = 10, rad = 15)
 
-	New()
-		..()
-		var/obj/item/weapon/powerarmor/C = new /obj/item/weapon/powerarmor/servos/cheap(src)
-		C.add_to(src)
-		subsystems.Add(C)
+/obj/item/clothing/suit/powered/full/mining/New()
+	..()
+	var/obj/item/weapon/powerarmor/C = new /obj/item/weapon/powerarmor/servos/cheap(src)
+	C.add_to(src)
+	subsystems.Add(C)
 
-		reactive = new /obj/item/weapon/powerarmor/reactive/standart(src)
-		reactive.add_to(src)
+	reactive = new /obj/item/weapon/powerarmor/reactive/standart(src)
+	reactive.add_to(src)

@@ -1,6 +1,5 @@
-/obj/item/weapon/powerarmor/weapon
-	proc/pattack(var/atom/A, var/mob/living/carbon/user)
-		return 0
+/obj/item/weapon/powerarmor/weapon/proc/pattack(var/atom/A, var/mob/living/carbon/user)
+	return 0
 
 
 // MEELE
@@ -8,13 +7,13 @@
 	name = "punch repeater"
 	desc = "Repeats your hand's movements with a set of servos."
 
-	pattack(var/atom/A, var/mob/living/carbon/user)
-		if(ismob(A) && parent.use_power(80))
-			A.attack_hand(user)
-			A.attack_hand(user)
-			A.attack_hand(user)
-			return 1
-		return 0
+/obj/item/weapon/powerarmor/weapon/meele/multiplier/pattack(var/atom/A, var/mob/living/carbon/user)
+	if(ismob(A) && parent.use_power(80))
+		A.attack_hand(user)
+		A.attack_hand(user)
+		A.attack_hand(user)
+		return 1
+	return 0
 
 
 /obj/item/weapon/powerarmor/weapon/meele/pneumatic
@@ -23,16 +22,16 @@
 	icon = 'icons/obj/module.dmi'
 	icon_state = "pneumatics"
 
-	pattack(var/atom/A, var/mob/living/carbon/user)
-		if(ismob(A) && parent.use_power(250))
-			var/mob/living/M = A
-			M.Stun(8)
-			M.adjustBruteLoss(10)
-			M.attack_hand(user)
-			var/throwdir = get_dir(user,M)
-			M.throw_at(get_edge_target_turf(M, throwdir),5,1)
-			return 1
-		return 0
+/obj/item/weapon/powerarmor/weapon/meele/pneumatic/pattack(var/atom/A, var/mob/living/carbon/user)
+	if(ismob(A) && parent.use_power(250))
+		var/mob/living/M = A
+		M.Stun(8)
+		M.adjustBruteLoss(10)
+		M.attack_hand(user)
+		var/throwdir = get_dir(user,M)
+		M.throw_at(get_edge_target_turf(M, throwdir),5,1)
+		return 1
+	return 0
 
 
 
@@ -44,9 +43,6 @@
 	var/shot_cost = 100
 	var/fire_sound = 'sound/weapons/Gunshot.ogg'
 
-	proc/load()
-		return 0
-
 /obj/item/weapon/powerarmor/weapon/ranged/energy
 	name = "mounted proto-kinetic accelerator"
 	desc = "According to Nanotrasen accounting, this is mining equipment used for crushing rocks. It's not very powerful unless used in a low pressure environment."
@@ -55,31 +51,37 @@
 	gun_name = "rapid proto-kinetic accelerator"
 	var/list/ammo_type = list(/obj/item/ammo_casing/energy/kinetic)
 
-	pattack(var/atom/A, var/mob/living/carbon/user)
-		return gun.afterattack(A, user, 0, "")
 
-	New()
-		..()
-		gun = new /obj/item/weapon/gun/energy/powersuit(src)
+/obj/item/weapon/powerarmor/weapon/ranged/energy/New()
+	..()
+	gun = new /obj/item/weapon/gun/energy/powersuit(src)
+
+
+/obj/item/weapon/powerarmor/weapon/ranged/energy/pattack(var/atom/A, var/mob/living/carbon/user)
+	return gun.afterattack(A, user, 0, "")
 
 
 /obj/item/weapon/gun/energy/powersuit
+	name = "powersuit gun"
 	var/obj/item/weapon/powerarmor/weapon/ranged/energy/holder
 
-	New(var/atom/A)
-		holder = A
-		fire_sound = holder.fire_sound
-		name = holder.gun_name
-		ammo_type = holder.ammo_type
-		..()
 
-	newshot()
-		if (!ammo_type || !holder.parent)	return
-		var/obj/item/ammo_casing/energy/shot = ammo_type[select]
-		if (!holder.parent.use_power(holder.shot_cost))	return
-		chambered = shot
-		chambered.newshot()
-		return
+/obj/item/weapon/gun/energy/powersuit/New(var/atom/A)
+	holder = A
+	fire_sound = holder.fire_sound
+	name = holder.gun_name
+	ammo_type = holder.ammo_type
+	..()
+
+/obj/item/weapon/gun/energy/powersuit/newshot()
+	if (!ammo_type || !holder.parent)	return
+	var/obj/item/ammo_casing/energy/shot = ammo_type[select]
+	if (!holder.parent.use_power(holder.shot_cost))	return
+	chambered = shot
+	chambered.newshot()
+	return
+
+
 
 /obj/item/weapon/powerarmor/weapon/ranged/proj
 	name = "mounted Bulldog"
@@ -90,36 +92,38 @@
 
 	var/mag_type = /obj/item/ammo_box/magazine/m762
 
-	pattack(var/atom/A, var/mob/living/carbon/user)
-		if(parent.use_power(shot_cost))
-			return gun.afterattack(A, user, 0, "")
 
-	load(var/obj/item/I, var/mob/user)
-		var/obj/item/weapon/gun/projectile/automatic/powersuit/proj_gun = gun
-		if(!proj_gun.magazine && istype(I, mag_type))
-			var/obj/item/ammo_box/magazine/magazine = I
-			if(magazine.ammo_count())
-				return gun.attackby(magazine, user)
+/obj/item/weapon/powerarmor/weapon/ranged/proj/pattack(var/atom/A, var/mob/living/carbon/user)
+	if(parent.use_power(shot_cost))
+		return gun.afterattack(A, user, 0, "")
 
-	New()
-		..()
-		gun = new /obj/item/weapon/gun/projectile/automatic/powersuit(src)
-		button = new(null, src, "Drop")
+/obj/item/weapon/powerarmor/weapon/ranged/proj/load(var/obj/item/I, var/mob/user)
+	var/obj/item/weapon/gun/projectile/automatic/powersuit/proj_gun = gun
+	if(!proj_gun.magazine && istype(I, mag_type))
+		var/obj/item/ammo_box/magazine/magazine = I
+		if(magazine.ammo_count())
+			return gun.attackby(magazine, user)
 
-	Stat()
-		..()
-		if(!istype(parent))	return
-		var/obj/item/weapon/gun/projectile/automatic/powersuit/proj_gun = gun
-		statpanel("Power Armor", gun.name + ":", "")
-		if(proj_gun.magazine)
-			statpanel("Power Armor", "\[[proj_gun.get_ammo()] / [proj_gun.magazine.max_ammo]\]", button)
-		else
-			statpanel("Power Armor", "\[RELOAD\]", "")
+/obj/item/weapon/powerarmor/weapon/ranged/proj/New()
+	..()
+	gun = new /obj/item/weapon/gun/projectile/automatic/powersuit(src)
+	button = new(null, src, "Drop")
 
-	stat_button(var/name)
-		var/obj/item/weapon/gun/projectile/automatic/powersuit/proj_gun = gun
-		if(name == "Drop")
-			proj_gun.drop_mag()
+/obj/item/weapon/powerarmor/weapon/ranged/proj/Stat()
+	..()
+	if(!istype(parent))	return
+	var/obj/item/weapon/gun/projectile/automatic/powersuit/proj_gun = gun
+	statpanel("Power Armor", gun.name + ":", "")
+	if(proj_gun.magazine)
+		statpanel("Power Armor", "\[[proj_gun.get_ammo()] / [proj_gun.magazine.max_ammo]\]", button)
+	else
+		statpanel("Power Armor", "\[RELOAD\]", "")
+
+/obj/item/weapon/powerarmor/weapon/ranged/proj/stat_button(var/name)
+	var/obj/item/weapon/gun/projectile/automatic/powersuit/proj_gun = gun
+	if(name == "Drop")
+		proj_gun.drop_mag()
+
 
 /obj/item/weapon/gun/projectile/automatic/powersuit
 	name = "powersuit gun"
@@ -128,23 +132,24 @@
 	var/obj/item/weapon/powerarmor/weapon/ranged/proj/holder
 
 
-	New(var/atom/A)
-		holder = A
-		mag_type = holder.mag_type
-		fire_sound = holder.fire_sound
-		name = holder.gun_name
-		..()
+/obj/item/weapon/gun/projectile/automatic/powersuit/New(var/atom/A)
+	holder = A
+	mag_type = holder.mag_type
+	fire_sound = holder.fire_sound
+	name = holder.gun_name
+	..()
 
-	chamber_round()
-		..()
-		if(magazine && !magazine.ammo_count())
-			drop_mag()
+/obj/item/weapon/gun/projectile/automatic/powersuit/chamber_round()
+	..()
+	if(magazine && !magazine.ammo_count())
+		drop_mag()
 
-	proc/drop_mag()
-		if(magazine)
-			magazine.loc = get_turf(src.loc)
-			magazine.update_icon()
-			magazine = null
+/obj/item/weapon/gun/projectile/automatic/powersuit/proc/drop_mag()
+	if(magazine)
+		magazine.loc = get_turf(src.loc)
+		magazine.update_icon()
+		magazine = null
+
 
 
 /obj/item/weapon/powerarmor/weapon/ranged/proj/l6

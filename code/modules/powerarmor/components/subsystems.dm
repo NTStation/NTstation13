@@ -6,27 +6,29 @@
 	var/toggleslowdown = 7
 	var/powerusage = 6
 
-	toggle(sudden = 0)
-		switch(parent.active)
-			if(1)
-				if(!sudden)
-					usr << "\blue Movement assist servos disengaged."
-				parent.slowdown += toggleslowdown
-			if(0)
-				usr << "\blue Movement assist servos engaged."
-				parent.slowdown -= toggleslowdown
+/obj/item/weapon/powerarmor/servos/toggle(sudden = 0)
+	switch(parent.active)
+		if(1)
+			if(!sudden)
+				usr << "\blue Movement assist servos disengaged."
+			parent.slowdown += toggleslowdown
+		if(0)
+			usr << "\blue Movement assist servos engaged."
+			parent.slowdown -= toggleslowdown
 
-	is_subsystem()
-		return 1
+/obj/item/weapon/powerarmor/servos/is_subsystem()
+	return "servo"
 
-	proc/onmove()
-		parent.use_power(powerusage)
+/obj/item/weapon/powerarmor/servos/proc/onmove()
+	parent.use_power(powerusage)
 
 /obj/item/weapon/powerarmor/servos/cheap
 	name = "cheap servos"
 	desc = "A set of cheap and weak servos for a powersuit."
 	toggleslowdown = 5
 	powerusage = 4
+
+
 
 /obj/item/weapon/powerarmor/medinj
 	name = "medical injector"
@@ -36,45 +38,45 @@
 	var/charges = 10
 	var/max_charges = 10
 
-	toggle(sudden = 0)
-		switch(parent.active)
-			if(1)
-				if(!sudden)
-					usr << "\blue Medical injector disengaged."
-			if(0)
-				usr << "\blue Medical injector engaged."
+/obj/item/weapon/powerarmor/medinj/toggle(sudden = 0)
+	switch(parent.active)
+		if(1)
+			if(!sudden)
+				usr << "\blue Medical injector disengaged."
+		if(0)
+			usr << "\blue Medical injector engaged."
 
-	is_subsystem()
-		return 1
+/obj/item/weapon/powerarmor/medinj/is_subsystem()
+	return "medinj"
 
-	Stat()
-		..()
-		if(!istype(parent))	return
-		statpanel("Power Armor", "Medical Injector:", "")
-		statpanel("Power Armor", "\[[charges]/[max_charges]\]", button)
+/obj/item/weapon/powerarmor/medinj/Stat()
+	..()
+	if(!istype(parent))	return
+	statpanel("Power Armor", "Medical Injector:", "")
+	statpanel("Power Armor", "\[[charges]/[max_charges]\]", button)
 
+/obj/item/weapon/powerarmor/medinj/New()
+	..()
+	button = new(null, src, "Inject")
 
-	New()
-		..()
-		button = new(null, src, "Inject")
+/obj/item/weapon/powerarmor/medinj/proc/Inject()
+	if(!charges)
+		return
+	if(!parent.use_power(2))
+		return
 
-	proc/Inject()
-		if(!charges)
-			return
-		if(!parent.use_power(2))
-			return
+	for(var/mob/living/carbon/human/M in range(0, parent))
+		if(M.wear_suit == parent)
+			M.reagents.add_reagent("doctorsdelight", 5)
+			M.reagents.add_reagent("synaptizine", 5)
+			M.reagents.add_reagent("anti_toxin", 5)
+			M.reagents.add_reagent("tricordrazine", 10)
+			charges--
 
-		for(var/mob/living/carbon/human/M in range(0, parent))
-			if(M.wear_suit == parent)
-				M.reagents.add_reagent("doctorsdelight", 5)
-				M.reagents.add_reagent("synaptizine", 5)
-				M.reagents.add_reagent("anti_toxin", 5)
-				M.reagents.add_reagent("tricordrazine", 10)
-				charges--
+/obj/item/weapon/powerarmor/medinj/stat_button(var/name)
+	if(name == "Inject")
+		Inject()
 
-	stat_button(var/name)
-		if(name == "Inject")
-			Inject()
 
 
 /obj/item/weapon/powerarmor/autoext
@@ -82,23 +84,23 @@
 	desc = ""
 	icon_state = "suit_autoext"
 
-	toggle(sudden = 0)
-		switch(parent.active)
-			if(1)
-				if(!sudden)
-					usr << "\blue Automatic fire extinguisher disengaged."
-			if(0)
-				usr << "\blue Automatic fire extinguisher engaged."
+/obj/item/weapon/powerarmor/autoext/toggle(sudden = 0)
+	switch(parent.active)
+		if(1)
+			if(!sudden)
+				usr << "\blue Automatic fire extinguisher disengaged."
+		if(0)
+			usr << "\blue Automatic fire extinguisher engaged."
 
-	is_subsystem()
-		return 1
+/obj/item/weapon/powerarmor/autoext/is_subsystem()
+	return "autoext"
 
-	process()
-		..()
-		if(ishuman(parent.loc))
-			var/mob/living/carbon/human/H = parent.loc
-			if(H.on_fire && parent.use_power(150))
-				H << "\blue *fssszt*"
-				H << "\blue Fire extinguished."
-				H.ExtinguishMob()
-				H.bodytemperature -= rand(25,30)
+/obj/item/weapon/powerarmor/autoext/process()
+	..()
+	if(ishuman(parent.loc))
+		var/mob/living/carbon/human/H = parent.loc
+		if(H.on_fire && parent.use_power(150))
+			H << "\blue *fssszt*"
+			H << "\blue Fire extinguished."
+			H.ExtinguishMob()
+			H.bodytemperature -= rand(25,30)

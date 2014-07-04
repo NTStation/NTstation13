@@ -4,23 +4,24 @@
 	var/powergen = 100
 	var/on = 1
 
-	New()
-		..()
-		button = new(null, src, "Toggle")
+	is_subsystem()
+		return "powergen"
 
-	stat_button(var/name)
-		if(name == "Toggle")
-			on = !on
+/obj/item/weapon/powerarmor/power/New()
+	..()
+	button = new(null, src, "Toggle")
 
-	proc/fuel(var/item)
-		return 0
+/obj/item/weapon/powerarmor/power/stat_button(var/name)
+	if(name == "Toggle")
+		on = !on
 
-	process()
-		if(parent.powercell)
-			return parent.powercell.give(powergen)
-		else
-			return powergen
-			// should never happen
+/obj/item/weapon/powerarmor/power/process()
+	if(parent.powercell)
+		return parent.powercell.give(powergen)
+	else
+		return powergen
+		// should never happen
+
 
 // Plasma Generator
 /obj/item/weapon/powerarmor/power/plasma
@@ -29,50 +30,50 @@
 	slowdown = 1
 	var/fuel = 0
 	var/maxfuel = 75
-	powergen = 50
+	powergen = 30
 
-	Stat()
-		..()
-		if(!istype(parent))	return
-		statpanel("Power Armor", "Plasma Generator:", "")
-		statpanel("Power Armor", "Fuel:", fuel)
-		statpanel("Power Armor", on ? "\[ON\]" :"\[OFF\]", button)
+/obj/item/weapon/powerarmor/power/plasma/Stat()
+	..()
+	if(!istype(parent))	return
+	statpanel("Power Armor", "Plasma Generator:", "")
+	statpanel("Power Armor", "Fuel:", fuel)
+	statpanel("Power Armor", on ? "\[ON\]" :"\[OFF\]", button)
 
-	process()
-		if(!on) return
+/obj/item/weapon/powerarmor/power/plasma/process()
+	if(!on) return
 
-		if(fuel <= 0)
-			on = 0
-			return
+	if(fuel <= 0)
+		on = 0
+		return
 
-		if(..() == powergen)
-			return
+	if(..() == powergen)
+		return
 
+	fuel--
+	if(!prob(reliability))
 		fuel--
-		if(!prob(reliability))
-			fuel--
 
-	fuel(var/item, var/mob/user)
-		if(istype(item, /obj/item/stack/sheet/mineral/plasma))
-			var/obj/item/stack/S = item
-			if(fuel < maxfuel)
-				user << "\blue You feed some plasma into the armor's generator."
-				fuel += 25
-				S.use(1)
-			else
-				user << "\red The generator already has plenty of plasma."
-				return 1
+/obj/item/weapon/powerarmor/power/plasma/load(var/item, var/mob/user)
+	if(istype(item, /obj/item/stack/sheet/mineral/plasma))
+		var/obj/item/stack/S = item
+		if(fuel < maxfuel)
+			user << "\blue You feed some plasma into the armor's generator."
+			fuel += 25
+			S.use(1)
+		else
+			user << "\red The generator already has plenty of plasma."
+			return 1
 
-		if(istype(item, /obj/item/weapon/ore/plasma))
-			if(fuel < maxfuel)
-				user << "\blue You feed plasma ore into the armor's generator."
-				fuel += 15
-				//raw plasma has impurities, so it doesn't provide as much fuel. --NEO
-				del(item)
-			else
-				user << "\red The generator already has plenty of plasma."
-				return 1
-		return 0
+	if(istype(item, /obj/item/weapon/ore/plasma))
+		if(fuel < maxfuel)
+			user << "\blue You feed plasma ore into the armor's generator."
+			fuel += 15
+			//raw plasma has impurities, so it doesn't provide as much fuel. --NEO
+			del(item)
+		else
+			user << "\red The generator already has plenty of plasma."
+			return 1
+	return 0
 
 
 // Nuclear Generator
@@ -80,38 +81,38 @@
 	name = "miniaturized nuclear generator"
 	desc = "A generator for power armor. For all your radioactive needs!"
 	slowdown = 1.5
-	powergen = 25
+	powergen = 20
 
-	Stat()
-		..()
-		if(!istype(parent))	return
-		statpanel("Power Armor", "Nuclear Generator:", "")
-		if(crit_fail)
-			statpanel("Power Armor", "\[CRITICAL ERROR\]", "")
-			return
-		statpanel("Power Armor", on ? "\[ON\]" : "\[OFF\]", button)
+/obj/item/weapon/powerarmor/power/nuclear/Stat()
+	..()
+	if(!istype(parent))	return
+	statpanel("Power Armor", "Nuclear Generator:", "")
+	if(crit_fail)
+		statpanel("Power Armor", "\[CRITICAL FAILURE\]", "")
+		return
+	statpanel("Power Armor", on ? "\[ON\]" : "\[OFF\]", button)
 
-	process()
-		if(crit_fail)			return
-		if(!on)					return
-		if(..() == powergen)	return
+/obj/item/weapon/powerarmor/power/nuclear/process()
+	if(crit_fail)			return
+	if(!on)					return
+	if(..() == powergen)	return
 
-		if(!prob(reliability))
-			if(prob(reliability)) //Only a minor failure, enjoy your radiation.
-				for (var/mob/M in range(0,src.parent))
-					if (src.parent in M.contents)
-						M << "\red Your armor feels pleasantly warm for a moment."
-						M.radiation += rand(1,20)
-					else
-						M << "\red You feel a warm sensation."
-					M.radiation += rand(1,15)
-				if(!prob(reliability))
-					reliability -= 5
-			else //Big failure, TIME FOR RADIATION BITCHES
-				for (var/mob/M in range(2,src.parent))
-					if (src.parent in M.contents)
-						M << "\red Your armor's reactor overloads!"
-						M.radiation += 60
-					M << "\red You feel a wave of heat wash over you."
-					M.radiation += 40
-				crit_fail = 1 //broken~
+	if(!prob(reliability))
+		if(prob(reliability)) //Only a minor failure, enjoy your radiation.
+			for (var/mob/living/M in range(0,src.parent))
+				if (src.parent in M.contents)
+					M << "\red Your armor feels pleasantly warm for a moment."
+					M.radiation += rand(1,20)
+				else
+					M << "\red You feel a warm sensation."
+				M.apply_effect(rand(1,15),IRRADIATE,0)
+			if(!prob(reliability))
+				reliability -= 5
+		else //Big failure, TIME FOR RADIATION BITCHES
+			for (var/mob/living/M in range(2,src.parent))
+				if (src.parent in M.contents)
+					M << "\red Your armor's reactor overloads!"
+					M.radiation += 60
+				M << "\red You feel a wave of heat wash over you."
+				M.apply_effect(40,IRRADIATE,0)
+			crit_fail = 1 //broken~
