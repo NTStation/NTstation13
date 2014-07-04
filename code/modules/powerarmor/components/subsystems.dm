@@ -5,6 +5,7 @@
 	icon_state = "servo"
 	var/toggleslowdown = 7
 	var/powerusage = 6
+	origin_tech = "materials=2;programming=2;engineering=2"
 
 /obj/item/weapon/powerarmor/servos/toggle(sudden = 0)
 	switch(parent.active)
@@ -27,6 +28,7 @@
 	desc = "A set of cheap and weak servos for a powersuit."
 	toggleslowdown = 5
 	powerusage = 4
+	origin_tech = "materials=1;programming=1;engineering=2"
 
 
 
@@ -35,8 +37,11 @@
 	desc = ""
 	icon = 'icons/obj/module.dmi'
 	icon_state = "injector"
+	origin_tech = "materials=1;engineering=1;biotech=3"
+
 	var/charges = 10
 	var/max_charges = 10
+
 
 /obj/item/weapon/powerarmor/medinj/toggle(sudden = 0)
 	switch(parent.active)
@@ -79,10 +84,13 @@
 
 
 
+
 /obj/item/weapon/powerarmor/autoext
 	name = "automatic fire extinguisher"
 	desc = ""
+	origin_tech = "materials=2;engineering=2"
 	icon_state = "suit_autoext"
+
 
 /obj/item/weapon/powerarmor/autoext/toggle(sudden = 0)
 	switch(parent.active)

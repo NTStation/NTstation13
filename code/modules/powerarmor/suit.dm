@@ -114,8 +114,8 @@
 	if(subsystems.len)
 		user << "\blue Engaging subsystems..."
 		for(var/obj/item/weapon/powerarmor/I in subsystems)
-			I.toggle()
 			sleep(20)
+			I.toggle()
 
 	user << "\blue All systems online."
 	active = 1

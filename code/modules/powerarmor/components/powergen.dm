@@ -1,11 +1,12 @@
 /obj/item/weapon/powerarmor/power
 	name = "Badminium power generator"
 	desc = "A generator for power armor. Runs on the rare Badminium molecule."
+	origin_tech = "powerstorage=6;engineering=4;materials=8"
 	var/powergen = 100
 	var/on = 1
 
-	is_subsystem()
-		return "powergen"
+/obj/item/weapon/powerarmor/power/is_subsystem()
+	return "powergen"
 
 /obj/item/weapon/powerarmor/power/New()
 	..()
@@ -16,11 +17,11 @@
 		on = !on
 
 /obj/item/weapon/powerarmor/power/process()
-	if(parent.powercell)
+	if(parent.powercell && parent.powercell.charge < parent.powercell.maxcharge)
 		return parent.powercell.give(powergen)
 	else
 		return powergen
-		// should never happen
+
 
 
 // Plasma Generator
@@ -28,6 +29,8 @@
 	name = "miniaturized plasma generator"
 	desc = "A generator for power armor. Runs on plasma."
 	slowdown = 1
+	origin_tech = "plasmatech=2;powerstorage=2;engineering=2"
+
 	var/fuel = 0
 	var/maxfuel = 75
 	powergen = 30
@@ -80,6 +83,7 @@
 /obj/item/weapon/powerarmor/power/nuclear
 	name = "miniaturized nuclear generator"
 	desc = "A generator for power armor. For all your radioactive needs!"
+	origin_tech = "powerstorage=3;engineering=3;materials=3"
 	slowdown = 1.5
 	powergen = 20
 

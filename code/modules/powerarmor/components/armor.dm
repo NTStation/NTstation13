@@ -2,6 +2,7 @@
 	name = "AdminBUS reactive armor plating"
 	desc = "Made with the rare Badminium plates."
 	icon_state = "armor_plates"
+	origin_tech = "materials=8"
 	var/list/togglearmor = list(melee = 250, bullet = 100, laser = 100,energy = 100, bomb = 100, bio = 100, rad = 100)
 	//Good lord an active energy axe does 150 damage a swing? Anyway, barring var editing, this armor loadout should be impervious to anything. Enjoy, badmins~ --NEO
 
@@ -36,19 +37,21 @@
 /obj/item/weapon/powerarmor/reactive/centcomm
 	name = "reactive armor plating"
 	desc = "Pretty effective against everything, not perfect though."
+	origin_tech = "materials=6"
 	togglearmor = list(melee = 90, bullet = 70, laser = 60, energy = 80, bomb = 75, bio = 50, rad = 75)
 	slowdown = 2
 
-/obj/item/weapon/powerarmor/reactive/standart
-	name = "standart armor plating"
-	desc = "A set of standart radiation shielded armor plating."
+/obj/item/weapon/powerarmor/reactive/standard
+	name = "standard armor plating"
+	desc = "A set of standard radiation shielded armor plating."
+	origin_tech = "materials=3"
 	togglearmor = list(melee = 15, bullet = 10, laser = 15, energy = 10, bomb = 15, bio = 50, rad = 60)
 	slowdown = 2
 
 	var/list/upgrades = list("diamond" = 0, "goliath" = 0, "plasteel" = 0,
 							"xenochitin" = 0, "welder" = 0, "screwdriver" = 0)
 
-/obj/item/weapon/powerarmor/reactive/standart/attackby(obj/item/weapon/W as obj, mob/user as mob)
+/obj/item/weapon/powerarmor/reactive/standard/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	if(istype(W, /obj/item/asteroid/goliath_hide) && upgrades["goliath"] < 4)
 		upgrades["goliath"]++
 		add_armor(list(melee = 10, bullet = 4, laser = 2, bomb = 5, rad = 8))

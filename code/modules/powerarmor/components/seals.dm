@@ -2,6 +2,8 @@
 	name = "atmospheric seals"
 	desc = "Keeps the bad stuff out."
 	slowdown = 0
+	origin_tech = "materials=4;engineering=2"
+
 	var/sealed = 0
 
 	var/suit_max = FIRE_SUIT_MAX_TEMP_PROTECT
@@ -84,6 +86,7 @@
 /obj/item/weapon/powerarmor/atmoseal/standart // Spaceproof, but not fireproof
 	name = "atmospheric seals"
 	desc = "Keeps the vacuum out."
+	origin_tech = "materials=2;engineering=2"
 
 	suit_max = SPACE_SUIT_MAX_TEMP_PROTECT
 	helmet_max = SPACE_HELM_MAX_TEMP_PROTECT
@@ -93,6 +96,7 @@
 /obj/item/weapon/powerarmor/atmoseal/optional
 	name = "togglable atmospheric seals"
 	desc = "Keeps the bad stuff out, but lets you remove your helmet without having to turn the whole suit off."
+	origin_tech = "materials=4;engineering=3"
 
 /obj/item/weapon/powerarmor/atmoseal/optional/New()
 	..()
@@ -161,6 +165,7 @@
 /obj/item/weapon/powerarmor/atmoseal/optional/standart // Spaceproof, but not fireproof
 	name = "togglable atmospheric seals"
 	desc = "Keeps the vacuum out, but lets you remove your helmet without having to turn the whole suit off."
+	origin_tech = "materials=2;engineering=3"
 
 	suit_max = SPACE_SUIT_MAX_TEMP_PROTECT
 	helmet_max = SPACE_HELM_MAX_TEMP_PROTECT

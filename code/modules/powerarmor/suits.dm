@@ -96,5 +96,5 @@
 	C.add_to(src)
 	subsystems.Add(C)
 
-	reactive = new /obj/item/weapon/powerarmor/reactive/standart(src)
+	reactive = new /obj/item/weapon/powerarmor/reactive/standard(src)
 	reactive.add_to(src)
