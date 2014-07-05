@@ -203,6 +203,8 @@
 	new /obj/item/clothing/under/rank/atmospheric_technician(src)
 	new /obj/item/clothing/suit/labcoat/coat/atmos(src)
 	new /obj/item/clothing/suit/labcoat/coat/atmos(src)
+	new /obj/item/taperoll/engineering(src)
+	new /obj/item/taperoll/engineering(src)
 	new /obj/item/device/analyzer(src)
 	new /obj/item/device/analyzer(src)
 	new /obj/item/device/analyzer(src)
