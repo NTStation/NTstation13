@@ -2,7 +2,7 @@
 	helmrequired = 1
 
 /obj/item/clothing/suit/powered/full/New()
-	atmoseal = new /obj/item/weapon/powerarmor/atmoseal/optional/standart(src)
+	atmoseal = new /obj/item/weapon/powerarmor/atmoseal/optional/standard(src)
 	atmoseal.add_to(src)
 	..()
 

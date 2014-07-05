@@ -83,7 +83,7 @@
 				parent.shoes.armor["bio"] = 100
 
 
-/obj/item/weapon/powerarmor/atmoseal/standart // Spaceproof, but not fireproof
+/obj/item/weapon/powerarmor/atmoseal/standard // Spaceproof, but not fireproof
 	name = "atmospheric seals"
 	desc = "Keeps the vacuum out."
 	origin_tech = "materials=2;engineering=2"
@@ -162,7 +162,7 @@
 				parent.helm = null
 				helm.parent = null
 
-/obj/item/weapon/powerarmor/atmoseal/optional/standart // Spaceproof, but not fireproof
+/obj/item/weapon/powerarmor/atmoseal/optional/standard // Spaceproof, but not fireproof
 	name = "togglable atmospheric seals"
 	desc = "Keeps the vacuum out, but lets you remove your helmet without having to turn the whole suit off."
 	origin_tech = "materials=2;engineering=3"
