@@ -37,7 +37,7 @@
 
 /mob/living/simple_animal/corgi/attackby(var/obj/item/O as obj, var/mob/user as mob)
 	if(user.stat == CONSCIOUS && istype(O, /obj/item/weapon/razor))
-		if (shaved == 1)
+		if (shaved)
 			user << "<span class='warning'>You can't shave this corgi, it's already been shaved.</span>"
 			return
 		user.visible_message("<span class='notice'>[user] starts to shave [src] using \the [O].</span>")
