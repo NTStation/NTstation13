@@ -115,16 +115,16 @@
 			traitor.objectives += block_objective
 
 	else
-			if(prob(50))
-				var/datum/objective/assassinate/kill_objective = new
-				kill_objective.owner = traitor
-				kill_objective.find_target()
-				traitor.objectives += kill_objective
-			else
-				var/datum/objective/steal/steal_objective = new
-				steal_objective.owner = traitor
-				steal_objective.find_target()
-				traitor.objectives += steal_objective
+		if(prob(50))
+			var/datum/objective/assassinate/kill_objective = new
+			kill_objective.owner = traitor
+			kill_objective.find_target()
+			traitor.objectives += kill_objective
+		else
+			var/datum/objective/steal/steal_objective = new
+			steal_objective.owner = traitor
+			steal_objective.find_target()
+			traitor.objectives += steal_objective
 
 		forge_escape_objective(traitor)
 
@@ -322,8 +322,7 @@
 			traitor_mob << "Unfortunately, the Syndicate did not provide you with a code response."
 		traitor_mob << "Use the code words in the order provided, during regular conversation, to identify other agents. Proceed with caution, however, as everyone is a potential foe."
 	//End code phrase.
-	if(traitor_mob.mind == exchange_red || traitor_mob.mind == exchange_blue)
-		equip_exchange(traitor_mob)
+
 /datum/game_mode/proc/assign_exchange_role(var/datum/mind/owner)
 	//set faction
 	var/faction = "red"
