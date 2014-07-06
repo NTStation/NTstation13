@@ -340,7 +340,7 @@ datum/objective/steal/exchange/update_explanation_text()
 	if(target && target.current)
 		explanation_text = "Acquire [targetinfo.name] held by [target.current.real_name], the [target.assigned_role] and syndicate agent"
 	else
-		explanation_text = "Free Objective"
+		explanation_text = "Acquire [targetinfo.name]"
 
 
 datum/objective/steal/exchange/backstab
