@@ -20,7 +20,7 @@
 /obj/item/weapon/powerarmor/servos/is_subsystem()
 	return "servo"
 
-/obj/item/weapon/powerarmor/servos/proc/onmove()
+/obj/item/weapon/powerarmor/servos/on_mob_move()
 	parent.use_power(powerusage)
 
 /obj/item/weapon/powerarmor/servos/cheap

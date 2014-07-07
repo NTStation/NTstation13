@@ -49,10 +49,10 @@
 	. = powercell.use(amount)
 	return .
 
-/obj/item/clothing/suit/powered/proc/onmove()
+/obj/item/clothing/suit/powered/on_mob_move()
 	if(active)
-		for(var/obj/item/weapon/powerarmor/servos/S in src)
-			S.onmove()
+		for(var/obj/item/weapon/powerarmor/S in src)
+			S.on_mob_move()
 
 /obj/item/clothing/suit/powered/process()
 	if(!active)

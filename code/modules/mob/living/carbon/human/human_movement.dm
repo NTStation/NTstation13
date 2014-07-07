@@ -1,9 +1,8 @@
 /mob/living/carbon/human/Move(NewLoc, direct)
 	. = ..()
 	if(.)
-		if(istype(wear_suit, /obj/item/clothing/suit/powered))
-			var/obj/item/clothing/suit/powered/powersuit = wear_suit
-			powersuit.onmove()
+		if(istype(wear_suit))
+			wear_suit.on_mob_move()
 
 /mob/living/carbon/human/movement_delay()
 	if(!has_gravity(src))
