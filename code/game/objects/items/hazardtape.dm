@@ -1,4 +1,4 @@
-#define MAX_TAPE_RANGE 5
+#define MAX_TAPE_RANGE 3
 //The max length of a line of hazard tape by tile range, this is
 
 //Define all tape types in hazardtape.dm
