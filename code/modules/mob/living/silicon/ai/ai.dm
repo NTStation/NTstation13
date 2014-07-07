@@ -567,7 +567,7 @@ var/list/ai_list = list()
 /mob/living/silicon/ai/proc/set_waypoint(var/atom/A)
 	var/turf/turf_check = get_turf(A)
 		//The target must be in view of a camera or near the core.
-	if(turf_check in range(src))
+	if(turf_check in range(get_turf(src)))
 		call_bot(turf_check)
 	else if(cameranet && cameranet.checkTurfVis(turf_check))
 		call_bot(turf_check)

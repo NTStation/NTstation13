@@ -142,6 +142,7 @@
 /obj/machinery/bot/medbot/Topic(href, href_list)
 	if(..())
 		return
+	world << "[href],[href_list]"
 	usr.set_machine(src)
 	add_fingerprint(usr)
 	if ((href_list["power"]) && (allowed(usr)))
@@ -172,7 +173,7 @@
 	else if((href_list["patrol"]) && (!locked || issilicon(usr)))
 		auto_patrol = !auto_patrol
 
-	else if((href_list["remote"]) && !locked)
+	else if((href_list["operation"] == "remote") && !locked && emagged != 2)
 		if(emagged != 2)
 			remote_disabled = !remote_disabled
 
@@ -186,7 +187,7 @@
 	else if ((href_list["togglevoice"]) && (!locked || issilicon(usr)))
 		shut_up = !shut_up
 
-	else if (href_list["operation"])
+	else if (href_list["operation"] == "hack")
 		if(!emagged)
 			emagged = 2
 			hacked = 1
