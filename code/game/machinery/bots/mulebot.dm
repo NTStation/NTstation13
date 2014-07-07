@@ -299,7 +299,7 @@ var/global/mulebot_count = 0
 
 			if("stop")
 				if(mode >= BOT_DELIVER)
-					mode = BOT_IDLE
+					bot_reset()
 					updateDialog()
 
 			if("go")
@@ -470,7 +470,7 @@ var/global/mulebot_count = 0
 	// with items dropping as mobs are loaded
 
 	for(var/atom/movable/AM in src)
-		if(AM == cell || AM == botcard) continue
+		if(AM == cell || istype(AM , botcard)) continue
 
 		AM.loc = loc
 		AM.layer = initial(AM.layer)
@@ -521,7 +521,6 @@ var/global/mulebot_count = 0
 		destination = format_text(dest_area.name)
 		path = call_path
 		call_path = null //Once the MULE is commanded, follow normal procedures to reach the waypoint.
-		auto_return = 0 //Prevents the MULE immediately scooting back home upon reaching the waypoint..
 		pathset = 1 //Indicates the AI's custom path is initialized.
 		start()
 
@@ -687,6 +686,7 @@ var/global/mulebot_count = 0
 		reached_target = 1
 
 		if(pathset) //The AI called us here, so tell it we arrived.
+			loaddir = dir //The MULE will attempt to load a crate in whatever direction the MULE is "facing".
 			if(calling_ai)
 				calling_ai << "[src] wirelessly plays a chiming sound!"
 				playsound(calling_ai, 'sound/machines/chime.ogg',40, 0)
@@ -714,7 +714,7 @@ var/global/mulebot_count = 0
 			start_home()
 			mode = BOT_BLOCKED
 		else
-			mode = BOT_IDLE	// otherwise go idle
+			bot_reset()	// otherwise go idle
 
 	send_status()	// report status to anyone listening
 
@@ -791,7 +791,7 @@ var/global/mulebot_count = 0
 		// process control input
 		switch(recv)
 			if("stop")
-				mode = BOT_IDLE
+				bot_reset()
 				return
 
 			if("go")
