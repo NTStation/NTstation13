@@ -124,8 +124,8 @@ Detective
 
 	access = list(access_sec_doors, access_forensics_lockers, access_morgue, access_maint_tunnels, access_court)
 	minimal_access = list(access_sec_doors, access_forensics_lockers, access_morgue, access_maint_tunnels, access_court)
-	assistant_access = list(access_sec_doors)
-	assistant_title = "Forensics Apprentice"
+	assistant_access = list(access_sec_doors, access_morgue)
+	assistant_title = "Private Investigator"
 
 /datum/job/detective/equip_items(var/mob/living/carbon/human/H)
 	H.equip_to_slot_or_del(new /obj/item/clothing/under/det(H), slot_w_uniform)
