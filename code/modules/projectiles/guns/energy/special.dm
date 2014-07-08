@@ -109,7 +109,7 @@
 	var/recent_reload = 1
 	var/range_add = 0
 	var/overheat_time = 20
-	var/list/upgrades = list("diamond" = 0, "screwdriver" = 0, "plasma" = 0)
+	upgrades = list("diamond" = 0, "screwdriver" = 0, "plasma" = 0)
 
 
 /obj/item/weapon/gun/energy/kinetic_accelerator/newshot()
