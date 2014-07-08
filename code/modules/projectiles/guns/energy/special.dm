@@ -107,8 +107,16 @@
 	cell_type = "/obj/item/weapon/stock_parts/cell/crap"
 	var/overheat = 0
 	var/recent_reload = 1
+	var/range_add = 0
 	var/overheat_time = 20
-	var/list/upgrades = list("diamond" = 0, "screwdriver" = 0)
+	var/list/upgrades = list("diamond" = 0, "screwdriver" = 0, "plasma" = 0)
+
+
+/obj/item/weapon/gun/energy/kinetic_accelerator/newshot()
+	..()
+	if(chambered && chambered.BB)
+		var/obj/item/projectile/kinetic/charge = chambered.BB
+		charge.range += range_add
 
 
 /obj/item/weapon/gun/energy/kinetic_accelerator/attackby(obj/item/weapon/W as obj, mob/user as mob)
@@ -125,6 +133,14 @@
 			upgrades["diamond"]++
 			overheat_time -= 3
 			user << "<span class='info'>You upgrade [src]'s thermal exchanger with diamonds.</span>"
+			S.use(1)
+
+		if(istype(S, /obj/item/stack/sheet/mineral/plasma) && upgrades["plasma"] < 2)
+			upgrades["plasma"]++
+			range_add++
+			user << "<span class='info'>You upgrade [src]'s accelerating chamber with plasma.</span>"
+			if(prob(5 * (range_add + 1)) && power_supply)
+				power_supply.rigged = 1 // This is dangerous!
 			S.use(1)
 
 
