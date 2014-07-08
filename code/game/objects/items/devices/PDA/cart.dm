@@ -291,7 +291,7 @@
 
 			else
 				for(var/obj/machinery/bot/B in SC.botlist)
-					menu += "<A href='byond://?src=\ref[SC];op=control;bot=\ref[B]'>[B] at [B.loc.loc]</A><BR>"
+					menu += "<A href='byond://?src=\ref[SC];op=control;bot=\ref[B]'>[B] at [get_area(B)]</A><BR>"
 
 			menu += "<BR><A href='byond://?src=\ref[SC];op=scanbots'><img src=pda_scanner.png> Scan for active bots</A><BR>"
 

@@ -522,7 +522,7 @@ obj/machinery/bot/proc/start_patrol()
 	var/list/kv = list(
 	"type" = src.bot_type,
 	"name" = src.name,
-	"loca" = src.loc.loc,	// area
+	"loca" = get_area(src),	// area
 	"mode" = src.mode
 	)
 	post_signal_multiple(control_freq, kv)

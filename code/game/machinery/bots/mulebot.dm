@@ -19,6 +19,7 @@ var/global/mulebot_count = 0
 	fire_dam_coeff = 0.7
 	brute_dam_coeff = 0.5
 	var/atom/movable/load = null		// the loaded crate (usually)
+	var/list/delivery_beacons = list() //List of beacons that serve as delivery locations.
 	beacon_freq = 1400
 	control_freq = 1447
 	bot_type = MULE_BOT
@@ -314,7 +315,7 @@ var/global/mulebot_count = 0
 
 			if("destination")
 				refresh=0
-				var/new_dest = input("Enter new destination tag", "Mulebot [suffix ? "([suffix])" : ""]", destination) as text|null
+				var/new_dest = input("Select M.U.L.E. Destination", "Mulebot [suffix ? "([suffix])" : ""]", destination) as null|anything in delivery_beacons
 				refresh=1
 				if(new_dest)
 					set_destination(new_dest)
@@ -331,7 +332,7 @@ var/global/mulebot_count = 0
 
 			if("sethome")
 				refresh=0
-				var/new_home = input("Enter new home tag", "Mulebot [suffix ? "([suffix])" : ""]", home_destination) as text|null
+				var/new_home = input("Enter new home tag", "Mulebot [suffix ? "([suffix])" : ""]", home_destination) as null|anything in delivery_beacons
 				refresh=1
 				if(new_home)
 					home_destination = new_home
@@ -827,6 +828,7 @@ var/global/mulebot_count = 0
 
 	// receive response from beacon
 	recv = signal.data["beacon"]
+
 	if(wires.BeaconRX())
 		if(recv == new_destination)	// if the recvd beacon location matches the set destination
 									// the we will navigate there
@@ -840,6 +842,12 @@ var/global/mulebot_count = 0
 			icon_state = "mulebot[(wires.MobAvoid() != null)]"
 			calc_path()
 			updateDialog()
+
+	//Detects and stores current active delivery beacons.
+	if(signal.data["beacon"])
+		if(!delivery_beacons)
+			delivery_beacons = new()
+		delivery_beacons[signal.data["beacon"] ] = signal.source
 
 // send a radio signal with a single data key/value pair
 /obj/machinery/bot/mulebot/post_signal(var/freq, var/key, var/value)
@@ -878,7 +886,7 @@ var/global/mulebot_count = 0
 	var/list/kv = list(
 		"type" = MULE_BOT,
 		"name" = suffix,
-		"loca" = (loc ? loc.loc : "Unknown"),	// somehow loc can be null and cause a runtime - Quarxink
+		"loca" = get_area(src),
 		"mode" = mode,
 		"powr" = (cell ? cell.percent() : 0),
 		"dest" = destination,
