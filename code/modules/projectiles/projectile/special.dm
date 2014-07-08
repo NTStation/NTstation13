@@ -185,12 +185,5 @@ obj/item/projectile/kinetic/New()
 	layer = 4.1
 
 /obj/item/effect/kinetic_blast/New()
-	for(var/turf/T in range(1))
-		if(!istype(T, /turf/simulated/wall))
-			T.ex_act(3)
-
-	for(var/obj/structure/S in range(1))
-		S.ex_act(3)
-
 	spawn(4)
 		qdel(src)
