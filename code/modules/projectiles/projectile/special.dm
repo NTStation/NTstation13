@@ -183,12 +183,14 @@ obj/item/projectile/kinetic/New()
 		var/turf/simulated/mineral/M = target_turf
 		M.gets_drilled()
 	new /obj/item/effect/kinetic_blast(target_turf)
-	for(var/turf/T in range(1, target_turf))
-		if(!istype(T, /turf/simulated/wall))
-			T.ex_act(3)
 
-	for(var/obj/structure/S in range(1, target_turf))
-		S.ex_act(3)
+	if(isturf(target) || istype(target, /obj/structure))
+		for(var/turf/T in range(1, target_turf))
+			if(!istype(T, /turf/simulated/wall))
+				T.ex_act(3)
+
+		for(var/obj/structure/S in range(1, target_turf))
+			S.ex_act(3)
 	..()
 
 /obj/item/effect/kinetic_blast
