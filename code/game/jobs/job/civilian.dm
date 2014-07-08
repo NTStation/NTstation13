@@ -17,6 +17,8 @@ Bartender
 
 	access = list(access_hydroponics, access_bar, access_kitchen, access_morgue, access_mineral_storeroom)
 	minimal_access = list(access_bar, access_mineral_storeroom)
+	assistant_access = list(access_bar)
+	assistant_title = "Barista"
 
 /datum/job/bartender/equip_backpack(var/mob/living/carbon/human/H)
 	switch(H.backbag)
@@ -68,6 +70,8 @@ Chef
 
 	access = list(access_hydroponics, access_bar, access_kitchen, access_morgue)
 	minimal_access = list(access_kitchen, access_morgue)
+	assistant_access = list(access_kitchen)
+	assistant_title = "Waiter"
 
 /datum/job/chef/equip_items(var/mob/living/carbon/human/H)
 	H.equip_to_slot_or_del(new /obj/item/clothing/under/rank/chef(H), slot_w_uniform)
@@ -96,6 +100,8 @@ Botanist
 
 	access = list(access_hydroponics, access_bar, access_kitchen, access_morgue) // Removed tox and chem access because STOP PISSING OFF THE CHEMIST GUYS // //Removed medical access because WHAT THE FUCK YOU AREN'T A DOCTOR YOU GROW WHEAT //Given Morgue access because they have a viable means of cloning.
 	minimal_access = list(access_hydroponics, access_morgue) // Removed tox and chem access because STOP PISSING OFF THE CHEMIST GUYS // //Removed medical access because WHAT THE FUCK YOU AREN'T A DOCTOR YOU GROW WHEAT //Given Morgue access because they have a viable means of cloning.
+	assistant_access = list(access_hydroponics)
+	assistant_title = "Sprout"
 
 /datum/job/hydro/equip_items(var/mob/living/carbon/human/H)
 	H.equip_to_slot_or_del(new /obj/item/clothing/under/rank/hydroponics(H), slot_w_uniform)
@@ -123,6 +129,8 @@ Quartermaster
 
 	access = list(access_maint_tunnels, access_mailsorting, access_cargo, access_cargo_bot, access_qm, access_mint, access_mining, access_mining_station, access_mineral_storeroom)
 	minimal_access = list(access_maint_tunnels, access_mailsorting, access_cargo, access_cargo_bot, access_qm, access_mint, access_mining, access_mining_station)
+	assistant_access = list(access_cargo, access_mailsorting)
+	assistant_title = "Quartermaster's Apprentice"
 
 /datum/job/qm/equip_items(var/mob/living/carbon/human/H)
 	H.equip_to_slot_or_del(new /obj/item/clothing/under/rank/cargo(H), slot_w_uniform)
@@ -150,6 +158,8 @@ Cargo Technician
 
 	access = list(access_maint_tunnels, access_mailsorting, access_cargo, access_cargo_bot, access_mining)
 	minimal_access = list(access_maint_tunnels, access_cargo, access_cargo_bot, access_mailsorting)
+	assistant_access = list(access_cargo)
+	assistant_title = "Supply Apprentice"
 
 /datum/job/cargo_tech/equip_items(var/mob/living/carbon/human/H)
 	H.equip_to_slot_or_del(new /obj/item/clothing/under/rank/cargotech(H), slot_w_uniform)
@@ -178,6 +188,8 @@ Shaft Miner
 
 	access = list(access_maint_tunnels, access_mailsorting, access_cargo, access_mint, access_mining, access_mining_station, access_mineral_storeroom)
 	minimal_access = list(access_mining, access_mint, access_mining_station, access_mailsorting, access_mineral_storeroom)
+	assistant_access = list(access_cargo)
+	assistant_title = "Mining Apprentice"
 
 /datum/job/mining/equip_items(var/mob/living/carbon/human/H)
 	H.equip_to_slot_or_del(new /obj/item/clothing/under/rank/miner(H), slot_w_uniform)
@@ -212,6 +224,8 @@ Clown
 
 	access = list(access_theatre, access_maint_tunnels)
 	minimal_access = list(access_theatre)
+	assistant_access = list(access_theatre)
+	assistant_title = "Fun Assistant"
 
 /datum/job/clown/equip_backpack(var/mob/living/carbon/human/H)
 	var/obj/item/weapon/storage/backpack/BPK = new default_backpack(H)
@@ -254,7 +268,8 @@ Mime
 
 	access = list(access_theatre, access_maint_tunnels)
 	minimal_access = list(access_theatre)
-
+	assistant_access = list(access_theatre)
+	assistant_title = "Silent Assistant"
 
 /datum/job/mime/equip_items(var/mob/living/carbon/human/H)
 	H.equip_to_slot_or_del(new /obj/item/clothing/under/mime(H), slot_w_uniform)
@@ -297,6 +312,8 @@ Janitor
 
 	access = list(access_janitor, access_maint_tunnels)
 	minimal_access = list(access_janitor, access_maint_tunnels)
+	assistant_access = list(access_janitor)
+	assistant_title = "Custodian's Apprentice"
 
 /datum/job/janitor/equip_items(var/mob/living/carbon/human/H)
 	H.equip_to_slot_or_del(new /obj/item/clothing/under/rank/janitor(H), slot_w_uniform)
@@ -320,6 +337,8 @@ Librarian
 
 	access = list(access_library, access_maint_tunnels)
 	minimal_access = list(access_library)
+	assistant_access = list(access_library)
+	assistant_title = "Bookworm"
 
 /datum/job/librarian/equip_items(var/mob/living/carbon/human/H)
 	H.equip_to_slot_or_del(new /obj/item/clothing/under/suit_jacket/red(H), slot_w_uniform)
@@ -348,6 +367,8 @@ Lawyer
 
 	access = list(access_lawyer, access_court, access_sec_doors, access_maint_tunnels)
 	minimal_access = list(access_lawyer, access_court, access_sec_doors)
+	assistant_access = list(access_lawyer, access_court)
+	assistant_title = "Paralegal"
 
 /datum/job/lawyer/equip_items(var/mob/living/carbon/human/H)
 	lawyers += 1

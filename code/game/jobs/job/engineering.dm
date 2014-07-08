@@ -30,6 +30,8 @@ Chief Engineer
 			            access_external_airlocks, access_atmospherics, access_emergency_storage, access_eva,
 			            access_heads, access_construction, access_sec_doors, access_minisat,
 			            access_ce, access_RC_announce, access_keycard_auth, access_tcomsat, access_mineral_storeroom)
+	assistant_access = list(access_engine, access_atmospherics, access_construction)
+	assistant_title = "CE's Assistant"
 
 /datum/job/chief_engineer/equip_items(var/mob/living/carbon/human/H)
 	H.equip_to_slot_or_del(new /obj/item/clothing/under/rank/chief_engineer(H), slot_w_uniform)
@@ -68,6 +70,8 @@ Station Engineer
 									access_external_airlocks, access_construction, access_atmospherics, access_tcomsat)
 	minimal_access = list(access_engine, access_engine_equip, access_tech_storage, access_maint_tunnels,
 									access_external_airlocks, access_construction, access_tcomsat)
+	assistant_access = list(access_engine, access_construction)
+	assistant_title = "Grease Monkey"
 
 /datum/job/engineer/equip_items(var/mob/living/carbon/human/H)
 	H.equip_to_slot_or_del(new /obj/item/clothing/under/rank/engineer(H), slot_w_uniform)
@@ -103,6 +107,8 @@ Atmospheric Technician
 	access = list(access_eva, access_engine, access_engine_equip, access_tech_storage, access_maint_tunnels,
 									access_external_airlocks, access_construction, access_atmospherics)
 	minimal_access = list(access_atmospherics, access_maint_tunnels, access_emergency_storage, access_construction)
+	assistant_access = list(access_atmospherics)
+	assistant_title = "Atmospherics Apprentice"
 
 /datum/job/atmos/equip_items(var/mob/living/carbon/human/H)
 	H.equip_to_slot_or_del(new /obj/item/clothing/under/rank/atmospheric_technician(H), slot_w_uniform)

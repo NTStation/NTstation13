@@ -12,7 +12,6 @@ Assistant
 	selection_color = "#dddddd"
 	access = list()			//See /datum/job/assistant/get_access()
 	minimal_access = list()	//See /datum/job/assistant/get_access()
-	idtype = /obj/item/weapon/card/id/assistant
 	default_id = /obj/item/weapon/card/id/assistant
 
 /datum/job/assistant/equip_items(var/mob/living/carbon/human/H)
