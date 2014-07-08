@@ -29,6 +29,8 @@ Research Director
 			            access_research, access_robotics, access_xenobiology, access_ai_upload,
 			            access_RC_announce, access_keycard_auth, access_gateway, access_mineral_storeroom,
 			            access_tech_storage, access_minisat)
+	assistant_access = list(access_tox, access_research)
+	assistant_title = "RD's Assistant"
 
 /datum/job/rd/equip_items(var/mob/living/carbon/human/H)
 	H.equip_to_slot_or_del(new /obj/item/clothing/shoes/sneakers/brown(H), slot_shoes)
@@ -60,6 +62,8 @@ Scientist
 
 	access = list(access_robotics, access_tox, access_tox_storage, access_research, access_xenobiology, access_mineral_storeroom)
 	minimal_access = list(access_tox, access_tox_storage, access_research, access_xenobiology, access_mineral_storeroom)
+	assistant_access = list(access_tox, access_research)
+	assistant_title = "Research Apprentice"
 
 /datum/job/scientist/equip_items(var/mob/living/carbon/human/H)
 	H.equip_to_slot_or_del(new /obj/item/clothing/under/rank/scientist(H), slot_w_uniform)
@@ -86,6 +90,8 @@ Roboticist
 
 	access = list(access_robotics, access_tech_storage, access_morgue, access_research, access_tox, access_mineral_storeroom)
 	minimal_access = list(access_robotics, access_tech_storage, access_morgue, access_research, access_mineral_storeroom)
+	assistant_access = list(access_robotics, access_research)
+	assistant_title = "Robotics Apprentice"
 
 /datum/job/roboticist/equip_items(var/mob/living/carbon/human/H)
 		H.equip_to_slot_or_del(new /obj/item/clothing/under/rank/roboticist(H), slot_w_uniform)

@@ -18,6 +18,7 @@ Chaplain
 	access = list(access_morgue, access_chapel_office, access_crematorium, access_maint_tunnels)
 	minimal_access = list(access_morgue, access_chapel_office, access_crematorium)
 	assistant_access = list(access_chapel_office)
+	assistant_title = "Dedicated Follower"
 
 /datum/job/chaplain/proc/setupbiblespecifics(var/obj/item/weapon/storage/bible/B, var/mob/living/carbon/human/H)
 	switch(B.icon_state)

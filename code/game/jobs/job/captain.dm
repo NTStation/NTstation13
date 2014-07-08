@@ -22,6 +22,8 @@ Captain
 
 	access = list() 			//See get_access()
 	minimal_access = list() 	//See get_access()
+	assistant_access = list(access_heads)
+	assistant_title = "Captain's Assistant"
 
 /datum/job/captain/equip_items(var/mob/living/carbon/human/H)
 	var/obj/item/clothing/under/U = new /obj/item/clothing/under/rank/captain(H)
@@ -68,6 +70,8 @@ Head of Personnel
 	default_id = /obj/item/weapon/card/id/silver
 	default_pda = /obj/item/device/pda/heads/hop
 	default_headset = /obj/item/device/radio/headset/heads/hop
+	assistant_access = list(access_heads)
+	assistant_title = "HoP's Assistant"
 
 	access = list(access_security, access_sec_doors, access_brig, access_court, access_forensics_lockers,
 			            access_medical, access_engine, access_change_ids, access_ai_upload, access_eva, access_heads,
