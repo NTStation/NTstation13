@@ -107,10 +107,30 @@
 	cell_type = "/obj/item/weapon/stock_parts/cell/crap"
 	var/overheat = 0
 	var/recent_reload = 1
+	var/overheat_time = 20
+	var/list/upgrades = list("diamond" = 0, "screwdriver" = 0)
+
+
+/obj/item/weapon/gun/energy/kinetic_accelerator/attackby(obj/item/weapon/W as obj, mob/user as mob)
+	if(istype(W, /obj/item/weapon/screwdriver) && upgrades["screwdriver"] < 3)
+		upgrades["screwdriver"]++
+		overheat_time -= 1
+		user << "<span class='info'>You tweak [src]'s thermal exchanger.</span>"
+
+
+	else if(istype(W, /obj/item/stack))
+		var/obj/item/stack/S = W
+
+		if(istype(S, /obj/item/stack/sheet/mineral/diamond) && upgrades["diamond"] < 3)
+			upgrades["diamond"]++
+			overheat_time -= 3
+			user << "<span class='info'>You upgrade [src]'s thermal exchanger with diamonds.</span>"
+			S.use(1)
+
 
 /obj/item/weapon/gun/energy/kinetic_accelerator/shoot_live_shot()
 	overheat = 1
-	spawn(20)
+	spawn(overheat_time)
 		overheat = 0
 		recent_reload = 0
 	..()
