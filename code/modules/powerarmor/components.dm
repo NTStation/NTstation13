@@ -3,9 +3,12 @@
 	icon_state = "tesla"
 	name = "power armor component"
 	desc = "This is the base object, you should never see one."
+	slowdown = 0 //how much the component slows down the wearer
+
 	var/obj/item/clothing/suit/powered/parent //so the component knows which armor it belongs to.
 	var/obj/effect/proc_holder/stat_button/button // for control panel
-	slowdown = 0 //how much the component slows down the wearer
+	var/shoesrequired = 0
+	var/helmrequired = 0
 
 /obj/item/weapon/powerarmor/proc/toggle()
 	return

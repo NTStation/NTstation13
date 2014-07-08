@@ -32,9 +32,8 @@
 				parent.helm.min_cold_protection_temperature = null
 				parent.helm.flags &= ~STOPSPRESSUREDMAGE
 				parent.helm.parent = null
-			if(parent.glovesrequired)
-				parent.gloves.gas_transfer_coefficient = 1
-				parent.gloves.permeability_coefficient = 1
+			parent.gloves.gas_transfer_coefficient = 1
+			parent.gloves.permeability_coefficient = 1
 			if(parent.shoesrequired)
 				parent.shoes.gas_transfer_coefficient = 1
 				parent.shoes.permeability_coefficient = 1
@@ -64,9 +63,8 @@
 				parent.helm.min_cold_protection_temperature = helmet_min
 				parent.helm.flags |= STOPSPRESSUREDMAGE
 				parent.helm.parent = parent
-			if(parent.glovesrequired && parent.gloves)
-				parent.gloves.gas_transfer_coefficient = 0.01
-				parent.gloves.permeability_coefficient = 0.02
+			parent.gloves.gas_transfer_coefficient = 0.01
+			parent.gloves.permeability_coefficient = 0.02
 			if(parent.shoesrequired && parent.shoes)
 				parent.shoes.gas_transfer_coefficient = 0.01
 				parent.shoes.permeability_coefficient = 0.02

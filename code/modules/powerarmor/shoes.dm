@@ -22,3 +22,6 @@
 	var/obj/item/clothing/suit/powered/suit = get_armor()
 	if(!istype(suit)) return 0
 	return suit.active
+
+/obj/item/clothing/shoes/powered/negates_gravity()
+	return flags & NOSLIP

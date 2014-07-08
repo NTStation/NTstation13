@@ -17,7 +17,6 @@
 
 	var/helmrequired = 0
 	var/obj/item/clothing/head/powered/helm
-	var/glovesrequired = 1
 	var/obj/item/clothing/gloves/powered/gloves
 	var/shoesrequired = 0
 	var/obj/item/clothing/shoes/powered/shoes
@@ -81,7 +80,7 @@
 		user << "\red Helmet missing, unable to initiate power-on procedure."
 		return
 
-	if(glovesrequired && !istype(user.gloves, /obj/item/clothing/gloves/powered))
+	if(!istype(user.gloves, /obj/item/clothing/gloves/powered))
 		user << "\red Gloves missing, unable to initiate power-on procedure."
 		return
 
@@ -94,9 +93,8 @@
 	if(helmrequired)
 		helm = user.head
 		helm.flags |= NODROP
-	if(glovesrequired)
-		gloves = user.gloves
-		gloves.flags |= NODROP
+	gloves = user.gloves
+	gloves.flags |= NODROP
 	if(shoesrequired)
 		shoes = user.shoes
 		shoes.flags |= NODROP
@@ -275,6 +273,10 @@
 				for(var/obj/item/weapon/powerarmor/A in subsystems)
 					if(C.is_subsystem() == A.is_subsystem())
 						return
+				if(C.shoesrequired && !shoesrequired)
+					return
+				if(C.helmrequired && !helmrequired)
+					return
 				subsystems.Add(C)
 				installed = 1
 

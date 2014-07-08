@@ -57,7 +57,7 @@
 /obj/item/weapon/powerarmor/medinj/Stat()
 	..()
 	if(!istype(parent))	return
-	statpanel("Power Armor", "Medical Injector:", "")
+	statpanel("Power Armor", "Medical injector:", "")
 	statpanel("Power Armor", "\[[charges]/[max_charges]\]", button)
 
 /obj/item/weapon/powerarmor/medinj/New()
@@ -72,6 +72,7 @@
 
 	for(var/mob/living/carbon/human/M in range(0, parent))
 		if(M.wear_suit == parent)
+			M << "\blue Medicals injected."
 			M.reagents.add_reagent("doctorsdelight", 5)
 			M.reagents.add_reagent("synaptizine", 5)
 			M.reagents.add_reagent("anti_toxin", 5)
@@ -112,3 +113,60 @@
 			H << "\blue Fire extinguished."
 			H.ExtinguishMob()
 			H.bodytemperature -= rand(25,30)
+
+
+/obj/item/weapon/powerarmor/grip/is_subsystem()
+	return "grip"
+
+/obj/item/weapon/powerarmor/grip/magnetic
+	name = "magnetic grip modules"
+	desc = "A pair of magnetic grip modules for keeping the user safely attached to the vehicle during extravehicular activity."
+	icon_state = "magneticgrip"
+	var/toggleslowdown = 1
+	var/powerusage = 1
+	var/active = 0
+
+/obj/item/weapon/powerarmor/grip/magnetic/toggle(sudden = 0)
+	switch(parent.active)
+		if(1)
+			if(active)
+				toggle_grip(sudden)
+			if(!sudden)
+				usr << "\blue Magnetic grip modules disengaged."
+		if(0)
+			usr << "\blue Magnetic grip modules engaged."
+
+/obj/item/weapon/powerarmor/grip/magnetic/on_mob_move()
+	if(active)
+		parent.use_power(powerusage)
+
+/obj/item/weapon/powerarmor/grip/magnetic/proc/toggle_grip(sudden = 0)
+	var/mob/living/carbon/human/user = usr
+
+	if(active)
+		if(!sudden)
+			user << "\blue Magnetic grip modules deactivated."
+		parent.slowdown -= toggleslowdown
+		parent.shoes.flags &= ~NOSLIP
+	else
+		user << "\blue Magnetic grip modules activated."
+		parent.slowdown += toggleslowdown
+		parent.shoes.flags |= NOSLIP
+
+	user.update_gravity(user.mob_has_gravity())
+
+	active = !active
+
+/obj/item/weapon/powerarmor/grip/magnetic/stat_button(var/name)
+	if(name == "Toggle")
+		toggle_grip()
+
+/obj/item/weapon/powerarmor/grip/magnetic/Stat()
+	..()
+	if(!istype(parent))	return
+	statpanel("Power Armor", "Magnetic grip:", "")
+	statpanel("Power Armor", active ? "\[ON\]" : "\[OFF\]", button)
+
+/obj/item/weapon/powerarmor/grip/magnetic/New()
+	..()
+	button = new(null, src, "Toggle")
