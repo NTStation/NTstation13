@@ -55,3 +55,6 @@
 
 /obj/item/weapon/powerarmor/proc/load()
 	return 0
+
+/obj/item/weapon/powerarmor/proc/user_click(var/atom/A, var/proximity, var/mob/living/carbon/human/user, var/intent)
+	return 0

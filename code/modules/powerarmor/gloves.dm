@@ -29,10 +29,11 @@
 /obj/item/clothing/gloves/powered/Touch(A, proximity, var/mob/living/carbon/user)
 	var/obj/item/clothing/suit/powered/parmor = get_armor()
 
-	if(!user)		return 0
-	if(!parmor)		return 0
+	if(!user)			return 0
+	if(!parmor)			return 0
+	if(!is_armor_on())	return 0
 
-	if(user.a_intent == "harm" && is_armor_on())
+	if(user.a_intent == "harm")
 		if(proximity)
 			if(parmor.meele)
 				return parmor.meele.pattack(A, user)
@@ -47,6 +48,12 @@
 					return parmor.ranged_l.pattack(A, user)
 				else if(parmor.ranged_r)
 					return parmor.ranged_r.pattack(A, user)
+	else
+		for(var/obj/item/weapon/powerarmor/P in parmor.subsystems)
+			if(P.user_click(A, proximity, user, user.a_intent))
+				break
+
+
 	/*
 	else if(istype(A, /obj/machinery/power/apc) && user.a_intent == "grab" && proximity)
 		place code for charging from apcs here

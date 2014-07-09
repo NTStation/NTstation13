@@ -130,6 +130,10 @@
 	else
 		statpanel("Power Armor", "\[RELOAD\]", "")
 
+/obj/item/weapon/powerarmor/weapon/ranged/proj/attack_self()
+	var/obj/item/weapon/gun/projectile/automatic/powersuit/proj_gun = gun
+	proj_gun.drop_mag()
+
 /obj/item/weapon/powerarmor/weapon/ranged/proj/stat_button(var/name)
 	var/obj/item/weapon/gun/projectile/automatic/powersuit/proj_gun = gun
 	if(name == "Drop")

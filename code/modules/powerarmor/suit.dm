@@ -137,8 +137,8 @@
 		if(!sudden)
 			user << "\blue Disengaging subsystems..."
 		for(var/obj/item/weapon/powerarmor/I in subsystems)
-			I.toggle()
 			sleep(delay/2)
+			I.toggle(sudden)
 
 	if(helm && helm.on)
 		helm.on = 0

@@ -4,7 +4,7 @@
 	icon = 'icons/obj/module.dmi'
 	icon_state = "servo"
 	var/toggleslowdown = 7
-	var/powerusage = 6
+	var/powerusage = 5
 	origin_tech = "materials=2;programming=2;engineering=2"
 
 /obj/item/weapon/powerarmor/servos/toggle(sudden = 0)
@@ -27,7 +27,7 @@
 	name = "cheap servos"
 	desc = "A set of cheap and weak servos for a powersuit."
 	toggleslowdown = 5
-	powerusage = 4
+	powerusage = 3
 	origin_tech = "materials=1;programming=1;engineering=2"
 
 
@@ -67,7 +67,7 @@
 /obj/item/weapon/powerarmor/medinj/proc/Inject()
 	if(!charges)
 		return
-	if(!parent.use_power(2))
+	if(!parent.use_power(10))
 		return
 
 	for(var/mob/living/carbon/human/M in range(0, parent))
@@ -82,7 +82,6 @@
 /obj/item/weapon/powerarmor/medinj/stat_button(var/name)
 	if(name == "Inject")
 		Inject()
-
 
 
 
@@ -113,6 +112,7 @@
 			H << "\blue Fire extinguished."
 			H.ExtinguishMob()
 			H.bodytemperature -= rand(25,30)
+
 
 
 /obj/item/weapon/powerarmor/grip/is_subsystem()
@@ -170,3 +170,56 @@
 /obj/item/weapon/powerarmor/grip/magnetic/New()
 	..()
 	button = new(null, src, "Toggle")
+
+
+
+/obj/item/weapon/powerarmor/orecollector
+	name = "ore collector module"
+	desc = "A module for collecting and storing loose ore."
+	icon_state = "orecollector"
+	var/max_ore = 120
+
+/obj/item/weapon/powerarmor/orecollector/is_subsystem()
+	return "storage"
+
+/obj/item/weapon/powerarmor/orecollector/New()
+	..()
+	button = new(null, src, "Release")
+
+/obj/item/weapon/powerarmor/orecollector/stat_button(var/name)
+	if(name == "Release")
+		drop_ore()
+
+/obj/item/weapon/powerarmor/orecollector/proc/drop_ore()
+	for(var/obj/item/I in contents)
+		I.loc = get_turf(src)
+
+/obj/item/weapon/powerarmor/orecollector/toggle(sudden = 0)
+	switch(parent.active)
+		if(1)
+			if(!sudden)
+				usr << "\blue Ore collector module disengaged."
+		if(0)
+			usr << "\blue Ore collector module engaged."
+
+/obj/item/weapon/powerarmor/orecollector/Stat()
+	..()
+	if(!istype(parent))	return
+	statpanel("Power Armor", "Ore collector:", "")
+	statpanel("Power Armor", contents.len ? "\[[contents.len]/[max_ore]\]" : "\[EMPTY\]", button)
+
+
+/obj/item/weapon/powerarmor/orecollector/user_click(var/atom/A, var/proximity, var/mob/living/carbon/human/user, var/intent)
+	if(proximity && contents.len && istype(A, /obj/structure/ore_box))
+		var/obj/structure/ore_box/box = A
+		for(var/obj/item/weapon/ore/O in contents)
+			O.loc = box
+		user << "\blue You empty the ore collector into the box."
+		return 1
+
+/obj/item/weapon/powerarmor/orecollector/on_mob_move()
+	if(contents.len < max_ore)
+		for(var/obj/item/weapon/ore/O in get_turf(src))
+			O.loc = src
+			if(contents.len >= max_ore)
+				break
