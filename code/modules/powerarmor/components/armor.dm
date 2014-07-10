@@ -39,7 +39,7 @@
 	desc = "Pretty effective against everything, not perfect though."
 	origin_tech = "materials=6"
 	togglearmor = list(melee = 90, bullet = 70, laser = 60, energy = 80, bomb = 75, bio = 50, rad = 75)
-	slowdown = 2
+	slowdown = 4
 
 /obj/item/weapon/powerarmor/reactive/standard
 	name = "standard armor plating"

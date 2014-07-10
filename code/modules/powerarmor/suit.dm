@@ -10,7 +10,7 @@
 	body_parts_covered = CHEST|GROIN|LEGS|FEET|ARMS
 	armor = list(melee = 40, bullet = 30, laser = 20,energy = 15, bomb = 25, bio = 10, rad = 10)
 	allowed = list(/obj/item/device/flashlight, /obj/item/weapon/gun, /obj/item/weapon/handcuffs, /obj/item/weapon/tank)
-	slowdown = 9
+	slowdown = 6
 
 	var/list/togglearmor = list(melee = 90, bullet = 70, laser = 60,energy = 40, bomb = 75, bio = 75, rad = 75)
 	var/active = 0

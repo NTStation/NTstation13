@@ -25,13 +25,20 @@
 		if(ismob(src.loc))
 			var/mob/M = src.loc
 			M.unEquip(src)
+
 	src.loc = S
 	src.parent = S
+
+	if(slowdown)
+		parent.slowdown += slowdown
 
 /obj/item/weapon/powerarmor/proc/drop()
 	if(!istype(loc, /obj/item/clothing/suit/powered))
 		return
 	src.loc = get_turf(src)
+
+	if(slowdown)
+		parent.slowdown -= slowdown
 
 	if(src == parent.reactive)
 		parent.reactive = null

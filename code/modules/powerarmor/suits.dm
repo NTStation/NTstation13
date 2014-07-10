@@ -87,7 +87,7 @@
 /obj/item/clothing/suit/powered/full/mining
 	icon_state = "cryo-engineering"
 	shoesrequired = 1
-	slowdown = 7
+	slowdown = 5
 	armor = list(melee = 5, bullet = 5, laser = 5, energy = 5, bomb = 5, bio = 10, rad = 15)
 
 /obj/item/clothing/suit/powered/full/mining/New()
