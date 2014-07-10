@@ -62,3 +62,4 @@ donkieyo = Game Master
 argoneus = Game Master
 paprka = Game Master
 dannno = Game Master
+dorsidwarf = Game Master
