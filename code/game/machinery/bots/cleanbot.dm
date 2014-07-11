@@ -28,6 +28,8 @@
 	var/list/target_types = list()
 	var/obj/effect/decal/cleanable/target
 	var/obj/effect/decal/cleanable/oldtarget
+	var/list/cleanbottargets = list() //Targets that the cleanbot cannot reach and will thus ignore.
+	var/max_targets = 50 //Maximum number of targets a cleanbot can ignore.
 	var/oldloc = null
 	req_one_access = list(access_janitor)
 //	var/patrol_path[] = null
@@ -59,12 +61,15 @@
 
 /obj/machinery/bot/cleanbot/turn_off()
 	..()
+	icon_state = "cleanbot[on]"
+	updateUsrDialog()
+
+/obj/machinery/bot/cleanbot/bot_reset()
+	..()
+	cleanbottargets = list() //Allows the bot to clean targets it previously ignored due to being unreachable.
 	target = null
 	oldtarget = null
 	oldloc = null
-	icon_state = "cleanbot[on]"
-	path = new()
-	updateUsrDialog()
 
 /obj/machinery/bot/cleanbot/attack_hand(mob/user as mob)
 	. = ..()
@@ -138,12 +143,14 @@ text("<A href='?src=\ref[src];operation=oddbutton'>[oddbutton ? "Yes" : "No"]</A
 				emagged = 2
 				hacked = 1
 				usr << "<span class='warning'>You corrupt [src]'s cleaning software.</span>"
+				bot_reset()
 			else if(!hacked)
 				usr << "<span class='userdanger'>[src] does not seem to respond to your repair code!</span>"
 			else
 				hacked = 0
 				emagged = 0
 				usr << "<span class='notice'>[src]'s software has been reset!</span>"
+				bot_reset()
 			updateUsrDialog()
 
 /obj/machinery/bot/cleanbot/attackby(obj/item/weapon/W, mob/user as mob)
@@ -164,8 +171,9 @@ text("<A href='?src=\ref[src];operation=oddbutton'>[oddbutton ? "Yes" : "No"]</A
 /obj/machinery/bot/cleanbot/Emag(mob/user as mob)
 	..()
 	if(open && !locked)
-		if(user) user << "<span class='notice'>[src] buzzes and beeps.</span>"
+		if(user) user << "<span class='danger'>[src] buzzes and beeps.</span>"
 		emagged = 2
+		bot_reset()
 
 /obj/machinery/bot/cleanbot/process()
 	set background = BACKGROUND_ENABLED
@@ -186,7 +194,7 @@ text("<A href='?src=\ref[src];operation=oddbutton'>[oddbutton ? "Yes" : "No"]</A
 			move_to_call()
 		return
 
-	var/list/cleanbottargets = list()
+
 
 	if(!emagged && prob(5))
 		visible_message("[src] makes an excited beeping booping sound!")
@@ -200,13 +208,13 @@ text("<A href='?src=\ref[src];operation=oddbutton'>[oddbutton ? "Yes" : "No"]</A
 		visible_message("<span class='danger'>[src] whirs and bubbles violently, before releasing a plume of froth!</span>")
 		new /obj/effect/effect/foam(loc)
 
-	if(!target || target == null)
+	if(!target || target == null) //Search for cleanables it can see.
 		for (var/obj/effect/decal/cleanable/D in view(7,src))
 			for(var/T in target_types)
 				if(!(D in cleanbottargets) && (D.type == T || D.parent_type == T) && D != oldtarget)
 					oldtarget = D
 					target = D
-					return
+					break
 
 	if(!target || target == null)
 		if(loc != oldloc)
@@ -227,16 +235,20 @@ text("<A href='?src=\ref[src];operation=oddbutton'>[oddbutton ? "Yes" : "No"]</A
 
 	if(target && path.len == 0)
 		spawn(0)
-			if(!src || !target) return
-			path = AStar(loc, target.loc, /turf/proc/AdjacentTurfs, /turf/proc/Distance, 0, 30, id=botcard)
+			if(!src || !target)
+				return
+			//Try to produce a path to the target, and ignore airlocks to which it has access.
+			path = AStar(loc, target.loc, /turf/proc/CardinalTurfsWithAccess, /turf/proc/Distance_cardinal, 0, 30, id=botcard)
 			if(!path)
 				path = list()
-			if(path.len == 0)
+			if(path.len == 0) //Target is unreachable, so add it to ignore list and prepare to find another target or remain idle/patrol.
+				add_to_ignore(target)
 				oldtarget = target
 				target = null
+				mode = BOT_IDLE
 		return
 	if(path.len > 0 && target && (target != null))
-		mode = BOT_WORKING
+		mode = BOT_MOVING
 		step_to(src, path[1])
 		path -= path[1]
 	else if(path.len == 1)
@@ -288,6 +300,13 @@ text("<A href='?src=\ref[src];operation=oddbutton'>[oddbutton ? "Yes" : "No"]</A
 		next_dest_loc = signal.source.loc
 		next_dest = signal.data["next_patrol"]
 		*/
+
+/obj/machinery/bot/cleanbot/proc/add_to_ignore(target)
+	if(cleanbottargets.len < max_targets && !(target in cleanbottargets)) //Add the target to the ignore list if it is not full or already inside.
+		cleanbottargets += target
+	else if (cleanbottargets.len >= max_targets)
+		cleanbottargets -= cleanbottargets[1] // ignore list is full, so remove the oldest target.
+		cleanbottargets += target // then add the newest one.
 
 /obj/machinery/bot/cleanbot/proc/get_targets()
 	target_types = new/list()

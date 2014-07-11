@@ -68,13 +68,15 @@
 
 /obj/machinery/bot/secbot/turn_off()
 	..()
+	icon_state = "secbot[on]"
+	updateUsrDialog()
+
+/obj/machinery/bot/secbot/bot_reset()
+	..()
 	target = null
 	oldtarget_name = null
 	anchored = 0
-	mode = BOT_IDLE
 	walk_to(src,0)
-	icon_state = "secbot[on]"
-	updateUsrDialog()
 
 /obj/machinery/bot/secbot/attack_hand(mob/user as mob)
 	. = ..()

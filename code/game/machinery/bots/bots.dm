@@ -61,7 +61,7 @@
 	#define BOT_SUMMON			6	// summoned by PDA
 	#define BOT_CLEANING 		7	// cleaning (cleanbots)
 	#define BOT_REPAIRING		8	// repairing hull breaches (floorbots)
-	#define BOT_WORKING			9	// for clean/floor bots, when moving.
+	#define BOT_MOVING			9	// for clean/floor bots, when moving.
 	#define BOT_HEALING			10	// healing people (medbots)
 	#define BOT_RESPONDING		11	// responding to a call from the AI
 	#define BOT_LOADING			12	// loading/unloading
@@ -72,7 +72,7 @@
 	#define BOT_WAIT_FOR_NAV	17	// waiting for nav computation
 	#define BOT_NO_ROUTE		18	// no destination beacon found (or no route)
 	var/list/mode_name = list("In Pursuit","Preparing to Arrest","Arresting","Beginning Patrol","Patrolling","Summoned by PDA", \
-	"Cleaning", "Repairing", "Working","Healing","Responding","Loading/Unloading","Navigating to Delivery Location","Navigating to Home", \
+	"Cleaning", "Repairing", "Proceeding to work site","Healing","Responding","Loading/Unloading","Navigating to Delivery Location","Navigating to Home", \
 	"Waiting for clear path","Calculating navigation path","Pinging beacon network","Unable to reach destination")
 	//This holds text for what the bot is mode doing, reported on the AI's bot control interface.
 
@@ -115,6 +115,7 @@
 	if(!locked && open)
 		emagged = 2
 		remote_disabled = 1 //Manually emagging the bot locks out the AI.
+		bot_reset()
 
 /obj/machinery/bot/examine()
 	set src in view()
@@ -279,7 +280,7 @@ obj/machinery/bot/proc/bot_reset()
 	tries = 0
 	mode = BOT_IDLE
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-//Experimental patrol code!
+//Patrol and summon code!
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 /obj/machinery/bot/proc/bot_patrol()

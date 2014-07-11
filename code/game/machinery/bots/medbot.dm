@@ -87,14 +87,15 @@
 
 /obj/machinery/bot/medbot/turn_off()
 	..()
+	icon_state = "medibot[on]"
+	updateUsrDialog()
+
+/obj/machinery/bot/medbot/bot_reset()
+	..()
 	patient = null
 	oldpatient = null
 	oldloc = null
-	path = new()
-	mode = BOT_IDLE
 	last_found = world.time
-	icon_state = "medibot[on]"
-	updateUsrDialog()
 
 /obj/machinery/bot/medbot/attack_paw(mob/user as mob)
 	return attack_hand(user)

@@ -321,7 +321,7 @@
 						menu += "Responding to summons"
 					if(BOT_CLEANING)
 						menu += "Cleaning"
-					if(BOT_WORKING)
+					if(BOT_MOVING)
 						menu += "Proceeding to work site"
 					if(BOT_REPAIRING)
 						menu += "Performing repairs"

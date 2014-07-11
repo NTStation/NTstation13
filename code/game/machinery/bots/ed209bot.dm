@@ -93,13 +93,15 @@
 
 /obj/machinery/bot/ed209/turn_off()
 	..()
+	icon_state = "[lasercolor]ed209[on]"
+	updateUsrDialog()
+
+/obj/machinery/bot/ed209/bot_reset()
+	..()
 	target = null
 	oldtarget_name = null
 	anchored = 0
-	mode = BOT_IDLE
 	walk_to(src,0)
-	icon_state = "[lasercolor]ed209[on]"
-	updateUsrDialog()
 
 /obj/machinery/bot/ed209/attack_hand(mob/user as mob)
 	. = ..()
