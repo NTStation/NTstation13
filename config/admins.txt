@@ -63,4 +63,3 @@ argoneus = Game Master
 paprka = Game Master
 dannno = Game Master
 dorsidwarf = Game Master
-account12 = Game Master
