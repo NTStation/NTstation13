@@ -346,12 +346,12 @@
 
 	oldloc = loc
 
-/obj/machinery/bot/floorbot/proc/add_to_ignore(target)
-	if(floorbottargets.len < max_targets && !(target in floorbottargets))
+/obj/machinery/bot/floorbot/proc/add_to_ignore(target) //Often objects may block access to damaged tiles or open space.
+	if(floorbottargets.len < max_targets && !(target in floorbottargets)) //This will help keep track of them, so the bot is always trying to reach a blocked spot.
 		floorbottargets += target
-	else if (floorbottargets.len >= max_targets)
-		floorbottargets -= floorbottargets[1] // ignore list is full, so remove the oldest target.
-		floorbottargets += target // then add the newest one.
+	else if (floorbottargets.len >= max_targets) //If the list is full, insert newest, delete oldest.
+		floorbottargets -= floorbottargets[1]
+		floorbottargets += target
 
 /obj/machinery/bot/floorbot/proc/is_hull_breach(var/turf/t) //Ignore space tiles not considered part of a structure, also ignores shuttle docking areas.
 	var/area/t_area = get_area(t)
