@@ -212,9 +212,13 @@
 						if(C.internals)
 							C.internals.icon_state = "internal0"
 					else
+						if(!istype(C.wear_mask, /obj/item/clothing/mask))
+							C << "<span class='notice'>You are not wearing an internals-compliant mask.</span>"
+							return 1
+
 						C.internal = C.get_airtank()
 						if(C.internal)
-							C <<"<span class='notice'>You are now breathing from your [C.internal].</span>"
+							C <<"<span class='notice'>You are now breathing from [C.internal].</span>"
 							if(C.internals)
 								C.internals.icon_state = "internal1"
 						else
