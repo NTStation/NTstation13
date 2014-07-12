@@ -95,7 +95,7 @@ var/list/ai_list = list()
 	if (istype(loc, /turf))
 		verbs.Add(/mob/living/silicon/ai/proc/ai_network_change, \
 		/mob/living/silicon/ai/proc/ai_statuschange, /mob/living/silicon/ai/proc/ai_hologram_change, \
-		/mob/living/silicon/ai/proc/toggle_camera_light, /mob/living/silicon/ai/proc/sensor_mode)
+		/mob/living/silicon/ai/proc/toggle_camera_light)
 
 	if(!safety)//Only used by AIize() to successfully spawn an AI.
 		if (!B)//If there is no player/brain inside.
@@ -500,9 +500,9 @@ var/list/ai_list = list()
 	return 1
 
 /mob/living/silicon/ai/proc/sensor_mode()
-	set category = "AI Commands"
+/*	set category = "AI Commands"
 	set name = "Set Sensor Augmentation"
-	set desc = "Augment visual feed with internal sensor overlays."
+	set desc = "Augment visual feed with internal sensor overlays."*/
 
 	var/sensor_type = input("Please select sensor type.", "Sensor Integration", null) in list("Security", "Medical"/*,"Light Amplification"*/,"Disable")
 	switch(sensor_type)

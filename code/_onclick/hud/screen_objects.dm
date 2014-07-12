@@ -362,6 +362,11 @@
 				var/mob/living/silicon/ai/AI = usr
 				AI.aicamera.viewpictures()
 
+		if("Sensor Augmentation")
+			if(isAI(usr))
+				var/mob/living/silicon/ai/AI = usr
+				AI.sensor_mode()
+
 		else
 			return 0
 	return 1
