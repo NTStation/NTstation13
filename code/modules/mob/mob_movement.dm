@@ -46,6 +46,8 @@
 	usr.stop_pulling()
 
 /client/verb/swap_hand()
+	set category = "IC"
+	set name = "Swap hands"
 	mob.swap_hand()
 
 
