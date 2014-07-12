@@ -40,6 +40,7 @@
 	..()
 
 	name = "Drone ([rand(100,999)])"
+	real_name = name
 
 	access_card = new /obj/item/weapon/card/id(src)
 	var/datum/job/captain/C = new /datum/job/captain
