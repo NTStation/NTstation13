@@ -16,6 +16,7 @@
 	var/distribute_pressure = ONE_ATMOSPHERE
 	var/integrity = 3
 	var/volume = 70
+	var/canbreathe = 1
 
 /obj/item/weapon/tank/New()
 	..()
@@ -92,6 +93,10 @@
 
 	if(istype(W, /obj/item/device/assembly_holder))
 		bomb_assemble(W,user)
+
+	if(istype(W, /obj/item/weapon/wirecutters) && canbreathe == 0)
+		usr << "<span class='notice'>You snip the safety valve from the tank, allowing it to connect to internals.</span>"
+		canbreathe = 1
 
 /obj/item/weapon/tank/attack_self(mob/user as mob)
 	if (!(src.air_contents))
