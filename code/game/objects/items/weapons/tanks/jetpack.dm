@@ -96,6 +96,7 @@
 	distribute_pressure = 0
 	icon_state = "jetpack-black"
 	item_state =  "jetpack-black"
+	canbreathe = 0
 
 	New()
 		..()
