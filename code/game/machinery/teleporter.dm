@@ -243,7 +243,7 @@
 		visible_message("<span class='notice'>Cannot authenticate locked on coordinates. Please reinstate coordinate matrix.</span>")
 		return
 	if (istype(M, /atom/movable))		
-		if(do_teleport(M, com.target))
+		do_teleport(M, com.target)
  	return
 
 /obj/machinery/teleport/hub/update_icon()
