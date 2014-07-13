@@ -67,13 +67,13 @@
 	//BEGIN CENTCOM ACCESS
 	/*Should leave plenty of room if we need to add more access levels.
 /var/const/Mostly for admin fun times.*/
-/var/const/access_cent_general = 101//General facilities.
+/var/const/access_cent_general = 101//Minimum access.
 /var/const/access_cent_thunder = 102//Thunderdome.
 /var/const/access_cent_specops = 103//Special Ops.
-/var/const/access_cent_medical = 104//Medical/Research
+/var/const/access_cent_medsci = 104//Medical/Research
 /var/const/access_cent_living = 105//Living quarters.
-/var/const/access_cent_storage = 106//Generic storage areas.
-/var/const/access_cent_teleporter = 107//Teleporter.
+/var/const/access_cent_engineering = 106//Engineering (formally 'teleporter')
+/var/const/access_cent_secret = 107//Agents(spies, assassins, secrets, etc) (formally 'storage')
 /var/const/access_cent_captain = 109//Captain's office/ID comp/AI.
 
 	//The Syndicate
@@ -171,25 +171,25 @@
 
 /proc/get_centcom_access(job)
 	switch(job)
-		if("VIP Guest")
+		if("Guest")
 			return list(access_cent_general)
-		if("Custodian")
-			return list(access_cent_general, access_cent_living, access_cent_storage)
-		if("Thunderdome Overseer")
-			return list(access_cent_general, access_cent_thunder)
-		if("Centcom Official")
+		if("Employee")
 			return list(access_cent_general, access_cent_living)
-		if("Medical Officer")
-			return list(access_cent_general, access_cent_living, access_cent_medical)
-		if("Death Commando")
-			return list(access_cent_general, access_cent_specops, access_cent_living, access_cent_storage)
-		if("Research Officer")
-			return list(access_cent_general, access_cent_specops, access_cent_medical, access_cent_teleporter, access_cent_storage)
+		if("Thunderdome Overseer")
+			return list(access_cent_general, access_cent_living, access_cent_thunder)
+		if("Med-Sci")
+			return list(access_cent_general, access_cent_living, access_cent_medsci)
+		if("Engineer")
+			return list(access_cent_general, access_cent_living, access_cent_engineering)
+		if("Spec Ops")
+			return list(access_cent_general, access_cent_living, access_cent_specops)
 		if("Special Ops Officer")
-			return list(access_cent_general, access_cent_thunder, access_cent_specops, access_cent_living, access_cent_storage)
-		if("Admiral")
+			return list(access_cent_general, access_cent_living, access_cent_thunder, access_cent_specops, access_cent_medsci, access_cent_secret)
+		if("Agent")
+			return list(access_cent_general, access_cent_living, access_cent_secret)
+		if("Vice-Admiral")
 			return get_all_centcom_access()
-		if("Centcom Commander")
+		if("Admiral")
 			return get_all_centcom_access()
 
 /proc/get_all_accesses()
@@ -206,7 +206,7 @@
 	            access_keycard_auth, access_tcomsat, access_gateway, access_mineral_storeroom)
 
 /proc/get_all_centcom_access()
-	return list(access_cent_general, access_cent_thunder, access_cent_specops, access_cent_medical, access_cent_living, access_cent_storage, access_cent_teleporter, access_cent_captain)
+	return list(access_cent_general, access_cent_thunder, access_cent_specops, access_cent_medsci, access_cent_engineering, access_cent_living, access_cent_secret, access_cent_captain)
 
 /proc/get_all_syndicate_access()
 	return list(access_syndicate)
@@ -377,22 +377,22 @@
 		if(access_mineral_storeroom)
 			return "Mineral Storage"
 
-/proc/get_centcom_access_desc(A)
+/proc/get_centcom_access_desc(A) //Changing this to reflect the new sprites
 	switch(A)
 		if(access_cent_general)
-			return "Code Grey"
-		if(access_cent_thunder)
-			return "Code Yellow"
-		if(access_cent_storage)
-			return "Code Orange"
-		if(access_cent_living)
 			return "Code Green"
-		if(access_cent_medical)
-			return "Code White"
-		if(access_cent_teleporter)
+		if(access_cent_thunder)
 			return "Code Blue"
-		if(access_cent_specops)
+		if(access_cent_engineering)
+			return "Code Yellow"
+		if(access_cent_living)
+			return "Code Grey"
+		if(access_cent_medsci)
+			return "Code Purple"
+		if(access_cent_secret)
 			return "Code Black"
+		if(access_cent_specops)
+			return "Code Red"
 		if(access_cent_captain)
 			return "Code Gold"
 
@@ -406,7 +406,7 @@ proc/get_all_job_icons() //For all existing HUD icons
 	return get_all_jobs() + list("Prisoner")
 
 /proc/get_all_centcom_jobs()
-	return list("VIP Guest","Custodian","Thunderdome Overseer","Centcom Official","Medical Officer","Death Commando","Research Officer","Special Ops Officer","Admiral","Centcom Commander")
+	return list("Guest","Thunderdome Overseer","Employee","Med-Sci","Spec Ops", "Engineer","Agent", "Vice-Admiral","Admiral")
 
 /obj/item/proc/GetJobName() //Used in secHUD icon generation
 	var/obj/item/weapon/card/id/I = GetID()
