@@ -406,7 +406,7 @@ proc/get_all_job_icons() //For all existing HUD icons
 	return get_all_jobs() + list("Prisoner")
 
 /proc/get_all_centcom_jobs()
-	return list("Guest","Thunderdome Overseer","Employee","Med-Sci","Spec Ops", "Engineer," "Agent", "Vice-Admiral","Admiral")
+	return list("Guest","Thunderdome Overseer","Employee","Med-Sci","Spec Ops", "Engineer,","Agent", "Vice-Admiral","Admiral")
 
 /obj/item/proc/GetJobName() //Used in secHUD icon generation
 	var/obj/item/weapon/card/id/I = GetID()
