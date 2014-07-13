@@ -157,12 +157,17 @@ update_label("John Doe", "Clowny")
 	else
 		..()
 
-/obj/item/weapon/card/id/syndicate_command
+/obj/item/weapon/card/id/syndicate/nuke //same deal, just with different icon
 	name = "syndicate ID card"
-	desc = "An ID straight from the Syndicate."
-	registered_name = "Syndicate"
-	assignment = "Syndicate Overlord"
-	access = list(access_syndicate)
+	desc = "A syndicate ID.  This one has the same features as the agent ID, just with a new paint job."
+	icon_state = "syndicate"
+	assignment = "Syndicate Agent"
+
+/obj/item/weapon/card/id/syndicate/nuke/command
+	name = "syndicate leader's ID card"
+	desc = "A golden version of the syndicate ID.  This, like all other syndicate IDs, work just like agent IDs."
+	icon_state = "syndicate-command"
+	assignment = "Syndicate Leader"
 
 /obj/item/weapon/card/id/captains_spare
 	name = "captain's spare ID"
@@ -176,15 +181,80 @@ update_label("John Doe", "Clowny")
 		access = J.get_access()
 		..()
 
+//Centcom
+
 /obj/item/weapon/card/id/centcom
 	name = "\improper Centcom ID"
-	desc = "An ID straight from Cent. Com."
+	desc = "An ID given to guests of Central Command. This ID is painted white, as only real members of Centcom get 'real' platinum IDs."
 	icon_state = "centcom"
 	registered_name = "Central Command"
-	assignment = "General"
+	assignment = "Guest"
+	New()
+		access = get_centcom_access("Guest")
+		..()
+
+/obj/item/weapon/card/id/centcom/employee
+	name = "\improper Centcom ID"
+	desc = "An ID given to general employees of Central Command.  It's platinum plated."
+	assignment = "Employee"
+	New()
+		access = get_centcom_access("Employee")
+
+/obj/item/weapon/card/id/centcom/thunder
+	name = "\improper Thunderdome Overseer's ID"
+	desc = "This ID has access to the bowels of the Thunderdome, a place where anything can happen. It's platinum plated."
+	icon_state = "centcom-thunder"
+	assignment = "Thunderdome Overseer"
+	New()
+		access = get_centcom_access("Thunderdome Overseer")
+
+/obj/item/weapon/card/id/centcom/specops
+	name = "\improper Special Operations ID"
+	desc = "An ID that belongs to those who serve in Central Command's Special Operations, Deathsquad or otherwise. It's platinum plated."
+	icon_state = "centcom-specops"
+	assignment = "Spec Ops"
+	New()
+		access = get_centcom_access("Special Ops")
+
+/obj/item/weapon/card/id/centcom/medsci
+	name = "\improper Centcom MedSci ID"
+	desc = "Scientists and Medical Doctors share the same department at Centcom. It's platinum plated."
+	icon_state = "centcom-medsci"
+	assignment = "Med-Sci"
+	New()
+		access = get_centcom_access("Med-Sci")
+
+/obj/item/weapon/card/id/centcom/engi
+	name = "\improper Centcom Engineer"
+	desc = "An ID that belongs to an engineer of Central Command.  You wonder if they're any more competent then the station engineers. It's platinum plated."
+	icon_state = "centcom-engi"
+	assignment = "Engineer"
+	New()
+		access = get_centcom_access("Engineer")
+
+/obj/item/weapon/card/id/centcom/agent
+	name = "\improper Centcom Secret ID"
+	desc = "Company policy forbids thinking about this card."
+	icon_state = "centcom-agent"
+	assignment = "Agent"
+	New()
+		access = get_centcom_access("Agent")
+
+/obj/item/weapon/card/id/centcom/vice
+	name = "\improper Centcom Vice-Admiral's ID"
+	desc = "This ID belongs to the Admiral's right-hand man. It's platinum plated, with a silver stripe in the middle."
+	icon_state = "centcom-vice"
+	assignment = "Vice-Admiral"
 	New()
 		access = get_all_centcom_access()
-		..()
+
+/obj/item/weapon/card/id/centcom/admiral
+	name = "\improper Centcom Admiral's ID"
+	desc = "Centcom's version of the Captain's ID. It's platinum plated, with a gold stripe in the middle."
+	icon_state = "centcom-admiral"
+	assignment = "Admiral"
+	New()
+		access = get_all_centcom_access()
 
 /obj/item/weapon/card/id/prisoner
 	name = "prisoner ID card"
