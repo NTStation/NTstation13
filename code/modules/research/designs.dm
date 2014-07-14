@@ -1529,6 +1529,66 @@ datum/design/drone_shell
 	build_path = /obj/item/drone_shell
 	category = "Misc"
 
+datum/design/augment_l_arm
+	name = "augmented left arm"
+	desc = "a mechanical left arm"
+	id = "l_arm_aug"
+	req_tech = list("programming" = 2, "biotech" = 3)
+	build_type = MECHFAB
+	materials = list("$metal" = 250)
+	build_path = /obj/item/augment/l_arm
+	category = "Misc"
+
+datum/design/augment_r_arm
+	name = "augmented right arm"
+	desc = "a mechanical right arm"
+	id = "r_arm_aug"
+	req_tech = list("programming" = 2, "biotech" = 3)
+	build_type = MECHFAB
+	materials = list("$metal" = 250)
+	build_path = /obj/item/augment/r_arm
+	category = "Misc"
+
+datum/design/augment_l_leg
+	name = "augmented left leg"
+	desc = "a mechanical left leg"
+	id = "l_leg_aug"
+	req_tech = list("programming" = 2, "biotech" = 3)
+	build_type = MECHFAB
+	materials = list("$metal" = 250)
+	build_path = /obj/item/augment/l_leg
+	category = "Misc"
+
+datum/design/augment_r_leg
+	name = "augmented right leg"
+	desc = "a mechanical right leg"
+	id = "right_leg_aug"
+	req_tech = list("programming" = 2, "biotech" = 3)
+	build_type = MECHFAB
+	materials = list("$metal" = 250)
+	build_path = /obj/item/augment/r_leg
+	category = "Misc"
+
+datum/design/augment_chest
+	name = "augmented chest"
+	desc = "a mechanical chest"
+	id = "chest_aug"
+	req_tech = list("programming" = 2, "biotech" = 3)
+	build_type = MECHFAB
+	materials = list("$metal" = 350)
+	build_path = /obj/item/augment/chest
+	category = "Misc"
+
+datum/design/augment_head
+	name = "augmented head"
+	desc = "a mechanical head"
+	id = "head_aug"
+	req_tech = list("programming" = 2, "biotech" = 3)
+	build_type = MECHFAB
+	materials = list("$metal" = 350)
+	build_path = /obj/item/augment/head
+	category = "Misc"
+
 datum/design/synthetic_flash
 	name = "Synthetic Flash"
 	desc = "When a problem arises, SCIENCE is the solution."
