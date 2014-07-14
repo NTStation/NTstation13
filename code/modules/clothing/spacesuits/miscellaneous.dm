@@ -41,13 +41,12 @@
 	desc = "That's not red paint. That's real blood."
 	icon_state = "deathsquad"
 	item_state = "deathsquad"
-	armor = list(melee = 65, bullet = 55, laser = 35,energy = 20, bomb = 30, bio = 30, rad = 30)
+	armor = list(melee = 80, bullet = 60, laser = 50,energy = 50, bomb = 50, bio = 100, rad = 30)
 
 /obj/item/clothing/head/helmet/space/deathsquad/beret
 	name = "officer's beret"
 	desc = "An armored beret commonly used by special operations officers. Uses forcefield technology to protect the head from space."
 	icon_state = "beret_badge"
-	armor = list(melee = 65, bullet = 55, laser = 35,energy = 20, bomb = 30, bio = 30, rad = 30)
 	flags = STOPSPRESSUREDMAGE
 	flags_inv = 0
 
@@ -104,4 +103,77 @@
 	slowdown = 0
 	armor = list(melee = 60, bullet = 50, laser = 30,energy = 15, bomb = 30, bio = 30, rad = 30)
 
+//ERT Suits
+//Normal
+/obj/item/clothing/suit/space/ert
+	name = "ert hardsuit"
+	icon_state = "ert"
+	desc = "A hardsuit used by Emergency Response Team personnel."
+	item_state = "ert_suit"
 
+	w_class = 4
+	allowed = list(/obj/item/weapon/tank/oxygen, /obj/item/device/flashlight,/obj/item/weapon/gun/energy, /obj/item/weapon/gun/projectile, /obj/item/ammo_box, /obj/item/ammo_casing, /obj/item/weapon/melee/baton, /obj/item/weapon/handcuffs)
+	slowdown = 1
+	armor = list(melee = 50, bullet = 50, laser = 50, energy = 40, bomb = 50, bio = 100, rad = 30)
+
+/obj/item/clothing/head/helmet/space/ert
+	name = "ert helmet"
+	desc = "A space helmet used by Emergency Response Team personnel."
+	icon_state = "ert"
+	item_state = "ert_suit"
+	item_color = "ert"
+
+	permeability_coefficient = 0.01
+	armor = list(melee = 50, bullet = 50, laser = 50, energy = 40, bomb = 50, bio = 100, rad = 30)
+
+/obj/item/clothing/suit/space/ert/red
+	name = "red ert hardsuit"
+	icon_state = "ert-red"
+	desc = "A hardsuit used by Emergency Response Team personnel who specialize in combat and peacekeeping."
+	item_state = "ert_suit-red"
+
+/obj/item/clothing/head/helmet/space/ert/red
+	name = "red ert helmet"
+	desc = "A space helmet used by Emergency Response Team personnel who specialize in combat and peacekeeping."
+	icon_state = "ert-red"
+	item_state = "ert_suit-red"
+	item_color = "ertred"
+
+/obj/item/clothing/suit/space/ert/green
+	name = "green ert hardsuit"
+	icon_state = "ert-green"
+	desc = "A hardsuit used by Emergency Response Team personnel who specialize in leadership and command."
+	item_state = "ert_suit-green"
+
+/obj/item/clothing/head/helmet/space/ert/green
+	name = "green ert helmet"
+	desc = "A space helmet used by Emergency Response Team personnel who specialize in leadership and command."
+	icon_state = "ert-green"
+	item_state = "ert_suit-green"
+	item_color = "ertgreen"
+
+/obj/item/clothing/suit/space/ert/blue
+	name = "blue ert hardsuit"
+	icon_state = "ert-blue"
+	desc = "A hardsuit used by Emergency Response Team personnel who specialize in first aid and healing."
+	item_state = "ert_suit-blue"
+
+/obj/item/clothing/head/helmet/space/ert/blue
+	name = "blue ert helmet"
+	desc = "A space helmet used by Emergency Response Team personnel who specialize in first aid and healing."
+	icon_state = "ert-blue"
+	item_state = "ert_suit-blue"
+	item_color = "ertblue"
+
+/obj/item/clothing/suit/space/ert/yellow
+	name = "yellow ert hardsuit"
+	icon_state = "ert-yellow"
+	desc = "A hardsuit used by Emergency Response Team personnel who specialize in engineering and repair."
+	item_state = "ert_suit-yellow"
+
+/obj/item/clothing/head/helmet/space/ert/yellow
+	name = "yellow ert helmet"
+	desc = "A space helmet used by Emergency Response Team personnel who specialize in engineering and repair."
+	icon_state = "ert-yellow"
+	item_state = "ert_suit-yellow"
+	item_color = "ertyellow"

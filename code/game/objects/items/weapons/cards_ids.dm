@@ -214,7 +214,7 @@ update_label("John Doe", "Clowny")
 	icon_state = "centcom-specops"
 	assignment = "Spec Ops"
 	New()
-		access = get_centcom_access("Special Ops")
+		access = get_centcom_access("Spec Ops")
 
 /obj/item/weapon/card/id/centcom/medsci
 	name = "\improper Centcom MedSci ID"
