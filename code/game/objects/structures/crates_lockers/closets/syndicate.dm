@@ -16,6 +16,7 @@
 	new /obj/item/clothing/under/syndicate(src)
 	new /obj/item/weapon/storage/belt/military(src)
 	new /obj/item/weapon/crowbar/red(src)
+	new /obj/item/weapon/card/id/syndicate(src)
 
 
 /obj/structure/closet/syndicate/nuclear

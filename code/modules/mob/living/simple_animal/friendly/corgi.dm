@@ -20,6 +20,8 @@
 	see_in_dark = 5
 	childtype = /mob/living/simple_animal/corgi/puppy
 	species = /mob/living/simple_animal/corgi
+	var/shaved_state = "corgi_shaved"
+	var/shaved = 0
 	var/obj/item/inventory_head
 	var/obj/item/inventory_back
 	var/facehugger
@@ -33,6 +35,21 @@
 	usr.reagents.add_reagent("hell_water", 2)
 	R.stone_or_gib(victim)
 
+/mob/living/simple_animal/corgi/attackby(var/obj/item/O as obj, var/mob/user as mob)
+	if(user.stat == CONSCIOUS && istype(O, /obj/item/weapon/razor))
+		if (shaved)
+			user << "<span class='warning'>You can't shave this corgi, it's already been shaved.</span>"
+			return
+		user.visible_message("<span class='notice'>[user] starts to shave [src] using \the [O].</span>")
+		if(do_after(user, 50))
+			user.visible_message("<span class='notice'>[user] shaves [src]'s hair using \the [O]. </span>")
+			playsound(loc, 'sound/items/Welder2.ogg', 20, 1)
+			shaved = 1
+			icon_state = "[shaved_state]"
+			icon_living = "[shaved_state]"
+			icon_dead = "[shaved_state]_dead"
+		return
+	..()
 
 /mob/living/simple_animal/corgi/show_inv(mob/user as mob)
 	user.set_machine(src)
@@ -304,6 +321,15 @@
 			desc = "Can actually be trusted to not run off on his own."
 			valid = 1
 
+		if(/obj/item/clothing/head/culthood/alt)
+			name = "Dark Lord [real_name]"
+			speak = list("Ia!","AUUUUUUUU!")
+			speak_emote = list("chants", "yaps")
+			emote_hear = list("emits a low rumbling")
+			emote_see = list("stares eerily into the distance", "undulates rhythmically")
+			desc = "Ia! Ia! [real_name] F'Tang!."
+			valid = 1
+
 	if(valid)
 		if(usr)
 			if(!usr.drop_item())
@@ -384,7 +410,7 @@
 					if(isturf(movement_target.loc) )
 						movement_target.attack_animal(src)
 					else if(ishuman(movement_target.loc) )
-						if(prob(20))
+						if(prob(60))
 							emote("stares at [movement_target.loc]'s [movement_target] with a sad puppy-face")
 
 		if(prob(1))
@@ -471,6 +497,8 @@
 	icon_state = "puppy"
 	icon_living = "puppy"
 	icon_dead = "puppy_dead"
+	shaved_state = "puppy_shaved"
+	shaved = 0
 
 //puppies cannot wear anything.
 /mob/living/simple_animal/corgi/puppy/Topic(href, href_list)
@@ -494,6 +522,7 @@
 	response_harm   = "kicks"
 	var/turns_since_scan = 0
 	var/puppies = 0
+	shaved_state = "lisa_shaved"
 
 //Lisa already has a cute bow!
 /mob/living/simple_animal/corgi/Lisa/Topic(href, href_list)

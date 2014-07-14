@@ -505,6 +505,8 @@
 	new /obj/item/clothing/head/nursehat(src)
 	new /obj/item/clothing/suit/labcoat/emt(src)
 	new /obj/item/clothing/suit/labcoat/emt(src)
+	new /obj/item/clothing/suit/labcoat/coat/medical/emt(src)
+	new /obj/item/clothing/suit/labcoat/coat/medical/emt(src)
 	new /obj/item/clothing/shoes/steeltoe(src)
 	new /obj/item/clothing/shoes/steeltoe(src)
 	new /obj/item/clothing/suit/labcoat(src)
