@@ -21,6 +21,10 @@
 				L.burnstate = 0
 				H.visible_message("<span class='danger'>[src] has regrown their [L.getDisplayName()]!</span>")
 
+		H.regenerate_icons()
+		H.update_canmove()
+
+
 	spawn(0)
 		for(var/i = 0, i<10,i++)
 			user.adjustBruteLoss(-10)
