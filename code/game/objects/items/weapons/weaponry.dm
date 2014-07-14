@@ -196,6 +196,12 @@
 /obj/item/weapon/katana/IsShield()
 		return 1
 
+/obj/item/weapon/katana/dism
+	name = "Flesh Renderer"
+	force = 100
+	flags = SHARP
+	desc = "Render the flesh from your enemies bones!"
+
 obj/item/weapon/wirerod
 	name = "wired rod"
 	desc = "A rod with some wire wrapped around the top. It'd be easy to attach something to the top bit."

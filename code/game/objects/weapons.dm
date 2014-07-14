@@ -2,6 +2,7 @@
 	name = "weapon"
 	icon = 'icons/obj/weapons.dmi'
 
+
 /obj/item/weapon/New()
 	..()
 	if(!hitsound)
@@ -14,3 +15,4 @@
 	spawn(0)
 		..()
 	return
+
