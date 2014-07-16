@@ -306,13 +306,9 @@
 		return 1
 	switch(name)
 		if("r_hand")
-			if(iscarbon(usr))
-				var/mob/living/carbon/C = usr
-				C.activate_hand("r")
+			usr:activate_hand("r")
 		if("l_hand")
-			if(iscarbon(usr))
-				var/mob/living/carbon/C = usr
-				C.activate_hand("l")
+			usr:activate_hand("l")
 		if("swap")
 			usr:swap_hand()
 		if("hand")

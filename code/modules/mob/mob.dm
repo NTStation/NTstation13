@@ -709,6 +709,9 @@ var/list/slot_equipment_priority = list( \
 /mob/proc/IsAdvancedToolUser()//This might need a rename but it should replace the can this mob use things check
 	return 0
 
+/mob/proc/swap_hand()
+	return
+
 /mob/proc/Jitter(amount)
 	jitteriness = max(jitteriness,amount,0)
 
@@ -797,5 +800,8 @@ var/list/slot_equipment_priority = list( \
 /mob/proc/AdjustResting(amount)
 	resting = max(resting + amount,0)
 	update_canmove()
+	return
+
+/mob/proc/activate_hand(var/selhand) //0 or "r" or "right" for right hand; 1 or "l" or "left" for left hand.
 	return
 

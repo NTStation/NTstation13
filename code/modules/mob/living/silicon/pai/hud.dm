@@ -26,7 +26,7 @@ mob/living/silicon/proc/securityHUD(mob/living/silicon/S as mob)
 						if("Parolled")		holder.icon_state = "hudparolled"
 						if("Released")		holder.icon_state = "hudreleased"
 						else
-							return
+							continue
 					client.images += holder
 
 /mob/living/silicon/proc/medicalHUD(mob/living/silicon/S as mob)

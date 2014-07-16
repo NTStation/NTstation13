@@ -120,6 +120,11 @@ proc/isorgan(A)
 		return 1
 	return 0
 
+proc/isdrone(A)
+	if(istype(A, /mob/living/simple_animal/drone))
+		return 1
+	return 0
+
 /proc/isloyal(A) //Checks to see if the person contains a loyalty implant, then checks that the implant is actually inside of them
 	for(var/obj/item/weapon/implant/loyalty/L in A)
 		if(L && L.implanted)
