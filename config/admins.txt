@@ -63,3 +63,5 @@ argoneus = Game Master
 paprka = Game Master
 dannno = Game Master
 dorsidwarf = Game Master
+tokiko1 = Game Master
+neerti = Game Master

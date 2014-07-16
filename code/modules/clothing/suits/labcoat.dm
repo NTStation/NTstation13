@@ -1,7 +1,7 @@
 /obj/item/clothing/suit/labcoat
 	name = "labcoat"
 	desc = "A suit that protects against minor chemical spills."
-	icon_state = "labcoat_open"
+	icon_state = "labcoat"
 	item_state = "labcoat"
 	blood_overlay_type = "coat"
 	body_parts_covered = CHEST|ARMS
@@ -146,6 +146,11 @@
 	name = "medical winter coat"
 	desc = "A coat that protects against the bitter cold."
 	icon_state = "coatmedical"
+
+/obj/item/clothing/suit/labcoat/coat/medical/emt
+	name = "first-responder winter coat"
+	desc = "A coat that protects against the bitter cold."
+	icon_state = "coatemt"
 
 /obj/item/clothing/suit/labcoat/coat/miner
 	name = "mining winter coat"

@@ -156,7 +156,7 @@
 	if(occupier)
 		if(occupier.module && occupier.module.modules)
 			var/list/um = occupier.contents|occupier.module.modules
-			// ^ makes sinle list of active (occupier.contents) and inactive modules (occupier.module.modules)
+			// ^ makes single list of active (occupier.contents) and inactive modules (occupier.module.modules)
 			var/coeff = recharge_speed / 200
 			for(var/obj/O in um)
 				// Engineering
@@ -209,3 +209,4 @@
 						S.reagents.add_reagent("pacid", 2 * coeff)
 					else if(S.name == "lube spray")
 						S.reagents.add_reagent("lube", 2 * coeff)
+

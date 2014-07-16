@@ -5,6 +5,8 @@
 #define HANDS_LAYER 1
 #define TOTAL_LAYERS 1
 
+#define DRONE_MAX_RESOURCE 50
+
 /mob/living/simple_animal/drone
 	name = "drone"
 	desc = "A maintenance drone, an expendable robot built to perform station repairs."
@@ -33,10 +35,12 @@
 	2. You may not harm any being, regardless of intent or circumstance.
 	3. You must maintain, repair, improve, and power the station to the best of your abilities."}
 
+
 /mob/living/simple_animal/drone/New()
 	..()
 
 	name = "Drone ([rand(100,999)])"
+	real_name = name
 
 	access_card = new /obj/item/weapon/card/id(src)
 	var/datum/job/captain/C = new /datum/job/captain
@@ -44,20 +48,54 @@
 
 /mob/living/simple_animal/drone/attack_hand(mob/user)
 	if(isdrone(user))
+		var/mob/living/simple_animal/drone/D = user
 		if(stat == DEAD)
-			var/mob/living/simple_animal/drone/D = user
-			if(D.health < D.maxHealth)
-				D.visible_message("<span class='notice'>[D] begins to cannibalize parts from [src].</span>")
-				if(do_after(D, 60,5,0))
-					D.visible_message("<span class='notice'>[D] repairs itself with using [src]'s remains!</span>")
-					D.adjustBruteLoss(D.health - D.maxHealth)
-					gib()
-				else
-					D << "<span class='notice'>You need to remain still to canibalize [src].</span>"
-			else
-				D << "<span class='notice'>You're already in perfect condition!</span>"
+			var/d_input = alert(D,"Perform which action?","Drone Interaction","Reactivate","Cannibalize","Nothing")
+			if(d_input)
+				switch(d_input)
+					if("Reactivate")
+						D.visible_message("<span class='notice'>[D] begins to reactivate [src]</span>")
+						if(do_after(user,30,needhand = 1))
+							health = maxHealth
+							stat = CONSCIOUS
+							icon_state = icon_living
+							D.visible_message("<span class='notice'>[D] reactivates [src]!</span>")
+						else
+							D << "<span class='notice'>You need to remain still to reactivate [src]</span>"
+
+					if("Cannibalize")
+						if(D.health < D.maxHealth)
+							D.visible_message("<span class='notice'>[D] begins to cannibalize parts from [src].</span>")
+							if(do_after(D, 60,5,0))
+								D.visible_message("<span class='notice'>[D] repairs itself using [src]'s remains!</span>")
+								D.adjustBruteLoss(D.health - D.maxHealth)
+								gib()
+							else
+								D << "<span class='notice'>You need to remain still to canibalize [src].</span>"
+						else
+							D << "<span class='notice'>You're already in perfect condition!</span>"
+					if("Nothing")
+						return
+
+		return
+
+	if(ishuman(user))
+		if(user.get_active_hand())
+			user << "<span class='notice'>Your hands are full.</span>"
+			return
+		src << "<span class='warning'>[user] is trying to pick you up!</span"
+		user << "<span class='notice'>You start picking [src] up...</span>"
+		if(do_after(user, 20, needhand = 1))
+			drop_l_hand()
+			drop_r_hand()
+			var/obj/item/drone_holder/DH = new /obj/item/drone_holder(src)
+			DH.contents += src
+			DH.drone = src
+			user.put_in_hands(DH)
+			src.loc = DH
 		else
-			user << "<span class='notice'>You can't salvage parts from [src] while they're still alive!</span>"
+			user << "<span class='notice'>[src] got away!</span>"
+			src << "<span class='warning'>You got away from [user]!</span>"
 		return
 
 	..()
@@ -67,6 +105,10 @@
 	return 1
 
 /mob/living/simple_animal/drone/UnarmedAttack(atom/A, proximity)
+	if(istype(A,/obj/item/weapon/gun))
+		src << "<span class='warning'>Your subroutines prevent you from picking up [A].</span>"
+		return
+
 	A.attack_hand(src)
 
 /mob/living/simple_animal/drone/swap_hand()
@@ -157,7 +199,6 @@
 		drone_overlays[cache_index] = null
 
 
-
 /mob/living/simple_animal/drone/update_inv_hands()
 	remove_overlay(HANDS_LAYER)
 
@@ -172,7 +213,7 @@
 		var/l_state = l_hand.item_state
 		if(!l_state)	l_state = l_hand.icon_state
 
-		hands_overlays += image("icon"='icons/mob/items_righthand.dmi', "icon_state"="[l_state]", "layer"=-HANDS_LAYER)
+		hands_overlays += image("icon"='icons/mob/items_lefthand.dmi', "icon_state"="[l_state]", "layer"=-HANDS_LAYER)
 
 
 	if(hands_overlays.len)
@@ -181,21 +222,6 @@
 	apply_overlay(HANDS_LAYER)
 
 #undef HANDS_LAYER
-
-/obj/item/drone_shell
-	name = "drone shell"
-	desc = "A shell of a maintenance drone, an expendable robot built to perform station repairs."
-	icon = 'icons/mob/drone.dmi'
-	icon_state = "drone_item"
-	origin_tech = "programming=2;biotech=4"
-
-/obj/item/drone_shell/attack_ghost(mob/user)
-	if(jobban_isbanned(user,"pAI"))
-		return
-
-	var/mob/living/simple_animal/drone/D = new(get_turf(loc))
-	D.key = user.key
-	qdel(src)
 
 /mob/living/simple_animal/drone/canUseTopic()
 	if(stat)
@@ -216,3 +242,47 @@
 		swap_hand()
 	else
 		mode()
+
+
+//DRONE SHELL
+/obj/item/drone_shell
+	name = "drone shell"
+	desc = "A shell of a maintenance drone, an expendable robot built to perform station repairs."
+	icon = 'icons/mob/drone.dmi'
+	icon_state = "drone_item"
+	origin_tech = "programming=2;biotech=4"
+	var/construction_cost = list("metal"=800, "glass"=350)
+	var/construction_time=150
+
+/obj/item/drone_shell/attack_ghost(mob/user)
+	if(jobban_isbanned(user,"pAI"))
+		return
+
+	var/mob/living/simple_animal/drone/D = new(get_turf(loc))
+	D.key = user.key
+	qdel(src)
+
+
+//DRONE HOLDER
+
+/obj/item/drone_holder //Only exists in someones hand.
+	name = "drone (hiding)"
+	desc = "This drone is scared and has curled up into a ball"
+	icon = 'icons/mob/drone.dmi'
+	icon_state = "drone_item"
+	var/mob/living/simple_animal/drone/drone //stored drone
+
+/obj/item/drone_holder/dropped()
+	if(drone)
+		contents -= drone
+		drone.loc = get_turf(src)
+		drone.dir = SOUTH //Looks better
+		drone.visible_message("<span class='notice'>[drone] uncurls!</span>")
+		drone = null
+		qdel(src)
+	else
+		..()
+
+
+
+

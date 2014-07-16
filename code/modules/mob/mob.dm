@@ -805,3 +805,17 @@ var/list/slot_equipment_priority = list( \
 /mob/proc/activate_hand(var/selhand) //0 or "r" or "right" for right hand; 1 or "l" or "left" for left hand.
 	return
 
+/mob/proc/get_airtank()
+    return null
+
+/mob/living/carbon/get_airtank()
+    for(var/obj/item/weapon/tank/T in list(l_hand,r_hand, back))
+        if(T.canbreathe)
+            return T
+    return null
+/mob/living/carbon/human/get_airtank()
+    for(var/obj/item/weapon/tank/T in list(l_hand,r_hand,s_store, belt, l_store, r_store, back))
+        if(T.canbreathe)
+            return T
+    return null
+
