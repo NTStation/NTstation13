@@ -164,6 +164,9 @@ obj/structure/sign/poster/New(serial,subtype)
 			if(24)
 				name += " - C-20r Advertisment"
 				desc += " A poster advertising the Scarborough Arms C-20r."
+			else
+				name += " - Error (subtype 0 serial_number)"
+				desc += " This is a bug, please report the circumstances under which you encountered this poster at https://github.com/NTStation/NTstation13/issues."
 
 	if(subtype == 1)
 		icon_state = "poster[serial_number]_legit"
@@ -238,7 +241,7 @@ obj/structure/sign/poster/New(serial,subtype)
 				name += " - Ion Rifle"
 				desc += " A poster displaying an Ion Rifle."
 			else
-				name += " - ulgar themes have marked i (subtype 1 serial_number)"
+				name += " - Error (subtype 1 serial_number)"
 				desc += " This is a bug, please report the circumstances under which you encountered this poster at https://github.com/NTStation/NTstation13/issues."
 	..()
 
