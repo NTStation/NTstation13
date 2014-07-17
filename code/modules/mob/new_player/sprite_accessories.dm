@@ -725,6 +725,16 @@
 		icon_state = "skullshirt"
 		gender = NEUTER
 
+	commie_shirt
+		name = "Question Shirt"
+		icon_state = "watshirt"
+		gender = NEUTER
+
+	nano_shirt
+		name = "Nanotrasen Shirt"
+		icon_state = "skullshirt"
+		gender = NEUTER
+
 ///////////////////////
 // Socks Definitions //
 ///////////////////////
