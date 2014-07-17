@@ -14,7 +14,7 @@
 
 /obj/item/weapon/contraband/poster
 	name = "rolled-up poster"
-	desc = "The poster comes with its own automatic adhesive mechanism, for easy pinning to any vertical surface. Its vulgar themes have marked it as Contraband aboard Nanotrasen? Space Facilities."
+	desc = "The poster comes with its own automatic adhesive mechanism, for easy pinning to any vertical surface. Its vulgar themes have marked it as contraband aboard Nanotrasen space facilities."
 	icon_state = "rolled_poster"
 	var/serial_number = 0
 	var/obj/structure/sign/poster/resulting_poster = null //The poster that will be created is initialised and stored through contraband/poster's constructor
@@ -97,7 +97,7 @@ obj/structure/sign/poster/New(serial,subtype)
 				desc += " A framed shred of a much larger flag, colors bled together and faded from age."
 			if(2)
 				name += " - Atmosia Declaration of Independence"
-				desc += " A relic of a failed rebellion"
+				desc += " A relic of a failed rebellion."
 			if(3)
 				name += " - Fun Police"
 				desc += " A poster condemning the station's security forces."
@@ -148,10 +148,10 @@ obj/structure/sign/poster/New(serial,subtype)
 				desc += " All hail the Communist party!"
 			if(19)
 				name += " - Lamarr"
-				desc += " This poster depicts Lamarr. Probably made by the research director."
+				desc += " This poster depicts Lamarr. Probably made by the Research Director."
 			if(20)
 				name += " - Borg Fancy"
-				desc += " Being fancy can be for any borg, Just need a suit."
+				desc += " Being fancy can be for any borg, just need a suit."
 			if(21)
 				name += " - Borg Fancy v2"
 				desc += " Borg Fancy, Now only taking the most fancy."
@@ -164,9 +164,7 @@ obj/structure/sign/poster/New(serial,subtype)
 			if(24)
 				name += " - C-20r Advertisment"
 				desc += " A poster advertising the Scarborough Arms C-20r."
-			else
-				name += " - Error (subtype 0 serial_number)"
-				desc += " This is a bug, please report the circumstances under which you encountered this poster at https://github.com/NTStation/NTstation13/issues."
+
 	if(subtype == 1)
 		icon_state = "poster[serial_number]_legit"
 		switch(serial_number)
@@ -175,7 +173,7 @@ obj/structure/sign/poster/New(serial,subtype)
 				desc += " A poster glorifying the station's security force."
 			if(2)
 				name += " - Nanotrasen Logo"
-				desc += " A poster depicting the logo of Nanotrasen"
+				desc += " A poster depicting the logo of Nanotrasen."
 			if(3)
 				name += " - Cleanliness"
 				desc += " A poster warning of the dangers of poor hygiene."
@@ -226,7 +224,7 @@ obj/structure/sign/poster/New(serial,subtype)
 				desc += " A poster reprint of some cheap pop art."
 			if(19)
 				name += " - Saftey: Internals"
-				desc += " A poster instructing the viewer to wear internals in enviornments where there is no oxygen or the air has been rendered toxic."
+				desc += " A poster instructing the viewer to wear internals in environments where there is no oxygen or the air has been rendered toxic."
 			if(20)
 				name += " - Saftey: Eye Protection"
 				desc += " A poster instructing the viewer to wear eye protection when dealing with chemicals, smoke, or bright lights."
@@ -235,16 +233,13 @@ obj/structure/sign/poster/New(serial,subtype)
 				desc += " A poster instructing the viewer to report suspicious activity to the security force."
 			if(22)
 				name += " - Report Crimes"
-				desc += " Report Crimes At: 1-800-FUCKING-TERRORISTS or at https://www.sectorthirteen.nt/malconetents."
+				desc += " Report crimes at: 1-800-FUCKING-TERRORISTS or at https://www.sectorthirteen.nt/malconetents."
 			if(23)
 				name += " - Ion Rifle"
 				desc += " A poster displaying an Ion Rifle."
 			else
-				name += " - Error (subtype 1 serial_number)"
+				name += " - ulgar themes have marked i (subtype 1 serial_number)"
 				desc += " This is a bug, please report the circumstances under which you encountered this poster at https://github.com/NTStation/NTstation13/issues."
-	else
-		name += " - Error (subtype/pre-placed poster serial_number generator)"
-		desc += " This is a bug, please report the circumstances under which you encountered this poster at https://github.com/NTStation/NTstation13/issues."
 	..()
 
 obj/structure/sign/poster/attackby(obj/item/I, mob/user)
