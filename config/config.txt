@@ -74,6 +74,9 @@ ALLOW_METADATA
 ## allow players to initate a mode-change start
 #ALLOW_VOTE_MODE
 
+## allow players to initate a crew transfer shuttle vote
+#ALLOW_VOTE_TRANSFER
+
 ## min delay (deciseconds) between voting sessions (default 10 minutes)
 VOTE_DELAY 6000
 

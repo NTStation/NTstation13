@@ -242,18 +242,9 @@
 	if (!com.target)
 		visible_message("<span class='notice'>Cannot authenticate locked on coordinates. Please reinstate coordinate matrix.</span>")
 		return
-	if (istype(M, /atom/movable))
-		if(do_teleport(M, com.target))
-			if(prob(30 - (accurate * 10))) //oh dear a problem
-				if(ishuman(M))//don't remove people from the round randomly you jerks
-					var/mob/living/carbon/human/human = M
-					if(human.dna && !human.dna.mutantrace)
-						M  << "<span class='danger'>You hear a buzzing in your ears.</span>"
-						human.dna.mutantrace = "fly"
-						human.update_body()
-						human.update_hair()
-					human.apply_effect((rand(120 - accurate * 40, 180 - accurate * 60)), IRRADIATE, 0)
-	return
+	if (istype(M, /atom/movable))		
+		do_teleport(M, com.target)
+ 	return
 
 /obj/machinery/teleport/hub/update_icon()
 	if(panel_open)

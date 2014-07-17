@@ -52,7 +52,7 @@
 
 
 /obj/item/weapon/gun/energy/crossbow
-	name = "mini energy-crossbow"
+	name = "mini energy crossbow"
 	desc = "A weapon favored by many syndicate stealth specialists."
 	icon_state = "crossbow"
 	w_class = 2.0
@@ -98,8 +98,8 @@
 	return
 
 /obj/item/weapon/gun/energy/crossbow/largecrossbow
-	name = "Energy Crossbow"
-	desc = "A reverse-engineered energy crossbow."
+	name = "energy crossbow"
+	desc = "A reverse-engineered energy crossbow with a bulky frame."
 	icon_state = "crossbow_large"
 	w_class = 4.0
 	item_state = "crossbow_large"

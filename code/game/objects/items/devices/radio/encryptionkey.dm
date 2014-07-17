@@ -115,3 +115,9 @@
 	desc = "An encryption key for a radio headset.  To access the service channel, use :v."
 	icon_state = "srv_cypherkey"
 	channels = list("Service" = 1)
+
+/obj/item/device/encryptionkey/heads/ai_integrated //ported from bay, this goes 'inside' the AI.
+	name = "AI Integrated Encryption Key"
+	desc = "Integrated encryption key"
+	icon_state = "cap_cypherkey"
+	channels = list("Command" = 1, "Security" = 1, "Engineering" = 1, "Science" = 1, "Medical" = 1, "Supply" = 1, "Service" = 1)

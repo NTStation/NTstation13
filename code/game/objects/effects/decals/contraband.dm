@@ -178,13 +178,13 @@ obj/structure/sign/poster/New(serial,subtype)
 				desc += " A poster depicting the logo of Nanotrasen"
 			if(3)
 				name += " - Cleanliness"
-				desc += " A poster warning of the dangers of poor hygene."
+				desc += " A poster warning of the dangers of poor hygiene."
 			if(4)
 				name += " - Help Others"
 				desc += " A poster encouraging you to help fellow crewmembers."
 			if(5)
 				name += " - Build"
-				desc += " A poster glorifying the engineerning team."
+				desc += " A poster glorifying the engineering team."
 			if(6)
 				name += " - Bless This Spess"
 				desc += " A poster blessing this area."

@@ -247,6 +247,23 @@
 		mode = SYRINGE_INJECT
 		update_icon()
 
+/obj/item/weapon/reagent_containers/syringe/bicaridine
+	name = "syringe (bicaridine)"
+	desc = "Contains bicaridine."
+	New()
+		..()
+		reagents.add_reagent("bicaridine", 15)
+		mode = SYRINGE_INJECT
+		update_icon()
+
+/obj/item/weapon/reagent_containers/syringe/kelotane
+	name = "syringe (kelotane)"
+	desc = "Contains kelotane."
+	New()
+		..()
+		reagents.add_reagent("kelotane", 15)
+		mode = SYRINGE_INJECT
+		update_icon()
 
 //Robot syringes
 //Not special in any way, code wise. They don't have added variables or procs.

@@ -205,48 +205,24 @@
 		if("internal")
 			if(iscarbon(usr))
 				var/mob/living/carbon/C = usr
-				if(!C.stat && !C.stunned && !C.paralysis && !C.restrained())
+				if(C.canmove && !C.restrained())
 					if(C.internal)
 						C.internal = null
-						C << "<span class='notice'>No longer running on internals.</span>"
+						C << "<span class='notice'>No longer breathing from internals.</span>"
 						if(C.internals)
 							C.internals.icon_state = "internal0"
 					else
 						if(!istype(C.wear_mask, /obj/item/clothing/mask))
-							C << "<span class='notice'>You are not wearing a mask.</span>"
+							C << "<span class='notice'>You are not wearing an internals-compliant mask.</span>"
 							return 1
+
+						C.internal = C.get_airtank()
+						if(C.internal)
+							C <<"<span class='notice'>You are now breathing from [C.internal].</span>"
+							if(C.internals)
+								C.internals.icon_state = "internal1"
 						else
-							if(istype(C.l_hand, /obj/item/weapon/tank))
-								C << "<span class='notice'>You are now running on internals from the [C.l_hand] on your left hand.</span>"
-								C.internal = C.l_hand
-							else if(istype(C.r_hand, /obj/item/weapon/tank))
-								C << "<span class='notice'>You are now running on internals from the [C.r_hand] on your right hand.</span>"
-								C.internal = C.r_hand
-							else if(ishuman(C))
-								var/mob/living/carbon/human/H = C
-								if(istype(H.s_store, /obj/item/weapon/tank))
-									H << "<span class='notice'>You are now running on internals from the [H.s_store] on your [H.wear_suit].</span>"
-									H.internal = H.s_store
-								else if(istype(H.belt, /obj/item/weapon/tank))
-									H << "<span class='notice'>You are now running on internals from the [H.belt] on your belt.</span>"
-									H.internal = H.belt
-								else if(istype(H.l_store, /obj/item/weapon/tank))
-									H << "<span class='notice'>You are now running on internals from the [H.l_store] in your left pocket.</span>"
-									H.internal = H.l_store
-								else if(istype(H.r_store, /obj/item/weapon/tank))
-									H << "<span class='notice'>You are now running on internals from the [H.r_store] in your right pocket.</span>"
-									H.internal = H.r_store
-
-							//Seperate so CO2 jetpacks are a little less cumbersome.
-							if(!C.internal && istype(C.back, /obj/item/weapon/tank))
-								C << "<span class='notice'>You are now running on internals from the [C.back] on your back.</span>"
-								C.internal = C.back
-
-							if(C.internal)
-								if(C.internals)
-									C.internals.icon_state = "internal1"
-							else
-								C << "<span class='notice'>You don't have an oxygen tank.</span>"
+							C << "<span class='notice'>You don't have an internals tank!</span>"
 		if("act_intent")
 			usr.a_intent_change("right")
 		if("pull")
@@ -290,6 +266,83 @@
 			if(istype(usr, /mob/living/silicon/robot))
 				usr:toggle_module(3)
 
+		if("AI Core")
+			if(isAI(usr))
+				var/mob/living/silicon/ai/AI = usr
+				AI.view_core()
+
+		if("Show Camera List")
+			if(isAI(usr))
+				var/mob/living/silicon/ai/AI = usr
+				var/camera = input(AI) in AI.get_camera_list()
+				AI.ai_camera_list(camera)
+
+		if("Track With Camera")
+			if(isAI(usr))
+				var/mob/living/silicon/ai/AI = usr
+				var/target_name = input(AI) in AI.trackable_mobs()
+				AI.ai_camera_track(target_name)
+
+		if("Toggle Camera Light")
+			if(isAI(usr))
+				var/mob/living/silicon/ai/AI = usr
+				AI.toggle_camera_light()
+
+		if("Crew Monitorting")
+			if(isAI(usr))
+				var/mob/living/silicon/ai/AI = usr
+				crewmonitor(AI)
+
+		if("Show Crew Manifest")
+			if(isAI(usr))
+				var/mob/living/silicon/ai/AI = usr
+				AI.ai_roster()
+
+		if("Show Alerts")
+			if(isAI(usr))
+				var/mob/living/silicon/ai/AI = usr
+				AI.ai_alerts()
+
+		if("Announcement")
+			if(isAI(usr))
+				var/mob/living/silicon/ai/AI = usr
+				AI.announcement()
+
+		if("Call Emergency Shuttle")
+			if(isAI(usr))
+				var/mob/living/silicon/ai/AI = usr
+				AI.ai_call_shuttle()
+
+		if("State Laws")
+			if(isAI(usr))
+				var/mob/living/silicon/ai/AI = usr
+				AI.checklaws()
+
+		if("PDA - Send Message")
+			if(isAI(usr))
+				var/mob/living/silicon/ai/AI = usr
+				AI.cmd_send_pdamesg(usr)
+
+		if("PDA - Show Message Log")
+			if(isAI(usr))
+				var/mob/living/silicon/ai/AI = usr
+				AI.cmd_show_message_log(usr)
+
+		if("Take Image")
+			if(isAI(usr))
+				var/mob/living/silicon/ai/AI = usr
+				AI.aicamera.toggle_camera_mode()
+
+		if("View Images")
+			if(isAI(usr))
+				var/mob/living/silicon/ai/AI = usr
+				AI.aicamera.viewpictures()
+
+		if("Sensor Augmentation")
+			if(isAI(usr))
+				var/mob/living/silicon/ai/AI = usr
+				AI.sensor_mode()
+
 		else
 			return 0
 	return 1
@@ -306,13 +359,9 @@
 		return 1
 	switch(name)
 		if("r_hand")
-			if(iscarbon(usr))
-				var/mob/living/carbon/C = usr
-				C.activate_hand("r")
+			usr:activate_hand("r")
 		if("l_hand")
-			if(iscarbon(usr))
-				var/mob/living/carbon/C = usr
-				C.activate_hand("l")
+			usr:activate_hand("l")
 		if("swap")
 			usr:swap_hand()
 		if("hand")

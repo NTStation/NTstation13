@@ -518,6 +518,31 @@ proc/process_ghost_teleport_locs()
 /area/centcom/holding
 	name = "\improper Holding Facility"
 
+/area/centcom/bar
+	name = "\improper Centcom Bar"
+
+/area/centcom/center
+	name = "\improper Centcom Central"
+
+/area/centcom/specops
+	name = "\improper Special Operations Sector"
+
+/area/centcom/civilian
+	name = "\improper Civilian Sector"
+
+/area/centcom/medsci
+	name = "\improper Medsci Sector"
+
+/area/centcom/misc/prefab_dungeon //for badmins to fill
+	name = "\improper Centcom Depths"
+
+/area/centcom/misc/plane
+	name = "\improper Blank Plane"
+
+/area/centcom/misc/fleet
+	name = "\improper Centcom Fleet"
+
+
 //SYNDICATES
 
 /area/syndicate_mothership
