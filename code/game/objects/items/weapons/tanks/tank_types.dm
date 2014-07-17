@@ -91,6 +91,7 @@
 	name = "plasma tank"
 	desc = "Contains dangerous plasma. Do not inhale. Warning: extremely flammable."
 	icon_state = "plasma"
+	canbreathe = 0
 	flags = CONDUCT
 	slot_flags = null	//they have no straps!
 

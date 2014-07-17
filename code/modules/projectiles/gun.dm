@@ -22,6 +22,8 @@
 	var/obj/item/ammo_casing/chambered = null
 	var/trigger_guard = 1
 
+	var/list/upgrades = list()
+
 /obj/item/weapon/gun/proc/process_chamber()
 	return 0
 

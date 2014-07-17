@@ -570,11 +570,20 @@
 		icon_state = "bl_shirt"
 		gender = NEUTER
 
+	black_shirt2
+		name = "Black Shirt 2"
+		icon_state = "bl_shirt2"
+		gender = NEUTER
+
 	white_shirt
 		name = "White Shirt"
 		icon_state = "wt_shirt"
 		gender = NEUTER
 
+	white_shirt2
+		name = "White Shirt 2"
+		icon_state = "wt_shirt2"
+		gender = NEUTER
 
 	black_tank_top
 		name = "Black Tank Top"

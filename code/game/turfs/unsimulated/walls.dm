@@ -14,6 +14,11 @@
 	icon_state = "fakewindows"
 	opacity = 0
 
+/turf/unsimulated/wall/fakeglassnew
+	name = "window"
+	icon_state = "fakewindowsnew"
+	opacity = 0
+
 /turf/unsimulated/wall/fakedoor
 	name = "Centcom Access"
 	icon = 'icons/obj/doors/Doorele.dmi'

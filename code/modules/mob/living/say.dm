@@ -121,7 +121,7 @@ var/list/department_radio_keys = list(
 	else if (copytext(message, 1, 2) == ";")
 		if (ishuman(src))
 			message_mode = "headset"
-		else if(ispAI(src) || isrobot(src))
+		else if(ispAI(src) || isrobot(src) || isAI(src))
 			message_mode = "pAI"
 		message = copytext(message, 2)
 
@@ -132,7 +132,7 @@ var/list/department_radio_keys = list(
 		//world << "channel_prefix=[channel_prefix]; message_mode=[message_mode]"
 		if (message_mode)
 			message = trim(copytext(message, 3))
-			if (!(ishuman(src) || istype(src, /mob/living/simple_animal/parrot) || isrobot(src) && (message_mode=="department" || (message_mode in radiochannels))))
+			if (!(ishuman(src) || istype(src, /mob/living/simple_animal/parrot) || isrobot(src) && (message_mode=="department") || isAI(src) && (message_mode=="department") || (message_mode in radiochannels)))
 				message_mode = null //only humans can use headsets
 			// Check changed so that parrots can use headsets. Other simple animals do not have ears and will cause runtimes.
 			// And borgs -Sieve
@@ -247,6 +247,11 @@ var/list/department_radio_keys = list(
 					if(R.radio)//Sanityyyy
 						R.radio.talk_into(src, message, message_mode)
 						used_radios += R.radio
+				else if(isAI(src))//for the AI's radio.  This can't be with the borg thing above due to typecasting.
+					var/mob/living/silicon/ai/A = src
+					if(A.radio)
+						A.radio.talk_into(src, message, message_mode)
+						used_radios += A.radio
 				else
 					if (src:ears)
 						src:ears.talk_into(src, message, message_mode)

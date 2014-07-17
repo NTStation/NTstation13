@@ -29,6 +29,7 @@ var/list/ai_list = list()
 	var/icon/holo_icon//Default is assigned when AI is created.
 	var/obj/item/device/pda/ai/aiPDA = null
 	var/obj/item/device/multitool/aiMulti = null
+	var/obj/item/device/radio/headset/heads/ai_integrated/radio = null
 	var/obj/item/device/camera/ai_camera/aicamera = null
 
 	//MALFUNCTION
@@ -90,12 +91,14 @@ var/list/ai_list = list()
 	aiPDA.name = name + " (" + aiPDA.ownjob + ")"
 
 	aiMulti = new(src)
+	radio = new(src)
+	radio.myAi = src
 	aicamera = new/obj/item/device/camera/ai_camera(src)
 
 	if (istype(loc, /turf))
 		verbs.Add(/mob/living/silicon/ai/proc/ai_network_change, \
 		/mob/living/silicon/ai/proc/ai_statuschange, /mob/living/silicon/ai/proc/ai_hologram_change, \
-		/mob/living/silicon/ai/proc/toggle_camera_light)
+		/mob/living/silicon/ai/proc/control_integrateed_radio)
 
 	if(!safety)//Only used by AIize() to successfully spawn an AI.
 		if (!B)//If there is no player/brain inside.
@@ -736,3 +739,18 @@ var/list/ai_list = list()
 				src.current = camera
 				src.current.SetLuminosity(AI_CAMERA_LUMINOSITY)
 		camera_light_on = world.timeofday + 1 * 20 // Update the light every 2 seconds.
+
+/mob/living/silicon/ai/verb/outputlaws()
+	set category = "AI Commands"
+	set name = "State Laws"
+
+	checklaws()
+
+/mob/living/silicon/ai/proc/control_integrateed_radio()
+	set name = "Radio Settings"
+	set desc = "Allows you to change settings of your radio."
+	set category = "AI Commands"
+
+	src << "Accessing Subspace Transceiver control..."
+	if (src.radio)
+		src.radio.interact(src)

@@ -77,6 +77,7 @@
 		new /obj/item/clothing/mask/surgical(src)
 		new /obj/item/weapon/storage/belt/medical(src)
 		new /obj/item/clothing/glasses/hud/health(src)
+		new /obj/item/clothing/glasses/hud/health(src)
 		return
 
 /obj/structure/closet/secure_closet/CMO
