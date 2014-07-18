@@ -74,8 +74,6 @@
 	new /obj/item/clothing/under/janimaid(src)
 	new /obj/item/clothing/under/rank/janitor/alternate(src)
 	new /obj/item/clothing/suit/hazardvest/denim(src)
-	if(prob(60))
-		new /obj/item/weapon/paper/magazine(src)
 	new /obj/item/clothing/head/maidbow(src)
 	new /obj/item/weapon/cartridge/janitor(src)
 	new /obj/item/clothing/gloves/black(src)
