@@ -23,8 +23,8 @@
 	C.add_to(src)
 	subsystems.Add(C)
 
-	meele = new /obj/item/weapon/powerarmor/weapon/meele/pneumatic(src)
-	meele.add_to(src)
+	melee = new /obj/item/weapon/powerarmor/weapon/melee/pneumatic(src)
+	melee.add_to(src)
 
 	ranged_r = new /obj/item/weapon/powerarmor/weapon/ranged/proj/l6(src)
 	ranged_r.add_to(src)

@@ -35,8 +35,8 @@
 
 	if(user.a_intent == "harm")
 		if(proximity)
-			if(parmor.meele)
-				return parmor.meele.pattack(A, user)
+			if(parmor.melee)
+				return parmor.melee.pattack(A, user)
 		else
 			if(parmor.ranged_r && parmor.ranged_l)
 				if(user.hand)

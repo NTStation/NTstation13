@@ -33,7 +33,7 @@
 		parent.slowdown += slowdown
 
 /obj/item/weapon/powerarmor/proc/drop()
-	if(!istype(loc, /obj/item/clothing/suit/powered))
+	if(!src.parent || src.loc != parent)
 		return
 	src.loc = get_turf(src)
 
@@ -46,8 +46,8 @@
 	else if(src == parent.atmoseal)
 		parent.atmoseal = null
 
-	else if(src == parent.meele)
-		parent.meele = null
+	else if(src == parent.melee)
+		parent.melee = null
 
 	else if(src == parent.ranged_l)
 		parent.ranged_l = null

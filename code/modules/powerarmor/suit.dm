@@ -28,7 +28,7 @@
 	var/obj/item/weapon/powerarmor/reactive/reactive
 	var/obj/item/weapon/powerarmor/atmoseal/atmoseal
 
-	var/obj/item/weapon/powerarmor/weapon/meele/meele
+	var/obj/item/weapon/powerarmor/weapon/melee/melee
 	var/obj/item/weapon/powerarmor/weapon/ranged/ranged_l
 	var/obj/item/weapon/powerarmor/weapon/ranged/ranged_r
 
@@ -240,11 +240,11 @@
 				"<span class='warning'>You remove [src]'s subsystems!</span>",
 				"<span class='notice'>You hear a click!</span>")
 
-			else if(meele)
-				user.visible_message("<span class='warning'>[user] removes [meele] from [src]!</span>",
-				"<span class='warning'>You remove [meele] from [src]!</span>",
+			else if(melee)
+				user.visible_message("<span class='warning'>[user] removes [melee] from [src]!</span>",
+				"<span class='warning'>You remove [melee] from [src]!</span>",
 				"<span class='notice'>You hear a click!</span>")
-				meele.drop()
+				melee.drop()
 
 			else if(ranged_l)
 				user.visible_message("<span class='warning'>[user] removes [ranged_l] from [src]!</span>",
@@ -280,8 +280,8 @@
 				subsystems.Add(C)
 				installed = 1
 
-			else if(istype(C, /obj/item/weapon/powerarmor/weapon/meele) && !meele)
-				meele = C
+			else if(istype(C, /obj/item/weapon/powerarmor/weapon/melee) && !melee)
+				melee = C
 				installed = 1
 
 			else if(istype(C, /obj/item/weapon/powerarmor/weapon/ranged) && !ranged_r)
