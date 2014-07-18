@@ -39,7 +39,8 @@
 
 /obj/item/organ/limb
 	name = "limb"
-	var/mob/owner = null
+	origin_tech = "biotech=3"
+	var/mob/living/carbon/human/owner = null
 	var/body_part = null
 	var/brutestate = 0
 	var/burnstate = 0
@@ -47,7 +48,6 @@
 	var/burn_dam = 0
 	var/max_damage = 0
 	var/dam_icon = ""
-	origin_tech = "biotech=3"
 
 /obj/item/organ/limb/chest
 	name = "chest"
@@ -233,3 +233,12 @@
 
 
 
+
+
+/obj/item/organ/limb/head/attackby(var/obj/item/I,var/mob/M)
+	if(istype(I, /obj/item/weapon/circular_saw))
+		var/obj/item/organ/brain/B = locate(/obj/item/organ/brain) in contents
+		if(B)
+			B.loc = get_turf(src)
+			contents -= B
+			M << "<span class='notice'>You saw open [src] and remove their brain</span>"

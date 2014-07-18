@@ -21,7 +21,7 @@
 		. += back.slowdown
 
 	//Leg based movement delays
-	if(get_num_limbs_of_state(LEG_RIGHT,ORGAN_FINE) >= 1)
+	if(get_num_limbs_of_state(LEG_RIGHT,ORGAN_REMOVED) >= 1)
 		. += 1//1 leg missing, +1 delay
 
 	if(has_organic_effect(/datum/organic_effect/fat))

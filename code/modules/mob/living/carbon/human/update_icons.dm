@@ -161,7 +161,7 @@ Please contact me on #coderbus IRC. ~Carnie x
 			standing	+= img_facial_s
 
 	//Applies the debrained overlay if there is no brain
-	if(!getorgan(/obj/item/organ/brain))
+	if(!getorgan(/obj/item/organ/brain) && HEAD_ORGAN.state == ORGAN_FINE)
 		standing	+= image("icon"='icons/mob/human_face.dmi', "icon_state" = "debrained_s", "layer" = -HAIR_LAYER)
 
 	if((wear_suit) && (wear_suit.has_hood) && (wear_suit.is_toggled == 2))
@@ -207,20 +207,24 @@ Please contact me on #coderbus IRC. ~Carnie x
 	remove_overlay(BODY_LAYER)
 
 	var/list/standing	= list()
+	var/obj/item/organ/limb/head/HEAD_ORGAN = get_organ("head")
 
 	//Mouth	(lipstick!)
-	if(lip_style)
-		standing	+= image("icon"='icons/mob/human_face.dmi', "icon_state"="lips_[lip_style]_s", "layer" = -BODY_LAYER)
+
+	if(HEAD_ORGAN.state == ORGAN_FINE)
+		if(lip_style)
+			standing	+= image("icon"='icons/mob/human_face.dmi', "icon_state"="lips_[lip_style]_s", "layer" = -BODY_LAYER)
 
 	//Eyes
-	if(!dna || dna.mutantrace != "skeleton")
-		var/image/img_eyes_s = image("icon" = 'icons/mob/human_face.dmi', "icon_state" = "eyes_s", "layer" = -BODY_LAYER)
+	if(HEAD_ORGAN.state == ORGAN_FINE)
+		if(!dna || dna.mutantrace != "skeleton")
+			var/image/img_eyes_s = image("icon" = 'icons/mob/human_face.dmi', "icon_state" = "eyes_s", "layer" = -BODY_LAYER)
 
-		var/new_color = "#" + eye_color
+			var/new_color = "#" + eye_color
 
-		img_eyes_s.color = new_color
+			img_eyes_s.color = new_color
 
-		standing	+= img_eyes_s
+			standing	+= img_eyes_s
 
 	//Underwear
 	if(underwear)
@@ -236,9 +240,10 @@ Please contact me on #coderbus IRC. ~Carnie x
 
 
 	if(socks)
-		var/datum/sprite_accessory/socks/U3 = socks_list[socks]
-		if(U3)
-			standing	+= image("icon"=U3.icon, "icon_state"="[U3.icon_state]_s", "layer"=-BODY_LAYER)
+		if(get_num_limbs_of_state(LEG_RIGHT,ORGAN_REMOVED) >= 2)
+			var/datum/sprite_accessory/socks/U3 = socks_list[socks]
+			if(U3)
+				standing	+= image("icon"=U3.icon, "icon_state"="[U3.icon_state]_s", "layer"=-BODY_LAYER)
 
 	if(standing.len)
 		overlays_standing[BODY_LAYER]	= standing
@@ -816,8 +821,11 @@ var/global/list/human_icon_cache = list()
 	var/mutant_type = get_mutant_type()
 
 
-	if(affecting.body_part == HEAD || affecting.body_part == CHEST) //These body parts have genders, are not removable, but ARE augmentable
-		if(affecting.status == ORGAN_ORGANIC || affecting.body_part == HEAD) //Heads bypass this due to the icon
+	if(affecting.state == ORGAN_REMOVED)
+		return 0
+
+	if(affecting.body_part == HEAD || affecting.body_part == CHEST) //these have gender and use it in their icons
+		if(affecting.status == ORGAN_ORGANIC) //Heads bypass this due to the icon
 			if(mutant_type != "normal")//Skin tone is irrelevant in Mutant races
 				if(stat == DEAD)
 					if(mutant_type == "plant")
@@ -837,10 +845,7 @@ var/global/list/human_icon_cache = list()
 		else if(affecting.status == ORGAN_ROBOTIC)
 			I									= image("icon"=augment_parts,"icon_state"="[affecting.name]_[icon_gender]_s","layer"=-BODYPARTS_LAYER)
 
-	else // These body parts have no gender, and do not use the gender variable in their icon names
-		if(affecting.state == ORGAN_REMOVED)
-			return 0
-
+	else
 		if(affecting.status == ORGAN_ORGANIC)
 			if(mutant_type != "normal")
 				if(stat == DEAD)
@@ -898,8 +903,8 @@ var/global/list/human_icon_cache = list()
 #undef BELT_LAYER
 #undef SUIT_STORE_LAYER
 #undef BACK_LAYER
-#undef HAIR_LAYER
-#undef HEAD_LAYER
+//#undef HAIR_LAYER //Keeping these defined, for easy Head dismemberment
+//#undef HEAD_LAYER
 #undef HANDCUFF_LAYER
 #undef LEGCUFF_LAYER
 #undef HANDS_LAYER

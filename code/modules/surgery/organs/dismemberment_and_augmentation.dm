@@ -32,6 +32,8 @@
 	else
 		dismember_chance = overide //So you can specify an overide chance to dismember, for Unique weapons / Non weapon dismemberment
 
+	if(affecting.body_part == HEAD)
+		dismember_chance -= 25 //25% more likely to remain on the body
 
 	if(I)
 		if((affecting.brute_dam + I.force) >= (affecting.max_damage / 2) && affecting.state != ORGAN_REMOVED)
@@ -43,43 +45,86 @@
 
 	if(succesful)
 		if(prob(dismember_chance))
-			var/turf/T = get_turf(owner)
-			var/dismember_msg = "<span class='danger'><B>[owner]'s [affecting.getDisplayName()] has been violently dismembered!</B></span>"
 
-			switch(affecting.body_part)
-				if(HEAD)
-					return
-				if(CHEST)
-					for(var/obj/item/organ/O in owner.internal_organs)
-						if(istype(O,/obj/item/organ/brain))
-							continue
-						owner.internal_organs -= O
-						O.loc = T
-
-					dismember_msg = "<span class='danger'><B>[owner]'s internal organs have spilled onto the floor!</B></span>"
-
-				if(ARM_RIGHT || ARM_LEFT)
-					handle_arm_removal()
-				if(LEG_RIGHT || LEG_LEFT)
-					handle_leg_removal()
-
+			affecting.dismember_act()
 			owner.apply_damage(30, "brute","[affecting]")
-
 			affecting.state = ORGAN_REMOVED
-
 			affecting.drop_limb(owner)
-
 			affecting.brutestate = 0
-
 			affecting.burnstate = 0
 
-			owner.visible_message(dismember_msg)
+			owner.visible_message("<span class='danger'><B>[owner]'s [affecting.getDisplayName()] has been violently dismembered!</B></span>")
 
 			owner.drop_r_hand() //Removes any items they may be carrying in their now non existant arms
-			owner.drop_l_hand()
+			owner.drop_l_hand() //Handled here due to the "shock" of losing any limb
+
 		owner.regenerate_icons()  //Redraw the mob and all it's clothing
 		owner.update_canmove()
 
+
+////////////////////
+// Dismember acts //
+////////////////////
+
+//For each limb type's individual code to run on dismembering
+
+
+/obj/item/organ/limb/proc/dismember_act()
+	return
+
+/obj/item/organ/limb/head/dismember_act()
+	if(!owner)
+		return
+
+	var/obj/item/organ/brain/B = owner.getorgan(/obj/item/organ/brain)
+	owner.internal_organs -= B
+
+	if(status == ORGAN_ORGANIC)
+		var/obj/item/organ/limb/head/H = new /obj/item/organ/limb/head (get_turf(owner))
+		H.contents += B
+		B.loc = H
+		H.get_icon(owner)
+		H.name = "[owner.name]'s head"
+		H.desc = "it looks like [owner.name]"
+
+	if(status == ORGAN_ROBOTIC)
+		var/obj/item/augment/head/R = new /obj/item/augment/head (get_turf(owner))
+		R.contents += B
+		B.loc = R
+		R.name = "[owner.name]'s robotic head"
+		R.brain = B
+
+	B.transfer_identity(owner)
+
+
+/obj/item/organ/limb/chest/dismember_act()
+	if(!owner)
+		return
+
+	for(var/obj/item/organ/O in owner.internal_organs)
+		if(istype(O,/obj/item/organ/brain))
+			continue
+		owner.internal_organs -= O
+		O.loc = get_turf(owner)
+
+/obj/item/organ/limb/r_arm/dismember_act()
+	handle_arm_removal()
+
+/obj/item/organ/limb/l_arm/dismember_act()
+	handle_arm_removal()
+
+/obj/item/organ/limb/r_leg/dismember_act()
+	handle_leg_removal()
+
+/obj/item/organ/limb/l_leg/dismember_act()
+	handle_leg_removal()
+
+
+///////////////////////
+// Arm & Leg helpers //
+///////////////////////
+
+//Exists soley to prevent copy paste
 
 /obj/item/organ/limb/proc/handle_arm_removal()
 	if(!owner || !ishuman(owner))
@@ -114,6 +159,33 @@
 		var/obj/item/augment/AUG = I
 
 		if(affecting.body_part == AUG.limb_part)
+
+			if(affecting.body_part == HEAD)
+				if(istype(I, /obj/item/augment/head))
+					var/obj/item/augment/head/H = I
+					if(H.brain)
+						user.unEquip(H)
+						var/obj/item/organ/brain/B = H.brain
+						B.loc = src
+						internal_organs += B
+						H.brain = null
+						qdel(H)
+						if(B.brainmob && B.brainmob.mind)
+							B.brainmob.mind.transfer_to(src)
+						else
+							key = B.brainmob.key
+
+						stat = CONSCIOUS //Revive em
+
+					else
+						user << "<span class='warning'>This [H] has no brain inside!</span>"
+						return
+
+
+			if(affecting.body_part == CHEST)
+				for(var/datum/disease/D in viruses)
+					D.cure(1)
+
 			affecting.change_organ(ORGAN_ROBOTIC)
 
 			var/who = "[src]'s"
@@ -122,9 +194,6 @@
 
 			visible_message("<span class='notice'>[user] has attached [who] new limb!</span>")
 
-			if(affecting.body_part == CHEST)
-				for(var/datum/disease/D in viruses)
-					D.cure(1)
 
 		else
 			user << "<span class='notice'>[AUG.name] doesn't go there!</span>"
@@ -205,6 +274,7 @@
 /obj/item/organ/limb/proc/drop_limb(var/location)
 	var/obj/item/organ/limb/L
 	var/obj/item/augment/A
+
 	var/turf/T
 
 	if(location)
@@ -263,3 +333,32 @@
 			return 0
 		return 1
 
+
+//////////////////////
+//  head get_icon() //
+//////////////////////
+
+//Generates an icon for the head, using a human's Hair and Head layers, and the human generate_icon(limb) proc
+
+
+/obj/item/organ/limb/head/proc/get_icon(var/mob/living/carbon/human/H)
+	if(!istype(H) || !H)
+		return
+
+	icon_state = ""
+
+	var/image/I = H.overlays_standing[HAIR_LAYER] //Grab the hair
+	if(I)
+		overlays += I
+
+
+	I = H.overlays_standing[HEAD_LAYER] //Grab the Eyes/Face layer
+	if(I)
+		overlays += I
+
+
+	I = H.generate_icon(H.getlimb(src)) //Get the Human head
+	if(I)
+		underlays += I
+	else
+		icon_state = "head"
