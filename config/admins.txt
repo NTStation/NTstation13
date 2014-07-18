@@ -66,3 +66,4 @@ dannno = Game Master
 dorsidwarf = Game Master
 tokiko1 = Game Master
 neerti = Game Master
+account12 = Game Master
