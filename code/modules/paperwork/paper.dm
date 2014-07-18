@@ -356,9 +356,3 @@
 /obj/item/weapon/paper/crumpled/bloody
 	icon_state = "scrap_bloodied"
 
-/obj/item/weapon/paper/magazine
-	name = "magazine"
-	icon_state = "magazine"
-
-/obj/item/weapon/paper/magazine/update_icon()
-	return
