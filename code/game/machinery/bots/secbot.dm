@@ -24,8 +24,6 @@
 	bot_type = SEC_BOT
 	bot_filter = RADIO_SECBOT
 
-
-
 	//List of weapons that secbots will not arrest for
 	var/safe_weapons = list(\
 		/obj/item/weapon/gun/energy/laser/bluetag,\
@@ -53,6 +51,7 @@
 /obj/machinery/bot/secbot/New()
 	..()
 	icon_state = "secbot[on]"
+	set_custom_texts()
 	spawn(3)
 
 		var/datum/job/detective/J = new/datum/job/detective
@@ -78,6 +77,12 @@
 	anchored = 0
 	walk_to(src,0)
 
+/obj/machinery/bot/secbot/proc/set_custom_texts()
+
+	text_hack = "You overload [name]'s target identification system."
+	text_dehack = "You reboot [name] and restore the target identification."
+	text_dehack_fail = "[name] refuses to accept your authority!"
+
 /obj/machinery/bot/secbot/attack_hand(mob/user as mob)
 	. = ..()
 	if(.)
@@ -89,7 +94,7 @@
 	var/dat
 	dat += hack(user)
 	dat += text({"
-<TT><B>Automatic Security Unit v1.3</B></TT><BR><BR>
+<TT><B>Securitron v1.4 controls</B></TT><BR><BR>
 Status: []<BR>
 Behaviour controls are [locked ? "locked" : "unlocked"]<BR>
 Maintenance panel panel is [open ? "opened" : "closed"]"},
@@ -108,21 +113,14 @@ Auto Patrol: []"},
 "<A href='?src=\ref[src];operation=switchmode'>[arrest_type ? "Detain" : "Arrest"]</A>",
 "<A href='?src=\ref[src];operation=patrol'>[auto_patrol ? "On" : "Off"]</A>" )
 
-
-	user << browse("<HEAD><TITLE>Securitron v1.3 controls</TITLE></HEAD>[dat]", "window=autosec")
-	onclose(user, "autosec")
+	var/datum/browser/popup = new(user, "autosec", "Automatic Security Unit v1.4")
+	popup.set_content(dat)
+	popup.open()
 	return
 
 /obj/machinery/bot/secbot/Topic(href, href_list)
-	if(..())
-		return
-	usr.set_machine(src)
-	if((href_list["power"]) && (allowed(usr)))
-		if (on && !emagged)
-			turn_off()
-		else
-			turn_on()
-		return
+
+	..()
 
 	switch(href_list["operation"])
 		if("idcheck")
@@ -134,26 +132,7 @@ Auto Patrol: []"},
 		if("switchmode")
 			arrest_type = !arrest_type
 			updateUsrDialog()
-		if("patrol")
-			auto_patrol = !auto_patrol
-			mode = BOT_IDLE
-			updateUsrDialog()
-		if("remote")
-			if(emagged != 2)
-				remote_disabled = !remote_disabled
-				updateUsrDialog()
-		if("hack")
-			if(!emagged)
-				emagged = 2
-				hacked = 1
-				usr << "<span class='warning'>You overload [src]'s target identification system.</span>"
-			else if(!hacked)
-				usr << "<span class='userdanger'>[src] refuses to accept your authority!</span>"
-			else
-				emagged = 0
-				hacked = 0
-				usr << "<span class='notice'>You reboot [src] and restore the target identification.</span>"
-			updateUsrDialog()
+
 
 /obj/machinery/bot/secbot/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	if(istype(W, /obj/item/weapon/card/id)||istype(W, /obj/item/device/pda))

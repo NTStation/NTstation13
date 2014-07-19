@@ -103,6 +103,11 @@
 	anchored = 0
 	walk_to(src,0)
 
+/obj/machinery/bot/ed209/proc/set_custom_texts()
+	text_hack = "You disable [name]'s combat inhibitor."
+	text_dehack = "You restore [name]'s combat inhibitor."
+	text_dehack_fail = "[name] ignores your attempts to restrict him!"
+
 /obj/machinery/bot/ed209/attack_hand(mob/user as mob)
 	. = ..()
 	if (.)
@@ -110,7 +115,7 @@
 	var/dat
 	dat += hack(user)
 	dat += text({"
-<TT><B>Automatic Security Unit v2.5</B></TT><BR><BR>
+<TT><B>Security Unit v2.6 controls</B></TT><BR><BR>
 Status: []<BR>
 Behaviour controls are [locked ? "locked" : "unlocked"]<BR>
 Maintenance panel panel is [open ? "opened" : "closed"]"},
@@ -136,27 +141,19 @@ Auto Patrol: []"},
 "<A href='?src=\ref[src];operation=patrol'>[auto_patrol ? "On" : "Off"]</A>" )
 
 
-	user << browse("<HEAD><TITLE>Securitron v2.5 controls</TITLE></HEAD>[dat]", "window=autosec")
-	onclose(user, "autosec")
+	var/datum/browser/popup = new(user, "autoed209", "Automatic Security Unit v2.6")
+	popup.set_content(dat)
+	popup.open()
 	return
 
 /obj/machinery/bot/ed209/Topic(href, href_list)
-	if (..())
-		return
-	usr.set_machine(src)
-	add_fingerprint(usr)
 	if(lasercolor && (istype(usr,/mob/living/carbon/human)))
 		var/mob/living/carbon/human/H = usr
 		if((lasercolor == "b") && (istype(H.wear_suit, /obj/item/clothing/suit/redtag)))//Opposing team cannot operate it
 			return
 		else if((lasercolor == "r") && (istype(H.wear_suit, /obj/item/clothing/suit/bluetag)))
 			return
-	if ((href_list["power"]) && (allowed(usr)))
-		if (on && !emagged)
-			turn_off()
-		else
-			turn_on()
-		return
+	..()
 
 	switch(href_list["operation"])
 		if ("idcheck")
@@ -167,26 +164,6 @@ Auto Patrol: []"},
 			updateUsrDialog()
 		if ("switchmode")
 			arrest_type = !arrest_type
-			updateUsrDialog()
-		if("patrol")
-			auto_patrol = !auto_patrol
-			mode = BOT_IDLE
-			updateUsrDialog()
-		if("remote")
-			if(emagged != 2)
-				remote_disabled = !remote_disabled
-				updateUsrDialog()
-		if("hack")
-			if(!emagged)
-				emagged = 2
-				hacked = 1
-				usr << "<span class='warning'>You disable [src]'s combat inhibitor.</span>"
-			else if(!hacked)
-				usr << "<span class='userdanger'>[src] ignores your attempts to restrict it!</span>"
-			else
-				emagged = 0
-				hacked = 0
-				usr << "<span class='notice'>You restore [src]'s combat inhibitor.</span>"
 			updateUsrDialog()
 
 /obj/machinery/bot/ed209/attackby(obj/item/weapon/W as obj, mob/user as mob)

@@ -30,7 +30,7 @@
 
 	//Setting which reagents to use to treat what by default. By id.
 	var/treatment_brute = "tricordrazine"
-	var/treatment_oxy = "tricordrazine"
+	var/treatment_oxy = "inaprovaline"
 	var/treatment_fire = "tricordrazine"
 	var/treatment_tox = "tricordrazine"
 	var/treatment_virus = "spaceacillin"
@@ -67,6 +67,7 @@
 /obj/machinery/bot/medbot/New()
 	..()
 	icon_state = "medibot[on]"
+	set_custom_texts()
 
 	spawn(4)
 		if(skin)
@@ -97,6 +98,12 @@
 	oldloc = null
 	last_found = world.time
 
+/obj/machinery/bot/medbot/proc/set_custom_texts()
+
+	text_hack = "You corrupt [name]'s reagent processor circuits."
+	text_dehack = "You reset [name]'s reagent processor circuits."
+	text_dehack_fail = "[name] seems damaged and does not respond to reprogramming!"
+
 /obj/machinery/bot/medbot/attack_paw(mob/user as mob)
 	return attack_hand(user)
 
@@ -106,7 +113,7 @@
 		return
 	var/dat
 	dat += hack(user)
-	dat += "<TT><B>Automatic Medical Unit v1.0</B></TT><BR><BR>"
+	dat += "<TT><B>Medical Unit Controls v1.1</B></TT><BR><BR>"
 	dat += "Status: <A href='?src=\ref[src];power=1'>[on ? "On" : "Off"]</A><BR>"
 	dat += "Maintenance panel panel is [open ? "opened" : "closed"]<BR>"
 	dat += "Beaker: "
@@ -134,25 +141,17 @@
 		dat += "<a href='?src=\ref[src];use_beaker=1'>[use_beaker ? "Loaded Beaker (When available)" : "Internal Synthesizer"]</a><br>"
 
 		dat += "The speaker switch is [shut_up ? "off" : "on"]. <a href='?src=\ref[src];togglevoice=[1]'>Toggle</a><br>"
-		dat += "Patrol Station: <a href='?src=\ref[src];patrol=1'>[auto_patrol ? "Yes" : "No"]</a><br>"
+		dat += "Patrol Station: <a href='?src=\ref[src];operation=patrol'>[auto_patrol ? "Yes" : "No"]</a><br>"
 
-	user << browse("<HEAD><TITLE>Medibot v1.0 controls</TITLE></HEAD>[dat]", "window=automed")
-	onclose(user, "automed")
+	var/datum/browser/popup = new(user, "automed", "Automatic Medical Unit v1.1")
+	popup.set_content(dat)
+	popup.open()
 	return
 
 /obj/machinery/bot/medbot/Topic(href, href_list)
-	if(..())
-		return
-	world << "[href],[href_list]"
-	usr.set_machine(src)
-	add_fingerprint(usr)
-	if ((href_list["power"]) && (allowed(usr)))
-		if (on && !emagged)
-			turn_off()
-		else
-			turn_on()
+	..()
 
-	else if((href_list["adj_threshold"]) && (!locked || issilicon(usr)))
+	if((href_list["adj_threshold"]) && (!locked || issilicon(usr)))
 		var/adjust_num = text2num(href_list["adj_threshold"])
 		heal_threshold += adjust_num
 		if(heal_threshold < 5)
@@ -171,13 +170,6 @@
 	else if((href_list["use_beaker"]) && (!locked || issilicon(usr)))
 		use_beaker = !use_beaker
 
-	else if((href_list["patrol"]) && (!locked || issilicon(usr)))
-		auto_patrol = !auto_patrol
-
-	else if((href_list["operation"] == "remote") && !locked && emagged != 2)
-		if(emagged != 2)
-			remote_disabled = !remote_disabled
-
 	else if (href_list["eject"] && (!isnull(reagent_glass)))
 		if(!locked)
 			reagent_glass.loc = get_turf(src)
@@ -188,17 +180,6 @@
 	else if ((href_list["togglevoice"]) && (!locked || issilicon(usr)))
 		shut_up = !shut_up
 
-	else if (href_list["operation"] == "hack")
-		if(!emagged)
-			emagged = 2
-			hacked = 1
-			usr << "<span class='warning'>You corrupt [src]'s reagent processor circuits.</span>"
-		else if(!hacked)
-			usr << "<span class='userdanger'>[src] seems damaged and does not respond to reprogramming!</span>"
-		else
-			hacked = 0
-			emagged = 0
-			usr << "<span class='notice'>You reset [src]'s reagent circuits.</span>"
 	updateUsrDialog()
 	return
 

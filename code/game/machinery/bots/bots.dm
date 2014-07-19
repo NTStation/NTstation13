@@ -15,6 +15,9 @@
 	var/open = 0//Maint panel
 	var/locked = 1
 	var/hacked = 0 //Used to differentiate between being hacked by silicons and emagged by humans.
+	var/text_hack = ""		//Custom text returned to a silicon upon hacking a bot.
+	var/text_dehack = "" 	//Text shown when resetting a bots hacked status to normal.
+	var/text_dehack_fail = "" //Shown when a silicon tries to reset a bot emagged with the emag item, which cannot be reset.
 	var/frustration = 0 //Used by some bots for tracking failures to reach their target.
 	var/list/call_path = list() //Path calculated by the AI and given to the bot to follow.
 	var/list/path = new() //Every bot has this, so it is best to put it here.
@@ -128,6 +131,7 @@
 	return
 
 /obj/machinery/bot/attack_alien(var/mob/living/carbon/alien/user as mob)
+	user.changeNext_move(8)
 	src.health -= rand(15,30)*brute_dam_coeff
 	src.visible_message("\red <B>[user] has slashed [src]!</B>")
 	playsound(src.loc, 'sound/weapons/slice.ogg', 25, 1, -1)
@@ -137,7 +141,9 @@
 
 
 /obj/machinery/bot/attack_animal(var/mob/living/simple_animal/M as mob)
-	if(M.melee_damage_upper == 0)	return
+	if(M.melee_damage_upper == 0)
+		return
+	M.changeNext_move(8)
 	src.health -= M.melee_damage_upper
 	src.visible_message("\red <B>[M] has [M.attacktext] [src]!</B>")
 	add_logs(M, src, "attacked", admin=0)
@@ -145,7 +151,37 @@
 		new /obj/effect/decal/cleanable/oil(src.loc)
 	healthcheck()
 
+/obj/machinery/bot/Topic(href, href_list) //Master Topic to handle common functions.
+	if(..())
+		return
 
+	usr.set_machine(src)
+	add_fingerprint(usr)
+	if((href_list["power"]) && (allowed(usr)))
+		if (on && emagged != 2)
+			turn_off()
+		else
+			turn_on()
+
+	switch(href_list["operation"])
+		if("patrol")
+			auto_patrol = !auto_patrol
+			mode = BOT_IDLE
+		if("remote")
+			if(emagged != 2)
+				remote_disabled = !remote_disabled
+		if("hack")
+			if(!emagged)
+				emagged = 2
+				hacked = 1
+				usr << "<span class='warning'>[text_hack]</span>"
+			else if(!hacked)
+				usr << "<span class='userdanger'>[text_dehack_fail]</span>"
+			else
+				emagged = 0
+				hacked = 0
+				usr << "<span class='notice'>[text_dehack]</span>"
+	updateUsrDialog()
 
 
 /obj/machinery/bot/attackby(obj/item/weapon/W as obj, mob/user as mob)
@@ -166,6 +202,7 @@
 		Emag(user)
 	else
 		if(hasvar(W,"force") && hasvar(W,"damtype"))
+			user.changeNext_move(8)
 			switch(W.damtype)
 				if("fire")
 					src.health -= W.force * fire_dam_coeff
@@ -229,7 +266,7 @@
 	var/hack
 	if(issilicon(user)) //Allows silicons to toggle the emag status of a bot.
 		hack += "[emagged ? "Software compromised! Unit may exhibit dangerous or erratic behavior." : "Unit operating normally. Release safety lock?"]<BR>"
-		hack += "Harm Prevention Safety System: <A href='?src=\ref[src];operation=hack'>[emagged ? "DANGER" : "Engaged"]</A><BR>"
+		hack += "Harm Prevention Safety System: <A href='?src=\ref[src];operation=hack'>[emagged ? "<span class='bad'>DANGER</span>" : "Engaged"]</A><BR>"
 	else if(!locked) //Humans with access can use this option to hide a bot from the AI's remote control panel.
 		hack += "AI remote control network port: <A href='?src=\ref[src];operation=remote'>[remote_disabled ? "Closed" : "Open"]</A><BR><BR>"
 	return hack
@@ -292,7 +329,7 @@ obj/machinery/bot/proc/bot_reset()
 
 obj/machinery/bot/proc/start_patrol()
 
-	if(tries >= 5) //Bot is trapped, so stop trying to patrol.
+	if(tries >= 4) //Bot is trapped, so stop trying to patrol.
 		auto_patrol = 0
 		tries = 0
 		speak("Unable to start patrol.")
@@ -606,4 +643,3 @@ obj/machinery/bot/proc/bot_summon()
 		loc = Mb.loc
 		frustration = 0
 	return
-

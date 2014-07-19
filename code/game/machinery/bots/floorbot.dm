@@ -50,7 +50,6 @@
 	bot_type = FLOOR_BOT
 	bot_filter = RADIO_FLOORBOT
 
-
 /obj/machinery/bot/floorbot/New()
 	..()
 	updateicon()
@@ -74,6 +73,11 @@
 	oldloc = null
 	floorbottargets = list()
 
+/obj/machinery/bot/floorbot/proc/set_custom_texts()
+	text_hack = "You corrupt [name]'s construction protocols."
+	text_dehack = "You detect errors in [name] and reset his programming."
+	text_dehack_fail = "[name] is not responding to reset commands!"
+
 /obj/machinery/bot/floorbot/attack_hand(mob/user as mob)
 	. = ..()
 	if (.)
@@ -84,8 +88,8 @@
 /obj/machinery/bot/floorbot/interact(mob/user as mob)
 	var/dat
 	dat += hack(user)
-	dat += "<TT><B>Automatic Station Floor Repairer v1.0</B></TT><BR><BR>"
-	dat += "Status: <A href='?src=\ref[src];operation=start'>[on ? "On" : "Off"]</A><BR>"
+	dat += "<TT><B>Floor Repairer Controls v1.1</B></TT><BR><BR>"
+	dat += "<A href='?src=\ref[src];power=1'>Status: [on ? "On" : "Off"]</A><BR>"
 	dat += "Maintenance panel panel is [open ? "opened" : "closed"]<BR>"
 	dat += "Tiles left: [amount]<BR>"
 	dat += "Behvaiour controls are [locked ? "locked" : "unlocked"]<BR>"
@@ -102,8 +106,9 @@
 			bmode = "Disabled"
 		dat += "<BR><BR>Bridge Mode : <A href='?src=\ref[src];operation=bridgemode'>[bmode]</A><BR>"
 
-	user << browse("<HEAD><TITLE>Repairbot v1.0 controls</TITLE></HEAD>[dat]", "window=autorepair")
-	onclose(user, "autorepair")
+	var/datum/browser/popup = new(user, "autofloor", "Automatic Station Floor Repairer v1.1")
+	popup.set_content(dat)
+	popup.open()
 	return
 
 
@@ -138,16 +143,8 @@
 		if(user) user << "<span class='danger'>The [src] buzzes and beeps.</span>"
 
 /obj/machinery/bot/floorbot/Topic(href, href_list)
-	if(..())
-		return
-	usr.set_machine(src)
-	add_fingerprint(usr)
+	..()
 	switch(href_list["operation"])
-		if("start")
-			if (on && !emagged)
-				turn_off()
-			else
-				turn_on()
 		if("replace")
 			replacetiles = !replacetiles
 			updateUsrDialog()
@@ -160,27 +157,7 @@
 		if("fix")
 			fixfloors = !fixfloors
 			updateUsrDialog()
-		if("patrol")
-			auto_patrol = !auto_patrol
-			updateUsrDialog()
-		if("remote")
-			if(emagged != 2)
-				remote_disabled = !remote_disabled
-				updateUsrDialog()
-		if("hack")
-			if(!emagged)
-				emagged = 2
-				hacked = 1
-				usr << "<span class='warning'>You corrupt [src]'s construction protocols.</span>"
-				bot_reset()
-			else if(!hacked)
-				usr << "<span class='userdanger'>[src] is not responding to reset commands!</span>"
-			else
-				emagged = 0
-				hacked = 0
-				usr << "<span class='notice'>You detect errors in [src] and reset its programming.</span>"
-				bot_reset()
-			updateUsrDialog()
+
 		if("bridgemode")
 			switch(targetdirection)
 				if(null)

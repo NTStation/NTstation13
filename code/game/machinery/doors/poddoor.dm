@@ -83,8 +83,8 @@
 
 	operating = 0
 
-
-
+/obj/machinery/door/poddoor/CanAStarPass()
+	return !density
 
 /*
 /obj/machinery/door/poddoor/two_tile_hor/open()

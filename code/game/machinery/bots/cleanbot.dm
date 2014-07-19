@@ -46,6 +46,7 @@
 	..()
 	get_targets()
 	icon_state = "cleanbot[on]"
+	set_custom_texts()
 
 	var/datum/job/janitor/J = new/datum/job/janitor
 	botcard.access = J.get_access()
@@ -71,6 +72,11 @@
 	oldtarget = null
 	oldloc = null
 
+/obj/machinery/bot/cleanbot/proc/set_custom_texts()
+	text_hack = "You corrupt [name]'s cleaning software."
+	text_dehack = "[name]'s software has been reset!"
+	text_dehack_fail = "[name] does not seem to respond to your repair code!"
+
 /obj/machinery/bot/cleanbot/attack_hand(mob/user as mob)
 	. = ..()
 	if (.)
@@ -82,11 +88,11 @@
 	var/dat
 	dat += hack(user)
 	dat += text({"
-<TT><B>Automatic Station Cleaner v1.0</B></TT><BR><BR>
+<TT><B>Cleaner v1.1 controls</B></TT><BR><BR>
 Status: []<BR>
 Behaviour controls are [locked ? "locked" : "unlocked"]<BR>
 Maintenance panel panel is [open ? "opened" : "closed"]"},
-text("<A href='?src=\ref[src];operation=start'>[on ? "On" : "Off"]</A>"))
+text("<A href='?src=\ref[src];power=1'>[on ? "On" : "Off"]</A>"))
 	if(!locked || issilicon(user))
 		dat += text({"<BR>Cleans Blood: []<BR>"}, text("<A href='?src=\ref[src];operation=blood'>[blood ? "Yes" : "No"]</A>"))
 		dat += text({"<BR>Patrol station: []<BR>"}, text("<A href='?src=\ref[src];operation=patrol'>[auto_patrol ? "Yes" : "No"]</A>"))
@@ -98,38 +104,25 @@ Weird button pressed: []"},
 text("<A href='?src=\ref[src];operation=screw'>[screwloose ? "Yes" : "No"]</A>"),
 text("<A href='?src=\ref[src];operation=oddbutton'>[oddbutton ? "Yes" : "No"]</A>"))*/
 
-	user << browse("<HEAD><TITLE>Cleaner v1.0 controls</TITLE></HEAD>[dat]", "window=autocleaner")
-	onclose(user, "autocleaner")
+	var/datum/browser/popup = new(user, "autoclean", "Automatic Station Cleaner v1.1")
+	popup.set_content(dat)
+	popup.open()
 	return
 
 /obj/machinery/bot/cleanbot/Topic(href, href_list)
-	if(..())
-		return
-	usr.set_machine(src)
-	add_fingerprint(usr)
+
+	..()
 	switch(href_list["operation"])
-		if("start")
-			if (on && !emagged)
-				turn_off()
-			else
-				turn_on()
 		if("blood")
 			blood =!blood
 			get_targets()
-			updateUsrDialog()
-		if("patrol")
-			auto_patrol =!auto_patrol
-			//patrol_path = null
 			updateUsrDialog()
 		if("freq")
 			var/freq = text2num(input("Select frequency for  navigation beacons", "Frequency", num2text(beacon_freq / 10))) * 10
 			if (freq > 0)
 				beacon_freq = freq
 			updateUsrDialog()
-		if("remote")
-			if(emagged != 2)
-				remote_disabled = !remote_disabled
-				updateUsrDialog()
+
 /*		if("screw")
 			screwloose = !screwloose
 			usr << "<span class='notice>You twiddle the screw.</span>"
@@ -138,20 +131,6 @@ text("<A href='?src=\ref[src];operation=oddbutton'>[oddbutton ? "Yes" : "No"]</A
 			oddbutton = !oddbutton
 			usr << "<span class='notice'>You press the weird button.</span>"
 			updateUsrDialog() */
-		if("hack")
-			if(!emagged)
-				emagged = 2
-				hacked = 1
-				usr << "<span class='warning'>You corrupt [src]'s cleaning software.</span>"
-				bot_reset()
-			else if(!hacked)
-				usr << "<span class='userdanger'>[src] does not seem to respond to your repair code!</span>"
-			else
-				hacked = 0
-				emagged = 0
-				usr << "<span class='notice'>[src]'s software has been reset!</span>"
-				bot_reset()
-			updateUsrDialog()
 
 /obj/machinery/bot/cleanbot/attackby(obj/item/weapon/W, mob/user as mob)
 	if (istype(W, /obj/item/weapon/card/id)||istype(W, /obj/item/device/pda))
