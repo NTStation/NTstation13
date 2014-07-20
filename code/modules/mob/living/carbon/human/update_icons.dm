@@ -240,7 +240,7 @@ Please contact me on #coderbus IRC. ~Carnie x
 
 
 	if(socks)
-		if(get_num_limbs_of_state(LEG_RIGHT,ORGAN_REMOVED) >= 2)
+		if(get_num_limbs_of_state(LEG_RIGHT,ORGAN_FINE) >= 2)
 			var/datum/sprite_accessory/socks/U3 = socks_list[socks]
 			if(U3)
 				standing	+= image("icon"=U3.icon, "icon_state"="[U3.icon_state]_s", "layer"=-BODY_LAYER)
@@ -410,7 +410,7 @@ Please contact me on #coderbus IRC. ~Carnie x
 				gloves.screen_loc = ui_gloves		//...draw the item in the inventory screen
 			client.screen += gloves					//Either way, add the item to the HUD
 
-		if(get_num_limbs_of_state(ARM_RIGHT,ORGAN_FINE) == 2)//if it's less than 2, don't bother rendering
+		if(get_num_limbs_of_state(ARM_RIGHT,ORGAN_FINE) >= 2)//if it's less than 2, don't bother rendering
 
 			var/t_state = gloves.item_state
 			if(!t_state)	t_state = gloves.icon_state
@@ -427,7 +427,7 @@ Please contact me on #coderbus IRC. ~Carnie x
 			unEquip(gloves)
 
 	else
-		if(blood_DNA && get_num_limbs_of_state(ARM_RIGHT,ORGAN_FINE) == 2)
+		if(blood_DNA && get_num_limbs_of_state(ARM_RIGHT,ORGAN_FINE) >= 2)
 			overlays_standing[GLOVES_LAYER]	= image("icon"='icons/effects/blood.dmi', "icon_state"="bloodyhands")
 
 	apply_overlay(GLOVES_LAYER)
