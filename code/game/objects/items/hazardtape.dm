@@ -99,11 +99,14 @@
 				var/obj/item/tape/P = new tape_type(cur)
 				P.icon_state = "[P.icon_base]_[dir]"
 			cur = get_step_towards(cur,end)
-	//is_blocked_turf(var/turf/T)
-		usr << "<span class='notice'>You finish placing the [src].</span>"	//Git Test
+			
+		usr << "<span class='notice'>You finish placing the [src].</span>"	
 
 /obj/item/taperoll/afterattack(var/atom/A, var/mob/user)
 	if (istype(A, /obj/machinery/door/airlock))
+		if(!user.Adjacent(A))
+			user << "<span class='notice'>You're too far away from \the [A]!</span>"
+			return
 		var/turf/T = get_turf(A)
 		var/obj/item/tape/P = new tape_type(T.x,T.y,T.z)
 		P.loc = locate(T.x,T.y,T.z)
