@@ -156,6 +156,8 @@
 	can_hold = list(/obj/item/clothing/mask/cigarette)
 	icon_type = "cigarette"
 
+/obj/item/weapon/storage/fancy/cigarettes/empty
+
 /obj/item/weapon/storage/fancy/cigarettes/New()
 	..()
 	flags |= NOREACT
