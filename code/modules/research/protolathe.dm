@@ -80,10 +80,11 @@ Note: Must be placed west/left of and R&D console to function.
 	if (shocked)
 		shock(user,50)
 	if (default_deconstruction_screwdriver(user, "protolathe_t", "protolathe", O))
-		if(linked_console)
-			linked_console.linked_lathe = null
-			linked_console = null
-		return
+		if(!busy)
+			if(linked_console)
+				linked_console.linked_lathe = null
+				linked_console = null
+			return
 
 	if(exchange_parts(user, O))
 		return

@@ -80,6 +80,11 @@
 	item_color = "janitor"
 	armor = list(melee = 0, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 10, rad = 0)
 
+/obj/item/clothing/under/rank/janitor/alternate
+	desc = "A pair of trousers designed for janitorial use. It has minor protection from biohazards."
+	name = "janitorial trousers"
+	icon_state = "alt_janitor"
+	item_color = "alt_janitor"
 
 /obj/item/clothing/under/lawyer
 	desc = "Slick threads."

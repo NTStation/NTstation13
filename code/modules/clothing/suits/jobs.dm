@@ -151,3 +151,15 @@
 	desc = "A sterile blue surgical apron."
 	icon_state = "surgical"
 	allowed = list(/obj/item/weapon/scalpel, /obj/item/weapon/surgical_drapes, /obj/item/weapon/cautery, /obj/item/weapon/hemostat, /obj/item/weapon/retractor)
+
+
+//Janijacket
+/obj/item/clothing/suit/hazardvest/denim
+	name = "denim jacket"
+	desc = "A denim jacket designed for janitorial use.."
+	icon_state = "denim_jacket"
+	item_state = "denim_jacket"
+	body_parts_covered = CHEST|ARMS
+	allowed = list(/obj/item/device/flashlight,/obj/item/weapon/tank/emergency_oxygen,/obj/item/device/t_scanner,)
+	armor = list(melee = 0, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 10, rad = 0)
+
