@@ -193,6 +193,9 @@
 			move_to_call()
 		return
 
+	if(mode == BOT_SUMMON)
+		bot_summon()
+		return
 
 	if(amount <= 0 && ((target == null) || !target))
 		if(eattiles)
@@ -261,8 +264,7 @@
 					break
 
 	if(!target || target == null)
-		if(mode == BOT_SUMMON)
-			bot_summon()
+
 		if(auto_patrol)
 			if(mode == BOT_IDLE || mode == BOT_START_PATROL)
 				start_patrol()
@@ -358,13 +360,14 @@
 		//var/obj/item/stack/tile/plasteel/T = new /obj/item/stack/tile/plasteel
 		mode = BOT_REPAIRING
 		spawn(50)
-			//T.build(loc)
-			F = target.ChangeTurf(/turf/simulated/floor)
-			mode = BOT_IDLE
-			amount -= 1
-			updateicon()
-			anchored = 0
-			src.target = null
+			if(mode == BOT_REPAIRING)
+				//T.build(loc)
+				F = target.ChangeTurf(/turf/simulated/floor)
+				mode = BOT_IDLE
+				amount -= 1
+				updateicon()
+				anchored = 0
+				src.target = null
 	else
 
 		F = target
@@ -372,13 +375,14 @@
 		mode = BOT_REPAIRING
 		visible_message("<span class='notice'> [src] begins repairing the floor.</span>")
 		spawn(50)
-			F = target
-			F.make_plasteel_floor(T)
-			mode = BOT_IDLE
-			amount -= 1
-			updateicon()
-			anchored = 0
-			src.target = null
+			if(mode == BOT_REPAIRING)
+				F = target
+				F.make_plasteel_floor(T)
+				mode = BOT_IDLE
+				amount -= 1
+				updateicon()
+				anchored = 0
+				src.target = null
 
 /obj/machinery/bot/floorbot/proc/eattile(var/obj/item/stack/tile/plasteel/T)
 	if(!istype(T, /obj/item/stack/tile/plasteel))

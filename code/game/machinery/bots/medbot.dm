@@ -30,7 +30,7 @@
 
 	//Setting which reagents to use to treat what by default. By id.
 	var/treatment_brute = "tricordrazine"
-	var/treatment_oxy = "inaprovaline"
+	var/treatment_oxy = "tricordrazine"
 	var/treatment_fire = "tricordrazine"
 	var/treatment_tox = "tricordrazine"
 	var/treatment_virus = "spaceacillin"
@@ -275,6 +275,10 @@
 		path = new()
 
 	if(!patient)
+		if(mode == BOT_SUMMON) //A medibot will not search for new patients when summoned!
+			bot_summon()
+			return
+
 		if(!shut_up && prob(1))
 			var/message = pick("Radar, put a mask on!","There's always a catch, and it's the best there is.","I knew it, I should've been a plastic surgeon.","What kind of medbay is this? Everyone's dropping like dead flies.","Delicious!")
 			speak(message)
@@ -338,8 +342,6 @@
 
 	if(!patient)
 
-		if(mode == BOT_SUMMON)
-			bot_summon()
 		if(auto_patrol)
 			if(mode == BOT_IDLE || mode == BOT_START_PATROL)
 				start_patrol()

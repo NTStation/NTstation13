@@ -305,7 +305,6 @@
 		bot_reset()
 
 obj/machinery/bot/proc/bot_reset()
-
 	calling_ai = null
 	call_path = null
 	path = new()
@@ -496,7 +495,7 @@ obj/machinery/bot/proc/start_patrol()
 				var/list/user_access = signal.data["useraccess"]
 				summon_target = signal.data["target"]	//Location of the user
 				if(user_access.len != 0)
-					botcard.access = user_access	//Adds the user's access, if any.
+					botcard.access = user_access + prev_access	//Adds the user's access, if any.
 				mode = BOT_SUMMON
 				calc_summon_path()
 				speak("Responding.")
@@ -627,7 +626,7 @@ obj/machinery/bot/proc/bot_summon()
 			return
 
 	else	// no path, so calculate new one
-		bot_reset()
+		calc_summon_path()
 
 	return
 

@@ -187,6 +187,10 @@ text("<A href='?src=\ref[src];operation=oddbutton'>[oddbutton ? "Yes" : "No"]</A
 		visible_message("<span class='danger'>[src] whirs and bubbles violently, before releasing a plume of froth!</span>")
 		new /obj/effect/effect/foam(loc)
 
+	if(mode == BOT_SUMMON)
+		bot_summon()
+		return
+
 	if(!target || target == null) //Search for cleanables it can see.
 		for (var/obj/effect/decal/cleanable/D in view(7,src))
 			for(var/T in target_types)
@@ -199,8 +203,6 @@ text("<A href='?src=\ref[src];operation=oddbutton'>[oddbutton ? "Yes" : "No"]</A
 		if(loc != oldloc)
 			oldtarget = null
 
-		if(mode == BOT_SUMMON)
-			bot_summon()
 		if(auto_patrol)
 			if(mode == BOT_IDLE || mode == BOT_START_PATROL)
 				start_patrol()
@@ -234,7 +236,6 @@ text("<A href='?src=\ref[src];operation=oddbutton'>[oddbutton ? "Yes" : "No"]</A
 		step_to(src, target)
 
 	if(target && (target != null))
-		patrol_path = new()
 		if(loc == target.loc)
 			clean(target)
 			path = new()
@@ -316,11 +317,12 @@ text("<A href='?src=\ref[src];operation=oddbutton'>[oddbutton ? "Yes" : "No"]</A
 	visible_message("<span class='danger'>[src] begins to clean up [target]</span>")
 	mode = BOT_CLEANING
 	spawn(50)
-		mode = BOT_IDLE
-		qdel(target)
-		icon_state = "cleanbot[on]"
-		anchored = 0
-		target = null
+		if(mode == BOT_CLEANING)
+			mode = BOT_IDLE
+			qdel(target)
+			icon_state = "cleanbot[on]"
+			anchored = 0
+			target = null
 
 /obj/machinery/bot/cleanbot/explode()
 	on = 0
