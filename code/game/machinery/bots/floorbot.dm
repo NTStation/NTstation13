@@ -89,7 +89,7 @@
 	var/dat
 	dat += hack(user)
 	dat += "<TT><B>Floor Repairer Controls v1.1</B></TT><BR><BR>"
-	dat += "<A href='?src=\ref[src];power=1'>Status: [on ? "On" : "Off"]</A><BR>"
+	dat += "Status: <A href='?src=\ref[src];power=1'>[on ? "On" : "Off"]</A><BR>"
 	dat += "Maintenance panel panel is [open ? "opened" : "closed"]<BR>"
 	dat += "Tiles left: [amount]<BR>"
 	dat += "Behvaiour controls are [locked ? "locked" : "unlocked"]<BR>"
