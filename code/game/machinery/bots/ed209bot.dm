@@ -328,7 +328,7 @@ Auto Patrol: []"},
 								return
 
 							if(istype(target,/mob/living/carbon))
-								target.handcuffed = new /obj/item/weapon/handcuffs(target)
+								target.handcuffed = new /obj/item/weapon/handcuffs/cyborg(target)
 								target.update_inv_handcuffed(0)	//update handcuff overlays
 
 							mode = BOT_IDLE
