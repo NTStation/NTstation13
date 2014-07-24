@@ -727,13 +727,12 @@ var/global/mulebot_count = 0
 		var/mob/M = obs
 		if(ismob(M))
 			if(istype(M,/mob/living/silicon/robot))
-				visible_message("\red [src] bumps into [M]!")
+				visible_message("<span class='danger'>[src] bumps into [M]!</span>")
 			else
-				visible_message("\red [src] knocks over [M]!")
+				visible_message("<span class='danger'>[src] knocks over [M]!</span>")
 				M.stop_pulling()
 				M.Stun(8)
 				M.Weaken(5)
-				M.lying = 1
 	..()
 
 /obj/machinery/bot/mulebot/alter_health()
@@ -743,7 +742,7 @@ var/global/mulebot_count = 0
 // called from mob/living/carbon/human/Crossed()
 // when mulebot is in the same loc
 /obj/machinery/bot/mulebot/proc/RunOver(var/mob/living/carbon/human/H)
-	visible_message("\red [src] drives over [H]!")
+	visible_message("<span class='danger'>[src] drives over [H]!</span>")
 	playsound(loc, 'sound/effects/splat.ogg', 50, 1)
 
 	var/damage = rand(5,15)
