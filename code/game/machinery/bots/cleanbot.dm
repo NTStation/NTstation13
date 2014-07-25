@@ -151,8 +151,6 @@ text("<A href='?src=\ref[src];operation=oddbutton'>[oddbutton ? "Yes" : "No"]</A
 	..()
 	if(open && !locked)
 		if(user) user << "<span class='danger'>[src] buzzes and beeps.</span>"
-		emagged = 2
-		bot_reset()
 
 /obj/machinery/bot/cleanbot/process()
 	set background = BACKGROUND_ENABLED

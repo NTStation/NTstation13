@@ -119,6 +119,7 @@
 		emagged = 2
 		remote_disabled = 1 //Manually emagging the bot locks out the AI.
 		bot_reset()
+		turn_on()
 
 /obj/machinery/bot/examine()
 	set src in view()

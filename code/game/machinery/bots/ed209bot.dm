@@ -102,6 +102,7 @@
 	oldtarget_name = null
 	anchored = 0
 	walk_to(src,0)
+	last_found = world.time
 
 /obj/machinery/bot/ed209/proc/set_custom_texts()
 	text_hack = "You disable [name]'s combat inhibitor."
@@ -194,15 +195,8 @@ Auto Patrol: []"},
 		spawn(0)
 			for(var/mob/O in hearers(src, null))
 				O.show_message("<span class='danger'> <B>[src] buzzes oddly!</B></span>", 1)
-		target = null
 		if(user) oldtarget_name = user.name
-		last_found = world.time
-		anchored = 0
-		emagged = 2
-		on = 1
-		icon_state = "[lasercolor]ed209[on]"
 		projectile = null
-		mode = BOT_IDLE
 
 /obj/machinery/bot/ed209/process()
 	set background = BACKGROUND_ENABLED

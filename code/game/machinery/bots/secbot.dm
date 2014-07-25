@@ -76,6 +76,7 @@
 	oldtarget_name = null
 	anchored = 0
 	walk_to(src,0)
+	last_found = world.time
 
 /obj/machinery/bot/secbot/proc/set_custom_texts()
 
@@ -159,14 +160,7 @@ Auto Patrol: []"},
 		spawn(0)
 			for(var/mob/O in hearers(src, null))
 				O.show_message("<span class='danger'><B>[src] buzzes oddly!</B></span>", 1)
-		target = null
 		if(user) oldtarget_name = user.name
-		last_found = world.time
-		anchored = 0
-		emagged = 2
-		on = 1
-		icon_state = "secbot[on]"
-		mode = BOT_IDLE
 
 /obj/machinery/bot/secbot/process()
 	set background = BACKGROUND_ENABLED

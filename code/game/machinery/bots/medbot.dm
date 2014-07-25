@@ -224,14 +224,7 @@
 		spawn(0)
 			visible_message("<span class='userdanger'>[src] buzzes oddly!</span>", 1)
 		flick("medibot_spark", src)
-		patient = null
 		if(user) oldpatient = user
-		mode = BOT_IDLE
-		last_found = world.time
-		anchored = 0
-		emagged = 2
-		on = 1
-		icon_state = "medibot[on]"
 
 /obj/machinery/bot/medbot/process()
 	set background = BACKGROUND_ENABLED
