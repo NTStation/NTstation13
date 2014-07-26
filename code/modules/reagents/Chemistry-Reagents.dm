@@ -1831,11 +1831,10 @@ datum
 			description = "A very complex and dangerous poison."
 			reagent_state = LIQUID
 			color = "#000067" // rgb: 0, 0, 103
-			toxpwr = 0
+			toxpwr = 1.5
 
 			on_mob_life(var/mob/living/M as mob)
 				if(!M) M = holder.my_atom
-				M.adjustToxLoss(1.5*REM)
 				M.take_organ_damage(1*REM, 0)
 				M.adjustCloneLoss(1) //cruel!
 				M.eye_blurry = 5
@@ -1858,7 +1857,6 @@ datum
 			reagent_state = LIQUID
 			color = "#CF3600" // rgb: 207, 54, 0
 			nutriment_factor = 50 * REAGENTS_METABOLISM //this is a lot. you can use this as a superior lipozine if you are brave
-			toxpwr = 0
 
 			on_mob_life(var/mob/living/M as mob)
 				if(!M) M = holder.my_atom
