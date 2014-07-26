@@ -1747,9 +1747,9 @@ datum
 						M.Weaken(4)
 						M << "<span class='danger'>You suddenly feel an intense pain.</span>"
 					if(120 to INFINITY)
-						holder.remove_reagent(src.id, 0.3*REM)
-						M.adjustToxLoss(2*REM)
-						if(prob(10)) //random chance to vomit
+						holder.remove_reagent(src.id, 0.6*REM)
+						M.adjustToxLoss(4*REM)
+						if(prob(20)) //random chance to vomit
 							M.Stun(4)
 							M.visible_message("<B>[M]</B> vomits blood on the floor!")
 							M.take_organ_damage(2*REM, 0)
@@ -1822,7 +1822,7 @@ datum
 							pos.add_blood_floor(M) //again, nicer effect than just blood
 							playsound(pos, 'sound/effects/splat.ogg', 50, 1)
 				data++
-				holder.remove_reagent(src.id, 0.04*REM)
+				holder.remove_reagent(src.id, 0.03*REM)
 				return
 
 		toxin/ehuadol
@@ -1831,10 +1831,11 @@ datum
 			description = "A very complex and dangerous poison."
 			reagent_state = LIQUID
 			color = "#000067" // rgb: 0, 0, 103
+			toxpwr = 0
 
 			on_mob_life(var/mob/living/M as mob)
 				if(!M) M = holder.my_atom
-				M.adjustToxLoss(1*REM)
+				M.adjustToxLoss(1.5*REM)
 				M.take_organ_damage(1*REM, 0)
 				M.adjustCloneLoss(1) //cruel!
 				M.eye_blurry = 5
@@ -1857,6 +1858,7 @@ datum
 			reagent_state = LIQUID
 			color = "#CF3600" // rgb: 207, 54, 0
 			nutriment_factor = 50 * REAGENTS_METABOLISM //this is a lot. you can use this as a superior lipozine if you are brave
+			toxpwr = 0
 
 			on_mob_life(var/mob/living/M as mob)
 				if(!M) M = holder.my_atom
