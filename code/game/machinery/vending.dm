@@ -799,6 +799,36 @@
 	component_parts += new /obj/item/weapon/vending_refill/autodrobe(0)
 	component_parts += new /obj/item/weapon/vending_refill/autodrobe(0)
 
+
+/obj/machinery/vending/clothing
+	name = "Clothe-O-Mat"
+	desc = "A vending machine for clothing."
+	icon_state = "clothes"
+	product_slogans = "Dress for success!;Prepare to look swagalicious!;Look at all this free swag!;Why leave style up to fate? Use the Clothe-O-Mat!"
+	vend_delay = 15
+	vend_reply = "Thank you for using the Clothe-O-Mat!"
+	products = list(/obj/item/clothing/mask/fakemoustache = 3,/obj/item/clothing/head/collectable/tophat = 3,/obj/item/clothing/glasses/monocle = 2,
+					/obj/item/clothing/under/suit_jacket/navy = 3,/obj/item/clothing/under/kilt = 1,/obj/item/clothing/under/overalls = 3,/obj/item/clothing/under/lawyer/blacksuit = 3,
+					/obj/item/clothing/under/suit_jacket/really_black = 3,/obj/item/clothing/under/lawyer/bluesuit = 3,/obj/item/clothing/under/jeans = 5,/obj/item/clothing/under/camo = 2,
+					/obj/item/clothing/under/lawyer/purpsuit = 3,/obj/item/clothing/tie/waistcoat = 3,/obj/item/clothing/under/sundress = 4,/obj/item/clothing/under/blacktango = 2,
+					/obj/item/clothing/head/maidbow = 1,/obj/item/clothing/under/maid = 1,/obj/item/clothing/suit/labcoat/coat/jacket/varsity = 3,/obj/item/clothing/suit/labcoat/coat/jacket = 5,
+					/obj/item/clothing/glasses/regular = 3,/obj/item/clothing/head/sombrero = 2,/obj/item/clothing/suit/poncho = 2,
+					/obj/item/clothing/shoes/laceup = 3,/obj/item/clothing/shoes/sneakers/black = 6, /obj/item/clothing/shoes/sandal = 2)
+	contraband = list(/obj/item/clothing/under/syndicate/tacticool = 1,/obj/item/clothing/mask/fawkes = 1,/obj/item/clothing/mask/balaclava = 1,/obj/item/clothing/head/ushanka = 1,/obj/item/clothing/under/soviet = 1,/obj/item/clothing/suit/cardborg = 1, /obj/item/clothing/head/cardborg = 1,/obj/item/clothing/glasses/hypno = 1)
+	premium = list(/obj/item/clothing/head/mailman = 1,/obj/item/clothing/under/rank/mailman = 1,/obj/item/clothing/suit/labcoat/coat/jacket/leather = 1,/obj/item/clothing/suit/ianshirt = 1,/obj/item/clothing/glasses/sunglasses = 3, /obj/item/clothing/glasses/threed = 2, /obj/item/clothing/head/collectable/paper = 1, /obj/item/clothing/head/fedora = 2)
+	refill_canister = /obj/item/weapon/vending_refill/clothing
+
+/obj/machinery/vending/clothing/New()
+	..()
+	component_parts = list()
+	var/obj/item/weapon/circuitboard/vendor/V = new(null)
+	V.set_type(type)
+	component_parts += V
+	component_parts += new /obj/item/weapon/vending_refill/clothing(0)
+	component_parts += new /obj/item/weapon/vending_refill/clothing(0)
+	component_parts += new /obj/item/weapon/vending_refill/clothing(0)
+
+
 /obj/machinery/vending/dinnerware
 	name = "dinnerware"
 	desc = "A kitchen and restaurant equipment vendor"
