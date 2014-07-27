@@ -811,7 +811,7 @@
 					/obj/item/clothing/under/suit_jacket/navy = 3,/obj/item/clothing/under/kilt = 1,/obj/item/clothing/under/overalls = 3,
 					/obj/item/clothing/under/suit_jacket/really_black = 3,/obj/item/clothing/under/jeans = 5,/obj/item/clothing/under/camo = 2,
 					/obj/item/clothing/tie/waistcoat = 3,/obj/item/clothing/under/sundress = 4,/obj/item/clothing/under/blacktango = 2,
-					/obj/item/clothing/head/maidbow = 1,/obj/item/clothing/under/maid = 1,/obj/item/clothing/suit/labcoat/coat/jacket/varsity = 3,/obj/item/clothing/suit/labcoat/coat/jacket = 5,
+					/obj/item/clothing/head/maidbow = 1,/obj/item/clothing/under/janimaid = 1,/obj/item/clothing/suit/labcoat/coat/jacket/varsity = 3,/obj/item/clothing/suit/labcoat/coat/jacket = 5,
 					/obj/item/clothing/glasses/regular = 3,/obj/item/clothing/head/sombrero = 2,/obj/item/clothing/suit/poncho = 2,
 					/obj/item/clothing/shoes/laceup = 3,/obj/item/clothing/shoes/sneakers/black = 6, /obj/item/clothing/shoes/sandal = 2)
 	contraband = list(/obj/item/clothing/under/syndicate/tacticool = 1,/obj/item/clothing/mask/fawkes = 1,/obj/item/clothing/mask/balaclava = 1,/obj/item/clothing/head/ushanka = 1,/obj/item/clothing/under/soviet = 1,/obj/item/clothing/suit/cardborg = 1, /obj/item/clothing/head/cardborg = 1,/obj/item/clothing/glasses/hypno = 1)
