@@ -468,6 +468,9 @@ obj/machinery/bot/proc/start_patrol()
 	//log_admin("DEBUG \[[// world.timeofday]\]: /obj/machinery/bot/receive_signal([signal.debug_print()])")
 	if(!on)
 		return
+
+	if(!z || z != 1) //Bot control will only work on station.
+		return
 /*
 	if(!signal.data["beacon"])
 
@@ -539,6 +542,8 @@ obj/machinery/bot/proc/start_patrol()
 
 // send a radio signal with multiple data key/values
 /obj/machinery/bot/proc/post_signal_multiple(var/freq, var/list/keyval)
+	if(!z || z != 1) //Bot control will only work on station.
+		return
 	var/datum/radio_frequency/frequency = radio_controller.return_frequency(freq)
 
 	if(!frequency) return
