@@ -118,6 +118,7 @@
 	if(!locked && open)
 		emagged = 2
 		remote_disabled = 1 //Manually emagging the bot locks out the AI.
+		locked = 1 //Access denied forever!
 		bot_reset()
 		turn_on()
 
@@ -156,10 +157,18 @@
 	if(..())
 		return
 
+	if(emagged == 2) //An emagged bot cannot be controlled by humans, silicons can if one hacked it.
+		if(!hacked) //Manually emagged by a human - access denied to all.
+			usr << "<span class='warning'>[src]'s interface is not responding!</span>"
+			return
+		else if(!issilicon(usr)) //Bot is hacked, so only silicons are allowed access.
+			usr << "<span class='warning'>[src]'s interface is not responding!</span>"
+			return
+
 	usr.set_machine(src)
 	add_fingerprint(usr)
 	if((href_list["power"]) && (allowed(usr)))
-		if (on && emagged != 2)
+		if (on)
 			turn_off()
 		else
 			turn_on()
@@ -169,12 +178,13 @@
 			auto_patrol = !auto_patrol
 			mode = BOT_IDLE
 		if("remote")
-			if(emagged != 2)
-				remote_disabled = !remote_disabled
+			remote_disabled = !remote_disabled
 		if("hack")
 			if(!emagged)
 				emagged = 2
 				hacked = 1
+				remote_disabled = 0
+				locked = 1
 				usr << "<span class='warning'>[text_hack]</span>"
 			else if(!hacked)
 				usr << "<span class='userdanger'>[text_dehack_fail]</span>"

@@ -144,7 +144,7 @@
 /obj/machinery/bot/floorbot/Emag(mob/user as mob)
 	..()
 	if(open && !locked)
-		if(user) user << "<span class='danger'>The [src] buzzes and beeps.</span>"
+		if(user) user << "<span class='danger'>[src] buzzes and beeps.</span>"
 
 /obj/machinery/bot/floorbot/Topic(href, href_list)
 	..()
