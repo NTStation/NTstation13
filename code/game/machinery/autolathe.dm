@@ -46,7 +46,7 @@ var/global/list/autolathe_recipes = list( \
 		new /obj/item/weapon/light/tube(), \
 		new /obj/item/weapon/light/bulb(), \
 		new /obj/item/weapon/camera_assembly(), \
-		new /obj/item/newscaster_frame(), \
+		new /obj/item/wall_frame/newscaster(), \
 		new /obj/item/weapon/reagent_containers/syringe(), \
 		new /obj/item/device/assembly/prox_sensor(), \
 	)
