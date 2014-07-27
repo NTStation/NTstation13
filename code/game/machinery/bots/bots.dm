@@ -303,10 +303,13 @@
 	else
 		if(calling_ai)
 			calling_ai << "[tries ? "<span class='danger'>[src] failed to reach waypoint.</span>" : "<span class='notice'>[src] successfully arrived to waypoint.</span>"]"
+			calling_ai = null
 		bot_reset()
 
 obj/machinery/bot/proc/bot_reset()
-	calling_ai = null
+	if(calling_ai) //Simple notification to the AI if it called a bot. It will not know the cause or identity of the bot.
+		calling_ai << "<span class='danger'>Call command to a bot has been reset.</span>"
+		calling_ai = null
 	call_path = null
 	path = new()
 	patrol_path = list()
@@ -487,7 +490,6 @@ obj/machinery/bot/proc/start_patrol()
 				return
 
 			if("go")
-				bot_reset()
 				auto_patrol = 1
 				return
 
