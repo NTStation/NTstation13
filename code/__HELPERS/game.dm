@@ -24,6 +24,17 @@
 			return A
 	return 0
 
+/proc/find_mob_loc(atom/A)
+	var/atom/location = A.loc
+	for(var/i=1, i<=30, i++)
+		if(ismob(location))
+			return location
+		else if(location)
+			location = location.loc
+		else
+			return null
+	return null
+
 /proc/in_range(source, user)
 	if(get_dist(source, user) <= 1)
 		return 1

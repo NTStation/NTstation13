@@ -109,9 +109,3 @@
 
 	open
 		secured = 0
-
-proc/find_mob_loc(atom/A)
-	if(ismob(A))return A
-	if(A.loc)	return .(A.loc)
-
-	return 0
