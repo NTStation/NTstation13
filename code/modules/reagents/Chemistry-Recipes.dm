@@ -422,6 +422,34 @@ silicate
 	required_reagents = list("carpotoxin" = 1, "cryptobiolin" = 1, "copper" = 1)
 	result_amount = 3
 
+/datum/chemical_reaction/chiyanine
+	name = "Chiyanine"
+	id = "chiyanine"
+	result = "chiyanine"
+	required_reagents = list("plasma" = 1, "radium" = 1, "aluminium" = 1)
+	result_amount = 3
+
+/datum/chemical_reaction/mizarudol
+	name = "Mizarudol"
+	id = "mizarudol"
+	result = "mizarudol"
+	required_reagents = list("plasma" = 1, "cryptobiolin" = 1)
+	result_amount = 3
+
+/datum/chemical_reaction/maizine
+	name = "Maizine"
+	id = "maizine"
+	result = "maizine"
+	required_reagents = list("cryptobiolin" = 1, "mindbreaker" = 1, "chloralhydrate" = 1)
+	result_amount = 3
+
+/datum/chemical_reaction/jiutin
+	name = "Jiutin"
+	id = "jiutin"
+	result = "jiutin"
+	required_reagents = list("radium" = 1, "lipozine" = 1, "copper" = 1)
+	result_amount = 4
+
 /datum/chemical_reaction/mindbreaker
 	name = "Mindbreaker Toxin"
 	id = "mindbreaker"
