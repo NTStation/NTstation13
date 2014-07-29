@@ -110,17 +110,17 @@
 	if (src.health <= 0)
 		src.explode()
 
-/obj/machinery/bot/proc/Emag(mob/user as mob)
-	if(locked)
+/obj/machinery/bot/proc/Emag(mob/user as mob) //Master Emag proc. Ensure this is called in your bot before setting unique functions.
+	if(locked) //First emag application unlocks the bot's interface. Apply a screwdriver to use the emag again.
 		locked = 0
 		emagged = 1
 		user << "<span class='warning'>You bypass [src]'s controls.</span>"
-	if(!locked && open)
+	if(!locked && open) //Bot panel is unlocked by ID or emag, and the panel is screwed open. Ready for emagging.
 		emagged = 2
 		remote_disabled = 1 //Manually emagging the bot locks out the AI.
 		locked = 1 //Access denied forever!
 		bot_reset()
-		turn_on()
+		turn_on() //The bot automatically turns on when emagged, unless recently hit with EMP.
 
 /obj/machinery/bot/examine()
 	set src in view()

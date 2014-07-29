@@ -149,7 +149,7 @@ text("<A href='?src=\ref[src];operation=oddbutton'>[oddbutton ? "Yes" : "No"]</A
 
 /obj/machinery/bot/cleanbot/Emag(mob/user as mob)
 	..()
-	if(open && !locked)
+	if(emagged == 2)
 		if(user) user << "<span class='danger'>[src] buzzes and beeps.</span>"
 
 /obj/machinery/bot/cleanbot/process()

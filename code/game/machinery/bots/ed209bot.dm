@@ -190,7 +190,7 @@ Auto Patrol: []"},
 
 /obj/machinery/bot/ed209/Emag(mob/user as mob)
 	..()
-	if(open && !locked)
+	if(emagged == 2)
 		if(user) user << "<span class='warning'>You short out [src]'s target assessment circuits.</span>"
 		spawn(0)
 			for(var/mob/O in hearers(src, null))
@@ -535,6 +535,7 @@ Auto Patrol: []"},
 
 	//if(lastfired && world.time - lastfired < 100)
 	//	playsound(loc, 'ed209_shoot.ogg', 50, 0)
+	var/shoot_sound = 'sound/weapons/laser.ogg' //Pew Pew!
 
 	if(!projectile)
 		if(!lasercolor)
@@ -542,6 +543,7 @@ Auto Patrol: []"},
 				projectile = /obj/item/projectile/beam
 			else
 				projectile = /obj/item/projectile/energy/electrode
+				shoot_sound = 'sound/weapons/Taser.ogg' //Face the wrath of the Golden Bolt!
 		else if(lasercolor == "b")
 			if (emagged == 2)
 				projectile = /obj/item/projectile/lasertag
@@ -556,6 +558,7 @@ Auto Patrol: []"},
 	if (!( istype(U, /turf) ))
 		return
 	var/obj/item/projectile/A = new projectile (loc)
+	playsound(loc, shoot_sound, 50, 1)
 	A.current = U
 	A.yo = U.y - T.y
 	A.xo = U.x - T.x

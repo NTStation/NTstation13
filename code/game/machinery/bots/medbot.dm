@@ -219,7 +219,7 @@
 
 /obj/machinery/bot/medbot/Emag(mob/user as mob)
 	..()
-	if(open && !locked)
+	if(emagged == 2)
 		if(user) user << "<span class='warning'>You short out [src]'s reagent synthesis circuits.</span>"
 		spawn(0)
 			visible_message("<span class='userdanger'>[src] buzzes oddly!</span>", 1)

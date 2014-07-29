@@ -155,7 +155,7 @@ Auto Patrol: []"},
 
 /obj/machinery/bot/secbot/Emag(mob/user as mob)
 	..()
-	if(open && !locked)
+	if(emagged == 2)
 		if(user) user << "<span class='danger'> You short out [src]'s target assessment circuits.</span>"
 		spawn(0)
 			for(var/mob/O in hearers(src, null))
