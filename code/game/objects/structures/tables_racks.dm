@@ -528,6 +528,8 @@
 
 	if(istype(mover) && mover.checkpass(PASSTABLE))
 		return 1
+	if(locate(/obj/structure/table) in get_turf(mover))
+		return 1
 	else
 		return 0
 
