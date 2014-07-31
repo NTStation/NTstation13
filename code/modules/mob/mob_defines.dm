@@ -2,7 +2,7 @@
 	density = 1
 	layer = 4
 	animate_movement = 2
-	flags = NOREACT
+	flags = 0
 	var/datum/mind/mind
 
 	var/stat = 0 //Whether a mob is alive or dead. TODO: Move this to living - Nodrak
