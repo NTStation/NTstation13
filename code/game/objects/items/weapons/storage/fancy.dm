@@ -2,26 +2,29 @@
  * The 'fancy' path is for objects like donut boxes that show how many items are in the storage item on the sprite itself
  * .. Sorry for the shitty path name, I couldnt think of a better one.
  *
- * WARNING: var/icon_type is used for both examine text and sprite name. Please look at the procs below and adjust your sprite names accordingly
- *		TODO: Cigarette boxes should be ported to this standard
- *
  * Contains:
  *		Donut Box
  *		Egg Box
  *		Candle Box
  *		Crayon Box
  *		Cigarette Box
+ *		Cigar Box
+ *
+ * Fancy Box Tutorial:
+ * The icon_type varibale is what specific item a particular box is meant to store (I.E. Donuts), it is used for descriptions.
+ * You will need as many icon_states as your box has storage slots + 2.
+ * One of these icon_states will be the inital icon_state, it is only used when the box is first created. (I.E. "donutbox")
+ * The other icon_states are used to show how many of whatever your item is use to store. For example, "donutbox0" means the box is empty, while "donutbox4" means there are 4 donuts in the box.
  */
 
 /obj/item/weapon/storage/fancy/
 	icon = 'icons/obj/food.dmi'
-	icon_state = "donutbox6"
+	icon_state = "donutbox"
 	name = "donut box"
 	var/icon_type = "donut"
 
 /obj/item/weapon/storage/fancy/update_icon(var/itemremoved = 0)
-	var/total_contents = src.contents.len - itemremoved
-	src.icon_state = "[src.icon_type]box[total_contents]"
+	icon_state = "[initial(icon_state)][contents.len]"
 	return
 
 /obj/item/weapon/storage/fancy/examine()
@@ -44,7 +47,7 @@
 
 /obj/item/weapon/storage/fancy/donut_box
 	icon = 'icons/obj/food.dmi'
-	icon_state = "donutbox6"
+	icon_state = "donutbox"
 	icon_type = "donut"
 	name = "donut box"
 	storage_slots = 6
@@ -165,11 +168,6 @@
 		new /obj/item/clothing/mask/cigarette(src)
 	create_reagents(15 * storage_slots)//so people can inject cigarettes without opening a packet, now with being able to inject the whole one
 
-/obj/item/weapon/storage/fancy/cigarettes/update_icon()
-	icon_state = "[initial(icon_state)][contents.len]"
-	desc = "There are [contents.len] cig\s left!"
-	return
-
 /obj/item/weapon/storage/fancy/cigarettes/remove_from_storage(obj/item/W as obj, atom/new_location)
 		var/obj/item/clothing/mask/cigarette/C = W
 		if(!istype(C)) return // what
@@ -194,3 +192,33 @@
 	desc = "A packet of six imported DromedaryCo cancer sticks. A label on the packaging reads, \"Wouldn't a slow death make a change?\""
 	icon_state = "Dpacket"
 	item_state = "Dpacket"
+
+/obj/item/weapon/storage/fancy/cigarcase
+	name = "cigar case"
+	desc = "A case of cigars, classy."
+	icon = 'icons/obj/cigarettes.dmi'
+	icon_state = "cigarcase"
+	item_state = "briefcase"
+	w_class = 1
+	throwforce = 0
+	slot_flags = SLOT_BELT
+	storage_slots = 7
+	can_hold = list(/obj/item/clothing/mask/cigarette/cigar)
+	icon_type = "cigar"
+
+/obj/item/weapon/storage/fancy/cigarcase/New()
+	..()
+	for(var/i=1; i <= storage_slots; i++)
+		new /obj/item/clothing/mask/cigarette/cigar(src)
+	return
+
+/obj/item/weapon/storage/fancy/cigarcase/cohiba
+	name = "Cohiba Robusto cigar case"
+	desc = "A case of Cohiba Robusto cigars, extra classy."
+	icon_state = "cohibacase"
+
+/obj/item/weapon/storage/fancy/cigarcase/cohiba/New()
+	..()
+	for(var/i=1; i <= storage_slots; i++)
+		new /obj/item/clothing/mask/cigarette/cigar/cohiba(src)
+	return
