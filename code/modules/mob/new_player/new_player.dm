@@ -24,7 +24,7 @@
 
 		if(!ticker || ticker.current_state <= GAME_STATE_PREGAME)
 			if(!ready)	output += "<p><a href='byond://?src=\ref[src];ready=1'>Declare Ready</A></p>"
-			else	output += "<p><b>You are ready</b> <a href='byond://?src=\ref[src];ready=2'>Cancel</A></p>"
+			else	output += "<p><b>You are ready</b> <a href='byond://?src=\ref[src];ready=0'>Cancel</A></p>"
 
 		else
 			output += "<a href='byond://?src=\ref[src];manifest=1'>Crew Manifest</A><br><br>"
@@ -95,7 +95,7 @@
 			return 1
 
 		if(href_list["ready"])
-			ready = !ready
+			ready = text2num(href_list["ready"])
 
 		if(href_list["refresh"])
 			src << browse(null, "window=playersetup") //closes the player setup window

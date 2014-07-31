@@ -58,3 +58,8 @@
 	machine_name = "AutoDrobe"
 	icon_state = "refill_costume"
 	charges = 19// of 58
+
+/obj/item/weapon/vending_refill/clothing
+	machine_name = "Clothe-O-Mat"
+	icon_state = "refill_costume"
+	charges = 20// of 60
