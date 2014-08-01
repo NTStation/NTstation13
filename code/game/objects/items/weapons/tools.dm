@@ -458,7 +458,7 @@
 
 /obj/item/weapon/crowbar/attackby(obj/item/W as obj, mob/user as mob)
 	if(istype(W,/obj/item/stack/sheet/plasteel))
-		if(!src.type == /obj/item/weapon/crowbar/tireiron)
+		if(!istype(src, /obj/item/weapon/crowbar/tireiron))
 			if(constructionsystem == 0)
 				user << "You start to form a tire iron out of the crowbar using the plasteel."
 				var/obj/item/stack/sheet/plasteel/S = W
