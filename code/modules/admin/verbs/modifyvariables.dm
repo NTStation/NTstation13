@@ -4,6 +4,20 @@ var/list/forbidden_varedit_object_types = list(
 										/datum/feedback_variable			//Prevents people messing with feedback gathering
 									)
 
+var/list/var_kinds = list("text","num","type","text2type","reference","mob reference",
+						"icon","file","list","edit referenced object","restore to default")
+
+// for all kinds of vars you can set
+
+/client/proc/var_kinds(var/list = 0)
+	var/list/types = var_kinds.Copy()
+	if(holder && holder.marked_datum)
+		types += "marked datum ([holder.marked_datum.type])"
+	if(list)
+		types += "DELETE FROM LIST"
+	return types
+
+
 /*
 /client/proc/cmd_modify_object_variables(obj/O as obj|mob|turf|area in world)
 	set category = "Debug"
@@ -24,14 +38,7 @@ var/list/forbidden_varedit_object_types = list(
 		feedback_add_details("admin_verb","ETV") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
 /client/proc/mod_list_add_ass() //haha
-
-	var/class = "text"
-	if(src.holder && src.holder.marked_datum)
-		class = input("What kind of variable?","Variable Type") as null|anything in list("text",
-			"num","type","reference","mob reference", "icon","file","list","edit referenced object","restore to default","marked datum ([holder.marked_datum.type])")
-	else
-		class = input("What kind of variable?","Variable Type") as null|anything in list("text",
-			"num","type","reference","mob reference", "icon","file","list","edit referenced object","restore to default")
+	var/class = input("What kind of variable?","Variable Type") as null|anything in var_kinds()
 
 	if(!class)
 		return
@@ -51,6 +58,9 @@ var/list/forbidden_varedit_object_types = list(
 
 		if("type")
 			var_value = input("Enter type:","Type") as null|anything in typesof(/obj,/mob,/area,/turf)
+
+		if("text2type")
+			var_value = text2path(input("Enter type:","Type") as text)
 
 		if("reference")
 			var_value = input("Select reference:","Reference") as null|mob|obj|turf|area in world
@@ -73,14 +83,7 @@ var/list/forbidden_varedit_object_types = list(
 
 
 /client/proc/mod_list_add(var/list/L)
-
-	var/class = "text"
-	if(src.holder && src.holder.marked_datum)
-		class = input("What kind of variable?","Variable Type") as null|anything in list("text",
-			"num","type","reference","mob reference", "icon","file","list","edit referenced object","restore to default","marked datum ([holder.marked_datum.type])")
-	else
-		class = input("What kind of variable?","Variable Type") as null|anything in list("text",
-			"num","type","reference","mob reference", "icon","file","list","edit referenced object","restore to default")
+	var/class = input("What kind of variable?","Variable Type") as null|anything in var_kinds()
 
 	if(!class)
 		return
@@ -100,6 +103,9 @@ var/list/forbidden_varedit_object_types = list(
 
 		if("type")
 			var_value = input("Enter type:","Type") in typesof(/obj,/mob,/area,/turf)
+
+		if("text2type")
+			var_value = text2path(input("Enter type:","Type") as text)
 
 		if("reference")
 			var_value = input("Select reference:","Reference") as mob|obj|turf|area in world
@@ -217,13 +223,7 @@ var/list/forbidden_varedit_object_types = list(
 		if(dir)
 			usr << "If a direction, direction is: [dir]"
 
-	var/class = "text"
-	if(src.holder && src.holder.marked_datum)
-		class = input("What kind of variable?","Variable Type",default) as null|anything in list("text",
-			"num","type","reference","mob reference", "icon","file","list","edit referenced object","restore to default","marked datum ([holder.marked_datum.type])", "DELETE FROM LIST")
-	else
-		class = input("What kind of variable?","Variable Type",default) as null|anything in list("text",
-			"num","type","reference","mob reference", "icon","file","list","edit referenced object","restore to default", "DELETE FROM LIST")
+	var/class = input("What kind of variable?","Variable Type",default) as null|anything in var_kinds(1)
 
 	if(!class)
 		return
@@ -254,6 +254,9 @@ var/list/forbidden_varedit_object_types = list(
 
 		if("type")
 			L[L.Find(variable)] = input("Enter type:","Type") in typesof(/obj,/mob,/area,/turf)
+
+		if("text2type")
+			L[L.Find(variable)] = text2path(input("Enter type:","Type") as text)
 
 		if("reference")
 			L[L.Find(variable)] = input("Select reference:","Reference") as mob|obj|turf|area in world
@@ -431,12 +434,7 @@ var/list/forbidden_varedit_object_types = list(
 				usr << "If a direction, direction is: [dir]"
 
 
-		var/list/kinds = list("text","num","type","text2type","reference","mob reference",
-							"icon","file","list","edit referenced object","restore to default")
-		if(src.holder && src.holder.marked_datum)
-			class = input("What kind of variable?","Variable Type",default) as null|anything in (kinds + "marked datum ([holder.marked_datum.type])")
-		else
-			class = input("What kind of variable?","Variable Type",default) as null|anything in kinds
+		class = input("What kind of variable?","Variable Type",default) as null|anything in var_kinds()
 
 		if(!class)
 			return
