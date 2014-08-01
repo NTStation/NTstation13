@@ -64,5 +64,9 @@
 /datum/surgery_step/saw/preop(mob/user, mob/living/carbon/target, target_zone, obj/item/tool, datum/surgery/surgery)
 	user.visible_message("<span class='notice'>[user] begins to saw through the bone in [target]'s [parse_zone(target_zone)].</span>")
 
-
-
+/datum/surgery_step/saw/success(mob/user, mob/living/carbon/target, target_zone, obj/item/tool, datum/surgery/surgery)
+	if(ishuman(target))
+		var/mob/living/carbon/human/H = target
+		H.apply_damage(75,"brute","[target_zone]")
+		user.visible_message("<span class='notice'>[user] saws [target]'s [parse_zone(target_zone)] open!")
+	return 1
