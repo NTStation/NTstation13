@@ -430,12 +430,13 @@ var/list/forbidden_varedit_object_types = list(
 			if(dir)
 				usr << "If a direction, direction is: [dir]"
 
+
+		var/list/kinds = list("text","num","type","text2type","reference","mob reference",
+							"icon","file","list","edit referenced object","restore to default")
 		if(src.holder && src.holder.marked_datum)
-			class = input("What kind of variable?","Variable Type",default) as null|anything in list("text",
-				"num","type","reference","mob reference", "icon","file","list","edit referenced object","restore to default","marked datum ([holder.marked_datum.type])")
+			class = input("What kind of variable?","Variable Type",default) as null|anything in (kinds + "marked datum ([holder.marked_datum.type])")
 		else
-			class = input("What kind of variable?","Variable Type",default) as null|anything in list("text",
-				"num","type","reference","mob reference", "icon","file","list","edit referenced object","restore to default")
+			class = input("What kind of variable?","Variable Type",default) as null|anything in kinds
 
 		if(!class)
 			return
@@ -489,6 +490,11 @@ var/list/forbidden_varedit_object_types = list(
 
 		if("type")
 			var/var_new = input("Enter type:","Type",O.vars[variable]) as null|anything in typesof(/obj,/mob,/area,/turf)
+			if(var_new==null) return
+			O.vars[variable] = var_new
+
+		if("text2type")
+			var/var_new = text2path(input("Enter type:","Type", O.vars[variable]) as text)
 			if(var_new==null) return
 			O.vars[variable] = var_new
 
