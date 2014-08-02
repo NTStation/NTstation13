@@ -219,6 +219,8 @@
 
 /obj/item/weapon/storage/fancy/cigarcase/cohiba/New()
 	..()
+	contents.Cut() // Fastfix. The old cigars will be garbage collected now.
+	
 	for(var/i=1; i <= storage_slots; i++)
 		new /obj/item/clothing/mask/cigarette/cigar/cohiba(src)
 	return
