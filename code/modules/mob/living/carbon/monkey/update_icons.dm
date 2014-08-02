@@ -60,19 +60,17 @@
 		r_hand.screen_loc = ui_rhand
 		if(client && hud_used)
 			client.screen += r_hand
-		var/t_state = r_hand.item_state
-		if(!t_state)	t_state = r_hand.icon_state
+
 		overlays -= overlays_standing[M_HANDS_LAYER]
-		M_overlays	+= image("icon" = 'icons/mob/items_righthand.dmi', "icon_state" = t_state, "layer" = -M_HANDS_LAYER)
+		M_overlays	+= r_hand.get_hand_icon("r", -M_HANDS_LAYER)
 
 	if(l_hand)
 		l_hand.screen_loc = ui_lhand
 		if(client && hud_used)
 			client.screen += l_hand
-		var/t_state = l_hand.item_state
-		if(!t_state)	 t_state = l_hand.icon_state
+
 		overlays -= overlays_standing[M_HANDS_LAYER]
-		M_overlays	+= image("icon" = 'icons/mob/items_lefthand.dmi', "icon_state" = t_state, "layer" = -M_HANDS_LAYER)
+		M_overlays	+= l_hand.get_hand_icon("l", -M_HANDS_LAYER)
 
 	if(M_overlays.len)
 		overlays_standing[M_HANDS_LAYER] = M_overlays

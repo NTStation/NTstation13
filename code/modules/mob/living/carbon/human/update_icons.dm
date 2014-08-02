@@ -651,19 +651,14 @@ Please contact me on #coderbus IRC. ~Carnie x
 			l_hand.screen_loc = ui_lhand
 			client.screen += l_hand
 
-		var/t_state = l_hand.item_state
-		if(!t_state)	t_state = l_hand.icon_state
+		H_hands_overlays += l_hand.get_hand_icon("l", -HANDS_LAYER)
 
-		H_hands_overlays += image("icon"='icons/mob/items_lefthand.dmi', "icon_state"="[t_state]", "layer"=-HANDS_LAYER)
 	if(r_hand)
 		if(client)
 			r_hand.screen_loc = ui_rhand
 			client.screen += r_hand
 
-		var/t_state = r_hand.item_state
-		if(!t_state)	t_state = r_hand.icon_state
-
-		H_hands_overlays += image("icon"='icons/mob/items_righthand.dmi', "icon_state"="[t_state]", "layer"=-HANDS_LAYER)
+		H_hands_overlays += r_hand.get_hand_icon("r", -HANDS_LAYER)
 
 	if(H_hands_overlays.len)
 		overlays_standing[HANDS_LAYER] = H_hands_overlays

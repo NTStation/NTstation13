@@ -2,6 +2,8 @@
 	name = "item"
 	icon = 'icons/obj/items.dmi'
 	var/item_state = null
+	var/item_state_icon = null
+
 	var/hitsound = null
 	var/throwhitsound = null
 	var/w_class = 3.0
@@ -380,3 +382,22 @@
 			var/icon/blood_splatter_icon = blood_splatter_icons[index]
 			if(blood_splatter_icon)
 				overlays -= blood_splatter_icon
+
+
+/obj/item/proc/get_hand_icon(var/hand, var/layer = 0)
+	var/t_state = item_state
+	if(!t_state)
+		t_state = icon_state
+
+	var/icon = item_state_icon
+	if(icon)
+		t_state += "_hand_" + hand
+	else if(hand == "r")
+		icon = 'icons/mob/items_righthand.dmi'
+	else if(hand == "l")
+		icon = 'icons/mob/items_lefthand.dmi'
+
+	if(layer)
+		return image(icon = icon, icon_state = t_state, layer = layer)
+	else
+		return image(icon = icon, icon_state = t_state)
