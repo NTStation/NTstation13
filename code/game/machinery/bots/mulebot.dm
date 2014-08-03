@@ -19,29 +19,24 @@ var/global/mulebot_count = 0
 	fire_dam_coeff = 0.7
 	brute_dam_coeff = 0.5
 	var/atom/movable/load = null		// the loaded crate (usually)
-	var/beacon_freq = 1400
-	var/control_freq = 1447
+	var/list/delivery_beacons = list() //List of beacons that serve as delivery locations.
+	beacon_freq = 1400
+	control_freq = 1447
+	bot_type = MULE_BOT
+	bot_filter = RADIO_MULEBOT
 
 	suffix = ""
 
 	var/turf/target				// this is turf to navigate to (location of beacon)
 	var/loaddir = 0				// this the direction to unload onto/load from
-	var/new_destination = ""	// pending new destination (waiting for beacon response)
-	var/destination = ""		// destination description
+	new_destination = ""	// pending new destination (waiting for beacon response)
+	destination = ""		// destination description
 	var/home_destination = "" 	// tag of home beacon
-	req_access = list(access_cargo) // added robotics access so assembly line drop-off works properly -veyveyr //I don't think so, Tim. You need to add it to the MULE's hidden robot ID card. -NEO
-	var/path[] = new()
+	req_one_access = list(access_cargo) // added robotics access so assembly line drop-off works properly -veyveyr //I don't think so, Tim. You need to add it to the MULE's hidden robot ID card. -NEO
 
-	var/mode = 0		//0 = idle/ready
-						//1 = loading/unloading
-						//2 = moving to deliver
-						//3 = returning to home
-						//4 = blocked
-						//5 = computing navigation
-						//6 = waiting for nav computation
-						//7 = no destination beacon found (or no route)
+	mode = BOT_IDLE
 
-	var/blockcount	= 0		//number of times retried a blocked path
+	blockcount	= 0		//number of times retried a blocked path
 	var/reached_target = 1 	//true if already reached the target
 
 	var/refresh = 1		// true to refresh dialogue
@@ -67,18 +62,16 @@ var/global/mulebot_count = 0
 /obj/machinery/bot/mulebot/New()
 	..()
 	wires = new(src)
-	botcard = new(src)
 	var/datum/job/cargo_tech/J = new/datum/job/cargo_tech
 	botcard.access = J.get_access()
+	prev_access = botcard.access
 //	botcard.access += access_robotics //Why --Ikki
 	cell = new(src)
 	cell.charge = 2000
 	cell.maxcharge = 2000
 
 	spawn(5)	// must wait for map loading to finish
-		if(radio_controller)
-			radio_controller.add_object(src, control_freq, filter = RADIO_MULEBOT)
-			radio_controller.add_object(src, beacon_freq, filter = RADIO_NAVBEACONS)
+		add_to_beacons(bot_filter)
 
 		mulebot_count += 1
 		if(!suffix)
@@ -100,7 +93,7 @@ var/global/mulebot_count = 0
 		locked = !locked
 		user << "\blue You [locked ? "lock" : "unlock"] the mulebot's controls!"
 		flick("mulebot-emagged", src)
-		playsound(src.loc, 'sound/effects/sparks1.ogg', 100, 0)
+		playsound(loc, 'sound/effects/sparks1.ogg', 100, 0)
 	else if(istype(I, /obj/item/weapon/card/id))
 		if(toggle_lock(user))
 			user << "\blue Controls [(locked ? "locked" : "unlocked")]."
@@ -118,17 +111,17 @@ var/global/mulebot_count = 0
 
 		open = !open
 		if(open)
-			src.visible_message("[user] opens the maintenance hatch of [src]", "\blue You open [src]'s maintenance hatch.")
+			visible_message("[user] opens the maintenance hatch of [src]", "\blue You open [src]'s maintenance hatch.")
 			on = 0
 			icon_state="mulebot-hatch"
 		else
-			src.visible_message("[user] closes the maintenance hatch of [src]", "\blue You close [src]'s maintenance hatch.")
+			visible_message("[user] closes the maintenance hatch of [src]", "\blue You close [src]'s maintenance hatch.")
 			icon_state = "mulebot0"
 
 		updateDialog()
 	else if (istype(I, /obj/item/weapon/wrench))
-		if (src.health < maxhealth)
-			src.health = min(maxhealth, src.health+25)
+		if (health < maxhealth)
+			health = min(maxhealth, health+25)
 			user.visible_message(
 				"\red [user] repairs [src]!",
 				"\blue You repair [src]!"
@@ -164,7 +157,7 @@ var/global/mulebot_count = 0
 	if(prob(50) && !isnull(load))
 		unload(0)
 	if(prob(25))
-		src.visible_message("\red Something shorts out inside [src]!")
+		visible_message("\red Something shorts out inside [src]!")
 		wires.RandomCut()
 	..()
 
@@ -189,22 +182,23 @@ var/global/mulebot_count = 0
 	if(!open)
 
 		dat += "<h3>Status</h3>"
+
 		dat += "<div class='statusDisplay'>"
 		switch(mode)
-			if(0)
+			if(BOT_IDLE)
 				dat += "Ready"
-			if(1)
-				dat += "<span class='good'>Loading/Unloading</span>"
-			if(2)
-				dat += "<span class='good'>Navigating to Delivery Location</span>"
-			if(3)
-				dat += "<span class='good'>Navigating to Home</span>"
-			if(4)
-				dat += "<span class='average'>Waiting for clear path</span>"
-			if(5,6)
-				dat += "<span class='average'>Calculating navigation path</span>"
-			if(7)
-				dat += "<span class='bad'>Unable to reach destination</span>"
+			if(BOT_LOADING)
+				dat += "<span class='good'>[mode_name[BOT_LOADING]]</span>"
+			if(BOT_DELIVER)
+				dat += "<span class='good'>[mode_name[BOT_DELIVER]]</span>"
+			if(BOT_GO_HOME)
+				dat += "<span class='good'>[mode_name[BOT_GO_HOME]]</span>"
+			if(BOT_BLOCKED)
+				dat += "<span class='average'>[mode_name[BOT_BLOCKED]]</span>"
+			if(BOT_NAV,BOT_WAIT_FOR_NAV)
+				dat += "<span class='average'>[mode_name[BOT_NAV]]</span>"
+			if(BOT_NO_ROUTE)
+				dat += "<span class='bad'>[mode_name[BOT_NO_ROUTE]]</span>"
 		dat += "</div>"
 
 		dat += "<b>Current Load:</b> [load ? load.name : "<i>none</i>"]<BR>"
@@ -247,7 +241,7 @@ var/global/mulebot_count = 0
 	//onclose(user, "mulebot")
 	var/datum/browser/popup = new(user, "mulebot", "M.U.L.E. Mk. III [suffix ? "([suffix])" : ""]", 350, 500)
 	popup.set_content(dat)
-	popup.set_title_image(user.browse_rsc_icon(src.icon, src.icon_state))
+	popup.set_title_image(user.browse_rsc_icon(icon, icon_state))
 	popup.open()
 	return
 
@@ -261,7 +255,7 @@ var/global/mulebot_count = 0
 		return
 	if (usr.stat)
 		return
-	if ((in_range(src, usr) && istype(src.loc, /turf)) || (istype(usr, /mob/living/silicon)))
+	if ((in_range(src, usr) && istype(loc, /turf)) || (istype(usr, /mob/living/silicon)))
 		usr.set_machine(src)
 
 		switch(href_list["op"])
@@ -269,7 +263,7 @@ var/global/mulebot_count = 0
 				toggle_lock(usr)
 
 			if("power")
-				if (src.on)
+				if (on)
 					turn_off()
 				else if (cell && !open)
 					if (!turn_on())
@@ -305,23 +299,23 @@ var/global/mulebot_count = 0
 
 
 			if("stop")
-				if(mode >=2)
-					mode = 0
+				if(mode >= BOT_DELIVER)
+					bot_reset()
 					updateDialog()
 
 			if("go")
-				if(mode == 0)
+				if(mode == BOT_IDLE)
 					start()
 					updateDialog()
 
 			if("home")
-				if(mode == 0 || mode == 2)
+				if(mode == BOT_IDLE || mode == BOT_DELIVER)
 					start_home()
 					updateDialog()
 
 			if("destination")
 				refresh=0
-				var/new_dest = input("Enter new destination tag", "Mulebot [suffix ? "([suffix])" : ""]", destination) as text|null
+				var/new_dest = input("Select M.U.L.E. Destination", "Mulebot [suffix ? "([suffix])" : ""]", destination) as null|anything in delivery_beacons
 				refresh=1
 				if(new_dest)
 					set_destination(new_dest)
@@ -338,7 +332,7 @@ var/global/mulebot_count = 0
 
 			if("sethome")
 				refresh=0
-				var/new_home = input("Enter new home tag", "Mulebot [suffix ? "([suffix])" : ""]", home_destination) as text|null
+				var/new_home = input("Enter new home tag", "Mulebot [suffix ? "([suffix])" : ""]", home_destination) as null|anything in delivery_beacons
 				refresh=1
 				if(new_home)
 					home_destination = new_home
@@ -362,7 +356,7 @@ var/global/mulebot_count = 0
 				usr << browse(null,"window=mulebot")
 
 		updateDialog()
-		//src.updateUsrDialog()
+		//updateUsrDialog()
 	else
 		usr << browse(null, "window=mulebot")
 		usr.unset_machine()
@@ -375,7 +369,7 @@ var/global/mulebot_count = 0
 	return !open && cell && cell.charge > 0 && wires.HasPower()
 
 /obj/machinery/bot/mulebot/proc/toggle_lock(var/mob/user)
-	if(src.allowed(user))
+	if(allowed(user))
 		locked = !locked
 		updateDialog()
 		return 1
@@ -403,8 +397,8 @@ var/global/mulebot_count = 0
 // called to load a crate
 /obj/machinery/bot/mulebot/proc/load(var/atom/movable/C)
 	if(wires.LoadCheck() && !istype(C,/obj/structure/closet/crate))
-		src.visible_message("[src] makes a sighing buzz.", "You hear an electronic buzzing sound.")
-		playsound(src.loc, 'sound/machines/buzz-sigh.ogg', 50, 0)
+		visible_message("[src] makes a sighing buzz.", "You hear an electronic buzzing sound.")
+		playsound(loc, 'sound/machines/buzz-sigh.ogg', 50, 0)
 		return		// if not emagged, only allow crates to be loaded
 
 	//I'm sure someone will come along and ask why this is here... well people were dragging screen items onto the mule, and that was not cool.
@@ -416,16 +410,16 @@ var/global/mulebot_count = 0
 
 	if(get_dist(C, src) > 1 || load || !on)
 		return
-	mode = 1
+	mode = BOT_LOADING
 
 	// if a create, close before loading
 	var/obj/structure/closet/crate/crate = C
 	if(istype(crate))
 		crate.close()
 
-	C.loc = src.loc
+	C.loc = loc
 	sleep(2)
-	if(C.loc != src.loc) //To prevent you from going onto more thano ne bot.
+	if(C.loc != loc) //To prevent you from going onto more thano ne bot.
 		return
 	C.loc = src
 	load = C
@@ -441,7 +435,7 @@ var/global/mulebot_count = 0
 			M.client.perspective = EYE_PERSPECTIVE
 			M.client.eye = src
 
-	mode = 0
+	mode = BOT_IDLE
 	send_status()
 
 // called to unload the bot
@@ -451,7 +445,7 @@ var/global/mulebot_count = 0
 	if(!load)
 		return
 
-	mode = 1
+	mode = BOT_LOADING
 	overlays.Cut()
 
 	if(ismob(load))
@@ -461,11 +455,11 @@ var/global/mulebot_count = 0
 			M.client.eye = src
 
 
-	load.loc = src.loc
+	load.loc = loc
 	load.pixel_y -= 9
 	load.layer = initial(load.layer)
 	if(dirn)
-		var/turf/T = src.loc
+		var/turf/T = loc
 		var/turf/newT = get_step(T,dirn)
 		if(load.CanPass(load,newT)) //Can't get off onto anything that wouldn't let you pass normally
 			step(load, dirn)
@@ -477,9 +471,9 @@ var/global/mulebot_count = 0
 	// with items dropping as mobs are loaded
 
 	for(var/atom/movable/AM in src)
-		if(AM == cell || AM == botcard) continue
+		if(AM == cell || istype(AM , botcard)) continue
 
-		AM.loc = src.loc
+		AM.loc = loc
 		AM.layer = initial(AM.layer)
 		AM.pixel_y = initial(AM.pixel_y)
 		if(ismob(AM))
@@ -487,7 +481,7 @@ var/global/mulebot_count = 0
 			if(M.client)
 				M.client.perspective = MOB_PERSPECTIVE
 				M.client.eye = src
-	mode = 0
+	mode = BOT_IDLE
 
 
 /obj/machinery/bot/mulebot/process()
@@ -521,13 +515,23 @@ var/global/mulebot_count = 0
 
 /obj/machinery/bot/mulebot/proc/process_bot()
 	//if(mode) world << "Mode: [mode]"
+	var/area/dest_area
+	if (call_path && call_path.len)
+		target = call_path[call_path.len] //Target is the end point of the path, the waypoint set by the AI.
+		dest_area = get_area(target)
+		destination = format_text(dest_area.name)
+		path = call_path
+		call_path = null //Once the MULE is commanded, follow normal procedures to reach the waypoint.
+		pathset = 1 //Indicates the AI's custom path is initialized.
+		start()
+
 	switch(mode)
-		if(0)		// idle
+		if(BOT_IDLE)		// idle
 			icon_state = "mulebot0"
 			return
-		if(1)		// loading/unloading
+		if(BOT_LOADING)		// loading/unloading
 			return
-		if(2,3,4)		// navigating to deliver,home, or blocked
+		if(BOT_DELIVER,BOT_GO_HOME,BOT_BLOCKED)		// navigating to deliver,home, or blocked
 
 			if(loc == target)		// reached target
 				at_target()
@@ -570,14 +574,14 @@ var/global/mulebot_count = 0
 						path -= loc
 
 
-						if(mode==4)
+						if(mode == BOT_BLOCKED)
 							spawn(1)
 								send_status()
 
 						if(destination == home_destination)
-							mode = 3
+							mode = BOT_GO_HOME
 						else
-							mode = 2
+							mode = BOT_DELIVER
 
 					else		// failed to move
 
@@ -586,73 +590,74 @@ var/global/mulebot_count = 0
 
 
 						blockcount++
-						mode = 4
+						mode = BOT_BLOCKED
 						if(blockcount == 3)
-							src.visible_message("[src] makes an annoyed buzzing sound.", "You hear an electronic buzzing sound.")
-							playsound(src.loc, 'sound/machines/buzz-two.ogg', 50, 0)
+							visible_message("[src] makes an annoyed buzzing sound.", "You hear an electronic buzzing sound.")
+							playsound(loc, 'sound/machines/buzz-two.ogg', 50, 0)
 
 						if(blockcount > 5)	// attempt 5 times before recomputing
 							// find new path excluding blocked turf
-							src.visible_message("[src] makes a sighing buzz.", "You hear an electronic buzzing sound.")
-							playsound(src.loc, 'sound/machines/buzz-sigh.ogg', 50, 0)
+							visible_message("[src] makes a sighing buzz.", "You hear an electronic buzzing sound.")
+							playsound(loc, 'sound/machines/buzz-sigh.ogg', 50, 0)
 
 							spawn(2)
 								calc_path(next)
 								if(path.len > 0)
-									src.visible_message("[src] makes a delighted ping!", "You hear a ping.")
-									playsound(src.loc, 'sound/machines/ping.ogg', 50, 0)
-								mode = 4
-							mode =6
+									visible_message("[src] makes a delighted ping!", "You hear a ping.")
+									playsound(loc, 'sound/machines/ping.ogg', 50, 0)
+								mode = BOT_BLOCKED
+							mode = BOT_WAIT_FOR_NAV
 							return
 						return
 				else
-					src.visible_message("[src] makes an annoyed buzzing sound.", "You hear an electronic buzzing sound.")
-					playsound(src.loc, 'sound/machines/buzz-two.ogg', 50, 0)
+					visible_message("[src] makes an annoyed buzzing sound.", "You hear an electronic buzzing sound.")
+					playsound(loc, 'sound/machines/buzz-two.ogg', 50, 0)
 					//world << "Bad turf."
-					mode = 5
+					mode = BOT_NAV
 					return
 			else
 				//world << "No path."
-				mode = 5
+				mode = BOT_NAV
 				return
 
-		if(5)		// calculate new path
+		if(BOT_NAV)	// calculate new path
 			//world << "Calc new path."
-			mode = 6
+			mode = BOT_WAIT_FOR_NAV
 			spawn(0)
 
 				calc_path()
 
 				if(path.len > 0)
 					blockcount = 0
-					mode = 4
-					src.visible_message("[src] makes a delighted ping!", "You hear a ping.")
-					playsound(src.loc, 'sound/machines/ping.ogg', 50, 0)
+					mode = BOT_BLOCKED
+					visible_message("[src] makes a delighted ping!", "You hear a ping.")
+					playsound(loc, 'sound/machines/ping.ogg', 50, 0)
 
 				else
-					src.visible_message("[src] makes a sighing buzz.", "You hear an electronic buzzing sound.")
-					playsound(src.loc, 'sound/machines/buzz-sigh.ogg', 50, 0)
+					visible_message("[src] makes a sighing buzz.", "You hear an electronic buzzing sound.")
+					playsound(loc, 'sound/machines/buzz-sigh.ogg', 50, 0)
 
-					mode = 7
+					mode = BOT_NO_ROUTE
 		//if(6)
 			//world << "Pending path calc."
 		//if(7)
 			//world << "No dest / no route."
+
 	return
 
 
 // calculates a path to the current destination
 // given an optional turf to avoid
-/obj/machinery/bot/mulebot/proc/calc_path(var/turf/avoid = null)
-	src.path = AStar(src.loc, src.target, /turf/proc/CardinalTurfsWithAccess, /turf/proc/Distance_cardinal, 0, 250, id=botcard, exclude=avoid)
-	if(!src.path)
-		src.path = list()
+/obj/machinery/bot/mulebot/calc_path(var/turf/avoid = null)
+	path = AStar(loc, target, /turf/proc/CardinalTurfsWithAccess, /turf/proc/Distance_cardinal, 0, 250, id=botcard, exclude=avoid)
+	if(!path)
+		path = list()
 
 
 // sets the current destination
 // signals all beacons matching the delivery code
 // beacons will return a signal giving their locations
-/obj/machinery/bot/mulebot/proc/set_destination(var/new_dest)
+/obj/machinery/bot/mulebot/set_destination(var/new_dest)
 	spawn(0)
 		new_destination = new_dest
 		post_signal(beacon_freq, "findbeacon", "delivery")
@@ -661,9 +666,9 @@ var/global/mulebot_count = 0
 // starts bot moving to current destination
 /obj/machinery/bot/mulebot/proc/start()
 	if(destination == home_destination)
-		mode = 3
+		mode = BOT_GO_HOME
 	else
-		mode = 2
+		mode = BOT_DELIVER
 	icon_state = "mulebot[(wires.MobAvoid() != 0)]"
 
 // starts bot moving to home
@@ -671,15 +676,23 @@ var/global/mulebot_count = 0
 /obj/machinery/bot/mulebot/proc/start_home()
 	spawn(0)
 		set_destination(home_destination)
-		mode = 4
+		mode = BOT_BLOCKED
 	icon_state = "mulebot[(wires.MobAvoid() != 0)]"
 
 // called when bot reaches current target
 /obj/machinery/bot/mulebot/proc/at_target()
 	if(!reached_target)
-		src.visible_message("[src] makes a chiming sound!", "You hear a chime.")
-		playsound(src.loc, 'sound/machines/chime.ogg', 50, 0)
+		visible_message("[src] makes a chiming sound!", "You hear a chime.")
+		playsound(loc, 'sound/machines/chime.ogg', 50, 0)
 		reached_target = 1
+
+		if(pathset) //The AI called us here, so tell it we arrived.
+			loaddir = dir //The MULE will attempt to load a crate in whatever direction the MULE is "facing".
+			if(calling_ai)
+				calling_ai << "[src] wirelessly plays a chiming sound!"
+				playsound(calling_ai, 'sound/machines/chime.ogg',40, 0)
+				calling_ai = null
+			bot_reset()
 
 		if(load)		// if loaded, unload at target
 			unload(loaddir)
@@ -701,9 +714,9 @@ var/global/mulebot_count = 0
 		if(auto_return && destination != home_destination)
 			// auto return set and not at home already
 			start_home()
-			mode = 4
+			mode = BOT_BLOCKED
 		else
-			mode = 0	// otherwise go idle
+			bot_reset()	// otherwise go idle
 
 	send_status()	// report status to anyone listening
 
@@ -715,13 +728,12 @@ var/global/mulebot_count = 0
 		var/mob/M = obs
 		if(ismob(M))
 			if(istype(M,/mob/living/silicon/robot))
-				src.visible_message("\red [src] bumps into [M]!")
+				visible_message("<span class='danger'>[src] bumps into [M]!</span>")
 			else
-				src.visible_message("\red [src] knocks over [M]!")
+				visible_message("<span class='danger'>[src] knocks over [M]!</span>")
 				M.stop_pulling()
 				M.Stun(8)
 				M.Weaken(5)
-				M.lying = 1
 	..()
 
 /obj/machinery/bot/mulebot/alter_health()
@@ -731,8 +743,8 @@ var/global/mulebot_count = 0
 // called from mob/living/carbon/human/Crossed()
 // when mulebot is in the same loc
 /obj/machinery/bot/mulebot/proc/RunOver(var/mob/living/carbon/human/H)
-	src.visible_message("\red [src] drives over [H]!")
-	playsound(src.loc, 'sound/effects/splat.ogg', 50, 1)
+	visible_message("<span class='danger'>[src] drives over [H]!</span>")
+	playsound(loc, 'sound/effects/splat.ogg', 50, 1)
 
 	var/damage = rand(5,15)
 	H.apply_damage(2*damage, BRUTE, "head")
@@ -742,7 +754,7 @@ var/global/mulebot_count = 0
 	H.apply_damage(0.5*damage, BRUTE, "l_arm")
 	H.apply_damage(0.5*damage, BRUTE, "r_arm")
 
-	var/obj/effect/decal/cleanable/blood/B = new(src.loc)
+	var/obj/effect/decal/cleanable/blood/B = new(loc)
 	B.blood_DNA = list()
 	B.blood_DNA[H.dna.unique_enzymes] = H.dna.blood_type
 
@@ -780,7 +792,7 @@ var/global/mulebot_count = 0
 		// process control input
 		switch(recv)
 			if("stop")
-				mode = 0
+				bot_reset()
 				return
 
 			if("go")
@@ -816,6 +828,7 @@ var/global/mulebot_count = 0
 
 	// receive response from beacon
 	recv = signal.data["beacon"]
+
 	if(wires.BeaconRX())
 		if(recv == new_destination)	// if the recvd beacon location matches the set destination
 									// the we will navigate there
@@ -830,12 +843,18 @@ var/global/mulebot_count = 0
 			calc_path()
 			updateDialog()
 
+	//Detects and stores current active delivery beacons.
+	if(signal.data["beacon"])
+		if(!delivery_beacons)
+			delivery_beacons = new()
+		delivery_beacons[signal.data["beacon"] ] = signal.source
+
 // send a radio signal with a single data key/value pair
-/obj/machinery/bot/mulebot/proc/post_signal(var/freq, var/key, var/value)
+/obj/machinery/bot/mulebot/post_signal(var/freq, var/key, var/value)
 	post_signal_multiple(freq, list("[key]" = value) )
 
 // send a radio signal with multiple data key/values
-/obj/machinery/bot/mulebot/proc/post_signal_multiple(var/freq, var/list/keyval)
+/obj/machinery/bot/mulebot/post_signal_multiple(var/freq, var/list/keyval)
 
 	if(freq == beacon_freq && !(wires.BeaconRX()))
 		return
@@ -857,17 +876,17 @@ var/global/mulebot_count = 0
 		//world << "sent [key],[keyval[key]] on [freq]"
 	if (signal.data["findbeacon"])
 		frequency.post_signal(src, signal, filter = RADIO_NAVBEACONS)
-	else if (signal.data["type"] == "mulebot")
+	else if (signal.data["type"] == MULE_BOT)
 		frequency.post_signal(src, signal, filter = RADIO_MULEBOT)
 	else
 		frequency.post_signal(src, signal)
 
 // signals bot status etc. to controller
-/obj/machinery/bot/mulebot/proc/send_status()
+/obj/machinery/bot/mulebot/send_status()
 	var/list/kv = list(
-		"type" = "mulebot",
+		"type" = MULE_BOT,
 		"name" = suffix,
-		"loca" = (loc ? loc.loc : "Unknown"),	// somehow loc can be null and cause a runtime - Quarxink
+		"loca" = get_area(src),
 		"mode" = mode,
 		"powr" = (cell ? cell.percent() : 0),
 		"dest" = destination,
@@ -887,7 +906,7 @@ var/global/mulebot_count = 0
 
 
 /obj/machinery/bot/mulebot/explode()
-	src.visible_message("\red <B>[src] blows apart!</B>", 1)
+	visible_message("\red <B>[src] blows apart!</B>", 1)
 	var/turf/Tsec = get_turf(src)
 
 	new /obj/item/device/assembly/prox_sensor(Tsec)
@@ -903,6 +922,6 @@ var/global/mulebot_count = 0
 	s.set_up(3, 1, src)
 	s.start()
 
-	new /obj/effect/decal/cleanable/oil(src.loc)
+	new /obj/effect/decal/cleanable/oil(loc)
 	unload(0)
 	qdel(src)
