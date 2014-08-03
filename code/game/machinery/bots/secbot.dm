@@ -51,7 +51,6 @@
 /obj/machinery/bot/secbot/New()
 	..()
 	icon_state = "secbot[on]"
-	set_custom_texts()
 	spawn(3)
 
 		var/datum/job/detective/J = new/datum/job/detective
@@ -78,7 +77,7 @@
 	walk_to(src,0)
 	last_found = world.time
 
-/obj/machinery/bot/secbot/proc/set_custom_texts()
+/obj/machinery/bot/secbot/set_custom_texts()
 
 	text_hack = "You overload [name]'s target identification system."
 	text_dehack = "You reboot [name] and restore the target identification."

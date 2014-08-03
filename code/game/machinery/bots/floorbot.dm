@@ -77,7 +77,7 @@
 	oldloc = null
 	floorbottargets = list()
 
-/obj/machinery/bot/floorbot/proc/set_custom_texts()
+/obj/machinery/bot/floorbot/set_custom_texts()
 	text_hack = "You corrupt [name]'s construction protocols."
 	text_dehack = "You detect errors in [name] and reset his programming."
 	text_dehack_fail = "[name] is not responding to reset commands!"

@@ -103,8 +103,9 @@
 	anchored = 0
 	walk_to(src,0)
 	last_found = world.time
+	projectile = null
 
-/obj/machinery/bot/ed209/proc/set_custom_texts()
+/obj/machinery/bot/ed209/set_custom_texts()
 	text_hack = "You disable [name]'s combat inhibitor."
 	text_dehack = "You restore [name]'s combat inhibitor."
 	text_dehack_fail = "[name] ignores your attempts to restrict him!"
@@ -535,9 +536,10 @@ Auto Patrol: []"},
 
 	//if(lastfired && world.time - lastfired < 100)
 	//	playsound(loc, 'ed209_shoot.ogg', 50, 0)
-	var/shoot_sound = 'sound/weapons/laser.ogg' //Pew Pew!
+	var/shoot_sound
 
 	if(!projectile)
+		shoot_sound = 'sound/weapons/laser.ogg' //Pew Pew!
 		if(!lasercolor)
 			if (emagged == 2)
 				projectile = /obj/item/projectile/beam
@@ -558,7 +560,7 @@ Auto Patrol: []"},
 	if (!( istype(U, /turf) ))
 		return
 	var/obj/item/projectile/A = new projectile (loc)
-	playsound(loc, shoot_sound, 50, 1)
+	playsound(loc, shoot_sound, 60, 1)
 	A.current = U
 	A.yo = U.y - T.y
 	A.xo = U.x - T.x

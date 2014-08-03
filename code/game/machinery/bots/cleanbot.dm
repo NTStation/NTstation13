@@ -46,7 +46,6 @@
 	..()
 	get_targets()
 	icon_state = "cleanbot[on]"
-	set_custom_texts()
 
 	var/datum/job/janitor/J = new/datum/job/janitor
 	botcard.access = J.get_access()
@@ -72,7 +71,7 @@
 	oldtarget = null
 	oldloc = null
 
-/obj/machinery/bot/cleanbot/proc/set_custom_texts()
+/obj/machinery/bot/cleanbot/set_custom_texts()
 	text_hack = "You corrupt [name]'s cleaning software."
 	text_dehack = "[name]'s software has been reset!"
 	text_dehack_fail = "[name] does not seem to respond to your repair code!"

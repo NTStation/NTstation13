@@ -94,6 +94,7 @@
 /obj/machinery/bot/New()
 	..()
 	botcard = new /obj/item/weapon/card/id(src)
+	set_custom_texts()
 
 /obj/machinery/bot/proc/add_to_beacons(bot_filter) //Master filter control for bots. Must be placed in the bot's local New() to support map spawned bots.
 	if(radio_controller)
@@ -186,12 +187,14 @@
 				remote_disabled = 0
 				locked = 1
 				usr << "<span class='warning'>[text_hack]</span>"
+				bot_reset()
 			else if(!hacked)
 				usr << "<span class='userdanger'>[text_dehack_fail]</span>"
 			else
 				emagged = 0
 				hacked = 0
 				usr << "<span class='notice'>[text_dehack]</span>"
+				bot_reset()
 	updateUsrDialog()
 
 
@@ -281,6 +284,11 @@
 	else if(!locked) //Humans with access can use this option to hide a bot from the AI's remote control panel.
 		hack += "AI remote control network port: <A href='?src=\ref[src];operation=remote'>[remote_disabled ? "Closed" : "Open"]</A><BR><BR>"
 	return hack
+
+/obj/machinery/bot/proc/set_custom_texts() //Superclass for setting hack texts. Appears only if a set is not given to a bot locally.
+	text_hack = "You hack [name]."
+	text_dehack = "You reset [name]."
+	text_dehack_fail = "You fail to reset [name]."
 
 /obj/machinery/bot/attack_ai(mob/user as mob)
 	src.attack_hand(user)

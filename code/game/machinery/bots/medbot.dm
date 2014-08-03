@@ -67,7 +67,6 @@
 /obj/machinery/bot/medbot/New()
 	..()
 	icon_state = "medibot[on]"
-	set_custom_texts()
 
 	spawn(4)
 		if(skin)
@@ -98,7 +97,7 @@
 	oldloc = null
 	last_found = world.time
 
-/obj/machinery/bot/medbot/proc/set_custom_texts()
+/obj/machinery/bot/medbot/set_custom_texts()
 
 	text_hack = "You corrupt [name]'s reagent processor circuits."
 	text_dehack = "You reset [name]'s reagent processor circuits."
