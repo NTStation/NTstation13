@@ -203,10 +203,10 @@
 	remove_overlay(HANDS_LAYER)
 	var/list/hands_overlays = list()
 	if(r_hand)
-		hands_overlays += r_hand.get_hand_icon("r", -HANDS_LAYER)
+		hands_overlays += r_hand.get_onmob_icon("hand_r", -HANDS_LAYER)
 
 	if(l_hand)
-		hands_overlays += l_hand.get_hand_icon("l", -HANDS_LAYER)
+		hands_overlays += l_hand.get_onmob_icon("hand_l", -HANDS_LAYER)
 
 	if(hands_overlays.len)
 		drone_overlays[HANDS_LAYER] = hands_overlays

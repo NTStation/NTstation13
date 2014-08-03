@@ -384,20 +384,44 @@
 				overlays -= blood_splatter_icon
 
 
-/obj/item/proc/get_hand_icon(var/hand, var/layer = 0)
-	var/t_state = item_state
-	if(!t_state)
-		t_state = icon_state
+var/list/onmob_icons = list(
+	"hand_r" = 'icons/mob/items_righthand.dmi',
+	"hand_l" = 'icons/mob/items_lefthand.dmi',
+	"back" = 'icons/mob/back.dmi',
+	"mask" = 'icons/mob/mask.dmi',
+	"suit" = 'icons/mob/suit.dmi',
+	"belt" = 'icons/mob/belt.dmi',
+	"head" = 'icons/mob/head.dmi',
+	"s_store" = 'icons/mob/belt_mirror.dmi',
+	"shoes" = 'icons/mob/feet.dmi',
+	"ears" = 'icons/mob/ears.dmi',
+	"eyes" = 'icons/mob/eyes.dmi',
+	"hands" = 'icons/mob/hands.dmi',
+	"uniform" = 'icons/mob/uniform.dmi')
 
-	var/icon = item_state_icon
-	if(icon)
-		t_state += "_hand_" + hand
-	else if(hand == "r")
-		icon = 'icons/mob/items_righthand.dmi'
-	else if(hand == "l")
-		icon = 'icons/mob/items_lefthand.dmi'
+/obj/item/proc/get_onmob_icon(var/icon_name, var/layer = 0)
+	var/icon = onmob_icons[icon_name]
+	var/t_state = icon_state
+	var/image/overlay
+
+	if((icon_name in list("hand_r", "hand_l", "belt", "s_store", "gloves")) && item_state)
+		t_state = item_state
+
+	if(icon_name == "uniform")
+		if(item_color)
+			t_state = item_color
+		t_state += "_s"
+
+	if(item_state_icon)
+		icon = item_state_icon
+		t_state += "_" + icon_name
 
 	if(layer)
-		return image(icon = icon, icon_state = t_state, layer = layer)
+		overlay = image(icon = icon, icon_state = t_state, layer = layer)
 	else
-		return image(icon = icon, icon_state = t_state)
+		overlay = image(icon = icon, icon_state = t_state)
+
+	overlay.color = color
+	overlay.alpha = alpha
+
+	return overlay
