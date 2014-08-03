@@ -385,8 +385,8 @@
 
 
 var/list/onmob_icons = list(
-	"hand_r" = 'icons/mob/items_righthand.dmi',
-	"hand_l" = 'icons/mob/items_lefthand.dmi',
+	"r_hand" = 'icons/mob/items_righthand.dmi',
+	"l_hand" = 'icons/mob/items_lefthand.dmi',
 	"back" = 'icons/mob/back.dmi',
 	"mask" = 'icons/mob/mask.dmi',
 	"suit" = 'icons/mob/suit.dmi',
@@ -404,13 +404,14 @@ var/list/onmob_icons = list(
 	var/t_state = icon_state
 	var/image/overlay
 
-	if((icon_name in list("hand_r", "hand_l", "belt", "s_store", "gloves")) && item_state)
+	if((icon_name in list("r_hand", "l_hand", "belt", "s_store", "gloves")) && item_state)
 		t_state = item_state
 
 	if(icon_name == "uniform")
 		if(item_color)
 			t_state = item_color
-		t_state += "_s"
+		if(!item_state_icon)
+			t_state += "_s"
 
 	if(item_state_icon)
 		icon = item_state_icon

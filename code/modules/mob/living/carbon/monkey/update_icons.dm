@@ -62,7 +62,7 @@
 			client.screen += r_hand
 
 		overlays -= overlays_standing[M_HANDS_LAYER]
-		M_overlays	+= r_hand.get_onmob_icon("hand_r", -M_HANDS_LAYER)
+		M_overlays	+= r_hand.get_onmob_icon("r_hand", -M_HANDS_LAYER)
 
 	if(l_hand)
 		l_hand.screen_loc = ui_lhand
@@ -70,7 +70,7 @@
 			client.screen += l_hand
 
 		overlays -= overlays_standing[M_HANDS_LAYER]
-		M_overlays	+= l_hand.get_onmob_icon("hand_l", -M_HANDS_LAYER)
+		M_overlays	+= l_hand.get_onmob_icon("l_hand", -M_HANDS_LAYER)
 
 	if(M_overlays.len)
 		overlays_standing[M_HANDS_LAYER] = M_overlays

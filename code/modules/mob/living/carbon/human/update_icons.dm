@@ -625,14 +625,14 @@ Please contact me on #coderbus IRC. ~Carnie x
 			l_hand.screen_loc = ui_lhand
 			client.screen += l_hand
 
-		H_hands_overlays += l_hand.get_onmob_icon("hand_l", -HANDS_LAYER)
+		H_hands_overlays += l_hand.get_onmob_icon("l_hand", -HANDS_LAYER)
 
 	if(r_hand)
 		if(client)
 			r_hand.screen_loc = ui_rhand
 			client.screen += r_hand
 
-		H_hands_overlays += r_hand.get_onmob_icon("hand_r", -HANDS_LAYER)
+		H_hands_overlays += r_hand.get_onmob_icon("r_hand", -HANDS_LAYER)
 
 	if(H_hands_overlays.len)
 		overlays_standing[HANDS_LAYER] = H_hands_overlays
