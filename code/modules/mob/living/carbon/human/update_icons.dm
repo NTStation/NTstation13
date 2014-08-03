@@ -341,14 +341,12 @@ Please contact me on #coderbus IRC. ~Carnie x
 
 		var/t_color = w_uniform.item_color
 		if(!t_color)		t_color = icon_state
-		var/image/standing	= image("icon"='icons/mob/uniform.dmi', "icon_state"="[t_color]_s", "layer"=-UNIFORM_LAYER)
-		standing.color = w_uniform.color
-		standing.alpha = w_uniform.alpha
 
+		var/image/standing	= U.get_onmob_icon("uniform", -UNIFORM_LAYER)
 		overlays_standing[UNIFORM_LAYER]	= standing
 
 		var/G = (gender == FEMALE) ? "f" : "m"
-		if(G == "f" && U.fitted == 1)
+		if(G == "f" && U.fitted == 1 && !U.item_state_icon)
 			var/index = "[t_color]_s"
 			var/icon/female_uniform_icon = female_uniform_icons[index]
 			if(!female_uniform_icon ) 	//Create standing/laying icons if they don't exist
@@ -397,12 +395,8 @@ Please contact me on #coderbus IRC. ~Carnie x
 				gloves.screen_loc = ui_gloves		//...draw the item in the inventory screen
 			client.screen += gloves					//Either way, add the item to the HUD
 
-		var/t_state = gloves.item_state
-		if(!t_state)	t_state = gloves.icon_state
-		var/image/standing	= image("icon"='icons/mob/hands.dmi', "icon_state"="[t_state]", "layer"=-GLOVES_LAYER)
-		standing.color = gloves.color
-		standing.alpha = gloves.alpha
 
+		var/image/standing = gloves.get_onmob_icon("hands", -GLOVES_LAYER)
 		overlays_standing[GLOVES_LAYER]	= standing
 
 		if(gloves.blood_DNA)
@@ -424,7 +418,7 @@ Please contact me on #coderbus IRC. ~Carnie x
 				glasses.screen_loc = ui_glasses		//...draw the item in the inventory screen
 			client.screen += glasses				//Either way, add the item to the HUD
 
-		overlays_standing[GLASSES_LAYER]	= image("icon"='icons/mob/eyes.dmi', "icon_state"="[glasses.icon_state]", "layer"=-GLASSES_LAYER)
+		overlays_standing[GLASSES_LAYER]	= glasses.get_onmob_icon("eyes", -GLASSES_LAYER)
 
 	apply_overlay(GLASSES_LAYER)
 
@@ -438,7 +432,7 @@ Please contact me on #coderbus IRC. ~Carnie x
 				ears.screen_loc = ui_ears			//...draw the item in the inventory screen
 			client.screen += ears					//Either way, add the item to the HUD
 
-		overlays_standing[EARS_LAYER] = image("icon"='icons/mob/ears.dmi', "icon_state"="[ears.icon_state]", "layer"=-EARS_LAYER)
+		overlays_standing[EARS_LAYER] = ears.get_onmob_icon("ears", -EARS_LAYER)
 
 	apply_overlay(EARS_LAYER)
 
@@ -452,11 +446,8 @@ Please contact me on #coderbus IRC. ~Carnie x
 				shoes.screen_loc = ui_shoes			//...draw the item in the inventory screen
 			client.screen += shoes					//Either way, add the item to the HUD
 
-		var/image/standing	= image("icon"='icons/mob/feet.dmi', "icon_state"="[shoes.icon_state]", "layer"=-SHOES_LAYER)
-		standing.color = shoes.color
-		standing.alpha = shoes.alpha
-
-		overlays_standing[SHOES_LAYER]	= standing
+		var/image/standing = shoes.get_onmob_icon("shoes", -SHOES_LAYER)
+		overlays_standing[SHOES_LAYER] = standing
 
 		if(shoes.blood_DNA)
 			standing.overlays	+= image("icon"='icons/effects/blood.dmi', "icon_state"="shoeblood")
@@ -472,9 +463,7 @@ Please contact me on #coderbus IRC. ~Carnie x
 			s_store.screen_loc = ui_sstore1		//TODO
 			client.screen += s_store
 
-		var/t_state = s_store.item_state
-		if(!t_state)	t_state = s_store.icon_state
-		overlays_standing[SUIT_STORE_LAYER]	= image("icon"='icons/mob/belt_mirror.dmi', "icon_state"="[t_state]", "layer"=-SUIT_STORE_LAYER)
+		overlays_standing[SUIT_STORE_LAYER]	= s_store.get_onmob_icon("s_store", -SUIT_STORE_LAYER)
 
 	apply_overlay(SUIT_STORE_LAYER)
 
@@ -489,11 +478,8 @@ Please contact me on #coderbus IRC. ~Carnie x
 				head.screen_loc = ui_head		//TODO	//...draw the item in the inventory screen
 			client.screen += head						//Either way, add the item to the HUD
 
-		var/image/standing = image("icon"='icons/mob/head.dmi', "icon_state"="[head.icon_state]", "layer"=-HEAD_LAYER)
-		standing.color = head.color
-		standing.alpha = head.alpha
-
-		overlays_standing[HEAD_LAYER]	= standing
+		var/image/standing = head.get_onmob_icon("head", -HEAD_LAYER)
+		overlays_standing[HEAD_LAYER] = standing
 
 		if(head.blood_DNA)
 			standing.overlays	+= image("icon"='icons/effects/blood.dmi', "icon_state"="helmetblood")
@@ -509,9 +495,7 @@ Please contact me on #coderbus IRC. ~Carnie x
 			belt.screen_loc = ui_belt
 			client.screen += belt
 
-		var/t_state = belt.item_state
-		if(!t_state)	t_state = belt.icon_state
-		overlays_standing[BELT_LAYER]	= image("icon"='icons/mob/belt.dmi', "icon_state"="[t_state]", "layer"=-BELT_LAYER)
+		overlays_standing[BELT_LAYER]	= belt.get_onmob_icon("belt", -BELT_LAYER)
 
 	apply_overlay(BELT_LAYER)
 
@@ -526,11 +510,8 @@ Please contact me on #coderbus IRC. ~Carnie x
 				wear_suit.screen_loc = ui_oclothing	//TODO	//...draw the item in the inventory screen
 			client.screen += wear_suit						//Either way, add the item to the HUD
 
-		var/image/standing	= image("icon"='icons/mob/suit.dmi', "icon_state"="[wear_suit.icon_state]", "layer"=-SUIT_LAYER)
-		standing.color = wear_suit.color
-		standing.alpha = wear_suit.alpha
-
-		overlays_standing[SUIT_LAYER]	= standing
+		var/image/standing = wear_suit.get_onmob_icon("suit", -SUIT_LAYER)
+		overlays_standing[SUIT_LAYER] = standing
 
 		if(istype(wear_suit, /obj/item/clothing/suit/straight_jacket))
 			unEquip(handcuffed)
@@ -565,11 +546,8 @@ Please contact me on #coderbus IRC. ~Carnie x
 				wear_mask.screen_loc = ui_mask	//TODO	//...draw the item in the inventory screen
 			client.screen += wear_mask					//Either way, add the item to the HUD
 
-		var/image/standing	= image("icon"='icons/mob/mask.dmi', "icon_state"="[wear_mask.icon_state]", "layer"=-FACEMASK_LAYER)
-		standing.color = wear_mask.color
-		standing.alpha = wear_mask.alpha
-
-		overlays_standing[FACEMASK_LAYER]	= standing
+		var/image/standing = wear_mask.get_onmob_icon("mask", -FACEMASK_LAYER)
+		overlays_standing[FACEMASK_LAYER] = standing
 
 		if(wear_mask.blood_DNA && !istype(wear_mask, /obj/item/clothing/mask/cigarette))
 			standing.overlays	+= image("icon"='icons/effects/blood.dmi', "icon_state"="maskblood")
@@ -587,11 +565,7 @@ Please contact me on #coderbus IRC. ~Carnie x
 			back.screen_loc = ui_back	//TODO
 			client.screen += back
 
-		var/image/standing	= image("icon"='icons/mob/back.dmi', "icon_state"="[back.icon_state]", "layer"=-BACK_LAYER)
-		standing.color = back.color
-		standing.alpha = back.alpha
-
-		overlays_standing[BACK_LAYER]	= standing
+		overlays_standing[BACK_LAYER]	= back.get_onmob_icon("back", -BACK_LAYER)
 
 	apply_overlay(BACK_LAYER)
 
@@ -651,19 +625,14 @@ Please contact me on #coderbus IRC. ~Carnie x
 			l_hand.screen_loc = ui_lhand
 			client.screen += l_hand
 
-		var/t_state = l_hand.item_state
-		if(!t_state)	t_state = l_hand.icon_state
+		H_hands_overlays += l_hand.get_onmob_icon("l_hand", -HANDS_LAYER)
 
-		H_hands_overlays += image("icon"='icons/mob/items_lefthand.dmi', "icon_state"="[t_state]", "layer"=-HANDS_LAYER)
 	if(r_hand)
 		if(client)
 			r_hand.screen_loc = ui_rhand
 			client.screen += r_hand
 
-		var/t_state = r_hand.item_state
-		if(!t_state)	t_state = r_hand.icon_state
-
-		H_hands_overlays += image("icon"='icons/mob/items_righthand.dmi', "icon_state"="[t_state]", "layer"=-HANDS_LAYER)
+		H_hands_overlays += r_hand.get_onmob_icon("r_hand", -HANDS_LAYER)
 
 	if(H_hands_overlays.len)
 		overlays_standing[HANDS_LAYER] = H_hands_overlays
