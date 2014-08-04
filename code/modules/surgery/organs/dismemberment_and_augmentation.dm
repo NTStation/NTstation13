@@ -9,6 +9,10 @@
 /obj/item/organ/limb/proc/dismember(var/obj/item/I, var/removal_type, var/overide)
 	var/obj/item/organ/limb/affecting = src
 
+	if(istype(src, /obj/item/organ/limb/head))
+		return
+
+
 	if(affecting.state == ORGAN_REMOVED)
 		return
 
@@ -54,6 +58,7 @@
 			affecting.burnstate = 0
 
 			owner.visible_message("<span class='danger'><B>[owner]'s [affecting.getDisplayName()] has been violently dismembered!</B></span>")
+			affecting.name = "[owner.name]'s [affecting.getDisplayName()]" //this is below the line above for a reason, guess
 
 			owner.drop_r_hand() //Removes any items they may be carrying in their now non existant arms
 			owner.drop_l_hand() //Handled here due to the "shock" of losing any limb
