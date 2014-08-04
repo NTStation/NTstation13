@@ -146,6 +146,7 @@
 	icon_state = "sord"
 	item_state = "sord"
 	slot_flags = SLOT_BELT
+	flags = SHARP
 	force = 2
 	throwforce = 1
 	w_class = 3
@@ -162,7 +163,7 @@
 	icon_state = "claymore"
 	item_state = "claymore"
 	hitsound = 'sound/weapons/bladeslice.ogg'
-	flags = CONDUCT
+	flags = CONDUCT | SHARP
 	slot_flags = SLOT_BELT
 	force = 40
 	throwforce = 10
@@ -181,7 +182,7 @@
 	desc = "Woefully underpowered in D20"
 	icon_state = "katana"
 	item_state = "katana"
-	flags = CONDUCT
+	flags = CONDUCT | SHARP
 	slot_flags = SLOT_BELT | SLOT_BACK
 	force = 40
 	throwforce = 10
@@ -195,6 +196,11 @@
 
 /obj/item/weapon/katana/IsShield()
 		return 1
+
+/obj/item/weapon/katana/dism
+	name = "Flesh Renderer"
+	force = 100
+	desc = "Render the flesh from your enemies bones!"
 
 obj/item/weapon/wirerod
 	name = "wired rod"

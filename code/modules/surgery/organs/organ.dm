@@ -1,6 +1,8 @@
 /obj/item/organ
 	name = "organ"
 	icon = 'icons/obj/surgery.dmi'
+	var/status = ORGAN_ORGANIC
+	var/state = ORGAN_FINE
 
 
 
@@ -37,16 +39,15 @@
 
 /obj/item/organ/limb
 	name = "limb"
-	var/mob/owner = null
+	origin_tech = "biotech=3"
+	var/mob/living/carbon/human/owner = null
 	var/body_part = null
 	var/brutestate = 0
 	var/burnstate = 0
 	var/brute_dam = 0
 	var/burn_dam = 0
 	var/max_damage = 0
-	var/status = ORGAN_ORGANIC
-
-
+	var/dam_icon = ""
 
 /obj/item/organ/limb/chest
 	name = "chest"
@@ -54,7 +55,7 @@
 	icon_state = "chest"
 	max_damage = 200
 	body_part = CHEST
-
+	dam_icon = "chest"
 
 /obj/item/organ/limb/head
 	name = "head"
@@ -62,7 +63,7 @@
 	icon_state = "head"
 	max_damage = 200
 	body_part = HEAD
-
+	dam_icon = "head"
 
 /obj/item/organ/limb/l_arm
 	name = "l_arm"
@@ -70,6 +71,7 @@
 	icon_state = "l_arm"
 	max_damage = 75
 	body_part = ARM_LEFT
+	dam_icon = "l_arm"
 
 
 /obj/item/organ/limb/l_leg
@@ -78,6 +80,7 @@
 	icon_state = "l_leg"
 	max_damage = 75
 	body_part = LEG_LEFT
+	dam_icon = "l_leg"
 
 
 /obj/item/organ/limb/r_arm
@@ -86,6 +89,7 @@
 	icon_state = "r_arm"
 	max_damage = 75
 	body_part = ARM_RIGHT
+	dam_icon = "r_arm"
 
 
 /obj/item/organ/limb/r_leg
@@ -94,6 +98,7 @@
 	icon_state = "r_leg"
 	max_damage = 75
 	body_part = LEG_RIGHT
+	dam_icon = "r_leg"
 
 
 
@@ -101,6 +106,9 @@
 //Damage will not exceed max_damage using this proc
 //Cannot apply negative damage
 /obj/item/organ/limb/proc/take_damage(brute, burn)
+	if(state == ORGAN_REMOVED)
+		return
+
 	if(owner && (owner.status_flags & GODMODE))	return 0	//godmode
 	brute	= max(brute,0)
 	burn	= max(burn,0)
@@ -137,6 +145,8 @@
 //Damage cannot go below zero.
 //Cannot remove negative damage (i.e. apply damage)
 /obj/item/organ/limb/proc/heal_damage(brute, burn, var/robotic)
+	if(state == ORGAN_REMOVED)
+		return
 
 	if(robotic && status != ORGAN_ROBOTIC) // This makes organic limbs not heal when the proc is in Robotic mode.
 		brute = max(0, brute - 3)
@@ -153,6 +163,9 @@
 
 /obj/item/proc/item_heal_robotic(var/mob/living/carbon/human/H, var/mob/user, var/brute, var/burn)
 	var/obj/item/organ/limb/affecting = H.get_organ(check_zone(user.zone_sel.selecting))
+
+	if(affecting.state == ORGAN_REMOVED)
+		return
 
 	var/dam //changes repair text based on how much brute/burn was supplied
 
@@ -198,7 +211,7 @@
 //Updates an organ's brute/burn states for use by update_damage_overlays()
 //Returns 1 if we need to update overlays. 0 otherwise.
 /obj/item/organ/limb/proc/update_organ_icon()
-	if(status == ORGAN_ORGANIC) //Robotic limbs show no damage - RR
+	if(status == ORGAN_ORGANIC) //Robotic limbs show no damage
 		var/tbrute	= round( (brute_dam/max_damage)*3, 1 )
 		var/tburn	= round( (burn_dam/max_damage)*3, 1 )
 		if((tbrute != brutestate) || (tburn != burnstate))
@@ -208,7 +221,7 @@
 		return 0
 
 //Returns a display name for the organ
-/obj/item/organ/limb/proc/getDisplayName() //Added "Chest" and "Head" just in case, this may not be needed - RR.
+/obj/item/organ/limb/proc/getDisplayName()
 	switch(name)
 		if("l_leg")		return "left leg"
 		if("r_leg")		return "right leg"
@@ -219,3 +232,13 @@
 		else			return name
 
 
+
+
+
+/obj/item/organ/limb/head/attackby(var/obj/item/I,var/mob/M)
+	if(istype(I, /obj/item/weapon/circular_saw))
+		var/obj/item/organ/brain/B = locate(/obj/item/organ/brain) in contents
+		if(B)
+			B.loc = get_turf(src)
+			contents -= B
+			M << "<span class='notice'>You saw open [src] and remove their brain</span>"

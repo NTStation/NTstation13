@@ -7,6 +7,12 @@
 #define CLONE		"clone"
 #define STAMINA 	"stamina"
 
+//Dismemberment
+#define SHARP					16
+#define MELEE_DISMEMBERMENT 	32
+#define GUN_DISMEMBERMENT		64
+#define EXPLOSION_DISMEMBERMENT 128
+
 #define STUN		"stun"
 #define WEAKEN		"weaken"
 #define PARALYZE	"paralize"
@@ -45,4 +51,3 @@
 #define HOSTILE_STANCE_ATTACK		3
 #define HOSTILE_STANCE_ATTACKING	4
 //#define HOSTILE_STANCE_TIRED		5 //Was also only used by bears
-

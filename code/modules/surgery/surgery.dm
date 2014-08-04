@@ -57,10 +57,6 @@ proc/steps2text(var/datum/surgery_step/Step)
 			txt = "You should shape the patient's genitals"
 		if(/datum/surgery_step/extract_implant)
 			txt = "You should remove any implants in the patient"
-		if(/datum/surgery_step/replace)
-			txt = "You should sever the muscles on the target area"
-		if(/datum/surgery_step/add_limb)
-			txt = "You should add the patient's new body part"
 		if(/datum/surgery_step/reshape_face)
 			txt = "You should reshape the patient's face"
 		if(/datum/surgery_step/xenomorph_removal)

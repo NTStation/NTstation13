@@ -54,10 +54,12 @@ obj/item/proc/get_clamped_volume()
 	if(!istype(M))	//not sure if this is the right thing...
 		return
 
-	if(hitsound)
-		playsound(loc, hitsound, get_clamped_volume(), 1, -1)
-	else
-		playsound(loc, 'sound/weapons/tap.ogg', get_clamped_volume(), 1, -1)
+	//Hitsounds moved to attackby for humans due to Dismemberment causing "misses"
+	if(!ishuman(M))
+		if(hitsound)
+			playsound(loc, hitsound, get_clamped_volume(), 1, -1)
+		else
+			playsound(loc, 'sound/weapons/tap.ogg', get_clamped_volume(), 1, -1)
 
 	user.lastattacked = M
 	M.lastattacker = user

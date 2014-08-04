@@ -54,6 +54,10 @@
 #define ORGAN_ORGANIC   1
 #define ORGAN_ROBOTIC   2
 
+//Organ states
+#define ORGAN_FINE		1
+#define ORGAN_REMOVED	2
+
 
 
 /* //OLD MUTATION BITFLAGS

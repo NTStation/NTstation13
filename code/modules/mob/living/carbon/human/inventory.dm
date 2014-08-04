@@ -1,11 +1,19 @@
 /mob/living/carbon/human/can_equip(obj/item/I, slot, disable_warning = 0)
+
+	var/obj/item/organ/limb/l_arm/L_arm = get_organ("l_arm")
+	var/obj/item/organ/limb/r_arm/R_arm = get_organ("r_arm")
+
 	switch(slot)
 		if(slot_l_hand)
 			if(l_hand)
 				return 0
+			if(L_arm.state == ORGAN_REMOVED)
+				return 0
 			return 1
 		if(slot_r_hand)
 			if(r_hand)
+				return 0
+			if(R_arm.state == ORGAN_REMOVED)
 				return 0
 			return 1
 		if(slot_wear_mask)
@@ -19,11 +27,15 @@
 				return 0
 			if( !(I.slot_flags & SLOT_BACK) )
 				return 0
+			if(get_num_limbs_of_state(ARM_RIGHT,ORGAN_REMOVED) >= 2 && get_num_limbs_of_state(LEG_RIGHT,ORGAN_REMOVED) >= 2)
+				return 0
 			return 1
 		if(slot_wear_suit)
 			if(wear_suit)
 				return 0
 			if( !(I.slot_flags & SLOT_OCLOTHING) )
+				return 0
+			if(get_num_limbs_of_state(ARM_RIGHT,ORGAN_REMOVED) >= 2 && get_num_limbs_of_state(LEG_RIGHT,ORGAN_REMOVED) >= 2)
 				return 0
 			return 1
 		if(slot_gloves)
@@ -31,11 +43,15 @@
 				return 0
 			if( !(I.slot_flags & SLOT_GLOVES) )
 				return 0
+			if(get_num_limbs_of_state(ARM_RIGHT,ORGAN_REMOVED) >= 1)
+				return 0
 			return 1
 		if(slot_shoes)
 			if(shoes)
 				return 0
 			if( !(I.slot_flags & SLOT_FEET) )
+				return 0
+			if(get_num_limbs_of_state(LEG_RIGHT,ORGAN_REMOVED) >= 1)
 				return 0
 			return 1
 		if(slot_belt)
@@ -70,6 +86,8 @@
 			if(w_uniform)
 				return 0
 			if( !(I.slot_flags & SLOT_ICLOTHING) )
+				return 0
+			if(get_num_limbs_of_state(ARM_RIGHT,ORGAN_REMOVED) >= 2 && get_num_limbs_of_state(LEG_RIGHT,ORGAN_REMOVED) >= 2)
 				return 0
 			return 1
 		if(slot_wear_id)
@@ -134,14 +152,20 @@
 				return 0
 			if(!istype(I, /obj/item/weapon/handcuffs))
 				return 0
+			if(get_num_limbs_of_state(ARM_RIGHT,ORGAN_REMOVED) >= 1)
+				return 0
 			return 1
 		if(slot_legcuffed)
 			if(legcuffed)
 				return 0
 			if(!istype(I, /obj/item/weapon/legcuffs))
 				return 0
+			if(get_num_limbs_of_state(LEG_RIGHT,ORGAN_REMOVED) >= 1)
+				return 0
 			return 1
 		if(slot_in_backpack)
+			if(get_num_limbs_of_state(ARM_RIGHT,ORGAN_REMOVED) >= 2)
+				return 0
 			if (back && istype(back, /obj/item/weapon/storage/backpack))
 				var/obj/item/weapon/storage/backpack/B = back
 				if(B.contents.len < B.storage_slots && I.w_class <= B.max_w_class)

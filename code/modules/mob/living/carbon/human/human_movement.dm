@@ -26,6 +26,10 @@
 	if(back)
 		. += back.slowdown
 
+	//Leg based movement delays
+	if(get_num_limbs_of_state(LEG_RIGHT,ORGAN_REMOVED) >= 1)
+		. += 1//1 leg missing, +1 delay
+
 	if(has_organic_effect(/datum/organic_effect/fat))
 		. += 1.5
 	if(bodytemperature < 283.222)
@@ -33,6 +37,14 @@
 
 	. += ..()
 	. += config.human_delay
+
+/mob/living/carbon/human/update_canmove()
+	..()
+
+	if(!get_num_limbs_of_state(LEG_RIGHT,ORGAN_FINE))
+		canmove = 0
+
+	return canmove
 
 /mob/living/carbon/human/Process_Spacemove(var/check_drift = 0)
 	//Can we act

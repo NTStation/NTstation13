@@ -57,10 +57,20 @@ emp_act
 
 			return -1 // complete projectile permutation
 
+	var/obj/item/organ/limb/affecting = get_organ(check_zone(def_zone))
+
 	if(check_shields(P.damage, "the [P.name]"))
-		P.on_hit(src, 100, def_zone)
-		return 2
-	return (..(P , def_zone, 1))
+		if(affecting.state != ORGAN_REMOVED)
+			affecting.dismember(null, GUN_DISMEMBERMENT, 0)
+			P.on_hit(src, 100, def_zone)
+			return 2
+		else
+			return
+	if(affecting.state != ORGAN_REMOVED)
+		affecting.dismember(null, GUN_DISMEMBERMENT, 0)
+		return (..(P , def_zone, 1))
+	else
+		return
 
 /mob/living/carbon/human/proc/check_reflect(var/def_zone) //Reflection checks for anything in your l_hand, r_hand, or wear_suit based on reflect_chance var of the object
 	if(wear_suit && istype(wear_suit, /obj/item/))
@@ -120,6 +130,15 @@ emp_act
 
 	var/obj/item/organ/limb/affecting = get_organ(ran_zone(user.zone_sel.selecting))
 
+	if(affecting.state == ORGAN_REMOVED)
+		if(istype(I, /obj/item/augment))
+			var/obj/item/organ/limb/affecting_accurate = get_organ(check_zone(user.zone_sel.selecting)) //so augmenting doesn't "miss"
+			var/obj/item/augment/AUG = I
+			augmentation(affecting_accurate,user, AUG)
+
+		return 0//No limb/Augmentation time
+
+
 	var/hit_area = parse_zone(affecting.name)
 
 	if((user != src) && check_shields(I.force, "the [I.name]"))
@@ -138,10 +157,19 @@ emp_act
 	if(armor >= 100)	return 0
 	var/Iforce = I.force //to avoid runtimes on the forcesay checks at the bottom. Some items might delete themselves if you drop them. (stunning yourself, ninja swords)
 
-	apply_damage(I.force, I.damtype, affecting, armor , I)
+	if(affecting && affecting.status != ORGAN_REMOVED && I) //for self deleting items and dismemberment interaction
+		apply_damage(I.force, I.damtype, affecting, armor , I)
+
+		if(I.hitsound)
+			playsound(loc, I.hitsound, I.get_clamped_volume(), 1, -1)
+		else
+			playsound(loc, 'sound/weapons/tap.ogg', I.get_clamped_volume(), 1, -1)
+
+	if(I && I.flags & SHARP)
+		affecting.dismember(I, MELEE_DISMEMBERMENT, 0)
 
 	var/bloody = 0
-	if(I.damtype == BRUTE && prob(25 + (I.force * 2)))
+	if(I && I.damtype == BRUTE && prob(25 + (I.force * 2)))
 		if(affecting.status == ORGAN_ORGANIC)
 			I.add_blood(src)		//Make the weapon bloody, not the person.
 			I.add_fibers(src)		//Add our victim fibers to the weapon.

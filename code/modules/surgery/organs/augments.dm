@@ -2,50 +2,76 @@
 //See code/modules/surgery/organs/organ.dm for the parent "limb"
 
 
-/obj/item/organ/limb/robot
+/obj/item/augment
 	name = "cyberlimb"
 	desc = "You should never be seeing this!"
-	status = ORGAN_ROBOTIC
+	icon = 'icons/obj/surgery.dmi'
+	origin_tech = "programming=2;biotech=3"
+	var/limb_part = null
+	var/list/construction_cost = list("metal"=250)
+	var/construction_time = 75
 
-/obj/item/organ/limb/robot/chest
-	name = "chest"
+/obj/item/augment/chest
+	name = "robotic chest"
 	desc = "A Robotic chest"
-	icon_state = "chest"
-	max_damage = 200
-	body_part = CHEST
+	icon_state = "chest_m_s"
+	limb_part = CHEST
+	construction_cost = list("metal"=350)
 
-/obj/item/organ/limb/robot/head
-	name = "head"
+/obj/item/augment/head
+	name = "robotic head"
 	desc = "A Robotic head"
-	icon_state = "head"
-	max_damage = 200
-	body_part = HEAD
+	icon_state = "head_m_s"
+	limb_part = HEAD
+	construction_cost = list("metal"=350)
+	var/obj/item/organ/brain/brain
 
-/obj/item/organ/limb/robot/l_arm
-	name = "l_arm"
+/obj/item/augment/l_arm
+	name = "robotic left arm"
 	desc = "A Robotic arm"
-	icon_state = "l_arm"
-	max_damage = 75
-	body_part = ARM_LEFT
+	icon_state = "l_arm_s"
+	limb_part = ARM_LEFT
 
-/obj/item/organ/limb/robot/l_leg
-	name = "l_leg"
+/obj/item/augment/l_leg
+	name = "robotic left leg"
 	desc = "A Robotic leg"
-	icon_state = "l_leg"
-	max_damage = 75
-	body_part = LEG_LEFT
+	icon_state = "l_leg_s"
+	limb_part = LEG_LEFT
 
-/obj/item/organ/limb/robot/r_arm
-	name = "r_arm"
+/obj/item/augment/r_arm
+	name = "robotic right arm"
 	desc = "A Robotic arm"
-	icon_state = "r_arm"
-	max_damage = 75
-	body_part = ARM_RIGHT
+	icon_state = "r_arm_s"
+	limb_part = ARM_RIGHT
 
-/obj/item/organ/limb/robot/r_leg
-	name = "r_leg"
+/obj/item/augment/r_leg
+	name = "robotic right leg"
 	desc = "A Robotic leg"
-	icon_state = "r_leg"
-	max_damage = 75
-	body_part = LEG_RIGHT
+	icon_state = "r_leg_s"
+	limb_part = LEG_RIGHT
 
+
+/obj/item/augment/head/attackby(var/obj/item/I,var/mob/M)
+	if(istype(I,/obj/item/organ/brain))
+		var/obj/item/organ/brain/B = I
+
+		if(!B.brainmob || !B.brainmob.mind)
+			M << "<span class='warning'>This brain is unresponsive.</span>"
+			return
+
+		M.unEquip(B)
+		B.loc = src
+		brain = B
+		M << "<span class='notice'>You insert the brain into [src].</span>"
+
+
+	if(istype(I, /obj/item/weapon/crowbar))
+
+		if(!brain)
+			return
+
+		brain.loc = get_turf(src)
+		contents -= brain
+		brain = null
+
+		M << "<span class='notice'>You pop the brain out of the [src].</span>"
