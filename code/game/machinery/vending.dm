@@ -543,7 +543,7 @@
 /obj/machinery/vending/assist
 	products = list(	/obj/item/device/assembly/prox_sensor = 5,/obj/item/device/assembly/igniter = 3,/obj/item/device/assembly/signaler = 4,
 						/obj/item/weapon/wirecutters = 1, /obj/item/weapon/cartridge/signal = 4)
-	contraband = list(/obj/item/device/flashlight = 5,/obj/item/device/assembly/timer = 2, /obj/item/device/assembly/voice = 2)
+	contraband = list(/obj/item/device/flashlight = 5,/obj/item/device/assembly/timer = 2, /obj/item/device/assembly/health = 2, /obj/item/device/assembly/voice = 2)
 	product_ads = "Only the finest!;Have some tools.;The most robust equipment.;The finest gear in space!"
 
 /obj/machinery/vending/coffee
@@ -648,7 +648,7 @@
 	icon_state = "cigs"
 	products = list(/obj/item/weapon/storage/fancy/cigarettes = 10,/obj/item/weapon/storage/box/matches = 10,/obj/item/weapon/lighter/random = 4,/obj/item/weapon/rollingpaperpack = 5)
 	contraband = list(/obj/item/weapon/lighter/zippo = 4)
-	premium = list(/obj/item/clothing/mask/cigarette/cigar/havana = 2)
+	premium = list(/obj/item/clothing/mask/cigarette/cigar/havana = 2,/obj/item/weapon/storage/fancy/cigarcase = 2)
 	refill_canister = /obj/item/weapon/vending_refill/cigarette
 
 
@@ -682,7 +682,7 @@
 	desc = "All the fine parts you need in one vending machine!"
 	products = list(/obj/item/clothing/under/rank/scientist = 6,/obj/item/clothing/suit/bio_suit = 6,/obj/item/clothing/head/bio_hood = 6,
 					/obj/item/device/transfer_valve = 6,/obj/item/device/assembly/timer = 6,/obj/item/device/assembly/signaler = 6,
-					/obj/item/device/assembly/prox_sensor = 6,/obj/item/device/assembly/igniter = 6)
+					/obj/item/device/assembly/prox_sensor = 6,/obj/item/device/assembly/igniter = 6, /obj/item/device/assembly/health = 2)
 
 /obj/machinery/vending/wallmed1
 	name = "\improper NanoMed"
@@ -798,6 +798,36 @@
 	component_parts += new /obj/item/weapon/vending_refill/autodrobe(0)
 	component_parts += new /obj/item/weapon/vending_refill/autodrobe(0)
 	component_parts += new /obj/item/weapon/vending_refill/autodrobe(0)
+
+
+/obj/machinery/vending/clothing
+	name = "Clothe-O-Mat"
+	desc = "A vending machine for clothing."
+	icon_state = "clothes"
+	product_slogans = "Dress for success!;Prepare to look swagalicious!;Look at all this free swag!;Why leave style up to fate? Use the Clothe-O-Mat!"
+	vend_delay = 15
+	vend_reply = "Thank you for using the Clothe-O-Mat!"
+	products = list(/obj/item/clothing/mask/fakemoustache = 3,/obj/item/clothing/head/collectable/tophat = 3,/obj/item/clothing/glasses/monocle = 2,
+					/obj/item/clothing/under/suit_jacket/navy = 3,/obj/item/clothing/under/kilt = 1,/obj/item/clothing/under/overalls = 3,
+					/obj/item/clothing/under/suit_jacket/really_black = 3,/obj/item/clothing/under/jeans = 5,/obj/item/clothing/under/camo = 2,
+					/obj/item/clothing/tie/waistcoat = 3,/obj/item/clothing/under/sundress = 4,/obj/item/clothing/under/blacktango = 2,
+					/obj/item/clothing/head/maidbow = 1,/obj/item/clothing/under/janimaid = 1,/obj/item/clothing/suit/labcoat/coat/jacket/varsity = 3,/obj/item/clothing/suit/labcoat/coat/jacket = 5,
+					/obj/item/clothing/glasses/regular = 3,/obj/item/clothing/head/sombrero = 2,/obj/item/clothing/suit/poncho = 2,
+					/obj/item/clothing/shoes/laceup = 3,/obj/item/clothing/shoes/sneakers/black = 6, /obj/item/clothing/shoes/sandal = 2)
+	contraband = list(/obj/item/clothing/under/syndicate/tacticool = 1,/obj/item/clothing/mask/fawkes = 1,/obj/item/clothing/mask/balaclava = 1,/obj/item/clothing/head/ushanka = 1,/obj/item/clothing/under/soviet = 1,/obj/item/clothing/suit/cardborg = 1, /obj/item/clothing/head/cardborg = 1,/obj/item/clothing/glasses/hypno = 1)
+	premium = list(/obj/item/clothing/under/suit_jacket/checkered = 1,/obj/item/clothing/head/mailman = 1,/obj/item/clothing/under/rank/mailman = 1,/obj/item/clothing/suit/labcoat/coat/jacket/leather = 1,/obj/item/clothing/suit/ianshirt = 1,/obj/item/clothing/glasses/sunglasses = 3, /obj/item/clothing/glasses/threed = 2, /obj/item/clothing/head/collectable/paper = 1, /obj/item/clothing/head/fedora = 2)
+	refill_canister = /obj/item/weapon/vending_refill/clothing
+
+/obj/machinery/vending/clothing/New()
+	..()
+	component_parts = list()
+	var/obj/item/weapon/circuitboard/vendor/V = new(null)
+	V.set_type(type)
+	component_parts += V
+	component_parts += new /obj/item/weapon/vending_refill/clothing(0)
+	component_parts += new /obj/item/weapon/vending_refill/clothing(0)
+	component_parts += new /obj/item/weapon/vending_refill/clothing(0)
+
 
 /obj/machinery/vending/dinnerware
 	name = "dinnerware"

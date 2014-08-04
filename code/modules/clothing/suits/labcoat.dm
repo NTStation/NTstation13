@@ -117,6 +117,14 @@
 	desc = "Pompadour not included."
 	icon_state = "leatherjacket"
 
+/obj/item/clothing/suit/labcoat/coat/jacket/varsity
+	name = "varsity jacket"
+	desc = "Smells like high school."
+	icon_state = "varsity_red"
+
+/obj/item/clothing/suit/labcoat/coat/jacket/varsity/blue
+	icon_state = "varsity_blue"
+
 /obj/item/clothing/suit/labcoat/coat/captain
 	name = "captain's winter coat"
 	desc = "A coat that protects against the bitter cold."

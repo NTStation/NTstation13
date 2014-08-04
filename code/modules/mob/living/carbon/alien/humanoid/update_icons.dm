@@ -66,14 +66,14 @@
 		if(!t_state)
 			t_state = l_hand.icon_state
 		l_hand.screen_loc = ui_lhand
-		X_hands_overlays	+= image("icon" = 'icons/mob/items_lefthand.dmi', "icon_state" = t_state)
+		X_hands_overlays	+= l_hand.get_onmob_icon("l_hand")
 
 	if(r_hand)
 		var/t_state = r_hand.item_state
 		if(!t_state)
 			t_state = r_hand.icon_state
 		r_hand.screen_loc = ui_rhand
-		X_hands_overlays	+= image("icon" = 'icons/mob/items_righthand.dmi', "icon_state" = t_state)
+		X_hands_overlays	+= r_hand.get_onmob_icon("r_hand")
 
 	if(X_hands_overlays.len)
 		overlays_standing[X_HANDS_LAYER] = X_hands_overlays

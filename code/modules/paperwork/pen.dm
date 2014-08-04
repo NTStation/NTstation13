@@ -75,3 +75,21 @@
 	reagents.add_reagent("impedrezene", 25)
 	reagents.add_reagent("cryptobiolin", 15)
 	..()
+
+/obj/item/weapon/pen/chem
+	origin_tech = "materials=2;syndicate=5"
+	flags = OPENCONTAINER
+
+/obj/item/weapon/pen/chem/New()
+	create_reagents(30)
+	reagents.add_reagent("chloralhydrate", 30)
+	..()
+
+
+/obj/item/weapon/pen/chem/attack(mob/living/M, mob/user)
+	if(!istype(M))	return
+
+	if(..())
+		if(reagents.total_volume)
+			if(M.reagents)
+				reagents.trans_to(M, 10)

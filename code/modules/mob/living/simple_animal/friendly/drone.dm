@@ -201,20 +201,12 @@
 
 /mob/living/simple_animal/drone/update_inv_hands()
 	remove_overlay(HANDS_LAYER)
-
 	var/list/hands_overlays = list()
 	if(r_hand)
-		var/r_state = r_hand.item_state
-		if(!r_state)	r_state = r_hand.icon_state
-
-		hands_overlays += image("icon"='icons/mob/items_righthand.dmi', "icon_state"="[r_state]", "layer"=-HANDS_LAYER)
+		hands_overlays += r_hand.get_onmob_icon("r_hand", -HANDS_LAYER)
 
 	if(l_hand)
-		var/l_state = l_hand.item_state
-		if(!l_state)	l_state = l_hand.icon_state
-
-		hands_overlays += image("icon"='icons/mob/items_lefthand.dmi', "icon_state"="[l_state]", "layer"=-HANDS_LAYER)
-
+		hands_overlays += l_hand.get_onmob_icon("l_hand", -HANDS_LAYER)
 
 	if(hands_overlays.len)
 		drone_overlays[HANDS_LAYER] = hands_overlays

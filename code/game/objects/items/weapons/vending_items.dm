@@ -52,9 +52,14 @@
 /obj/item/weapon/vending_refill/cigarette
 	machine_name = "cigarette"
 	icon_state = "refill_smoke"
-	charges = 9// of 29
+	charges = 11// of 33
 
 /obj/item/weapon/vending_refill/autodrobe
 	machine_name = "AutoDrobe"
 	icon_state = "refill_costume"
 	charges = 19// of 58
+
+/obj/item/weapon/vending_refill/clothing
+	machine_name = "Clothe-O-Mat"
+	icon_state = "refill_costume"
+	charges = 20// of 60

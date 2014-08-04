@@ -1731,6 +1731,149 @@ datum
 			color = "#7F8400" // rgb: 127, 132, 0
 			toxpwr = 0.5
 
+		toxin/chiyanine
+			name = "Chiyanine"
+			id = "chiyanine"
+			description = "A delayed poison that will cause severe poisoning several minutes after consumption."
+			reagent_state = LIQUID
+			color = "#5B2E0D" // rgb: 91, 46, 13
+			toxpwr = 0
+
+			on_mob_life(var/mob/living/M as mob)
+				if(!M) M = holder.my_atom
+				if(!data) data = 1
+				switch(data)
+					if(119)
+						M.Weaken(4)
+						M << "<span class='danger'>You suddenly feel an intense pain.</span>"
+					if(120 to INFINITY)
+						holder.remove_reagent(src.id, 0.6*REM)
+						M.adjustToxLoss(4*REM)
+						if(prob(20)) //random chance to vomit
+							M.Stun(4)
+							M.visible_message("<B>[M]</B> vomits blood on the floor!")
+							M.take_organ_damage(2*REM, 0)
+							M.nutrition -= 20
+							M.adjustToxLoss(-2)
+							var/turf/pos = get_turf(M)
+							pos.add_vomit_floor(M)
+							pos.add_blood_floor(M) //nicer effect than just blood
+							playsound(pos, 'sound/effects/splat.ogg', 50, 1)
+				data++
+				return
+
+		toxin/mizarudol
+			name = "Mizarudol"
+			id = "mizarudol"
+			description = "A poison that is known to degrade vision."
+			reagent_state = LIQUID
+			color = "#DB5008" // rgb: 219, 80, 8
+			toxpwr = 0
+
+			on_mob_life(var/mob/living/M as mob)
+				if(!M) M = holder.my_atom
+				if(!data) data = 1
+				switch(data)
+					if(1 to 10)
+						if(prob(19))
+							M.eye_stat += 1
+							M << "<span class='danger'>Your eyes ache.</span>"
+					if(11 to INFINITY)
+						if(prob(19))
+							M.eye_blurry = 5
+							M.eye_stat += 2
+							M << "<span class='danger'>Your eyes burn.</span>"
+							if (M.eye_stat >= 10)
+								M.disabilities |= NEARSIGHTED
+								if (prob(M.eye_stat - 10 + 1) && !(M.sdisabilities & BLIND))
+									M << "<span class='danger'>You go blind!</span>"
+									M.sdisabilities |= BLIND
+				data++
+				holder.remove_reagent(src.id, 0.3*REM)
+				return
+
+		toxin/maizine
+			name = "Maizine"
+			id = "maizine"
+			description = "A very slow acting poison. It does not kill very fast but even small doses may be lethal if left untreated."
+			reagent_state = LIQUID
+			color = "#000067" // rgb: 0, 0, 103
+			toxpwr = 0
+
+			on_mob_life(var/mob/living/M as mob)
+				if(!M) M = holder.my_atom
+				if(!data) data = 1
+				switch(data)
+					if(10 to 20)
+						if(prob(20)) M.adjustToxLoss(1)
+					if(21 to 30)
+						if(prob(70)) M.adjustToxLoss(1)
+					if(31 to INFINITY)
+						M.adjustToxLoss(1)
+						if(prob(20)) M.adjustToxLoss(1)
+						if(prob(5))
+							M.Stun(4)
+							M.visible_message("<B>[M]</B> vomits blood on the floor!")
+							M.take_organ_damage(2*REM, 0)
+							M.nutrition -= 20
+							M.adjustToxLoss(-2)
+							var/turf/pos = get_turf(M)
+							pos.add_vomit_floor(M)
+							pos.add_blood_floor(M) //again, nicer effect than just blood
+							playsound(pos, 'sound/effects/splat.ogg', 50, 1)
+				data++
+				holder.remove_reagent(src.id, 0.03*REM)
+				return
+
+		toxin/ehuadol
+			name = "Ehuadol"
+			id = "ehuadol"
+			description = "A very complex and dangerous poison."
+			reagent_state = LIQUID
+			color = "#000067" // rgb: 0, 0, 103
+			toxpwr = 1.5
+
+			on_mob_life(var/mob/living/M as mob)
+				if(!M) M = holder.my_atom
+				M.take_organ_damage(1*REM, 0)
+				M.adjustCloneLoss(1) //cruel!
+				M.eye_blurry = 5
+				M.eye_stat += 2
+				M.adjustBrainLoss(2*REM)
+
+				if (M.eye_stat >= 10)
+					M.disabilities |= NEARSIGHTED
+					if (prob(M.eye_stat - 10 + 1) && !(M.sdisabilities & BLIND))
+						M << "<span class='danger'>You go blind!</span>"
+						M.sdisabilities |= BLIND
+
+				holder.remove_reagent(src.id, 0.2*REM)
+				return
+
+		jiutin //technically a toxin, but we don't want anti toxins to remove it
+			name = "Jiutin"
+			id = "jiutin"
+			description = "A lingering, weak poison which is also known as hungry ghost poison. Can be removed from the body by eating."
+			reagent_state = LIQUID
+			color = "#CF3600" // rgb: 207, 54, 0
+			nutriment_factor = 50 * REAGENTS_METABOLISM //this is a lot. you can use this as a superior lipozine if you are brave
+
+			on_mob_life(var/mob/living/M as mob)
+				if(!M) M = holder.my_atom
+				M.overeatduration = 0
+				if(M.nutrition <= 0) //starving!
+					if(prob(7))
+						M << "<span class='danger'>You feel extreme hunger.</span>"
+					M.adjustToxLoss(1*REM)
+					M.nutrition = 0 //probably not needed but let's make double sure nothing breaks
+				if(M.nutrition > 0) //not starving yet...
+					holder.remove_reagent("jiutin", 0.5*REM)
+					M.nutrition -= nutriment_factor
+					if(M.nutrition < 0) M.nutrition = 0 //make sure it does not drop below 0
+				return
+
+
+
 /////////////////////////Coloured Crayon Powder////////////////////////////
 //For colouring in /proc/mix_color_from_reagents
 

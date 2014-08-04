@@ -10,7 +10,7 @@
 	// Special glove functions:
 	// If the gloves do anything, have them return 1 to stop
 	// normal attack_hand() here.
-	if(proximity && istype(G) && G.Touch(A,1))
+	if(proximity && istype(G) && G.Touch(A, 1, src))
 		return
 
 	if(!has_active_hand())
@@ -35,7 +35,7 @@
 	if(has_organic_effect(/datum/organic_effect/laser) && a_intent == "harm")
 		LaserEyes(A) // moved into a proc below
 
-	else if(istype(G) && G.Touch(A,0)) // for magic gloves
+	else if(istype(G) && G.Touch(A, 0, src)) // for magic gloves
 		return
 
 	else if(has_organic_effect(/datum/organic_effect/tk))

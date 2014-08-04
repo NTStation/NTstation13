@@ -146,7 +146,10 @@
 	return 0
 
 /turf/proc/inertial_drift(atom/movable/A as mob|obj)
-	if(!(A.last_move))	return
+	if(!(A.last_move))
+		return
+	if (A.pulledby)
+		return
 	if((istype(A, /mob/) && src.x > 2 && src.x < (world.maxx - 1) && src.y > 2 && src.y < (world.maxy-1)))
 		var/mob/M = A
 		if(M.Process_Spacemove(1))
@@ -154,7 +157,7 @@
 			return
 		spawn(5)
 			if((M && !(M.anchored) && (M.loc == src)))
-				if(M.inertia_dir)
+				if(M.inertia_dir & M.last_move)
 					step(M, M.inertia_dir)
 					return
 				M.inertia_dir = M.last_move

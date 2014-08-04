@@ -1,6 +1,6 @@
 var/list/ai_list = list()
 
-//Not sure why this is necessary..
+//Not sure why this is necessary...
 /proc/AutoUpdateAI(obj/subject)
 	var/is_in_use = 0
 	if (subject!=null)
@@ -29,7 +29,9 @@ var/list/ai_list = list()
 	var/icon/holo_icon//Default is assigned when AI is created.
 	var/obj/item/device/pda/ai/aiPDA = null
 	var/obj/item/device/multitool/aiMulti = null
+	var/obj/item/device/radio/headset/heads/ai_integrated/radio = null
 	var/obj/item/device/camera/ai_camera/aicamera = null
+	var/obj/machinery/bot/Bot = null
 
 	//MALFUNCTION
 	var/datum/module_picker/malf_picker
@@ -44,13 +46,15 @@ var/list/ai_list = list()
 	var/explosive = 0 //does the AI explode when it dies?
 
 	var/mob/living/silicon/ai/parent = null
-
-	var/camera_light_on = 0	//Defines if the AI toggled the light on the camera it's looking through.
-	var/datum/trackable/track = null
+	var/camera_light_on = 0
+	var/list/obj/machinery/camera/lit_cameras = list()
+	var/datum/trackable/track = new()
 
 	var/last_paper_seen = null
 	var/can_shunt = 1
 	var/last_announcement = "" // For AI VOX, if enabled
+	var/turf/waypoint //Holds the turf of the currently selected waypoint.
+	var/waypoint_mode = 0 //Waypoint mode is for selecting a turf via clicking.
 	var/sensor_mode = 0 //Determines the AI's current HUD.
 	#define 	SEC_HUD 1 //Security HUD mode
 	#define 	MED_HUD 2 //Medical HUD mode
@@ -90,13 +94,14 @@ var/list/ai_list = list()
 	aiPDA.name = name + " (" + aiPDA.ownjob + ")"
 
 	aiMulti = new(src)
+	radio = new(src)
+	radio.myAi = src
 	aicamera = new/obj/item/device/camera/ai_camera(src)
 
 	if (istype(loc, /turf))
-		verbs.Add(/mob/living/silicon/ai/proc/ai_call_shuttle,/mob/living/silicon/ai/proc/ai_camera_track, \
-		/mob/living/silicon/ai/proc/ai_camera_list, /mob/living/silicon/ai/proc/ai_network_change, \
+		verbs.Add(/mob/living/silicon/ai/proc/ai_network_change, \
 		/mob/living/silicon/ai/proc/ai_statuschange, /mob/living/silicon/ai/proc/ai_hologram_change, \
-		/mob/living/silicon/ai/proc/toggle_camera_light, /mob/living/silicon/ai/proc/sensor_mode)
+		/mob/living/silicon/ai/proc/botcall, /mob/living/silicon/ai/proc/control_integrateed_radio)
 
 	if(!safety)//Only used by AIize() to successfully spawn an AI.
 		if (!B)//If there is no player/brain inside.
@@ -231,9 +236,6 @@ var/list/ai_list = list()
 			stat(null, text("Systems nonfunctional"))
 
 /mob/living/silicon/ai/proc/ai_alerts()
-	set category = "AI Commands"
-	set name = "Show Alerts"
-
 	var/dat = "<HEAD><TITLE>Current Station Alerts</TITLE><META HTTP-EQUIV='Refresh' CONTENT='10'></HEAD><BODY>\n"
 	dat += "<A HREF='?src=\ref[src];mach_close=aialerts'>Close</A><BR><BR>"
 	for (var/cat in alarms)
@@ -267,8 +269,6 @@ var/list/ai_list = list()
 	src << browse(dat, "window=aialerts&can_close=0")
 
 /mob/living/silicon/ai/proc/ai_roster()
-	set category = "AI Commands"
-	set name = "Show Crew Manifest"
 	var/dat = "<html><head><title>Crew Roster</title></head><body><b>Crew Roster:</b><br><br>"
 
 	for(var/datum/data/record/t in sortRecord(data_core.general))
@@ -278,14 +278,7 @@ var/list/ai_list = list()
 	src << browse(dat, "window=airoster")
 	onclose(src, "airoster")
 
-/mob/living/silicon/ai/verb/ai_crew()
-	set category = "AI Commands"
-	set name = "Crew Monitoring Console"
-	crewmonitor(src)
-
 /mob/living/silicon/ai/proc/ai_call_shuttle()
-	set category = "AI Commands"
-	set name = "Call Emergency Shuttle"
 	if(src.stat == 2)
 		src << "You can't call the shuttle because you are dead!"
 		return
@@ -307,6 +300,9 @@ var/list/ai_list = list()
 			C.post_status("shuttle")
 
 	return
+
+/mob/living/silicon/ai/cancel_camera()
+	src.view_core()
 
 /mob/living/silicon/ai/verb/toggle_anchor()
         set category = "AI Commands"
@@ -413,6 +409,24 @@ var/list/ai_list = list()
 			A.ai_actual_track(target)
 		return
 
+	if (href_list["callbot"]) //Command a bot to move to a selected location.
+		Bot = locate(href_list["callbot"]) in machines
+		if(!Bot || Bot.remote_disabled || src.control_disabled)
+			return //True if there is no bot found, the bot is manually emagged, or the AI is carded with wireless off.
+		waypoint_mode = 1
+		src << "<span class='notice'>Set your waypoint by clicking on a valid location free of obstructions.</span>"
+		return
+
+	if (href_list["interface"]) //Remotely connect to a bot!
+		Bot = locate(href_list["interface"]) in machines
+		if(!Bot || Bot.remote_disabled || src.control_disabled)
+			return
+		Bot.attack_ai(src)
+
+	if (href_list["botrefresh"]) //Refreshes the bot control panel.
+		botcall()
+		return
+
 	else if (href_list["faketrack"])
 		var/mob/target = locate(href_list["track"]) in mob_list
 		var/mob/living/silicon/ai/A = locate(href_list["track2"]) in mob_list
@@ -429,7 +443,6 @@ var/list/ai_list = list()
 				continue
 		return
 	return
-
 
 /mob/living/silicon/ai/bullet_act(var/obj/item/projectile/Proj)
 	..(Proj)
@@ -484,14 +497,12 @@ var/list/ai_list = list()
 		updatehealth()
 
 /mob/living/silicon/ai/reset_view(atom/A)
-	if(current)
-		current.SetLuminosity(0)
+	if (camera_light_on)
+		light_cameras()
 	if(istype(A,/obj/machinery/camera))
 		current = A
 	..()
-	if(istype(A,/obj/machinery/camera))
-		if(camera_light_on)	A.SetLuminosity(AI_CAMERA_LUMINOSITY)
-		else				A.SetLuminosity(0)
+
 
 /mob/living/silicon/ai/proc/switchCamera(var/obj/machinery/camera/C)
 
@@ -509,10 +520,85 @@ var/list/ai_list = list()
 
 	return 1
 
-/mob/living/silicon/ai/proc/sensor_mode()
+/mob/living/silicon/ai/proc/botcall()
 	set category = "AI Commands"
+	set name = "Access Robot Control"
+	set desc = "Wirelessly control various automatic robots."
+	if(stat == 2)
+		src << "<span class='danger'>Critical error. System offline.</span>"
+		return
+
+	if(control_disabled)
+		src << "Wireless communication is disabled."
+		return
+	var/turf/ai_current_turf = get_turf(src)
+	var/ai_Zlevel = ai_current_turf.z
+	var/d
+	var/area/bot_area
+	d += "<A HREF=?src=\ref[src];botrefresh=\ref[Bot]>Query network status</A><br>"
+	d += "<table width='100%'><tr><td width='40%'><h3>Name</h3></td><td width='30%'><h3>Status</h3></td><td width='30%'><h3>Location</h3></td><td width='10%'><h3>Control</h3></td></tr>"
+
+	for (Bot in machines)
+		if(Bot.z == ai_Zlevel && !Bot.remote_disabled) //Only non-emagged bots on the same Z-level are detected!
+			bot_area = get_area(Bot)
+			d += "<tr><td width='30%'>[Bot.hacked ? "<span class='bad'>(!) </span>[Bot.name]" : Bot.name]</td>"
+			//If the bot is on, it will display the bot's current mode status. If the bot is not mode, it will just report "Idle". "Inactive if it is not on at all.
+			d += "<td width='30%'>[Bot.on ? "[Bot.mode ? "<span class='average'>[ Bot.mode_name[Bot.mode] ]</span>": "<span class='good'>Idle</span>"]" : "<span class='bad'>Inactive</span>"]</td>"
+			d += "<td width='30%'>[bot_area.name]</td>"
+			d += "<td width='10%'><A HREF=?src=\ref[src];interface=\ref[Bot]>Interface</A></td>"
+			d += "<td width='10%'><A HREF=?src=\ref[src];callbot=\ref[Bot]>Call</A></td>"
+			d += "</tr>"
+			d = format_text(d)
+
+	var/datum/browser/popup = new(src, "botcall", "Remote Robot Control", 700, 400)
+	popup.set_content(d)
+	popup.open()
+
+/mob/living/silicon/ai/proc/set_waypoint(var/atom/A)
+	var/turf/turf_check = get_turf(A)
+		//The target must be in view of a camera or near the core.
+	if(turf_check in range(get_turf(src)))
+		call_bot(turf_check)
+	else if(cameranet && cameranet.checkTurfVis(turf_check))
+		call_bot(turf_check)
+	else
+		src << "<span class='danger'>Selected location is not visible.</span>"
+
+/mob/living/silicon/ai/proc/call_bot(var/turf/end_loc)
+
+	if(!Bot)
+		return
+
+	if(Bot.calling_ai && Bot.calling_ai != src) //Prevents an override if another AI is controlling this bot.
+		src << "<span class='danger'>Interface error. Unit is already in use.</span>"
+		return
+
+	var/area/end_area = get_area(end_loc)
+	var/turf/start_loc = get_turf(Bot) //Get the bot's location.
+
+	//For giving the bot all-access.
+	var/obj/item/weapon/card/id/all_access = new /obj/item/weapon/card/id
+	var/datum/job/captain/All = new/datum/job/captain
+	all_access.access = All.get_access()
+
+	var/list/call_path = list()
+	call_path = AStar(start_loc, end_loc, /turf/proc/CardinalTurfsWithAccess, /turf/proc/Distance_cardinal, 0, 150, id=all_access)
+
+	if(call_path && call_path.len) //Ensures that a valid path is calculated!
+		if(!Bot.on)
+			Bot.turn_on() //Saves the AI the hassle of having to activate a bot manually.
+		Bot.pathset = 0 //Forces the bot to accept a new rute if already under an AI call.
+		Bot.call_path = call_path //Send the path to the bot!
+		Bot.botcard = all_access //Give the bot all-access while under the AI's command.
+		Bot.calling_ai = src //Link the AI to the bot!
+		src << "<span class='notice'>[Bot.name] called to [end_area.name]. [call_path.len-1] meters to destination.</span>"
+	else
+		src << "<span class='danger'>Failed to calculate a valid route. Ensure destination is clear of obstructions and within range.</span>"
+
+/mob/living/silicon/ai/proc/sensor_mode()
+/*	set category = "AI Commands"
 	set name = "Set Sensor Augmentation"
-	set desc = "Augment visual feed with internal sensor overlays."
+	set desc = "Augment visual feed with internal sensor overlays."*/
 
 	var/sensor_type = input("Please select sensor type.", "Sensor Integration", null) in list("Security", "Medical"/*,"Light Amplification"*/,"Disable")
 	switch(sensor_type)
@@ -582,14 +668,6 @@ var/list/ai_list = list()
 		queueAlarm(text("--- [] alarm in [] has been cleared.", class, A.name), class, 0)
 		if (viewalerts) ai_alerts()
 	return !cleared
-
-/mob/living/silicon/ai/cancel_camera()
-	set category = "AI Commands"
-	set name = "Cancel Camera View"
-
-	//src.cameraFollow = null
-	src.view_core()
-
 
 //Replaces /mob/living/silicon/ai/verb/change_network() in ai.dm & camera.dm
 //Adds in /mob/living/silicon/ai/proc/ai_network_change() instead
@@ -716,48 +794,59 @@ var/list/ai_list = list()
 		return
 	apc.malfvacate()
 
-//Toggles the luminosity and applies it by re-entereing the camera.
 /mob/living/silicon/ai/proc/toggle_camera_light()
-	set name = "Toggle Camera Light"
-	set desc = "Toggles the light on the camera the AI is looking through."
-	set category = "AI Commands"
+	if(stat != CONSCIOUS)
+		return
 
 	camera_light_on = !camera_light_on
-	src << "Camera lights [camera_light_on ? "activated" : "deactivated"]."
-	if(!camera_light_on)
-		if(src.current)
-			src.current.SetLuminosity(0)
-	else
-		src.lightNearbyCamera()
 
+	if (!camera_light_on)
+		src << "Camera lights deactivated."
 
+		for (var/obj/machinery/camera/C in lit_cameras)
+			C.SetLuminosity(0)
+			lit_cameras = list()
 
-// Handled camera lighting, when toggled.
-// It will get the nearest camera from the eyeobj, lighting it.
+		return
 
-/mob/living/silicon/ai/proc/lightNearbyCamera()
-	if(camera_light_on && camera_light_on < world.timeofday)
-		if(src.current)
-			var/obj/machinery/camera/camera = near_range_camera(src.eyeobj)
-			if(camera && src.current != camera)
-				src.current.SetLuminosity(0)
-				if(!camera.light_disabled)
-					src.current = camera
-					src.current.SetLuminosity(AI_CAMERA_LUMINOSITY)
-				else
-					src.current = null
-			else if(isnull(camera))
-				src.current.SetLuminosity(0)
-				src.current = null
-		else
-			var/obj/machinery/camera/camera = near_range_camera(src.eyeobj)
-			if(camera && !camera.light_disabled)
-				src.current = camera
-				src.current.SetLuminosity(AI_CAMERA_LUMINOSITY)
-		camera_light_on = world.timeofday + 1 * 20 // Update the light every 2 seconds.
+	light_cameras()
+
+	src << "Camera lights activated."
+	return
+
+//AI_CAMERA_LUMINOSITY
+
+/mob/living/silicon/ai/proc/light_cameras()
+	var/list/obj/machinery/camera/add = list()
+	var/list/obj/machinery/camera/remove = list()
+	var/list/obj/machinery/camera/visible = list()
+	for (var/datum/camerachunk/CC in eyeobj.visibleCameraChunks)
+		for (var/obj/machinery/camera/C in CC.cameras)
+			if (!C.can_use() || C.light_disabled || get_dist(C, eyeobj) > 7)
+				continue
+			visible |= C
+
+	add = visible - lit_cameras
+	remove = lit_cameras - visible
+
+	for (var/obj/machinery/camera/C in remove)
+		C.SetLuminosity(0)
+		lit_cameras -= C
+	for (var/obj/machinery/camera/C in add)
+		C.SetLuminosity(AI_CAMERA_LUMINOSITY)
+		lit_cameras |= C
 
 /mob/living/silicon/ai/verb/outputlaws()
 	set category = "AI Commands"
 	set name = "State Laws"
 
 	checklaws()
+
+/mob/living/silicon/ai/proc/control_integrateed_radio()
+	set name = "Radio Settings"
+	set desc = "Allows you to change settings of your radio."
+	set category = "AI Commands"
+
+	src << "Accessing Subspace Transceiver control..."
+	if (src.radio)
+		src.radio.interact(src)
