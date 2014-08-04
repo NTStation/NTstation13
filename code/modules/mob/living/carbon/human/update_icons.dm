@@ -409,10 +409,7 @@ Please contact me on #coderbus IRC. ~Carnie x
 			client.screen += gloves					//Either way, add the item to the HUD
 
 		if(get_num_limbs_of_state(ARM_RIGHT,ORGAN_FINE) >= 2)//if it's less than 2, don't bother rendering
-
-		var/image/standing = gloves.get_onmob_icon("hands", -GLOVES_LAYER)
-		overlays_standing[GLOVES_LAYER]	= standing
-
+			var/image/standing = gloves.get_onmob_icon("hands", -GLOVES_LAYER)
 			overlays_standing[GLOVES_LAYER]	= standing
 
 			if(gloves.blood_DNA)
