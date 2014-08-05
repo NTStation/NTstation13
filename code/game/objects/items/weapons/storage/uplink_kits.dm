@@ -172,4 +172,34 @@
 	new /obj/item/device/flashlight/emp/(src)
 	return
 
+/obj/item/weapon/storage/box/syndie_kit/poison
+	name = "boxed poison kit"
 
+/obj/item/weapon/storage/box/syndie_kit/poison/New()
+	..()
+	switch (pick("chiyanine", "maizine", "fangshenine", "amatoxin", "frostoil", "hunzine")) //poisons
+		if ("chiyanine") new /obj/item/weapon/reagent_containers/glass/bottle/syndie/chiyanine(src)
+		if ("maizine") new /obj/item/weapon/reagent_containers/glass/bottle/syndie/maizine(src)
+		if ("fangshenine") new /obj/item/weapon/reagent_containers/glass/bottle/syndie/fangshenine(src)
+		if ("amatoxin") new /obj/item/weapon/reagent_containers/glass/bottle/syndie/amatoxin(src)
+		if ("frostoil") new /obj/item/weapon/reagent_containers/glass/bottle/syndie/frostoil(src)
+		if ("hunzine") new /obj/item/weapon/reagent_containers/glass/bottle/syndie/hunzine(src)
+
+
+	switch (pick("iwazarudol", "mizarudol", "impedrezene", "beepskysmash", "chloralhydrate", "neurotoxin", "mutagen")) //utility poisons
+		if ("iwazarudol") new /obj/item/weapon/reagent_containers/glass/bottle/syndie/iwazarudol(src)
+		if ("mizarudol") new /obj/item/weapon/reagent_containers/glass/bottle/syndie/mizarudol(src)
+		if ("impedrezene") new /obj/item/weapon/reagent_containers/glass/bottle/syndie/impedrezene(src)
+		if ("beepskysmash") new /obj/item/weapon/reagent_containers/glass/bottle/syndie/beepskysmash(src)
+		if ("chloralhydrate") new /obj/item/weapon/reagent_containers/glass/bottle/syndie/chloralhydrate(src)
+		if ("neurotoxin") new /obj/item/weapon/reagent_containers/glass/bottle/syndie/neurotoxin(src)
+		if ("mutagen") new /obj/item/weapon/reagent_containers/glass/bottle/syndie/mutagen(src)
+
+	switch (pick("plasma", "ehuadol", "lexorin", "blazeoil", "slimejelly")) //strong poisons
+		if ("plasma") new /obj/item/weapon/reagent_containers/glass/bottle/syndie/plasma(src)
+		if ("ehuadol") new /obj/item/weapon/reagent_containers/glass/bottle/syndie/ehuadol(src)
+		if ("lexorin") new /obj/item/weapon/reagent_containers/glass/bottle/syndie/lexorin(src)
+		if ("blazeoil") new /obj/item/weapon/reagent_containers/glass/bottle/syndie/blazeoil(src)
+		if ("slimejelly") new /obj/item/weapon/reagent_containers/glass/bottle/syndie/slimejelly(src)
+
+	return

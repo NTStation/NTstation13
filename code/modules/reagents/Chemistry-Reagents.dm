@@ -1306,7 +1306,7 @@ datum
 			description = "A powerful poison derived from certain species of mushroom."
 			reagent_state = LIQUID
 			color = "#792300" // rgb: 121, 35, 0
-			toxpwr = 1
+			toxpwr = 1.5
 
 		toxin/mutagen
 			name = "Unstable mutagen"
@@ -1314,7 +1314,7 @@ datum
 			description = "Might cause unpredictable mutations. Keep away from children."
 			reagent_state = LIQUID
 			color = "#13BC5E" // rgb: 19, 188, 94
-			toxpwr = 0
+			toxpwr = 2
 
 			reaction_mob(var/mob/living/carbon/M, var/method=TOUCH, var/volume)
 				if(!..())	return
@@ -1330,8 +1330,12 @@ datum
 			on_mob_life(var/mob/living/carbon/M)
 				if(!istype(M))	return
 				if(!M) M = holder.my_atom
-				M.apply_effect(5,IRRADIATE,0)
-				..()
+				if(prob(20))
+					if(prob(98))	randmutb(M)
+					else			randmutg(M)
+					domutcheck(M, null)
+					updateappearance(M)
+				holder.remove_reagent(src.id, 1 * REAGENTS_METABOLISM)
 				return
 
 		toxin/plasma
@@ -1731,6 +1735,26 @@ datum
 			color = "#7F8400" // rgb: 127, 132, 0
 			toxpwr = 0.5
 
+		toxin/hunzine
+			name = "Hunzine"
+			id = "hunzine"
+			description = "A poison targeting various parts of the body. Known to cause toxic damage to tissue, damage to the brain and severe confusion."
+			reagent_state = SOLID
+			color = "#7F8400" // rgb: 127, 132, 0
+			toxpwr = 1
+
+			on_mob_life(var/mob/living/M as mob)
+				if(!M) M = holder.my_atom
+				M.jitteriness = max(M.jitteriness-5,0)
+				M.Dizzy(1)
+				if(!M.confused) M.confused = 1
+				M.confused = max(M.confused, 20)
+				if(prob(80)) M.adjustBrainLoss(1.5*REM)
+				if(prob(50)) M.drowsyness = max(M.drowsyness, 3)
+				if(prob(10)) M.emote("drool")
+				..()
+				return
+
 		toxin/chiyanine
 			name = "Chiyanine"
 			id = "chiyanine"
@@ -1749,9 +1773,9 @@ datum
 					if(120 to INFINITY)
 						holder.remove_reagent(src.id, 0.6*REM)
 						M.adjustToxLoss(4*REM)
-						if(prob(20)) //random chance to vomit
+						if(prob(15)) //random chance to vomit
 							M.Stun(4)
-							M.visible_message("<B>[M]</B> vomits blood on the floor!")
+							M.visible_message("<span class='danger'>[M] throws up!</span>")
 							M.take_organ_damage(2*REM, 0)
 							M.nutrition -= 20
 							M.adjustToxLoss(-2)
@@ -1792,6 +1816,28 @@ datum
 				holder.remove_reagent(src.id, 0.3*REM)
 				return
 
+		toxin/iwazarudol
+			name = "Iwazarudol"
+			id = "iwazarudol"
+			description = "A muting poison. It takes a while to start working."
+			reagent_state = LIQUID
+			color = "#792300" // rgb: 121, 35, 0
+			toxpwr = 0
+
+			on_mob_life(var/mob/living/carbon/M as mob)
+				if(!M) M = holder.my_atom
+				if(!data) data = 1
+				switch(data)
+					if(11)
+						M << "<span class='danger'>Your throat feels unusual. You can't talk!</span>"
+						M.emote("gasp")
+					if(12 to INFINITY)
+						M.silent = max(M.silent, 10)
+				data++
+				..()
+				return
+
+
 		toxin/maizine
 			name = "Maizine"
 			id = "maizine"
@@ -1813,7 +1859,7 @@ datum
 						if(prob(20)) M.adjustToxLoss(1)
 						if(prob(5))
 							M.Stun(4)
-							M.visible_message("<B>[M]</B> vomits blood on the floor!")
+							M.visible_message("<span class='danger'>[M] throws up!</span>")
 							M.take_organ_damage(2*REM, 0)
 							M.nutrition -= 20
 							M.adjustToxLoss(-2)
@@ -1836,9 +1882,9 @@ datum
 			on_mob_life(var/mob/living/M as mob)
 				if(!M) M = holder.my_atom
 				M.take_organ_damage(1*REM, 0)
-				M.adjustCloneLoss(1) //cruel!
+				M.adjustCloneLoss(1*REM) //cruel!
 				M.eye_blurry = 5
-				M.eye_stat += 2
+				M.eye_stat += 0.4
 				M.adjustBrainLoss(2*REM)
 
 				if (M.eye_stat >= 10)
@@ -1848,6 +1894,21 @@ datum
 						M.sdisabilities |= BLIND
 
 				holder.remove_reagent(src.id, 0.2*REM)
+				return
+
+		toxin/fangshenine
+			name = "Fangshenine"
+			id = "fangshenine"
+			description = "Irridiates the victim."
+			reagent_state = LIQUID
+			color = "#000067" // rgb: 0, 0, 103
+			toxpwr = 0
+
+			on_mob_life(var/mob/living/carbon/M)
+				if(!istype(M))	return
+				if(!M) M = holder.my_atom
+				M.apply_effect(5,IRRADIATE,0)
+				..()
 				return
 
 		jiutin //technically a toxin, but we don't want anti toxins to remove it
@@ -1867,12 +1928,58 @@ datum
 					M.adjustToxLoss(1*REM)
 					M.nutrition = 0 //probably not needed but let's make double sure nothing breaks
 				if(M.nutrition > 0) //not starving yet...
-					holder.remove_reagent("jiutin", 0.5*REM)
+					holder.remove_reagent(src.id, 0.5*REM)
 					M.nutrition -= nutriment_factor
 					if(M.nutrition < 0) M.nutrition = 0 //make sure it does not drop below 0
 				return
 
+		synaptidol
+			name = "Synaptidol"
+			id = "synaptidol"
+			description = "A dangerous stimulant."
+			reagent_state = LIQUID
+			color = "#C8A5DC" // rgb: 200, 165, 220
 
+			on_mob_life(var/mob/living/M as mob)
+				if(!M) M = holder.my_atom
+				if(!data) data = 1
+				switch(data)
+					if(20 to 40)
+						M.drowsyness = max(M.drowsyness-5, 0)
+						M.AdjustParalysis(-1)
+						M.AdjustStunned(-1)
+						M.AdjustWeakened(-1)
+					if(41 to INFINITY)
+						M.drowsyness = max(M.drowsyness-5, 0)
+						M.AdjustParalysis(-2)
+						M.AdjustStunned(-2)
+						M.AdjustWeakened(-2)
+					if(50 to INFINITY)
+						if(prob(80)) M.adjustBrainLoss(1.5*REM)
+						if(prob(80))
+							M.eye_blurry = 5
+							M.eye_stat += 0.4
+							if (M.eye_stat >= 10)
+								M.disabilities |= NEARSIGHTED
+								if (prob(M.eye_stat - 10 + 1) && !(M.sdisabilities & BLIND))
+									M << "<span class='danger'>You go blind!</span>"
+									M.sdisabilities |= BLIND
+						if(prob(15))
+							M.Stun(4)
+							M.visible_message("<span class='danger'>[M] throws up!</span>")
+							M.take_organ_damage(2*REM, 0)
+							M.nutrition -= 20
+							M.adjustToxLoss(-2)
+							var/turf/pos = get_turf(M)
+							pos.add_vomit_floor(M)
+							pos.add_blood_floor(M) //nicer effect than just blood
+							playsound(pos, 'sound/effects/splat.ogg', 50, 1)
+					if(60 to INFINITY)
+						if(prob(80)) M.adjustCloneLoss(0.5*REM)
+				if(prob(80)) holder.remove_reagent(src.id, rand(0.1,1)*REM)
+				if(holder.has_reagent("fuel"))
+					holder.remove_reagent(src.id, 0.8*REM)
+				return
 
 /////////////////////////Coloured Crayon Powder////////////////////////////
 //For colouring in /proc/mix_color_from_reagents
@@ -2089,6 +2196,21 @@ datum
 				if(!M) M = holder.my_atom
 				if(prob(5))
 					M.visible_message("<span class='warning'>[M] [pick("dry heaves!","coughs!","splutters!")]</span>")
+				..()
+				return
+
+		blazeoil
+			name = "Blaze Oil"
+			id = "blazeoil"
+			description = "Causes spontanous combustion when ingested."
+			reagent_state = LIQUID
+			color = "#B31008" // rgb: 179, 16, 8
+
+			on_mob_life(var/mob/living/M as mob)
+				if(!M) M = holder.my_atom
+				if(prob(20))
+					M.fire_stacks = min(10,M.fire_stacks + 4)
+					M.IgniteMob()
 				..()
 				return
 
@@ -2940,18 +3062,6 @@ datum
 			on_mob_life(var/mob/living/carbon/M as mob)
 				if(!M) M = holder.my_atom
 				M.weakened = max(M.weakened, 3)
-				if(!data) data = 1
-				data++
-				M.dizziness +=6
-				if(data >= 15 && data <45)
-					if (!M.stuttering) M.stuttering = 1
-					M.stuttering += 3
-				else if(data >= 45 && prob(50) && data <55)
-					M.confused = max(M.confused+3,0)
-				else if(data >=55)
-					M.druggy = max(M.druggy, 55)
-				else if(data >=200)
-					M.adjustToxLoss(2)
 				..()
 				return
 
@@ -3302,13 +3412,12 @@ datum
 				..()
 				return
 
-		ethanol/beepsky_smash
+		beepsky_smash
 			name = "Beepsky Smash"
 			id = "beepskysmash"
 			description = "Deny drinking this and prepare for THE LAW."
 			reagent_state = LIQUID
 			color = "#664300" // rgb: 102, 67, 0
-			boozepwr = 25
 
 			on_mob_life(var/mob/living/M as mob)
 				M.Stun(2)

@@ -89,12 +89,12 @@ silicate
 	required_reagents = list("radium" = 1, "phosphorus" = 1, "chlorine" = 1)
 	result_amount = 3
 
-//cyanide
-//	name = "Cyanide"
-//	id = "cyanide"
-//	result = "cyanide"
-//	required_reagents = list("hydrogen" = 1, "carbon" = 1, "nitrogen" = 1)
-//	result_amount = 1
+/datum/chemical_reaction/cyanide
+	name = "Cyanide"
+	id = "cyanide"
+	result = "cyanide"
+	required_reagents = list("ehuadol" = 1, "zombiepowder" = 1)
+	result_amount = 2
 
 /datum/chemical_reaction/thermite
 	name = "Thermite"
@@ -343,14 +343,16 @@ silicate
 	name = "Napalm"
 	id = "napalm"
 	result = null
-	required_reagents = list("aluminium" = 1, "plasma" = 1, "sacid" = 1 )
+	required_reagents = list("aluminium" = 1, "plasma" = 1, "sacid" = 1)
 	result_amount = 1
 /datum/chemical_reaction/napalm/on_reaction(var/datum/reagents/holder, var/created_volume)
-	var/turf/simulated/T = get_turf(holder.my_atom)
-	if(istype(T))
-		T.atmos_spawn_air(SPAWN_HEAT | SPAWN_TOXINS, created_volume)
-	holder.del_reagent(id)
+	//var/location = get_turf(holder.my_atom) DELETE ME
+	var/napalmfiresize = min (MAX_EX_FLAME_RANGE, round(created_volume/4)) //let's not go over the cap
+	if (created_volume >= 20) explosion(get_turf(holder.my_atom),-1,-1,-1, flame_range = napalmfiresize) //double explosion for denser fire... a dedicated fire explosion effect would be nicer
+	explosion(get_turf(holder.my_atom),-1,-1,-1, flame_range = napalmfiresize)
+	holder.clear_reagents()
 	return
+
 
 /*
 /datum/chemical_reaction/smoke
@@ -449,6 +451,34 @@ silicate
 	result = "jiutin"
 	required_reagents = list("radium" = 1, "lipozine" = 1, "copper" = 1)
 	result_amount = 4
+
+/datum/chemical_reaction/iwazarudol
+	name = "Iwazarudol"
+	id = "iwazarudol"
+	result = "iwazarudol"
+	required_reagents = list("plasma" = 1, "stoxin" = 1, "silicon" = 1)
+	result_amount = 3
+
+/datum/chemical_reaction/fangshenine
+	name = "Fangshenine"
+	id = "fangshenine"
+	result = "fangshenine"
+	required_reagents = list("radium" = 1, "phosphorus" = 1, "aluminium" = 1)
+	result_amount = 3
+
+/datum/chemical_reaction/hunzine
+	name = "Hunzine"
+	id = "hunzine"
+	result = "hunzine"
+	required_reagents = list("impedrezene" = 1, "cryptobiolin" = 1, "toxin" = 1)
+	result_amount = 3
+
+/datum/chemical_reaction/synaptidol
+	name = "Synaptidol"
+	id = "synaptidol"
+	result = "synaptidol"
+	required_reagents = list("fuel" = 2, "robustharvestnutriment" = 1)
+	result_amount = 3
 
 /datum/chemical_reaction/mindbreaker
 	name = "Mindbreaker Toxin"
