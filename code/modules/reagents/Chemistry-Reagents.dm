@@ -1766,7 +1766,7 @@ datum
 			id = "chiyanine"
 			description = "A delayed poison that will cause severe poisoning several minutes after consumption."
 			reagent_state = LIQUID
-			color = "#5B2E0D" // rgb: 91, 46, 13
+			color = "#C7E46E" // rgb: 199, 228, 110
 			toxpwr = 0
 
 			on_mob_life(var/mob/living/M as mob)
@@ -1834,10 +1834,7 @@ datum
 				if(!M) M = holder.my_atom
 				if(!data) data = 1
 				switch(data)
-					if(11)
-						M << "<span class='danger'>Your throat feels unusual. You can't talk!</span>"
-						M.emote("gasp")
-					if(12 to INFINITY)
+					if(10 to INFINITY)
 						M.silent = max(M.silent, 10)
 				data++
 				..()
@@ -1907,7 +1904,7 @@ datum
 			id = "fangshenine"
 			description = "Irridiates the victim."
 			reagent_state = LIQUID
-			color = "#000067" // rgb: 0, 0, 103
+			color = "#008000" // rgb: 0, 128, 0
 			toxpwr = 0
 
 			on_mob_life(var/mob/living/carbon/M)
@@ -1923,12 +1920,39 @@ datum
 						new /obj/effect/decal/cleanable/greenglow(T)
 						return
 
+		toxin/beepsky_smash
+			name = "Beepsky Smash"
+			id = "beepskysmash"
+			description = "Deny drinking this and prepare for THE LAW."
+			reagent_state = LIQUID
+			color = "#664300" // rgb: 102, 67, 0
+			toxpwr = 0
+
+			on_mob_life(var/mob/living/M as mob)
+				M.Stun(2)
+				..()
+				return
+
+		toxin/neurotoxin
+			name = "Neurotoxin"
+			id = "neurotoxin"
+			description = "A strong neurotoxin that puts the subject into a death-like state."
+			reagent_state = LIQUID
+			color = "#2E2E61" // rgb: 46, 46, 97
+			toxpwr = 0
+
+			on_mob_life(var/mob/living/carbon/M as mob)
+				if(!M) M = holder.my_atom
+				M.weakened = max(M.weakened, 3)
+				..()
+				return
+
 		jiutin //technically a toxin, but we don't want anti toxins to remove it
 			name = "Jiutin"
 			id = "jiutin"
 			description = "A lingering, weak poison which is also known as hungry ghost poison. Can be removed from the body by eating."
 			reagent_state = LIQUID
-			color = "#CF3600" // rgb: 207, 54, 0
+			color = "#D5D5FF" // rgb: 213, 213, 255
 			nutriment_factor = 50 * REAGENTS_METABOLISM //this is a lot. you can use this as a superior lipozine if you are brave
 
 			on_mob_life(var/mob/living/M as mob)
@@ -1938,7 +1962,6 @@ datum
 					if(prob(7))
 						M << "<span class='danger'>You feel extreme hunger.</span>"
 					M.adjustToxLoss(1*REM)
-					M.nutrition = 0 //probably not needed but let's make double sure nothing breaks
 				if(M.nutrition > 0) //not starving yet...
 					holder.remove_reagent(src.id, 0.5*REM)
 					M.nutrition -= nutriment_factor
@@ -1950,13 +1973,13 @@ datum
 			id = "synaptidol"
 			description = "A dangerous stimulant."
 			reagent_state = LIQUID
-			color = "#C8A5DC" // rgb: 200, 165, 220
+			color = "#C7E46E" // rgb: 199, 228, 110
 
 			on_mob_life(var/mob/living/M as mob)
 				if(!M) M = holder.my_atom
 				if(!data) data = 1
 				switch(data)
-					if(20 to 40)
+					if(15 to 40)
 						M.drowsyness = max(M.drowsyness-5, 0)
 						M.AdjustParalysis(-1)
 						M.AdjustStunned(-1)
@@ -1988,9 +2011,9 @@ datum
 							playsound(pos, 'sound/effects/splat.ogg', 50, 1)
 					if(60 to INFINITY)
 						if(prob(80)) M.adjustCloneLoss(0.5*REM)
-				if(prob(80)) holder.remove_reagent(src.id, rand(0.1,1)*REM)
+				if(prob(80)) holder.remove_reagent(src.id, rand(1,10)/25*REM)
 				if(holder.has_reagent("fuel"))
-					holder.remove_reagent(src.id, 0.8*REM)
+					holder.remove_reagent(src.id, 1*REM)
 				return
 
 /////////////////////////Coloured Crayon Powder////////////////////////////
@@ -3065,19 +3088,6 @@ datum
 				..()
 				return
 
-		neurotoxin
-			name = "Neurotoxin"
-			id = "neurotoxin"
-			description = "A strong neurotoxin that puts the subject into a death-like state."
-			reagent_state = LIQUID
-			color = "#2E2E61" // rgb: 46, 46, 97
-
-			on_mob_life(var/mob/living/carbon/M as mob)
-				if(!M) M = holder.my_atom
-				M.weakened = max(M.weakened, 3)
-				..()
-				return
-
 		hippies_delight
 			name = "Hippie's Delight"
 			id = "hippiesdelight"
@@ -3422,18 +3432,6 @@ datum
 			on_mob_life(var/mob/living/M as mob)
 				if (M.bodytemperature < 330)
 					M.bodytemperature = min(330, M.bodytemperature + (15 * TEMPERATURE_DAMAGE_COEFFICIENT)) //310 is the normal bodytemp. 310.055
-				..()
-				return
-
-		beepsky_smash
-			name = "Beepsky Smash"
-			id = "beepskysmash"
-			description = "Deny drinking this and prepare for THE LAW."
-			reagent_state = LIQUID
-			color = "#664300" // rgb: 102, 67, 0
-
-			on_mob_life(var/mob/living/M as mob)
-				M.Stun(2)
 				..()
 				return
 
