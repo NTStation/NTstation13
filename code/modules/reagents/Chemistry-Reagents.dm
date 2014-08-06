@@ -1337,6 +1337,12 @@ datum
 					updateappearance(M)
 				holder.remove_reagent(src.id, 1 * REAGENTS_METABOLISM)
 				return
+			reaction_turf(var/turf/T, var/volume)
+				src = null
+				if(volume >= 3)
+					if(!istype(T, /turf/space))
+						new /obj/effect/decal/cleanable/greenglow(T)
+						return
 
 		toxin/plasma
 			name = "Plasma"
@@ -1910,6 +1916,12 @@ datum
 				M.apply_effect(5,IRRADIATE,0)
 				..()
 				return
+			reaction_turf(var/turf/T, var/volume)
+				src = null
+				if(volume >= 3)
+					if(!istype(T, /turf/space))
+						new /obj/effect/decal/cleanable/greenglow(T)
+						return
 
 		jiutin //technically a toxin, but we don't want anti toxins to remove it
 			name = "Jiutin"
@@ -2211,7 +2223,8 @@ datum
 				if(prob(20))
 					M.fire_stacks = min(10,M.fire_stacks + 4)
 					M.IgniteMob()
-				..()
+					M << "<span class='danger'>You suddenly ignite!</span>"
+				holder.remove_reagent(src.id, 0.2*REM)
 				return
 
 		frostoil

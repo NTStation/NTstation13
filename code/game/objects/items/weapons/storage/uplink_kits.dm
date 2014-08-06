@@ -184,8 +184,6 @@
 		if ("amatoxin") new /obj/item/weapon/reagent_containers/glass/bottle/syndie/amatoxin(src)
 		if ("frostoil") new /obj/item/weapon/reagent_containers/glass/bottle/syndie/frostoil(src)
 		if ("hunzine") new /obj/item/weapon/reagent_containers/glass/bottle/syndie/hunzine(src)
-
-
 	switch (pick("iwazarudol", "mizarudol", "impedrezene", "beepskysmash", "chloralhydrate", "neurotoxin", "mutagen")) //utility poisons
 		if ("iwazarudol") new /obj/item/weapon/reagent_containers/glass/bottle/syndie/iwazarudol(src)
 		if ("mizarudol") new /obj/item/weapon/reagent_containers/glass/bottle/syndie/mizarudol(src)
@@ -194,12 +192,10 @@
 		if ("chloralhydrate") new /obj/item/weapon/reagent_containers/glass/bottle/syndie/chloralhydrate(src)
 		if ("neurotoxin") new /obj/item/weapon/reagent_containers/glass/bottle/syndie/neurotoxin(src)
 		if ("mutagen") new /obj/item/weapon/reagent_containers/glass/bottle/syndie/mutagen(src)
-
 	switch (pick("plasma", "ehuadol", "lexorin", "blazeoil", "slimejelly")) //strong poisons
 		if ("plasma") new /obj/item/weapon/reagent_containers/glass/bottle/syndie/plasma(src)
 		if ("ehuadol") new /obj/item/weapon/reagent_containers/glass/bottle/syndie/ehuadol(src)
 		if ("lexorin") new /obj/item/weapon/reagent_containers/glass/bottle/syndie/lexorin(src)
 		if ("blazeoil") new /obj/item/weapon/reagent_containers/glass/bottle/syndie/blazeoil(src)
 		if ("slimejelly") new /obj/item/weapon/reagent_containers/glass/bottle/syndie/slimejelly(src)
-
 	return

@@ -346,11 +346,13 @@ silicate
 	required_reagents = list("aluminium" = 1, "plasma" = 1, "sacid" = 1)
 	result_amount = 1
 /datum/chemical_reaction/napalm/on_reaction(var/datum/reagents/holder, var/created_volume)
-	//var/location = get_turf(holder.my_atom) DELETE ME
+	var/turf/simulated/T = get_turf(holder.my_atom)
+	if(istype(T))
+		T.atmos_spawn_air(SPAWN_HEAT | SPAWN_TOXINS, created_volume*3)
 	var/napalmfiresize = min (MAX_EX_FLAME_RANGE, round(created_volume/4)) //let's not go over the cap
 	if (created_volume >= 20) explosion(get_turf(holder.my_atom),-1,-1,-1, flame_range = napalmfiresize) //double explosion for denser fire... a dedicated fire explosion effect would be nicer
 	explosion(get_turf(holder.my_atom),-1,-1,-1, flame_range = napalmfiresize)
-	holder.clear_reagents()
+	holder.del_reagent(id)
 	return
 
 
