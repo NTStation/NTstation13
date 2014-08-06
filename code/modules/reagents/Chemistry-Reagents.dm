@@ -1339,7 +1339,7 @@ datum
 				return
 			reaction_turf(var/turf/T, var/volume)
 				src = null
-				if(volume >= 3)
+				if(volume >= 1)
 					if(!istype(T, /turf/space))
 						new /obj/effect/decal/cleanable/greenglow(T)
 						return
@@ -1918,7 +1918,7 @@ datum
 				return
 			reaction_turf(var/turf/T, var/volume)
 				src = null
-				if(volume >= 3)
+				if(volume >= 1)
 					if(!istype(T, /turf/space))
 						new /obj/effect/decal/cleanable/greenglow(T)
 						return
