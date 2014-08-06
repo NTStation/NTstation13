@@ -199,3 +199,6 @@
 		if ("blazeoil") new /obj/item/weapon/reagent_containers/glass/bottle/syndie/blazeoil(src)
 		if ("slimejelly") new /obj/item/weapon/reagent_containers/glass/bottle/syndie/slimejelly(src)
 	return
+
+/obj/item/weapon/storage/box/syndie_kit/incendiary
+	name = "boxed incendiary grenade"
