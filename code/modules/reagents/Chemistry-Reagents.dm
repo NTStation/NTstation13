@@ -610,7 +610,7 @@ datum
 
 			reaction_turf(var/turf/T, var/volume)
 				src = null
-				if(volume >= 3)
+				if(volume >= 1)
 					if(!istype(T, /turf/space))
 						new /obj/effect/decal/cleanable/greenglow(T)
 						return
@@ -1974,46 +1974,49 @@ datum
 			description = "A dangerous stimulant."
 			reagent_state = LIQUID
 			color = "#C7E46E" // rgb: 199, 228, 110
+			var/metabolizespeed = 0.3
 
 			on_mob_life(var/mob/living/M as mob)
 				if(!M) M = holder.my_atom
 				if(!data) data = 1
 				switch(data)
-					if(15 to 40)
+					if(1) metabolizespeed = rand(3,12)/25
+					if(10 to 40)
 						M.drowsyness = max(M.drowsyness-5, 0)
 						M.AdjustParalysis(-1)
 						M.AdjustStunned(-1)
 						M.AdjustWeakened(-1)
+						if(prob(60)) M.adjustBrainLoss(0.5*REM)
+						if(prob(38)) M.eye_blurry = max(M.eye_blurry, 1)
+						if(prob(10)) M.emote("twitch")
 					if(41 to INFINITY)
 						M.drowsyness = max(M.drowsyness-5, 0)
 						M.AdjustParalysis(-2)
 						M.AdjustStunned(-2)
 						M.AdjustWeakened(-2)
-					if(50 to INFINITY)
-						if(prob(80)) M.adjustBrainLoss(1.5*REM)
-						if(prob(80))
-							M.eye_blurry = 5
-							M.eye_stat += 0.4
-							if (M.eye_stat >= 10)
-								M.disabilities |= NEARSIGHTED
-								if (prob(M.eye_stat - 10 + 1) && !(M.sdisabilities & BLIND))
-									M << "<span class='danger'>You go blind!</span>"
-									M.sdisabilities |= BLIND
-						if(prob(15))
-							M.Stun(4)
+						if(prob(6))
+						//	M.Stun(4) Uncomment this to make the vomitting more consistant...this makes you drop your stuff though...
 							M.visible_message("<span class='danger'>[M] throws up!</span>")
 							M.take_organ_damage(2*REM, 0)
 							M.nutrition -= 20
 							M.adjustToxLoss(-2)
 							var/turf/pos = get_turf(M)
 							pos.add_vomit_floor(M)
-							pos.add_blood_floor(M) //nicer effect than just blood
 							playsound(pos, 'sound/effects/splat.ogg', 50, 1)
-					if(60 to INFINITY)
-						if(prob(80)) M.adjustCloneLoss(0.5*REM)
-				if(prob(80)) holder.remove_reagent(src.id, rand(1,10)/25*REM)
+						if(prob(80)) M.adjustBrainLoss(1*REM)
+						if(prob(80))
+							M.eye_stat += 0.2
+							if (M.eye_stat >= 10)
+								M.disabilities |= NEARSIGHTED
+								if (prob(M.eye_stat - 10 + 1) && !(M.sdisabilities & BLIND))
+									M << "<span class='danger'>You go blind!</span>"
+									M.sdisabilities |= BLIND
+						if(prob(20)) M.adjustCloneLoss(0.5*REM)
+						if(prob(75)) M.take_organ_damage(0.5*REM, 0)
+				if(prob(80)) holder.remove_reagent(src.id, metabolizespeed*REM)
 				if(holder.has_reagent("fuel"))
-					holder.remove_reagent(src.id, 1*REM)
+					holder.remove_reagent(src.id, 5*REM)
+				data++
 				return
 
 /////////////////////////Coloured Crayon Powder////////////////////////////

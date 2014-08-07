@@ -239,7 +239,8 @@
 	..()
 	reagents.add_reagent("spore", 150)
 	reagents.add_reagent("hunzine", 150)
-	reagents.add_reagent("ehuadol", 150)
+	reagents.add_reagent("ehuadol", 75)
+	reagents.add_reagent("mutagen", 75)
 	reagents.add_reagent("chloralhydrate", 150)
 
 

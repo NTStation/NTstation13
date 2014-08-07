@@ -27,8 +27,8 @@
 	if(activeFor % interval == 0)
 		var/obj/vent = pick_n_take(vents)
 		if(vent && vent.loc)
-			var/list/gunk = list("water","copper","flour","mutagen","frostoil","lube","jiutin","condensedcapsaicin","mushroomhallucinogen","lube",
-								 "plantbgone","lube","doctorsdelight","zombiepowder","hyperzine","holywater","blood","neurotoxin","mizarudol")
+			var/list/gunk = list("water","spore","flour","radium","frostoil","lube","jiutin","condensedcapsaicin","mushroomhallucinogen","lube",
+								 "chloralhydrate","lube","doctorsdelight","zombiepowder","hyperzine","holywater","blood","neurotoxin","mizarudol")
 			var/datum/reagents/R = new/datum/reagents(50)
 			R.my_atom = vent
 			R.add_reagent(pick(gunk), 50)
