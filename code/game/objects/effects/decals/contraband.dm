@@ -1,9 +1,9 @@
 
 //########################## CONTRABAND ;3333333333333333333 -Agouri ###################################################
 
-#define NUM_OF_POSTER_DESIGNS 22 //subtype 0-contraband posters
+#define NUM_OF_POSTER_DESIGNS 32 //subtype 0-contraband posters
 
-#define NUM_OF_POSTER_DESIGNS_LEGIT 21 //subtype 1-corporate approved posters
+#define NUM_OF_POSTER_DESIGNS_LEGIT 35 //subtype 1-corporate approved posters
 
 /obj/item/weapon/contraband
 	name = "contraband item"
@@ -164,6 +164,30 @@ obj/structure/sign/poster/New(serial,subtype)
 			if(24)
 				name += " - C-20r Advertisment"
 				desc += " A poster advertising the Scarborough Arms C-20r."
+			if(25)
+				name += " - Have A Puff"
+				desc += " Who cares about lung cancer when you're high as a kite?"
+			if(26)
+				name += " - Revolver Advertisment"
+				desc += " Because six shots are all you need."
+			if(27)
+				name += " - D-Day Promotional Poster"
+				desc += " A promotional poster for some rapper."
+			if(28)
+				name += " - Stetchkin Pistol Advertisment"
+				desc += " A poster advertising Stetchkin pistols as being 'Classy as fuck'."
+			if(29)
+				name += " - E-sword Rainbow"
+				desc += " All the colors of bloody murder rainbow."
+			if(30)
+				name += " - Red Rum"
+				desc += " Looking at this poster makes you want to kill."
+			if(31)
+				name += " - CC 64K Advertisment"
+				desc += " The latest portable computer from Comrade Computing, with a whole 64kB of ram!"
+			if(32)
+				name += " - Punch Shit"
+				desc += " Fight things for no reason, like a man!"
 			else
 				name += " - Error (subtype 0 serial_number)"
 				desc += " This is a bug, please report the circumstances under which you encountered this poster at https://github.com/NTStation/NTstation13/issues."
@@ -240,6 +264,42 @@ obj/structure/sign/poster/New(serial,subtype)
 			if(23)
 				name += " - Ion Rifle"
 				desc += " A poster displaying an Ion Rifle."
+			if(24)
+				name += " - Foam Force Advertisment"
+				desc += " Foam Force, it's Foam or be Foamed!"
+			if(25)
+				name += " - Cohiba Robusto Advertisment"
+				desc += " Cohiba Robusto, the classy cigar."
+			if(26)
+				name += " - 50th Aniversery Vintage Reprint"
+				desc += " A reprint of a poster from 2504, commemorating the 50th Aniversery of Nanoposters Manufacturing, a subsidary of Nanotrasen."
+			if(27)
+				name += " - Fruit Bowl"
+				desc += " Simple, yet awe inspiring."
+			if(28)
+				name += " - NanoPDA 1000 Advertisment"
+				desc += " A poster advertising the latest PDA from Nanotrasen."
+			if(29)
+				name += " - Space Leauge: The Crimson Sprinter"
+				desc += " A poster showing one of the characters from The Space Leauge."
+			if(30)
+				name += " - Space Leauge: Particle Man"
+				desc += " A poster showing one of the characters from The Space Leauge."
+			if(31)
+				name += " - Space Leauge: The Greek Amazon"
+				desc += " A poster showing one of the characters from The Space Leauge."
+			if(32)
+				name += " - Space Leauge: The Night Walker"
+				desc += " A poster showing one of the characters from The Space Leauge."
+			if(33)
+				name += " - Space Leauge: Asteroid Corgicatcher"
+				desc += " A poster showing one of the characters from The Space Leauge."
+			if(34)
+				name += " - Space Leauge: The Jade Flashlight"
+				desc += " A poster showing one of the characters from The Space Leauge."
+			if(35)
+				name += " - Space Leauge: The Guner Eagle"
+				desc += " A poster showing one of the characters from The Space Leauge."
 			else
 				name += " - Error (subtype 1 serial_number)"
 				desc += " This is a bug, please report the circumstances under which you encountered this poster at https://github.com/NTStation/NTstation13/issues."
