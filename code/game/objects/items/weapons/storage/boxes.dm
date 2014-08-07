@@ -218,6 +218,22 @@
 		new /obj/item/weapon/grenade/chem_grenade/teargas(src)
 		new /obj/item/weapon/grenade/chem_grenade/teargas(src)
 
+/obj/item/weapon/storage/box/incendiary
+	name = "box of incendiary grenades (WARNING)"
+	desc = "<B>WARNING: Do not use without fire resistant clothing and internals.</B>"
+	icon_state = "incendiary"
+
+	New()
+		..()
+		new /obj/item/weapon/grenade/chem_grenade/incendiary(src)
+		new /obj/item/weapon/grenade/chem_grenade/incendiary(src)
+		new /obj/item/weapon/grenade/chem_grenade/incendiary(src)
+		new /obj/item/weapon/grenade/chem_grenade/incendiary(src)
+		new /obj/item/weapon/grenade/chem_grenade/incendiary(src)
+		new /obj/item/weapon/grenade/chem_grenade/incendiary(src)
+		new /obj/item/weapon/grenade/chem_grenade/incendiary(src)
+
+
 /obj/item/weapon/storage/box/emps
 	name = "box of emp grenades"
 	desc = "A box with 5 emp grenades."

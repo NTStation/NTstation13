@@ -32,6 +32,7 @@
 	new /obj/item/ammo_box/magazine/m10mm(src)
 	new /obj/item/weapon/storage/box/flashbangs(src)
 	new /obj/item/weapon/storage/box/teargas(src)
+	new /obj/item/weapon/storage/box/incendiary(src)
 	new /obj/item/weapon/gun/projectile/automatic/bulldog(src)
 	new /obj/item/weapon/gun/projectile/automatic/bulldog(src)
 	new /obj/item/weapon/gun/projectile/automatic/bulldog(src)

@@ -494,8 +494,10 @@
 		..()
 		if(reagents)
 			reagents.add_reagent("nutriment", 1+round((potency / 25), 1))
+			reagents.add_reagent("blazeoil", max(0, potency-80))
 			reagents.add_reagent("capsaicin", 8+round(potency / 2, 1))
 			reagents.add_reagent("condensedcapsaicin", 4+round(potency / 4, 1))
+
 			bitesize = 1+round(reagents.total_volume / 4, 1)
 
 /obj/item/weapon/reagent_containers/food/snacks/grown/ghost_chilli/attackby(var/obj/item/O as obj, var/mob/user as mob)

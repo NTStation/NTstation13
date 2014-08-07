@@ -324,3 +324,133 @@
 	New()
 		..()
 		reagents.add_reagent("frostoil", 30)
+
+/obj/item/weapon/reagent_containers/glass/bottle/syndie
+	icon = 'icons/obj/chemical.dmi'
+	icon_state = "bottle_syndicate"
+
+/obj/item/weapon/reagent_containers/glass/bottle/syndie/chiyanine
+	name = "chiyanine bottle"
+	desc = "A delayed poison that will cause severe poisoning several minutes after consumption."
+	New()
+		..()
+		reagents.add_reagent("chiyanine", 30)
+
+/obj/item/weapon/reagent_containers/glass/bottle/syndie/mizarudol
+	name = "mizarudol bottle"
+	desc = "A poison that is known to degrade vision."
+	New()
+		..()
+		reagents.add_reagent("mizarudol", 30)
+
+/obj/item/weapon/reagent_containers/glass/bottle/syndie/iwazarudol
+	name = "iwazarudol bottle"
+	desc = "A muting poison. It takes a while to start working."
+	New()
+		..()
+		reagents.add_reagent("iwazarudol", 30)
+
+/obj/item/weapon/reagent_containers/glass/bottle/syndie/maizine
+	name = "maizine bottle"
+	desc = "A very slow acting poison. It does not kill very fast but even small doses may be lethal if left untreated."
+	New()
+		..()
+		reagents.add_reagent("maizine", 30)
+
+/obj/item/weapon/reagent_containers/glass/bottle/syndie/ehuadol
+	name = "ehuadol bottle"
+	desc = "A very complex and dangerous poison."
+	New()
+		..()
+		reagents.add_reagent("ehuadol", 30)
+
+/obj/item/weapon/reagent_containers/glass/bottle/syndie/impedrezene
+	name = "impedrezene bottle"
+	desc = "Impedrezene is a narcotic that impedes one's ability by slowing down the higher brain cell functions."
+	New()
+		..()
+		reagents.add_reagent("impedrezene", 30)
+
+/obj/item/weapon/reagent_containers/glass/bottle/syndie/beepskysmash
+	name = "beepsky smash bottle"
+	desc = "Stuns the victim. Considered a drink by nanotrasen."
+	New()
+		..()
+		reagents.add_reagent("beepskysmash", 30)
+
+/obj/item/weapon/reagent_containers/glass/bottle/syndie/frostoil
+	name = "frost oil bottle"
+	desc = "A special oil that noticably chills the body. Extraced from Icepeppers."
+	New()
+		..()
+		reagents.add_reagent("frostoil", 30)
+
+/obj/item/weapon/reagent_containers/glass/bottle/syndie/fangshenine
+	name = "fangshenine bottle"
+	desc = "Irridiates the victim."
+	New()
+		..()
+		reagents.add_reagent("fangshenine", 30)
+
+/obj/item/weapon/reagent_containers/glass/bottle/syndie/amatoxin
+	name = "amatoxin bottle"
+	desc = "A powerful poison derived from certain species of mushroom."
+	New()
+		..()
+		reagents.add_reagent("amatoxin", 30)
+
+/obj/item/weapon/reagent_containers/glass/bottle/syndie/hunzine
+	name = "hunzine bottle"
+	desc = "A poison targeting various parts of the body. Known to cause toxic damage to tissue, damage to the brain and severe confusion."
+	New()
+		..()
+		reagents.add_reagent("hunzine", 30)
+
+/obj/item/weapon/reagent_containers/glass/bottle/syndie/chloralhydrate
+	name = "chloral hydrate bottle"
+	desc = "A powerful sedative."
+	New()
+		..()
+		reagents.add_reagent("chloralhydrate", 30)
+
+/obj/item/weapon/reagent_containers/glass/bottle/syndie/neurotoxin
+	name = "neurotoxin bottle"
+	desc = "Weakens the victim. Considered a drink by nanotrasen."
+	New()
+		..()
+		reagents.add_reagent("neurotoxin", 30)
+
+/obj/item/weapon/reagent_containers/glass/bottle/syndie/mutagen
+	name = "unstable mutagen bottle"
+	desc = "Might cause unpredictable mutations."
+	New()
+		..()
+		reagents.add_reagent("mutagen", 30)
+
+/obj/item/weapon/reagent_containers/glass/bottle/syndie/plasma
+	name = "plasma bottle"
+	desc = "Plasma in its liquid form."
+	New()
+		..()
+		reagents.add_reagent("plasma", 30)
+
+/obj/item/weapon/reagent_containers/glass/bottle/syndie/lexorin
+	name = "lexorin bottle"
+	desc = "Lexorin temporarily stops respiration. Causes tissue damage."
+	New()
+		..()
+		reagents.add_reagent("lexorin", 30)
+
+/obj/item/weapon/reagent_containers/glass/bottle/syndie/blazeoil
+	name = "blaze oil bottle"
+	desc = "Causes spontanous combustion when ingested."
+	New()
+		..()
+		reagents.add_reagent("blazeoil", 30)
+
+/obj/item/weapon/reagent_containers/glass/bottle/syndie/slimejelly
+	name = "slime jelly bottle"
+	desc = "A gooey semi-liquid produced from one of the deadliest lifeforms in existence."
+	New()
+		..()
+		reagents.add_reagent("slimejelly", 30)
