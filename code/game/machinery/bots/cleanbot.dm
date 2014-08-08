@@ -159,18 +159,8 @@ text("<A href='?src=\ref[src];operation=oddbutton'>[oddbutton ? "Yes" : "No"]</A
 	if(mode == BOT_CLEANING)
 		return
 	if(call_path)
-		if(!pathset)
-			set_path()
-			target = null
-			oldtarget = null
-			oldloc = null
-		else
-			move_to_call()
-			sleep(5)
-			move_to_call()
+		call_mode()
 		return
-
-
 
 	if(!emagged && prob(5))
 		visible_message("[src] makes an excited beeping booping sound!")

@@ -168,7 +168,7 @@
 
 	usr.set_machine(src)
 	add_fingerprint(usr)
-	if((href_list["power"]) && (allowed(usr)))
+	if((href_list["power"]) && (allowed(usr) || !locked))
 		if (on)
 			turn_off()
 		else
@@ -181,7 +181,7 @@
 		if("remote")
 			remote_disabled = !remote_disabled
 		if("hack")
-			if(!emagged)
+			if(emagged != 2)
 				emagged = 2
 				hacked = 1
 				remote_disabled = 0
@@ -279,7 +279,7 @@
 /obj/machinery/bot/proc/hack(mob/user)
 	var/hack
 	if(issilicon(user)) //Allows silicons to toggle the emag status of a bot.
-		hack += "[emagged ? "Software compromised! Unit may exhibit dangerous or erratic behavior." : "Unit operating normally. Release safety lock?"]<BR>"
+		hack += "[emagged == 2 ? "Software compromised! Unit may exhibit dangerous or erratic behavior." : "Unit operating normally. Release safety lock?"]<BR>"
 		hack += "Harm Prevention Safety System: <A href='?src=\ref[src];operation=hack'>[emagged ? "<span class='bad'>DANGER</span>" : "Engaged"]</A><BR>"
 	else if(!locked) //Humans with access can use this option to hide a bot from the AI's remote control panel.
 		hack += "AI remote control network port: <A href='?src=\ref[src];operation=remote'>[remote_disabled ? "Closed" : "Open"]</A><BR><BR>"
@@ -304,10 +304,16 @@
 	if(mode != BOT_SUMMON && mode != BOT_RESPONDING)
 		botcard.access = prev_access
 
-/obj/machinery/bot/proc/set_path() //Contains all the non-unique settings for prepairing a bot to be controlled by the AI.
-	pathset = 1
-	mode = BOT_RESPONDING
-	tries = 0
+/obj/machinery/bot/proc/call_mode() //Handles preparing a bot for a call, as well as calling the move proc.
+	if(!pathset) //Sets the bot to call mode.
+		pathset = 1
+		mode = BOT_RESPONDING
+		tries = 0
+	else //Handles the bot's movement during a call.
+		move_to_call()
+		sleep(5)
+		move_to_call() //Called twice so that the bot moves faster.
+		return
 
 /obj/machinery/bot/proc/move_to_call()
 	if(call_path && call_path.len && tries < 6)

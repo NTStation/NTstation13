@@ -248,15 +248,7 @@
 	if(call_path) //Stop what you are doing and answer the call!
 
 		if(!pathset) //Reset the bot before calling it.
-			set_path()
-			patient = null
-			oldpatient = null
-			oldloc = null
-			last_found = world.time
-		else
-			move_to_call()
-			sleep(5)
-			move_to_call()
+			call_mode()
 		return
 
 	if(frustration > 8)
