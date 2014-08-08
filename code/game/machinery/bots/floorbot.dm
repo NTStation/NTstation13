@@ -45,7 +45,7 @@
 	var/turf/oldtarget
 	var/list/floorbottargets = list() //List of unreachable targets
 	var/oldloc = null
-	req_one_access = list(access_construction)
+	req_one_access = list(access_construction, access_robotics)
 	var/targetdirection
 	bot_type = FLOOR_BOT
 	bot_filter = RADIO_FLOORBOT

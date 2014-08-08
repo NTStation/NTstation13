@@ -31,7 +31,7 @@
 	var/list/cleanbottargets = list() //Targets that the cleanbot cannot reach and will thus ignore.
 	var/max_targets = 50 //Maximum number of targets a cleanbot can ignore.
 	var/oldloc = null
-	req_one_access = list(access_janitor)
+	req_one_access = list(access_janitor, access_robotics)
 //	var/patrol_path[] = null
 //	var/beacon_freq = 1445		// navigation beacon frequency
 	var/closest_dist
