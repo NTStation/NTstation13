@@ -1283,6 +1283,63 @@ datum
 				..()
 				return
 
+		pentetic_acid
+			name = "Pentetic acid"
+			id = "penteticacid"
+			description = "A powerful medicinal acid to combat radiation and toxin damage."
+			reagent_state = LIQUID
+			color = "#604030" // rgb: 96, 64, 48
+
+			on_mob_life(var/mob/living/M as mob)
+				if(!M) M = holder.my_atom
+				M.radiation = max(M.radiation-5*REM,0)
+				if(!M) M = holder.my_atom
+				M.reagents.remove_all_type(/datum/reagent/toxin, 1*REM, 0, 1)
+				M.adjustToxLoss(-3*REM)
+				..()
+				return
+
+		almazidone // the name of this is a reference
+			name = "Almazidone"
+			id = "almazidone"
+			description = "Chemically modified salt, basically. Best used to get high."
+			reagent_state = LIQUID
+			color = "#4D5D53" // rgb: 77, 93, 83
+
+			on_mob_life(var/mob/living/M as mob)
+				if(!M) M = holder.my_atom
+				M.druggy = max(M.druggy, 15)
+				if(isturf(M.loc) && !istype(M.loc, /turf/space))
+					if(M.canmove)
+						if(prob(10)) step(M, pick(cardinal))
+				holder.remove_reagent(src.id, 0.5 * REAGENTS_METABOLISM)
+				if(!M) M = holder.my_atom
+				if(prob(33))
+					M.take_organ_damage(1*REM, 0)
+				M.adjustOxyLoss(3)
+				if(prob(20)) M.emote("gasp")
+				if(!M) M = holder.my_atom
+				M.hallucination += 10
+				..()
+				return
+
+		elatopam // this drug took so much shit to make :^)
+			name = "Elatopam"
+			id = "elatopam"
+			description = "An old drug for burns and bruises. Now it's used to get high."
+			reagent_state = LIQUID
+			color = "#FF4BA4" // rgb: 255, 75, 164
+
+			on_mob_life(var/mob/living/M as mob)
+				if(M.stat == 2.0)
+					return
+				if(!M) M = holder.my_atom
+				M.heal_organ_damage(0,1*REM)
+				if(M.getBruteLoss() && prob(20)) M.heal_organ_damage(1,0)
+				M.jitteriness = max(M.jitteriness-5,0)
+				if(prob(80)) M.adjustBrainLoss(1*REM)
+				M.druggy = max(M.druggy, 15)
+
 //////////////////////////Poison stuff///////////////////////
 
 		toxin
@@ -3746,6 +3803,21 @@ datum
 					M.heal_organ_damage(1,1)
 					..()
 					return
+
+		ethanol/bathsalts // not even stolen from goon tho
+			name = "Bath salts"
+			id = "bathsalts"
+			description = "A horrible drug from the depths of the space slums. Practice caution when consuming!"
+			nutriment_factor = 1 * REAGENTS_METABOLISM
+			color = "#FFFFFF" // rgb: 255, 255, 255
+			boozepwr = 1
+
+			on_mob_life(var/mob/living/M as mob)
+				M.nutrition += nutriment_factor
+				M.AdjustStunned(-0.5)
+				..()
+				return
+
 
 // Undefine the alias for REAGENTS_EFFECT_MULTIPLER
 #undef REM
