@@ -282,9 +282,9 @@
 		..()
 		if(reagents)
 			reagents.add_reagent("nutriment", 1)
-			reagents.add_reagent("toxin", 3+round(potency / 3, 1))
-			reagents.add_reagent("lexorin", 1+round(potency / 5, 1))
 			reagents.add_reagent("ehuadol", 2+round(potency / 5, 1))
+			reagents.add_reagent("lexorin", 1+round(potency / 5, 1))
+			reagents.add_reagent("toxin", 3+round(potency / 3, 1))
 			bitesize = 1+round(reagents.total_volume / 2, 1)
 
 /obj/item/weapon/reagent_containers/food/snacks/grown/ambrosiavulgaris
