@@ -45,7 +45,7 @@
 	var/turf/oldtarget
 	var/list/floorbottargets = list() //List of unreachable targets
 	var/oldloc = null
-	req_one_access = list(access_construction)
+	req_one_access = list(access_construction, access_robotics)
 	var/targetdirection
 	bot_type = FLOOR_BOT
 	bot_filter = RADIO_FLOORBOT
@@ -100,7 +100,7 @@
 	if(!locked || issilicon(user))
 		dat += "Replaces floor tiles: <A href='?src=\ref[src];operation=replace'>[replacetiles ? "Yes" : "No"]</A><BR>"
 		dat += "Finds tiles: <A href='?src=\ref[src];operation=tiles'>[eattiles ? "Yes" : "No"]</A><BR>"
-		dat += "Make singles pieces of metal into tiles when empty: <A href='?src=\ref[src];operation=make'>[maketiles ? "Yes" : "No"]</A><BR>"
+		dat += "Make pieces of metal into tiles when empty: <A href='?src=\ref[src];operation=make'>[maketiles ? "Yes" : "No"]</A><BR>"
 		dat += "Repair damaged tiles and platings: <A href='?src=\ref[src];operation=fix'>[fixfloors ? "Yes" : "No"]</A><BR>"
 		dat += "Patrol Station: <A href='?src=\ref[src];operation=patrol'>[auto_patrol ? "Yes" : "No"]</A><BR>"
 		var/bmode
@@ -186,15 +186,7 @@
 	if(mode == BOT_REPAIRING)
 		return
 	if(call_path)
-		if(!pathset)
-			target = null
-			oldtarget = null
-			oldloc = null
-			set_path()
-		else
-			move_to_call()
-			sleep(5)
-			move_to_call()
+		call_mode()
 		return
 
 	if(mode == BOT_SUMMON)
@@ -212,7 +204,7 @@
 			if(maketiles)
 				if(target == null || !target)
 					for(var/obj/item/stack/sheet/metal/M in view(7, src))
-						if(!(M in floorbottargets) && M != oldtarget && M.amount == 1 && !(istype(M.loc, /turf/simulated/wall)))
+						if(!(M in floorbottargets) && M != oldtarget && !(istype(M.loc, /turf/simulated/wall)))
 							oldtarget = M
 							target = M
 							break
@@ -222,7 +214,7 @@
 		visible_message("[src] makes an excited booping beeping sound!")
 
 	if((!target || target == null) && emagged < 2 && amount > 0)
-		if(targetdirection != null)
+		if(targetdirection != null) //The bot is in bridge mode.
 
 			for (var/turf/space/D in view(7,src))
 				if(!(D in floorbottargets) && D != oldtarget)			// Added for bridging mode
@@ -237,7 +229,7 @@
 				target = T
 		if(!target || target == null)
 			for (var/turf/space/D in view(7,src)) //Ensures the floorbot does not try to "fix" space areas or shuttle docking zones.
-				if(!(D in floorbottargets) && D != oldtarget && is_hull_breach())
+				if(!(D in floorbottargets) && D != oldtarget && is_hull_breach(D))
 					mode = BOT_MOVING
 					oldtarget = D
 					target = D
@@ -338,7 +330,7 @@
 
 /obj/machinery/bot/floorbot/proc/is_hull_breach(var/turf/t) //Ignore space tiles not considered part of a structure, also ignores shuttle docking areas.
 	var/area/t_area = get_area(t)
-	if (t_area && (t_area.name == "Space" || findtext(t_area.name, "Shuttle" | "shuttle")))
+	if (t_area && (t_area.name == "Space" || findtext(t_area.name, "huttle")))
 		return 0
 	else
 		return 1
@@ -347,7 +339,7 @@
 
 	if(istype(target, /turf/space/))
 		 //Must be a hull breach or in bridge mode to continue.
-		if(!is_hull_breach() && !targetdirection)
+		if(!is_hull_breach(target) && !targetdirection)
 			target = null
 			return
 	else if(!istype(target, /turf/simulated/floor))
@@ -412,8 +404,6 @@
 /obj/machinery/bot/floorbot/proc/maketile(var/obj/item/stack/sheet/metal/M)
 	if(!istype(M, /obj/item/stack/sheet/metal))
 		return
-	if(M.amount > 1)
-		return
 	visible_message("<span class='notice'> [src] begins to create tiles.</span>")
 	mode = BOT_REPAIRING
 	spawn(20)
@@ -424,7 +414,10 @@
 		var/obj/item/stack/tile/plasteel/T = new /obj/item/stack/tile/plasteel
 		T.amount = 4
 		T.loc = M.loc
-		qdel(M)
+		if(M.amount > 1)
+			M.amount--
+		else
+			qdel(M)
 		target = null
 		mode = BOT_IDLE
 

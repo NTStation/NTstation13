@@ -587,6 +587,7 @@ var/list/ai_list = list()
 	if(call_path && call_path.len) //Ensures that a valid path is calculated!
 		if(!Bot.on)
 			Bot.turn_on() //Saves the AI the hassle of having to activate a bot manually.
+		Bot.bot_reset() //Reset a bot becore setting it to call mode.
 		Bot.pathset = 0 //Forces the bot to accept a new rute if already under an AI call.
 		Bot.call_path = call_path //Send the path to the bot!
 		Bot.botcard = all_access //Give the bot all-access while under the AI's command.

@@ -18,7 +18,7 @@
 	var/list/codes		// assoc. list of transponder codes
 	var/codes_txt = ""	// codes as set on map: "tag1;tag2" or "tag1=value;tag2=value"
 
-	req_access = list(access_engine)
+	req_one_access = list(access_engine, access_robotics)
 
 	New()
 		..()
@@ -117,7 +117,7 @@
 					src.locked = !src.locked
 					user << "Controls are now [src.locked ? "locked." : "unlocked."]"
 				else
-					user << "\red Access denied."
+					user << "<span class='danger'>Access denied.</span>"
 				updateDialog()
 			else
 				user << "You must open the cover first!"
@@ -176,9 +176,9 @@ Transponder Codes:<UL>"}
 			t += "<small><A href='byond://?src=\ref[src];add=1;'>(add new)</A></small><BR>"
 			t+= "<UL></TT>"
 
-		user << browse(t, "window=navbeacon")
-		onclose(user, "navbeacon")
-		return
+		var/datum/browser/popup = new(user, "navbeacon", "Automatic Robot Navigation Beacon")
+		popup.set_content(t)
+		popup.open()
 
 	Topic(href, href_list)
 		if(..())

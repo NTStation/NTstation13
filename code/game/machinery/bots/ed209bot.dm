@@ -206,16 +206,7 @@ Auto Patrol: []"},
 		return
 
 	if(call_path)
-		if(!pathset)
-			set_path()
-			target = null
-			oldtarget_name = null
-			anchored = 0
-			walk_to(src,0)
-		else
-			move_to_call()
-			sleep(5)
-			move_to_call()
+		call_mode()
 		return
 
 	var/list/targets = list()

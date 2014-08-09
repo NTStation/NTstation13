@@ -31,7 +31,7 @@
 	var/list/cleanbottargets = list() //Targets that the cleanbot cannot reach and will thus ignore.
 	var/max_targets = 50 //Maximum number of targets a cleanbot can ignore.
 	var/oldloc = null
-	req_one_access = list(access_janitor)
+	req_one_access = list(access_janitor, access_robotics)
 //	var/patrol_path[] = null
 //	var/beacon_freq = 1445		// navigation beacon frequency
 	var/closest_dist
@@ -159,18 +159,8 @@ text("<A href='?src=\ref[src];operation=oddbutton'>[oddbutton ? "Yes" : "No"]</A
 	if(mode == BOT_CLEANING)
 		return
 	if(call_path)
-		if(!pathset)
-			set_path()
-			target = null
-			oldtarget = null
-			oldloc = null
-		else
-			move_to_call()
-			sleep(5)
-			move_to_call()
+		call_mode()
 		return
-
-
 
 	if(!emagged && prob(5))
 		visible_message("[src] makes an excited beeping booping sound!")
