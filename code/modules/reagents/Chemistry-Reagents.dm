@@ -1293,7 +1293,6 @@ datum
 			on_mob_life(var/mob/living/M as mob)
 				if(!M) M = holder.my_atom
 				M.radiation = max(M.radiation-5*REM,0)
-				if(!M) M = holder.my_atom
 				M.reagents.remove_all_type(/datum/reagent/toxin, 1*REM, 0, 1)
 				M.adjustToxLoss(-3*REM)
 				..()
@@ -1313,12 +1312,10 @@ datum
 					if(M.canmove)
 						if(prob(10)) step(M, pick(cardinal))
 				holder.remove_reagent(src.id, 0.5 * REAGENTS_METABOLISM)
-				if(!M) M = holder.my_atom
 				if(prob(33))
 					M.take_organ_damage(1*REM, 0)
 				M.adjustOxyLoss(3)
 				if(prob(20)) M.emote("gasp")
-				if(!M) M = holder.my_atom
 				M.hallucination += 10
 				..()
 				return
@@ -3814,7 +3811,9 @@ datum
 
 			on_mob_life(var/mob/living/M as mob)
 				M.nutrition += nutriment_factor
+				M.AdjustParalysis(-0.5)
 				M.AdjustStunned(-0.5)
+				M.AdjustWeakened(-0.5)
 				..()
 				return
 
