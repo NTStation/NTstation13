@@ -493,7 +493,7 @@ datum/chemical_reaction/penteticacid // stolen from goon
 	name = "Pentetic acid"
 	id = "penteticacid"
 	result = "penteticacid"
-	required_reagents = list("ammonia" = 1, "chlorine" = 1, "radium" = 1)
+	required_reagents = list("arithrazine" = 1, "anti_toxin" = 2, "plasma" = 1)
 	result_amount = 1
 
 datum/chemical_reaction/almazidone
