@@ -404,7 +404,7 @@ var/list/onmob_icons = list(
 	var/t_state = icon_state
 	var/image/overlay
 
-	if((icon_name in list("r_hand", "l_hand", "belt", "s_store", "gloves")) && item_state)
+	if((icon_name in list("r_hand", "l_hand", "belt", "s_store", "hands")) && item_state)
 		t_state = item_state
 
 	if(icon_name == "uniform")
