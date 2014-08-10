@@ -1336,6 +1336,7 @@ datum
 				M.jitteriness = max(M.jitteriness-5,0)
 				if(prob(80)) M.adjustBrainLoss(1*REM)
 				M.druggy = max(M.druggy, 15)
+				return
 
 //////////////////////////Poison stuff///////////////////////
 
@@ -2019,7 +2020,6 @@ datum
 				if(isturf(M.loc) && !istype(M.loc, /turf/space))
 					if(M.canmove)
 						if(prob(10)) step(M, pick(cardinal))
-				..()
 				return
 
 		toxin/methamphetamine
@@ -2044,7 +2044,6 @@ datum
 				if(isturf(M.loc) && !istype(M.loc, /turf/space))
 					if(M.canmove)
 						if(prob(10)) step(M, pick(cardinal))
-				..()
 				return
 
 
