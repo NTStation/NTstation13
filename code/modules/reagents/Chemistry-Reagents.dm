@@ -2012,7 +2012,6 @@ datum
 			on_mob_life(var/mob/living/carbon/M as mob)
 				if(!M) M = holder.my_atom
 				M.status_flags |= GOTTAGOFAST
-				M.adjustBrainLoss(2*REM)
 				M.hallucination += 10
 				M.drowsyness = max(M.drowsyness-3)
 				if(prob(80)) M.adjustBrainLoss(1*REM)
@@ -2039,7 +2038,7 @@ datum
 				M.AdjustWeakened(-2)
 				M.hallucination += 10
 				M.jitteriness = max(M.jitteriness-5,0)
-				if(prob(80)) M.adjustBrainLoss(1*REM)
+				if(prob(90)) M.adjustBrainLoss(1*REM)
 				..()
 				holder.remove_reagent(src.id, REAGENTS_METABOLISM)
 				if(isturf(M.loc) && !istype(M.loc, /turf/space))
