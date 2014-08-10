@@ -1317,7 +1317,6 @@ datum
 				M.adjustOxyLoss(3)
 				if(prob(20)) M.emote("gasp")
 				M.hallucination += 10
-				..()
 				return
 
 		elatopam // this drug took so much shit to make :^)
@@ -1330,6 +1329,7 @@ datum
 			on_mob_life(var/mob/living/M as mob)
 				if(M.stat == 2.0)
 					return
+				holder.remove_reagent(src.id, 0.5 * REAGENTS_METABOLISM)
 				if(!M) M = holder.my_atom
 				M.heal_organ_damage(0,1*REM)
 				if(M.getBruteLoss() && prob(20)) M.heal_organ_damage(1,0)
