@@ -2001,6 +2001,54 @@ datum
 				..()
 				return
 
+		toxin/ephedrine
+			name = "Ephedrine"
+			id = "ephedrine"
+			description = "A relatively weak drug that can boost your stamina."
+			reagent_state = LIQUID
+			color = "#792300" // rgb: 121, 35, 0
+			toxpwr = 1.5
+
+			on_mob_life(var/mob/living/carbon/M as mob)
+				if(!M) M = holder.my_atom
+				M.status_flags |= GOTTAGOFAST
+				M.adjustBrainLoss(2*REM)
+				M.hallucination += 10
+				M.drowsyness = max(M.drowsyness-3)
+				if(prob(80)) M.adjustBrainLoss(1*REM)
+				holder.remove_reagent(src.id, 0.5 * REAGENTS_METABOLISM)
+				if(isturf(M.loc) && !istype(M.loc, /turf/space))
+					if(M.canmove)
+						if(prob(10)) step(M, pick(cardinal))
+				..()
+				return
+
+		toxin/methamphetamine
+			name = "Methampetamine"
+			id = "methamphetamine"
+			description = "A rather powerful drug derived from 'drines."
+			reagent_state = LIQUID
+			color = "#000067" // rgb: 0, 0, 103
+			toxpwr = 1
+
+			on_mob_life(var/mob/living/carbon/M as mob)
+				if(!M) M = holder.my_atom
+				M.status_flags |= GOTTAGOFAST
+				M.AdjustParalysis(-2)
+				M.AdjustStunned(-2)
+				M.AdjustWeakened(-2)
+				M.hallucination += 10
+				M.jitteriness = max(M.jitteriness-5,0)
+				if(prob(80)) M.adjustBrainLoss(1*REM)
+				..()
+				holder.remove_reagent(src.id, REAGENTS_METABOLISM)
+				if(isturf(M.loc) && !istype(M.loc, /turf/space))
+					if(M.canmove)
+						if(prob(10)) step(M, pick(cardinal))
+				..()
+				return
+
+
 		jiutin //technically a toxin, but we don't want anti toxins to remove it
 			name = "Jiutin"
 			id = "jiutin"

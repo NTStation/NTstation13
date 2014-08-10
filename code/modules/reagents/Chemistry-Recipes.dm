@@ -510,6 +510,20 @@ datum/chemical_reaction/elatopam
 	required_reagents = list("virusfood" = 1, "robustharvestnutriment" = 2)
 	result_amount = 4
 
+datum/chemical_reaction/ephedrine
+	name = "Ephedrine"
+	id = "ephedrine"
+	result = "ephedrine"
+	required_reagents = list("sugar" = 1, "almazidone" = 1, "beepskysmash" = 1)
+	result_amount = 2
+
+datum/chemical_reaction/methamphetamine
+	name = "Methamphetamine"
+	id = "methamphetamine"
+	result = "methamphetamine"
+	required_reagents = list("ephedrine" = 5, "hydrogen" = 1, "chlorine" = 1, "plasma" = 1)
+	result_amount = 1
+
 /datum/chemical_reaction/lipozine
 	name = "Lipozine"
 	id = "Lipozine"
