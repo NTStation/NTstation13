@@ -490,7 +490,7 @@ silicate
 	result_amount = 5
 
 /datum/chemical_reaction/synchrozine
-	name = "Synchorizine"
+	name = "Synchroizine"
 	id = "synchrozine"
 	result = "synchrozine"
 	required_reagents = list("blood" = 1, "fuel" = 1, "elatopam" = 1)
