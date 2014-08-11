@@ -489,6 +489,13 @@ silicate
 	required_reagents = list("silicon" = 1, "hydrogen" = 1, "anti_toxin" = 1)
 	result_amount = 5
 
+/datum/chemical_reaction/syncrozine
+	name = "Syncorizine"
+	id = "syncrozine"
+	result = "syncrozine"
+	required_reagents = list("blood" = 1, "fuel" = 1, "elatopam" = 1)
+	result_amount = 2
+
 datum/chemical_reaction/penteticacid // stolen from goon
 	name = "Pentetic acid"
 	id = "penteticacid"

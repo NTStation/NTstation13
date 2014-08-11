@@ -2118,6 +2118,30 @@ datum
 				data++
 				return
 
+		toxin/syncrozine
+			name = "Syncrozine"
+			id = "syncrozine"
+			description = "Apparently fixes brain damage, but is it really worth it?"
+			reagent_state = LIQUID
+			color = "#49E20E" // rgb: 73, 226, 14
+			toxpwr = 2
+
+			on_mob_life(var/mob/living/M as mob)
+				if (M.stat == 2.0)
+					return
+				if(!M) M = holder.my_atom
+				if(prob(80)) M.adjustBrainLoss(-3*REM)
+				if(prob(90)) // you will literally never stop vomitting
+					M.visible_message("<span class='danger'>[M] throws up!</span>")
+					M.take_organ_damage(2*REM, 0)
+					var/turf/pos = get_turf(M)
+					pos.add_vomit_floor(M)
+					pos.add_blood_floor(M)
+					playsound(pos, 'sound/effects/splat.ogg', 50, 1)
+				data++
+				..()
+				return
+
 /////////////////////////Coloured Crayon Powder////////////////////////////
 //For colouring in /proc/mix_color_from_reagents
 
