@@ -2130,8 +2130,8 @@ datum
 				if (M.stat == 2.0)
 					return
 				if(!M) M = holder.my_atom
-				if(prob(80)) M.adjustBrainLoss(-3*REM)
-				if(prob(90)) // you will literally never stop vomitting
+				if(prob(70)) M.adjustBrainLoss(-3*REM)
+				if(prob(50)) // you will literally never stop vomiting
 					M.visible_message("<span class='danger'>[M] throws up!</span>")
 					M.take_organ_damage(2*REM, 0)
 					var/turf/pos = get_turf(M)
