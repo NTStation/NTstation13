@@ -2118,13 +2118,13 @@ datum
 				data++
 				return
 
-		toxin/syncrozine
-			name = "Syncrozine"
-			id = "syncrozine"
+		toxin/synchrozine
+			name = "Synchrozine"
+			id = "synchrozine"
 			description = "Apparently fixes brain damage, but is it really worth it?"
 			reagent_state = LIQUID
 			color = "#49E20E" // rgb: 73, 226, 14
-			toxpwr = 2
+			toxpwr = 0.5
 
 			on_mob_life(var/mob/living/M as mob)
 				if (M.stat == 2.0)
