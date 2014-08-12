@@ -339,6 +339,95 @@
 	braidtail
 		name = "Braided Tail"
 		icon_state = "hair_braidtail"
+
+	familyman
+		name = "Family Man"
+		icon_state = "hair_thefamilyman"
+
+	drillruru
+		name = "Drillruru"
+		icon_state = "hair_drillruru"
+
+	dandypomp
+		name = "Dandy Pompadour"
+		icon_state = "hair_dandypompadour"
+
+	poofy
+		name = "Poofy"
+		icon_state = "hair_poofy"
+
+	crono
+		name = "Chrono"
+		icon_state = "hair_toriyama"
+
+	vegeta
+		name = "Vegeta"
+		icon_state = "hair_toriyama2"
+
+	cia
+		name = "CIA"
+		icon_state = "hair_cia"
+
+	mulder
+		name = "Mulder"
+		icon_state = "hair_mulder"
+
+	scully
+		name = "Scully"
+		icon_state = "hair_scully"
+
+	nitori
+		name = "Nitori"
+		icon_state = "hair_nitori"
+
+	joestar
+		name = "Joestar"
+		icon_state = "hair_joestar"
+
+	edgeworth
+		name = "Edgeworth"
+		icon_state = "hair_edgeworth"
+
+	objection
+		name = "Wright"
+		icon_state = "hair_objection!"
+
+	dubsman
+		name = "Dubsman"
+		icon_state = "hair_dubsman"
+
+	blackswordsman
+		name = "Black Swordsman"
+		icon_state = "hair_blackswordsman"
+
+	mentalist
+		name = "Mentalist"
+		icon_state = "hair_mentalist"
+
+	fujisaki
+		name = "Fujisaki"
+		icon_state = "hair_fujisaki"
+
+	schierke
+		name = "Schierke"
+		icon_state = "hair_schierke"
+
+	akari
+		name = "Akari"
+		icon_state = "hair_akari"
+
+	fujiyabashi
+		name = "Fujiyabashi"
+		icon_state = "hair_fubiyabashi"
+
+	nia
+		name = "Nia"
+		icon_state = "hair_nia"
+
+	shinobu
+		name = "Shinobu"
+		icon_state = "hair_shinobu"
+
 /////////////////////////////
 // Facial Hair Definitions //
 /////////////////////////////
