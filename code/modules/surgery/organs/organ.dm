@@ -48,6 +48,7 @@
 	var/burn_dam = 0
 	var/max_damage = 0
 	var/dam_icon = ""
+	var/visibly_dismembers = 1
 
 /obj/item/organ/limb/chest
 	name = "chest"
@@ -56,6 +57,7 @@
 	max_damage = 200
 	body_part = CHEST
 	dam_icon = "chest"
+	visibly_dismembers = 0
 
 /obj/item/organ/limb/head
 	name = "head"
