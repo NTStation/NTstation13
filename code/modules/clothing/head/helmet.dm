@@ -56,7 +56,7 @@
 
 /obj/item/clothing/head/helmet/swat
 	name = "\improper SWAT helmet"
-	desc = "They're often used by highly trained Swat Members."
+	desc = "An extremely robust, space-worthy helmet with a nanotrasen logo on the top."
 	icon_state = "swat"
 	flags = HEADCOVERSEYES
 	item_state = "swat"
@@ -66,6 +66,12 @@
 	min_cold_protection_temperature = SPACE_HELM_MIN_TEMP_PROTECT
 	heat_protection = HEAD
 	max_heat_protection_temperature = SPACE_HELM_MAX_TEMP_PROTECT
+
+/obj/item/clothing/head/helmet/swat/syndicate
+	name = "blood-red helmet"
+	desc = "An extremely robust, space-worthy helmet without a visor to allow for goggle usage underneath."
+	icon_state = "helmetsyndi"
+	item_state = "helmet"
 
 /obj/item/clothing/head/helmet/thunderdome
 	name = "\improper Thunderdome helmet"
