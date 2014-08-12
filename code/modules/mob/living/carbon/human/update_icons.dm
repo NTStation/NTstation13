@@ -788,7 +788,7 @@ var/global/list/human_icon_cache = list()
 	var/mutant_type = get_mutant_type()
 
 
-	if(affecting.state == ORGAN_REMOVED && visibly_dismembers)
+	if(affecting.state == ORGAN_REMOVED && affecting.visibly_dismembers)
 		return 0
 
 	if(affecting.body_part == HEAD || affecting.body_part == CHEST) //these have gender and use it in their icons
