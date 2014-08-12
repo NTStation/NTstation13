@@ -489,6 +489,48 @@ silicate
 	required_reagents = list("silicon" = 1, "hydrogen" = 1, "anti_toxin" = 1)
 	result_amount = 5
 
+/datum/chemical_reaction/synchrozine
+	name = "Synchroizine"
+	id = "synchrozine"
+	result = "synchrozine"
+	required_reagents = list("blood" = 1, "fuel" = 1, "elatopam" = 1)
+	result_amount = 2
+
+datum/chemical_reaction/penteticacid // stolen from goon
+	name = "Pentetic acid"
+	id = "penteticacid"
+	result = "penteticacid"
+	required_reagents = list("arithrazine" = 1, "anti_toxin" = 2, "plasma" = 1)
+	result_amount = 1
+
+datum/chemical_reaction/almazidone
+	name = "Almazidone"
+	id = "almazidone"
+	result = "almazidone"
+	required_reagents = list("fuel" = 1, "toxin" = 1, "sodiumchloride" = 2)
+	result_amount = 3
+
+datum/chemical_reaction/elatopam
+	name = "Elatopam"
+	id = "elatopam"
+	result = "elatopam"
+	required_reagents = list("virusfood" = 1, "robustharvestnutriment" = 2)
+	result_amount = 4
+
+datum/chemical_reaction/ephedrine
+	name = "Ephedrine"
+	id = "ephedrine"
+	result = "ephedrine"
+	required_reagents = list("sugar" = 1, "almazidone" = 1, "beepskysmash" = 1)
+	result_amount = 2
+
+datum/chemical_reaction/methamphetamine
+	name = "Methamphetamine"
+	id = "methamphetamine"
+	result = "methamphetamine"
+	required_reagents = list("ephedrine" = 5, "hydrogen" = 1, "chlorine" = 1, "plasma" = 1)
+	result_amount = 1
+
 /datum/chemical_reaction/lipozine
 	name = "Lipozine"
 	id = "Lipozine"
@@ -2007,6 +2049,13 @@ datum/chemical_reaction/pestkiller
 	result = "barefoot"
 	required_reagents = list("berryjuice" = 1, "cream" = 1, "vermouth" = 1)
 	result_amount = 3
+
+/datum/chemical_reaction/bathsalts
+	name = "Bath salts"
+	id = "bathsalts"
+	result = "bathsalts"
+	required_reagents = list("enzyme" = 1, "cleaner" = 1, "vodka" = 2)
+	result_amount = 2
 
 
 ////DRINKS THAT REQUIRED IMPROVED SPRITES BELOW:: -Agouri/////
