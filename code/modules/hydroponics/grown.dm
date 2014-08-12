@@ -627,13 +627,13 @@
 
 /obj/item/weapon/reagent_containers/food/snacks/grown/bloodtomato/throw_impact(atom/hit_atom)
 	..()
-	new/obj/effect/decal/cleanable/blood/splatter(src.loc)
+	new /obj/effect/gibspawner/human(src.loc)
 	src.visible_message("<span class='notice'>The [src.name] has been squashed.</span>","<span class='moderate'>You hear a smack.</span>")
 	src.reagents.reaction(get_turf(hit_atom))
 	for(var/atom/A in get_turf(hit_atom))
 		src.reagents.reaction(A)
+
 	qdel(src)
-	return
 
 /obj/item/weapon/reagent_containers/food/snacks/grown/bluetomato
 	seed = "/obj/item/seeds/bluetomatoseed"
@@ -1080,3 +1080,39 @@
 			reagents.add_reagent("space_drugs", 20+round(potency / 8, 1))
 			reagents.add_reagent("mindbreaker", 20+round(potency / 8, 1))
 			bitesize = 1+round(reagents.total_volume / 2, 1)
+
+/obj/item/weapon/reagent_containers/food/snacks/grown/singulopotato
+	//seed = "/obj/item/seeds/potatoseed"
+	name = "singularity potato"
+	desc = "This strange potato seems to have its own gravitational pull..."
+	icon_state = "singulopotato"
+	dried_type = /obj/item/weapon/reagent_containers/food/snacks/grown/potato
+	New(var/loc, var/potency = 25)
+		..()
+		if(reagents)
+			reagents.add_reagent("nutriment", 1+round((potency / 10), 1))
+			bitesize = reagents.total_volume
+
+/obj/item/weapon/reagent_containers/food/snacks/grown/singulopotato/attack_self(mob/user as mob)
+	user.visible_message("<span class='warning'>[user] crushes a singularity potato!</span>")
+	var/vortexpower = max(2, round(potency/14, 1)) // this limits the range to 7 at max potency.
+	var/turf/pull = src.loc
+	playsound(user, 'sound/weapons/marauder.ogg', 50, 1)
+	for(var/atom/X in orange(vortexpower,pull))
+		if(istype(X, /atom/movable))
+			if(X == user) continue
+			if((X) &&(!X:anchored) && (!istype(X,/mob/living/carbon/human)))
+				step_towards(X,pull)
+				step_towards(X,pull)
+				step_towards(X,pull)
+			else if(istype(X,/mob/living/carbon/human))
+				var/mob/living/carbon/human/H = X
+				if(istype(H.shoes,/obj/item/clothing/shoes/magboots))
+					var/obj/item/clothing/shoes/magboots/M = H.shoes
+					if(M.magpulse)
+						continue
+				H.apply_effect(min(4, vortexpower), WEAKEN, 0)
+				step_towards(H,pull)
+				step_towards(H,pull)
+				step_towards(H,pull)
+	qdel(src)

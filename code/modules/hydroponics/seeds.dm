@@ -197,7 +197,7 @@
 	potency = 20
 	plant_type = 0
 	growthstages = 6
-	mutatelist = list(/obj/item/seeds/eggyseed)
+	mutatelist = list(/obj/item/seeds/eggyseed, /obj/item/seeds/spiderplantseed)
 
 /obj/item/seeds/eggyseed
 	name = "pack of eggplant seeds"
@@ -1226,3 +1226,20 @@
 	plant_type = 0
 	growthstages = 6
 	rarity = 40
+
+/obj/item/seeds/spiderplantseed
+	name = "pack of spiderplant seeds"
+	desc = "These seeds grow into strange spiderpods."
+	icon_state = "seed-spiderplant"
+	species = "spiderplant"
+	plantname = "Spiderplant"
+	product = /obj/item/weapon/grown/spiderpod
+	lifespan = 20
+	endurance = 10
+	maturation = 6
+	production = 6
+	yield = 4
+	potency = 10
+	growthstages = 5
+	plant_type = 0
+	rarity = 30
