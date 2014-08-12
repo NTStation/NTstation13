@@ -38,11 +38,21 @@
 					usr << "<span class='warning'>Their hands are full.</span>"
 					return
 				else
-					usr.drop_item()
-					if(src.r_hand == null)
-						src.r_hand = I
-					else
-						src.l_hand = I
+					var/obj/item/organ/limb/affecting = getlimb(/obj/item/organ/limb/r_arm)
+
+					if(src.r_hand == null && affecting.state != ORGAN_REMOVED)
+						r_hand = I
+						usr.drop_item()
+					else	
+						affecting = getlimb(/obj/item/organ/limb/l_arm)
+						if(l_hand == null && affecting.state != ORGAN_REMOVED)
+							l_hand = I
+							usr.drop_item()
+						else
+							src << "<span class='warning'>Your [affecting.getDisplayName()] is missing, so [usr.name] gave up!</span>"
+							usr << "<span class='warning'>Their [affecting.getDisplayName()] is missing!</span>"
+							return
+
 				I.loc = src
 				I.layer = 20
 				I.add_fingerprint(src)
