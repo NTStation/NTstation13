@@ -88,7 +88,7 @@
 	var/traitorcap = round(joined_player_list.len / (config.traitor_scaling_coeff * scale_modifier))
 	if(traitors.len >= traitorcap) //Upper cap for number of latejoin antagonists
 		return
-	if(traitors.len <= (traitorcap - 2) || prob(100 / (config.traitor_scaling_coeff * scale_modifier)))
+	if(traitors.len <= (traitorcap - 1) || prob(100 / (config.traitor_scaling_coeff * scale_modifier)))
 		if(character.client.prefs.be_special & BE_TRAITOR)
 			if(!jobban_isbanned(character.client, "traitor") && !jobban_isbanned(character.client, "Syndicate"))
 				if(!(character.job in ticker.mode.restricted_jobs))
