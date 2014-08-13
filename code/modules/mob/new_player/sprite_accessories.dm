@@ -116,6 +116,10 @@
 		name = "Ponytail 3"
 		icon_state = "hair_ponytail3"
 
+	ponytail4
+		name = "Ponytail 4"
+		icon_state = "hair_ponytail4"
+
 	side_tail
 		name = "Side Pony"
 		icon_state = "hair_sidetail"
@@ -167,6 +171,10 @@
 	beehive
 		name = "Beehive"
 		icon_state = "hair_beehive"
+
+	beehive2
+		name = "Beehive 2"
+		icon_state = "hair_beehivev2"
 
 	bobcurl
 		name = "Bobcurl"
@@ -224,6 +232,10 @@
 		name = "Emo"
 		icon_state = "hair_emo"
 
+	longemo
+		name = "Long Emo"
+		icon_state = "hair_longemo"
+
 	fag
 		name = "Flow Hair"
 		icon_state = "hair_f"
@@ -239,6 +251,10 @@
 	mohawk
 		name = "Mohawk"
 		icon_state = "hair_d"
+
+	reversemohawk
+		name = "Reverse Mohawk"
+		icon_state = "hair_reversemohawk"
 
 	jensen
 		name = "Adam Jensen Hair"
@@ -296,6 +312,10 @@
 		name = "Floorlength Braid"
 		icon_state = "hair_braid"
 
+	shortbraid
+		name = "Short Floorlength Braid"
+		icon_state = "hair_shortbraid"
+
 	odango
 		name = "Odango"
 		icon_state = "hair_odango"
@@ -339,6 +359,103 @@
 	braidtail
 		name = "Braided Tail"
 		icon_state = "hair_braidtail"
+
+	familyman
+		name = "Family Man"
+		icon_state = "hair_thefamilyman"
+
+	drillruru
+		name = "Drillruru"
+		icon_state = "hair_drillruru"
+
+	dandypomp
+		name = "Dandy Pompadour"
+		icon_state = "hair_dandypompadour"
+
+	poofy
+		name = "Poofy"
+		icon_state = "hair_poofy"
+
+	crono
+		name = "Chrono"
+		icon_state = "hair_toriyama"
+
+	vegeta
+		name = "Vegeta Hair"
+		icon_state = "hair_toriyama2"
+
+	cia
+		name = "CIA"
+		icon_state = "hair_cia"
+
+	mulder
+		name = "Mulder"
+		icon_state = "hair_mulder"
+
+	scully
+		name = "Scully"
+		icon_state = "hair_scully"
+
+	nitori
+		name = "Nitori"
+		icon_state = "hair_nitori"
+
+	joestar
+		name = "Joestar"
+		icon_state = "hair_joestar"
+
+	edgeworth
+		name = "Edgeworth"
+		icon_state = "hair_edgeworth"
+
+	objection
+		name = "Wright"
+		icon_state = "hair_objection!"
+
+	dubsman
+		name = "Dubsman"
+		icon_state = "hair_dubsman"
+
+	blackswordsman
+		name = "Black Swordsman"
+		icon_state = "hair_blackswordsman"
+
+	mentalist
+		name = "Mentalist"
+		icon_state = "hair_mentalist"
+
+	fujisaki
+		name = "Fujisaki"
+		icon_state = "hair_fujisaki"
+
+	schierke
+		name = "Schierke"
+		icon_state = "hair_schierke"
+
+	akari
+		name = "Akari"
+		icon_state = "hair_akari"
+
+	fujiyabashi
+		name = "Fujiyabashi"
+		icon_state = "hair_fubiyabashi"
+
+	nia
+		name = "Nia"
+		icon_state = "hair_nia"
+
+	shinobu
+		name = "Shinobu"
+		icon_state = "hair_shinobu"
+
+	ramona
+		name = "Ramona"
+		icon_state = "hair_ramona"
+
+	megaeyebrows
+		name = "Mega Eyebrows"
+		icon_state = "hair_megaeyebrows"
+
 /////////////////////////////
 // Facial Hair Definitions //
 /////////////////////////////
