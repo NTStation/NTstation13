@@ -355,7 +355,7 @@
 		return 1
 
 	if(declare_crit && C.health <= 0) //Critical condition! Call for help!
-		declare()
+		declare(C)
 
 	//If they're injured, we're using a beaker, and don't have one of our WONDERCHEMS.
 	if((reagent_glass) && (use_beaker) && ((C.getBruteLoss() >= heal_threshold) || (C.getToxLoss() >= heal_threshold) || (C.getToxLoss() >= heal_threshold) || (C.getOxyLoss() >= (heal_threshold + 15))))
@@ -501,11 +501,11 @@
 	qdel(src)
 	return
 
-/obj/machinery/bot/medbot/declare()
+/obj/machinery/bot/medbot/declare(var/crit_patient)
 	if(declare_cooldown)
 		return
 	var/area/location = get_area(src)
-	declare_message = "<span class='info'>\icon[src] Medical emergency! A patient is in critical condition at [location]!</span>"
+	declare_message = "<span class='info'>\icon[src] Medical emergency! [crit_patient ? "<b>[crit_patient]</b>" : "A patient"] is in critical condition at <b>[location]</b>!</span>"
 	..()
 	declare_cooldown = 1
 	spawn(100) //Ten seconds
