@@ -15,7 +15,7 @@ Bartender
 	default_pda = /obj/item/device/pda/bar
 	default_headset = /obj/item/device/radio/headset/headset_srv
 
-	access = list(access_hydroponics, access_bar, access_kitchen, access_morgue, access_mineral_storeroom)
+	access = list(access_hydroponics, access_bar, access_kitchen, access_morgue, access_mineral_storeroom, access_weapons)
 	minimal_access = list(access_bar, access_mineral_storeroom)
 	assistant_access = list(access_bar)
 	assistant_title = "Barista"

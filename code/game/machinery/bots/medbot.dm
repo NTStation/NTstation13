@@ -27,6 +27,8 @@
 	var/injection_amount = 15 //How much reagent do we inject at a time?
 	var/heal_threshold = 10 //Start healing when they have this much damage in a category
 	var/use_beaker = 0 //Use reagents in beaker instead of default treatment agents.
+	var/declare_crit = 1 //If active, the bot will transmit a critical patient alert to MedHUD users.
+	var/declare_cooldown = 0 //Prevents spam of critical patient alerts.
 
 	//Setting which reagents to use to treat what by default. By id.
 	var/treatment_brute = "tricordrazine"
@@ -96,6 +98,7 @@
 	oldpatient = null
 	oldloc = null
 	last_found = world.time
+	declare_cooldown = 0
 
 /obj/machinery/bot/medbot/set_custom_texts()
 
@@ -140,6 +143,7 @@
 		dat += "<a href='?src=\ref[src];use_beaker=1'>[use_beaker ? "Loaded Beaker (When available)" : "Internal Synthesizer"]</a><br>"
 
 		dat += "The speaker switch is [shut_up ? "off" : "on"]. <a href='?src=\ref[src];togglevoice=[1]'>Toggle</a><br>"
+		dat += "Critical Patient Alerts: <a href='?src=\ref[src];critalerts=1'>[declare_crit ? "Yes" : "No"]</a><br>"
 		dat += "Patrol Station: <a href='?src=\ref[src];operation=patrol'>[auto_patrol ? "Yes" : "No"]</a><br>"
 
 	var/datum/browser/popup = new(user, "automed", "Automatic Medical Unit v1.1")
@@ -178,6 +182,9 @@
 
 	else if ((href_list["togglevoice"]) && (!locked || issilicon(usr)))
 		shut_up = !shut_up
+
+	else if ((href_list["critalerts"]) && (!locked || issilicon(usr)))
+		declare_crit = !declare_crit
 
 	updateUsrDialog()
 	return
@@ -219,11 +226,14 @@
 /obj/machinery/bot/medbot/Emag(mob/user as mob)
 	..()
 	if(emagged == 2)
-		if(user) user << "<span class='warning'>You short out [src]'s reagent synthesis circuits.</span>"
+		declare_crit = 0
+		if(user)
+			user << "<span class='warning'>You short out [src]'s reagent synthesis circuits.</span>"
 		spawn(0)
 			visible_message("<span class='userdanger'>[src] buzzes oddly!</span>", 1)
 		flick("medibot_spark", src)
-		if(user) oldpatient = user
+		if(user)
+			oldpatient = user
 
 /obj/machinery/bot/medbot/process()
 	set background = BACKGROUND_ENABLED
@@ -246,9 +256,7 @@
 		return
 
 	if(call_path) //Stop what you are doing and answer the call!
-
-		if(!pathset) //Reset the bot before calling it.
-			call_mode()
+		call_mode()
 		return
 
 	if(frustration > 8)
@@ -345,6 +353,9 @@
 
 	if(emagged == 2) //Everyone needs our medicine. (Our medicine is toxins)
 		return 1
+
+	if(declare_crit && C.health <= 0) //Critical condition! Call for help!
+		declare()
 
 	//If they're injured, we're using a beaker, and don't have one of our WONDERCHEMS.
 	if((reagent_glass) && (use_beaker) && ((C.getBruteLoss() >= heal_threshold) || (C.getToxLoss() >= heal_threshold) || (C.getToxLoss() >= heal_threshold) || (C.getOxyLoss() >= (heal_threshold + 15))))
@@ -489,6 +500,17 @@
 	s.start()
 	qdel(src)
 	return
+
+/obj/machinery/bot/medbot/declare()
+	if(declare_cooldown)
+		return
+	var/area/location = get_area(src)
+	declare_message = "<span class='info'>\icon[src] Medical emergency! A patient is in critical condition at [location]!</span>"
+	..()
+	declare_cooldown = 1
+	spawn(100) //Ten seconds
+	declare_cooldown = 0
+
 
 /* terrible
 /obj/machinery/bot/medbot/Bumped(atom/movable/M as mob|obj)

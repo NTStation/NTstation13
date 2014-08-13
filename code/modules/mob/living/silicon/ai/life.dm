@@ -166,11 +166,9 @@
 	regular_hud_updates()
 	switch(src.sensor_mode)
 		if (SEC_HUD)
-			src.securityHUD(src.eyeobj)
+			process_sec_hud(src,0,src.eyeobj)
 		if (MED_HUD)
-			src.medicalHUD(src.eyeobj)
-		if (NIGHT)
-			src.see_invisible = SEE_INVISIBLE_MINIMUM
+			process_med_hud(src,src.eyeobj)
 
 /mob/living/silicon/ai/updatehealth()
 	if(status_flags & GODMODE)

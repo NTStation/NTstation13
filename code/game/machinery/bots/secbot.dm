@@ -18,7 +18,9 @@
 	var/target_lastloc //Loc of target when arrested.
 	var/last_found //There's a delay
 //	var/emagged = 0 //Emagged Secbots view everyone as a criminal
-	var/idcheck = 0 //If false, all station IDs are authorized for weapons.
+	var/declare_arrests = 1 //When making an arrest, should it notify everyone wearing sechuds?
+	var/idcheck = 0 //If true, arrest people with no IDs
+	var/weaponscheck = 0 //If true, arrest people for weapons if they lack access
 	var/check_records = 1 //Does it check security records?
 	var/arrest_type = 0 //If true, don't handcuff
 	bot_type = SEC_BOT
@@ -35,6 +37,7 @@
 	name = "Officer Beep O'sky"
 	desc = "It's Officer Beep O'sky! Powered by a potato and a shot of whiskey."
 	idcheck = 0
+	weaponscheck = 0
 	auto_patrol = 1
 
 /obj/item/weapon/secbot_assembly
@@ -103,14 +106,19 @@ Maintenance panel panel is [open ? "opened" : "closed"]"},
 
 	if(!locked || issilicon(user))
 		dat += text({"<BR>
-Check for Weapon Authorization: []<BR>
-Check Security Records: []<BR>
+Arrest for No ID: []<BR>
+Arrest for Unauthorized Weapons: []<BR>
+Arrest for Warrant: []<BR>
+<BR>
 Operating Mode: []<BR>
+Report Arrests[]<BR>
 Auto Patrol: []"},
 
 "<A href='?src=\ref[src];operation=idcheck'>[idcheck ? "Yes" : "No"]</A>",
+"<A href='?src=\ref[src];operation=weaponscheck'>[weaponscheck ? "Yes" : "No"]</A>",
 "<A href='?src=\ref[src];operation=ignorerec'>[check_records ? "Yes" : "No"]</A>",
 "<A href='?src=\ref[src];operation=switchmode'>[arrest_type ? "Detain" : "Arrest"]</A>",
+"<A href='?src=\ref[src];operation=declarearrests'>[declare_arrests ? "Yes" : "No"]</A>",
 "<A href='?src=\ref[src];operation=patrol'>[auto_patrol ? "On" : "Off"]</A>" )
 
 	var/datum/browser/popup = new(user, "autosec", "Automatic Security Unit v1.4")
@@ -126,11 +134,17 @@ Auto Patrol: []"},
 		if("idcheck")
 			idcheck = !idcheck
 			updateUsrDialog()
+		if("weaponscheck")
+			weaponscheck = !weaponscheck
+			updateUsrDialog()
 		if("ignorerec")
 			check_records = !check_records
 			updateUsrDialog()
 		if("switchmode")
 			arrest_type = !arrest_type
+			updateUsrDialog()
+		if("declarearrests")
+			declare_arrests = !declare_arrests
 			updateUsrDialog()
 
 
@@ -148,9 +162,14 @@ Auto Patrol: []"},
 				user << "<span class='danger'> Access denied.</span>"
 	else
 		..()
-		if(!istype(W, /obj/item/weapon/screwdriver) && !istype(W, /obj/item/weapon/weldingtool) && (W.force) && (!target)) // Added check for welding tool to fix #2432. Welding tool behavior is handled in superclass.
-			target = user
-			mode = BOT_HUNT
+		if(istype(W, /obj/item/weapon/weldingtool) && user.a_intent != "harm") // Any intent but harm will heal, so we shouldn't get angry.
+			return
+		if(!istype(W, /obj/item/weapon/screwdriver) && (W.force) && (!target) ) // Added check for welding tool to fix #2432. Welding tool behavior is handled in superclass.
+			threatlevel = user.assess_threat(src)
+			threatlevel += 6
+			if(threatlevel > 0)
+				target = user
+				mode = BOT_HUNT
 
 /obj/machinery/bot/secbot/Emag(mob/user as mob)
 	..()
@@ -160,6 +179,7 @@ Auto Patrol: []"},
 			for(var/mob/O in hearers(src, null))
 				O.show_message("<span class='danger'><B>[src] buzzes oddly!</B></span>", 1)
 		if(user) oldtarget_name = user.name
+		declare_arrests = 0
 
 /obj/machinery/bot/secbot/process()
 	set background = BACKGROUND_ENABLED
@@ -208,10 +228,16 @@ Auto Patrol: []"},
 						M.Weaken(10)
 						M.stuttering = 10
 						M.Stun(10)
+
+					if(declare_arrests)
+						declare()
+					target.visible_message("<span class='danger'>[target] has been stunned by [src]!</span>",\
+											"<span class='userdanger'>[target] has been stunned by [src]!</span>")
+
 					maxstuns--
 					if(maxstuns <= 0)
 						target = null
-					visible_message("<span class='danger'> <B>[target] has been stunned by [src]!</B></span>")
+					//visible_message("<span class='danger'> <B>[target] has been stunned by [src]!</B></span>")
 
 					mode = BOT_PREP_ARREST
 					anchored = 1
@@ -236,9 +262,9 @@ Auto Patrol: []"},
 
 			if(iscarbon(target) && target.canBeHandcuffed())
 				if(!target.handcuffed && !arrest_type)
-					playsound(src.loc, 'sound/weapons/cablecuff.ogg', 30, 1, -2)
+					playsound(loc, 'sound/weapons/cablecuff.ogg', 30, 1, -2)
 					mode = BOT_ARREST
-					visible_message("<span class='danger'> <B>[src] is trying to restrain [src.target] with zipties!</B></span>")
+					visible_message("<span class='danger'> <B>[src] is trying to restrain [target] with zipties!</B></span>")
 
 					spawn(60)
 						if(get_dist(src, target) <= 1)
@@ -296,8 +322,7 @@ Auto Patrol: []"},
 		if((C.name == oldtarget_name) && (world.time < last_found + 100))
 			continue
 
-		if(istype(C, /mob/living/carbon))
-			threatlevel = assess_perp(C)
+		threatlevel = C.assess_threat(src)
 
 		if(!threatlevel)
 			continue
@@ -314,49 +339,6 @@ Auto Patrol: []"},
 			break
 		else
 			continue
-
-
-//If the security records say to arrest them, arrest them
-//Or if they have weapons and aren't security, arrest them.
-/obj/machinery/bot/secbot/proc/assess_perp(mob/living/carbon/perp as mob)
-	var/threatcount = 0
-
-	if(emagged == 2) return 10 //Everyone is a criminal!
-
-	if(idcheck && !allowed(perp))
-
-		if(check_for_weapons(perp.l_hand))
-			threatcount += 4
-		if(check_for_weapons(perp.r_hand))
-			threatcount += 4
-
-	if(istype(perp, /mob/living/carbon/human))
-		var/mob/living/carbon/human/humanperp = perp
-
-		if(idcheck && !allowed(perp))
-			if(check_for_weapons(humanperp.belt))
-				threatcount += 2
-
-		if(istype(humanperp.head, /obj/item/clothing/head/wizard) || istype(humanperp.head, /obj/item/clothing/head/helmet/space/rig/wizard))
-			threatcount += 2
-
-		if(humanperp.dna && humanperp.dna.mutantrace && humanperp.dna.mutantrace != "none")
-			threatcount += 2
-
-		//Agent cards lower threatlevel.
-		if(humanperp.wear_id && istype(humanperp.wear_id.GetID(), /obj/item/weapon/card/id/syndicate))
-			threatcount -= 2
-
-		if(check_records)	//check if they are set to *Arrest* on records
-			var/perpname = humanperp.get_face_name(humanperp.get_id_name())
-			var/datum/data/record/R = find_record("name", perpname, data_core.security)
-			if(R && (R.fields["criminal"] == "*Arrest*"))
-				threatcount += 4
-	else
-		threatcount += 2
-
-	return threatcount
-
 /obj/machinery/bot/secbot/proc/check_for_weapons(var/obj/item/slot_item)
 	if(istype(slot_item, /obj/item/weapon/gun) || istype(slot_item, /obj/item/weapon/melee))
 		if(!(slot_item.type in safe_weapons))
@@ -490,3 +472,8 @@ Auto Patrol: []"},
 			new /obj/item/robot_parts/l_arm(get_turf(src))
 			user << "<span class='notice'>You remove the robot arm from [src].</span>"
 			build_step--
+
+/obj/machinery/bot/secbot/declare()
+	var/area/location = get_area(src)
+	declare_message = "<span class='info'>\icon[src] [name] is [arrest_type ? "detaining" : "arresting"] level [threatlevel] scumbag <b>[target]</b> in <b>[location]</b></span>"
+	..()

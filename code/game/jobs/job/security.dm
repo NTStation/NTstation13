@@ -26,15 +26,15 @@ Head of Shitcurity
 	default_backpack = /obj/item/weapon/storage/backpack/security
 	default_satchel = /obj/item/weapon/storage/backpack/satchel_sec
 
-	access = list(access_security, access_sec_doors, access_brig, access_armory, access_court,
+	access = list(access_security, access_sec_doors, access_brig, access_armory, access_court, access_weapons,
 			            access_forensics_lockers, access_morgue, access_maint_tunnels, access_all_personal_lockers,
 			            access_research, access_engine, access_mining, access_medical, access_construction, access_mailsorting,
 			            access_heads, access_hos, access_RC_announce, access_keycard_auth, access_gateway)
-	minimal_access = list(access_security, access_sec_doors, access_brig, access_armory, access_court,
+	minimal_access = list(access_security, access_sec_doors, access_brig, access_armory, access_court, access_weapons,
 			            access_forensics_lockers, access_morgue, access_maint_tunnels, access_all_personal_lockers,
 			            access_research, access_engine, access_mining, access_medical, access_construction, access_mailsorting,
 			            access_heads, access_hos, access_RC_announce, access_keycard_auth, access_gateway)
-	assistant_access = list(access_sec_doors, access_brig)
+	assistant_access = list(access_sec_doors, access_brig,access_weapons)
 	assistant_title = "HoS' Assistant"
 
 /datum/job/hos/equip_items(var/mob/living/carbon/human/H)
@@ -77,8 +77,8 @@ Warden
 	default_satchel = /obj/item/weapon/storage/backpack/satchel_sec
 
 	access = list(access_security, access_sec_doors, access_brig, access_armory, access_court, access_maint_tunnels, access_morgue)
-	minimal_access = list(access_security, access_sec_doors, access_brig, access_armory, access_court) //See /datum/job/warden/get_access()
-	assistant_access = list(access_sec_doors, access_brig)
+	minimal_access = list(access_security, access_sec_doors, access_brig, access_armory, access_court, access_weapons) //See /datum/job/warden/get_access()
+	assistant_access = list(access_sec_doors, access_brig,access_weapons)
 	assistant_title = "Warden's Assistant"
 
 /datum/job/warden/equip_items(var/mob/living/carbon/human/H)
@@ -122,9 +122,9 @@ Detective
 	default_pda = /obj/item/device/pda/detective
 	default_headset = /obj/item/device/radio/headset/headset_sec
 
-	access = list(access_sec_doors, access_forensics_lockers, access_morgue, access_maint_tunnels, access_court)
-	minimal_access = list(access_sec_doors, access_forensics_lockers, access_morgue, access_maint_tunnels, access_court)
-	assistant_access = list(access_sec_doors, access_morgue)
+	access = list(access_sec_doors, access_forensics_lockers, access_morgue, access_maint_tunnels, access_court, access_weapons)
+	minimal_access = list(access_sec_doors, access_forensics_lockers, access_morgue, access_maint_tunnels, access_court, access_weapons)
+	assistant_access = list(access_sec_doors, access_morgue,access_weapons)
 	assistant_title = "Private Investigator"
 
 /datum/job/detective/equip_items(var/mob/living/carbon/human/H)
@@ -173,9 +173,9 @@ Security Officer
 	default_backpack = /obj/item/weapon/storage/backpack/security
 	default_satchel = /obj/item/weapon/storage/backpack/satchel_sec
 
-	access = list(access_security, access_sec_doors, access_brig, access_court, access_maint_tunnels, access_morgue)
-	minimal_access = list(access_security, access_sec_doors, access_brig, access_court) //But see /datum/job/warden/get_access()
-	assistant_access = list(access_sec_doors)
+	access = list(access_security, access_sec_doors, access_brig, access_court, access_maint_tunnels, access_morgue, access_weapons)
+	minimal_access = list(access_security, access_sec_doors, access_brig, access_court, access_weapons) //But see /datum/job/warden/get_access()
+	assistant_access = list(access_sec_doors,access_weapons)
 	assistant_title = "Security Cadet"
 
 /datum/job/officer/equip_items(var/mob/living/carbon/human/H)

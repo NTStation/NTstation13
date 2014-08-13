@@ -15,6 +15,10 @@
 	var/lawcheck[1]
 	var/ioncheck[1]
 
+	var/sensor_mode = 0 //Determines the current HUD.
+	#define 	SEC_HUD 1 //Security HUD mode
+	#define 	MED_HUD 2 //Medical HUD mode
+
 /mob/living/silicon/proc/cancelAlarm()
 	return
 
@@ -307,3 +311,24 @@
 // But the src mob is a silicon!!  Disable.
 /mob/living/silicon/stripPanelEquip(obj/item/what, mob/who, slot)
 	return 0
+
+/mob/living/silicon/assess_threat() //Secbots will not target silicons!
+	return -10
+
+/mob/living/silicon/verb/sensor_mode()
+	set name = "Set Sensor Augmentation"
+	var/sensor_type = input("Please select sensor type.", "Sensor Integration", null) in list("Security", "Medical"/*,"Light Amplification"*/,"Disable")
+	switch(sensor_type)
+		if ("Security")
+			sensor_mode = SEC_HUD
+			src << "<span class='notice'>Security records overlay enabled.</span>"
+
+		if ("Medical")
+			sensor_mode = MED_HUD
+			src << "<span class='notice'>Life signs monitor overlay enabled.</span>"/*
+		if ("Light Amplification")
+			src.sensor_mode = NIGHT
+			src << "<span class='notice'>Light amplification mode enabled.</span>"*/
+		if ("Disable")
+			sensor_mode = 0
+			src << "Sensor augmentations disabled."
