@@ -116,6 +116,10 @@
 		name = "Ponytail 3"
 		icon_state = "hair_ponytail3"
 
+	ponytail4
+		name = "Ponytail 4"
+		icon_state = "hair_ponytail4"
+
 	side_tail
 		name = "Side Pony"
 		icon_state = "hair_sidetail"
@@ -167,6 +171,10 @@
 	beehive
 		name = "Beehive"
 		icon_state = "hair_beehive"
+
+	beehive2
+		name = "Beehive 2"
+		icon_state = "hair_beehivev2"
 
 	bobcurl
 		name = "Bobcurl"
@@ -224,6 +232,10 @@
 		name = "Emo"
 		icon_state = "hair_emo"
 
+	longemo
+		name = "Long Emo"
+		icon_state = "hair_longemo"
+
 	fag
 		name = "Flow Hair"
 		icon_state = "hair_f"
@@ -239,6 +251,10 @@
 	mohawk
 		name = "Mohawk"
 		icon_state = "hair_d"
+
+	reversemohawk
+		name = "Reverse Mohawk"
+		icon_state = "hair_reversemohawk"
 
 	jensen
 		name = "Adam Jensen Hair"
@@ -295,6 +311,10 @@
 	braid
 		name = "Floorlength Braid"
 		icon_state = "hair_braid"
+
+	shortbraid
+		name = "Short Floorlength Braid"
+		icon_state = "hair_shortbraid"
 
 	odango
 		name = "Odango"
@@ -361,7 +381,7 @@
 		icon_state = "hair_toriyama"
 
 	vegeta
-		name = "Vegeta"
+		name = "Vegeta Hair"
 		icon_state = "hair_toriyama2"
 
 	cia
@@ -427,6 +447,14 @@
 	shinobu
 		name = "Shinobu"
 		icon_state = "hair_shinobu"
+
+	ramona
+		name = "Ramona"
+		icon_state = "hair_ramona"
+
+	megaeyebrows
+		name = "Mega Eyebrows"
+		icon_state = "hair_megaeyebrows"
 
 /////////////////////////////
 // Facial Hair Definitions //
