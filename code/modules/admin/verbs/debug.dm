@@ -939,6 +939,7 @@ var/global/list/g_fancy_list_of_safe_types = null
 			W.access = get_centcom_access("Centcom Official")
 			W.assignment = "Centcom Official"
 			W.registered_name = M.real_name
+			W.access += access_weapons
 			W.update_label()
 			M.equip_to_slot_or_del(W, slot_wear_id)
 

@@ -818,4 +818,5 @@ var/list/slot_equipment_priority = list( \
         if(T.canbreathe)
             return T
     return null
-
+/mob/proc/assess_threat() //For sec bot threat assessment
+	return

@@ -18,8 +18,9 @@
 	var/text_hack = ""		//Custom text returned to a silicon upon hacking a bot.
 	var/text_dehack = "" 	//Text shown when resetting a bots hacked status to normal.
 	var/text_dehack_fail = "" //Shown when a silicon tries to reset a bot emagged with the emag item, which cannot be reset.
+	var/declare_message = "" //What the bot will display to the HUD user.
 	var/frustration = 0 //Used by some bots for tracking failures to reach their target.
-	var/list/call_path = list() //Path calculated by the AI and given to the bot to follow.
+	var/list/call_path //Path calculated by the AI and given to the bot to follow.
 	var/list/path = new() //Every bot has this, so it is best to put it here.
 	var/list/patrol_path = list() //The path a bot has while on patrol.
 	var/list/summon_path = list() //Path bot has while summoned.
@@ -299,6 +300,20 @@
 	for(var/mob/O in hearers(src, null))
 		O.show_message("<span class='game say'><span class='name'>[src]</span> beeps, \"[message]\"</span>",2)
 	return
+
+/obj/machinery/bot/proc/declare() //Signals a medical or security HUD user to a relevant bot's activity.
+	var/hud_user_list = list() //Determines which userlist to use.
+	switch(bot_type) //Made into a switch so more HUDs can be added easily.
+		if(SEC_BOT) //Securitrons and ED-209
+			hud_user_list = sec_hud_users
+		if(MED_BOT) //Medibots
+			hud_user_list = med_hud_users
+	var/area/myturf = get_turf(src)
+	for(var/mob/huduser in hud_user_list)
+		var/turf/mobturf = get_turf(huduser)
+		if(mobturf.z == myturf.z)
+			huduser.show_message(declare_message,1)
+
 
 /obj/machinery/bot/proc/check_bot_access()
 	if(mode != BOT_SUMMON && mode != BOT_RESPONDING)

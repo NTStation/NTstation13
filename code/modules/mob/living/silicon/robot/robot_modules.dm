@@ -76,7 +76,6 @@
 
 	New()
 		..()
-		modules += new /obj/item/borg/sight/hud/med(src)
 		modules += new /obj/item/device/healthanalyzer(src)
 		modules += new /obj/item/weapon/reagent_containers/borghypo(src)
 		modules += new /obj/item/weapon/reagent_containers/glass/beaker/large(src)
@@ -150,7 +149,6 @@
 
 	New()
 		..()
-		modules += new /obj/item/borg/sight/hud/sec(src)
 		modules += new /obj/item/weapon/handcuffs/cyborg(src)
 		modules += new /obj/item/weapon/melee/baton/loaded(src)
 		modules += new /obj/item/weapon/gun/energy/taser/cyborg(src)
