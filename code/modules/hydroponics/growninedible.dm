@@ -217,33 +217,5 @@
 		reagents.add_reagent("chiyanine", round(potency/5, 1))
 		reagents.add_reagent("mizarudol", round(potency/5, 1))
 
-/obj/item/weapon/grown/spiderpod/attackby(obj/item/weapon/W as obj, mob/user as mob)
-	..()
-	if(istype(W, /obj/item/weapon/kitchenknife) || istype(W, /obj/item/weapon/butch))
-		var/spidermeatamount = max(1, round(potency/25, 1))
-		for (var/i=1 to spidermeatamount)
-			var/obj/item/weapon/reagent_containers/food/snacks/spidermeat/newspidermeat = new(src.loc)
-			src.reagents.trans_to (newspidermeat, round(src.reagents.total_volume/spidermeatamount, 1)) //move all reagents from the pod to the meat but split it between the meatslabs
-			user << "<span class='notice'>You cut the spiderpod into [spidermeatamount] spidermeat slabs.</span>"
-		playsound(src.loc, 'sound/effects/splat.ogg', 50, 1)
-		qdel(src)
-		return
 
-/obj/item/weapon/grown/spiderpod/attack_self(mob/user as mob)
-	user.visible_message("<span class='warning'>[user] pries open a spiderpod!</span>")
-	if(prob(max(5, round(potency/1.6, 1))))
-		user << "<span class='notice'>You pry open the spiderpod and release the spiderling.</span>"
-		var/obj/effect/spider/spiderling/S = new(user.loc)
-		switch (pickweight(list("regular" = 50, "hunter" = 35, "nurse" = 15)))
-			if ("regular")
-				S.grow_as = /mob/living/simple_animal/hostile/giant_spider
-			if ("hunter")
-				S.grow_as = /mob/living/simple_animal/hostile/giant_spider/hunter
-			if ("nurse")
-				S.grow_as = /mob/living/simple_animal/hostile/giant_spider/nurse
-		log_game(user, "spawned a spiderling with a spiderpod.")
-	else
-		user << "<span class='notice'>You pry open the spiderpod but it is empty.</span>"
-		log_game(user, "attempted to spawn a spiderling with a spiderpod.")
-	qdel(src)
 
