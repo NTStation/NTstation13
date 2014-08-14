@@ -23,16 +23,12 @@
 	mouse_opacity = 1
 	speed = 1
 	ventcrawler = 2
-	attack_sound = 'sound/weapons/bite.ogg'
 	var/powerlevel = 0 //Tracks our general strength level gained from eating other shrooms
 	var/bruised = 0 //If someone tries to cheat the system by attacking a shroom to lower its health, punish them so that it wont award levels to shrooms that eat it
 	var/recovery_cooldown = 0 //So you can't repeatedly revive it during a fight
 	var/faint_ticker = 0 //If we hit three, another mushroom's gonna eat us
 	var/image/cap_living = null //Where we store our cap icons so we dont generate them constantly to update our icon
 	var/image/cap_dead = null
-	var/limit_maxhealth = 200 //This is the maximum amount of health a walking mushroom can gain.
-	var/limit_damage_lower = 30 //max lower damage cap a walking mushroom can gain
-	var/limit_damage_upper = 50 //max upper damage cap a walking mushroom can gain
 
 /mob/living/simple_animal/hostile/mushroom/examine()
 	..()
@@ -76,12 +72,9 @@
 			return
 		M.visible_message("<span class='notice'>[M] devours [src]!</span>")
 		var/level_gain = (powerlevel - M.powerlevel)
-		if(!bruised && !M.ckey)//Player shrooms can't level up to become robust gods.
-			if(level_gain == 0)//So we still gain a level if two mushrooms were the same level
+		if(level_gain >= -1 && !bruised && !M.ckey)//Player shrooms can't level up to become robust gods.
+			if(level_gain < 1)//So we still gain a level if two mushrooms were the same level
 				level_gain = 1
-			else if (level_gain < 0) //So the winning mushroom is higher level... it still can level up, but at a lower chance.
-				if(prob(round(100 / (M.powerlevel - powerlevel)))) //for every level that the winning mushroom is higher than the devoured mushroom, the chance to level up is halved
-					level_gain = 1
 			M.LevelUp(level_gain)
 		M.health = M.maxHealth
 		qdel(src)
@@ -96,13 +89,6 @@
 	visible_message("<span class='notice'>[src] fainted.</span>")
 	..()
 	UpdateMushroomCap()
-
-mob/living/simple_animal/hostile/mushroom/proc/rampage()
-	src.visible_message("<span class='notice'>The [src.name] looks strange...</span>")
-	spawn(60)
-		attack_same = 1
-		stat_attack = 1
-		src.visible_message("<span class='notice'>The [src.name] looks furious!</span>")
 
 /mob/living/simple_animal/hostile/mushroom/proc/UpdateMushroomCap()
 	overlays.Cut()
@@ -122,18 +108,13 @@ mob/living/simple_animal/hostile/mushroom/proc/rampage()
 		recovery_cooldown = 0
 
 /mob/living/simple_animal/hostile/mushroom/proc/LevelUp(var/level_gain)
-	if(powerlevel <= 29)
-		src.visible_message("<span class='notice'>The [src.name] grows a bit!</span>")
+	if(powerlevel <= 9)
 		powerlevel += level_gain
 		if(prob(25))
-			melee_damage_lower = min(limit_damage_lower, melee_damage_lower + (level_gain * rand(1,5)))
+			melee_damage_lower += (level_gain * rand(1,5))
 		else
-			melee_damage_upper = min(limit_damage_upper, melee_damage_upper + (level_gain * rand(1,5)))
-		maxHealth = min(limit_maxhealth, maxHealth + (level_gain * rand(1,5)))
-		//DEBUG REMOVE
-		if(powerlevel > 9 && environment_smash == 0)
-			environment_smash = 1
-			src.visible_message("<span class='notice'>The [src.name] looks strong enough to break windows and tables!</span>")
+			melee_damage_upper += (level_gain * rand(1,5))
+		maxHealth += (level_gain * rand(1,5))
 	health = maxHealth //They'll always heal, even if they don't gain a level, in case you want to keep this shroom around instead of harvesting it
 
 /mob/living/simple_animal/hostile/mushroom/proc/Bruise()
@@ -149,14 +130,6 @@ mob/living/simple_animal/hostile/mushroom/proc/rampage()
 		else
 			user << "<span class='notice'>[src] won't eat it!</span>"
 		return
-
-	if(istype(I, /obj/item/weapon/reagent_containers/food/snacks/grown/killertomato))
-		user << "<span class='notice'>You feed [src].</span>"
-		//if(prob(max(5, round(I.potency / 2, 1))))
-		rampage()
-		qdel(I)
-		return
-
 	if(I.force)
 		Bruise()
 	..()
