@@ -378,7 +378,7 @@
 
 	crono
 		name = "Chrono"
-		icon_state = "hair_toriyama"
+		icon_state = "hair_toriyama1"
 
 	vegeta
 		name = "Vegeta Hair"
@@ -438,7 +438,7 @@
 
 	fujiyabashi
 		name = "Fujiyabashi"
-		icon_state = "hair_fubiyabashi"
+		icon_state = "hair_fujiyabashi"
 
 	nia
 		name = "Nia"
@@ -454,7 +454,7 @@
 
 	megaeyebrows
 		name = "Mega Eyebrows"
-		icon_state = "hair_megaeyebrows"
+		icon_state = "hair_megaeyebrow"
 
 /////////////////////////////
 // Facial Hair Definitions //
