@@ -627,13 +627,16 @@
 
 /obj/item/weapon/reagent_containers/food/snacks/grown/bloodtomato/throw_impact(atom/hit_atom)
 	..()
-	new /obj/effect/gibspawner/human(src.loc)
+	if(potency >= 50)
+		new /obj/effect/gibspawner/generic(src.loc)
+	else
+		new/obj/effect/decal/cleanable/blood/splatter(src.loc)
 	src.visible_message("<span class='notice'>The [src.name] has been squashed.</span>","<span class='moderate'>You hear a smack.</span>")
 	src.reagents.reaction(get_turf(hit_atom))
 	for(var/atom/A in get_turf(hit_atom))
 		src.reagents.reaction(A)
-
 	qdel(src)
+	return
 
 /obj/item/weapon/reagent_containers/food/snacks/grown/bluetomato
 	seed = "/obj/item/seeds/bluetomatoseed"
