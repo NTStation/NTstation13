@@ -198,3 +198,33 @@
 	throw_range = 7
 /obj/item/weapon/grown/corncob/New(var/loc, var/potency = 10)
 	..()
+
+/obj/item/weapon/grown/spiderpod
+	name = "spiderplant pod"
+	desc = "A very strange looking plant. It is said to sometimes produce moving, thoughtless beings."
+	icon = 'icons/obj/harvest.dmi'
+	icon_state = "spiderpod"
+	w_class = 1.0
+	throwforce = 0
+	throw_speed = 3
+	throw_range = 7
+	seed = "/obj/item/seeds/spiderplantseed"
+
+/obj/item/weapon/grown/spiderpod/New(var/loc, var/potency = 10)
+	..()
+	if(reagents)
+		reagents.add_reagent("nutriment", 1)
+		switch (pickweight(list("toxin" = 30, "chiyanine" = 20, "neurotoxin" = 15, "sporetoxin" = 15, "mizarudol" = 20)))
+			if ("toxin")
+				reagents.add_reagent("toxin", round(potency/5, 1))
+			if ("chiyanine")
+				reagents.add_reagent("chiyanine", round(potency/5, 1))
+			if ("neurotoxin")
+				reagents.add_reagent("neurotoxin", round(potency/5, 1))
+			if ("sporetoxin")
+				reagents.add_reagent("spore", round(potency/5, 1))
+			if ("mizarudol")
+				reagents.add_reagent("mizarudol", round(potency/5, 1))
+
+
+

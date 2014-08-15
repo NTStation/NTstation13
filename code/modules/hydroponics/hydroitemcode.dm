@@ -155,3 +155,63 @@
 	src.visible_message("<span class='notice'>The [src.name] has been squashed, causing a distortion in space-time.</span>","<span class='moderate'>You hear a splat and a crackle.</span>")
 	qdel(src)
 	return
+
+//singulo potato
+/obj/item/weapon/reagent_containers/food/snacks/grown/singulopotato/attack_self(mob/user as mob)
+	user.visible_message("<span class='warning'>[user] crushes a singularity potato!</span>")
+	var/vortexpower = max(3, round(potency/14, 1)) // this limits the range to 7 at max potency.
+	var/turf/pull = user.loc
+	playsound(user, 'sound/weapons/marauder.ogg', 50, 1)
+	for(var/atom/X in orange(vortexpower,pull))
+		if(istype(X, /atom/movable))
+			if(X == user) continue
+			if((X) &&(!X:anchored) && (!istype(X,/mob/living/carbon/human)))
+				step_towards(X,pull)
+				step_towards(X,pull)
+				step_towards(X,pull)
+			else if(istype(X,/mob/living/carbon/human))
+				var/mob/living/carbon/human/H = X
+				if(istype(H.shoes,/obj/item/clothing/shoes/magboots))
+					var/obj/item/clothing/shoes/magboots/M = H.shoes
+					if(M.magpulse)
+						continue
+				H.apply_effect(min(3, vortexpower), WEAKEN, 0)
+				step_towards(H,pull)
+				step_towards(H,pull)
+				step_towards(H,pull)
+	log_game("[key_name(user)] used a singularity potato.")
+	qdel(src)
+	return
+
+//spiderplant
+/obj/item/weapon/grown/spiderpod/attackby(obj/item/weapon/W as obj, mob/user as mob)
+	..()
+	if(istype(W, /obj/item/weapon/kitchenknife) || istype(W, /obj/item/weapon/butch))
+		var/spidermeatamount = max(1, round(potency/25, 1))
+		var/turf/L = user.loc
+		for (var/i=1 to spidermeatamount)
+			var/obj/item/weapon/reagent_containers/food/snacks/spidermeat/newspidermeat = new(L)
+			src.reagents.trans_to (newspidermeat, round(src.reagents.total_volume/spidermeatamount, 1)) //move all reagents from the pod to the meat but split it between the meatslabs
+			user << "<span class='notice'>You cut the spiderpod into [spidermeatamount] spidermeat slabs.</span>"
+		qdel(src)
+		return
+
+/obj/item/weapon/grown/spiderpod/attack_self(mob/user as mob)
+	user.visible_message("<span class='warning'>[user] pries open a spiderpod!</span>")
+	if(prob(max(5, round(potency/1.6, 1))))
+		user << "<span class='notice'>You pry open the spiderpod and release the spiderling.</span>"
+		var/turf/L = user.loc
+		var/obj/effect/spider/spiderling/S = new(L)
+		switch (pickweight(list("regular" = 50, "hunter" = 35, "nurse" = 15)))
+			if ("regular")
+				S.grow_as = /mob/living/simple_animal/hostile/giant_spider
+			if ("hunter")
+				S.grow_as = /mob/living/simple_animal/hostile/giant_spider/hunter
+			if ("nurse")
+				S.grow_as = /mob/living/simple_animal/hostile/giant_spider/nurse
+		log_game("[key_name(user)] spawned a spiderling with a spiderpod.")
+	else
+		user << "<span class='notice'>You pry open the spiderpod but it is empty.</span>"
+		log_game("[key_name(user)] attempted to spawn a spiderling with a spiderpod.")
+	qdel(src)
+	return

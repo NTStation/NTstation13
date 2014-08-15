@@ -197,7 +197,7 @@
 	potency = 20
 	plant_type = 0
 	growthstages = 6
-	mutatelist = list(/obj/item/seeds/eggyseed)
+	mutatelist = list(/obj/item/seeds/eggyseed, /obj/item/seeds/spiderplantseed)
 
 /obj/item/seeds/eggyseed
 	name = "pack of eggplant seeds"
@@ -352,6 +352,7 @@
 	oneharvest = 1
 	potency = 10
 	growthstages = 4
+	mutatelist = list(/obj/item/seeds/singulopotatoseed)
 
 /obj/item/seeds/icepepperseed
 	name = "pack of ice-pepper seeds"
@@ -1226,3 +1227,37 @@
 	plant_type = 0
 	growthstages = 6
 	rarity = 40
+
+/obj/item/seeds/spiderplantseed
+	name = "pack of spiderplant seeds"
+	desc = "These seeds grow into strange spiderpods."
+	icon_state = "seed-spiderplant"
+	species = "spiderplant"
+	plantname = "Spiderplant"
+	product = /obj/item/weapon/grown/spiderpod
+	lifespan = 20
+	endurance = 10
+	maturation = 6
+	production = 6
+	yield = 4
+	potency = 10
+	growthstages = 5
+	plant_type = 0
+	rarity = 30
+
+/obj/item/seeds/singulopotatoseed
+	name = "pack of singularity seeds"
+	desc = "These seeds grow into singularity potatoes. 97% less dangerous than a regular singularity!"
+	icon_state = "seed-singulopotato"
+	species = "singulopotato"
+	plantname = "Singularity Potato"
+	product = /obj/item/weapon/reagent_containers/food/snacks/grown/singulopotato
+	lifespan = 20
+	endurance = 10
+	maturation = 5
+	production = 5
+	yield = 3
+	potency = 10
+	growthstages = 3
+	plant_type = 0
+	rarity = 30
