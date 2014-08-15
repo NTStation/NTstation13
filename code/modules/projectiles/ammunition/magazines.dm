@@ -208,7 +208,7 @@
 /obj/item/ammo_box/magazine/m12g/dragon
 	name = "shotgun magazine (12g dragon's breath)"
 	icon_state = "m12gf"
-	origin_tech = "combat=3, syndicate=1"
+	origin_tech = "combat=3;syndicate=1"
 	ammo_type = /obj/item/ammo_casing/shotgun/dragon
 
 /obj/item/ammo_box/magazine/m12g/dragon/update_icon()
