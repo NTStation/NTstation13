@@ -144,7 +144,7 @@
 			parent.helm.max_heat_protection_temperature = null
 			parent.helm.min_cold_protection_temperature = null
 			parent.helm.flags &= ~STOPSPRESSUREDMAGE
-			if(manual)
+			if(manual && parent.reactive)
 				for (var/armorvar in helm.armor)
 					helm.armor[armorvar] = parent.reactive.togglearmor[armorvar]
 					helm.armor["bio"] = initial(helm.armor["bio"])
