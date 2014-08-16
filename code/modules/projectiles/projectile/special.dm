@@ -167,7 +167,7 @@ obj/item/projectile/kinetic/New()
 /obj/item/projectile/kinetic/Range()
 	range--
 	if(range <= 0)
-		new /obj/item/effect/kinetic_blast(src.loc)
+		new /obj/effect/kinetic_blast(src.loc)
 
 		for(var/turf/T in range(1, src.loc))
 			if(!istype(T, /turf/simulated/wall))
@@ -182,7 +182,7 @@ obj/item/projectile/kinetic/New()
 	if(istype(target_turf, /turf/simulated/mineral))
 		var/turf/simulated/mineral/M = target_turf
 		M.gets_drilled()
-	new /obj/item/effect/kinetic_blast(target_turf)
+	new /obj/effect/kinetic_blast(target_turf)
 
 	if(isturf(target) || istype(target, /obj/structure))
 		for(var/turf/T in range(1, target_turf))
@@ -193,12 +193,12 @@ obj/item/projectile/kinetic/New()
 			S.ex_act(3)
 	..()
 
-/obj/item/effect/kinetic_blast
+/obj/effect/kinetic_blast
 	name = "kinetic explosion"
 	icon = 'icons/obj/projectiles.dmi'
 	icon_state = "kinetic_blast"
 	layer = 4.1
 
-/obj/item/effect/kinetic_blast/New()
+/obj/effect/kinetic_blast/New()
 	spawn(4)
 		qdel(src)
