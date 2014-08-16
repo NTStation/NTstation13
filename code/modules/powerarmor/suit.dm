@@ -18,7 +18,7 @@
 	var/helmrequired = 0
 	var/obj/item/clothing/head/powered/helm
 	var/obj/item/clothing/gloves/powered/gloves
-	var/shoesrequired = 0
+	var/shoesrequired = 1
 	var/obj/item/clothing/shoes/powered/shoes
 
 	var/obj/effect/proc_holder/stat_button/button

@@ -13,8 +13,10 @@
 	return
 
 /obj/item/weapon/gun/projectile/automatic/attackby(var/obj/item/A as obj, mob/user as mob)
-	if(..() && chambered)
+	. = ..()
+	if(. && chambered)
 		alarmed = 0
+	return .
 
 
 /obj/item/weapon/gun/projectile/automatic/mini_uzi
@@ -56,8 +58,8 @@
 
 /obj/item/weapon/gun/projectile/automatic/c20r/attackby(obj/item/I as obj, mob/user as mob)
 	if(istype(I, /obj/item/weapon/silencer))
-		silencer_attackby(I,user)
-	..()
+		return silencer_attackby(I,user)
+	return ..()
 
 /obj/item/weapon/gun/projectile/automatic/c20r/update_icon()
 	..()
