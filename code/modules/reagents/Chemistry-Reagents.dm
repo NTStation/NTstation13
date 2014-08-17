@@ -1022,15 +1022,23 @@ datum
 
 			on_mob_life(var/mob/living/M as mob)
 				if(!M) M = holder.my_atom
+
+				if(!data) data = 1
+				data++
+
 				M.drowsyness = max(M.drowsyness-5, 0)
-				M.AdjustParalysis(-1)
-				M.AdjustStunned(-1)
-				M.AdjustWeakened(-1)
+				M.AdjustParalysis(-4)
+				M.AdjustStunned(-4)
+				M.AdjustWeakened(-4)
 				if(holder.has_reagent("mindbreaker"))
 					holder.remove_reagent("mindbreaker", 5)
 				M.hallucination = max(0, M.hallucination - 10)
-				if(prob(60))	M.adjustToxLoss(1)
-				..()
+
+				if(prob(60))
+					M.adjustToxLoss(1)
+
+				holder.remove_reagent(src.id, REAGENTS_METABOLISM*(1 + data/100))
+				// double consumption rate after 100 ticks
 				return
 
 		impedrezene
