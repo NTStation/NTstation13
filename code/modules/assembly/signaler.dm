@@ -14,7 +14,7 @@
 	var/frequency = 1457
 	var/delay = 0
 	var/datum/wires/connected = null
-	var/datum/radio_frequency/radio_connection
+	var/tmp/datum/radio_frequency/radio_connection
 
 	New()
 		..()
