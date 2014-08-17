@@ -58,8 +58,7 @@
 			affecting.burnstate = 0
 
 			owner.visible_message("<span class='danger'><B>[owner]'s [affecting.getDisplayName()] has been violently dismembered!</B></span>")
-			affecting.name = "[owner.name]'s [affecting.getDisplayName()]" //this is below the line above for a reason, guess
-
+			
 			owner.drop_r_hand() //Removes any items they may be carrying in their now non existant arms
 			owner.drop_l_hand() //Handled here due to the "shock" of losing any limb
 
@@ -311,7 +310,7 @@
 
 	var/direction = pick(cardinal)
 	if(L)
-		L.name = L.getDisplayName()
+		L.name = "[owner.name]'s [L.getDisplayName()]"
 		step(L,direction)
 	if(A)
 		step(A,direction)
