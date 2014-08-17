@@ -711,20 +711,18 @@ var/global/list/human_icon_cache = list()
 	var/mutant_type = null
 	var/race = dna ? dna.mutantrace : null
 
-	if(!has_organic_effect(/datum/organic_effect/husk) && !has_organic_effect(/datum/organic_effect/hulk))
-		if(race)
-			if(race == "adamantine")
-				mutant_type = "golem"
-			else
-				mutant_type = race
-		else
-			mutant_type = "normal"
 
+	if(has_organic_effect(/datum/organic_effect/husk))
+		mutant_type = "husk"
+	else if(has_organic_effect(/datum/organic_effect/hulk))
+		mutant_type = "hulk"
+	else if(race)
+		if(race == "adamantine")
+			mutant_type = "golem"
+		else
+			mutant_type = race
 	else
-		if(has_organic_effect(/datum/organic_effect/husk))
-			mutant_type = "husk"
-		else if(has_organic_effect(/datum/organic_effect/hulk))
-			mutant_type = "hulk"
+		mutant_type = "normal"
 
 	if(mutant_type)
 		return mutant_type
@@ -749,13 +747,14 @@ var/global/list/human_icon_cache = list()
 	icon_render_key += "|[gender]" //Gender
 
 	for(var/obj/item/organ/limb/L in organs) //Limb status
+		icon_render_key += "|[initial(L.name)]="
 		if(L.state == ORGAN_REMOVED)
-			icon_render_key += "|[L.name]=removed"
+			icon_render_key += "removed"
 		else
 			if(L.status == ORGAN_ORGANIC)
-				icon_render_key += "|[L.name]=organic"
+				icon_render_key += "organic"
 			else
-				icon_render_key += "|[L.name]=robotic"
+				icon_render_key += "robotic"
 
 	icon_render_key += "|" //Make it look neat on the end
 
@@ -791,41 +790,42 @@ var/global/list/human_icon_cache = list()
 	if(affecting.state == ORGAN_REMOVED && affecting.visibly_dismembers)
 		return 0
 
+	var/limb_name = initial(affecting.name)
 	if(affecting.body_part == HEAD || affecting.body_part == CHEST) //these have gender and use it in their icons
 		if(affecting.status == ORGAN_ORGANIC) //Heads bypass this due to the icon
 			if(mutant_type != "normal")//Skin tone is irrelevant in Mutant races
 				if(stat == DEAD)
 					if(mutant_type == "plant")
-						I						= image("icon"=human_parts, "icon_state"="[mutant_type]_[affecting.name]_[icon_gender]_dead_s", "layer"=-BODYPARTS_LAYER)
+						I						= image("icon"=human_parts, "icon_state"="[mutant_type]_[limb_name]_[icon_gender]_dead_s", "layer"=-BODYPARTS_LAYER)
 
 
 					else if(mutant_type == "husk")
-						I						= image("icon"=human_parts, "icon_state"="[mutant_type]_[affecting.name]_s","layer"=-BODYPARTS_LAYER)
+						I						= image("icon"=human_parts, "icon_state"="[mutant_type]_[limb_name]_s","layer"=-BODYPARTS_LAYER)
 
 				else
-					I							= image("icon"=human_parts, "icon_state"="[mutant_type]_[affecting.name]_[icon_gender]_s","layer"=-BODYPARTS_LAYER)
+					I							= image("icon"=human_parts, "icon_state"="[mutant_type]_[limb_name]_[icon_gender]_s","layer"=-BODYPARTS_LAYER)
 
 
 			if(mutant_type == "normal") //Skin tone IS Relevant in "Normal" race humans
-				I								= image("icon"=human_parts,"icon_state"="[skin_tone]_[affecting.name]_[icon_gender]_s","layer"=-BODYPARTS_LAYER)
+				I								= image("icon"=human_parts,"icon_state"="[skin_tone]_[limb_name]_[icon_gender]_s","layer"=-BODYPARTS_LAYER)
 
 		else if(affecting.status == ORGAN_ROBOTIC)
-			I									= image("icon"=augment_parts,"icon_state"="[affecting.name]_[icon_gender]_s","layer"=-BODYPARTS_LAYER)
+			I									= image("icon"=augment_parts,"icon_state"="[limb_name]_[icon_gender]_s","layer"=-BODYPARTS_LAYER)
 
 	else
 		if(affecting.status == ORGAN_ORGANIC)
 			if(mutant_type != "normal")
 				if(stat == DEAD)
 					if(mutant_type == "plant")
-						I					= image("icon"=human_parts, "icon_state"="[mutant_type]_[affecting.name]_dead_s", "layer"=-BODYPARTS_LAYER)
+						I					= image("icon"=human_parts, "icon_state"="[mutant_type]_[limb_name]_dead_s", "layer"=-BODYPARTS_LAYER)
 					else
-						I					= image("icon"=human_parts,"icon_state"="[mutant_type]_[affecting.name]_s", "layer"=-BODYPARTS_LAYER)
+						I					= image("icon"=human_parts,"icon_state"="[mutant_type]_[limb_name]_s", "layer"=-BODYPARTS_LAYER)
 				else
-					I						= image("icon"=human_parts,"icon_state"="[mutant_type]_[affecting.name]_s", "layer"=-BODYPARTS_LAYER)
+					I						= image("icon"=human_parts,"icon_state"="[mutant_type]_[limb_name]_s", "layer"=-BODYPARTS_LAYER)
 			else if(mutant_type == "normal")
-				I							= image("icon"=human_parts,"icon_state"="[skin_tone]_[affecting.name]_s", "layer"=-BODYPARTS_LAYER)
+				I							= image("icon"=human_parts,"icon_state"="[skin_tone]_[limb_name]_s", "layer"=-BODYPARTS_LAYER)
 		else if(affecting.status == ORGAN_ROBOTIC)
-			I								= image("icon"=augment_parts,"icon_state"="[affecting.name]_s","layer"=-BODYPARTS_LAYER)
+			I								= image("icon"=augment_parts,"icon_state"="[limb_name]_s","layer"=-BODYPARTS_LAYER)
 
 	if(I)
 		return I
