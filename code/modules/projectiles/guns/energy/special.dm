@@ -112,6 +112,10 @@
 	upgrades = list("diamond" = 0, "screwdriver" = 0, "plasma" = 0)
 
 
+/obj/item/weapon/gun/energy/kinetic_accelerator/emp_act()
+	return // so it stops breaking from EMPs
+
+
 /obj/item/weapon/gun/energy/kinetic_accelerator/newshot()
 	..()
 	if(chambered && chambered.BB)
@@ -135,12 +139,12 @@
 			user << "<span class='info'>You upgrade [src]'s thermal exchanger with diamonds.</span>"
 			S.use(1)
 
-		if(istype(S, /obj/item/stack/sheet/mineral/plasma) && upgrades["plasma"] < 2)
+		if(istype(S, /obj/item/stack/sheet/mineral/plasma) && upgrades["plasma"] < 3)
 			upgrades["plasma"]++
 			range_add++
 			user << "<span class='info'>You upgrade [src]'s accelerating chamber with plasma.</span>"
-			if(prob(5 * (range_add + 1) * (range_add + 1)) && power_supply)
-				power_supply.rigged = 1 // This is dangerous!
+			if(prob(5 * range_add * range_add) && power_supply)
+				overheat = 1 // Will permanently break this gun.
 			S.use(1)
 
 

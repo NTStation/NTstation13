@@ -153,7 +153,7 @@ mob/living/carbon/human/proc/hat_fall_prob()
 /mob/living/carbon/human/proc/get_organ(var/zone)
 	if(!zone)	zone = "chest"
 	for(var/obj/item/organ/limb/O in organs)
-		if(O.name == zone)
+		if(initial(O.name) == zone)
 			return O
 	return null
 

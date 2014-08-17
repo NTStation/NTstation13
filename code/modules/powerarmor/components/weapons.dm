@@ -108,7 +108,7 @@
 	shot_cost = 60
 	gun_name = "\improper Bulldog shotgun"
 
-	var/mag_type = /obj/item/ammo_box/magazine/m762
+	var/mag_type = /obj/item/ammo_box/magazine/m12g
 
 
 /obj/item/weapon/powerarmor/weapon/ranged/proj/pattack(var/atom/A, var/mob/living/carbon/user)
@@ -121,7 +121,8 @@
 	if(!proj_gun.magazine && istype(I, mag_type))
 		var/obj/item/ammo_box/magazine/magazine = I
 		if(magazine.ammo_count())
-			return gun.attackby(magazine, user)
+			var/tenp = gun.attackby(magazine, user)
+			return tenp
 
 /obj/item/weapon/powerarmor/weapon/ranged/proj/New()
 	..()

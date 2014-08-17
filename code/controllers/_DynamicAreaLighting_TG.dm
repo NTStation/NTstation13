@@ -111,7 +111,7 @@ datum/light_source
 			return sqrtTable[owner.trueLuminosity] - dist
 
 atom
-	var/datum/light_source/light
+	var/tmp/datum/light_source/light
 	var/trueLuminosity = 0  // Typically 'luminosity' squared.  The builtin luminosity must remain linear.
 	                        // We may read it, but NEVER set it directly.
 

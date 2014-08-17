@@ -56,6 +56,9 @@ proc/make_mining_asteroid_secret()
 	y_size = rand(3,7)
 	areapoints = x_size * y_size
 
+	if(!possiblethemes.len)
+		return 0 // Runtimes, sir!
+
 	switch(pick(possiblethemes))//what kind of room is this gonna be?
 		if("organharvest")
 			walltypes = list(/turf/simulated/wall/r_wall=2,/turf/simulated/wall=2,/turf/simulated/mineral/random/high_chance=1)
