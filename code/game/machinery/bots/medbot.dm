@@ -29,13 +29,14 @@
 	var/use_beaker = 0 //Use reagents in beaker instead of default treatment agents.
 	var/declare_crit = 1 //If active, the bot will transmit a critical patient alert to MedHUD users.
 	var/declare_cooldown = 0 //Prevents spam of critical patient alerts.
-
+	var/stationary_mode = 0 //If enabled, the Medibot will not move automatically.
 	//Setting which reagents to use to treat what by default. By id.
 	var/treatment_brute = "tricordrazine"
 	var/treatment_oxy = "tricordrazine"
 	var/treatment_fire = "tricordrazine"
 	var/treatment_tox = "tricordrazine"
 	var/treatment_virus = "spaceacillin"
+	var/treat_virus = 1 //If on, the bot will attempt to treat viral infections, curing them if possible.
 	var/shut_up = 0 //self explanatory :)
 	bot_type = MED_BOT
 	bot_filter = RADIO_MEDBOT
@@ -65,10 +66,20 @@
 			if(skin)
 				overlays += image('icons/obj/aibots.dmi', "kit_skin_[skin]")
 
+/obj/machinery/bot/medbot/proc/updateicon()
+	if(!on)
+		icon_state = "medibot0"
+	if(mode == BOT_HEALING)
+		icon_state = "medibots[stationary_mode]"
+		return
+	else if(stationary_mode) //Bot has yellow light to indicate stationary mode.
+		icon_state = "medibot2"
+	else
+		icon_state = "medibot1"
 
 /obj/machinery/bot/medbot/New()
 	..()
-	icon_state = "medibot[on]"
+	updateicon()
 
 	spawn(4)
 		if(skin)
@@ -84,12 +95,12 @@
 
 /obj/machinery/bot/medbot/turn_on()
 	. = ..()
-	icon_state = "medibot[on]"
+	updateicon()
 	updateUsrDialog()
 
 /obj/machinery/bot/medbot/turn_off()
 	..()
-	icon_state = "medibot[on]"
+	updateicon()
 	updateUsrDialog()
 
 /obj/machinery/bot/medbot/bot_reset()
@@ -142,9 +153,11 @@
 		dat += "Reagent Source: "
 		dat += "<a href='?src=\ref[src];use_beaker=1'>[use_beaker ? "Loaded Beaker (When available)" : "Internal Synthesizer"]</a><br>"
 
+		dat += "Treat Viral Infections: <a href='?src=\ref[src];virus=1'>[treat_virus ? "Yes" : "No"]</a><br>"
 		dat += "The speaker switch is [shut_up ? "off" : "on"]. <a href='?src=\ref[src];togglevoice=[1]'>Toggle</a><br>"
 		dat += "Critical Patient Alerts: <a href='?src=\ref[src];critalerts=1'>[declare_crit ? "Yes" : "No"]</a><br>"
 		dat += "Patrol Station: <a href='?src=\ref[src];operation=patrol'>[auto_patrol ? "Yes" : "No"]</a><br>"
+		dat += "Stationary Mode: <a href='?src=\ref[src];stationary=1'>[stationary_mode ? "Yes" : "No"]</a><br>"
 
 	var/datum/browser/popup = new(user, "automed", "Automatic Medical Unit v1.1")
 	popup.set_content(dat)
@@ -153,8 +166,10 @@
 
 /obj/machinery/bot/medbot/Topic(href, href_list)
 	..()
+	if(locked && !issilicon(usr))
+		return
 
-	if((href_list["adj_threshold"]) && (!locked || issilicon(usr)))
+	if(href_list["adj_threshold"])
 		var/adjust_num = text2num(href_list["adj_threshold"])
 		heal_threshold += adjust_num
 		if(heal_threshold < 5)
@@ -162,7 +177,7 @@
 		if(heal_threshold > 75)
 			heal_threshold = 75
 
-	else if((href_list["adj_inject"]) && (!locked || issilicon(usr)))
+	else if(href_list["adj_inject"])
 		var/adjust_num = text2num(href_list["adj_inject"])
 		injection_amount += adjust_num
 		if(injection_amount < 5)
@@ -170,21 +185,26 @@
 		if(injection_amount > 15)
 			injection_amount = 15
 
-	else if((href_list["use_beaker"]) && (!locked || issilicon(usr)))
+	else if(href_list["use_beaker"])
 		use_beaker = !use_beaker
 
 	else if (href_list["eject"] && (!isnull(reagent_glass)))
-		if(!locked)
-			reagent_glass.loc = get_turf(src)
-			reagent_glass = null
-		else
-			usr << "<span class='notice'>You cannot eject the beaker because the panel is locked.</span>"
+		reagent_glass.loc = get_turf(src)
+		reagent_glass = null
 
-	else if ((href_list["togglevoice"]) && (!locked || issilicon(usr)))
+	else if (href_list["togglevoice"])
 		shut_up = !shut_up
 
-	else if ((href_list["critalerts"]) && (!locked || issilicon(usr)))
+	else if (href_list["critalerts"])
 		declare_crit = !declare_crit
+
+	else if (href_list["stationary"])
+		stationary_mode = !stationary_mode
+		path = new()
+		updateicon()
+
+	else if (href_list["virus"])
+		treat_virus = !treat_virus
 
 	updateUsrDialog()
 	return
@@ -251,7 +271,7 @@
 		mode = BOT_IDLE
 
 		if(stunned <= 0)
-			icon_state = "medibot[on]"
+			updateicon()
 			stunned = 0
 		return
 
@@ -275,7 +295,8 @@
 			var/message = pick("Radar, put a mask on!","There's always a catch, and it's the best there is.","I knew it, I should've been a plastic surgeon.","What kind of medbay is this? Everyone's dropping like dead flies.","Delicious!")
 			speak(message)
 
-		for (var/mob/living/carbon/C in view(7,src)) //Time to find a patient!
+		var/scan_range = (stationary_mode ? 1 : 7) //If in stationary mode, scan range is limited to adjacent patients.
+		for (var/mob/living/carbon/C in view(scan_range,src)) //Time to find a patient!
 			if ((C.stat == 2) || !istype(C, /mob/living/carbon/human))
 				continue
 
@@ -300,6 +321,7 @@
 	if(patient && (get_dist(src,patient) <= 1))
 		if(mode != BOT_HEALING)
 			mode = BOT_HEALING
+			updateicon()
 			frustration = 0
 			medicate_patient(patient)
 		return
@@ -309,7 +331,7 @@
 		mode = BOT_IDLE
 		last_found = world.time
 
-	if(patient && path.len == 0 && (get_dist(src,patient) > 1))
+	if(!stationary_mode && patient && path.len == 0 && (get_dist(src,patient) > 1))
 		spawn(0)
 			path = AStar(loc, get_turf(patient), /turf/proc/CardinalTurfsWithAccess, /turf/proc/Distance_cardinal, 0, 30,id=botcard)
 			if(!path)
@@ -332,14 +354,12 @@
 	if(path.len > 8 && patient)
 		frustration++
 
-	if(!patient)
+	if(auto_patrol && !stationary_mode && !patient)
+		if(mode == BOT_IDLE || mode == BOT_START_PATROL)
+			start_patrol()
 
-		if(auto_patrol)
-			if(mode == BOT_IDLE || mode == BOT_START_PATROL)
-				start_patrol()
-
-			if(mode == BOT_PATROL)
-				bot_patrol()
+		if(mode == BOT_PATROL)
+			bot_patrol()
 
 	return
 
@@ -376,12 +396,12 @@
 	if((C.getToxLoss() >= heal_threshold) && (!C.reagents.has_reagent(treatment_tox)))
 		return 1
 
+	if(treat_virus) //This check is so that virologists can spread (hopefully benign) viruses.
+		for(var/datum/disease/D in C.viruses)
+			if((D.stage > 1) || (D.spread_type == AIRBORNE))
 
-	for(var/datum/disease/D in C.viruses)
-		if((D.stage > 1) || (D.spread_type == AIRBORNE))
-
-			if (!C.reagents.has_reagent(treatment_virus))
-				return 1 //STOP DISEASE FOREVER
+				if (!C.reagents.has_reagent(treatment_virus))
+					return 1 //STOP DISEASE FOREVER
 
 	return 0
 
@@ -411,13 +431,14 @@
 		reagent_id = "toxin"
 
 	else
-		var/virus = 0
-		for(var/datum/disease/D in C.viruses)
-			virus = 1
+		if(treat_virus)
+			var/virus = 0
+			for(var/datum/disease/D in C.viruses)
+				virus = 1
 
-		if (!reagent_id && (virus))
-			if(!C.reagents.has_reagent(treatment_virus))
-				reagent_id = treatment_virus
+			if (!reagent_id && (virus))
+				if(!C.reagents.has_reagent(treatment_virus))
+					reagent_id = treatment_virus
 
 		if (!reagent_id && (C.getBruteLoss() >= heal_threshold))
 			if(!C.reagents.has_reagent(treatment_brute))
@@ -449,9 +470,9 @@
 		last_found = world.time
 		var/message = pick("All patched up!","An apple a day keeps me away.","Feel better soon!")
 		speak(message)
+		updateicon()
 		return
 	else
-		icon_state = "medibots"
 		C.visible_message("<span class='danger'>[src] is trying to inject [patient]!</span>", \
 			"<span class='userdanger'>[src] is trying to inject [patient]!</span>")
 
@@ -465,8 +486,8 @@
 				C.visible_message("<span class='danger'>[src] injects [patient] with the syringe!</span>", \
 					"<span class='userdanger'>[src] injects [patient] with the syringe!</span>")
 
-			icon_state = "medibot[on]"
 			mode = BOT_IDLE
+			updateicon()
 			return
 
 	reagent_id = null
