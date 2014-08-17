@@ -32,8 +32,8 @@
 	var/image/cap_living = null //Where we store our cap icons so we dont generate them constantly to update our icon
 	var/image/cap_dead = null
 	var/limit_maxhealth = 400 //This is the maximum amount of health a walking mushroom can gain.
-	var/limit_damage_lower = 50 //hardcap for lower damage cap a walking mushroom can gain
-	var/limit_damage_upper = 50 //hardcap for upper damage cap a walking mushroom can gain
+	var/limit_damage_lower = 45 //hardcap for lower damage cap a walking mushroom can gain
+	var/limit_damage_upper = 45 //hardcap for upper damage cap a walking mushroom can gain
 	var/list/mushbility = list("stun" = 0, "smash" = 0, "fastheal" = 0, "freeze" = 0, "bluespace" = 0, "spaceproof" = 0, "evolve" = 0, "rampage" = 0,) //learned abilities are stored here
 
 /mob/living/simple_animal/hostile/mushroom/examine()
@@ -48,7 +48,7 @@
 	if(!stat)//Mushrooms slowly regenerate if conscious, for people who want to save them from being eaten
 		health = min(health+2, maxHealth)
 		if(mushbility["fastheal"] == 1)
-			health = min(health+3, maxHealth)
+			health = min(health+1, maxHealth)
 
 /mob/living/simple_animal/hostile/mushroom/New()//Makes every shroom a little unique
 	melee_damage_lower += rand(4,5)
@@ -84,7 +84,7 @@
 			if(level_gain == 0)//So we still gain a level if two mushrooms were the same level
 				level_gain = 1
 			else if (level_gain < 0) //So the winning mushroom is higher level... it still can level up, but at a lower chance.
-				if(prob(round(100 / ((M.powerlevel - powerlevel)/2.5)))) //chance for levelup decreases for every level the losing shroom is below us
+				if(prob(round(100 / ((M.powerlevel - powerlevel)/2)))) //chance for levelup decreases for every level the losing shroom is below us
 					level_gain = 1
 				else
 					level_gain = 0 //Make sure that we don't get negative levelups from being too overleveled!
@@ -162,11 +162,11 @@ mob/living/simple_animal/hostile/mushroom/proc/rampage()
 		melee_damage_upper = min(limit_damage_upper, melee_damage_upper + rand(5,7))
 		maxHealth = min(limit_maxhealth, maxHealth + rand(15,22))
 		src.visible_message("<span class='notice'>The [src.name] sheds its cap to become even better at fighting!</span>")
-		move_to_delay = min(3, (move_to_delay - 3))
+		move_to_delay = max(3, (move_to_delay - 3))
 
 	if(powerlevel >= 5 && mushbility["fastheal"] == 0)
 		mushbility["fastheal"] = 1
-		move_to_delay = min(3, (move_to_delay - 3))
+		move_to_delay = max(3, (move_to_delay - 3))
 		src.visible_message("<span class='notice'>The [src.name] seems to move faster now!</span>")
 
 	if(powerlevel >= 3 && mushbility["spaceproof"] == 0)
