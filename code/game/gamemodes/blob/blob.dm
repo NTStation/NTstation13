@@ -36,7 +36,7 @@ var/list/blob_nodes = list()
 	blobwincount = initial(blobwincount) * cores_to_spawn
 
 	if(num_players() < 30)
-		blob_point_rate = min((num_players()*0.1)+(num_players()*0.006), 3)
+		blob_point_rate = min((num_players()*0.1)+0.1, 3)
 
 	for(var/datum/mind/player in antag_candidates)
 		for(var/job in restricted_jobs)//Removing robots from the list
