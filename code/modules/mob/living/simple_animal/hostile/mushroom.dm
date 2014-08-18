@@ -99,6 +99,7 @@
 /mob/living/simple_animal/hostile/mushroom/revive()
 	..()
 	UpdateMushroomCap()
+	icon_state = icon_living
 
 /mob/living/simple_animal/hostile/mushroom/Die()
 	visible_message("<span class='notice'>[src] fainted.</span>")
@@ -255,7 +256,7 @@ mob/living/simple_animal/hostile/mushroom/proc/rampage()
 
 	if(istype(I, /obj/item/weapon/reagent_containers/food/snacks/grown/bluespacetomato))
 		user << "<span class='notice'>You feed the [I] to [src].</span>"
-		if(!mushbility["bluespace"] == 1)
+		if(!mushbility["bluespace"] == 1 && !factions["lazarus"]) //No rampage if someone goes the difficult way and actually revives a mushroom with the lazarus
 			mushbility["bluespace"] = 1
 			src.visible_message("<span class='notice'>The [src.name] has mastered bluespace teleportion!</span>")
 		qdel(I)
@@ -335,7 +336,6 @@ mob/living/simple_animal/hostile/mushroom/proc/rampage()
 		src.visible_message("<span class='warning'>The <b>[src.name]</b> teleports!</span>")
 		playsound(src, 'sound/effects/EMPulse.ogg', 50, 1)
 		src.loc = L.loc
-		//sleep(1)
 		s.set_up(3, 1, src)
 		s.start()
 
