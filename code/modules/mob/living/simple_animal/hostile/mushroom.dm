@@ -53,7 +53,7 @@
 /mob/living/simple_animal/hostile/mushroom/New()//Makes every shroom a little unique
 	melee_damage_lower += rand(4,5)
 	melee_damage_upper += rand(4,5)
-	maxHealth += rand(30,40)
+	maxHealth += rand(30,50)
 	move_to_delay = rand(3,11)
 	var/cap_color = rgb(rand(0, 255), rand(0, 255), rand(0, 255))
 	cap_living = image('icons/mob/animal.dmi',icon_state = "mushroom_cap")
@@ -80,7 +80,7 @@
 			return
 		M.visible_message("<span class='notice'>[M] devours [src]!</span>")
 		var/level_gain = (powerlevel - M.powerlevel)
-		if(!bruised && !M.ckey && M.powerlevel <= 30)//Player shrooms can't level up to become robust gods.
+		if(!bruised && !M.ckey && M.powerlevel <= 20)//Player shrooms can't level up to become robust gods.
 			if(level_gain == 0)//So we still gain a level if two mushrooms were the same level
 				level_gain = 1
 			else if (level_gain < 0) //So the winning mushroom is higher level... it still can level up, but at a lower chance.
@@ -218,7 +218,7 @@ mob/living/simple_animal/hostile/mushroom/proc/rampage()
 		if(mushbility["fastheal"] == 1)
 			msg += "- *Fast Metabolism*\n"
 			msg += "- Speeds up movement and regeneration rate.\n"
-		if(mushbility["stun"] == 1)
+		if(mushbility["bluespace"] == 1)
 			msg += "- *Bluespace Teleportation*\n"
 			msg += "- Allows mushroom to teleport to sighted enemies.\n"
 		if(mushbility["stun"] == 1)
@@ -244,7 +244,7 @@ mob/living/simple_animal/hostile/mushroom/proc/rampage()
 
 	if(istype(I, /obj/item/weapon/reagent_containers/food/snacks/grown/ghost_chilli))
 		user << "<span class='notice'>You feed the [I] to the [src].</span>"
-		if(!mushbility["rampage"] == 1)
+		if(!mushbility["rampage"] == 1 && !factions["lazarus"])
 			mushbility["rampage"] = 1
 			friends += user
 			log_game("[key_name(user)] turned a walking mushroom hostile.")
@@ -256,7 +256,7 @@ mob/living/simple_animal/hostile/mushroom/proc/rampage()
 
 	if(istype(I, /obj/item/weapon/reagent_containers/food/snacks/grown/bluespacetomato))
 		user << "<span class='notice'>You feed the [I] to [src].</span>"
-		if(!mushbility["bluespace"] == 1 && !factions["lazarus"]) //No rampage if someone goes the difficult way and actually revives a mushroom with the lazarus
+		if(!mushbility["bluespace"] == 1)
 			mushbility["bluespace"] = 1
 			src.visible_message("<span class='notice'>The [src.name] has mastered bluespace teleportion!</span>")
 		qdel(I)
