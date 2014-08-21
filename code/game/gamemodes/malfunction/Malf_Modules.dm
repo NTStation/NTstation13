@@ -66,58 +66,69 @@
 	set category = "Malfunction"
 	set name = "Initiate Hostile Lockdown"
 
-	if(src.stat == 2)
-		src <<"You cannot begin a lockdown because you are dead!"
+	if(malf_cooldown)
+		src << "Network calibration in progress. Standby."
 		return
 
-	for(var/obj/machinery/firealarm/FA in machines) //activate firealarms
+	if(src.stat == 2)
+		src <<"Critical system failure. Function offline."
+		return
+	var/obj/machinery/door/airlock/AL
+	for(var/obj/machinery/door/D in portals)
 		spawn()
-			FA.alarm()
-	for(var/obj/machinery/door/poddoor/BD in world) //Close blast doors!
-		spawn()
-			BD.close()
-	for(var/obj/machinery/door/airlock/AL in world) //shock-bolt airlocks
-		spawn()
-			if(AL.canAIControl() && !AL.stat) //Must be powered and have working AI wire.
-				AL.locked = 0
-				AL.safe = 0
-				AL.close()
-				AL.locked = 1
-				AL.lights = 0
-				AL.secondsElectrified = -1
+			if(istype(D, /obj/machinery/door/airlock))
+				AL = D
+				if(AL.canAIControl() && !AL.stat) //Must be powered and have working AI wire.
+					AL.locked = 0 //For airlocks that were bolted open.
+					AL.safe = 0 //DOOR CRUSH
+					AL.close()
+					AL.locked = 1 //Bolt it!
+					AL.secondsElectrified = -1  //Shock it!
+					AL.update_icon() //Ensure the airlock's state is correctly shown.
+			else if(!D.stat) //So that only powered doors are closed.
+				D.close() //Close ALL the doors!
 
-	var/obj/machinery/computer/communications/C = locate() in world
+	var/obj/machinery/computer/communications/C = locate() in machines
 	if(C)
 		C.post_status("alert", "lockdown")
 
 	src.verbs += /mob/living/silicon/ai/proc/disablelockdown
 	src << "<span class = 'warning'>Lockdown Initiated.</span>"
 
+	//Short cooldown, for performance.
+	malf_cooldown = 1
+	spawn(30)
+	malf_cooldown = 0
 /mob/living/silicon/ai/proc/disablelockdown()
 	set category = "Malfunction"
 	set name = "Disable Lockdown"
 
 	if(src.stat == 2)
-		src <<"You cannot disable lockdown because you are dead!"
+		src << "System offline."
 		return
 
-	for(var/obj/machinery/firealarm/FA in machines) //deactivate firealarms
-		spawn()
-			FA.reset()
-	for(var/obj/machinery/door/poddoor/BD in world) //Open blast doors!
-		spawn()
-			BD.open()
-	for(var/obj/machinery/door/airlock/AL in world) //unbolt and open airlocks
-		spawn()
-			if(AL.canAIControl() && !AL.stat)
+	if(malf_cooldown)
+		src << "Network calibration in progress. Standby."
+		return
 
-				AL.locked = 0
-				AL.secondsElectrified = 0
-				AL.open()
-				AL.safe = 1
-				AL.lights = 1
+	var/obj/machinery/door/airlock/AL
+	for(var/obj/machinery/door/D in portals)
+		spawn()
+			if(istype(D, /obj/machinery/door/airlock))
+				AL = D
+				if(AL.canAIControl() && !AL.stat) //Must be powered and have working AI wire.
+					AL.locked = 0 //Unbolt all airlocks before trying to open them!
+					AL.secondsElectrified = 0
+					AL.open()
+					AL.safe = 1 //Remove this line for potential door crushing!
+					AL.update_icon()
+			else if(!D.stat) //Opens only powered doors.
+				D.open() //Open everything!
 
 	src << "<span class = 'notice'>Lockdown Lifted.</span>"
+	malf_cooldown = 1
+	spawn(30)
+	malf_cooldown = 0
 
 /datum/AI_Module/large/disable_rcd
 	module_name = "RCD disable"
