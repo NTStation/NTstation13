@@ -104,7 +104,7 @@ var/list/sacrificed = list()
 					if(iscultist(C) && !C.stat)		//converting requires three cultists
 						cultsinrange += C
 						C.say("Mah[pick("'","`")]weyh pleggh at e'ntrath!")
-				if(cultsinrange.len >= 3)
+				if(cultsinrange.len >= 2)
 					M.visible_message("\red [M] writhes in pain as the markings below him glow a bloody red.", \
 					"\red AAAAAAHHHH!.", \
 					"\red You hear an anguished scream.")
