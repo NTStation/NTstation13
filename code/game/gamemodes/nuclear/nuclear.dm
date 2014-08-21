@@ -5,16 +5,16 @@
 /datum/game_mode/nuclear
 	name = "nuclear emergency"
 	config_tag = "nuclear"
-	required_players = 20 // 20 players - 5 players to be the nuke ops = 15 players remaining
-	required_enemies = 5
-	recommended_enemies = 5
+	required_players = 20
+	required_enemies = 3
+	recommended_enemies = 3
 	pre_setup_before_jobs = 1
 	antag_flag = BE_OPERATIVE
 
 	uplink_welcome = "Corporate Backed Uplink Console:"
-	uplink_uses = 10
+	uplink_uses = 18 //Ops get extra TC if their team is smaller.
 
-	var/const/agents_possible = 5 //If we ever need more syndicate agents.
+	var/agents_possible = 3 //If we ever need more syndicate agents.
 	var/const/waittime_l = 600 //lower bound on time before intercept arrives (in tenths of seconds)
 	var/const/waittime_h = 1800 //upper bound on time before intercept arrives (in tenths of seconds)
 
@@ -28,6 +28,15 @@
 	world << "A nuclear explosive was being transported by Nanotrasen to a military base. The transport ship mysteriously lost contact with Space Traffic Control (STC). About that time a strange disk was discovered around [station_name()]. It was identified by Nanotrasen as a nuclear auth. disk and now Syndicate Operatives have arrived to retake the disk and detonate SS13! Also, most likely Syndicate star ships are in the vicinity so take care not to lose the disk!\n<B>Syndicate</B>: Reclaim the disk and detonate the nuclear bomb anywhere on SS13.\n<B>Personnel</B>: Hold the disk and <B>escape with the disk</B> on the shuttle!"
 
 /datum/game_mode/nuclear/pre_setup()
+	if(num_players() >= 30)
+		agents_possible = 5
+		recommended_enemies = 5
+		uplink_uses = 10
+	else if (num_players() >= 25)
+		agents_possible = 4
+		recommended_enemies = 4
+		uplink_uses = 13
+
 	var/agent_number = 0
 	if(antag_candidates.len > agents_possible)
 		agent_number = agents_possible
