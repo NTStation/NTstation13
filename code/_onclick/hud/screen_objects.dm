@@ -224,7 +224,21 @@
 						else
 							C << "<span class='notice'>You don't have an internals tank!</span>"
 		if("act_intent")
-			usr.a_intent_change("right")
+			var/list/PL = params2list(params)
+
+			switch(text2num(PL["icon-y"]))
+				if(1 to 16)
+					switch(text2num(PL["icon-x"]))
+						if(1 to 16)
+							usr.a_intent_change("harm")
+						if(17 to 32)
+							usr.a_intent_change("grab")
+				if(17 to 32)
+					switch(text2num(PL["icon-x"]))
+						if(1 to 16)
+							usr.a_intent_change("help")
+						if(17 to 32)
+							usr.a_intent_change("disarm")
 		if("pull")
 			usr.stop_pulling()
 		if("throw/catch")
