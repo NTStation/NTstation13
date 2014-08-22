@@ -107,6 +107,13 @@
 		return num_loaded
 	return 0
 
+/obj/item/ammo_box/attack_self(mob/user as mob)
+	var/obj/item/ammo_casing/A = get_round()
+	if(A)
+		A.loc = user.loc
+		user << "<span class='notice'>You remove a shell from \the [src]!</span>"
+		update_icon()
+
 /obj/item/ammo_box/update_icon()
 	switch(multiple_sprites)
 		if(1)
