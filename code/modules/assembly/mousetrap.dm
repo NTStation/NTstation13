@@ -59,6 +59,9 @@
 			var/mob/living/simple_animal/mouse/M = target
 			visible_message("\red <b>SPLAT!</b>")
 			M.splat()
+		else if(istype(target, /mob/dead))
+			return // NO!
+
 		playsound(src.loc, 'sound/effects/snap.ogg', 50, 1)
 		armed = 0
 		update_icon()
@@ -112,6 +115,9 @@
 
 
 	on_found(mob/finder as mob)
+		if(istype(finder, /mob/dead))
+			return // NO!
+
 		if(armed)
 			finder.visible_message("<span class='warning'>[finder] accidentally sets off [src], breaking their fingers.</span>", \
 								   "<span class='warning'>You accidentally trigger [src]!</span>")
