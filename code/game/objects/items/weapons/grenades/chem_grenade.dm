@@ -172,11 +172,16 @@
 
 	if(nadeassembly)
 		var/mob/M = get_mob_by_ckey(assemblyattacher)
+		var/mob_string = M ? "[M.key]/[M]" : "Unknown"
 		var/mob/last = get_mob_by_ckey(nadeassembly.fingerprintslast)
+		var/last_string = last ? "[last.key]/[last]" : "Unknown"
+
 		var/turf/T = get_turf(src)
 		var/area/A = get_area(T)
-		message_admins("grenade primed by an assembly, attached by [M.key]/[M]<A HREF='?_src_=holder;adminmoreinfo=\ref[M]'>(?)</A> and last touched by [last.key]/[last]<A HREF='?_src_=holder;adminmoreinfo=\ref[last]'>(?)</A> ([nadeassembly.a_left.name] and [nadeassembly.a_right.name]) at <A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[T.x];Y=[T.y];Z=[T.z]'>[A.name] (JMP)</a>.")
-		log_game("grenade primed by an assembly, attached by [M.key]/[M] and last touched by [last.key]/[last] ([nadeassembly.a_left.name] and [nadeassembly.a_right.name]) at [A.name] ([T.x], [T.y], [T.z])")
+		log_game("grenade primed by an assembly, attached by [mob_string] and last touched by [last_string] ([nadeassembly.a_left.name] and [nadeassembly.a_right.name]) at [A.name] ([T.x], [T.y], [T.z])")
+		if(M)		mob_string += "<A HREF='?_src_=holder;adminmoreinfo=\ref[M]'>(?)</A>"
+		if(last)	last_string += "<A HREF='?_src_=holder;adminmoreinfo=\ref[last_string]'>(?)</A>"
+		message_admins("grenade primed by an assembly, attached by [mob_string] and last touched by [last_string] ([nadeassembly.a_left.name] and [nadeassembly.a_right.name]) at <A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[T.x];Y=[T.y];Z=[T.z]'>[A.name] (JMP)</a>.")
 
 	playsound(loc, 'sound/effects/bamf.ogg', 50, 1)
 
