@@ -178,7 +178,7 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 						if(!linked_lathe.check_mat(being_built, M))
 							src.visible_message("<span class='notice'>The [src.name] beeps, \"Not enough materials to complete all prototypes.\"</span>")
 							g2g = 0
-							spawn(32*i)
+							spawn(32*i/coeff)
 								linked_lathe.busy = 0
 								screen = 3.1
 								updateUsrDialog()
@@ -207,7 +207,7 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 					var/P = being_built.build_path //lets save these values before the spawn() just in case. Nobody likes runtimes.
 					var/R = being_built.reliability
 					var/O = being_built.locked
-					spawn(32*i)
+					spawn(32*i/coeff)
 						if(g2g)
 							var/obj/new_item = new P(src)
 							if( new_item.type == /obj/item/weapon/storage/backpack/holding )
