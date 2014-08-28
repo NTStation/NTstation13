@@ -50,6 +50,7 @@ obj/item/weapon/gun/energy/laser/retro
 
 /obj/item/weapon/gun/energy/laser/cyborg
 	desc = "An energy-based laser gun that draws power from the cyborg's internal energy cell directly. So this is what freedom looks like?"
+	can_charge = 0
 
 /obj/item/weapon/gun/energy/laser/cyborg/newshot()
 	if(isrobot(src.loc))

@@ -151,7 +151,7 @@
 	damage_type = BRUTE
 	flag = "bomb"
 	trace_residue = null
-	var/range = 2
+	range = 2
 
 obj/item/projectile/kinetic/New()
 	var/turf/proj_turf = get_turf(src)
@@ -164,8 +164,11 @@ obj/item/projectile/kinetic/New()
 		damage *= 2
 	..()
 
-/obj/item/projectile/kinetic/Range()
-	range--
+/obj/item/projectile/kinetic/Range(var/remove=1)
+	if(range <= 0)
+		return
+
+	range -= remove
 	if(range <= 0)
 		new /obj/effect/kinetic_blast(src.loc)
 
@@ -176,6 +179,7 @@ obj/item/projectile/kinetic/New()
 		for(var/obj/structure/S in range(1, src.loc))
 			S.ex_act(3)
 		delete()
+
 
 /obj/item/projectile/kinetic/on_hit(var/atom/target)
 	var/turf/target_turf= get_turf(target)
@@ -192,6 +196,33 @@ obj/item/projectile/kinetic/New()
 		for(var/obj/structure/S in range(1, target_turf))
 			S.ex_act(3)
 	..()
+
+
+/obj/item/projectile/plasma
+	name = "plasma blast"
+	icon_state = "pulse0_bl"
+	damage = 10
+	range = 9 // Used as both range and power
+	trace_residue = null
+
+/obj/item/projectile/plasma/mech
+	range = 18
+	damage = 15
+
+/obj/item/projectile/plasma/on_hit(var/atom/target)
+	Range(1)
+	if(!ismob(target))
+		target.ex_act(3)
+		while(target && target.density && range > 0)
+			// If target was not destroyed by first hit, use all power trying to destroy it.
+			Range(1)
+			target.ex_act(3)
+			if(!istype(target, /turf/simulated/mineral))
+				Range(5)
+		if(range > 0)
+			return -1
+	..()
+
 
 /obj/effect/kinetic_blast
 	name = "kinetic explosion"

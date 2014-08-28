@@ -107,10 +107,6 @@
 	projectile_type = /obj/item/projectile/temp/hot
 	select_name = "bake"
 
-/obj/item/ammo_casing/energy/meteor
-	projectile_type = /obj/item/projectile/meteor
-	select_name = "goddamn meteor"
-
 /obj/item/ammo_casing/energy/kinetic
 	projectile_type = /obj/item/projectile/kinetic
 	select_name = "kinetic"
@@ -122,3 +118,8 @@
 	select_name  = "disable"
 	e_cost = 50
 	fire_sound = "sound/weapons/taser.ogg"
+
+/obj/item/ammo_casing/energy/plasma
+	projectile_type = /obj/item/projectile/plasma
+	select_name = "plasma blast"
+	fire_sound = 'sound/weapons/pulse3.ogg'

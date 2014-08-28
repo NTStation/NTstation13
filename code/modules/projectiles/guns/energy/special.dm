@@ -164,6 +164,24 @@
 	update_icon()
 	return
 
+
+/obj/item/weapon/gun/energy/plasmacutter
+	name = "plasma cutter"
+	desc = "A high-power gun capable of expelling concentrated plasma blasts."
+	icon_state = "plasmacutter"
+	item_state = "plasmacutter"
+	modifystate = -1
+	origin_tech = "combat=3;materials=3;magnets=2;plasma=2"
+	ammo_type = list(/obj/item/ammo_casing/energy/plasma)
+	// DBG REMOVE
+	cell_type = /obj/item/weapon/stock_parts/cell/infinite
+
+/obj/item/weapon/gun/energy/plasmacutter/adv
+	name = "advanced plasma cutter"
+	icon_state = "adv_plasmacutter"
+	origin_tech = "combat=3;materials=4;magnets=3;plasma=3"
+
+
 /obj/item/weapon/gun/energy/disabler
 	name = "disabler"
 	desc = "A self-defense weapon that exhausts targets, weakening them until they collapse. Typically used against hostile wildlife by exploration teams; though after proving ineffective against the common space carp, was issued to some of the less-fortunate NT security teams."
