@@ -8,10 +8,14 @@ mob/proc/regular_hud_updates() //Used in the life.dm of mobs that can use HUDs.
 		for(var/image/hud in client.images)
 			if(copytext(hud.icon_state,1,4) == "hud")
 				client.images -= hud
+			if(copytext(hud.icon_state,1,5) == "rock")
+				client.images -= hud
 	if(src in med_hud_users)
 		med_hud_users -= src
 	if(src in sec_hud_users)
 		sec_hud_users -= src
+	if(src in mining_hud_users)
+		mining_hud_users -= src
 
 
 //Medical HUD procs
@@ -132,3 +136,30 @@ proc/process_sec_hud(var/mob/M, var/advanced_mode,var/mob/eye)
 					else
 						continue
 				C.images += holder
+
+
+proc/process_mining_hud(var/mob/M, var/mob/eye)
+	world << "mining hud cycled [M] [eye]"
+	if(!M)
+		return
+	if(!M.client)
+		return
+
+	var/client/C = M.client
+
+	var/turf/eye_turf
+	if(eye)
+		eye_turf = get_turf(eye)
+	else
+		eye_turf = get_turf(M)
+
+	var/list/L = list()
+
+	for(var/turf/simulated/mineral/MT in range(7, eye_turf))
+		if(MT.scan_state)
+			L += MT
+
+	for(var/turf/simulated/mineral/MT in L)
+		var/turf/T = get_turf(MT)
+		var/image/I = image('icons/turf/walls.dmi', loc = T, icon_state = MT.scan_state, layer = 18)
+		C.images += I

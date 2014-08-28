@@ -8,6 +8,16 @@
 	vision_flags = SEE_TURFS
 	invis_view = SEE_INVISIBLE_MINIMUM
 
+/obj/item/clothing/glasses/meson/adv
+	name = "Advanced Meson Scanner"
+	desc = "Used by engineering and mining staff to see basic structural and terrain layouts through walls, regardless of lighting condition."
+	darkness_view = 4
+	origin_tech = "magnets=3;engineering=3"
+	hud = 1
+
+/obj/item/clothing/glasses/meson/adv/process_hud(var/mob/M)
+	process_mining_hud(M)
+
 /obj/item/clothing/glasses/meson/gar
 	name = "Gar Mesons"
 	icon_state = "garm"
