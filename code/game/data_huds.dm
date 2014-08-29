@@ -139,7 +139,6 @@ proc/process_sec_hud(var/mob/M, var/advanced_mode,var/mob/eye)
 
 
 proc/process_mining_hud(var/mob/M, var/mob/eye)
-	world << "mining hud cycled [M] [eye]"
 	if(!M)
 		return
 	if(!M.client)
