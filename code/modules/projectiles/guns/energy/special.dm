@@ -167,9 +167,10 @@
 
 /obj/item/weapon/gun/energy/plasmacutter
 	name = "plasma cutter"
-	desc = "A high-power gun capable of expelling concentrated plasma blasts."
+	desc = "A mining tool capable of expelling concentrated plasma bursts. You could use it to cut limbs off of xenos! Or, you know, mine stuff."
 	icon_state = "plasmacutter"
 	item_state = "plasmacutter"
+	force = 15
 	modifystate = -1
 	origin_tech = "combat=3;materials=3;magnets=2;plasma=2"
 	ammo_type = list(/obj/item/ammo_casing/energy/plasma)
@@ -180,6 +181,7 @@
 	name = "advanced plasma cutter"
 	icon_state = "adv_plasmacutter"
 	origin_tech = "combat=3;materials=4;magnets=3;plasma=3"
+	ammo_type = list(/obj/item/ammo_casing/energy/plasma/adv)
 
 
 /obj/item/weapon/gun/energy/disabler

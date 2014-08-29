@@ -198,32 +198,6 @@ obj/item/projectile/kinetic/New()
 	..()
 
 
-/obj/item/projectile/plasma
-	name = "plasma blast"
-	icon_state = "pulse0_bl"
-	damage = 10
-	range = 9 // Used as both range and power
-	trace_residue = null
-
-/obj/item/projectile/plasma/mech
-	range = 18
-	damage = 15
-
-/obj/item/projectile/plasma/on_hit(var/atom/target)
-	Range(1)
-	if(!ismob(target))
-		target.ex_act(3)
-		while(target && target.density && range > 0)
-			// If target was not destroyed by first hit, use all power trying to destroy it.
-			Range(1)
-			target.ex_act(3)
-			if(!istype(target, /turf/simulated/mineral))
-				Range(5)
-		if(range > 0)
-			return -1
-	..()
-
-
 /obj/effect/kinetic_blast
 	name = "kinetic explosion"
 	icon = 'icons/obj/projectiles.dmi'
@@ -233,3 +207,42 @@ obj/item/projectile/kinetic/New()
 /obj/effect/kinetic_blast/New()
 	spawn(4)
 		qdel(src)
+
+
+
+/obj/item/projectile/plasma
+	name = "plasma blast"
+	icon_state = "plasmacutter"
+	damage_type = BURN
+	damage = 10
+	range = 6
+	var/power = 6
+	trace_residue = null
+
+/obj/item/projectile/plasma/on_hit(var/atom/target)
+	if(istype(target, /turf/simulated/mineral))
+		while(target && target.density && range > 0 && power > 0)
+			power -= 1
+			var/turf/simulated/mineral/M = target
+			M.gets_drilled()
+		if(range > 0 && power > 0)
+			return -1
+	return ..()
+
+/obj/item/projectile/plasma/adv
+	range = 9
+	power = 9
+	damage = 15
+
+/obj/item/projectile/plasma/adv/on_hit(var/atom/target)
+	if(!ismob(target) && !istype(target, /turf/simulated/mineral))
+		target.ex_act(3)
+		power -= 6
+		if(range > 0 && power > 0 && (!target || !target.density))
+			return -1
+	return ..()
+
+
+/obj/item/projectile/plasma/adv/mech
+	range = 12
+	power = 18
