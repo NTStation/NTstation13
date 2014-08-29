@@ -2032,10 +2032,19 @@ datum/design/mesons
 	name = "Optical Meson Scanners"
 	desc = "Used by engineering and mining staff to see basic structural and terrain layouts through walls, regardless of lighting condition."
 	id = "mesons"
-	req_tech = list("materials" = 2, "magnets" = 3, "engineering" = 4)
+	req_tech = list("materials" = 2, "magnets" = 2, "engineering" = 2)
 	build_type = PROTOLATHE
-	materials = list("$metal" = 200, "$glass" = 200, "$plasma" = 100)
+	materials = list("$metal" = 200, "$glass" = 200)
 	build_path = /obj/item/clothing/glasses/meson
+
+datum/design/mesons_adv
+	name = "Advanced Meson Scanners"
+	desc = "Used by engineering and mining staff to see basic structural and terrain layouts through walls, regardless of lighting condition."
+	id = "mesons_adv"
+	req_tech = list("materials" = 3, "magnets" = 3, "engineering" = 4)
+	build_type = PROTOLATHE
+	materials = list("$metal" = 200, "$glass" = 200, "$plasma" = 150)
+	build_path = /obj/item/clothing/glasses/meson/adv
 
 datum/design/night_vision_goggles
 	name = "Night Vision Goggles"
