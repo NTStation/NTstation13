@@ -869,7 +869,7 @@ datum/design/mech_energy_relay
 	category = "Exosuit Equipment"
 
 datum/design/mech_ccw_armor
-	name = "Exosuit Module Design(Reactive Armor Booster Module)"
+	name = "Exosuit Module Design (Reactive Armor Booster Module)"
 	desc = "Exosuit-mounted armor booster."
 	id = "mech_ccw_armor"
 	build_type = MECHFAB
@@ -878,7 +878,7 @@ datum/design/mech_ccw_armor
 	category = "Exosuit Equipment"
 
 datum/design/mech_proj_armor
-	name = "Exosuit Module Design(Reflective Armor Booster Module)"
+	name = "Exosuit Module Design (Reflective Armor Booster Module)"
 	desc = "Exosuit-mounted armor booster."
 	id = "mech_proj_armor"
 	build_type = MECHFAB
@@ -887,7 +887,7 @@ datum/design/mech_proj_armor
 	category = "Exosuit Equipment"
 
 datum/design/mech_syringe_gun
-	name = "Exosuit Module Design(Syringe Gun)"
+	name = "Exosuit Module Design (Syringe Gun)"
 	desc = "Exosuit-mounted syringe gun and chemical synthesizer."
 	id = "mech_syringe_gun"
 	build_type = MECHFAB
@@ -913,6 +913,14 @@ datum/design/mech_generator_nuclear
 	build_path = /obj/item/mecha_parts/mecha_equipment/generator/nuclear
 	category = "Exosuit Equipment"
 
+datum/design/mech_plasma_cutter
+	name = "Exosuit Module Design (217-D Heavy Plasma Cutter)"
+	desc = "A device that shoots resonant plasma bursts at extreme velocity. The blasts are capable of crushing rock and demloishing solid obstacles."
+	id = "mech_plasma_cutter"
+	build_type = MECHFAB
+	req_tech = list("powerstorage"= 3, "engineering" = 3, "materials" = 3, "combat" = 1, "plasma" = 2)
+	build_path = /obj/item/mecha_parts/mecha_equipment/weapon/energy/plasma
+	category = "Exosuit Equipment"
 
 ////////////////////////////////////////
 //////////Disk Construction Disks///////
