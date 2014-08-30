@@ -367,6 +367,7 @@
 	hitsound = "swing_hit"
 	flags = NOSHIELD
 	var/active = 0
+	var/f_lum = 1
 
 /obj/item/weapon/holo/esword/green
 	New()
@@ -396,6 +397,10 @@
 		hitsound = 'sound/weapons/blade1.ogg'
 		playsound(user, 'sound/weapons/saberon.ogg', 20, 1)
 		user << "<span class='warning'>[src] is now active.</span>"
+		if(src in user.contents)
+			user.AddLuminosity(f_lum)
+		else
+			SetLuminosity(f_lum)
 	else
 		force = 3
 		icon_state = "sword0"
@@ -403,7 +408,23 @@
 		hitsound = "swing_hit"
 		playsound(user, 'sound/weapons/saberoff.ogg', 20, 1)
 		user << "<span class='warning'>[src] can now be concealed.</span>"
+		if(src in user.contents)
+			user.AddLuminosity(-f_lum)
+		else
+			SetLuminosity(0)
 	return
+
+/obj/item/weapon/holo/esword/pickup(mob/user)
+	if(active)
+		SetLuminosity(0)
+		user.AddLuminosity(f_lum)
+
+/obj/item/weapon/holo/esword/dropped(mob/user)
+	if(active)
+		user.AddLuminosity(-f_lum)
+		SetLuminosity(f_lum)
+
+
 
 //BASKETBALL OBJECTS
 
