@@ -126,3 +126,7 @@
 
 /obj/item/ammo_casing/energy/plasma/adv
 	projectile_type = /obj/item/projectile/plasma/adv
+
+/obj/item/ammo_casing/energy/meteor
+	projectile_type = /obj/item/projectile/meteor
+	select_name = "goddamn meteor"
