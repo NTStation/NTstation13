@@ -216,7 +216,7 @@ obj/item/projectile/kinetic/New()
 	damage_type = BURN
 	damage = 10
 	range = 6
-	var/power = 6
+	var/power = 9
 	trace_residue = null
 
 /obj/item/projectile/plasma/on_hit(var/atom/target)
@@ -231,13 +231,13 @@ obj/item/projectile/kinetic/New()
 
 /obj/item/projectile/plasma/adv
 	range = 9
-	power = 9
+	power = 12
 	damage = 15
 
 /obj/item/projectile/plasma/adv/on_hit(var/atom/target)
 	if(!ismob(target) && !istype(target, /turf/simulated/mineral))
 		target.ex_act(3)
-		power -= 6
+		power -= 10
 		if(range > 0 && power > 0 && (!target || !target.density))
 			return -1
 	return ..()

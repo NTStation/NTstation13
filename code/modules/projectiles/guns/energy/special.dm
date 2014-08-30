@@ -174,7 +174,8 @@
 	modifystate = -1
 	origin_tech = "combat=1;materials=3;magnets=2;plasma=2;engineering=1"
 	ammo_type = list(/obj/item/ammo_casing/energy/plasma)
-	flags = CONDUCT | OPENCONTAINER
+	flags = CONDUCT | OPENCONTAINER | SHARP
+	attack_verb = list("attacked", "slashed", "cut", "sliced")
 	var/volume = 15
 
 /obj/item/weapon/gun/energy/plasmacutter/New()
@@ -211,6 +212,9 @@
 			qdel(A)
 			reagents.add_reagent("plasma", 10)
 			user << "<span class='info'>You refill [src] with [A]. [reagents.get_reagent_amount("plasma")] units of plasma left.</span>"
+		if(istype(A, /obj/item/weapon/storage/bag/ore))
+			if(locate(/obj/item/weapon/ore/plasma) in A)
+				attackby(locate(/obj/item/weapon/ore/plasma) in A, user)
 	..()
 
 /obj/item/weapon/gun/energy/plasmacutter/charged/New()

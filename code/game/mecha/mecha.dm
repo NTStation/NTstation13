@@ -1164,14 +1164,15 @@
 			mmi.mecha = null
 			src.occupant.canmove = 0
 			src.verbs += /obj/mecha/verb/eject
-		src.occupant = null
-		src.icon_state = initial(icon_state)+"-open"
-		src.dir = dir_in
 
 		if(ishuman(occupant))
 			var/mob/living/carbon/human/H = occupant
 			if(H.glasses == hud)
 				H.glasses = null
+
+		src.occupant = null
+		src.icon_state = initial(icon_state)+"-open"
+		src.dir = dir_in
 	return
 
 /////////////////////////
