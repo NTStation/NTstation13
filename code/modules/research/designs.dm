@@ -1850,16 +1850,6 @@ datum/design/drill
 	materials = list("$metal" = 6000, "$glass" = 1000) //expensive, but no need for miners.
 	build_path = /obj/item/weapon/pickaxe/drill
 
-datum/design/plasmacutter
-	name = "Plasma Cutter"
-	desc = "You could use it to cut limbs off of xenos! Or, you know, mine stuff."
-	id = "plasmacutter"
-	req_tech = list("materials" = 4, "plasmatech" = 3, "engineering" = 3)
-	build_type = PROTOLATHE
-	materials = list("$metal" = 1500, "$glass" = 500, "$plasma" = 500)
-	reliability = 79
-	build_path = /obj/item/weapon/pickaxe/plasmacutter
-
 datum/design/pick_diamond
 	name = "Diamond Pickaxe"
 	desc = "A pickaxe with a diamond pick head, this is just like minecraft."
@@ -1878,6 +1868,26 @@ datum/design/drill_diamond
 	materials = list("$metal" = 10000, "$glass" = 8000, "$diamond" = 4500) //Yes, a whole diamond is needed.
 	reliability = 79
 	build_path = /obj/item/weapon/pickaxe/diamonddrill
+
+/datum/design/plasmacutter
+	name = "Plasma Cutter"
+	desc = "You could use it to cut limbs off of xenos! Or, you know, mine stuff."
+	id = "plasmacutter"
+	req_tech = list("materials" = 2, "plasmatech" = 2, "engineering" = 2, "combat" = 1, "magnets" = 2)
+	build_type = PROTOLATHE
+	materials = list("$metal" = 1500, "$glass" = 500, "$plasma" = 200)
+	reliability = 79
+	build_path = /obj/item/weapon/gun/energy/plasmacutter
+
+/datum/design/plasmacutter_adv
+	name = "Advanced Plasma Cutter"
+	desc = "You could use it to cut limbs off of xenos! Or, you know, mine stuff."
+	id = "plasmacutter_adv"
+	req_tech = list("materials" = 4, "plasmatech" = 3, "engineering" = 3, "combat" = 3, "magnets" = 3)
+	build_type = PROTOLATHE
+	materials = list("$metal" = 3000, "$glass" = 1000, "$plasma" = 1000, "$silver" = 500, "$gold" = 100)
+	reliability = 79
+	build_path = /obj/item/weapon/gun/energy/plasmacutter/adv
 
 /////////////////////////////////////////
 //////////////Blue Space/////////////////
@@ -1958,6 +1968,7 @@ datum/design/security_hud_night
 	build_type = PROTOLATHE
 	materials = list("$metal" = 200, "$glass" = 200, "$uranium" = 1000, "$gold" = 350)
 	build_path = /obj/item/clothing/glasses/hud/security/night
+
 datum/design/security_hud_night
 	name = "Night Vision Security HUD"
 	desc = "A heads-up display which provides id data and vision in complete darkness."

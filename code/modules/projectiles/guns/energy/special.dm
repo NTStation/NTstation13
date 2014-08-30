@@ -172,16 +172,57 @@
 	item_state = "plasmacutter"
 	force = 15
 	modifystate = -1
-	origin_tech = "combat=3;materials=3;magnets=2;plasma=2"
+	origin_tech = "combat=1;materials=3;magnets=2;plasma=2;engineering=1"
 	ammo_type = list(/obj/item/ammo_casing/energy/plasma)
-	// DBG REMOVE
-	cell_type = /obj/item/weapon/stock_parts/cell/infinite
+	flags = CONDUCT | OPENCONTAINER
+	var/volume = 15
+
+/obj/item/weapon/gun/energy/plasmacutter/New()
+	..()
+	create_reagents(volume)
+
+/obj/item/weapon/gun/energy/plasmacutter/newshot()
+	if (!ammo_type || !reagents)	return
+	var/obj/item/ammo_casing/energy/shot = ammo_type[select]
+
+	var/amount = shot.e_cost / 100
+
+	if(!reagents.get_reagent_amount("plasma") >= amount)
+		return
+
+	reagents.remove_reagent("plasma", amount)
+	chambered = shot
+	chambered.newshot()
+	return
+
+/obj/item/weapon/gun/energy/plasmacutter/examine()
+	..()
+	usr << "Has [reagents.get_reagent_amount("plasma")] unit\s of plasma left."
+	return
+
+/obj/item/weapon/gun/energy/plasmacutter/attackby(var/obj/item/A, var/mob/user)
+	if(reagents.maximum_volume > reagents.total_volume)
+		if(istype(A, /obj/item/stack/sheet/mineral/plasma))
+			var/obj/item/stack/sheet/S = A
+			S.use(1)
+			reagents.add_reagent("plasma", 20)
+			user << "<span class='info'>You refill [src] with [S]. [reagents.get_reagent_amount("plasma")] units of plasma left.</span>"
+		if(istype(A, /obj/item/weapon/ore/plasma))
+			qdel(A)
+			reagents.add_reagent("plasma", 10)
+			user << "<span class='info'>You refill [src] with [A]. [reagents.get_reagent_amount("plasma")] units of plasma left.</span>"
+	..()
+
+/obj/item/weapon/gun/energy/plasmacutter/charged/New()
+	..()
+	reagents.add_reagent("plasma", volume)
 
 /obj/item/weapon/gun/energy/plasmacutter/adv
 	name = "advanced plasma cutter"
 	icon_state = "adv_plasmacutter"
-	origin_tech = "combat=3;materials=4;magnets=3;plasma=3"
+	origin_tech = "combat=3;materials=4;magnets=3;plasma=3;engineering=2"
 	ammo_type = list(/obj/item/ammo_casing/energy/plasma/adv)
+	volume = 25
 
 
 /obj/item/weapon/gun/energy/disabler
