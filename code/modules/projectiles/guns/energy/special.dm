@@ -176,6 +176,7 @@
 	ammo_type = list(/obj/item/ammo_casing/energy/plasma)
 	flags = CONDUCT | OPENCONTAINER | SHARP
 	attack_verb = list("attacked", "slashed", "cut", "sliced")
+	can_charge = 0
 	var/volume = 15
 
 /obj/item/weapon/gun/energy/plasmacutter/New()
