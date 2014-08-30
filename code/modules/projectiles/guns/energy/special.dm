@@ -172,7 +172,7 @@
 	item_state = "plasmacutter"
 	force = 15
 	modifystate = -1
-	origin_tech = "combat=1;materials=3;magnets=2;plasma=2;engineering=1"
+	origin_tech = "combat=1;materials=3;magnets=2;plasmatech=2;engineering=1"
 	ammo_type = list(/obj/item/ammo_casing/energy/plasma)
 	flags = CONDUCT | OPENCONTAINER | SHARP
 	attack_verb = list("attacked", "slashed", "cut", "sliced")
@@ -225,7 +225,7 @@
 /obj/item/weapon/gun/energy/plasmacutter/adv
 	name = "advanced plasma cutter"
 	icon_state = "adv_plasmacutter"
-	origin_tech = "combat=3;materials=4;magnets=3;plasma=3;engineering=2"
+	origin_tech = "combat=3;materials=4;magnets=3;plasmatech=3;engineering=2"
 	ammo_type = list(/obj/item/ammo_casing/energy/plasma/adv)
 	volume = 25
 
