@@ -26,6 +26,12 @@
 		var/obj/O = new path()
 		req_component_names[tname] = O.name
 
+/obj/machinery/constructable_frame/proc/get_req_components_amt()
+	var/amt = 0
+	for(var/path in req_components)
+		amt += req_components[path]
+	return amt
+
 // update description of required components remaining
 /obj/machinery/constructable_frame/proc/update_req_desc()
 	if(!req_components || !req_component_names)
@@ -100,7 +106,9 @@
 				playsound(src.loc, 'sound/items/Crowbar.ogg', 50, 1)
 				state = 2
 				circuit.loc = src.loc
+				components.Remove(circuit)
 				circuit = null
+
 				if(components.len == 0)
 					user << "<span class='notice'>You remove the circuit board.</span>"
 				else
@@ -131,7 +139,37 @@
 					new_machine.RefreshParts()
 					qdel(src)
 
-			if(istype(P, /obj/item))
+			if(istype(P, /obj/item/weapon/storage/part_replacer) && P.contents.len && get_req_components_amt())
+				var/obj/item/weapon/storage/replacer = P
+				var/list/added_components = list()
+				world << "start"
+				for(var/path in req_components)
+					world << path
+					while(req_components[path] > 0 && (locate(text2path(path)) in replacer))
+						var/obj/item/part = (locate(text2path(path)) in replacer)
+						if(!part.crit_fail)
+							world << "[src] << [part]"
+							added_components[part] = path
+							replacer.remove_from_storage(part, src)
+							req_components[path]--
+
+				for(var/obj/item/weapon/stock_parts/replace in replacer)
+					for(var/obj/item/weapon/stock_parts/part in added_components)
+						if(istype(replace, added_components[part]) && (replace.rating > part.rating) && (!replace.crit_fail))
+							world << "[part] > [replace]"
+							replacer.remove_from_storage(replace, src)
+							replacer.handle_item_insertion(part, 1)
+							added_components[replace] = added_components[part]
+							added_components.Remove(part)
+
+				for(var/obj/item/weapon/stock_parts/part in added_components)
+					components += part
+					user << "<span class='notice'>[part.name] applied.</span>"
+
+				update_req_desc()
+				return
+
+			if(istype(P, /obj/item) && get_req_components_amt())
 				var/success
 				for(var/I in req_components)
 					if(istype(P, text2path(I)) && (req_components[I] > 0))
@@ -186,7 +224,8 @@ to destroy them and players will be able to make replacements.
 		build_path = typepath
 		name = "circuit board ([names_paths[build_path]] Vendor)"
 		user << "<span class='notice'>You set the board to [names_paths[build_path]].</span>"
-		req_components = list("/obj/item/weapon/vending_refill/[copytext("[build_path]", 24)]" = 3)       //Never before has i used a method as horrible as this one, im so sorry
+		req_components = list("/obj/item/weapon/vending_refill/[copytext("[build_path]", 24)]" = 3)
+		//Never before has i used a method as horrible as this one, im so sorry
 
 /obj/item/weapon/circuitboard/smes
 	name = "circuit board (SMES)"
