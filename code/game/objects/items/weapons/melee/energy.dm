@@ -57,6 +57,7 @@
 	flags = NOSHIELD | SHARP
 	origin_tech = "magnets=3;syndicate=4"
 	var/hacked = 0
+	var/f_lum = 1
 
 /obj/item/weapon/melee/energy/sword/New()
 	item_color = pick("red", "blue", "green", "purple")
@@ -65,6 +66,16 @@
 	if(active)
 		return 1
 	return 0
+
+/obj/item/weapon/melee/energy/sword/pickup(mob/user)
+	if(active)
+		SetLuminosity(0)
+		user.AddLuminosity(f_lum)
+
+/obj/item/weapon/melee/energy/sword/dropped(mob/user)
+	if(active)
+		user.AddLuminosity(-f_lum)
+		SetLuminosity(f_lum)
 
 /obj/item/weapon/melee/energy/sword/attack_self(mob/living/user)
 	if (user.has_organic_effect(/datum/organic_effect/clumsy) && prob(50))
@@ -76,6 +87,10 @@
 		throwforce = 20
 		hitsound = 'sound/weapons/blade1.ogg'
 		attack_verb = list("attacked", "slashed", "stabbed", "sliced", "torn", "ripped", "diced", "cut")
+		if(src in user.contents)
+			user.AddLuminosity(f_lum)
+		else
+			SetLuminosity(f_lum)
 		if(istype(src,/obj/item/weapon/melee/energy/sword/pirate))
 			icon_state = "cutlass1"
 		else
@@ -88,6 +103,10 @@
 		throwforce = 5.0
 		hitsound = "swing_hit"
 		attack_verb = null
+		if(src in user.contents)
+			user.AddLuminosity(-f_lum)
+		else
+			SetLuminosity(0)
 		if(istype(src,/obj/item/weapon/melee/energy/sword/pirate))
 			icon_state = "cutlass0"
 		else
@@ -111,6 +130,10 @@
 			if(src.hacked) // That's right, we'll only check the "original" esword.
 				newSaber.hacked = 1
 				newSaber.item_color = "rainbow"
+			else
+				newSaber.item_color = item_color
+			if(active)
+				user.AddLuminosity(-f_lum)
 			user.unEquip(W)
 			user.unEquip(src)
 			qdel(W)

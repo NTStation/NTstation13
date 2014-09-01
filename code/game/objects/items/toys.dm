@@ -308,11 +308,13 @@
 	icon = 'icons/obj/weapons.dmi'
 	icon_state = "sword0"
 	item_state = "sword0"
+	item_color = "blue"
 	var/active = 0.0
 	w_class = 2.0
 	flags = NOSHIELD
 	attack_verb = list("attacked", "struck", "hit")
 	var/hacked = 0
+	var/f_lum = 1
 
 /obj/item/toy/sword/attack_self(mob/user as mob)
 	active = !( active )
@@ -320,18 +322,26 @@
 		user << "\blue You extend the plastic blade with a quick flick of your wrist."
 		playsound(user, 'sound/weapons/saberon.ogg', 20, 1)
 		if(hacked)
-			icon_state = "swordrainbow"
-			item_state = "swordrainbow"
+			item_color = "rainbow"
 		else
-			icon_state = "swordblue"
-			item_state = "swordblue"
+			item_color = "blue"
+		icon_state = "sword[item_color]"
+		item_state = "sword[item_color]"
 		w_class = 4
+		if(src in user.contents)
+			user.AddLuminosity(f_lum)
+		else
+			SetLuminosity(f_lum)
 	else
 		user << "\blue You push the plastic blade back down into the handle."
 		playsound(user, 'sound/weapons/saberoff.ogg', 20, 1)
 		icon_state = "sword0"
 		item_state = "sword0"
 		w_class = 2
+		if(src in user.contents)
+			user.AddLuminosity(-f_lum)
+		else
+			SetLuminosity(0)
 	add_fingerprint(user)
 	return
 
@@ -351,6 +361,10 @@
 			if(hacked) // That's right, we'll only check the "original" "sword".
 				newSaber.hacked = 1
 				newSaber.item_color = "rainbow"
+			else
+				newSaber.item_color = item_color
+			if(active)
+				user.AddLuminosity(-f_lum)
 			user.unEquip(W)
 			user.unEquip(src)
 			qdel(W)
@@ -366,6 +380,17 @@
 				user.update_inv_hands(0)
 		else
 			user << "<span class='warning'>It's already fabulous!</span>"
+
+/obj/item/toy/sword/pickup(mob/user)
+	if(active)
+		SetLuminosity(0)
+		user.AddLuminosity(f_lum)
+
+/obj/item/toy/sword/dropped(mob/user)
+	if(active)
+		user.AddLuminosity(-f_lum)
+		SetLuminosity(f_lum)
+	..()
 
 /*
  * Subtype of Double-Bladed Energy Swords
