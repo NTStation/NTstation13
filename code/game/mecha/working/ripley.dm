@@ -2,18 +2,30 @@
 	desc = "Autonomous Power Loader Unit. The workhorse of the exosuit world."
 	name = "\improper APLU \"Ripley\""
 	icon_state = "ripley"
-	step_in = 6
+	step_in = 5
 	max_temperature = 20000
 	health = 200
 	wreckage = /obj/structure/mecha_wreckage/ripley
+	damage_absorption = list("brute"=0.8,"fire"=1,"bullet"=0.8,"laser"=0.9,"energy"=1,"bomb"=0.6)
+	max_equip = 6
 	var/list/cargo = new
 	var/cargo_capacity = 15
 
-/*
 /obj/mecha/working/ripley/New()
 	..()
-	return
-*/
+	hud = new /obj/item/clothing/glasses/meson/adv/mech(src)
+
+/obj/mecha/working/ripley/Move()
+	. = ..()
+	if(. && (locate(/obj/item/mecha_parts/mecha_equipment/tool/hydraulic_clamp) in equipment))
+		var/obj/structure/ore_box/ore_box = locate(/obj/structure/ore_box) in cargo
+		if(ore_box)
+			for(var/obj/item/weapon/ore/ore in get_turf(src))
+				ore.Move(ore_box)
+
+/obj/item/clothing/glasses/meson/adv/mech
+	name = "Advanced Meson Visor"
+
 
 /obj/mecha/working/ripley/firefighter
 	desc = "Standart APLU chassis was refitted with additional thermal protection and cistern."
@@ -22,7 +34,8 @@
 	max_temperature = 65000
 	health = 250
 	lights_power = 8
-	damage_absorption = list("fire"=0.5,"bullet"=0.8,"bomb"=0.5)
+	max_equip = 5 // More armor, less tools
+	damage_absorption = list("brute"=0.8,"fire"=0.5,"bullet"=0.7,"laser"=0.8,"energy"=1,"bomb"=0.4)
 	wreckage = /obj/structure/mecha_wreckage/ripley/firefighter
 
 /obj/mecha/working/ripley/deathripley
@@ -46,7 +59,7 @@
 	return
 
 /obj/mecha/working/ripley/mining
-	desc = "An old, dusty mining ripley."
+	desc = "An old, dusty mining Ripley."
 	name = "\improper APLU \"Miner\""
 
 /obj/mecha/working/ripley/mining/New()
@@ -58,6 +71,14 @@
 	else
 		var/obj/item/mecha_parts/mecha_equipment/tool/drill/D = new /obj/item/mecha_parts/mecha_equipment/tool/drill
 		D.attach(src)
+
+	//Add possible plasma cutter
+	if(prob(25))
+		var/obj/item/mecha_parts/mecha_equipment/M = new /obj/item/mecha_parts/mecha_equipment/weapon/energy/plasma
+		M.attach(src)
+
+	//Add ore box to cargo
+	cargo.Add(new /obj/structure/ore_box(src))
 
 	//Attach hydrolic clamp
 	var/obj/item/mecha_parts/mecha_equipment/tool/hydraulic_clamp/HC = new /obj/item/mecha_parts/mecha_equipment/tool/hydraulic_clamp

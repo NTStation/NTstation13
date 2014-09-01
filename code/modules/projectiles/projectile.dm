@@ -48,12 +48,15 @@
 	var/eyeblur = 0
 	var/drowsy = 0
 	var/forcedodge = 0
+	// 1 to pass solid objects, 2 to pass solid turfs (results in bugs, bugs and tons of bugs)
 	var/trace_residue = "Projectile markings."
+
+	var/range = -1
 
 
 	proc/delete()
 		// Garbage collect the projectiles
-		loc = null
+		qdel(src)
 
 	proc/on_hit(var/atom/target, var/blocked = 0, var/hit_zone)
 		if(isliving(target))
@@ -111,10 +114,12 @@
 
 				var/permutation = A.bullet_act(src, def_zone) // searches for return value, could be deleted after run so check A isn't null
 
-				if(permutation == -1 || (forcedodge && !istype(A, /turf)))// the bullet passes through a dense object!
+				if(permutation == -1 || (forcedodge && (!istype(A, /turf) || forcedodge > 1)))
+					// the bullet passes through a dense object!
 					bumped = 0 // reset bumped variable!
 					loc = new_loc
 					permutated.Add(A)
+					Range()
 					return 0
 
 				density = 0
@@ -154,5 +159,10 @@
 			Range()
 		return
 
-/obj/item/projectile/proc/Range()
-	return
+/obj/item/projectile/proc/Range(var/remove=1)
+	if(range <= 0) // -1 for infinte range
+		return
+
+	range -= remove
+	if(range <= 0)
+		delete()

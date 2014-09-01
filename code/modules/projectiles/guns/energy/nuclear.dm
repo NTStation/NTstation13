@@ -21,6 +21,7 @@
 	var/lightfail = 0
 	var/charge_tick = 0
 	modifystate = 0
+	can_charge = 0
 
 	New()
 		..()

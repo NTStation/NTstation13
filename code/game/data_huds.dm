@@ -3,15 +3,20 @@ Use the regular_hud_updates() proc before process_med_hud(mob) or process_sec_hu
 the HUD updates properly! */
 
 //Deletes the current HUD images so they can be refreshed with new ones.
+/image/var/hud_remove = 0
+
+
 mob/proc/regular_hud_updates() //Used in the life.dm of mobs that can use HUDs.
 	if(client)
 		for(var/image/hud in client.images)
-			if(copytext(hud.icon_state,1,4) == "hud")
+			if(hud.hud_remove)
 				client.images -= hud
 	if(src in med_hud_users)
 		med_hud_users -= src
 	if(src in sec_hud_users)
 		sec_hud_users -= src
+	if(src in mining_hud_users)
+		mining_hud_users -= src
 
 
 //Medical HUD procs
@@ -62,6 +67,7 @@ proc/process_med_hud(var/mob/M, var/mob/eye)
 		if(!C) continue
 
 		holder = patient.hud_list[HEALTH_HUD]
+		holder.hud_remove = 1
 		if(patient.stat == 2)
 			holder.icon_state = "hudhealth-100"
 		else
@@ -98,6 +104,7 @@ proc/process_sec_hud(var/mob/M, var/advanced_mode,var/mob/eye)
 	for(var/mob/living/carbon/human/perp in range(T))
 		holder = perp.hud_list[ID_HUD]
 		holder.icon_state = "hudno_id"
+		holder.hud_remove = 1
 		if(perp.wear_id)
 			holder.icon_state = "hud[ckey(perp.wear_id.GetJobName())]"
 		C.images += holder
@@ -132,3 +139,30 @@ proc/process_sec_hud(var/mob/M, var/advanced_mode,var/mob/eye)
 					else
 						continue
 				C.images += holder
+
+
+proc/process_mining_hud(var/mob/M, var/mob/eye)
+	if(!M)
+		return
+	if(!M.client)
+		return
+
+	var/client/C = M.client
+
+	var/turf/eye_turf
+	if(eye)
+		eye_turf = get_turf(eye)
+	else
+		eye_turf = get_turf(M)
+
+	var/list/L = list()
+
+	for(var/turf/simulated/mineral/MT in range(7, eye_turf))
+		if(MT.scan_state)
+			L += MT
+
+	for(var/turf/simulated/mineral/MT in L)
+		var/turf/T = get_turf(MT)
+		var/image/I = image('icons/turf/walls.dmi', loc = T, icon_state = MT.scan_state, layer = 18)
+		I.hud_remove = 1
+		C.images += I

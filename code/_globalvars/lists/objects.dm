@@ -14,3 +14,4 @@ var/global/list/surgeries_list = list()				//list of all surgeries by name, asso
 var/global/list/table_recipes = list()				//list of all table craft recipes
 var/global/list/med_hud_users = list()				//list of all entities using a medical HUD.
 var/global/list/sec_hud_users = list()				//list of all entities using a security HUD.
+var/global/list/mining_hud_users = list()			//list of all entities using a mining HUD. TODO: make mining bots use this.

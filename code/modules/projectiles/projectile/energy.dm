@@ -61,12 +61,6 @@
 	icon_state = "omnilaser"
 	damage = 34
 	damage_type = STAMINA
-	var/range = 7
-
-/obj/item/projectile/energy/disabler/Range()
-	range--
-	if(range <= 0)
-		delete()
-
+	range = 7
 
 

@@ -869,7 +869,7 @@ datum/design/mech_energy_relay
 	category = "Exosuit Equipment"
 
 datum/design/mech_ccw_armor
-	name = "Exosuit Module Design(Reactive Armor Booster Module)"
+	name = "Exosuit Module Design (Reactive Armor Booster Module)"
 	desc = "Exosuit-mounted armor booster."
 	id = "mech_ccw_armor"
 	build_type = MECHFAB
@@ -878,7 +878,7 @@ datum/design/mech_ccw_armor
 	category = "Exosuit Equipment"
 
 datum/design/mech_proj_armor
-	name = "Exosuit Module Design(Reflective Armor Booster Module)"
+	name = "Exosuit Module Design (Reflective Armor Booster Module)"
 	desc = "Exosuit-mounted armor booster."
 	id = "mech_proj_armor"
 	build_type = MECHFAB
@@ -887,7 +887,7 @@ datum/design/mech_proj_armor
 	category = "Exosuit Equipment"
 
 datum/design/mech_syringe_gun
-	name = "Exosuit Module Design(Syringe Gun)"
+	name = "Exosuit Module Design (Syringe Gun)"
 	desc = "Exosuit-mounted syringe gun and chemical synthesizer."
 	id = "mech_syringe_gun"
 	build_type = MECHFAB
@@ -913,6 +913,14 @@ datum/design/mech_generator_nuclear
 	build_path = /obj/item/mecha_parts/mecha_equipment/generator/nuclear
 	category = "Exosuit Equipment"
 
+datum/design/mech_plasma_cutter
+	name = "Exosuit Module Design (217-D Heavy Plasma Cutter)"
+	desc = "A device that shoots resonant plasma bursts at extreme velocity. The blasts are capable of crushing rock and demloishing solid obstacles."
+	id = "mech_plasma_cutter"
+	build_type = MECHFAB
+	req_tech = list("powerstorage"= 3, "engineering" = 3, "materials" = 3, "combat" = 1, "plasma" = 2)
+	build_path = /obj/item/mecha_parts/mecha_equipment/weapon/energy/plasma
+	category = "Exosuit Equipment"
 
 ////////////////////////////////////////
 //////////Disk Construction Disks///////
@@ -1842,16 +1850,6 @@ datum/design/drill
 	materials = list("$metal" = 6000, "$glass" = 1000) //expensive, but no need for miners.
 	build_path = /obj/item/weapon/pickaxe/drill
 
-datum/design/plasmacutter
-	name = "Plasma Cutter"
-	desc = "You could use it to cut limbs off of xenos! Or, you know, mine stuff."
-	id = "plasmacutter"
-	req_tech = list("materials" = 4, "plasmatech" = 3, "engineering" = 3)
-	build_type = PROTOLATHE
-	materials = list("$metal" = 1500, "$glass" = 500, "$plasma" = 500)
-	reliability = 79
-	build_path = /obj/item/weapon/pickaxe/plasmacutter
-
 datum/design/pick_diamond
 	name = "Diamond Pickaxe"
 	desc = "A pickaxe with a diamond pick head, this is just like minecraft."
@@ -1870,6 +1868,26 @@ datum/design/drill_diamond
 	materials = list("$metal" = 10000, "$glass" = 8000, "$diamond" = 4500) //Yes, a whole diamond is needed.
 	reliability = 79
 	build_path = /obj/item/weapon/pickaxe/diamonddrill
+
+/datum/design/plasmacutter
+	name = "Plasma Cutter"
+	desc = "You could use it to cut limbs off of xenos! Or, you know, mine stuff."
+	id = "plasmacutter"
+	req_tech = list("materials" = 2, "plasmatech" = 2, "engineering" = 2, "combat" = 1, "magnets" = 2)
+	build_type = PROTOLATHE
+	materials = list("$metal" = 1500, "$glass" = 500, "$plasma" = 200)
+	reliability = 79
+	build_path = /obj/item/weapon/gun/energy/plasmacutter
+
+/datum/design/plasmacutter_adv
+	name = "Advanced Plasma Cutter"
+	desc = "You could use it to cut limbs off of xenos! Or, you know, mine stuff."
+	id = "plasmacutter_adv"
+	req_tech = list("materials" = 4, "plasmatech" = 3, "engineering" = 3, "combat" = 3, "magnets" = 3)
+	build_type = PROTOLATHE
+	materials = list("$metal" = 3000, "$glass" = 1000, "$plasma" = 1000, "$silver" = 500, "$gold" = 100)
+	reliability = 79
+	build_path = /obj/item/weapon/gun/energy/plasmacutter/adv
 
 /////////////////////////////////////////
 //////////////Blue Space/////////////////
@@ -1950,6 +1968,7 @@ datum/design/security_hud_night
 	build_type = PROTOLATHE
 	materials = list("$metal" = 200, "$glass" = 200, "$uranium" = 1000, "$gold" = 350)
 	build_path = /obj/item/clothing/glasses/hud/security/night
+
 datum/design/security_hud_night
 	name = "Night Vision Security HUD"
 	desc = "A heads-up display which provides id data and vision in complete darkness."
@@ -2032,10 +2051,19 @@ datum/design/mesons
 	name = "Optical Meson Scanners"
 	desc = "Used by engineering and mining staff to see basic structural and terrain layouts through walls, regardless of lighting condition."
 	id = "mesons"
-	req_tech = list("materials" = 2, "magnets" = 3, "engineering" = 4)
+	req_tech = list("materials" = 2, "magnets" = 2, "engineering" = 2)
 	build_type = PROTOLATHE
-	materials = list("$metal" = 200, "$glass" = 200, "$plasma" = 100)
+	materials = list("$metal" = 200, "$glass" = 200)
 	build_path = /obj/item/clothing/glasses/meson
+
+datum/design/mesons_adv
+	name = "Advanced Meson Scanners"
+	desc = "Used by engineering and mining staff to see basic structural and terrain layouts through walls, regardless of lighting condition."
+	id = "mesons_adv"
+	req_tech = list("materials" = 3, "magnets" = 3, "engineering" = 4)
+	build_type = PROTOLATHE
+	materials = list("$metal" = 200, "$glass" = 200, "$plasma" = 150)
+	build_path = /obj/item/clothing/glasses/meson/adv
 
 datum/design/night_vision_goggles
 	name = "Night Vision Goggles"

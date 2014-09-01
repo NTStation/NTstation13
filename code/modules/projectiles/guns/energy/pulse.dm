@@ -27,5 +27,6 @@
 	desc = "A pulse rifle compacted into a classic handgun frame for NT private military officers. It's not the size of the gun, it's the size of the hole it puts through people."
 	icon_state = "m1911-p"
 	cell_type = "/obj/item/weapon/stock_parts/cell/infinite"
+	can_charge = 0
 
 

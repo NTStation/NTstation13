@@ -70,6 +70,8 @@
 
 	var/stepsound = 'sound/mecha/mechturn.ogg'
 
+	var/obj/item/clothing/glasses/hud
+
 
 /obj/mecha/New()
 	..()
@@ -1005,6 +1007,12 @@
 		playsound(src, 'sound/machines/windowdoor.ogg', 50, 1)
 		if(!hasInternalDamage())
 			src.occupant << sound('sound/mecha/nominal.ogg',volume=50)
+
+		if(hud)
+			if(H.glasses)
+				occupant_message("<font color='red'>[H.glasses] prevent you from using [src] [hud]</font>")
+			else
+				H.glasses = hud
 		return 1
 	else
 		return 0
@@ -1156,6 +1164,12 @@
 			mmi.mecha = null
 			src.occupant.canmove = 0
 			src.verbs += /obj/mecha/verb/eject
+
+		if(ishuman(occupant))
+			var/mob/living/carbon/human/H = occupant
+			if(H.glasses == hud)
+				H.glasses = null
+
 		src.occupant = null
 		src.icon_state = initial(icon_state)+"-open"
 		src.dir = dir_in

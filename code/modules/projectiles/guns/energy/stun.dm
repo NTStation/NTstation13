@@ -63,6 +63,7 @@
 	ammo_type = list(/obj/item/ammo_casing/energy/bolt)
 	cell_type = "/obj/item/weapon/stock_parts/cell/crap"
 	var/charge_tick = 0
+	can_charge = 0
 
 
 	New()

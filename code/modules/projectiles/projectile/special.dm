@@ -151,7 +151,7 @@
 	damage_type = BRUTE
 	flag = "bomb"
 	trace_residue = null
-	var/range = 2
+	range = 2
 
 obj/item/projectile/kinetic/New()
 	var/turf/proj_turf = get_turf(src)
@@ -164,8 +164,11 @@ obj/item/projectile/kinetic/New()
 		damage *= 2
 	..()
 
-/obj/item/projectile/kinetic/Range()
-	range--
+/obj/item/projectile/kinetic/Range(var/remove=1)
+	if(range <= 0)
+		return
+
+	range -= remove
 	if(range <= 0)
 		new /obj/effect/kinetic_blast(src.loc)
 
@@ -176,6 +179,7 @@ obj/item/projectile/kinetic/New()
 		for(var/obj/structure/S in range(1, src.loc))
 			S.ex_act(3)
 		delete()
+
 
 /obj/item/projectile/kinetic/on_hit(var/atom/target)
 	var/turf/target_turf= get_turf(target)
@@ -193,6 +197,7 @@ obj/item/projectile/kinetic/New()
 			S.ex_act(3)
 	..()
 
+
 /obj/effect/kinetic_blast
 	name = "kinetic explosion"
 	icon = 'icons/obj/projectiles.dmi'
@@ -202,3 +207,42 @@ obj/item/projectile/kinetic/New()
 /obj/effect/kinetic_blast/New()
 	spawn(4)
 		qdel(src)
+
+
+
+/obj/item/projectile/plasma
+	name = "plasma blast"
+	icon_state = "plasmacutter"
+	damage_type = BURN
+	damage = 10
+	range = 6
+	var/power = 9
+	trace_residue = null
+
+/obj/item/projectile/plasma/on_hit(var/atom/target)
+	if(istype(target, /turf/simulated/mineral))
+		while(target && target.density && range > 0 && power > 0)
+			power -= 1
+			var/turf/simulated/mineral/M = target
+			M.gets_drilled()
+		if(range > 0 && power > 0)
+			return -1
+	return ..()
+
+/obj/item/projectile/plasma/adv
+	range = 9
+	power = 12
+	damage = 15
+
+/obj/item/projectile/plasma/adv/on_hit(var/atom/target)
+	if(!ismob(target) && !istype(target, /turf/simulated/mineral))
+		target.ex_act(3)
+		power -= 10
+		if(range > 0 && power > 0 && (!target || !target.density))
+			return -1
+	return ..()
+
+
+/obj/item/projectile/plasma/adv/mech
+	range = 12
+	power = 18

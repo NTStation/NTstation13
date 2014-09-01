@@ -9,22 +9,11 @@
 	internal_damage_threshold = 35
 	deflect_chance = 15
 	step_energy_drain = 6
-	var/obj/item/clothing/glasses/hud/health/mech/hud
 
 	New()
 		..()
 		hud = new /obj/item/clothing/glasses/hud/health/mech(src)
 		return
-
-	moved_inside(var/mob/living/carbon/human/H as mob)
-		if(..())
-			if(H.glasses)
-				occupant_message("<font color='red'>[H.glasses] prevent you from using [src] [hud]</font>")
-			else
-				H.glasses = hud
-			return 1
-		else
-			return 0
 
 	go_out()
 		if(ishuman(occupant))
@@ -59,7 +48,7 @@
 
 //TODO - Check documentation for client.eye and client.perspective...
 /obj/item/clothing/glasses/hud/health/mech
-	name = "integrated medical Hud"
+	name = "integrated medical HUD"
 
 
 	process_hud(var/mob/M)
