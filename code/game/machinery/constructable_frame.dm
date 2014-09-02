@@ -142,13 +142,11 @@
 			if(istype(P, /obj/item/weapon/storage/part_replacer) && P.contents.len && get_req_components_amt())
 				var/obj/item/weapon/storage/replacer = P
 				var/list/added_components = list()
-				world << "start"
+
 				for(var/path in req_components)
-					world << path
 					while(req_components[path] > 0 && (locate(text2path(path)) in replacer))
 						var/obj/item/part = (locate(text2path(path)) in replacer)
 						if(!part.crit_fail)
-							world << "[src] << [part]"
 							added_components[part] = path
 							replacer.remove_from_storage(part, src)
 							req_components[path]--
@@ -156,7 +154,6 @@
 				for(var/obj/item/weapon/stock_parts/replace in replacer)
 					for(var/obj/item/weapon/stock_parts/part in added_components)
 						if(istype(replace, added_components[part]) && (replace.rating > part.rating) && (!replace.crit_fail))
-							world << "[part] > [replace]"
 							replacer.remove_from_storage(replace, src)
 							replacer.handle_item_insertion(part, 1)
 							added_components[replace] = added_components[part]
@@ -167,7 +164,7 @@
 					user << "<span class='notice'>[part.name] applied.</span>"
 
 				update_req_desc()
-				return
+				return 1
 
 			if(istype(P, /obj/item) && get_req_components_amt())
 				var/success
